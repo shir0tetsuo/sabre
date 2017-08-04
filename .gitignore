@@ -5,3 +5,4 @@ desktop.ini
 config.json
 sabre_atom_stable.js
 sabre_cutcode.js
+*.sh
