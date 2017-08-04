@@ -4,8 +4,9 @@
 //console.log("Reading: Discord const")
 const Discord = require("discord.js"); // Initialize discord wrappers
 const client = new Discord.Client(); // New client authorization
-//console.log("Reading: config const")
-const config = require("./config.json") // Grabs sensitive data from json to memory
+const config = require("./config.json") // Grabs configurable components from json to memory
+const keys = require("./token.json") // Grabs secret token in Separate file
+console.log("Config and Token Read Success.")
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
 //console.log("Initializing bash integration.");
 //var sys = require('sys');
@@ -14,7 +15,8 @@ var exec = require('child_process').exec;
 // exec("ls -la", puts);
 console.log("Sending authorization token.");
 //client.login("");
-client.login(config.token)
+client.login(keys.token)
+console.log("Success.")
 //console.log(config) //verbose configuration
 client.on("ready", () => {
   console.log("System Ready.");
