@@ -1,29 +1,29 @@
 ///// file start ///////////////////////////////////////////////////////////////
 // Verbose, Client Login and Initialization
 ////////////////////////////////////////////////////////////////////////////////
-//console.log("Reading: Discord const")
+console.log("Initialization.")
+// Constraints /////////////////////////////////////////////////////////////////
 const Discord = require("discord.js"); // Initialize discord wrappers
 const client = new Discord.Client(); // New client authorization
-const config = require("./config.json") // Grabs configurable components from json to memory
-const keys = require("./token.json") // Grabs secret token in Separate file
-console.log("Config and Token Read Success.")
+// Variable and String Constraints /////////////////////////////////////////////
+const config = require("./sabre_init.json")
+const keys = require("./token.json")
+// const rateme = require("./sabre_rateme.json")
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
-//console.log("Initializing bash integration.");
+// Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
+let prefix = config.pre
+// Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
-//function puts(error, stdout, stderr) { sys.puts(stdout) };
 // exec("ls -la", puts);
-console.log("Sending authorization token.");
-//client.login("");
+// System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
-console.log("Success.")
 //console.log(config) //verbose configuration
 client.on("ready", () => {
-  console.log("System Ready.");
+  console.log("System Ready! " + prefix + " " + config.v + " " + Date());
+  client.user.setGame("With " + client.guilds.size + " Servers.")
+  client.user.setStatus("busy") // online / busy (dev)
 });
-let prefix = config.pre
-// Whats the difference between let and var anyway?
-console.log(prefix + " " + config.v)
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 client.on("message", (message) => {
@@ -209,7 +209,7 @@ client.on("message", (message) => {
         fields: [
           {
             name: ":bulb: Concepting",
-            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick```",
+            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nEmma```",
             inline: true
           },
           {
