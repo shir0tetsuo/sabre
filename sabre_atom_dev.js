@@ -129,8 +129,10 @@ client.on("message", (message) => {
         icon_url: client.user.avatarURL
       },
       fields: [
-        name: ":radioactive: Developer Test Commands",
-        value: "**dev** + checkOwnership, messagedata"
+        {
+          name: ":radioactive: Developer Test Commands",
+          value: "**dev** + checkOwnership, messagedata"
+        }
       ]
     }})
   }
