@@ -127,7 +127,6 @@ client.on("message", (message) => {
   } else if (devarg === "announceRole"){
     let modRole = message.guild.roles.find("name", devhandle[2]) // alternatively "string"
     console.log(modRole)
-    console.log(modRole.id) // This may break
   } else { // Developer Help Command Menu //////////////////////////////////////
     message.author.send({embed: {
       color: 0xFF0000,
