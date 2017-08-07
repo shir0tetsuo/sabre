@@ -62,7 +62,7 @@ client.on("message", (message) => {
     message.channel.send("Polo!"); // Dan's Mod
   // ipsummary /////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipsummary")) {
-    if (message.member.roles.has(config.cyberID)) {
+    if (message.member.roles.has(config.role.cyberID)) {
       exec("/root/NC/utils/NorthStar/ipbot.sh");
       message.channel.send("An IP Summary has been recorded.");
     } else {
@@ -70,7 +70,7 @@ client.on("message", (message) => {
     }
   // weather ///////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "weather")) {
-    if (message.member.roles.has(config.modID)) {
+    if (message.member.roles.has(config.role.modID)) {
       exec("/root/NC/utils/NorthStar/weatherbot.sh");
       message.channel.send("The weather has been updated.");
     } else {
@@ -93,8 +93,8 @@ client.on("message", (message) => {
         },
         fields: [
           {
-            name: "You have been rated as",
-            value: "```" + rate.text + "```"
+            name: "Sabre says",
+            value: "``" + rate.text + "``"
           }
         ]
       }})
@@ -106,20 +106,27 @@ client.on("message", (message) => {
     var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
-  // checkownership ////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "checkownership")) {
-    if(message.author.id !== config.ownerID) {
-      message.channel.send("Unauthorized!")
+  // Developer Commands ////////////////////////////////////////////////////////
+} else if (message.content.startsWith(prefix + "dev")) {
+  const devhandle = message.content.split(/\s+/g);
+  let devarg = devhandle[1];
+  if (devarg === "checkOwnership") {
+    if(message.author.id !== config.perUser.ownerID) {
+      message.author.send("Unauthorized!")
     } else {
-      message.channel.send("Authorized!")
+      message.author.send("Authorized!")
     }
+  } else if (devarg === "messagedata"){
+    message.channel.send("Developer data sent to console.")
+    console.log(message.author)
+  }
   // announcerole //////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "announcerole")) {
     let modRole = message.guild.roles.find("name", "Cyber Operative");
     console.log(modRole);
   // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
-    if(message.member.roles.has(config.modID)) {
+    if(message.member.roles.has(config.role.modID)) {
       message.channel.send("Shadow Moderator, confirmed.")
     } else {
       message.channel.send("Shadow Moderator, you are not.")
@@ -128,7 +135,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "botrps")) {
     var rpsmat = [ { ans: "rock" }, { ans: "paper" }, { ans: "scissors" } ] // These are the choices the bot can make
     var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)]; // rpsmat.ans
-    const rpssplit = message.content.split(/\s+/g); // Separate strings and don't fall apart
+    const rpssplit = message.content.split(/\s+/g); // Separate strings and don't fall apart / break
     let rpsmsg = rpssplit[1]; // The second string in the content is the analysis
     console.log("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans) // Verbose
     var beatprefix = "Ha! I beat you with " // bot wins
@@ -154,7 +161,7 @@ client.on("message", (message) => {
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
       }
     } else {
-      message.channel.send("Sorry, " + message.author + ", your second argument should be ``rock``, ``paper``, or ``scissors``.")
+      message.channel.send("Sorry, " + message.author + ", your argument should be ``rock``, ``paper``, or ``scissors``.")
     } // bot rock paper scissors ends Here
   // Dump Message data /////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "messagedata")) {
