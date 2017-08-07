@@ -121,7 +121,7 @@ client.on("message", (message) => {
     }
   // dev messagedata ///////////////////////////////////////////////////////////
 } else if (devarg === "math") {
-  if(!devhandle[2] && !devhandle[3]) {
+  if(!devhandle[3]) {
     exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3] + ">/root/NC/utils/NorthStar/mathoutput.txt")
   } else {
     message.channel.send("Error!")
