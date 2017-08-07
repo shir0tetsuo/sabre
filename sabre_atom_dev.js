@@ -107,7 +107,7 @@ client.on("message", (message) => {
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
   // Developer Commands ////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "dev")) {
+} else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
   // dev checkOwnership ////////////////////////////////////////////////////////
