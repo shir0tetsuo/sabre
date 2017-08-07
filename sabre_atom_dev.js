@@ -15,7 +15,6 @@ const rateme = require("./sabre_rateme.json")
 let prefix = config.pre
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
-// exec("ls -la", puts);
 // System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
 //console.log(config) //verbose configuration
@@ -147,20 +146,18 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**dev** + checkOwnership, messagedata, announceRole, math"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, math"
         }
       ]
     }})
   }
   // END OF FILE Developer Menu ////////////////////////////////////////////////
-  // checkmod //////////////////////////////////////////////////////////////////
+  // math //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "math")) {
     const matts = message.content.split(/\s+/g);
     // Math2 is required to remove special formatting
     exec('math2' + ' ' + matts[1] + ' ' + matts[2],
-      function (error, stdout, stderr) {
-        //console.log('stdout: ' + stdout);
-        //console.log('stderr: ' + stderr);
+      function (error, stdout, stderr) { // May change to spam channel
         message.author.send({embed: {
           color: 0xFFFF00,
           author: {
@@ -184,6 +181,7 @@ client.on("message", (message) => {
           }
         }})
     }) // may break
+  // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
       message.channel.send("Shadow Moderator, confirmed.")
@@ -246,7 +244,7 @@ client.on("message", (message) => {
     fields: [
       {
         name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**math** - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
+        value: '**help** - Hello, World!\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
