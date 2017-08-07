@@ -106,7 +106,9 @@ client.on("message", (message) => {
     var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+  //////////////////////////////////////////////////////////////////////////////
   // Developer Commands ////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
@@ -121,6 +123,11 @@ client.on("message", (message) => {
   } else if (devarg === "messagedata"){
     message.author.send("Developer data sent to console.")
     console.log(message.author)
+  // dev announcerole //////////////////////////////////////////////////////////
+  } else if (devarg === "announceRole"){
+    let modRole = message.guild.roles.find("name", devhandle[2]) // alternatively "string"
+    console.log(modRole)
+    console.log(modRole.id) // This may break
   } else { // Developer Help Command Menu //////////////////////////////////////
     message.author.send({embed: {
       color: 0xFF0000,
@@ -131,15 +138,12 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**dev** + checkOwnership, messagedata"
+          value: "**dev** + checkOwnership, messagedata, announcerole"
         }
       ]
     }})
   }
-  // announcerole //////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "announcerole")) {
-    let modRole = message.guild.roles.find("name", "Cyber Operative");
-    console.log(modRole);
+  // END OF FILE Developer Menu ////////////////////////////////////////////////
   // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
