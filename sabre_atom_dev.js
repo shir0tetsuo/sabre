@@ -120,6 +120,12 @@ client.on("message", (message) => {
       message.author.send("Authorized!")
     }
   // dev messagedata ///////////////////////////////////////////////////////////
+} else if (devarg === "math") {
+  if(!devhandle[2] && !devhandle[3]) {
+    exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3] + ">/root/NC/utils/NorthStar/mathoutput.txt")
+  } else {
+    message.channel.send("Error!")
+  }
   } else if (devarg === "messagedata"){
     message.author.send("Developer data sent to console.")
     console.log(message.author)
