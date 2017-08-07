@@ -110,15 +110,29 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "dev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
+  // dev checkOwnership ////////////////////////////////////////////////////////
   if (devarg === "checkOwnership") {
     if(message.author.id !== config.perUser.ownerID) {
-      message.author.send("Unauthorized!")
+      message.author.send("Unauthorized!") // Booyah's Finding
     } else {
       message.author.send("Authorized!")
     }
+  // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
-    message.channel.send("Developer data sent to console.")
+    message.author.send("Developer data sent to console.")
     console.log(message.author)
+  } else { // Developer Help Command Menu //////////////////////////////////////
+    message.author.send({embed: {
+      color: 0xFF0000,
+      author: {
+        name: client.user.username,
+        icon_url: client.user.avatarURL
+      },
+      fields: [
+        name: ":radioactive: Developer Test Commands",
+        value: "**dev** + checkOwnership, messagedata"
+      ]
+    }})
   }
   // announcerole //////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "announcerole")) {
@@ -199,7 +213,7 @@ client.on("message", (message) => {
         value: '**weather** - Get local weather data any time of day.',
         "inline": true
       },
-      {
+      { // Need to add !dev
         name: ':radioactive:Test Commands',
         value: '**devteam** - Developer Team Contributions.\n**messagedata** - Sends developer information to console.\n**announcerole** - Developer Test Command.\n**checkmod** - Developer Test Command.\n**checkownership** - Developer Test Command.'
       },
