@@ -32,6 +32,7 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
+  // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send({embed: {
       color: 0x0044FF,
@@ -59,7 +60,7 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
-  // ipsummary
+  // ipsummary /////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipsummary")) {
     if (message.member.roles.has(config.cyberID)) {
       exec("/root/NC/utils/NorthStar/ipbot.sh");
@@ -67,7 +68,7 @@ client.on("message", (message) => {
     } else {
       return;
     }
-  // weather
+  // weather ///////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "weather")) {
     if (message.member.roles.has(config.modID)) {
       exec("/root/NC/utils/NorthStar/weatherbot.sh");
@@ -75,39 +76,55 @@ client.on("message", (message) => {
     } else {
       return;
     }
-  // rateme
+  // rateme ////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "rateme")) {
     umath = Math.random()
     if (umath > .05) {
       var rate = rateme.strings[Math.floor(Math.random() * rateme.strings.length)]
-      message.channel.send(rate.text)
+      message.channel.send({embed: {
+        color: 13498899,
+        timestamp: new Date()
+        footer: {
+          text: "Server Time"
+        },
+        author: {
+          name: "Sabre",
+          icon_url: client.user.avatarURL
+        },
+        fields: [
+          {
+            name: "You have been rated as",
+            value: "```" + rate.text + "```"
+          }
+        ]
+      }})
       console.log("Verbose: umath is equal-to " + umath)
     } else { message.channel.send("Fish out of water!") // Ray's Mod
       console.log("Verbose: umath is equal-to " + umath)} // 5 percent chance
-  // dice
+  // dice //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "dice")) {
     var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
-  // checkownership
+  // checkownership ////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkownership")) {
     if(message.author.id !== config.ownerID) {
       message.channel.send("Unauthorized!")
     } else {
       message.channel.send("Authorized!")
     }
-  // announcerole
+  // announcerole //////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "announcerole")) {
     let modRole = message.guild.roles.find("name", "Cyber Operative");
     console.log(modRole);
-  // checkmod
+  // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.modID)) {
       message.channel.send("Shadow Moderator, confirmed.")
     } else {
       message.channel.send("Shadow Moderator, you are not.")
     }
-  // bot rock paper scissors
+  // bot rock paper scissors ///////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "botrps")) {
     var rpsmat = [ { ans: "rock" }, { ans: "paper" }, { ans: "scissors" } ] // These are the choices the bot can make
     var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)]; // rpsmat.ans
@@ -139,7 +156,7 @@ client.on("message", (message) => {
     } else {
       message.channel.send("Sorry, " + message.author + ", your second argument should be ``rock``, ``paper``, or ``scissors``.")
     } // bot rock paper scissors ends Here
-  // Dump Message data
+  // Dump Message data /////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "messagedata")) {
     //console.log(message.content);
     console.log(message)
