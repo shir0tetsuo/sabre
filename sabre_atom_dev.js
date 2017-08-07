@@ -8,7 +8,7 @@ const client = new Discord.Client(); // New client authorization
 // Variable and String Constraints /////////////////////////////////////////////
 const config = require("./sabre_init.json")
 const keys = require("./token.json")
-// const rateme = require("./sabre_rateme.json")
+const rateme = require("./sabre_rateme.json")
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -22,7 +22,7 @@ client.login(keys.token)
 client.on("ready", () => {
   console.log("System Ready! " + prefix + " " + config.v + " " + Date());
   client.user.setGame("With " + client.guilds.size + " Servers.")
-  client.user.setStatus("busy") // online / busy (dev)
+  client.user.setStatus("online") // online
 });
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
@@ -79,9 +79,8 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "rateme")) {
     umath = Math.random()
     if (umath > .05) {
-      var q = [ { text: "Lovely!" }, { text: "Spicy!" }, { text: "Courageous!" }, { text: "Fabulous!" }, { text: "Sexy!" }, { text: "Beautiful!" }, { text: "Oh My!" }, { text: "10/10!" }, { text: "Damnn!" }, { text: "Lookin Fiiiiine!" } ];
-      var q = q[Math.floor(Math.random() * q.length)]; // Booyah's Mod
-      message.channel.send(q.text);
+      var rate = rateme.strings[Math.floor(Math.random() * rateme.strings.length)]
+      message.channel.send(rate.text)
       console.log("Verbose: umath is equal-to " + umath)
     } else { message.channel.send("Fish out of water!") // Ray's Mod
       console.log("Verbose: umath is equal-to " + umath)} // 5 percent chance
