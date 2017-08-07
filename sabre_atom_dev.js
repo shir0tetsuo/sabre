@@ -28,7 +28,9 @@ client.on("ready", () => {
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
-  if (!message.content.startsWith(prefix)) {
+  if (!message.content.startsWith(prefix) && !message.author.bot) {
+    console.log("Return!")
+    if (message.author.bot === true) console.log("Bot reasons")
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
