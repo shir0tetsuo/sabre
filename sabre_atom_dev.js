@@ -119,7 +119,7 @@ client.on("message", (message) => {
     } else {
       message.author.send("Authorized!")
     }
-  // dev messagedata ///////////////////////////////////////////////////////////
+  // dev testfunction //////////////////////////////////////////////////////////
 } else if (devarg === "math") {
   //  exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3])
   // mathdata //
@@ -127,11 +127,9 @@ client.on("message", (message) => {
     function (error, stdout, stderr) {
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);
-      if (error !== null) {
-        console.log('exec error: ' + error);
-      }
     })
   // End mathdata //
+  // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
     message.author.send("Developer data sent to console.")
     console.log(message.author)
@@ -149,13 +147,22 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**dev** + checkOwnership, messagedata, announceRole"
+          value: "**dev** + checkOwnership, messagedata, announceRole, math"
         }
       ]
     }})
   }
   // END OF FILE Developer Menu ////////////////////////////////////////////////
   // checkmod //////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "math")) {
+    const matts = message.content.split(/\s+/g);
+    exec('math' + ' ' + matts[1] + ' ' + matts[2],
+      function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+    }) // may break
+    message.author.send(stdout)
+    message.author.send(stderr)
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
       message.channel.send("Shadow Moderator, confirmed.")
@@ -218,7 +225,7 @@ client.on("message", (message) => {
     fields: [
       {
         name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
+        value: '**help** - Hello, World!\n**math** - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
