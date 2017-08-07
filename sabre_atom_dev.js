@@ -156,12 +156,33 @@ client.on("message", (message) => {
   // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "math")) {
     const matts = message.content.split(/\s+/g);
-    exec('math' + ' ' + matts[1] + ' ' + matts[2],
+    // Math2 is required to remove special formatting
+    exec('math2' + ' ' + matts[1] + ' ' + matts[2],
       function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        message.author.send(stdout)
-        message.author.send(stderr)
+        //console.log('stdout: ' + stdout);
+        //console.log('stderr: ' + stderr);
+        message.author.send({embed: {
+          color: 0xFFFF00,
+          author: {
+            name: client.user.username,
+            icon_url: client.user.avatarURL
+          },
+          fields: [
+            {
+              name: "Output",
+              value: '```' + stdout + '```'
+            },
+            {
+              name: "Errors",
+              value: '```' + stderr + '```'
+            }
+          ],
+          timestamp: new Date(),
+          footer: {
+            icon_url: client.user.avatarURL,
+            text: 'Mathematics Program, Server Time'
+          }
+        }})
     }) // may break
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
