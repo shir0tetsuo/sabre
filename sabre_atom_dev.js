@@ -83,7 +83,7 @@ client.on("message", (message) => {
       var rate = rateme.strings[Math.floor(Math.random() * rateme.strings.length)]
       message.channel.send({embed: {
         color: 13498899,
-        timestamp: new Date()
+        timestamp: new Date(),
         footer: {
           text: "Server Time"
         },
