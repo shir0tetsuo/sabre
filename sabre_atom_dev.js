@@ -85,7 +85,7 @@ client.on("message", (message) => {
         color: 13498899,
         timestamp: new Date(),
         footer: {
-          text: message.author
+          text: "Server Time"
         },
         author: {
           name: "Sabre",
@@ -99,7 +99,7 @@ client.on("message", (message) => {
         ]
       }})
       console.log("Verbose: umath is equal-to " + umath)
-    } else { message.channel.send("Fish out of water! " + message.author) // Ray's Mod
+    } else { message.channel.send("Fish out of water!") // Ray's Mod
       console.log("Verbose: umath is equal-to " + umath)} // 5 percent chance
   // dice //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "dice")) {
