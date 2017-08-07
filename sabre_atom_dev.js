@@ -125,7 +125,7 @@ client.on("message", (message) => {
     console.log(message.author)
   // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){
-    let modRole = message.guild.roles.find("name", devhandle[2]) // alternatively "string"
+    let modRole = message.guild.roles.find("name", "Cyber") // alternatively "string"
     console.log(modRole)
   } else { // Developer Help Command Menu //////////////////////////////////////
     message.author.send({embed: {
@@ -137,7 +137,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**dev** + checkOwnership, messagedata, announcerole"
+          value: "**dev** + checkOwnership, messagedata, announceRole"
         }
       ]
     }})
