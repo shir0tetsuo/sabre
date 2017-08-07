@@ -122,10 +122,19 @@ client.on("message", (message) => {
   // dev messagedata ///////////////////////////////////////////////////////////
 } else if (devarg === "math") {
   if(!devhandle[3]) {
-    exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3] + ">/root/NC/utils/NorthStar/mathoutput.txt")
-  } else {
-    message.channel.send("Error!")
-  }
+  //  exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3])
+    mathdata = exec('math ' + ' ' + devhandle[2] + ' ' + devhandle[3],
+    function (error, stdout, stderr) {
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+    })
+    } else {
+    message.channel.send("Error! This command requires arguments.")
+    }
+  // End Math Test
   } else if (devarg === "messagedata"){
     message.author.send("Developer data sent to console.")
     console.log(message.author)
