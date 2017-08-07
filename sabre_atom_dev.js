@@ -160,9 +160,9 @@ client.on("message", (message) => {
       function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
+        message.author.send(stdout)
+        message.author.send(stderr)
     }) // may break
-    message.author.send(stdout)
-    message.author.send(stderr)
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
       message.channel.send("Shadow Moderator, confirmed.")
