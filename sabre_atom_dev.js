@@ -121,7 +121,7 @@ client.on("message", (message) => {
     }
   // dev messagedata ///////////////////////////////////////////////////////////
 } else if (devarg === "math") {
-  if(!devhandle[3]) {
+  if(devhandle[3] !== null) {
   //  exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3])
     mathdata = exec('math ' + ' ' + devhandle[2] + ' ' + devhandle[3],
     function (error, stdout, stderr) {
