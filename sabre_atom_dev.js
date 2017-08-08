@@ -83,8 +83,8 @@ client.on("message", (message) => {
           },
           fields: [
             {
-              name: "Killed Subnets",
-              value: '```' + stdout + '```'
+              name: "Terminated subnets blocked by System",
+              value: stdout
             }
           ],
           timestamp: new Date(),
