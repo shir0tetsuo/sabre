@@ -60,8 +60,16 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
+  // ipsummary /////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "ipsummary")) {
+    if (message.member.roles.has(config.role.cyberID)) {
+      exec("/root/NC/utils/NorthStar/ipbot.sh");
+      message.channel.send("An IP Summary has been recorded.");
+    } else {
+      return;
+    }
   // wttr //////////////////////////////////////////////////////////////////////
-  }  else if (message.content.startsWith(prefix + "wttr")){
+  } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
     if (locale[1] !== undefined) {
@@ -269,7 +277,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Killed Subnets',
+        value: '**ipsummary** - Prints top violations from /var/log/auth.log',
         "inline": true
       },
       {
