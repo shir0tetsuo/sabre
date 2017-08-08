@@ -76,7 +76,7 @@ client.on("message", (message) => {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
       function(error, stdout, stderr) {
         message.channel.send({embed: {
-          color: 0x0000FF,
+          color: 0x1979FF,
           author: {
             name: client.user.username,
             icon_url: client.user.avatarURL
