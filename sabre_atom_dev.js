@@ -78,7 +78,7 @@ client.on("message", (message) => {
         footer: {
           icon_url: client.user.avatarURL,
           text: 'Server Time'
-        }
+        },
         author: {
           name: client.user.username,
           icon_url: client.user.avatarURL
