@@ -91,7 +91,7 @@ client.on("message", (message) => {
         }})
       })
     } else {
-      message.channel.send("Give me a city name, " + message.author)
+      message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
       return;
     }
   } else if (message.content.startsWith(prefix + "weather")) {
