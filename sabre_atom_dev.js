@@ -72,7 +72,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
-    if (locale[1] !== null) {
+    if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
       function(error, stdout, stderr) {
         message.channel.send({embed: {
