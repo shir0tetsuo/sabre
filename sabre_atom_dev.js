@@ -14,6 +14,7 @@ const rateme = require("./sabre_rateme.json")
 //var sys = require('sys');
 let prefix = config.pre
 let ddstc = "Developer data sent to console."
+let forbidden = "Forbidden Command! "
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
 // System Login ////////////////////////////////////////////////////////////////
@@ -66,6 +67,7 @@ client.on("message", (message) => {
       exec("/root/NC/utils/NorthStar/ipbot.sh");
       message.channel.send("An IP Summary has been recorded.");
     } else {
+      message.channel.send(forbidden + message.author)
       return;
     }
   // ipkilled //////////////////////////////////////////////////////////////////
@@ -90,8 +92,9 @@ client.on("message", (message) => {
             icon_url: client.user.avatarURL,
             text: "STRATUS 1 FIREWALL.DNET.LAB, Server Time"
           }
-        }})})
+        }})}) // Confusing As Hell! Thank god for Atom
     } else {
+      message.channel.send(forbidden + message.author)
       return;
     }
   // wttr //////////////////////////////////////////////////////////////////////
