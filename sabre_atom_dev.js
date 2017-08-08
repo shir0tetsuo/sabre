@@ -72,7 +72,24 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
-    if (locale[1] !== undefined) {
+    if (locale[1] === "moon") {
+      exec('/root/NC/utils/NorthStar/wttr.in.moon.sh',
+      function(error, stdout, stderr) {
+        message.channel.send({embed: {
+          color: 0x808080,
+          author: {
+            name: client.user.username,
+            icon_url: client.user.avatarURL
+          },
+          title: 'wttr.in - Console-Like Weather Data',
+          url: 'http://wttr.in/moon',
+          fields: [{
+            name: ':full_moon_with_face::last_quarter_moon::new_moon_with_face:',
+            value: '```' + stdout + '```'
+          }]
+        }})
+      })
+    } else if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
       function(error, stdout, stderr) {
         message.channel.send({embed: {
@@ -86,23 +103,6 @@ client.on("message", (message) => {
           description: "You searched for: " + locale[1],
           fields: [{
             name: ':loudspeaker::satellite_orbital: Hows this?',
-            value: '```' + stdout + '```'
-          }]
-        }})
-      })
-    } else if (locale[1] === "moon") {
-      exec('/root/NC/utils/NorthStar/wttr.in.moon.sh',
-      function(error, stdout, stderr) {
-        message.channel.send({embed: {
-          color: 0x808080,
-          author: {
-            name: client.user.username,
-            icon_url: client.user.avatarURL
-          },
-          title: 'wttr.in - Console-Like Weather Data',
-          url: 'http://wttr.in/moon',
-          fields: [{
-            name: ':full_moon_with_face::last_quarter_moon::new_moon_with_face:',
             value: '```' + stdout + '```'
           }]
         }})
