@@ -306,7 +306,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipsummary** - Prints top violations from /var/log/auth.log',
+        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server',
         "inline": true
       },
       {
