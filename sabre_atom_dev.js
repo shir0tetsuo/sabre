@@ -73,7 +73,7 @@ client.on("message", (message) => {
   // ipkilled //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipkilled")) {
     if (message.member.roles.has(config.role.cyberID)) {
-      exec("ipkilled",
+      exec("/root/NC/utils/NorthStar/ipkilled.sh",
       function (error, stdout, stderr) {
         message.channel.send({embed: {
           color: 0xFF3D00,
