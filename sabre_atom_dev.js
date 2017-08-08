@@ -85,7 +85,7 @@ client.on("message", (message) => {
           url: 'http://wttr.in/moon',
           fields: [{
             name: ':full_moon_with_face::last_quarter_moon::new_moon_with_face:',
-            value: '```' + stdout + '```'
+            value: stdout
           }]
         }})
       })
