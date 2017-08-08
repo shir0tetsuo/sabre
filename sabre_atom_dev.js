@@ -190,6 +190,11 @@ client.on("message", (message) => {
     })
   // End mathdata //
   // dev messagedata ///////////////////////////////////////////////////////////
+} else if (devarg === "eval") {
+      if (message.author.id === config.perUser.ownerID) {
+        message.channel.send("eval: ", devhandle[2])
+      }
+    }
   } else if (devarg === "messagedata"){
     message.author.send(ddstc)
     console.log(message.author)
@@ -220,7 +225,7 @@ client.on("message", (message) => {
     // Let the math program handle all arguments
     exec('math2 ' + matts[1] + ' ' + matts[2],
       function (error, stdout, stderr) { // May change to spam channel
-        message.author.send({embed: {
+        message.channel.send({embed: {
           color: 0xFFFF00,
           author: {
             name: client.user.username,
