@@ -68,7 +68,37 @@ client.on("message", (message) => {
     } else {
       return;
     }
-  // weather ///////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "ipkilled")){
+    if (message.member.roles.has(config.role.cyberID)) {
+      exec('ipkilled',
+        function(error, stdout, stderr) {
+      message.channel.send({embed: {
+        color: 0xFF3D00,
+        timestamp: new Date(),
+        footer: {
+          icon_url: client.user.avatarURL,
+          text: 'Server Time'
+        }
+        author: {
+          name: client.user.username,
+          icon_url: client.user.avatarURL
+        },
+        fields: [{
+          name: ":satellite_orbital::closed_lock_with_key: Summary of Blocked Subnets",
+          value: '```' + stdout + '```'
+        },
+        {
+          name: "Server",
+          value: "STRATUS 1 FIREWALL.DNET.LAB"
+        },
+        {
+          name: "Errors",
+          value: stderr
+        }]
+      }})
+    }
+  }
+  // wttr //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
@@ -94,6 +124,7 @@ client.on("message", (message) => {
       message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
       return;
     }
+  // weather (bot) /////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "weather")) {
     if (message.member.roles.has(config.role.modID)) {
       exec("/root/NC/utils/NorthStar/weatherbot.sh");
@@ -276,7 +307,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipsummary** - Prints top violations from /var/log/auth.log',
+        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Killed Subnets',
         "inline": true
       },
       {
