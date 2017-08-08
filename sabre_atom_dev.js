@@ -90,6 +90,23 @@ client.on("message", (message) => {
           }]
         }})
       })
+    } else if (locale[1] === "moon") {
+      exec('/root/NC/utils/NorthStar/wttr.in.moon.sh',
+      function(error, stdout, stderr) {
+        message.channel.send({embed: {
+          color: 0x808080,
+          author: {
+            name: client.user.username,
+            icon_url: client.user.avatarURL
+          },
+          title: 'wttr.in - Console-Like Weather Data',
+          url: 'http://wttr.in/moon',
+          fields: [{
+            name: ':full_moon_with_face::last_quarter_moon::new_moon_with_face:',
+            value: '```' + stdout + '```'
+          }]
+        }})
+      })
     } else {
       message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
       return;
@@ -183,6 +200,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "math")) {
     const matts = message.content.split(/\s+/g);
     // Math2 is required to remove special formatting
+    // Let the math program handle all arguments
     exec('math2 ' + matts[1] + ' ' + matts[2],
       function (error, stdout, stderr) { // May change to spam channel
         message.author.send({embed: {
