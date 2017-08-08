@@ -13,6 +13,7 @@ const rateme = require("./sabre_rateme.json")
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
 let prefix = config.pre
+let ddstc = "Developer data sent to console."
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
 // System Login ////////////////////////////////////////////////////////////////
@@ -68,6 +69,31 @@ client.on("message", (message) => {
       return;
     }
   // weather ///////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "wttr")){
+    // stuff
+    const locale = message.content.split(/\s+/g);
+    if (!locale[1]) {
+      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
+      function(error, stdout, stderr) {
+        message.channel.send({embed: {
+          color: 0x0000FF,
+          author: {
+            name: client.user.username,
+            icon_url: client.user.avatarURL
+          },
+          title: 'wttr.in - Console-Like Weather Data',
+          url: 'http://wttr.in/',
+          description: "You searched for: " + locale[1],
+          fields: [{
+            name: ':loudspeaker::satellite_orbital: Hows this?',
+            value: '```' + stdout + '```'
+          }]
+        }})
+      })
+    } else {
+      message.channel.send("Give me a city name, " message.author)
+      return;
+    }
   } else if (message.content.startsWith(prefix + "weather")) {
     if (message.member.roles.has(config.role.modID)) {
       exec("/root/NC/utils/NorthStar/weatherbot.sh");
@@ -124,13 +150,14 @@ client.on("message", (message) => {
   // mathdata //
     mathdata = exec('math ' + ' ' + devhandle[2] + ' ' + devhandle[3],
     function (error, stdout, stderr) {
+      message.channel.send(ddstc)
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);
     })
   // End mathdata //
   // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
-    message.author.send("Developer data sent to console.")
+    message.author.send(ddstc)
     console.log(message.author)
   // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){
@@ -156,7 +183,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "math")) {
     const matts = message.content.split(/\s+/g);
     // Math2 is required to remove special formatting
-    exec('math2' + ' ' + matts[1] + ' ' + matts[2],
+    exec('math2 ' + matts[1] + ' ' + matts[2],
       function (error, stdout, stderr) { // May change to spam channel
         message.author.send({embed: {
           color: 0xFFFF00,
@@ -224,7 +251,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "messagedata")) {
     //console.log(message.content);
     console.log(message)
-    message.channel.send("Developer information was sent to console.")
+    message.channel.send(ddstc)
   // Print version.
   } else if (message.content.startsWith(prefix + "v")) {
     message.channel.send("Version " + config.v);
@@ -244,7 +271,7 @@ client.on("message", (message) => {
     fields: [
       {
         name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
+        value: '**help** - Hello, World!\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
