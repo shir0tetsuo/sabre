@@ -72,7 +72,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "ipkilled")) {
     if (message.member.roles.has(config.role.cyberID)) {
       exec("ipkilled",
-      function (error, stdout, stderr)
+      function (error, stdout, stderr) {
         message.channel.send({embed: {
           color: 0xFF3D00,
           author: {
@@ -90,7 +90,7 @@ client.on("message", (message) => {
             icon_url: client.user.avatarURL,
             text: "STRATUS 1 FIREWALL.DNET.LAB, Server Time"
           }
-        }}))
+        }})})
     } else {
       return;
     }
