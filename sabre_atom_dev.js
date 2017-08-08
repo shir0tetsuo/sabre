@@ -60,46 +60,8 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
-  // ipsummary /////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ipsummary")) {
-    if (message.member.roles.has(config.role.cyberID)) {
-      exec("/root/NC/utils/NorthStar/ipbot.sh");
-      message.channel.send("An IP Summary has been recorded.");
-    } else {
-      return;
-    }
-  } else if (message.content.startsWith(prefix + "ipkilled")){
-    if (message.member.roles.has(config.role.cyberID)) {
-      exec('ipkilled',
-        function(error, stdout, stderr) {
-      message.channel.send({embed: {
-        color: 0xFF3D00,
-        timestamp: new Date(),
-        footer: {
-          icon_url: client.user.avatarURL,
-          text: 'Server Time'
-        },
-        author: {
-          name: client.user.username,
-          icon_url: client.user.avatarURL
-        },
-        fields: [{
-          name: ":satellite_orbital::closed_lock_with_key: Summary of Blocked Subnets",
-          value: '```' + stdout + '```'
-        },
-        {
-          name: "Server",
-          value: "STRATUS 1 FIREWALL.DNET.LAB"
-        },
-        {
-          name: "Errors",
-          value: stderr
-        }]
-      }})
-    }
-  }
   // wttr //////////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "wttr")){
+  }  else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
     if (locale[1] !== undefined) {
