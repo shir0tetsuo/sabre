@@ -190,11 +190,6 @@ client.on("message", (message) => {
     })
   // End mathdata //
   // dev messagedata ///////////////////////////////////////////////////////////
-} else if (devarg === "eval") {
-      if (message.author.id === config.perUser.ownerID) {
-        message.channel.send("eval: ", devhandle[2])
-      }
-    }
   } else if (devarg === "messagedata"){
     message.author.send(ddstc)
     console.log(message.author)
