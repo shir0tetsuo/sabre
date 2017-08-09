@@ -211,9 +211,8 @@ client.on("message", (message) => {
   let devarg = devhandle[1];
   if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
-    message.author.send("Strings: " + devhandle[2,10])
   } if (devarg === "chanID") {
-    message.guild.channels.find("name", devhandle[2])
+    message.guild.channels.find("name", "security-bot")
     console.log(message.channel)
     message.author.send(ddstc)
   } else if (devarg === "mention") {
