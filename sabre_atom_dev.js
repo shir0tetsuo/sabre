@@ -211,11 +211,10 @@ client.on("message", (message) => {
   let devarg = devhandle[1];
   if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
-  } if (devarg === "chanID") {
-    message.guild.channels.find("name", "security-bot")
+  } else if (devarg === "chanID") {
+    message.guild.channels.find("name", "security-bot") // Doesn't work accurately
     console.log(message.channel)
     message.author.send(ddstc)
-    message.author.send(message.channel)
   } else if (devarg === "mention") {
     message.channel.send("Hello, " + message.mentions.members.first() + "!")
   // dev checkOwnership ////////////////////////////////////////////////////////
@@ -430,4 +429,5 @@ client.on("message", (message) => {
 // Join and Part Handlers
 client.on("guildMemberAdd", (member) => {
   console.log("User joined.")
+  message.channel(config.chan.securitybot).send("Test!") // method 1
 })
