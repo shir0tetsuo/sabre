@@ -376,6 +376,6 @@ client.on("message", (message) => {
     ////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "roast")) {
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
-    message.channel.send(message.mentions.members.first() + "," + roastc.text)
+    message.channel.send(message.mentions.members.first() + ", " + roastc.text)
   } //else if (message.content.startsWith)
 }); // may break
