@@ -344,7 +344,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server',
+        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server\n**xks** (string) - Searches local database for spy words.',
         "inline": true
       },
       {
