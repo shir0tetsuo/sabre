@@ -346,7 +346,7 @@ client.on("message", (message) => {
     fields: [
       {
         name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**v** - Print version number.'
+        value: '**help** - Hello, World!\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**roast** (@person) - Your favorite command.\n**v** - Print version number.'
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
