@@ -99,8 +99,9 @@ client.on("message", (message) => {
               .setThumbnail('https://i.imgur.com/iE39JgF.png')
               .setTimestamp()
               .setURL('https://duckduckgo.com/?q=xkeyscore')
-              .addField('Searching Database (2013)', '\u200b')
+              .addField('Here is what the monkeys could dig up.', '\u200b')
               .addField(regval, '```' + xksregex[1] + '```')
+              .addField('\u200b', '\u200b')
               //.addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
