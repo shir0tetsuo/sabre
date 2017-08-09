@@ -100,7 +100,7 @@ client.on("message", (message) => {
               .setURL('https://www.google.ca/search?q=xkeyscore')
               .addField('Searching Database.', '\u200b')
               .addField('{regval}', '\u200b')
-              .addfield('You searched for:', '```{regex}```')
+              //.addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
       } else {
