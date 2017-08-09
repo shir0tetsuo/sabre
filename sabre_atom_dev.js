@@ -13,6 +13,7 @@ const client = new Discord.Client(); // New client authorization
 const config = require("./sabre_init.json")
 const keys = require("./token.json")
 const rateme = require("./sabre_rateme.json")
+const roast = require("./sabre_roast.json")
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -373,5 +374,8 @@ client.on("message", (message) => {
         ]
       }}) // end devteam
     ////////////////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "roast")) {
+    var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
+    message.channel.send(message.mentions.members.first() + "," + roastc.text)
   } //else if (message.content.startsWith)
-});
+}); // may break
