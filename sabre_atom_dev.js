@@ -75,6 +75,37 @@ client.on("message", (message) => {
       message.channel.send(forbidden + message.author)
       return;
     }
+  // XKS Regex
+} else if (message.content.startsWith(prefix + "xks")) {
+    if (message.member.roles.has(config.role.cyberID)) {
+      const xksregex = message.content.split(/\s+/g);
+      if (xksregex[1] !== undefined) {
+        exec('/root/NC/NorthStar/xks.sh ' + xksregex[1],
+          function(error, stdout, stderr) {
+            const embed = new Discord.RichEmbed()
+              .setTitle('XKeyScore Regex')
+              .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
+              .setColor('0xFF3D00')
+              .setDescription('Searches local database for XKeyScore words.')
+              .setFooter('Server Time')
+              .setImage('https://i.imgur.com/sUj5UBw.jpg')
+              .setThumbnail('https://i.imgur.com/iE39JgF.png')
+              .setTimestamp()
+              .setURL('https://www.google.ca/search?q=xkeyscore')
+            if (stdout === "true") {
+              .addField(':large_orange_diamond: Warning!', 'Your regex string `' + xksregex[1] '` is known to be a tracked word.')
+            } else {
+              .addField(':large_blue_diamond: Safe!', 'Your regex string `' + xksregex[1] + '` is not in the database.')
+            }
+              message.channel.send({ embed });
+          })
+      } else {
+        message.channel.send(message.author + " A string is required.")
+      }
+    } else {
+      message.channel.send(forbidden + message.author)
+      return;
+    }
   // ipkilled //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipkilled")) {
     if (message.member.roles.has(config.role.cyberID)) {
