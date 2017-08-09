@@ -40,6 +40,9 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
+    if (!sabrestatus[1] || sabrestatus[1] === undefined) {
+      message.channel.send("Can't set it to nothing.")
+    }
     client.user.setStatus(sabrestatus[1])
     message.channel.send("Status has been set to " + sabrestatus[1])
   // PING //////////////////////////////////////////////////////////////////////
