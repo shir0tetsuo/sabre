@@ -20,7 +20,6 @@ const roast = require("./sabre_roast.json")
 let prefix = config.pre
 let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
-let talkedRecently = new Set();
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
 // System Login ////////////////////////////////////////////////////////////////
@@ -40,13 +39,6 @@ client.on("message", (message) => {
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
   // talkedRecently ////////////////////////////////////////////////////////////
-  } else if (talkedRecently.has(message.author.id)) {
-    message.author.send("You're on a cooldown! Please wait.")
-    talkedRecently.add(message.author.id);
-    setTimeout(() => {
-      talkedRecently.delete(message.author.id);
-    }, 2000);
-    console.log(talkedRecently)
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send({embed: {
