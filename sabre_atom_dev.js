@@ -429,5 +429,5 @@ client.on("message", (message) => {
 // Join and Part Handlers
 client.on("guildMemberAdd", (member) => {
   console.log("User joined.")
-  message.channel(config.chan.securitybot).send("Test!") // method 1
+  message.channel(config.chan.securitybot).send("Test! " + member.id, member.user) // method 1
 })
