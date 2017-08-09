@@ -42,6 +42,7 @@ client.on("message", (message) => {
     const sabrestatus = message.content.split(/\s+/g);
     if (!sabrestatus[1] || sabrestatus[1] === undefined) {
       message.channel.send("Can't set it to nothing.")
+      return;
     }
     client.user.setStatus(sabrestatus[1])
     message.channel.send("Status has been set to " + sabrestatus[1])
