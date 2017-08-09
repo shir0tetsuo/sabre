@@ -94,9 +94,11 @@ client.on("message", (message) => {
               .setTimestamp()
               .setURL('https://www.google.ca/search?q=xkeyscore')
             if (stdout === "true") {
-              .addField(':large_orange_diamond: Warning!', 'Your regex string ``{regex}`` is known to be a tracked word.')
+              .addField(':large_orange_diamond: Warning!', 'String was found in database!')
+              .addField('Search:', regex)
             } else {
-              .addField(':large_blue_diamond: Safe!', 'Your regex string ``{regex}`` was not found in the database.')
+              .addField(':large_blue_diamond: Safe!', 'String was not found in database!')
+              .addField('Search:', regex)
             }
               message.channel.send({ embed });
           })
