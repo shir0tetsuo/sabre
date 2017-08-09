@@ -215,6 +215,7 @@ client.on("message", (message) => {
     message.guild.channels.find("name", "security-bot")
     console.log(message.channel)
     message.author.send(ddstc)
+    message.author.send(message.channel)
   } else if (devarg === "mention") {
     message.channel.send("Hello, " + message.mentions.members.first() + "!")
   // dev checkOwnership ////////////////////////////////////////////////////////
