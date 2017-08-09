@@ -88,7 +88,10 @@ client.on("message", (message) => {
             } else if (stdout === "false") {
               var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
-            console.log(regval, regex, stdout, stderr)
+            console.log(regval)
+            console.log(regex)
+            console.log(stdout)
+            console.log(stderr)
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
               .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
