@@ -426,8 +426,3 @@ client.on("message", (message) => {
     message.channel.send(message.mentions.members.first() + ", " + roastc.text)
   } //else if (message.content.startsWith)
 }); // may break
-// Join and Part Handlers
-client.on("guildMemberAdd", (member) => {
-  console.log("User joined.")
-  message.channel(config.chan.securitybot).send("Test! " + member.id, member.user) // method 1
-})
