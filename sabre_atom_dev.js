@@ -80,7 +80,7 @@ client.on("message", (message) => {
     if (message.member.roles.has(config.role.cyberID)) {
       const xksregex = message.content.split(/\s+/g);
       if (xksregex[1] !== undefined) {
-        exec('/root/NC/NorthStar/xks.sh ' + xksregex[1],
+        exec('/root/NC/utils/NorthStar/xks.sh ' + xksregex[1],
           function(error, stdout, stderr) {
             regex = xksregex[1]
             if (stdout === "true") {
