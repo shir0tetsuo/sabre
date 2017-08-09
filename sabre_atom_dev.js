@@ -27,7 +27,7 @@ client.login(keys.token)
 client.on("ready", () => {
   console.log("System Ready! " + prefix + " " + config.v + " " + Date());
   client.user.setGame("With " + client.guilds.size + " Servers.")
-  client.user.setStatus("online") // online
+  client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
@@ -171,10 +171,8 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
-  if (devarg === "eval") {
-    if (message.author.id === config.perUser.ownerID) {
-      message.channel.send("eval: ", devhandle[2])
-    }
+  if (devarg === "mention") {
+    message.channel.send("Hello, " + message.mentions.members.first() + "!")
   // dev checkOwnership ////////////////////////////////////////////////////////
   } else if (devarg === "checkOwnership") {
     if(message.author.id !== config.perUser.ownerID) {
@@ -211,7 +209,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, math"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention"
         }
       ]
     }})
