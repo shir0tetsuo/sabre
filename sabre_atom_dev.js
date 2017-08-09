@@ -84,9 +84,9 @@ client.on("message", (message) => {
           function(error, stdout, stderr) {
             regex = xksregex[1]
             if (stdout === "true") {
-              let regval = ":large_orange_diamond: String was FOUND!"
+              var regval = ":large_orange_diamond: String was FOUND!"
             } else {
-              let regval = ":large_blue_diamond: String was NOT FOUND!"
+              var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
             console.log(regval, regex)
             const embed = new Discord.RichEmbed()
