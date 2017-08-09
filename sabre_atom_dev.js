@@ -84,9 +84,9 @@ client.on("message", (message) => {
           function(error, stdout, stderr) {
             regex = xksregex[1]
             if (stdout === "true") {
-              regval = ":large_orange_diamond: String was FOUND!"
+              let regval = ":large_orange_diamond: String was FOUND!"
             } else {
-              regval = ":large_blue_diamond: String was NOT FOUND!"
+              let regval = ":large_blue_diamond: String was NOT FOUND!"
             }
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
