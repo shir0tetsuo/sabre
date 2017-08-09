@@ -171,8 +171,12 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
+  if (devarg === "eval") {
+    if (message.author.id === config.perUser.ownerID) {
+      message.channel.send("eval: ", devhandle[2])
+    }
   // dev checkOwnership ////////////////////////////////////////////////////////
-  if (devarg === "checkOwnership") {
+  } else if (devarg === "checkOwnership") {
     if(message.author.id !== config.perUser.ownerID) {
       message.author.send("Unauthorized!") // Booyah's Finding
     } else {
