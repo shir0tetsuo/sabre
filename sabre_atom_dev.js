@@ -83,6 +83,11 @@ client.on("message", (message) => {
         exec('/root/NC/NorthStar/xks.sh ' + xksregex[1],
           function(error, stdout, stderr) {
             regex = xksregex[1]
+            if (stdout === "true") {
+              regval = ":large_orange_diamond: String was FOUND!"
+            } else {
+              regval = ":large_blue_diamond: String was NOT FOUND!"
+            }
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
               .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
@@ -93,13 +98,9 @@ client.on("message", (message) => {
               .setThumbnail('https://i.imgur.com/iE39JgF.png')
               .setTimestamp()
               .setURL('https://www.google.ca/search?q=xkeyscore')
-            if (stdout === "true") {
-            //  .addField(':large_orange_diamond: Warning!', 'String was found in database!')
-            //  .addField('Search:', regex)
-            } else {
-            //  .addField(':large_blue_diamond: Safe!', 'String was not found in database!')
-            //  .addField('Search:', regex)
-            }
+              .addField('Searching Database.', '\u200b')
+              .addField('{regval}')
+              .addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
       } else {
