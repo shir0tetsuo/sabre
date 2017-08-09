@@ -88,7 +88,7 @@ client.on("message", (message) => {
             } else if (stdout === "false\n") {
               var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
-            console.log(regval, xksregex[1], stdout)
+            //console.log(regval, xksregex[1], stdout)
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
               .setAuthor('firewall.dnet.lab')
@@ -101,7 +101,7 @@ client.on("message", (message) => {
               .setURL('https://duckduckgo.com/?q=xkeyscore')
               .addField('Here is what the monkeys could dig up.', '\u200b')
               .addField(regval, '```' + xksregex[1] + '```')
-              .addField('\u200b', '\u200b')
+              //.addField('\u200b', '\u200b')
               //.addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
