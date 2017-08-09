@@ -88,22 +88,19 @@ client.on("message", (message) => {
             } else if (stdout === "false\n") {
               var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
-            console.log(regval)
-            console.log(xksregex[1])
-            console.log(stdout)
-            //console.log(stderr)
+            console.log(regval, xksregex[1], stdout)
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
-              .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
+              .setAuthor('firewall.dnet.lab')
               .setColor('0xFF3D00')
               .setDescription('Searches local database for XKeyScore words.')
               .setFooter('Server Time')
               .setImage('https://i.imgur.com/sUj5UBw.jpg')
               .setThumbnail('https://i.imgur.com/iE39JgF.png')
               .setTimestamp()
-              .setURL('https://www.google.ca/search?q=xkeyscore')
-              .addField('Searching Database.', '\u200b')
-              .addField(regval, '\u200b')
+              .setURL('https://duckduckgo.com/?q=xkeyscore')
+              .addField('Searching Database (2013)', '\u200b')
+              .addField(regval, '```' + xksregex[1] + '```')
               //.addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
