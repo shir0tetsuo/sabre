@@ -82,6 +82,7 @@ client.on("message", (message) => {
       if (xksregex[1] !== undefined) {
         exec('/root/NC/NorthStar/xks.sh ' + xksregex[1],
           function(error, stdout, stderr) {
+            regex = xksregex[1]
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
               .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
@@ -93,9 +94,9 @@ client.on("message", (message) => {
               .setTimestamp()
               .setURL('https://www.google.ca/search?q=xkeyscore')
             if (stdout === "true") {
-              .addField(':large_orange_diamond: Warning!', 'Your regex string `' + xksregex[1] '` is known to be a tracked word.')
+              .addField(':large_orange_diamond: Warning!', 'Your regex string ``{regex}`` is known to be a tracked word.')
             } else {
-              .addField(':large_blue_diamond: Safe!', 'Your regex string `' + xksregex[1] + '` is not in the database.')
+              .addField(':large_blue_diamond: Safe!', 'Your regex string ``{regex}`` was not found in the database.')
             }
               message.channel.send({ embed });
           })
