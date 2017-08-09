@@ -99,7 +99,7 @@ client.on("message", (message) => {
               .setTimestamp()
               .setURL('https://www.google.ca/search?q=xkeyscore')
               .addField('Searching Database.', '\u200b')
-              .addField('{regval}', '\u200b')
+              .addField(regval, '\u200b')
               //.addfield('You searched for:', '```{regex}```')
               message.channel.send({ embed });
           })
