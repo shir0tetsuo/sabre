@@ -83,9 +83,9 @@ client.on("message", (message) => {
         exec('/root/NC/utils/NorthStar/xks.sh ' + xksregex[1],
           function(error, stdout, stderr) {
             //let regex = xksregex[1]
-            if (stdout === "true") {
+            if (stdout === "true\n") {
               var regval = ":large_orange_diamond: String was FOUND!"
-            } else if (stdout === "false") {
+            } else if (stdout === "false\n") {
               var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
             console.log(regval)
