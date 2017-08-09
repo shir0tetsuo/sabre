@@ -46,6 +46,7 @@ client.on("message", (message) => {
     setTimeout(() => {
       talkedRecently.delete(message.author.id);
     }, 2000);
+    console.log(talkedRecently)
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send({embed: {
