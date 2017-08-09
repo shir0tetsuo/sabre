@@ -34,7 +34,7 @@ client.on("ready", () => {
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
-  if (!message.content.startsWith(prefix)) {
+  if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
@@ -209,7 +209,14 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
-  if (devarg === "mention") {
+  if (devarg === "bigparse") {
+    message.author.send("Strings: " + devhandle)
+    message.author.send("Strings: " + devhandle[2,10])
+  } if (devarg === "chanID") {
+    message.guild.channels.find("name", devhandle[2])
+    console.log(message.channel)
+    message.author.send(ddstc)
+  } else if (devarg === "mention") {
     message.channel.send("Hello, " + message.mentions.members.first() + "!")
   // dev checkOwnership ////////////////////////////////////////////////////////
   } else if (devarg === "checkOwnership") {
@@ -247,7 +254,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname)"
         }
       ]
     }})
@@ -420,3 +427,7 @@ client.on("message", (message) => {
     message.channel.send(message.mentions.members.first() + ", " + roastc.text)
   } //else if (message.content.startsWith)
 }); // may break
+// Join and Part Handlers
+client.on("guildMemberAdd", (member) => {
+  console.log("User joined.")
+})
