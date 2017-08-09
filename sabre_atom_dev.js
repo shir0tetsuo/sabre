@@ -375,6 +375,10 @@ client.on("message", (message) => {
       }}) // end devteam
     ////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "roast")) {
+    if (message.mentions.members.first() === undefined) {
+      message.channel.send(message.author + ", you dink, you're supposed to @mention someone.")
+      return;
+    }
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
     message.channel.send(message.mentions.members.first() + ", " + roastc.text)
   } //else if (message.content.startsWith)
