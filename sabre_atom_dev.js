@@ -95,7 +95,7 @@ client.on("message", (message) => {
               .setColor('0xFF3D00')
               .setDescription('Searches local database for XKeyScore words.')
               .setFooter('Server Time')
-              .setImage('https://i.imgur.com/sUj5UBw.jpg')
+              //.setImage('https://i.imgur.com/sUj5UBw.jpg')
               .setThumbnail('https://i.imgur.com/iE39JgF.png')
               .setTimestamp()
               .setURL('https://duckduckgo.com/?q=xkeyscore')
