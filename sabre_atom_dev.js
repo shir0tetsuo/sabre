@@ -38,7 +38,10 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
-  // talkedRecently ////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
+    const sabrestatus = message.content.split(/\s+/g);
+    client.user.setStatus(sabrestatus[1])
+    message.channel.send("Status has been set to " sabrestatus[1])
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send({embed: {
@@ -362,7 +365,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_blue_diamond:Shadow Moderator Only',
-        value: '**weather** - Get local weather data any time of day.',
+        value: '**weather** - Get local weather data any time of day.\n**sabrestatus** (online, dnd, invisible) - Sets Sabres online status.',
         "inline": true
       },
       { // Need to add !dev
