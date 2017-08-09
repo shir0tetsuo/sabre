@@ -82,16 +82,16 @@ client.on("message", (message) => {
       if (xksregex[1] !== undefined) {
         exec('/root/NC/utils/NorthStar/xks.sh ' + xksregex[1],
           function(error, stdout, stderr) {
-            let regex = xksregex[1]
+            //let regex = xksregex[1]
             if (stdout === "true") {
               var regval = ":large_orange_diamond: String was FOUND!"
             } else if (stdout === "false") {
               var regval = ":large_blue_diamond: String was NOT FOUND!"
             }
-            //console.log(regval)
-            console.log(regex)
+            console.log(regval)
+            console.log(xksregex[1])
             console.log(stdout)
-            console.log(stderr)
+            //console.log(stderr)
             const embed = new Discord.RichEmbed()
               .setTitle('XKeyScore Regex')
               .setAuthor('firewall.dnet.lab', 'https://www.google.ca/search?q=xkeyscore')
