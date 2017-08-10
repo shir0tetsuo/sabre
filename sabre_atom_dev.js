@@ -38,18 +38,21 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
+  // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
-    if (!sabrestatus[1] || sabrestatus[1] === undefined) {
+    if (sabrestatus[1] === "game") {
+      client.user.setGame(message.content.substring(17,128))
+      return;
+    } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
       message.channel.send("Can't set it to nothing.")
       return;
-    }
-    if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible") {
+    } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible") {
       client.user.setStatus(sabrestatus[1])
       console.log(sabrestatus[1])
       message.channel.send("Status has been set to " + sabrestatus[1])
     } else {
-      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible``")
+      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game``")
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
