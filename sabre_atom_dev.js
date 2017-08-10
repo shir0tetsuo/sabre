@@ -38,6 +38,10 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
+  // announcements
+  } else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
+    var channel = message.channel.id(config.chan.announcements)
+    client.sendMessage(channel, "Hello, World! This is a Test!")
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
