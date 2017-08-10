@@ -171,7 +171,7 @@ client.on("message", (message) => {
     const locale = message.content.split(/\s+/g);
     let target = message.content.substring(7,71)
     if (locale[1] !== undefined) {
-      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target // replaces locale[1], slightly more dangerous
+      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target, // replaces locale[1], slightly more dangerous
       function(error, stdout, stderr) {
         message.channel.send({embed: {
           color: 0x1979FF,
