@@ -43,16 +43,24 @@ client.on("message", (message) => {
     const sabrestatus = message.content.split(/\s+/g);
     if (sabrestatus[1] === "game") {
       client.user.setGame(message.content.substring(17,128))
+      message.channel.send("Playing status updated.")
       return;
+    } else if (sabrestatus[1] === "forceExit"){
+      client.destroy((err) => {
+        console.log(err)
+      });
+    } else if (sabrestatus[1] === "exit") {
+      client.logOut((err) => {
+        console.log(err)
+      });
     } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
       message.channel.send("Can't set it to nothing.")
       return;
     } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible") {
       client.user.setStatus(sabrestatus[1])
-      console.log(sabrestatus[1])
       message.channel.send("Status has been set to " + sabrestatus[1])
     } else {
-      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game``")
+      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game, exit, forceExit``")
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
