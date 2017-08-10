@@ -40,8 +40,9 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // announcements
   } else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
-    var channel = message.channel.id(config.chan.announcements)
-    client.sendMessage(channel, "Hello, World! This is a Test!")
+    let announcechan = guild.channels.find("name", "announcements");
+    if (!announcements) return;
+    announcements.send("Hello, World!")
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
