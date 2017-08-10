@@ -38,6 +38,11 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
+  // announcements
+  /*} else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
+    let announcechan = guild.channels.find("name", "announcements");
+    if (!announcements) return;
+    announcements.send("Hello, World!") */
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
@@ -164,13 +169,9 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
-    let target = message.content.substring(6,71)
     if (locale[1] !== undefined) {
-      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target, // replaces locale[1], slightly more dangerous
+      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
       function(error, stdout, stderr) {
-        if (stderr !== null) {
-          console.log(stderr)
-        }
         message.channel.send({embed: {
           color: 0x1979FF,
           author: {
@@ -179,7 +180,7 @@ client.on("message", (message) => {
           },
           title: 'wttr.in - Console-Like Weather Data',
           url: 'http://wttr.in/',
-          description: "You searched for: " + target, // replaces locale[1]
+          description: "You searched for: " + locale[1],
           fields: [{
             name: ':loudspeaker::satellite_orbital: Hows this?',
             value: '```' + stdout + '```'
@@ -187,7 +188,7 @@ client.on("message", (message) => {
         }})
       })
     } else {
-      message.channel.send("Give me a city name, " + message.author + "\nExample: NYC, New York")
+      message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
       return;
     }
   // weather (bot) /////////////////////////////////////////////////////////////
