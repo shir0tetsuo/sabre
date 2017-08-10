@@ -92,7 +92,29 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
-  // ipsummary /////////////////////////////////////////////////////////////////
+  // ipsummaries /////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "ipstats") && message.member.roles.has(config.role.cyberID)){
+    exec("/root/NC/utils/NorthStar/ipsabre.sh",
+      function(error, stdout, stderr) {
+        message.channel.send({embed: {
+          color: 0xFF3D00,
+          timestamp: new Date(),
+          footer: {
+            icon_url: client.user.avatarURL,
+            text: "Server Time"
+          },
+          author: {
+            name: client.user.username,
+            icon_url: client.user.avatarURL
+          },
+          fields: [
+            {
+              name: "STRATUS 1 FIREWALL.DNET.LAB",
+              value: stdout
+            }
+          ]
+        }})
+      })
   } else if (message.content.startsWith(prefix + "ipsummary")) {
     if (message.member.roles.has(config.role.cyberID)) {
       exec("/root/NC/utils/NorthStar/ipbot.sh");
@@ -382,7 +404,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server\n**xks** (string) - Searches local database for spy words.',
+        value: '**ipstats** - Statistics on Attacks\n**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server\n**xks** (string) - Searches local database for spy words.',
         "inline": true
       },
       {
