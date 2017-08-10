@@ -184,7 +184,7 @@ client.on("message", (message) => {
         }})
       })
     } else {
-      message.channel.send("Give me a city name, " + message.author + "\nExample: New York City, New York")
+      message.channel.send("Give me a city name, " + message.author + "\nExample: NYC, New York")
       return;
     }
   // weather (bot) /////////////////////////////////////////////////////////////
