@@ -92,7 +92,7 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
-  // ipsummaries /////////////////////////////////////////////////////////////////
+  // ipsummaries ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipstats") && message.member.roles.has(config.role.cyberID)){
     exec("/root/NC/utils/NorthStar/ipsabre.sh",
       function(error, stdout, stderr) {
@@ -123,7 +123,7 @@ client.on("message", (message) => {
       message.channel.send(forbidden + message.author)
       return;
     }
-  // XKS Regex
+  // XKS Regex /////////////////////////////////////////////////////////////////
 } else if (message.content.startsWith(prefix + "xks")) {
     if (message.member.roles.has(config.role.cyberID)) {
       const xksregex = message.content.split(/\s+/g);
@@ -252,7 +252,7 @@ client.on("message", (message) => {
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
   //////////////////////////////////////////////////////////////////////////////
-  // Developer Commands ////////////////////////////////////////////////////////
+  // Developer Commands //////////////////////////// !!! ///////////////////////
   //////////////////////////////////////////////////////////////////////////////
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
@@ -275,16 +275,9 @@ client.on("message", (message) => {
       message.author.send("Authorized!")
     }
   // dev testfunction //////////////////////////////////////////////////////////
-} else if (devarg === "math") {
-  //  exec("/root/NC/utils/math " + devhandle[2] + " " + devhandle[3])
-  // mathdata //
-    mathdata = exec('math ' + ' ' + devhandle[2] + ' ' + devhandle[3],
-    function (error, stdout, stderr) {
-      message.channel.send(ddstc)
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
-    })
-  // End mathdata //
+} else if (devarg === "sendSec") {
+  var channel = client.channels.get("id", config.chan.securitybot)
+  client.sendMessage(channel, "Hello World")
   // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
     message.author.send(ddstc)
