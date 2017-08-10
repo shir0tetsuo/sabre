@@ -254,7 +254,7 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // Developer Commands //////////////////////////// !!! ///////////////////////
   //////////////////////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "xdev")) {
+} else if (message.content.startsWith(prefix + "xdev") && message.member.roles.has(config.role.sabredevID)) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
   if (devarg === "links"){
