@@ -188,7 +188,7 @@ client.on("message", (message) => {
         }})
       })
     } else {
-      message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
+      message.channel.send("Give me a city name, " + message.author + "!\nExample: Halifax,Nova")
       return;
     }
   // weather (bot) /////////////////////////////////////////////////////////////
