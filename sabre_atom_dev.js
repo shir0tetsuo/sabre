@@ -169,7 +169,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
-    let target = message.content.substring(7,71)
+    let target = message.content.substring(6,71)
     if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target, // replaces locale[1], slightly more dangerous
       function(error, stdout, stderr) {
@@ -189,7 +189,7 @@ client.on("message", (message) => {
         }})
       })
     } else {
-      message.channel.send("Give me a city name, " + message.author + "\nExample: Aylmer,Quebec")
+      message.channel.send("Give me a city name, " + message.author + "\nExample: New York City, New York")
       return;
     }
   // weather (bot) /////////////////////////////////////////////////////////////
