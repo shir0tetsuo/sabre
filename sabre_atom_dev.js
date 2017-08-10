@@ -39,10 +39,10 @@ client.on("message", (message) => {
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
   // announcements
-  } else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
+  /*} else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
     let announcechan = guild.channels.find("name", "announcements");
     if (!announcements) return;
-    announcements.send("Hello, World!")
+    announcements.send("Hello, World!") */
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
