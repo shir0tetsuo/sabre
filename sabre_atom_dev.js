@@ -169,8 +169,9 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "wttr")){
     // stuff
     const locale = message.content.split(/\s+/g);
+    let target = message.content.substring(7,71)
     if (locale[1] !== undefined) {
-      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
+      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target // replaces locale[1], slightly more dangerous
       function(error, stdout, stderr) {
         message.channel.send({embed: {
           color: 0x1979FF,
@@ -180,7 +181,7 @@ client.on("message", (message) => {
           },
           title: 'wttr.in - Console-Like Weather Data',
           url: 'http://wttr.in/',
-          description: "You searched for: " + locale[1],
+          description: "You searched for: " + target, // replaces locale[1]
           fields: [{
             name: ':loudspeaker::satellite_orbital: Hows this?',
             value: '```' + stdout + '```'
