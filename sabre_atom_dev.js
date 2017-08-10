@@ -44,8 +44,12 @@ client.on("message", (message) => {
       message.channel.send("Can't set it to nothing.")
       return;
     }
-    client.user.setStatus(sabrestatus[1])
-    message.channel.send("Status has been set to " + sabrestatus[1])
+    if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible") {
+      client.user.setStatus(sabrestatus[1])
+      message.channel.send("Status has been set to " + sabrestatus[1])
+    } else {
+      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible``")
+    }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send({embed: {
