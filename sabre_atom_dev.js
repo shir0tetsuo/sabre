@@ -257,7 +257,11 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
-  if (devarg === "bigparse") {
+  if (devarg === "cats") {
+    client.sendFile(message, 'http://random.cat/meow', 'randomcat', 'Test!', (err, m) => {
+      if (err) console.log(err)
+    })
+  } else if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
   } else if (devarg === "chanID") {
     message.guild.channels.find("name", "security-bot") // Doesn't work accurately
