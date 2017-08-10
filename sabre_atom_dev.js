@@ -168,6 +168,11 @@ client.on("message", (message) => {
     if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + target, // replaces locale[1], slightly more dangerous
       function(error, stdout, stderr) {
+        if (stderr !== null) {
+          message.channel.send("Something went wrong!")
+          console.log(stderr)
+          return;
+        }
         message.channel.send({embed: {
           color: 0x1979FF,
           author: {
