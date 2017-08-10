@@ -30,6 +30,9 @@ client.on("ready", () => {
   client.user.setGame("With " + client.guilds.size + " Servers.")
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
+client.on("guildMemberAdd", (member) => {
+  message.guild.channels.find("id", config.chan.securitybot).send(member.id, member.user)
+})
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 client.on("message", (message) => {
