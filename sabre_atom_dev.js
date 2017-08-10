@@ -261,6 +261,8 @@ client.on("message", (message) => {
     client.sendFile(message, 'http://random.cat/meow', 'randomcat', 'Test!', (err, m) => {
       if (err) console.log(err)
     })
+  } else if (devarg === "links"){
+    message.channel.send("https://github.com/shir0tetsuo/sabre - https://trello.com/b/7UjAWlS5/sabre-development")
   } else if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
   } else if (devarg === "chanID") {
@@ -305,7 +307,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname)"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname), cats, links"
         }
       ]
     }})
