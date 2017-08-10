@@ -258,7 +258,7 @@ client.on("message", (message) => {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
   if (devarg === "links"){
-    message.channel.send("https://github.com/shir0tetsuo/sabre - https://trello.com/b/7UjAWlS5/sabre-development")
+    message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
   } else if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
   } else if (devarg === "chanID") {
@@ -303,7 +303,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname), cats, links"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname), links"
         }
       ]
     }})
