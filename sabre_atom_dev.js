@@ -257,14 +257,18 @@ client.on("message", (message) => {
 } else if (message.content.startsWith(prefix + "xdev") && message.member.roles.has(config.role.sabredevID)) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
+  // developer links ///////////////////////////////////////////////////////////
   if (devarg === "links"){
     message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
+  // dev parse test parameters /////////////////////////////////////////////////
   } else if (devarg === "bigparse") {
     message.author.send("Strings: " + devhandle)
+  // dev channel ID spawner ////////////////////////////////////////////////////
   } else if (devarg === "chanID") {
     message.guild.channels.find("name", "security-bot") // Doesn't work accurately
     console.log(message.channel)
     message.author.send(ddstc)
+  // dev mention test //////////////////////////////////////////////////////////
   } else if (devarg === "mention") {
     message.channel.send("Hello, " + message.mentions.members.first() + "!")
   // dev checkOwnership ////////////////////////////////////////////////////////
@@ -295,7 +299,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, sendSec, mention, bigparse, chanID (channelname), links"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, sendSec, mention, bigparse, chanID, links"
         }
       ]
     }})
