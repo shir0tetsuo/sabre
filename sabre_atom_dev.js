@@ -45,14 +45,11 @@ client.on("message", (message) => {
       client.user.setGame(message.content.substring(17,128))
       message.channel.send("Playing status updated.")
       return;
-    } else if (sabrestatus[1] === "forceExit"){
-      client.destroy((err) => {
-        console.log(err)
-      });
-    } else if (sabrestatus[1] === "exit") {
-      client.logOut((err) => {
-        console.log(err)
-      });
+    } else if (sabrestatus[1] === "reset") {
+      client.user.setGame("With " + client.guilds.size + " Servers.")
+      client.user.setStatus("dnd")
+      message.channel.send("System reset.")
+      return;
     } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
       message.channel.send("Can't set it to nothing.")
       return;
@@ -60,7 +57,7 @@ client.on("message", (message) => {
       client.user.setStatus(sabrestatus[1])
       message.channel.send("Status has been set to " + sabrestatus[1])
     } else {
-      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game, exit, forceExit``")
+      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game, reset``")
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
