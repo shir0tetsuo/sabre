@@ -276,7 +276,7 @@ client.on("message", (message) => {
     }
   // dev testfunction //////////////////////////////////////////////////////////
 } else if (devarg === "sendSec") {
-  message.guild.channels.find("id", config.chan.securitybot).sendMessage("Hello, World!")
+  message.guild.channels.find("id", config.chan.securitybot).send("Hello, World!")
   // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
     message.author.send(ddstc)
