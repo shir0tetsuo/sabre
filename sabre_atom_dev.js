@@ -277,7 +277,8 @@ client.on("message", (message) => {
   // dev testfunction //////////////////////////////////////////////////////////
 } else if (devarg === "sendSec") {
   var channel = client.channels.get("id", config.chan.securitybot)
-  client.sendMessage(channel, "Hello World")
+  console.log(channel)
+  message.channel.send(channel, "Hello World")
   // dev messagedata ///////////////////////////////////////////////////////////
   } else if (devarg === "messagedata"){
     message.author.send(ddstc)
@@ -296,7 +297,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, math, mention, bigparse, chanID (channelname), links"
+          value: "**xdev** + checkOwnership, messagedata, announceRole, sendSec, mention, bigparse, chanID (channelname), links"
         }
       ]
     }})
