@@ -107,7 +107,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":satellite_orbital: Pong!",
-          value: "The server responded to your request.",
+          value: "```markdown\n[!]: Round Trip```",
           inline: true
         },
         {
