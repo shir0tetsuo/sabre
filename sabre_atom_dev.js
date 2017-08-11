@@ -111,7 +111,7 @@ client.on("message", (message) => {
           inline: true
         },
         {
-          name: "__Latency__",
+          name: ":satellite: __Latency__",
           value: "```\n" + (m.createdTimestamp - message.createdTimestamp) + "ms.```",
           inline: true
         }
