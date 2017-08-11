@@ -112,7 +112,7 @@ client.on("message", (message) => {
       fields: [
         {
           name: ":satellite_orbital: PONG!",
-          value: "```\nLatency: " + m.created.timestamp - message.createdTimestamp + "ms```",
+          value: "```\nLatency: " + m.createdTimestamp - message.createdTimestamp + "ms```",
           inline: true
         },
         {
