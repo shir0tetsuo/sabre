@@ -47,7 +47,19 @@ client.on("guildMemberAdd", (member) => {
   }})
 })
 client.on("guildMemberRemove", (member) => {
-  member.guild.channels.get(config.chan.securitybot).send(member.user.username + "left the server.")
+  member.guild.channels.get(config.chan.securitybot).send({embed: {
+    color: 0xA7A7A5,
+    timestamp: new Date(),
+    footer: {
+      text: client.user.username + ", Server Time"
+    },
+    fields: [
+      {
+        name: member.user.username,
+        value: "Left the server."
+      }
+    ]
+  }})
 })
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
