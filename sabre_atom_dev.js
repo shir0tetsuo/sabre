@@ -97,29 +97,31 @@ client.on("message", (message) => {
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send({embed: {
-      color: 0x0044FF,
+    message.delete();
+    message.channel.send("Calculating!").then(m => m.edit({embed: {
+      color: 0x2E9DFF,
       timestamp: new Date(),
       footer: {
+        icon_url: client.user.avatarURL,
         text: "Server Time"
       },
       author: {
-        name: "Sabre",
+        name: client.user.username,
         icon_url: client.user.avatarURL
       },
       fields: [
         {
-          name: ":satellite:",
-          value: "```PONG!```",
+          name: ":satellite_orbital: PONG!",
+          value: "```\nLatency: " + m.created.timestamp - message.createdTimestamp "ms```",
           inline: true
         },
         {
-          name: ":satellite_orbital:",
-          value: "```test```",
+          name: "\u200b",
+          value: "```\nCalculation: " + Math.round(bot.ping) + "ms```",
           inline: true
         }
       ]
-    }});
+    }}))
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
