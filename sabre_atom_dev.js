@@ -46,6 +46,7 @@ client.on("guildMemberAdd", (member) => {
     ]
   }})
 })
+// Guild Part Handler //////////////////////////////////////////////////////////
 client.on("guildMemberRemove", (member) => {
   member.guild.channels.get(config.chan.securitybot).send({embed: {
     color: 0xA7A7A5,
@@ -69,11 +70,6 @@ client.on("message", (message) => {
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
   //////////////////////////////////////////////////////////////////////////////
-  // announcements
-  /*} else if (message.content.startsWith(prefix, "announce") && message.member.roles.has(config.role.modID)) {
-    let announcechan = guild.channels.find("name", "announcements");
-    if (!announcements) return;
-    announcements.send("Hello, World!") */
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
     const sabrestatus = message.content.split(/\s+/g);
@@ -97,9 +93,8 @@ client.on("message", (message) => {
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
-    message.delete();
     message.channel.send("Calculating!").then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(bot.ping)}ms.`))
-    console.log(m.createdTimestamp, message.createdTimestamp)
+    //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
