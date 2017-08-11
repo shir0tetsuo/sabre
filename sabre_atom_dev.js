@@ -29,10 +29,27 @@ client.on("ready", () => {
   console.log("System Ready! " + prefix + " " + config.v + " " + Date());
   client.user.setGame("With " + client.guilds.size + " Servers.")
   client.user.setStatus("dnd") // online/offline/dnd/invisible
-});
+}); //member.user.avatarURL member.user.username
 client.on("guildMemberAdd", (member) => {
-  member.guild.channels.get(config.chan.securitybot).send(member.user.username + " joined the server.")
-  //member.addRole(member.guild.roles.find('name', 'shadowling')) // Append basic membership
+  member.guild.channels.get(config.chan.securitybot).send({embed: {
+    color: 0xA3F700,
+    timestamp: new Date(),
+    footer: "Server Time",
+    thumbnail: member.user.avatarURL,
+    author: {
+      name: client.user.username,
+      icon_url: client.user.avatarURL
+    },
+    fields: [
+      {
+        name: member.user.username,
+        value: "Joined the server."
+      }
+    ]
+  }})
+})
+client.on("guildMemberRemove", (member) => {
+  member.guild.channels.get(config.chan.securitybot).send(member.user.username + "left the server.")
 })
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
