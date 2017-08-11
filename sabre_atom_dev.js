@@ -14,6 +14,7 @@ const config = require("./sabre_init.json")
 const keys = require("./token.json")
 const rateme = require("./sabre_rateme.json")
 const roast = require("./sabre_roast.json")
+const jokes = require("./sabre_jokes.json")
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -91,6 +92,10 @@ client.on("message", (message) => {
     } else {
       message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, idle, game, reset``")
     }
+  // Joke //////////////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "joke")) {
+    var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
+    message.channel.send("Okay, okay. Here's a joke. " + joke.text)
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("Calculating!").then(m => m.edit({embed: {
@@ -494,6 +499,7 @@ client.on("message", (message) => {
         ]
       }}) // end devteam
     ////////////////////////////////////////////////////////////////////////////
+  // ROAST /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "roast")) {
     if (message.mentions.members.first() === undefined) {
       message.channel.send(message.author + ", you dink, you're supposed to @mention someone.")
