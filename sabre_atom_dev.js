@@ -28,7 +28,7 @@ client.login(keys.token)
 //console.log(config) //verbose configuration
 client.on("ready", () => {
   console.log("System Ready! " + prefix + " " + config.v + " " + Date());
-  client.user.setGame("With " + client.guilds.size + " Servers.")
+  client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 }); //member.user.avatarURL member.user.username
 // Guild Join Handler //////////////////////////////////////////////////////////
