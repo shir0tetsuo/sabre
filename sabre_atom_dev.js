@@ -98,25 +98,7 @@ client.on("message", (message) => {
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.delete();
-    message.channel.send("Calculating!").then(m => m.edit({embed: {
-      color: 0x2E9DFF,
-      timestamp: new Date(),
-      footer: {
-        icon_url: client.user.avatarURL,
-        text: "Server Time"
-      },
-      author: {
-        name: client.user.username,
-        icon_url: client.user.avatarURL
-      },
-      fields: [
-        {
-          name: ":satellite_orbital: PONG!",
-          value: "```\nLatency: " + m.createdTimestamp - message.createdTimestamp + "ms```",
-          inline: true
-        }
-      ]
-    }}))
+    message.channel.send("Calculating!").then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(bot.ping)}ms.`))
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
