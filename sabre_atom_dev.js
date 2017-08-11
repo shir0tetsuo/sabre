@@ -79,7 +79,7 @@ client.on("message", (message) => {
       message.channel.send("Playing status updated.")
       return;
     } else if (sabrestatus[1] === "reset") {
-      client.user.setGame("With " + client.guilds.size + " Servers.")
+      client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
       client.user.setStatus("dnd")
       message.channel.send("System reset.")
       return;
