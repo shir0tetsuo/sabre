@@ -93,7 +93,7 @@ client.on("message", (message) => {
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("Calculating!").then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(bot.ping)}ms.`))
+    message.channel.send("Calculating!").then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms.`))
     //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
