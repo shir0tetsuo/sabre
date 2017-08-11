@@ -34,8 +34,12 @@ client.on("guildMemberAdd", (member) => {
   member.guild.channels.get(config.chan.securitybot).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
-    footer: "Server Time",
-    thumbnail: member.user.avatarURL,
+    footer: {
+      text: "Server Time"
+    },
+    thumbnail: {
+      url: member.user.avatarURL
+    },
     author: {
       name: client.user.username,
       icon_url: client.user.avatarURL
