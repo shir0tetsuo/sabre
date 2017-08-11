@@ -31,7 +31,7 @@ client.on("ready", () => {
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
 client.on("guildMemberAdd", (member) => {
-  member.guild.channels.find("id", config.chan.securitybot).send(member.user.username + " joined the server.")
+  client.guild.channels.find("id", config.chan.securitybot).send(member.user.username + " joined the server.")
 //  member.addRole(member.guild.roles.find('name', 'shadowling').id)
 })
 ////////////////////////////////////////////////////////////////////////////////
