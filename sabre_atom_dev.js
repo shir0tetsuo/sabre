@@ -93,7 +93,30 @@ client.on("message", (message) => {
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
-    message.channel.send("Calculating!").then(m => m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms.`))
+    message.channel.send("Calculating!").then(m => m.edit({embed: {
+      color: 0xA7A7A5,
+      timestamp: new Date(),
+      footer: {
+        icon_url: client.user.avatarURL,
+        text: "Server Time"
+      },
+      author: {
+        name: client.user.username,
+        icon_url: client.user.avatarURL
+      },
+      fields: [
+        {
+          name: ":satellite_orbital: Pong!",
+          value: "The server responded to your request.",
+          inline: true
+        },
+        {
+          name: "\u200b",
+          value: "Latency: " + "```\n" + (m.createdTimestamp - message.createdTimestamp) + "ms.```",
+          inline: true
+        }
+      ]
+    }}))
     //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
