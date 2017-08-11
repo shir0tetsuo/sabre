@@ -114,11 +114,6 @@ client.on("message", (message) => {
           name: ":satellite_orbital: PONG!",
           value: "```\nLatency: " + m.createdTimestamp - message.createdTimestamp + "ms```",
           inline: true
-        },
-        {
-          name: "\u200b",
-          value: "```\nCalculation: " + Math.round(bot.ping) + "ms```",
-          inline: true
         }
       ]
     }}))
