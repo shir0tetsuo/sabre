@@ -30,10 +30,10 @@ client.on("ready", () => {
   client.user.setGame("With " + client.guilds.size + " Servers.")
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
-client.on("guildMemberAdd", (member) => {
-  client.guild.channels.find("id", config.chan.securitybot).send(member.user.username + " joined the server.")
+//client.on("guildMemberAdd", (member) => {
+//  client.guild.channels.find("id", config.chan.securitybot).send(member.user.username + " joined the server.")
 //  member.addRole(member.guild.roles.find('name', 'shadowling').id)
-})
+//})
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 client.on("message", (message) => {
@@ -62,11 +62,11 @@ client.on("message", (message) => {
     } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
       message.channel.send("Can't set it to nothing.")
       return;
-    } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible") {
+    } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible" || sabrestatus[1] ==="idle") {
       client.user.setStatus(sabrestatus[1])
       message.channel.send("Status has been set to " + sabrestatus[1])
     } else {
-      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, game, reset``")
+      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, idle, game, reset``")
     }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
