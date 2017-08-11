@@ -36,15 +36,11 @@ client.on("guildMemberAdd", (member) => {
     color: 0xA3F700,
     timestamp: new Date(),
     footer: {
-      text: "Server Time"
-    },
-    author: {
-      name: member.user.username,
-      icon_url: member.user.avatarURL
+      text: client.user.username + ", Server Time"
     },
     fields: [
       {
-        name: "\u200b",
+        name: member.user.username,
         value: "Joined the server."
       }
     ]
