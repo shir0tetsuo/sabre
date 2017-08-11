@@ -32,7 +32,7 @@ client.on("ready", () => {
 });
 client.on("guildMemberAdd", (member) => {
   member.guild.channels.get(config.chan.securitybot).send(member.user.username + " joined the server.")
-  member.addRole(member.guild.roles.find('name', 'shadowling')) // Append basic membership
+  //member.addRole(member.guild.roles.find('name', 'shadowling')) // Append basic membership
 })
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
