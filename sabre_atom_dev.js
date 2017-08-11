@@ -111,8 +111,8 @@ client.on("message", (message) => {
           inline: true
         },
         {
-          name: "\u200b",
-          value: "Latency: " + "```\n" + (m.createdTimestamp - message.createdTimestamp) + "ms.```",
+          name: "__Latency__",
+          value: "```\n" + (m.createdTimestamp - message.createdTimestamp) + "ms.```",
           inline: true
         }
       ]
