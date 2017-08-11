@@ -1,6 +1,5 @@
 ///// file start ///////////////////////////////////////////////////////////////
 // Verbose, Client Login and Initialization
-////////////////////////////////////////////////////////////////////////////////
 // Forewarning: Functions that require external execution are run specifically
 // by the developer's system. Custom commands have been created in order to
 // handle advanced scripting requests.
@@ -15,7 +14,6 @@ const keys = require("./token.json")
 const rateme = require("./sabre_rateme.json")
 const roast = require("./sabre_roast.json")
 const jokes = require("./sabre_jokes.json")
-//const fs = require("fs") // Uncomment to enable filesystem readwrite
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
 let prefix = config.pre
@@ -23,9 +21,11 @@ let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
+//const fs = require("fs") // Uncomment to enable filesystem readwrite
 // System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
-//console.log(config) //verbose configuration
+////////////////////////////////////////////////////////////////////////////////
+// Check if system is ready. ///////////////////////////////////////////////////
 client.on("ready", () => {
   console.log("System Ready! " + prefix + " " + config.v + " " + Date());
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
@@ -65,6 +65,8 @@ client.on("guildMemberRemove", (member) => {
 })
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
+// This is where the prefixed commands begin.
+////////////////////////////////////////////////////////////////////////////////
 client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
@@ -126,7 +128,7 @@ client.on("message", (message) => {
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     message.channel.send("Polo!"); // Dan's Mod
-  // ipsummaries ///////////////////////////////////////////////////////////////
+  // ipstats ///////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipstats") && message.member.roles.has(config.role.cyberID)){
     exec("/root/NC/utils/NorthStar/ipsabre.sh",
       function(error, stdout, stderr) {
@@ -149,6 +151,7 @@ client.on("message", (message) => {
           ]
         }})
       })
+  // ipsummary /////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipsummary")) {
     if (message.member.roles.has(config.role.cyberID)) {
       exec("/root/NC/utils/NorthStar/ipbot.sh");
@@ -223,7 +226,6 @@ client.on("message", (message) => {
     }
   // wttr //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "wttr")){
-    // stuff
     const locale = message.content.split(/\s+/g);
     if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
@@ -340,6 +342,7 @@ client.on("message", (message) => {
       ]
     }})
   }
+  //////////////////////////////////////////////////////////////////////////////
   // END OF FILE Developer Menu ////////////////////////////////////////////////
   // math //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "math")) {
@@ -370,7 +373,7 @@ client.on("message", (message) => {
             text: 'Mathematics Program, Server Time'
           }
         }})
-    }) // may break
+    })
   // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
@@ -402,9 +405,9 @@ client.on("message", (message) => {
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
       }
     } else if (rpsmsg === "scissors") {
-      if (rpsmat.ans === "rock") {
+      if (rpsmat.ans === "rock") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
-      } else {
+      } else { // bot loses
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
       }
     } else {
@@ -434,7 +437,7 @@ client.on("message", (message) => {
     fields: [
       {
         name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**roast** (@person) - Your favorite command.\n**v** - Print version number.'
+        value: '**help** - Hello, World!\n**joke** - Random joke\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**roast** (@person) - Your favorite command.\n**v** - Print version number.'
       },
       {
         name: ':large_orange_diamond:Cyber Operative Only',
