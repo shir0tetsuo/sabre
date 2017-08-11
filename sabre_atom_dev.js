@@ -413,7 +413,7 @@ client.on("message", (message) => {
       },
       {
         name: ':large_blue_diamond:Shadow Moderator Only',
-        value: '**weather** - Get local weather data any time of day.\n**sabrestatus** (online, dnd, invisible) - Sets Sabres online status.',
+        value: '**sabrestatus** - Set status for sabre.\n**weather** - Get local weather data any time of day.\n**sabrestatus** (online, dnd, invisible) - Sets Sabres online status.',
         "inline": true
       },
       { // Need to add !dev
