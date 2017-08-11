@@ -30,6 +30,7 @@ client.on("ready", () => {
   client.user.setGame("With " + client.guilds.size + " Servers.")
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 }); //member.user.avatarURL member.user.username
+// Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
   member.guild.channels.get(config.chan.securitybot).send({embed: {
     color: 0xA3F700,
@@ -37,16 +38,13 @@ client.on("guildMemberAdd", (member) => {
     footer: {
       text: "Server Time"
     },
-    thumbnail: {
-      url: member.user.avatarURL
-    },
     author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
+      name: member.user.username,
+      icon_url: member.user.avatarURL
     },
     fields: [
       {
-        name: member.user.username,
+        name: "\u200b",
         value: "Joined the server."
       }
     ]
