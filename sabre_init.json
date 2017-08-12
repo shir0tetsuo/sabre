@@ -4,13 +4,17 @@
   "role": {
     "cyberID": "331913896996896769",
     "modID": "331910949864865792",
-    "sabredevID": "340701852427616258"
+    "sabredevID": "340701852427616258",
+    "alaska_csd": "",
+    "alaska_citizen": "",
+    "alaska_botdev": ""
   },
   "perUser": {
     "ownerID": "303309686264954881"
   },
   "chan": {
     "securitybot": "331913852872556545",
-    "announcements": "332350161797775362"
+    "announcements": "332350161797775362",
+    "alaska_botcmds": "344918318370652162"
   }
 }
