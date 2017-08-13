@@ -36,12 +36,13 @@ client.login(keys.token)
 client.on("ready", () => {
   console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v);
   console.log("INIT: " + Date())
-  console.log(systemname, botname, client.guilds.size + " Servers Active.") // may break
+  console.log(systemname, botname, client.guilds.size + " Servers Active.")
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
+  // STABLE
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
-client.on("guildMemberAdd", (member) => { // may break
+client.on("guildMemberAdd", (member) => { // below may break
   member.guild.channels.get(config.chan.securitybot || config.chan.alaska_classified).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
