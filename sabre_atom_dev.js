@@ -283,7 +283,7 @@ client.on("message", (message) => {
     }
   // ipkilled //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipkilled")) {
-    if (message.member.roles.has(config.role.cyberID)) {
+    if (message.member.roles.has(config.role.cyberID) || message.member.roles.has(config.role.alaska_csd)) {
       exec("/root/NC/utils/NorthStar/ipkilled.sh",
       function (error, stdout, stderr) {
         message.channel.send({embed: {
@@ -310,6 +310,10 @@ client.on("message", (message) => {
     }
   // wttr //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "wttr")){
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
+      message.channel.send(forbidden)
+      return;
+    }
     const locale = message.content.split(/\s+/g);
     if (locale[1] !== undefined) {
       exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
