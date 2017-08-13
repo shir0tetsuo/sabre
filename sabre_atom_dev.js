@@ -20,7 +20,7 @@ const help = require("./sabre_helpfile.json") // Core help file
 ////////////////////////////////////////////////////////////////////////////////
 // Usage Defined Strings ///////////////////////////////////////////////////////
 let prefix = config.pre
-let botname = "Sabre"
+let botname = client.user.username
 let footname = "Server Time"
 let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
@@ -42,8 +42,21 @@ client.on("ready", () => {
   // STABLE
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
-client.on("guildMemberAdd", (member) => { // below may break
-  member.guild.channels.get(config.chan.securitybot || config.chan.alaska_classified).send({embed: {
+client.on("guildMemberAdd", (member) => {
+  member.guild.channels.get(config.chan.securitybot).send({embed: {
+    color: 0xA3F700,
+    timestamp: new Date(),
+    footer: {
+      text: client.user.username + ", Server Time"
+    },
+    fields: [
+      { //member.user.username
+        name: member.user.tag,
+        value: "Joined the server."
+      }
+    ]
+  }}) // Alaska nested in the same event may effect performance
+  member.guild.channels.get(config.chan.alaska_classified).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
     footer: {
@@ -59,7 +72,20 @@ client.on("guildMemberAdd", (member) => { // below may break
 })
 // Guild Part Handler //////////////////////////////////////////////////////////
 client.on("guildMemberRemove", (member) => {
-  member.guild.channels.get(config.chan.securitybot || config.chan.alaska_classified).send({embed: {
+  member.guild.channels.get(config.chan.securitybot).send({embed: {
+    color: 0xA7A7A5,
+    timestamp: new Date(),
+    footer: {
+      text: client.user.username + ", Server Time"
+    },
+    fields: [
+      {
+        name: member.user.tag,
+        value: "Left the server."
+      }
+    ]
+  }}) // Alaska nested in the same event may effect performance
+  member.guild.channels.get(config.chan.alaska_classified).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
     footer: {
