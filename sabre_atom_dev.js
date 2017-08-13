@@ -101,7 +101,8 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix) && !message.author.bot) {
     // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
-      console.log(message.author.id, message.author.tag, "has talked recently and is now being limtied.")
+      console.log(message.author.id, message.author.tag, "is being limtied.")
+      message.author.send("Oh no! You're feeding me commands too fast.")
       return;
     } else {
       talkedRecently.add(message.author.id);
