@@ -117,7 +117,7 @@ client.on("message", (message) => {
   // The above line shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID || config.role.alaska_botdev)) {
+} else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
     const sabrestatus = message.content.split(/\s+/g);
     if (sabrestatus[1] === "game") {
       client.user.setGame(message.content.substring(17,128))
