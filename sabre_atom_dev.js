@@ -152,7 +152,7 @@ client.on("message", (message) => {
     } else {
       var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
       message.channel.send("Okay okay. Here's a joke. " + joke.text)
-    }
+    } // MODIFIED!
 /*    if (message.guild.id === config.guild.ALASKA) {
       if (!message.member.roles.has(config.role.alaska_upperctzn)) {
 
