@@ -156,8 +156,10 @@ client.on("message", (message) => {
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     if (message.guild.id === config.guild.ALASKA) {
-      if (!message.member.roles.has(config.role.alaska_csd) || !message.member.roles.has(config.role.alaska_botdev)) {
-        message.channel.send(forbidden + "This command is reserved for CSD/Developers.")
+      check_csd = message.member.roles.has(config.role.alaska_csd)
+      check_dev = message.member.roles.has(config.role.alaska_botdev)
+      if (!check_csd && !check_dev) { // if both return empty
+        message.channel.send(forbidden + "This command is intended for CSD/Developers.")
         return;
       }
     }
