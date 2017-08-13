@@ -199,7 +199,21 @@ client.on("message", (message) => {
     }
     message.channel.send("Polo!"); // Dan's Mod
   // ipstats ///////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ipstats") && message.member.roles.has(config.role.cyberID)){
+  } else if (message.content.startsWith(prefix + "ipstats")) {
+    if (message.guild.id === config.guild.ALASKA) {
+      if (!message.member.roles.has(config.role.alaska_csd)) {
+        message.channel.send(forbidden + "This command is intended for CSD.")
+        return;
+      }
+    } else if (message.guild.id === config.guild.DAVNET) {
+      if (!message.member.roles.has(config.role.cyberID)) {
+        message.channel.send(forbidden)
+        return;
+      }
+    } else { // Safetynet
+      message.channel.send(forbidden)
+      return;
+    }
     exec("/root/NC/utils/NorthStar/ipsabre.sh",
       function(error, stdout, stderr) {
         message.channel.send({embed: {
