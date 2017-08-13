@@ -50,6 +50,7 @@ client.on("guildMemberAdd", (member) => {
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
+  // Would become member.guild.defaultChannel.send()
   console.log(member.user.tag + " Joined the server " + right_guild)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
@@ -63,7 +64,7 @@ client.on("guildMemberAdd", (member) => {
         value: "Joined the server."
       }
     ]
-  }}) // Alaska nested in the same event may effect performance
+  }})
 })
 // Guild Part Handler //////////////////////////////////////////////////////////
 client.on("guildMemberRemove", (member) => {
@@ -87,7 +88,7 @@ client.on("guildMemberRemove", (member) => {
         value: "Left the server."
       }
     ]
-  }}) // Alaska nested in the same event may effect performance
+  }})
 })
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
@@ -102,6 +103,7 @@ client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
+  // The above line shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID)) {
