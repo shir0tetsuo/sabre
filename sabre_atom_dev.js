@@ -20,7 +20,7 @@ const help = require("./sabre_helpfile.json") // Core help file
 ////////////////////////////////////////////////////////////////////////////////
 // Usage Defined Strings ///////////////////////////////////////////////////////
 let prefix = config.pre
-let botname = client.user.username
+let botname = "Sabre"
 let footname = "Server Time"
 let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
