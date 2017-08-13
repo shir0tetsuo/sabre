@@ -40,8 +40,8 @@ client.on("guildMemberAdd", (member) => {
       text: client.user.username + ", Server Time"
     },
     fields: [
-      {
-        name: member.user.username,
+      { //member.user.username
+        name: member.user,
         value: "Joined the server."
       }
     ]

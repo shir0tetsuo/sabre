@@ -1,12 +1,13 @@
 {
-  "v": "0.2.3.21",
-  "pre": "!",
+  "v": "0.3.0.1b",
+  "pre": "s!",
   "role": {
     "cyberID": "331913896996896769",
     "modID": "331910949864865792",
     "sabredevID": "340701852427616258",
     "alaska_csd": "",
     "alaska_citizen": "",
+    "alaska_upperctzn": "",
     "alaska_botdev": ""
   },
   "perUser": {
@@ -15,6 +16,6 @@
   "chan": {
     "securitybot": "331913852872556545",
     "announcements": "332350161797775362",
-    "alaska_botcmds": "344918318370652162"
+    "alaska_sabre": ""
   }
 }
