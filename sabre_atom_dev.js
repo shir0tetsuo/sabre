@@ -117,25 +117,32 @@ client.on("message", (message) => {
   // The above line shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "sabrestatus") && message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
-    const sabrestatus = message.content.split(/\s+/g);
-    if (sabrestatus[1] === "game") {
-      client.user.setGame(message.content.substring(17,128))
-      message.channel.send("Playing status updated.")
-      return;
-    } else if (sabrestatus[1] === "reset") {
-      client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
-      client.user.setStatus("dnd")
-      message.channel.send("System reset.")
-      return;
-    } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
-      message.channel.send("Can't set it to nothing.")
-      return;
-    } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible" || sabrestatus[1] ==="idle") {
-      client.user.setStatus(sabrestatus[1])
-      message.channel.send("Status has been set to " + sabrestatus[1])
+} else if (message.content.startsWith(prefix + "sabrestatus") { // No choice but to nest roles
+    if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
+      const sabrestatus = message.content.split(/\s+/g);
+      if (sabrestatus[1] === "game") {
+        client.user.setGame(message.content.substring(17,128))
+        message.channel.send("Playing status updated.")
+        return;
+      } else if (sabrestatus[1] === "reset") {
+        client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
+        client.user.setStatus("dnd")
+        message.channel.send("System reset.")
+        return;
+      } else if (!sabrestatus[1] || sabrestatus[1] === undefined) {
+        message.channel.send("Can't set it to nothing.")
+        return;
+      } else if (sabrestatus[1] === "online" || sabrestatus[1] === "dnd" || sabrestatus[1] === "invisible" || sabrestatus[1] ==="idle") {
+        client.user.setStatus(sabrestatus[1])
+        message.channel.send("Status has been set to " + sabrestatus[1])
+        return;
+      } else {
+        message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, idle, game, reset``");
+        return;
+      }
     } else {
-      message.channel.send("The argument was not understood. Acceptable parameters: ``online, dnd, invisible, idle, game, reset``")
+      message.channel.send(forbidden);
+      return;
     }
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
