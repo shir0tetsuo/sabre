@@ -335,7 +335,8 @@ client.on("message", (message) => {
   // Developer Commands //////////////////////////// !!! ///////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "xdev") && message.member.roles.has(config.role.sabredevID)) {
+  //  && message.member.roles.has(config.role.sabredevID)
+} else if (message.content.startsWith(prefix + "xdev")) {
   const devhandle = message.content.split(/\s+/g);
   let devarg = devhandle[1];
   // developer links ///////////////////////////////////////////////////////////
@@ -347,6 +348,7 @@ client.on("message", (message) => {
   // dev channel ID spawner ////////////////////////////////////////////////////
   } else if (devarg === "chanID") {
     message.guild.channels.find("name", "security-bot") // Doesn't work accurately
+    // This is replaced with Developer Mode in Discord
     console.log(message.channel)
     message.author.send(ddstc)
   // dev mention test //////////////////////////////////////////////////////////
@@ -368,7 +370,7 @@ client.on("message", (message) => {
     console.log(message.author)
   // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){
-    let modRole = message.guild.roles.find("name", "Admin") // alternatively "string"
+    let modRole = message.guild.roles.find("name", "Sabre Dev") // alternatively "string"
     console.log(modRole)
   } else { // Developer Help Command Menu //////////////////////////////////////
     message.author.send({embed: {
