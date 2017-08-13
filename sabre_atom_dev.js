@@ -117,6 +117,7 @@ client.on("message", (message) => {
   // The above lines shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
+  // Sabre is unable to detect which channel the text is being sent to, at the moment.
   } else if (message.content.startsWith(prefix + "sabrestatus")) { // No choice but to nest roles
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
@@ -148,7 +149,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA) {
       if (!message.member.roles.has(config.role.alaska_upperctzn))
-      message.channel.send(forbidden, "This is an Upper Class Citizen command.")
+      message.channel.send(forbidden + "This is an Upper Class Citizen command.")
       return;
     }
     var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
