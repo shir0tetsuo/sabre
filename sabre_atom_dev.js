@@ -34,7 +34,8 @@ client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
 // Check if system is ready. ///////////////////////////////////////////////////
 client.on("ready", () => {
-  console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v + " INIT: " + Date());
+  console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v);
+  console.log(" INIT: " + Date())
   console.log(systemname, botname, client.guilds.size + " Servers Active.") // may break
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
