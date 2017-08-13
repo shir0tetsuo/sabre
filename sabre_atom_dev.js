@@ -344,56 +344,62 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   //  && message.member.roles.has(config.role.sabredevID)
 } else if (message.content.startsWith(prefix + "xdev")) {
-  const devhandle = message.content.split(/\s+/g);
-  let devarg = devhandle[1];
-  // developer links ///////////////////////////////////////////////////////////
-  if (devarg === "links"){
-    message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
-  // dev parse test parameters /////////////////////////////////////////////////
-  } else if (devarg === "bigparse") {
-    message.author.send("Strings: " + devhandle)
-  // dev channel ID spawner ////////////////////////////////////////////////////
-  } else if (devarg === "chanID") {
-    message.guild.channels.find("name", "security-bot") // Doesn't work accurately
-    // This is replaced with Developer Mode in Discord
-    console.log(message.channel)
-    message.author.send(ddstc)
-  // dev mention test //////////////////////////////////////////////////////////
-  } else if (devarg === "mention") {
-    message.channel.send("Hello, " + message.mentions.members.first() + "!")
-  // dev checkOwnership ////////////////////////////////////////////////////////
-  } else if (devarg === "checkOwnership") {
-    if(message.author.id !== config.perUser.ownerID) {
-      message.author.send("Unauthorized!") // Booyah's Finding
-    } else {
-      message.author.send("Authorized!")
+  if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
+    const devhandle = message.content.split(/\s+/g);
+    let devarg = devhandle[1];
+    // developer links ///////////////////////////////////////////////////////////
+    if (devarg === "links"){
+      message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
+    // dev parse test parameters /////////////////////////////////////////////////
+    } else if (devarg === "bigparse") {
+      message.author.send("Strings: " + devhandle)
+    // dev channel ID spawner ////////////////////////////////////////////////////
+    } else if (devarg === "chanID") {
+      message.guild.channels.find("name", "security-bot") // Doesn't work accurately
+      // This is replaced with Developer Mode in Discord
+      console.log(message.channel)
+      message.author.send(ddstc)
+    // dev mention test //////////////////////////////////////////////////////////
+    } else if (devarg === "mention") {
+      message.channel.send("Hello, " + message.mentions.members.first() + "!")
+    // dev checkOwnership ////////////////////////////////////////////////////////
+    } else if (devarg === "checkOwnership") {
+      if(message.author.id !== config.perUser.ownerID) {
+        message.author.send("Unauthorized!") // Booyah's Finding
+      } else {
+        message.author.send("Authorized!")
+      }
+    // dev testfunction //////////////////////////////////////////////////////////
+  } else if (devarg === "sendSec") {
+    message.guild.channels.find("id", config.chan.securitybot).send("Hello, World!")
+    // dev messagedata ///////////////////////////////////////////////////////////
+    } else if (devarg === "messagedata"){
+      message.author.send(ddstc)
+      console.log(message.author)
+    // dev announcerole //////////////////////////////////////////////////////////
+    } else if (devarg === "announceRole"){
+      let modRole = message.guild.roles.find("name", "CSD") // alternatively "string"
+      console.log(modRole)
+    } else { // Developer Help Command Menu //////////////////////////////////////
+      message.author.send({embed: {
+        color: 0xFF0000,
+        author: {
+          name: client.user.username,
+          icon_url: client.user.avatarURL
+        },
+        fields: [
+          {
+            name: ":radioactive: Developer Test Commands",
+            value: "**xdev** + checkOwnership, messagedata, announceRole, sendSec, mention, bigparse, chanID, links"
+          }
+        ]
+      }})
     }
-  // dev testfunction //////////////////////////////////////////////////////////
-} else if (devarg === "sendSec") {
-  message.guild.channels.find("id", config.chan.securitybot).send("Hello, World!")
-  // dev messagedata ///////////////////////////////////////////////////////////
-  } else if (devarg === "messagedata"){
-    message.author.send(ddstc)
-    console.log(message.author)
-  // dev announcerole //////////////////////////////////////////////////////////
-  } else if (devarg === "announceRole"){
-    let modRole = message.guild.roles.find("name", "CSD") // alternatively "string"
-    console.log(modRole)
-  } else { // Developer Help Command Menu //////////////////////////////////////
-    message.author.send({embed: {
-      color: 0xFF0000,
-      author: {
-        name: client.user.username,
-        icon_url: client.user.avatarURL
-      },
-      fields: [
-        {
-          name: ":radioactive: Developer Test Commands",
-          value: "**xdev** + checkOwnership, messagedata, announceRole, sendSec, mention, bigparse, chanID, links"
-        }
-      ]
-    }})
+  } else {
+    message.channel.send(forbidden);
+    return;
   }
+
   //////////////////////////////////////////////////////////////////////////////
   // END OF FILE Developer Menu ////////////////////////////////////////////////
   // math //////////////////////////////////////////////////////////////////////
