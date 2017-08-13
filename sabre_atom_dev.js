@@ -246,7 +246,7 @@ client.on("message", (message) => {
     }
   // XKS Regex /////////////////////////////////////////////////////////////////
 } else if (message.content.startsWith(prefix + "xks")) {
-    if (message.member.roles.has(config.role.cyberID)) {
+    if (message.member.roles.has(config.role.cyberID) || message.member.roles.has(config.role.alaska_csd)) {
       const xksregex = message.content.split(/\s+/g);
       if (xksregex[1] !== undefined) {
         exec('/root/NC/utils/NorthStar/xks.sh ' + xksregex[1],
