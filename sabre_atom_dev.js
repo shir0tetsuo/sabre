@@ -49,8 +49,8 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = config.chan.alaska_classified
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
-  }
-  console.log(right_guild)
+  } // Public bot would need default channels
+  console.log(member.user.tag + " Joined the server " + right_guild)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
@@ -67,7 +67,15 @@ client.on("guildMemberAdd", (member) => {
 })
 // Guild Part Handler //////////////////////////////////////////////////////////
 client.on("guildMemberRemove", (member) => {
-  member.guild.channels.get(config.chan.securitybot).send({embed: {
+  let davnet_guild = member.guild.channels.get(config.chan.securitybot);
+  let alaska_guild = member.guild.channels.get(config.chan.alaska_classified);
+  if (davnet_guild === undefined) {
+    var right_guild = config.chan.alaska_classified
+  } else if (alaska_guild === undefined) {
+    var right_guild = config.chan.securitybot
+  } // Public bot would need default channels
+  console.log(member.user.tag + " Parted the server " + right_guild)
+  member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
     footer: {
