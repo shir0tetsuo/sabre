@@ -51,7 +51,7 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = davnet_guild
   }
   console.log(right_guild)
-  member.guild.channels.get(right_guild).send({embed: {
+  member.guild.channels.get(config.chan.securitybot).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
     footer: {
