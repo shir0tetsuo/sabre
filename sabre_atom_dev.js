@@ -147,16 +147,22 @@ client.on("message", (message) => {
     }
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
-    if (message.guild.id === config.guild.ALASKA) {
-      if (!message.member.roles.has(config.role.alaska_upperctzn))
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
+      message.channel.send(forbidden + "This is an Upper Class Citizen command.")
+    } else {
+      var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
+      message.channel.send("Okay okay. Here's a joke. " + joke.text)
+    }
+/*    if (message.guild.id === config.guild.ALASKA) {
+      if (!message.member.roles.has(config.role.alaska_upperctzn)) {
+
+      }
       message.channel.send(forbidden + "This is an Upper Class Citizen command.")
       return;
-    } else {
+    }
     var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
     message.channel.send("Okay, okay. Here's a joke. " + joke.text)
-    console.log(joke.text)
-    }
-  console.log("joke command ran.")
+*/
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("Calculating!").then(m => m.edit({embed: {
