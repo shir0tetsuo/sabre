@@ -342,13 +342,14 @@ client.on("message", (message) => {
   // Developer Commands //////////////////////////// !!! ///////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  //  && message.member.roles.has(config.role.sabredevID)
 } else if (message.content.startsWith(prefix + "xdev")) {
   if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
     const devhandle = message.content.split(/\s+/g);
     let devarg = devhandle[1];
+    if (devarg === "printGuildID") {
+      console.log(message.guild.id)
     // developer links ///////////////////////////////////////////////////////////
-    if (devarg === "links"){
+    } else if (devarg === "links"){
       message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
     // dev parse test parameters /////////////////////////////////////////////////
     } else if (devarg === "bigparse") {
