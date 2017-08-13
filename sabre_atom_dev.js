@@ -117,7 +117,7 @@ client.on("message", (message) => {
   // The above line shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "sabrestatus") { // No choice but to nest roles
+} else if (message.content.startsWith(prefix + "sabrestatus")) { // No choice but to nest roles
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
       if (sabrestatus[1] === "game") {
