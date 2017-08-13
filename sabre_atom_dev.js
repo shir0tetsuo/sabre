@@ -154,7 +154,9 @@ client.on("message", (message) => {
     } else {
     var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
     message.channel.send("Okay, okay. Here's a joke. " + joke.text)
+    console.log(joke.text)
     }
+  console.log("joke command ran.")
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("Calculating!").then(m => m.edit({embed: {
