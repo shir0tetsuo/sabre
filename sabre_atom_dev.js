@@ -152,19 +152,15 @@ client.on("message", (message) => {
     } else {
       var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
       message.channel.send("Okay okay. Here's a joke. " + joke.text)
-    } // MODIFIED!
-/*    if (message.guild.id === config.guild.ALASKA) {
-      if (!message.member.roles.has(config.role.alaska_upperctzn)) {
-
-      }
-      message.channel.send(forbidden + "This is an Upper Class Citizen command.")
-      return;
     }
-    var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
-    message.channel.send("Okay, okay. Here's a joke. " + joke.text)
-*/
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
+    if (message.guild.id === config.guild.ALASKA) {
+      if (!message.member.roles.has(config.role.alaska_csd) || !message.member.roles.has(config.role.alaska_botdev)) {
+        message.channel.send(forbidden + "This command is reserved for CSD/Developers.")
+        return;
+      }
+    }
     message.channel.send("Calculating!").then(m => m.edit({embed: {
       color: 0xA7A7A5,
       timestamp: new Date(),
