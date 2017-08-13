@@ -190,6 +190,13 @@ client.on("message", (message) => {
     //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
+    if (message.guild.id === config.guild.ALASKA) {
+      check_ctz = message.member.roles.has(config.role.alaska_citizen)
+      if (!check_ctz) {
+        message.channel.send(forbidden)
+        return;
+      }
+    }
     message.channel.send("Polo!"); // Dan's Mod
   // ipstats ///////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ipstats") && message.member.roles.has(config.role.cyberID)){
