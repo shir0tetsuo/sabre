@@ -96,24 +96,20 @@ client.on("guildMemberRemove", (member) => {
 // This is where the prefixed commands begin.
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Add Sabre limiter in new event Here
-//
-//
 client.on("message", (message) => {
-  if (message.content.startsWith(prefix) && !message.author.bot) { // Contains prefix and not bot
+  //////////////////////////////////////////////////////////////////////////////
+  if (message.content.startsWith(prefix) && !message.author.bot) {
+    // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
-      console.log(message.author.id, "has used a command recently and is now being limited.")
+      console.log(message.author.id, message.author.tag, "has talked recently and is now being limtied.")
       return;
     } else {
       talkedRecently.add(message.author.id);
       setTimeout(() => {
         talkedRecently.delete(message.author.id);
-      }, 2500); //2.5 seconds
+      }, 2500); // 2.5 seconds
     }
   }
-})
-client.on("message", (message) => {
-  //////////////////////////////////////////////////////////////////////////////
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
