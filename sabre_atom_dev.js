@@ -41,7 +41,7 @@ client.on("guildMemberAdd", (member) => {
     },
     fields: [
       { //member.user.username
-        name: member.user.username + member.user.tag,
+        name: member.user.tag,
         value: "Joined the server."
       }
     ]
@@ -53,7 +53,7 @@ client.on("guildMemberRemove", (member) => {
     color: 0xA7A7A5,
     timestamp: new Date(),
     footer: {
-      text: client.user.username + ", Server Time"
+      text: client.user.tag + ", Server Time"
     },
     fields: [
       {
