@@ -9,16 +9,23 @@ console.log("Initialization.")
 const Discord = require("discord.js"); // Initialize discord wrappers
 const client = new Discord.Client(); // New client authorization
 // Variable and String Constraints /////////////////////////////////////////////
-const config = require("./sabre_init.json")
-const keys = require("./token.json")
-const rateme = require("./sabre_rateme.json")
-const roast = require("./sabre_roast.json")
-const jokes = require("./sabre_jokes.json")
+const config = require("./sabre_init.json") // INIT., Basic Configuration
+const keys = require("./token.json") // Secret Keys
+const rateme = require("./sabre_rateme.json") // Game
+const roast = require("./sabre_roast.json") // Game
+const jokes = require("./sabre_jokes.json") // Game
+const help = require("./sabre_helpfile.json") // Core help file
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
+////////////////////////////////////////////////////////////////////////////////
+// Usage Defined Strings ///////////////////////////////////////////////////////
 let prefix = config.pre
+let botname = "Sabre"
+let footname = "Server Time"
+let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
+////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
 //const fs = require("fs") // Uncomment to enable filesystem readwrite
@@ -27,13 +34,14 @@ client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
 // Check if system is ready. ///////////////////////////////////////////////////
 client.on("ready", () => {
-  console.log("System Ready! " + prefix + " " + config.v + " " + Date());
+  console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v + " INIT: " + Date());
+  console.log(systemname, botname, client.guilds.size + " Servers Active.") // may break
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
-}); //member.user.avatarURL member.user.username
+});
 // Guild Join Handler //////////////////////////////////////////////////////////
-client.on("guildMemberAdd", (member) => {
-  member.guild.channels.get(config.chan.securitybot).send({embed: {
+client.on("guildMemberAdd", (member) => { // may break
+  member.guild.channels.get(config.chan.securitybot || config.chan.alaska_classified).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
     footer: {
@@ -49,7 +57,7 @@ client.on("guildMemberAdd", (member) => {
 })
 // Guild Part Handler //////////////////////////////////////////////////////////
 client.on("guildMemberRemove", (member) => {
-  member.guild.channels.get(config.chan.securitybot).send({embed: {
+  member.guild.channels.get(config.chan.securitybot || config.chan.alaska_classified).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
     footer: {
@@ -67,6 +75,10 @@ client.on("guildMemberRemove", (member) => {
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 // This is where the prefixed commands begin.
 ////////////////////////////////////////////////////////////////////////////////
+//
+// Add Sabre limiter in new event Here
+//
+//
 client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
