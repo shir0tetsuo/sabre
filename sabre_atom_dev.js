@@ -347,6 +347,10 @@ client.on("message", (message) => {
     }
   // rateme ////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "rateme")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
+      message.channel.send(forbidden)
+      return;
+    }
     umath = Math.random()
     if (umath > .05) {
       var rate = rateme.strings[Math.floor(Math.random() * rateme.strings.length)]
