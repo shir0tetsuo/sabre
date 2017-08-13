@@ -53,11 +53,11 @@ client.on("guildMemberRemove", (member) => {
     color: 0xA7A7A5,
     timestamp: new Date(),
     footer: {
-      text: client.user.tag + ", Server Time"
+      text: client.user.username + ", Server Time"
     },
     fields: [
       {
-        name: member.user.username,
+        name: member.user.tag,
         value: "Left the server."
       }
     ]
