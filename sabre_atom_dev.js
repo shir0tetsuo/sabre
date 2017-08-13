@@ -46,9 +46,9 @@ client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
   let alaska_guild = member.guild.channels.get(config.chan.alaska_classified);
   if (davnet_guild === undefined) {
-    let right_guild = alaska_guild
+    var right_guild = alaska_guild
   } else if (alaska_guild === undefined) {
-    let right_guild = davnet_guild
+    var right_guild = davnet_guild
   }
   console.log(right_guild)
   member.guild.channels.get(right_guild).send({embed: {
