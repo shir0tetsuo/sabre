@@ -118,6 +118,9 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sabrestatus")) { // No choice but to nest roles
+    if (message.guild.id === config.guild.ALASKA) {
+          if (!message.channel.id(config.chan.alaska_sabredevs) || !message.channel.id(config.chan.alaska_sabrecmds)) return;
+    }
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
       if (sabrestatus[1] === "game") {
