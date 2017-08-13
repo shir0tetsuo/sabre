@@ -114,10 +114,13 @@ client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
-  // The above line shouldn't change.
+  // The above lines shouldn't change.
   //////////////////////////////////////////////////////////////////////////////
   // sabrestatus ///////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "sabrestatus")) { // No choice but to nest roles
+  } else if (message.content.startsWith(prefix + "sabrestatus")) { // No choice but to nest roles
+    if (message.guild.id === config.guild.ALASKA) {
+          if (!message.channel.id(config.chan.alaska_sabredevs) || !message.channel.id(config.chan.alaska_sabrecmds)) return;
+    }
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
       if (sabrestatus[1] === "game") {
@@ -146,6 +149,11 @@ client.on("message", (message) => {
     }
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
+    if (message.guild.id === config.guild.ALASKA) {
+      if (!message.member.roles.has(config.role.alaska_upperctzn))
+      message.channel.send(forbidden, "This is an Upper Class Citizen command.")
+      return;
+    }
     var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
     message.channel.send("Okay, okay. Here's a joke. " + joke.text)
   // PING //////////////////////////////////////////////////////////////////////
@@ -347,7 +355,7 @@ client.on("message", (message) => {
     const devhandle = message.content.split(/\s+/g);
     let devarg = devhandle[1];
     if (devarg === "printGuildID") {
-      console.log(message.guild.id)
+      console.log(message.guild.id) // Working
     // developer links ///////////////////////////////////////////////////////////
     } else if (devarg === "links"){
       message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
