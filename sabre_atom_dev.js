@@ -102,7 +102,7 @@ client.on("message", (message) => {
     // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
       console.log(message.author.id, message.author.tag, "is being limtied.")
-      message.author.send("Oh no! You're feeding me commands too fast.")
+      message.author.send("Slow down! I'm not The Flash")
       return;
     } else {
       talkedRecently.add(message.author.id);
