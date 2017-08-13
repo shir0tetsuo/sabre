@@ -151,9 +151,10 @@ client.on("message", (message) => {
       if (!message.member.roles.has(config.role.alaska_upperctzn))
       message.channel.send(forbidden + "This is an Upper Class Citizen command.")
       return;
-    }
+    } else {
     var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
     message.channel.send("Okay, okay. Here's a joke. " + joke.text)
+    }
   // PING //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "ping")) {
     message.channel.send("Calculating!").then(m => m.edit({embed: {
