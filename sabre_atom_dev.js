@@ -370,7 +370,7 @@ client.on("message", (message) => {
     console.log(message.author)
   // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){
-    let modRole = message.guild.roles.find("name", "Upper Class Citizen") // alternatively "string"
+    let modRole = message.guild.roles.find("name", "CSD") // alternatively "string"
     console.log(modRole)
   } else { // Developer Help Command Menu //////////////////////////////////////
     message.author.send({embed: {
