@@ -46,12 +46,12 @@ client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
   let alaska_guild = member.guild.channels.get(config.chan.alaska_classified);
   if (davnet_guild === undefined) {
-    var right_guild = alaska_guild
+    var right_guild = config.chan.alaska_classified
   } else if (alaska_guild === undefined) {
-    var right_guild = davnet_guild
+    var right_guild = config.chan.securitybot
   }
   console.log(right_guild)
-  member.guild.channels.get(config.chan.securitybot).send({embed: {
+  member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
     footer: {
