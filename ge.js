@@ -13,11 +13,17 @@ console.log(syslog, "Discord Loaded to Memory.");
 const key = require("./token.json");
 const cfg = require("./ge_init");
 let prefix = cfg.pre;
-console.log(syslog, "TOKEN: ", key.token_ge);
-console.log(syslog, "SOFTWAREVERSION: ", cfg.version);
-console.log(syslog, "PREFIX: ", prefix);
-console.log(syslog, "ADMINISTRATOR: ", cfg.id.administrator);
-console.log(syslog, "OPER: ", cfg.id.guild_davnet_securitybot);
+console.log(syslog, "TOKEN:", key.token_ge.substring(0,8), "...");
+console.log(syslog, "SOFTWAREVERSION:", cfg.version);
+console.log(syslog, "PREFIX:", prefix);
+console.log(syslog, "ADMINISTRATOR:", cfg.id.administrator);
+console.log(syslog, "OPER:", cfg.id.guild_davnet_securitybot);
 console.log(syslog, "Beginning Authentication Process.");
-
-console.log(syslog, "System Ready.")
+ge.on("ready", () => {
+  console.log(syslog, "System Ready.")
+  console.log(syslog, Date())
+  console.log(syslog, client.guilds.size,"Servers Online")
+  client.user.setGame("Cyber Ops")
+  client.user.setStatus("dnd") // online/offline/dnd/invisible
+  // STABLE
+});
