@@ -492,7 +492,7 @@ client.on("message", (message) => {
     }
   // bot rock paper scissors ///////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "botrps")) {
-    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(alaska_citizen)) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
       message.channel.send(forbidden)
       return;
     }
