@@ -528,11 +528,19 @@ client.on("message", (message) => {
     } // bot rock paper scissors ends Here
   // Dump Message data /////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "messagedata")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_botdev)) {
+      message.channel.send(forbidden)
+      return;
+    }
     //console.log(message.content);
     console.log(message)
     message.channel.send(ddstc)
   // Print version.
   } else if (message.content.startsWith(prefix + "v")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
+      message.channel.send(forbidden)
+      return;
+    }
     message.channel.send("Version " + config.v);
   //////////////////////////////////////////////////////////////////////////////
   // Help Menu
