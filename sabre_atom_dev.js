@@ -97,6 +97,12 @@ client.on("guildMemberRemove", (member) => {
 ////////////////////////////////////////////////////////////////////////////////
 //
 client.on("message", (message) => {
+  if (message.guild.id === config.guild.ALASKA) {
+    const securechan = message.channel();
+    if (!securechan.id === config.chan.alaska_sabredevs && !securechan.id === config.chan.alaska_classified && !securechan.id === config.chan.alaska_sabrecmds) {
+      return;
+    }
+  }
   //////////////////////////////////////////////////////////////////////////////
   if (message.content.startsWith(prefix) && !message.author.bot) {
     // talkedRecently event, if message.author.id exists in set return.
