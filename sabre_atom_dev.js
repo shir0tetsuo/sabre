@@ -546,45 +546,80 @@ client.on("message", (message) => {
   // Help Menu
   //////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "help")) {
-  message.channel.send({embed: {
-    color: 0xFFC400,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    title: 'Based on the Discord Javascript wrappers.', // may break
-    url: 'https://discord.js.org',
-    description: 'Prefix: ' + prefix + ', Help Page ' + config.v, // may break
-    fields: [
-      {
-        name: ':mega:Common Commands',
-        value: '**help** - Hello, World!\n**joke** - Random joke\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**roast** (@person) - Your favorite command.\n**v** - Print version number.'
-      },
-      {
-        name: ':large_orange_diamond:Cyber Operative Only',
-        value: '**ipstats** - Statistics on Attacks\n**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server\n**xks** (string) - Searches local database for spy words.',
-        "inline": true
-      },
-      {
-        name: ':large_blue_diamond:Shadow Moderator Only',
-        value: '**sabrestatus** - Set status for sabre.\n**weather** - Get local weather data any time of day.\n**sabrestatus** (online, dnd, invisible) - Sets Sabres online status.',
-        "inline": true
-      },
-      { // Need to add !dev
-        name: ':radioactive:Test Commands',
-        value: '**devteam** - Developer Team Contributions.\n**messagedata** - Sends developer information to console.\n**announcerole** - Developer Test Command.\n**checkmod** - Developer Test Command.\n**checkownership** - Developer Test Command.\n**xdev** - Developers Command Set'
-      },
-      {
-        name: 'More',
-        value: 'Project Sabre runs on the ``STRATUS 1 FIREWALL.DNET.LAB`` Server.\nDon\'t forget to append the prefix.'
-      }
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: 'Server Time'
+    if(message.guild.id === config.guild.ALASKA) {
+      message.author.send({embed: {
+        color: 0xFFC400,
+        author: {
+          name: client.user.username,
+          icon_url: client.user.avatarURL
+        },
+        title: "A Project by ShadowSword, Based on the Discord NodeJS Wrappers",
+        url: 'https://discord.js.org',
+        description: 'Prefix: ``' + prefix + '``, Help Page ' + config.v,
+        fields: [
+          {
+            name: "Upper Class Citizen Commands",
+            value: "**joke** - Collection of jokes.\n**roast** - Poke fun at people."
+          },
+          {
+            name: "Citizen of Alaska Commands",
+            value: "**help** - Hello, World\n**wttr** (city(,state)) - Search weather conditions.\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6-Sided Dice.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
+          },
+          {
+            name: "More Coming Soon",
+            value: "In future updates."
+          }
+        ],
+        timestamp: new Date(),
+        footer: {
+          icon_url: client.user.avatarURL,
+          text: "Primary Development by shadowsword#0179"
+        }
+      }});
+
+    } else {
+      message.channel.send({embed: {
+        color: 0xFFC400,
+        author: {
+          name: client.user.username,
+          icon_url: client.user.avatarURL
+        },
+        title: 'Based on the Discord Javascript wrappers.', // may break
+        url: 'https://discord.js.org',
+        description: 'Prefix: ' + prefix + ', Help Page ' + config.v, // may break
+        fields: [
+          {
+            name: ':mega:Common Commands',
+            value: '**help** - Hello, World!\n**joke** - Random joke\n**wttr** (city) - Search weather on the Net\n**math** (--help) - Advanced Mathematics\n**botrps** - Play Rock Paper Scissors against the Bot.\n**ping** - Pong!\n**rateme** - Simple fun.\n**marco** - Polo\n**dice** - Role a die.\n**roast** (@person) - Your favorite command.\n**v** - Print version number.'
+          },
+          {
+            name: ':large_orange_diamond:Cyber Operative Only',
+            value: '**ipstats** - Statistics on Attacks\n**ipsummary** - Prints top violations from /var/log/auth.log\n**ipkilled** - Prints killed subnets on main Server\n**xks** (string) - Searches local database for spy words.',
+            "inline": true
+          },
+          {
+            name: ':large_blue_diamond:Shadow Moderator Only',
+            value: '**weather** - Get local weather data any time of day.\n**sabrestatus** (online, dnd, invisible) - Sets Sabres online status.',
+            "inline": true
+          },
+          { // Need to add !dev
+            name: ':radioactive:Test Commands',
+            value: '**devteam** - Developer Team Contributions.\n**messagedata** - Sends developer information to console.\n**announcerole** - Developer Test Command.\n**checkmod** - Developer Test Command.\n**checkownership** - Developer Test Command.\n**xdev** - Developers Command Set'
+          },
+          {
+            name: 'More',
+            value: 'Project Sabre runs on the ``STRATUS 1 FIREWALL.DNET.LAB`` Server.\nDon\'t forget to append the prefix.'
+          }
+        ],
+        timestamp: new Date(),
+        footer: {
+          icon_url: client.user.avatarURL,
+          text: 'Server Time'
+        }
+      }});
+
     }
-  }}); // end message.channel.send
+ // end message.channel.send
   // end of help
   //////////////////////////////////////////////////////////////////////////////
   // devteam
