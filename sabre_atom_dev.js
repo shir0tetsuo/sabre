@@ -492,6 +492,10 @@ client.on("message", (message) => {
     }
   // bot rock paper scissors ///////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "botrps")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(alaska_citizen)) {
+      message.channel.send(forbidden)
+      return;
+    }
     var rpsmat = [ { ans: "rock" }, { ans: "paper" }, { ans: "scissors" } ] // These are the choices the bot can make
     var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)]; // rpsmat.ans
     const rpssplit = message.content.split(/\s+/g); // Separate strings and don't fall apart / break
