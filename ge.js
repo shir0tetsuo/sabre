@@ -26,7 +26,7 @@ ge.login(key.token_ge)
 ge.on("ready", () => {
   console.log(syslog, "System Ready.")
   console.log(syslog, Date())
-  console.log(syslog, client.guilds.size,"Servers Online")
+  console.log(syslog, ge.guilds.size,"Servers Online")
   ge.user.setGame("Cyber Ops")
   ge.user.setStatus("dnd") // online/offline/dnd/invisible/idle
 });
