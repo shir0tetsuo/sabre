@@ -27,7 +27,7 @@ ge.on("ready", () => {
   console.log(syslog, "System Ready.")
   console.log(syslog, Date())
   console.log(syslog, client.guilds.size,"Servers Online")
-  client.user.setGame("Cyber Ops")
-  client.user.setStatus("dnd") // online/offline/dnd/invisible/idle
+  ge.user.setGame("Cyber Ops")
+  ge.user.setStatus("dnd") // online/offline/dnd/invisible/idle
 });
 //////////////////////// End of Head ///////////////////////////////////////////
