@@ -17,7 +17,7 @@ console.log(syslog, "TOKEN: ", key.token_ge);
 console.log(syslog, "SOFTWAREVERSION: ", cfg.version);
 console.log(syslog, "PREFIX: ", prefix);
 console.log(syslog, "ADMINISTRATOR: ", cfg.id.administrator);
-console.log(syslog, "OPER: ", cfg.guild_davnet_securitybot);
+console.log(syslog, "OPER: ", cfg.id.guild_davnet_securitybot);
 console.log(syslog, "Beginning Authentication Process.");
 
 console.log(syslog, "System Ready.")
