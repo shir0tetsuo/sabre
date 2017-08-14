@@ -98,7 +98,7 @@ client.on("guildMemberRemove", (member) => {
 //
 client.on("message", (message) => {
   if (message.guild.id === config.guild.ALASKA) {
-    const securechan = message.channel();
+    const securechan = message.guild.channel();
     if (!securechan.id === config.chan.alaska_sabredevs && !securechan.id === config.chan.alaska_classified && !securechan.id === config.chan.alaska_sabrecmds) {
       return;
     }
