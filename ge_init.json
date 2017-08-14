@@ -1,0 +1,10 @@
+{
+  "version": "0.0.0.0",
+  "pre": "?ge",
+  "id": {
+    "role_cyberop": "331913896996896769",
+    "guild_davnet": "331909839439659019",
+    "guild_davnet_securitybot": "331913852872556545",
+    "administrator": "303309686264954881"
+  }
+}
