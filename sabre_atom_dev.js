@@ -122,7 +122,7 @@ client.on("message", (message) => {
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
       if (sabrestatus[1] === "game") {
-        client.user.setGame(message.content.substring(17,128))
+        client.user.setGame(message.content.substring(18,128))
         message.channel.send("Playing status updated.")
         return;
       } else if (sabrestatus[1] === "reset") {
@@ -638,12 +638,12 @@ client.on("message", (message) => {
         fields: [
           {
             name: ":bulb: Concepting",
-            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nEmma```",
+            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar,\nEmma```",
             inline: true
           },
           {
             name: ":rocket: Function Testing",
-            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar```",
+            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar```" + "and Alaska Discord",
             inline: true
           },
           {
