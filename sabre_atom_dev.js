@@ -660,6 +660,10 @@ client.on("message", (message) => {
     ////////////////////////////////////////////////////////////////////////////
   // ROAST /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "roast")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
+      message.channel.send(forbidden)
+      return;
+    }
     if (message.mentions.members.first() === undefined) {
       message.channel.send(message.author + ", you dink, you're supposed to @mention someone.")
       return;
