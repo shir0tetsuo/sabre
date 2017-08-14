@@ -376,6 +376,10 @@ client.on("message", (message) => {
       console.log("Verbose: umath is equal-to " + umath)} // 5 percent chance
   // dice //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "dice")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
+      message.channel.send(forbidden)
+      return;
+    }
     var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
     var die = die[Math.floor(Math.random() * die.length)];
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
@@ -447,6 +451,10 @@ client.on("message", (message) => {
   // END OF FILE Developer Menu ////////////////////////////////////////////////
   // math //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "math")) {
+    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_csd)) {
+      message.channel.send(forbidden)
+      return;
+    }
     const matts = message.content.split(/\s+/g);
     // Math2 is required to remove special formatting
     // Let the math program handle all arguments
