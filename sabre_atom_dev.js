@@ -53,9 +53,10 @@ client.on("message", message => {
     points: 0,
     level: 0
   }; // if no points in file
-  let userData = points[message.author.id];
-  userData.points++;
-
+  if(message.guild.id === config.guild.ALASKA && message.member.roles.has(config.role.alaska_citizen) {
+    let userData = points[message.author.id];
+    userData.points++;
+  }
   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
   if (curLevel > userData.level) {
     // Level up!
@@ -408,7 +409,7 @@ client.on("message", (message) => {
         fields: [
           {
             name: "Upper Class Citizen Commands",
-            value: "**joke** - Collection of jokes.\n**roast** - Poke fun at people."
+            value: "**joke** - Collection of jokes.\n**roast** - Poke fun at people. **(10Mb)**"
           },
           {
             name: "Citizen of Alaska Commands",
