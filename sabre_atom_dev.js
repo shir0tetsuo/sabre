@@ -45,7 +45,31 @@ client.on("ready", () => {
 });
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
+client.on("message", message => {
+  if (!message.content.startsWith(prefix)) return;
+  if (talkedRecently.has(message.author.id)) return;
+  if (message.author.bot) return;
+  if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+    level: 0
+  }; // if no points in file
+  let userData = points[message.author.id];
+  userData.points++;
 
+  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+  if (curLevel > userData.level) {
+    // Level up!
+    userData.level = curLevel;
+    message.reply(`You"ve leveled up to level **${curLevel}**!`);
+  }
+
+  if (message.content.startsWith(prefix + "level")) {
+    message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
+  }
+  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
+  });
+});
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
@@ -495,27 +519,5 @@ client.on("message", (message) => {
     }
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
     message.channel.send(message.mentions.members.first() + ", " + roastc.text)
-  } else if (!talkedRecently.has(message.author.id) && !message.author.bot){
-    if (!points[message.author.id]) points[message.author.id] = {
-      points: 0,
-      level: 0
-    }; // if no points in file
-    let userData = points[message.author.id];
-    userData.points++;
-
-    let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-    if (curLevel > userData.level) {
-      // Level up!
-      userData.level = curLevel;
-      message.reply(`You've leveled up to level **${curLevel}**!`);
-    }
-
-    if (message.content.startsWith(prefix + "level")) {
-      message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
-    }
-    fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-      if (err) console.error(err)
-    });
-  } // else if
-
+  } //else if (message.content.startsWith)
 }); // may break
