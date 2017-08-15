@@ -44,7 +44,11 @@ client.on("ready", () => {
   // STABLE
 });
 
-function incrementPoint() {
+// POINT SYSTEM ////////////////////////////////////////////////////////////////
+client.on("message", message => {
+  if (!message.content.startsWith(prefix)) return;
+  if (talkedRecently.has(message.author.id)) return;
+  if (message.author.bot) return;
   if (!points[message.author.id]) points[message.author.id] = {
     points: 0,
     level: 0
@@ -66,14 +70,6 @@ function incrementPoint() {
   fs.writeFile("./points.json", JSON.stringify(points), (err) => {
     if (err) console.error(err)
   });
-}
-
-// POINT SYSTEM ////////////////////////////////////////////////////////////////
-client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (talkedRecently.has(message.author.id)) return;
-  if (message.author.bot) return;
-  incrementPoint();
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
