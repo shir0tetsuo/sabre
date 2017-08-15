@@ -381,7 +381,7 @@ client.on("message", (message) => {
           },
           {
             name: "Citizen of Alaska Commands",
-            value: "**help** - Hello, World\n**wttr** (city(,state)) - Search weather conditions.\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6-Sided Dice.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
+            value: "**help** - Hello, World\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6-Sided Dice.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
           },
           {
             name: "More Coming Soon",
