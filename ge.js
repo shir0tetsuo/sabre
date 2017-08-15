@@ -36,12 +36,6 @@ ge.on("ready", () => {
 
 let cooldown = new Set();
 ge.on("message", (message) => {
-  // Ensure user has cyber role ////////////////////////////////////////////////
-  if(!message.member.roles.has(cfg.id.role_cyberop)) {
-    console.log(syslog, message.user.tag, "Forbidden Access Detected");
-    message.channel.send(syslog, message.author, "Access Forbidden. Cyb.Op. Role Missing.")
-    return;
-  }
   // Cooldown Period ///////////////////////////////////////////////////////////
   if(message.content.startsWith(prefix) && !message.author.bot) {
     if(cooldown.has(message.author.id)) {
@@ -57,10 +51,16 @@ ge.on("message", (message) => {
   }
   // No Bots Allowed to Control GE /////////////////////////////////////////////
   if(message.author.bot) return;
+  // Ensure user has cyber role ////////////////////////////////////////////////
+  if(!message.member.roles.has(cfg.id.role_cyberop)) {
+    console.log(syslog, message.user.tag, "Forbidden Access Detected");
+    message.channel.send(syslog, message.author, "Access Forbidden. Cyb.Op. Role Missing.")
+    return;
+  }
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog, cfg.version);
     return;
-  }
+  } // else if {}
 }) // end ge.on /////////////////////////////////////////////////////////////////
