@@ -69,11 +69,11 @@ ge.on("message", (message) => {
     return;
   } else if(message.content.startsWith(prefix + "trackobj")) {
     const trackobj = message.content.split(/\s+/g);
-    if(trackobj[1] === undefined) {
+    if(trackobj[1] === undefined || trackobj[1] === null || !trackobj[1]) {
       message.channel.send("Please specify: ``ip``");
       return;
     }
-    if(trackobj[1] === "ip") {
+    else if(trackobj[1] === "ip") {
       let address = trackobj[2]
       exec('/root/NC/ip/ipwhere ' + address,
         function(error, stdout, stderr) {
