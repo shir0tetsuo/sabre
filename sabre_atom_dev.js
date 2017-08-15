@@ -495,7 +495,7 @@ client.on("message", (message) => {
     }
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
     message.channel.send(message.mentions.members.first() + ", " + roastc.text)
-  } if (!talkedRecently.has(message.author.id) && !message.author.bot){
+  } else if (!talkedRecently.has(message.author.id) && !message.author.bot){
     if (!points[message.author.id]) points[message.author.id] = {
       points: 0,
       level: 0
