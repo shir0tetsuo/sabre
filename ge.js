@@ -40,7 +40,7 @@ ge.on("message", (message) => {
   if(message.content.startsWith(prefix) && !message.author.bot) {
     if(cooldown.has(message.author.id)) {
       console.log(syslog, message.author.tag, "is being limtied.")
-      message.author.send(message.author.username + "You are feeding commands too quickly.")
+      message.author.send(message.author.username + " You are feeding commands too quickly.")
       return;
     } else {
       cooldown.add(message.author.id);
