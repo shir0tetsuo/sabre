@@ -63,11 +63,10 @@ ge.on("message", (message) => {
   if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog + cfg.version);
     return;
-  }
-  if(message.content.startsWith(prefix, "dir")) {
+  } else if(message.content.startsWith(prefix, "dir")) {
     message.channel.send("v, dir, trackobj")
-  }// else if {}
-  if(message.content.startsWith(prefix, "trackobj")) {
+    return;
+  } else if(message.content.startsWith(prefix, "trackobj")) {
     const trackobj = message.content.split(/\s+/g);
     if(trackobj[1] === undefined) {
       message.channel.send("Please specify: ``ip``");
@@ -91,5 +90,8 @@ ge.on("message", (message) => {
             .setThumbnail('https://i.imgur.com/iE39JgF.png')
         });
     } // end TrackOBJ ip-address
+  } else {
+    message.channel.send("The command was not understood.")
+    return;
   } // end TrackOBJ
 }) // end ge.on /////////////////////////////////////////////////////////////////
