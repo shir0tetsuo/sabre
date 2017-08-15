@@ -46,7 +46,7 @@ ge.on("message", (message) => {
       cooldown.add(message.author.id);
       setTimeout(() => {
         cooldown.delete(message.author.id);
-      }, 1000); // 4 seconds
+      }, 4000); // 4 seconds
     }
   }
   // No Bots Allowed to Control GE /////////////////////////////////////////////
@@ -60,13 +60,13 @@ ge.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  if(message.content.startsWith(prefix, "v")) {
+  if(message.content.startsWith(prefix + "v")) {
     message.channel.send(syslog + cfg.version);
     return;
-  } else if(message.content.startsWith(prefix, "dir")) {
+  } else if(message.content.startsWith(prefix + "dir")) {
     message.channel.send("v, dir, trackobj")
     return;
-  } else if(message.content.startsWith(prefix, "trackobj")) {
+  } else if(message.content.startsWith(prefix + "trackobj")) {
     const trackobj = message.content.split(/\s+/g);
     if(trackobj[1] === undefined) {
       message.channel.send("Please specify: ``ip``");
