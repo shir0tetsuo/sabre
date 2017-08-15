@@ -53,7 +53,7 @@ client.on("message", message => {
     points: 0,
     level: 0
   }; // if no points in file
-  if(message.guild.id === config.guild.ALASKA && message.member.roles.has(config.role.alaska_citizen) {
+  if(message.guild.id === config.guild.ALASKA && message.member.roles.has(config.role.alaska_citizen)) {
     let userData = points[message.author.id];
     userData.points++;
   }
