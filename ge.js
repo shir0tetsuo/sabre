@@ -46,13 +46,13 @@ ge.on("message", (message) => {
       cooldown.add(message.author.id);
       setTimeout(() => {
         cooldown.delete(message.author.id);
-      }, 4000); // 4 seconds
+      }, 1000); // 4 seconds
     }
   }
   // No Bots Allowed to Control GE /////////////////////////////////////////////
-  else if(message.author.bot) return;
+  if(message.author.bot) return;
   // Ensure user has cyber role ////////////////////////////////////////////////
-  else if(!message.member.roles.has(cfg.id.role_cyberop)) {
+  if(!message.member.roles.has(cfg.id.role_cyberop)) {
     console.log(syslog, message.author.tag, "Forbidden Access Detected");
     message.channel.send(syslog + message.author + " Access Forbidden. Cyb.Op. Role Missing.")
     return;
@@ -60,7 +60,7 @@ ge.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  else if(message.content.startsWith(prefix, "v")) {
+  if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog + cfg.version);
     return;
   } else if(message.content.startsWith(prefix, "dir")) {
