@@ -40,7 +40,7 @@ ge.on("message", (message) => {
   if(message.content.startsWith(prefix) && !message.author.bot) {
     if(cooldown.has(message.author.id)) {
       console.log(syslog, message.author.tag, "is being limtied.")
-      message.author.send(message.author.tag, "You are feeding commands too quickly.")
+      message.author.send(message.author.username + "You are feeding commands too quickly.")
       return;
     } else {
       cooldown.add(message.author.id);
@@ -54,13 +54,13 @@ ge.on("message", (message) => {
   // Ensure user has cyber role ////////////////////////////////////////////////
   if(!message.member.roles.has(cfg.id.role_cyberop)) {
     console.log(syslog, message.user.tag, "Forbidden Access Detected");
-    message.channel.send(syslog, message.author, "Access Forbidden. Cyb.Op. Role Missing.")
+    message.channel.send(syslog + message.author + "Access Forbidden. Cyb.Op. Role Missing.")
     return;
   }
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   if(message.content.startsWith(prefix, "v")) {
-    message.channel.send(syslog, cfg.version);
+    message.channel.send(syslog + cfg.version);
     return;
   } // else if {}
 }) // end ge.on /////////////////////////////////////////////////////////////////
