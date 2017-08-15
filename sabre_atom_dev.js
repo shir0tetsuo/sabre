@@ -154,39 +154,7 @@ client.on("message", (message) => {
       message.channel.send("Okay okay. Here's a joke. " + joke.text)
     }
   // PING //////////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ping")) {
-    if (message.guild.id === config.guild.ALASKA) {
-      check_csd = message.member.roles.has(config.role.alaska_csd)
-      check_dev = message.member.roles.has(config.role.alaska_botdev)
-      if (!check_csd && !check_dev) { // if both return empty
-        message.channel.send(forbidden + "This command is intended for CSD/Developers.")
-        return;
-      }
-    }
-    message.channel.send("Calculating!").then(m => m.edit({embed: {
-      color: 0xA7A7A5,
-      timestamp: new Date(),
-      footer: {
-        icon_url: client.user.avatarURL,
-        text: "Server Time"
-      },
-      author: {
-        name: client.user.username,
-        icon_url: client.user.avatarURL
-      },
-      fields: [
-        {
-          name: ":satellite_orbital: Pong!",
-          value: "```markdown\n[!]: Round Trip```",
-          inline: true
-        },
-        {
-          name: ":satellite: __Latency__",
-          value: "```\n" + (m.createdTimestamp - message.createdTimestamp) + "ms.```",
-          inline: true
-        }
-      ]
-    }}))
+
     //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
@@ -199,144 +167,11 @@ client.on("message", (message) => {
     }
     message.channel.send("Polo!"); // Dan's Mod
   // ipstats ///////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ipstats")) {
-    if (message.guild.id === config.guild.ALASKA) {
-      if (!message.member.roles.has(config.role.alaska_csd)) {
-        message.channel.send(forbidden + "This command is intended for CSD.")
-        return;
-      }
-    } else if (message.guild.id === config.guild.DAVNET) {
-      if (!message.member.roles.has(config.role.cyberID)) {
-        message.channel.send(forbidden)
-        return;
-      }
-    } else { // Safetynet
-      message.channel.send(forbidden)
-      return;
-    }
-    exec("/root/NC/utils/NorthStar/ipsabre.sh",
-      function(error, stdout, stderr) {
-        message.channel.send({embed: {
-          color: 0xFF3D00,
-          timestamp: new Date(),
-          footer: {
-            icon_url: client.user.avatarURL,
-            text: "Server Time"
-          },
-          author: {
-            name: client.user.username,
-            icon_url: client.user.avatarURL
-          },
-          fields: [
-            {
-              name: "STRATUS 1 FIREWALL.DNET.LAB",
-              value: stdout
-            }
-          ]
-        }})
-      })
-  // ipsummary /////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ipsummary")) {
-    if (message.member.roles.has(config.role.cyberID)) {
-      exec("/root/NC/utils/NorthStar/ipbot.sh");
-      message.channel.send("An IP Summary has been recorded.");
-    } else {
-      message.channel.send(forbidden + message.author)
-      return;
-    }
+
   // XKS Regex /////////////////////////////////////////////////////////////////
-} else if (message.content.startsWith(prefix + "xks")) {
-    if (message.member.roles.has(config.role.cyberID) || message.member.roles.has(config.role.alaska_csd)) {
-      const xksregex = message.content.split(/\s+/g);
-      if (xksregex[1] !== undefined) {
-        exec('/root/NC/utils/NorthStar/xks.sh ' + xksregex[1],
-          function(error, stdout, stderr) {
-            //let regex = xksregex[1]
-            if (stdout === "true\n") {
-              var regval = ":large_orange_diamond: String was FOUND!"
-            } else if (stdout === "false\n") {
-              var regval = ":large_blue_diamond: String was NOT FOUND!"
-            }
-            //console.log(regval, xksregex[1], stdout)
-            const embed = new Discord.RichEmbed()
-              .setTitle('XKeyScore Regex')
-              .setAuthor('firewall.dnet.lab')
-              .setColor('0xFF3D00')
-              .setDescription('Searches local database for XKeyScore words.')
-              .setFooter('Server Time')
-              //.setImage('https://i.imgur.com/sUj5UBw.jpg')
-              .setThumbnail('https://i.imgur.com/iE39JgF.png')
-              .setTimestamp()
-              .setURL('https://duckduckgo.com/?q=xkeyscore')
-              .addField('Here is what the monkeys could dig up.', '\u200b')
-              .addField(regval, '```' + xksregex[1] + '```')
-              //.addField('\u200b', '\u200b')
-              //.addfield('You searched for:', '```{regex}```')
-              message.channel.send({ embed });
-          })
-      } else {
-        message.channel.send(message.author + " A string is required.")
-      }
-    } else {
-      message.channel.send(forbidden + message.author)
-      return;
-    }
-  // ipkilled //////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "ipkilled")) {
-    if (message.member.roles.has(config.role.cyberID) || message.member.roles.has(config.role.alaska_csd)) {
-      exec("/root/NC/utils/NorthStar/ipkilled.sh",
-      function (error, stdout, stderr) {
-        message.channel.send({embed: {
-          color: 0xFF3D00,
-          author: {
-            name: client.user.username,
-            icon_url: client.user.avatarURL
-          },
-          fields: [
-            {
-              name: "Terminated subnets blocked by System",
-              value: '```' + stdout + '```'
-            }
-          ],
-          timestamp: new Date(),
-          footer: {
-            icon_url: client.user.avatarURL,
-            text: "STRATUS 1 FIREWALL.DNET.LAB, Server Time"
-          }
-        }})}) // Confusing As Hell! Thank god for Atom
-    } else {
-      message.channel.send(forbidden + message.author)
-      return;
-    }
+
   // wttr //////////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "wttr")){
-    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
-      message.channel.send(forbidden)
-      return;
-    }
-    const locale = message.content.split(/\s+/g);
-    if (locale[1] !== undefined) {
-      exec('/root/NC/utils/NorthStar/wttr.in.sh ' + locale[1],
-      function(error, stdout, stderr) {
-        message.channel.send({embed: {
-          color: 0x1979FF,
-          author: {
-            name: client.user.username,
-            icon_url: client.user.avatarURL
-          },
-          title: 'wttr.in - Console-Like Weather Data',
-          url: 'http://wttr.in/',
-          description: "You searched for: " + locale[1],
-          fields: [{
-            name: ':loudspeaker::satellite_orbital: Hows this?',
-            value: '```' + stdout + '```'
-          }]
-        }})
-      })
-    } else {
-      message.channel.send("Give me a city name, " + message.author + "!\nExample: Halifax,Nova")
-      return;
-    }
+
   // weather (bot) /////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "weather")) {
     if (message.member.roles.has(config.role.modID)) {
@@ -450,39 +285,7 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // END OF FILE Developer Menu ////////////////////////////////////////////////
   // math //////////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "math")) {
-    if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_csd)) {
-      message.channel.send(forbidden)
-      return;
-    }
-    const matts = message.content.split(/\s+/g);
-    // Math2 is required to remove special formatting
-    // Let the math program handle all arguments
-    exec('math2 ' + matts[1] + ' ' + matts[2],
-      function (error, stdout, stderr) { // May change to spam channel
-        message.channel.send({embed: {
-          color: 0xFFFF00,
-          author: {
-            name: client.user.username,
-            icon_url: client.user.avatarURL
-          },
-          fields: [
-            {
-              name: "Output",
-              value: '```' + stdout + '```'
-            },
-            {
-              name: "Errors",
-              value: '```' + stderr + '```'
-            }
-          ],
-          timestamp: new Date(),
-          footer: {
-            icon_url: client.user.avatarURL,
-            text: 'Mathematics Program, Server Time'
-          }
-        }})
-    })
+
   // checkmod //////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "checkmod")) {
     if(message.member.roles.has(config.role.modID)) {
