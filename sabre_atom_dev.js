@@ -45,30 +45,7 @@ client.on("ready", () => {
 });
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
-client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (message.author.bot) return;
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  }; // if no points in file
-  let userData = points[message.author.id];
-  userData.points++;
 
-  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-  if (curLevel > userData.level) {
-    // Level up!
-    userData.level = curLevel;
-    message.reply(`You"ve leveled up to level **${curLevel}**!`);
-  }
-
-  if (message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
-  }
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
-  });
-});
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
@@ -132,6 +109,27 @@ client.on("message", (message) => {
       message.author.send("Slow down! I'm not The Flash")
       return;
     } else {
+        if (message.author.bot) return;
+        if (!points[message.author.id]) points[message.author.id] = {
+          points: 0,
+          level: 0
+        }; // if no points in file
+        let userData = points[message.author.id];
+        userData.points++;
+
+        let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+        if (curLevel > userData.level) {
+          // Level up!
+          userData.level = curLevel;
+          message.reply(`You"ve leveled up to level **${curLevel}**!`);
+        }
+
+        if (message.content.startsWith(prefix + "level")) {
+          message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
+        }
+        fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+          if (err) console.error(err)
+        });
       talkedRecently.add(message.author.id);
       setTimeout(() => {
         talkedRecently.delete(message.author.id);
