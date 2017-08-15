@@ -519,6 +519,15 @@ client.on("message", (message) => {
       return;
     }
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
-    message.channel.send(message.mentions.members.first() + ", " + roastc.text)
+    if (message.guild.id === config.guild.ALASKA) {
+      if (userData.points > 10) {
+        var userData.points = (userData.points - 10)
+        message.channel.send(message.mentions.members.first() + ", " + roastc.text)
+      } else {
+        message.channel.send("You must have at least 10Mb")
+      }
+    } else {
+      message.channel.send(message.mentions.members.first() + ", " + roastc.text)
+    }
   } //else if (message.content.startsWith)
 }); // may break
