@@ -54,7 +54,7 @@ ge.on("message", (message) => {
   // Ensure user has cyber role ////////////////////////////////////////////////
   if(!message.member.roles.has(cfg.id.role_cyberop)) {
     console.log(syslog, message.author.tag, "Forbidden Access Detected");
-    message.channel.send(syslog + message.author + "Access Forbidden. Cyb.Op. Role Missing.")
+    message.channel.send(syslog + message.author + " Access Forbidden. Cyb.Op. Role Missing.")
     return;
   }
   //////////////////////////////////////////////////////////////////////////////
