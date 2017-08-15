@@ -59,11 +59,37 @@ ge.on("message", (message) => {
   }
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog + cfg.version);
     return;
   }
-  if(message.content.startsWith(prefix, "help")) {
-    message.channel.send("Unavailable.")
+  if(message.content.startsWith(prefix, "dir")) {
+    message.channel.send("v, dir, trackobj")
   }// else if {}
+  if(message.content.startsWith(prefix, "trackobj")) {
+    const trackobj = message.content.split(/\s+/g);
+    if(trackobj[1] === undefined) {
+      message.channel.send("Please specify: ``ip``");
+      return;
+    }
+    if(trackobj[1] === "ip") {
+      let address = trackobj[2]
+      exec('/root/NC/ip/ipwhere ' + address,
+        function(error, stdout, stderr) {
+          const embed = new Discord.RichEmbed();
+            .setTitle('TrackOBJ: IP Address')
+            .setAuthor(ge.user.username)
+            .setURL('https://ipinfo.io/' + address)
+            .setColor(0x00FF00)
+            .setFooter(syslog, 'https://tcpiputils.com/browse/ip-address/' + address)
+            .setTimestamp()
+            .setDescription('ISP Information')
+            .addField('stdout', stdout)
+            .addField('stderr', stderr)
+            .addField('error', error)
+            .setThumbnail('https://i.imgur.com/iE39JgF.png')
+        })
+    } // end TrackOBJ ip-address
+  } // end TrackOBJ
 }) // end ge.on /////////////////////////////////////////////////////////////////
