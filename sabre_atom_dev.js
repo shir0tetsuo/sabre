@@ -53,8 +53,8 @@ client.on("message", message => {
     points: 0,
     level: 0
   }; // if no points in file
+  let userData = points[message.author.id];
   if(message.guild.id === config.guild.ALASKA && message.member.roles.has(config.role.alaska_citizen)) {
-    let userData = points[message.author.id];
     userData.points++;
   }
   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
