@@ -546,7 +546,22 @@ client.on("message", (message) => {
   // Help Menu
   //////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "help")) {
-    if(message.guild.id === config.guild.ALASKA) {
+    if (message.guild.id === config.guild.ALASKA) {
+      if (message.member.roles.has(config.role.alaska_botdev)) {
+        message.author.send({embed: {
+          color: 0xFF3D00,
+          fields: [
+            {
+              name: "Developer Commands",
+              value: "xdev, checkOwnership, messagedata, announceRole, ~~sendSec~~, mention, bigparse, chanID, ~~links~~"
+            },
+            {
+              name: "Special Developer Commands",
+              value: "sabrestatus, messagedata"
+            }
+          ]
+        }})
+      }
       message.author.send({embed: {
         color: 0xFFC400,
         author: {
