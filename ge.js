@@ -28,7 +28,7 @@ ge.on("ready", () => {
   console.log(syslog, Date())
   console.log(syslog, ge.guilds.size,"Servers Online")
   ge.user.setGame("Cyber Ops")
-  ge.user.setStatus("dnd") // online/offline/dnd/invisible/idle
+  ge.user.setStatus("online") // online/offline/dnd/invisible/idle
 });
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////// End of Head ///////////////////////////////////////////
@@ -53,7 +53,7 @@ ge.on("message", (message) => {
   if(message.author.bot) return;
   // Ensure user has cyber role ////////////////////////////////////////////////
   if(!message.member.roles.has(cfg.id.role_cyberop)) {
-    console.log(syslog, message.user.tag, "Forbidden Access Detected");
+    console.log(syslog, message.author.tag, "Forbidden Access Detected");
     message.channel.send(syslog + message.author + "Access Forbidden. Cyb.Op. Role Missing.")
     return;
   }
@@ -62,5 +62,8 @@ ge.on("message", (message) => {
   if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog + cfg.version);
     return;
-  } // else if {}
+  }
+  if(message.content.startsWith(prefix, "help")) {
+    message.channel.send("Unavailable.")
+  }// else if {}
 }) // end ge.on /////////////////////////////////////////////////////////////////
