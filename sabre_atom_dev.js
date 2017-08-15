@@ -132,6 +132,7 @@ client.on("message", (message) => {
     if (talkedRecently.has(message.author.id)) {
       console.log(message.author.id, message.author.tag, "is being limtied.")
       message.author.send("Slow down! I'm not The Flash")
+      message.delete()
       return;
     } else {
       talkedRecently.add(message.author.id);
