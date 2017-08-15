@@ -29,8 +29,9 @@ let talkedRecently = new Set();
 ////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
-const fs = require("fs") // Uncomment to enable filesystem readwrite
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
+const sql = require("sqlite");
+sql.open("./score.sqlite");
+
 // System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,29 +47,19 @@ client.on("ready", () => {
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
 client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (talkedRecently.has(message.author.id)) return;
   if (message.author.bot) return;
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  }; // if no points in file
-  let userData = points[message.author.id];
-  if(message.guild.id === config.guild.ALASKA && message.member.roles.has(config.role.alaska_citizen)) {
-    userData.points++;
-  }
-  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-  if (curLevel > userData.level) {
-    // Level up!
-    userData.level = curLevel;
-    message.reply(`You"ve leveled up to level **${curLevel}**!`);
-  }
-
-  if (message.content.startsWith(prefix + "level")) {
-    message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
-  }
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
+  if (talkedRecently.has(message.author.id)) return;
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    } else {
+      sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+    }
+  }).catch(() => {
+    console.error;
+    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    });
   });
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
