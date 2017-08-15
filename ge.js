@@ -41,6 +41,7 @@ ge.on("message", (message) => {
     if(cooldown.has(message.author.id)) {
       console.log(syslog, message.author.tag, "is being limtied.")
       message.author.send(message.author.username + " You are feeding commands too quickly.")
+      message.delete()
       return;
     } else {
       cooldown.add(message.author.id);
