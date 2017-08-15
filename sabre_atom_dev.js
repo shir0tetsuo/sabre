@@ -29,7 +29,8 @@ let talkedRecently = new Set();
 ////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
-//const fs = require("fs") // Uncomment to enable filesystem readwrite
+const fs = require("fs") // Uncomment to enable filesystem readwrite
+let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 // System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +42,32 @@ client.on("ready", () => {
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
   // STABLE
+});
+
+// POINT SYSTEM ////////////////////////////////////////////////////////////////
+client.on("message", message => {
+  if (!message.content.startsWith(prefix)) return;
+  if (message.author.bot) return;
+  if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+    level: 0
+  }; // if no points in file
+  let userData = points[message.author.id];
+  userData.points++;
+
+  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+  if (curLevel > userData.level) {
+    // Level up!
+    userData.level = curLevel;
+    message.reply(`You"ve leveled up to level **${curLevel}**!`);
+  }
+
+  if (message.content.startsWith(prefix + "level")) {
+    message.reply(`You are currently level ${userData.level}, with ${userData.points}Mb.`);
+  }
+  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
+    if (err) console.error(err)
+  });
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
@@ -145,6 +172,9 @@ client.on("message", (message) => {
       message.channel.send(forbidden);
       return;
     }
+
+  } else if (message.content.startsWith(prefix + "buzz")){
+
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
