@@ -50,9 +50,9 @@ ge.on("message", (message) => {
     }
   }
   // No Bots Allowed to Control GE /////////////////////////////////////////////
-  if(message.author.bot) return;
+  else if(message.author.bot) return;
   // Ensure user has cyber role ////////////////////////////////////////////////
-  if(!message.member.roles.has(cfg.id.role_cyberop)) {
+  else if(!message.member.roles.has(cfg.id.role_cyberop)) {
     console.log(syslog, message.author.tag, "Forbidden Access Detected");
     message.channel.send(syslog + message.author + " Access Forbidden. Cyb.Op. Role Missing.")
     return;
@@ -60,7 +60,7 @@ ge.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  if(message.content.startsWith(prefix, "v")) {
+  else if(message.content.startsWith(prefix, "v")) {
     message.channel.send(syslog + cfg.version);
     return;
   } else if(message.content.startsWith(prefix, "dir")) {
