@@ -30,4 +30,37 @@ ge.on("ready", () => {
   ge.user.setGame("Cyber Ops")
   ge.user.setStatus("dnd") // online/offline/dnd/invisible/idle
 });
+////////////////////////////////////////////////////////////////////////////////
 //////////////////////// End of Head ///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+let cooldown = new Set();
+ge.on("message", (message) => {
+  // Ensure user has cyber role ////////////////////////////////////////////////
+  if(!message.member.roles.has(cfg.id.role_cyberop)) {
+    console.log(syslog, message.user.tag, "Forbidden Access Detected");
+    message.channel.send(syslog, message.author, "Access Forbidden. Cyb.Op. Role Missing.")
+    return;
+  }
+  // Cooldown Period ///////////////////////////////////////////////////////////
+  if(message.content.startsWith(prefix) && !message.author.bot) {
+    if(cooldown.has(message.author.id)) {
+      console.log(syslog, message.author.tag, "is being limtied.")
+      message.author.send(message.author.tag, "You are feeding commands too quickly.")
+      return;
+    } else {
+      cooldown.add(message.author.id);
+      setTimeout(() => {
+        cooldown.delete(message.author.id);
+      }, 4000); // 4 seconds
+    }
+  }
+  // No Bots Allowed to Control GE /////////////////////////////////////////////
+  if(message.author.bot) return;
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  if(message.content.startsWith(prefix, "v")) {
+    message.channel.send(syslog, cfg.version);
+    return;
+  }
+} // end ge.on /////////////////////////////////////////////////////////////////
