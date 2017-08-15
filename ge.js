@@ -77,7 +77,7 @@ ge.on("message", (message) => {
       let address = trackobj[2]
       exec('/root/NC/ip/ipwhere ' + address,
         function(error, stdout, stderr) {
-          const embed = new Discord.RichEmbed();
+          const embed = new Discord.RichEmbed()
             .setTitle('TrackOBJ: IP Address')
             .setAuthor(ge.user.username)
             .setURL('https://ipinfo.io/' + address)
@@ -89,7 +89,7 @@ ge.on("message", (message) => {
             .addField('stderr', stderr)
             .addField('error', error)
             .setThumbnail('https://i.imgur.com/iE39JgF.png')
-        })
+        });
     } // end TrackOBJ ip-address
   } // end TrackOBJ
 }) // end ge.on /////////////////////////////////////////////////////////////////
