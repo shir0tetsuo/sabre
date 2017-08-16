@@ -87,8 +87,25 @@ client.on("message", message => {
     });
   } else
 
-  if (message.content.startsWith(prefix + "cheat") && message.member.roles.has(config.perUser.ownerID)) {
-    return;
+  if (message.content.startsWith(prefix + "cheat") && message.member.roles.has(config.role.alaska_specialdev)) {
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+      if (!row) {
+        sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+      } else {
+        let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 100));
+        if (curLevel > row.level) {
+          row.level = curLevel;
+          sql.run(`UPDATE scores SET points = ${row.points + 100}, level = ${row.level} WHERE userId = ${message.author.id}`);
+          message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+        }
+        sql.run(`UPDATE scores SET points = ${row.points + 100} WHERE userId = ${message.author.id}`);
+      }
+    }).catch(() => {
+      console.error;
+      sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+        sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+      });
+    });
   }
 }); // end client message
 // Guild Join Handler //////////////////////////////////////////////////////////
@@ -312,7 +329,7 @@ client.on("message", (message) => {
       console.log(message.author)
     // dev announcerole //////////////////////////////////////////////////////////
     } else if (devarg === "announceRole"){
-      let modRole = message.guild.roles.find("name", "Oops") // alternatively "string"
+      let modRole = message.guild.roles.find("name", "Special Sabre Access") // alternatively "string"
       console.log(modRole)
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
