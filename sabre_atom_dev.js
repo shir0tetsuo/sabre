@@ -48,12 +48,24 @@ client.on("ready", () => {
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Function Test Zone
+////////////////////////////////////////////////////////////////////////////////
+
+function checkTable(mess) {
+
+  console.log("Data Received", mess)
+}
+
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
 client.on("message", message => {
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
   if (!message.content.startsWith(prefix)) return;
   if (message.member === null) return; // Should catch nulls
+  checkTable(message);
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
