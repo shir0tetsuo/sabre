@@ -55,7 +55,7 @@ client.on("message", message => {
     } else {
       let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
       if (curLevel > row.level) {
-        row.level = curLevel;
+        row.level = curLevel; // set current level
         sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
         message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
       }
@@ -73,16 +73,9 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + "level")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level}`);
+      message.reply(`Your current level is ${row.level} with ${row.points}Mb!`);
     });
   } else
-
-  if (message.content.startsWith(prefix + "points")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("sadly you do not have any points yet!");
-      message.reply(`you currently have ${row.points} points, good going!`);
-    });
-  }
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
