@@ -52,6 +52,10 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
   if (!message.content.startsWith(prefix)) return;
+  if (message.member.roles === null) {
+    console.log("System caught member with no roles. " + member.user.tag)
+    return;
+  }
 //  if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
