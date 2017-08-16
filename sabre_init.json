@@ -1,5 +1,5 @@
 {
-  "v": "0.3.3.3b",
+  "v": "0.3.3.4b",
   "pre": "s!",
   "guild": {
     "DAVNET": "331909839439659019",
@@ -14,7 +14,7 @@
     "alaska_upperctzn": "305495301228199946",
     "alaska_botdev": "346069367638982657",
     "alaska_oops_nolvlup": "347267182926888960",
-    "alaska_specialdev": ""
+    "alaska_specialdev": "347275887084961803"
   },
   "perUser": {
     "ownerID": "303309686264954881"
