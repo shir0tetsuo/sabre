@@ -43,11 +43,9 @@ client.on("ready", () => {
   console.log("INIT: " + Date())
   console.log(systemname, botname, client.guilds.size + " Servers Active.")
   //client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
-  client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers Active.`, type: 0}})
-  // This needs to be looked into.
-  //console.log(botname, client.guilds.size, config.v)
+  // Above no longer works as of Aug 16 Discord update
+  client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers. v${config.v}`, type: 0}})
   client.user.setStatus("dnd") // online/offline/dnd/invisible
-  // STABLE
 });
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
@@ -188,6 +186,10 @@ client.on("message", (message) => {
       }, 2500); // 2.5 seconds
     }
   }
+  if (message.member.roles === null) { // Don't break my system!
+    console.log("System caught member with no role data. " + member.user.tag)
+    return;
+  }
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
@@ -199,11 +201,11 @@ client.on("message", (message) => {
     if (message.member.roles.has(config.role.modID) || message.member.roles.has(config.role.alaska_botdev)) {
       const sabrestatus = message.content.split(/\s+/g);
       if (sabrestatus[1] === "game") {
-        client.user.setGame(message.content.substring(18,128))
+        client.user.setPresence({ game: { name: `${message.content.substring(18,128)}`, type: 0}})
         message.channel.send("Playing status updated.")
         return;
       } else if (sabrestatus[1] === "reset") {
-        client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
+        client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers. v${config.v}`, type: 0}})
         client.user.setStatus("dnd")
         message.channel.send("System reset.")
         return;
