@@ -26,6 +26,7 @@ let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
 let talkedRecently = new Set();
+let curren = ":tickets:"
 ////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
@@ -73,14 +74,14 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + "level")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level} and you have ${row.points}:gem:!`);
+      message.reply(`Your current level is ${row.level} and you have ${row.points}${curren}!`);
     });
   } else
 
   if (message.content.startsWith(prefix + "points")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("sadly you do not have any Megabytes yet!");
-      message.reply(`you currently have ${row.points}:gem:!`);
+      if (!row) return message.reply("sadly you do not have any " + curren + " yet!");
+      message.reply(`you currently have ${row.points}${curren}!`);
     });
   }
 }); // end client message
