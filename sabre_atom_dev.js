@@ -53,7 +53,8 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
   if (!message.content.startsWith(prefix)) return;
-  //if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
+  if (message.member === null) return; // Should catch nulls
+  if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
@@ -182,6 +183,7 @@ client.on("message", (message) => {
       }, 2500); // 2.5 seconds
     }
   }
+  if (message.member === null) return; // Should catch nulls
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
   // IMPORTANT. PREVENTS excess RAM/CPU usage. PREVENTS extra background processing.
