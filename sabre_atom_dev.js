@@ -43,7 +43,8 @@ client.on("ready", () => {
   console.log("INIT: " + Date())
   console.log(systemname, botname, client.guilds.size + " Servers Active.")
   client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
-  console.log(botname, client.guilds.size, config.v)
+  // This needs to be looked into.
+  //console.log(botname, client.guilds.size, config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
   // STABLE
 });
