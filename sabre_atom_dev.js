@@ -42,7 +42,8 @@ client.on("ready", () => {
   console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v);
   console.log("INIT: " + Date())
   console.log(systemname, botname, client.guilds.size + " Servers Active.")
-  client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
+  //client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
+  client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers Active.`, type: 0}})
   // This needs to be looked into.
   //console.log(botname, client.guilds.size, config.v)
   client.user.setStatus("dnd") // online/offline/dnd/invisible
