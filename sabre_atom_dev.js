@@ -73,14 +73,14 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + "level")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level} and you have ${row.points}Mb!`);
+      message.reply(`Your current level is ${row.level} and you have ${row.points}:SabreCoin:!`);
     });
   } else
 
   if (message.content.startsWith(prefix + "points")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("sadly you do not have any Megabytes yet!");
-      message.reply(`you currently have ${row.points}Mb!`);
+      message.reply(`you currently have ${row.points}:SabreCoin:!`);
     });
   }
 }); // end client message
