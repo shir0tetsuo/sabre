@@ -83,6 +83,10 @@ client.on("message", message => {
       if (!row) return message.reply("sadly you do not have any " + curren + " yet!");
       message.reply(`you currently have ${row.points}${curren}!`);
     });
+  } else
+
+  if (message.content.startsWith(prefix + "cheat") && message.member.roles.has(config.perUser.ownerID)) {
+    return;
   }
 }); // end client message
 // Guild Join Handler //////////////////////////////////////////////////////////
@@ -306,7 +310,7 @@ client.on("message", (message) => {
       console.log(message.author)
     // dev announcerole //////////////////////////////////////////////////////////
     } else if (devarg === "announceRole"){
-      let modRole = message.guild.roles.find("name", "CSD") // alternatively "string"
+      let modRole = message.guild.roles.find("name", "Oops") // alternatively "string"
       console.log(modRole)
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
