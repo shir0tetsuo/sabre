@@ -75,7 +75,7 @@ client.on("message", message => {
       if (!row) return message.reply("Your current level is 0");
       message.reply(`Your current level is ${row.level} with ${row.points}Mb!`);
     });
-  } else
+  }
 });
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
