@@ -50,6 +50,7 @@ client.on("ready", () => {
 client.on("message", message => {
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
+  if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
