@@ -32,7 +32,8 @@ let curren = ":tickets:"
 var exec = require('child_process').exec;
 const sql = require("sqlite");
 sql.open("./score.sqlite");
-
+// 0.3.4.0 Notes: Shop for Level System (ASYNC/AWAIT), Check for Roles,
+// add a "Message Counter" system BUT LIMIT IT!
 // System Login ////////////////////////////////////////////////////////////////
 client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
