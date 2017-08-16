@@ -53,11 +53,7 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
   if (!message.content.startsWith(prefix)) return;
-  if (message.member.roles === null) {
-    console.log("System caught member with no role data. " + member.user.tag)
-    return;
-  }
-  if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
+  //if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
@@ -185,10 +181,6 @@ client.on("message", (message) => {
         talkedRecently.delete(message.author.id);
       }, 2500); // 2.5 seconds
     }
-  }
-  if (message.member.roles === null) { // Don't break my system!
-    console.log("System caught member with no role data. " + member.user.tag)
-    return;
   }
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
