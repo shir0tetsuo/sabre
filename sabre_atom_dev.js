@@ -55,7 +55,7 @@ client.on("message", message => {
     } else {
       let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
       if (curLevel > row.level) {
-        row.level = curLevel; // set current level
+        row.level = curLevel;
         sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
         message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
       }
@@ -73,10 +73,17 @@ client.on("message", message => {
   if (message.content.startsWith(prefix + "level")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level} with ${row.points}Mb!`);
+      message.reply(`Your current level is ${row.level}`);
+    });
+  } else
+
+  if (message.content.startsWith(prefix + "points")) {
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+      if (!row) return message.reply("sadly you do not have any Megabytes yet!");
+      message.reply(`you currently have ${row.points}Mb!`);
     });
   }
-});
+}); // end client message
 // Guild Join Handler //////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
