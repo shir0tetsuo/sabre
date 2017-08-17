@@ -99,12 +99,12 @@ function readLevel(mess) {
         text: client.user.username
       },
       author: {
-        name: mess.author.tag,
+        name: mess.author.username,
         icon_url: mess.author.avatarURL
       },
       fields: [
         {
-          name: `:small_orange_diamond: Level`,
+          name: `:small_orange_diamond:: Level`,
           value: "```" + row.level + "```",
           inline: true
         },
