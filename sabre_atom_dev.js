@@ -82,6 +82,12 @@ function checkTicket(mess, xval) {
     sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
   })
 }
+function uncheckTicket(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets - xval} WHERE userId = ${mess.author.id}`)
+  })
+}
 ////////////////////////////////////////////////////////////////////////////////
 function checkLevel(mess, xval) {
   if (!xval) var xval = 1
@@ -244,7 +250,7 @@ client.on("message", (message) => {
     if (talkedRecently.has(message.author.id)) {
       if (speedingTicket.has(message.author.id)) {
         readLevel(message);
-        uncheckTicket(message);
+        uncheckTicket(message, 2);
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
       console.log(message.author.id, message.author.tag, "is being limtied.")
