@@ -128,6 +128,7 @@ function readLevel(mess) {
     }})) // end m edit message
     // Achievements and Other Weird Things
     // May make obsolete with sqlite
+    // uniq3
     if (mess.author.id === config.perUser.Tony3492) {
       mess.reply("has an achievement for being the first to reach Level 2 in Beta!")
     }
@@ -135,7 +136,7 @@ function readLevel(mess) {
       mess.reply("Is a Developer!")
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
-      mess.reply("Was a Secret Participant!").then(function (mess) {
+      mess.reply("Was a **``CLASSIFIED``**!").then(function (mess) {
         mess.react("🥇")
         mess.react("😤")
         mess.react("🕶")
@@ -143,7 +144,7 @@ function readLevel(mess) {
         mess.react("🌚")
         mess.react("🎲")
       }).catch(function() {
-        console.log("That wasnt meant to happen")
+        console.log("Bug at uu3")
       }); // end catch
     } // end AMBA achievement
   })
