@@ -212,7 +212,7 @@ client.on("guildMemberAdd", (member) => {
     },
     fields: [
       { //member.user.username
-        name: member.user.tag + " (" + message.member.displayName + ")"
+        name: member.user.tag + " (" + message.member.displayName + ")",
         value: "Joined the server."
       }
     ]
