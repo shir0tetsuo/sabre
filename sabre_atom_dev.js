@@ -322,11 +322,11 @@ client.on("message", (message) => {
   // uniq4
   } else if (message.content.startsWith(prefix + "giveTicket")){
     const data = message.content.split(/\s+/g);
+    let mentionedu = message.mentions.members.first()
     if (mentionedu === undefined) {
       message.reply("You must specify a @user! ``" + prefix + "giveTicket @user (ammount)``")
       return;
     }
-    let mentionedu = message.mentions.members.first()
     let remote = mentionedu.id
     if (data[2] === undefined) {
       message.reply("You must specify an amount to send! ``" + prefix + "giveTicket @user (ammount)``")
