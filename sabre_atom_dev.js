@@ -249,7 +249,7 @@ client.on("message", (message) => {
     // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
       if (speedingTicket.has(message.author.id)) {
-        readLevel(message);
+        checkEntry(message);
         uncheckTicket(message, 2);
         console.log(message.author.id, message.author.tag, "has been given a speeding ticket.")
         console.log(message.author.tag, "was deducted for spamming ", message.channel.name)
