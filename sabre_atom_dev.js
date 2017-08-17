@@ -340,15 +340,11 @@ client.on("message", (message) => {
     checkOther(remote)
     let amount = data[2]
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-      let givertk = row.tickets
-      if (amount <= givertk) {
-        let newamount = givertk-amount // deduct amount from tickets
-        console.log(newamount)
+      if (amount <= row.tickets) {
+        let newamount = row.tickets*1 - amount*1 // deduct amount from tickets
         sql.run(`UPDATE scores SET tickets = ${newamount} WHERE userId = ${message.author.id}`)
         sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
-          let takertk = next.tickets
-          let givenamount = takertk+amount
-          console.log(givenamount)
+          let givenamount = next.tickets*1 + amount*1
           sql.run(`UPDATE scores SET tickets = ${givenamount} WHERE userId = ${remote}`)
         })
         message.reply(`${amount}${curren} was sent to ${mentionedu}, you have ${newamount}${curren} left!`)
