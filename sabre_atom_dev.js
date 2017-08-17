@@ -199,20 +199,20 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
   // Would become member.guild.defaultChannel.send()
-  console.log(member.user.tag + " Joined the server " + message.guild.name)
+  console.log(member.user.tag + " Joined the server " + member.guild.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
     author: {
-      name: message.member.displayName,
-      icon_url: message.member.avatarURL
+      name: member.displayName,
+      icon_url: member.avatarURL
     },
     footer: {
       text: client.user.username + ", Server Time"
     },
     fields: [
       { //member.user.username
-        name: member.user.tag + " (" + message.member.displayName + ")",
+        name: member.user.tag + " (" + member.displayName + ")",
         value: "Joined the server."
       }
     ]
@@ -227,20 +227,20 @@ client.on("guildMemberRemove", (member) => {
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
-  console.log(member.user.tag + " Parted the server " + message.guild.name)
+  console.log(member.user.tag + " Parted the server " + member.guild.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
     author: {
-      name: message.member.displayName,
-      icon_url: message.member.avatarURL
+      name: member.displayName,
+      icon_url: member.avatarURL
     },
     footer: {
       text: client.user.username + ", Server Time"
     },
     fields: [
       {
-        name: member.user.tag + " (" + message.member.displayName + ")",
+        name: member.user.tag + " (" + member.displayName + ")",
         value: "Left the server."
       }
     ]
