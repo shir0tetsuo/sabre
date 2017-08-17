@@ -126,6 +126,7 @@ function readLevel(mess) {
         }
       ]
     }})) // end m edit message
+    // uniq3
     // Achievements and Other Weird Things
     // May make obsolete with sqlite
     if (mess.author.id === config.perUser.Tony3492) {
@@ -135,11 +136,12 @@ function readLevel(mess) {
       mess.reply("Is a Developer!")
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
-      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!")
-      mess.react("🥇")
-      mess.react("😤")
-      mess.react("🕶")
-    }
+      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!").then(mx => mx.edit {
+        mx.react("🥇")
+        mx.react("😤")
+        mx.react("🕶")
+      })
+    } // end AMBA achievement
   })
 }
 
