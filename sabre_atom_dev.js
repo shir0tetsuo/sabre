@@ -365,7 +365,7 @@ client.on("message", (message) => {
       var die = [ { int: 1 }, { int: 2 }, { int: 3 }, { int: 4 }, { int: 5 }, { int: 6 }, { int: 7 }, { int: 8 }, { int: 9 }, { int: 10 }, { int: 11 }, { int: 12 } ];
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
-          if (die === 12) {
+          if (die.int === 12) {
             message.reply("You have earned 5 " + curren + " for scoring high!")
             checkTicket(message, 5)
           }
