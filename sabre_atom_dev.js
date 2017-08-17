@@ -139,6 +139,9 @@ function readLevel(mess) {
         mess.react("🥇")
         mess.react("😤")
         mess.react("🕶")
+        mess.react("🐹")
+        mess.react("🌚")
+        mess.react("🎲")
       }).catch(function() {
         console.log("That wasnt meant to happen")
       }); // end catch
