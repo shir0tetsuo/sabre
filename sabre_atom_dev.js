@@ -375,7 +375,7 @@ client.on("message", (message) => {
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
     } else {
-      message.reply("You can choose between 6, 10, and 12 sided Dice!")
+      message.reply("You can choose between ``6``, ``10``, and ``12`` sided Dice! Do ``" + prefix + "dice 10`` or ``" + prefix + "dice twelve``!")
     }
 
     if (die === "Twelve") {
