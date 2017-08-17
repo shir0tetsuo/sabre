@@ -85,7 +85,6 @@ function checkLevel(mess, xval) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.level + xval} WHERE userId = ${mess.author.id}`)
   })
-  mess.delete()
 }
 ////////////////////////////////////////////////////////////////////////////////
 function readLevel(mess) {
@@ -94,6 +93,9 @@ function readLevel(mess) {
     mess.reply(`Lv: ${row.level} - ${curren}: ${row.tickets} - ${chatBit}: ${row.chatBits} - v${config.v}`)
     if (mess.author.id === config.perUser.Tony3492) {
       mess.reply("has an achievement for being the first to reach Level 2 in Beta!")
+    }
+    if (mess.member.roles.has(config.role.alaska_botdev)) {
+      mess.reply("Is a Developer!")
     }
   })
 }
