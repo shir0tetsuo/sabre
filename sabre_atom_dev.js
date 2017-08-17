@@ -94,6 +94,7 @@ function readLevel(mess) {
     mess.reply("Calculating!").then(m => m.edit({embed: {
       color: 0xFFC000,
       timestamp: new Date(),
+      description: `${botname} v${config.v}`,
       footer: {
         icon_url: client.user.avatarURL,
         text: client.user.username
@@ -119,7 +120,7 @@ function readLevel(mess) {
           inline: true
         },
         {
-          name: "Ranking for: " + mess.author.tag,
+          name: "Ranking for: " + mess.author.tag + "\u200b",
           value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
         }
       ]
