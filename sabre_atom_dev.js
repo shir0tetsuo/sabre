@@ -14,7 +14,6 @@ const keys = require("./token.json") // Secret Keys
 const rateme = require("./sabre_rateme.json") // Game
 const roast = require("./sabre_roast.json") // Game
 const jokes = require("./sabre_jokes.json") // Game
-//const dices = require("./sabre_dice.json") // Game
 const help = require("./sabre_helpfile.json") // Core help file
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -361,10 +360,26 @@ client.on("message", (message) => {
       message.channel.send(forbidden)
       return;
     }
-    var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
-    var die = die[Math.floor(Math.random() * die.length)];
-  //  var die = dice.sixsided[Math.floor(Math.random() * dice.sixsided.length)] // may break
+    const diceroll = message.content.split(/\s+/g);
+    if (diceroll[1] === "12" || diceroll[1] === "twelve") {
+      var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" }, { int: "Eleven" }, { int: Twelve } ];
+      var die = die[Math.floor(Math.random() * die.length)];
+    }
+    if (diceroll[1] === "10" || diceroll[1] === "ten") {
+      var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" } ];
+      var die = die[Math.floor(Math.random() * die.length)];
+    } else if (diceroll[1] === "6" || diceroll[1] === "six" || !diceroll[1] ){
+      var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
+      var die = die[Math.floor(Math.random() * die.length)];
+    } else {
+      message.reply("You can choose between 6, 10, and 12 sided Dice!")
+    }
     message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+    if (die === "Twelve") {
+      message.reply("You have earned 3 " + curren + " for scoring high!")
+      checkTicket(message, 3)
+    }
+    return;
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   // Developer Commands //////////////////////////// !!! ///////////////////////
