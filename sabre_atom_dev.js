@@ -621,7 +621,7 @@ client.on("message", (message) => {
           },
           {
             name: "Other Commands",
-            value: "**level** - Check your Level!\n**giveTicket** - Donate Tickets!"
+            value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!"
           },
           {
             name: "More Coming Soon",
