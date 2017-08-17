@@ -199,7 +199,7 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
   // Would become member.guild.defaultChannel.send()
-  console.log(member.user.tag + " Joined the server " + right_guild)
+  console.log(member.user.tag + " Joined the server " + right_guild + message.server.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
@@ -223,7 +223,7 @@ client.on("guildMemberRemove", (member) => {
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
-  console.log(member.user.tag + " Parted the server " + right_guild)
+  console.log(member.user.tag + " Parted the server " + right_guild + message.server.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
@@ -252,7 +252,7 @@ client.on("message", (message) => {
         checkEntry(message);
         uncheckTicket(message, 2);
         console.log(message.author.id, message.author.tag, "has been given a speeding ticket.")
-        console.log(message.author.tag, "was deducted for spamming ", message.channel.name)
+        console.log(message.author.tag, "was deducted for spamming", message.channel.name, "in", message.server.name)
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
       console.log(message.author.id, message.author.tag, "is being limtied.")
