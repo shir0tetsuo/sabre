@@ -341,10 +341,10 @@ client.on("message", (message) => {
     let amount = data[2]
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
       if (amount <= row.tickets) {
-        let newamount = (row.tickets - amount) // deduct amount from tickets
+        let newamount = row.tickets - amount // deduct amount from tickets
         sql.run(`UPDATE scores SET tickets = ${newamount} WHERE userId = ${message.author.id}`)
         sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
-          let givenamount = (next.tickets + amount)
+          let givenamount = next.tickets + amount
           sql.run(`UPDATE scores SET tickets = ${givenamount} WHERE userId = ${remote}`)
         })
         message.reply(`${amount}${curren} was sent to ${mentionedu}, you have ${newamount}${curren} left!`)
