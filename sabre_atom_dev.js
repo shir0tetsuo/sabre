@@ -14,7 +14,7 @@ const keys = require("./token.json") // Secret Keys
 const rateme = require("./sabre_rateme.json") // Game
 const roast = require("./sabre_roast.json") // Game
 const jokes = require("./sabre_jokes.json") // Game
-const dices = require("./sabre_dice.json") // Game
+//const dices = require("./sabre_dice.json") // Game
 const help = require("./sabre_helpfile.json") // Core help file
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
