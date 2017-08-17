@@ -332,6 +332,10 @@ client.on("message", (message) => {
       message.reply("You must specify an amount to send! ``" + prefix + "giveTicket @user (ammount)``")
       return;
     }
+    if (mentionedu.id === message.author.id) {
+      message.reply("You can't send tickets to yourself!")
+      return;
+    }
     checkEntry(message)
     checkOther(remote)
     let amount = data[2]
