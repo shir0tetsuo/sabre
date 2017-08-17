@@ -460,12 +460,31 @@ client.on("message", (message) => {
       if (message.mentions.members.first() === undefined) return;
       message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
+      // uniq5
     } else if (devarg === "seedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (message.mentions.members.first() === undefined) return;
       if (devhandle[3] === undefined) return;
       let seed = devhandle[3]
       message.reply("Developer Command was Run. Seeded user with " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
+      return;
+    } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
+      if (message.mentions.members.first() === undefined) return;
+      sql.get(`SELECT * FROM scores WHERE userId ="${message.mentions.members.first().id}"`).then(row => {
+        if (!row) {
+          sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [message.mentions.members.first().id, 1, 0, 1]);
+        } else {
+          message.author.send(`Lv: ${row.level}, Tk: ${row.tickets}, Cb: ${row.chatBits}`)
+          return;
+        }
+      }).catch(() => { // Error message generates new table instead
+        console.error;
+        console.log("The system recovered from an error.")
+        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
+          sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [message.mentions.members.first().id, 1, 0, 1]);
+        })
+      })
+      return;
     } else if (devarg === "printGuildID") {
       console.log(message.guild.id) // Working
     // developer links ///////////////////////////////////////////////////////////
@@ -610,7 +629,7 @@ client.on("message", (message) => {
             },
             {
               name: "Sabre Score System (Special Sabre Access)",
-              value: "unseedT (Are you SURE?), seedT"
+              value: "unseedT (Are you SURE?), seedT, inspect"
             }
           ]
         }})
