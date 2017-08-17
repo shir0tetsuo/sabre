@@ -76,6 +76,20 @@ function checkEntry(mess) { // Convert message into mess
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
+function checkOther(mess) { // Convert message into mess
+  sql.get(`SELECT * FROM scores WHERE userId ="${mess}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess, 1, 0, 1]);
+    }
+  }).catch(() => { // Error message generates new table instead
+    console.error;
+    console.log("The system recovered from an error.")
+    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess, 1, 0, 1]);
+    })
+  })
+}
+////////////////////////////////////////////////////////////////////////////////
 function checkTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
@@ -304,9 +318,34 @@ client.on("message", (message) => {
       message.channel.send(forbidden);
       return;
     }
-
-  } else if (message.content.startsWith(prefix + "giveticket")){
-
+  //////////////////////////////////////////////////////////////////////////////
+  // uniq4
+  } else if (message.content.startsWith(prefix + "giveTicket")){
+    const data = message.content.split(/\s+/g);
+    if (message.mentions.members.first() === undefined) {
+      message.reply("You must specify a @user! ``" + prefix + "giveTicket @user (ammount)``")
+      return;
+    }
+    if (data[2] === undefined) {
+      message.reply("You must specify an amount to send! ``" + prefix + "giveTicket @user (ammount)``")
+      return;
+    }
+    let remote = message.members.first().id
+    checkEntry(message)
+    checkOther(remote)
+    sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+      if (data[2] <= row.tickets) {
+        sql.run(`UPDATE scores SET tickets = ${row.tickets - data[2]} WHERE userId = ${message.author.id}`)
+        sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
+          sql.run(`UPDATE scores SET tickets = ${next.tickets + data[2]} WHERE userId = ${remote}`)
+        })
+        message.reply(`${data[2]}${curren} was sent to ${message.members.first()}, you have ${row.tickets - data[2]}${curren} left!`)
+        return;
+      } else {
+        message.reply("You don't have enough!")
+        return;
+      }
+    })
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
@@ -576,7 +615,7 @@ client.on("message", (message) => {
           },
           {
             name: "Other Commands",
-            value: "**level** - Check your Level!"
+            value: "**level** - Check your Level!\n**giveTicket** - Donate Tickets!"
           },
           {
             name: "More Coming Soon",
