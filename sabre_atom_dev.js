@@ -199,16 +199,20 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
   // Would become member.guild.defaultChannel.send()
-  console.log(member.user.tag + " Joined the server " + right_guild)
+  console.log(member.user.tag + " Joined the server " + message.guild.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
+    author: {
+      name: message.member.displayName,
+      icon_url: message.member.avatarURL
+    },
     footer: {
       text: client.user.username + ", Server Time"
     },
     fields: [
       { //member.user.username
-        name: member.user.tag,
+        name: member.user.tag + " (" + message.member.displayName + ")"
         value: "Joined the server."
       }
     ]
@@ -223,16 +227,20 @@ client.on("guildMemberRemove", (member) => {
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
-  console.log(member.user.tag + " Parted the server " + right_guild)
+  console.log(member.user.tag + " Parted the server " + message.guild.name)
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
+    author: {
+      name: message.member.displayName,
+      icon_url: message.member.avatarURL
+    },
     footer: {
       text: client.user.username + ", Server Time"
     },
     fields: [
       {
-        name: member.user.tag,
+        name: member.user.tag + " (" + message.member.displayName + ")",
         value: "Left the server."
       }
     ]
@@ -251,8 +259,7 @@ client.on("message", (message) => {
       if (speedingTicket.has(message.author.id)) {
         checkEntry(message);
         uncheckTicket(message, 2);
-        console.log(message.author.id, message.author.tag, "has been given a speeding ticket.")
-        console.log(message.author.tag, "was deducted for spamming", message.guild.name, message.channel.name)
+        console.log(message.author.tag, "was given a speeding ticket in", message.guild.name, message.channel.name)
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
       console.log(message.author.id, message.author.tag, "is being limtied.")
