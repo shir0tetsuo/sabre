@@ -58,6 +58,7 @@ client.on("ready", () => {
 ////////////////////////////////////////////////////////////////////////////////
 // Let everything else do the comparisons.
 // userId, tickets, level, chatBits
+// uniq1
 function checkEntry(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
@@ -86,6 +87,7 @@ function checkLevel(mess, xval) {
     sql.run(`UPDATE scores SET tickets = ${row.level + xval} WHERE userId = ${mess.author.id}`)
   })
 }
+// uniq2
 ////////////////////////////////////////////////////////////////////////////////
 function readLevel(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
@@ -133,7 +135,9 @@ function readLevel(mess) {
       mess.reply("Is a Developer!")
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
-      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!")
+      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!").then(function (mess)) {
+        mess.react(":SabreCoin:")
+      }
     }
   })
 }
