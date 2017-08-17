@@ -362,7 +362,7 @@ client.on("message", (message) => {
     }
     const diceroll = message.content.split(/\s+/g);
     if (diceroll[1] === "12" || diceroll[1] === "twelve") {
-      var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" }, { int: "Eleven" }, { int: Twelve } ];
+      var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" }, { int: "Eleven" }, { int: "Twelve" } ];
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
     }
