@@ -460,6 +460,12 @@ client.on("message", (message) => {
       if (message.mentions.members.first() === undefined) return;
       message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
+    } else if (devarg === "seedT" && message.member.roles.has(config.role.alaska_specialdev)) {
+      if (message.mentions.members.first() === undefined) return;
+      if (devhandle[3] === undefined) return;
+      let seed = devhandle[3]
+      message.reply("Developer Command was Run. Seeded user with " + seed + curren)
+      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
     } else if (devarg === "printGuildID") {
       console.log(message.guild.id) // Working
     // developer links ///////////////////////////////////////////////////////////
@@ -604,7 +610,7 @@ client.on("message", (message) => {
             },
             {
               name: "Sabre Score System (Special Sabre Access)",
-              value: "unseedT (Are you SURE?)"
+              value: "unseedT (Are you SURE?), seedT"
             }
           ]
         }})
