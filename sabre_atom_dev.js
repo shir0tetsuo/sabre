@@ -119,7 +119,7 @@ function readLevel(mess) {
           inline: true
         },
         {
-          name: "Ranking for: " + mess.author,
+          name: "Ranking for: " + mess.author.tag,
           value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
         }
       ]
