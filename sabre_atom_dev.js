@@ -472,7 +472,7 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // Help Menu
   //////////////////////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + "help")) {
+} else if (message.content.startsWith(prefix + "help")) { // uniq0
     if (message.guild.id === config.guild.ALASKA) {
       if (message.member.roles.has(config.role.alaska_botdev)) {
         message.author.send({embed: {
@@ -501,11 +501,15 @@ client.on("message", (message) => {
         fields: [
           {
             name: "Upper Class Citizen Commands",
-            value: "**joke** - Collection of jokes.\n**roast** - Poke fun at people. **(10Mb)**"
+            value: "**joke** - Collection of jokes.\n**roast** - Poke fun at people."
           },
           {
             name: "Citizen of Alaska Commands",
             value: "**help** - Hello, World\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6-Sided Dice.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
+          },
+          {
+            name: "Other Commands",
+            value: "**level** - Check your Level!"
           },
           {
             name: "More Coming Soon",
