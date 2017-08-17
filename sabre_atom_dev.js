@@ -26,10 +26,13 @@ let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
 let talkedRecently = new Set();
+// Point System Related
 let curren = ":tickets:"
+let chatBit = ":page_with_curl:"
 ////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
+// Require sqlite and database
 const sql = require("sqlite");
 sql.open("./score.sqlite");
 // 0.3.4.0 Notes: Shop for Level System (ASYNC/AWAIT), Check for Roles,
@@ -53,21 +56,64 @@ client.on("ready", () => {
 ////////////////////////////////////////////////////////////////////////////////
 // Function Test Zone
 ////////////////////////////////////////////////////////////////////////////////
-
-function checkTable(mess) {
-
-  console.log("Data Received", mess)
+// Let everything else do the comparisons.
+// userId, tickets, level, chatBits
+function checkEntry(mess) { // Convert message into mess
+  sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
+    } else { // Increment chatBits
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + 1} WHERE userId = ${mess.author.id}`);
+    }
+  }).catch(() => { // Error message generates new table instead
+    console.error;
+    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
+    })
+  })
+}
+////////////////////////////////////////////////////////////////////////////////
+function checkTicket(mess, xval) {
+  if (!xval) let xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
+  })
+}
+////////////////////////////////////////////////////////////////////////////////
+function checkLevel(mess, xval) {
+  if (!xval) let xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.level + xval} WHERE userId = ${mess.author.id}`)
+  })
+}
+////////////////////////////////////////////////////////////////////////////////
+function readLevel(mess) {
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    if (!row) return mess.reply("Your current level is 0.");
+    mess.reply(`Lv: ${row.level} - ${curren}: ${row.tickets} - ${chatBit}: ${row.chatBits} - v${config.v}`)
+    if (mess.author.id === config.perUser.Tony3492) {
+      mess.reply("has an achievement for being the first to reach Level 2 in Beta!")
+    }
+  })
 }
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
 client.on("message", message => {
+  // Return Conditions
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
-  if (!message.content.startsWith(prefix)) return;
+  if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
-  checkTable(message);
+  checkEntry(message);
+  // Commands with users that do not have a prefix or with nolvlup are disabled
+  if (!message.content.startsWith(prefix)) return;
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
-  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+  checkTicket(message, 1);
+  if (message.content.startsWith(prefix + "level")) {
+    readLevel(message);
+  }
+  // NEED TO REMOVE vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+/*  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     } else {
@@ -84,10 +130,10 @@ client.on("message", message => {
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
     });
-  });
-
+  }); */
+/*
   if (!message.content.startsWith(prefix)) return;
-
+*/ /*
   if (message.content.startsWith(prefix + "level")) {
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
       if (!row) return message.reply("Your current level is 0");
@@ -124,9 +170,13 @@ client.on("message", message => {
         sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
       });
     });
-  }
+  } */
 }); // end client message
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Guild Join Handler //////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 client.on("guildMemberAdd", (member) => {
   let davnet_guild = member.guild.channels.get(config.chan.securitybot);
   let alaska_guild = member.guild.channels.get(config.chan.alaska_classified);
@@ -192,9 +242,10 @@ client.on("message", (message) => {
       talkedRecently.add(message.author.id);
       setTimeout(() => {
         talkedRecently.delete(message.author.id);
-      }, 2500); // 2.5 seconds
+      }, 3000); // changed to 3 seconds
     }
   }
+  if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
   if (!message.content.startsWith(prefix) || message.author.bot) { // This is a proper OR Operator.
     return;
