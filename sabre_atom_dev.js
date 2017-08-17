@@ -625,11 +625,11 @@ client.on("message", (message) => {
             },
             {
               name: "Special Developer Commands",
-              value: "sabrestatus, messagedata"
+              value: "sabrestatus, messagedata, inspect"
             },
             {
               name: "Sabre Score System (Special Sabre Access)",
-              value: "unseedT (Are you SURE?), seedT, inspect"
+              value: "unseedT (Are you SURE?), seedT"
             }
           ]
         }})
