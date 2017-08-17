@@ -203,10 +203,6 @@ client.on("guildMemberAdd", (member) => {
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
-    author: {
-      name: member.displayName,
-      icon_url: member.avatarURL
-    },
     footer: {
       text: client.user.username + ", Server Time"
     },
@@ -231,10 +227,6 @@ client.on("guildMemberRemove", (member) => {
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
-    author: {
-      name: member.displayName,
-      icon_url: member.avatarURL
-    },
     footer: {
       text: client.user.username + ", Server Time"
     },
