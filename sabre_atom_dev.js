@@ -90,7 +90,6 @@ function checkLevel(mess, xval) {
 function readLevel(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
-  //  mess.reply(`Lv: ${row.level} - ${curren}: ${row.tickets} - ${chatBit}: ${row.chatBits} - v${config.v}`)
     mess.reply("Calculating!").then(m => m.edit({embed: {
       color: 0xFFC000,
       timestamp: new Date(),
@@ -126,11 +125,15 @@ function readLevel(mess) {
       ]
     }})) // end m edit message
     // Achievements and Other Weird Things
+    // May make obsolete with sqlite
     if (mess.author.id === config.perUser.Tony3492) {
       mess.reply("has an achievement for being the first to reach Level 2 in Beta!")
     }
     if (mess.member.roles.has(config.role.alaska_botdev)) {
       mess.reply("Is a Developer!")
+    }
+    if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
+      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!")
     }
   })
 }
