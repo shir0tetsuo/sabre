@@ -452,26 +452,30 @@ client.on("message", (message) => {
     let rpsmsg = rpssplit[1]; // The second string in the content is the analysis
     console.log("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans) // Verbose
     var beatprefix = "Ha! I beat you with " // bot wins
-    var defeatprefix = "Damn! My answer was " // bot loses
+    var defeatprefix = "Nooo! My answer was " // bot loses
+    var gainrpsticket = " You've earned 2 " + curren
     if (rpsmsg === rpsmat.ans) { // If comparison is the same, return
       message.channel.send("Damn! " + rpsmat.ans + " was my answer too, " + message.author + "!")
     } else if (rpsmsg === "rock") { // answer cannot be the same, reduces coding needed
       if (rpsmat.ans === "paper") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
-        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
+        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
+        checkTicket(message, 2)
       }
     } else if (rpsmsg === "paper") {
       if (rpsmat.ans === "scissors") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
-        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
+        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
+        checkTicket(message, 2)
       }
     } else if (rpsmsg === "scissors") {
       if (rpsmat.ans === "rock") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
-        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author)
+        message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
+        checkTicket(message, 2)
       }
     } else {
       message.channel.send("Sorry, " + message.author + ", your argument should be ``rock``, ``paper``, or ``scissors``.")
