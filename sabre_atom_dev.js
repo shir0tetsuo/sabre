@@ -14,6 +14,7 @@ const keys = require("./token.json") // Secret Keys
 const rateme = require("./sabre_rateme.json") // Game
 const roast = require("./sabre_roast.json") // Game
 const jokes = require("./sabre_jokes.json") // Game
+const dices = require("./sabre_dice.json") // Game
 const help = require("./sabre_helpfile.json") // Core help file
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -360,9 +361,10 @@ client.on("message", (message) => {
       message.channel.send(forbidden)
       return;
     }
-    var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
-    var die = die[Math.floor(Math.random() * die.length)];
-    message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+  //  var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
+  //  var die = die[Math.floor(Math.random() * die.length)];
+    var die = dice.sixsided[Math.floor(Math.random() * dice.sixsided.length)] // may break
+    message.channel.send("Cha-Ching! You rolled a " + die.int + " (" + die.text + ")!")
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   // Developer Commands //////////////////////////// !!! ///////////////////////

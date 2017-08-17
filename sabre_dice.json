@@ -1,5 +1,5 @@
 {
-  "6sided": [{
+  "sixsided": [{
     "int": "One",
     "value": 1
     },
@@ -23,7 +23,7 @@
     "int": "Six",
     "value": 6
     }],
-  "10sided": [{
+  "tensided": [{
     "int": "One",
     "value": 1
     },
@@ -63,7 +63,7 @@
     "int": "Ten",
     "value": 10
     }],
-  "12sided": [{
+  "twelvesided": [{
     "int": "One",
     "value": 1
     },
