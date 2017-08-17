@@ -427,7 +427,10 @@ client.on("message", (message) => {
       message.author.send(ddstc)
     // dev mention test //////////////////////////////////////////////////////////
     } else if (devarg === "mention") {
-      message.channel.send("Hello, " + message.mentions.members.first() + "!")
+      let firstmention = message.mentions.members.first()
+      message.channel.send("Hello, " + firstmention + "!")
+      message.author.send(ddstc)
+      console.log(firstmention.id)
     // dev checkOwnership ////////////////////////////////////////////////////////
     } else if (devarg === "checkOwnership") {
       if(message.author.id !== config.perUser.ownerID) {
