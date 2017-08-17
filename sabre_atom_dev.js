@@ -90,7 +90,41 @@ function checkLevel(mess, xval) {
 function readLevel(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
-    mess.reply(`Lv: ${row.level} - ${curren}: ${row.tickets} - ${chatBit}: ${row.chatBits} - v${config.v}`)
+  //  mess.reply(`Lv: ${row.level} - ${curren}: ${row.tickets} - ${chatBit}: ${row.chatBits} - v${config.v}`)
+    mess.reply("Calculating!").then(m => m.edit({embed: {
+      color: 0xFFC000,
+      timestamp: new Date(),
+      footer: {
+        icon_url: client.user.avatarURL,
+        text: client.user.username
+      },
+      author: {
+        name: mess.author.tag,
+        icon_url: mess.user.avatarURL
+      },
+      fields: [
+        {
+          name: `:small_orange_diamond: Level`,
+          value: "```" + row.level + "```",
+          inline: true
+        },
+        {
+          name: `${curren}: Tickets`,
+          value: "```" + row.tickets + "```",
+          inline: true
+        },
+        {
+          name: `${chatBit}: Bytes`,
+          value: "```" + row.chatBits + "```",
+          inline: true
+        },
+        {
+          name: "Ranking for: " + mess.author,
+          value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
+        }
+      ]
+    }})) // end m edit message
+    // Achievements and Other Weird Things
     if (mess.author.id === config.perUser.Tony3492) {
       mess.reply("has an achievement for being the first to reach Level 2 in Beta!")
     }
