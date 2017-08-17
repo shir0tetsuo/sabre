@@ -252,7 +252,7 @@ client.on("message", (message) => {
         readLevel(message);
         uncheckTicket(message, 2);
         console.log(message.author.id, message.author.tag, "has been given a speeding ticket.")
-        console.log(message.author.tag, "was deducted for spamming ", message.guild.channel.name)
+        console.log(message.author.tag, "was deducted for spamming ", message.channel.name)
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
       console.log(message.author.id, message.author.tag, "is being limtied.")
