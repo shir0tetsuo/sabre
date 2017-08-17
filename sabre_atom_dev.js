@@ -326,7 +326,7 @@ client.on("message", (message) => {
       message.reply("You must specify a @user! ``" + prefix + "giveTicket @user (ammount)``")
       return;
     } else {
-      let mentionedu = message.members.first()
+      let mentionedu = message.mentions.members.first()
       let remote = mentionedu.id
     }
     if (data[2] === undefined) {
