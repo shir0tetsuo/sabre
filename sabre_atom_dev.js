@@ -26,6 +26,7 @@ let systemname = "firewall.davnet.lab"
 let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
 let talkedRecently = new Set();
+let speedingTicket = new Set();
 // Point System Related
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
@@ -241,8 +242,17 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix) && !message.author.bot) {
     // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
+      if (speedingTicket.has(message.author.id)) {
+        readLevel(message);
+        uncheckTicket(message);
+        message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
+      }
       console.log(message.author.id, message.author.tag, "is being limtied.")
-      message.author.send("Slow down! I'm not The Flash")
+      message.author.send("Slow down! I'm not The Flash.")
+      speedingTicket.add(message.author.id);
+      setTimeout(() => {
+        speedingTicket.delete(message.author.id);
+      }, 8000); // 8 Seconds
       return;
     } else {
       talkedRecently.add(message.author.id);
@@ -288,7 +298,7 @@ client.on("message", (message) => {
       return;
     }
 
-  } else if (message.content.startsWith(prefix + "buzz")){
+  } else if (message.content.startsWith(prefix + "giveticket")){
 
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
@@ -552,7 +562,7 @@ client.on("message", (message) => {
           },
           {
             name: "Citizen of Alaska Commands",
-            value: "**help** - Hello, World\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6-Sided Dice.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
+            value: "**help** - Hello, World\n**botrps** (rock/paper/scissors) - Play Rock Paper Scissors against the Bot\n**rateme** - I'll tell you what a beautiful person you are.\n**marco** - Polo!\n**dice** - Roll a 6, 10, or 12 sided Die.\n**v** - Display version.\n**devteam** - A list of contributors for Sabre Development."
           },
           {
             name: "Other Commands",
@@ -560,7 +570,7 @@ client.on("message", (message) => {
           },
           {
             name: "More Coming Soon",
-            value: "In future updates."
+            value: "This Week: Waterfall Card Game, Level Shop, Announcement System, Summoning of the Shadow Sword, Purge System, Vote System, Spam Mitigation, Mute System"
           }
         ],
         timestamp: new Date(),
