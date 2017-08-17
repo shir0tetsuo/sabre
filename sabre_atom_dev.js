@@ -135,9 +135,8 @@ function readLevel(mess) {
       mess.reply("Is a Developer!")
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
-      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!").then(function (mess)) {
-        mess.react(":SabreCoin:")
-      }
+      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!")
+      mess.react(":SabreCoin:")
     }
   })
 }
