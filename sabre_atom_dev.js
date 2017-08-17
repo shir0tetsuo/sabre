@@ -135,7 +135,7 @@ function readLevel(mess) {
       mess.reply("Is a Developer!")
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
-      mess.reply("Was a participant in the AMBA Laboratories Psychological Center!").then(function (mess) {
+      mess.reply("Was a Secret Participant!").then(function (mess) {
         mess.react("🥇")
         mess.react("😤")
         mess.react("🕶")
