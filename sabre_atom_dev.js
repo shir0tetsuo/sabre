@@ -28,7 +28,7 @@ let forbidden = "Forbidden Command! "
 let talkedRecently = new Set();
 // Point System Related
 let curren = ":tickets:"
-let chatBit = ":page_with_curl:"
+let chatBit = ":eye_in_speech_bubble:"
 ////////////////////////////////////////////////////////////////////////////////
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
@@ -99,78 +99,22 @@ function readLevel(mess) {
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
 client.on("message", message => {
-  // Return Conditions
+  // Return Conditions: Bot and Cooldown
   if (message.author.bot) return;
   if (talkedRecently.has(message.author.id)) return;
+  // Return Conditions: DM or Null Object
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
   checkEntry(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
   if (!message.content.startsWith(prefix)) return;
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
+  ///////////////////////
+  // Add Tickets
   checkTicket(message, 1);
   if (message.content.startsWith(prefix + "level")) {
     readLevel(message);
   }
-  // NEED TO REMOVE vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-/*  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    } else {
-      let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-      if (curLevel > row.level) {
-        row.level = curLevel;
-        sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-        message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-      }
-      sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-    }
-  }).catch(() => {
-    console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-      sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-    });
-  }); */
-/*
-  if (!message.content.startsWith(prefix)) return;
-*/ /*
-  if (message.content.startsWith(prefix + "level")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("Your current level is 0");
-      message.reply(`Your current level is ${row.level} and you have ${row.points}${curren}!`);
-      if (message.author.id === config.perUser.Tony3492) {
-        message.reply("Has earned an achievement for being the first user to hit Level 2!")
-      }
-    });
-  } else
-
-  if (message.content.startsWith(prefix + "points")) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) return message.reply("sadly you do not have any " + curren + " yet!");
-      message.reply(`you currently have ${row.points}${curren}!`);
-    });
-  } else
-
-  if (message.content.startsWith(prefix + "cheat") && message.member.roles.has(config.role.alaska_specialdev)) {
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-      if (!row) {
-        sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-      } else {
-        let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 100));
-        if (curLevel > row.level) {
-          row.level = curLevel;
-          sql.run(`UPDATE scores SET points = ${row.points + 100}, level = ${row.level} WHERE userId = ${message.author.id}`);
-          message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-        }
-        sql.run(`UPDATE scores SET points = ${row.points + 100} WHERE userId = ${message.author.id}`);
-      }
-    }).catch(() => {
-      console.error;
-      sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-        sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-      });
-    });
-  } */
 }); // end client message
 
 ////////////////////////////////////////////////////////////////////////////////
