@@ -366,8 +366,8 @@ client.on("message", (message) => {
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
           if (die === "Twelve") {
-            message.reply("You have earned 3 " + curren + " for scoring high!")
-            checkTicket(message, 3)
+            message.reply("You have earned 5 " + curren + " for scoring high!")
+            checkTicket(message, 5)
           }
           return;
     }
