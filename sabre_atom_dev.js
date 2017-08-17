@@ -365,23 +365,27 @@ client.on("message", (message) => {
       var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" }, { int: "Eleven" }, { int: "Twelve" } ];
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+          if (die === "Twelve") {
+            message.reply("You have earned 3 " + curren + " for scoring high!")
+            checkTicket(message, 3)
+          }
+          return;
     }
     if (diceroll[1] === "10" || diceroll[1] === "ten") {
       var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" }, { int: "Seven" }, { int: "Eight" }, { int: "Nine" }, { int: "Ten" } ];
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+          return;
     } else if (diceroll[1] === "6" || diceroll[1] === "six" || !diceroll[1] ){
       var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
       var die = die[Math.floor(Math.random() * die.length)];
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
+          return;
     } else {
       message.reply("You can choose between ``6``, ``10``, and ``12`` sided Dice! Do ``" + prefix + "dice 10`` or ``" + prefix + "dice twelve``!")
     }
 
-    if (die === "Twelve") {
-      message.reply("You have earned 3 " + curren + " for scoring high!")
-      checkTicket(message, 3)
-    }
+
     return;
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
