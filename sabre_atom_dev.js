@@ -325,12 +325,14 @@ client.on("message", (message) => {
     if (message.mentions.members.first() === undefined) {
       message.reply("You must specify a @user! ``" + prefix + "giveTicket @user (ammount)``")
       return;
+    } else {
+      let mentionedu = message.members.first()
+      let remote = mentionedu.id
     }
     if (data[2] === undefined) {
       message.reply("You must specify an amount to send! ``" + prefix + "giveTicket @user (ammount)``")
       return;
     }
-    let remote = message.members.first().id
     checkEntry(message)
     checkOther(remote)
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
@@ -339,7 +341,7 @@ client.on("message", (message) => {
         sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
           sql.run(`UPDATE scores SET tickets = ${next.tickets + data[2]} WHERE userId = ${remote}`)
         })
-        message.reply(`${data[2]}${curren} was sent to ${message.members.first()}, you have ${row.tickets - data[2]}${curren} left!`)
+        message.reply(`${data[2]}${curren} was sent to ${mentionedu}, you have ${row.tickets - data[2]}${curren} left!`)
         return;
       } else {
         message.reply("You don't have enough!")
