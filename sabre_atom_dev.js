@@ -458,6 +458,7 @@ client.on("message", (message) => {
     let devarg = devhandle[1];
     if (devarg === "unseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (message.mentions.members.first() === undefined) return;
+      message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
     } else if (devarg === "printGuildID") {
       console.log(message.guild.id) // Working
