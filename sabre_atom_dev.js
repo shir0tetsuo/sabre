@@ -137,9 +137,9 @@ function readLevel(mess) {
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
       mess.reply("Was a participant in the AMBA Laboratories Psychological Center!").then(mx => mx.edit({
-        mx.react("🥇")
-        mx.react("😤")
-        mx.react("🕶")
+        react("🥇")
+        react("😤")
+        react("🕶")
       }))
     } // end AMBA achievement
   })
