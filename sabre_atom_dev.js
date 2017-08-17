@@ -100,7 +100,7 @@ function readLevel(mess) {
       },
       author: {
         name: mess.author.tag,
-        icon_url: mess.user.avatarURL
+        icon_url: mess.author.avatarURL
       },
       fields: [
         {
