@@ -63,10 +63,11 @@ function checkEntry(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
+    } else { // Increment chatBits
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + 1} WHERE userId = ${mess.author.id}`);
     }
   }).catch(() => { // Error message generates new table instead
     console.error;
-    console.log("The system recovered from an error.")
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
     })
@@ -77,13 +78,6 @@ function checkTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
-  })
-}
-////////////////////////////////////////////////////////////////////////////////
-function checkChatbit(mess, xval) {
-  if (!xval) var xval = 1
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET tickets = ${row.chatBits + xval} WHERE userId = ${mess.author.id}`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +159,6 @@ client.on("message", message => {
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
   checkEntry(message);
-  checkChatbit(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
   if (!message.content.startsWith(prefix)) return;
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
