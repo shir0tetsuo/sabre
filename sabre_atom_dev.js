@@ -341,11 +341,13 @@ client.on("message", (message) => {
     let amount = data[2]
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
       if (amount <= row.tickets) {
-        sql.run(`UPDATE scores SET tickets = ${row.tickets - amount} WHERE userId = ${message.author.id}`)
+        let newamount = (row.tickets - amount) // deduct amount from tickets
+        sql.run(`UPDATE scores SET tickets = ${newamount} WHERE userId = ${message.author.id}`)
         sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
-          sql.run(`UPDATE scores SET tickets = ${next.tickets + amount} WHERE userId = ${remote}`)
+          let givenamount = (next.tickets + amount)
+          sql.run(`UPDATE scores SET tickets = ${givenamount} WHERE userId = ${remote}`)
         })
-        message.reply(`${amount}${curren} was sent to ${mentionedu}, you have ${row.tickets - amount}${curren} left!`)
+        message.reply(`${amount}${curren} was sent to ${mentionedu}, you have ${newamount}${curren} left!`)
         return;
       } else {
         message.reply("You don't have enough!")
