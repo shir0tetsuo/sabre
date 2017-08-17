@@ -99,7 +99,7 @@ function readLevel(mess) {
         text: client.user.username
       },
       author: {
-        name: mess.member.GuildMember.nickname,
+        name: mess.member.guild.nickname,
         icon_url: mess.author.avatarURL
       },
       fields: [
