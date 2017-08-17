@@ -381,7 +381,7 @@ client.on("message", (message) => {
       console.log(message.author)
     // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){ // whats going on
-      let modRole = message.guild.roles.find("name", "Special Sabre Access") // alternatively "string"
+      let modRole = message.guild.roles.find("name", "Sabre Achievement 1") // alternatively "string"
       console.log(modRole)
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
