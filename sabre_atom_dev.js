@@ -361,10 +361,10 @@ client.on("message", (message) => {
       message.channel.send(forbidden)
       return;
     }
-  //  var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
-  //  var die = die[Math.floor(Math.random() * die.length)];
-    var die = dice.sixsided[Math.floor(Math.random() * dice.sixsided.length)] // may break
-    message.channel.send("Cha-Ching! You rolled a " + die.int + " (" + die.text + ")!")
+    var die = [ { int: "One" }, { int: "Two" }, { int: "Three" }, { int: "Four" }, { int: "Five" }, { int: "Six" } ];
+    var die = die[Math.floor(Math.random() * die.length)];
+  //  var die = dice.sixsided[Math.floor(Math.random() * dice.sixsided.length)] // may break
+    message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   // Developer Commands //////////////////////////// !!! ///////////////////////
