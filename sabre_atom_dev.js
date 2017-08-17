@@ -85,6 +85,7 @@ function checkLevel(mess, xval) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.level + xval} WHERE userId = ${mess.author.id}`)
   })
+  mess.delete()
 }
 ////////////////////////////////////////////////////////////////////////////////
 function readLevel(mess) {
