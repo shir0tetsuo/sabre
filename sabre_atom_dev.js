@@ -74,14 +74,14 @@ function checkEntry(mess) { // Convert message into mess
 }
 ////////////////////////////////////////////////////////////////////////////////
 function checkTicket(mess, xval) {
-  if (!xval) let xval = 1
+  if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
 function checkLevel(mess, xval) {
-  if (!xval) let xval = 1
+  if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.level + xval} WHERE userId = ${mess.author.id}`)
   })
