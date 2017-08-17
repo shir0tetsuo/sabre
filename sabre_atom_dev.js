@@ -136,7 +136,9 @@ function readLevel(mess) {
     }
     if (mess.member.roles.has(config.achievement.alaska_amba_participant)) {
       mess.reply("Was a participant in the AMBA Laboratories Psychological Center!")
-      mess.react(":SabreCoin:")
+      mess.react(":first_place:")
+      mess.react(":triumph:")
+      mess.react(":dark_sunglasses:")
     }
   })
 }
