@@ -334,13 +334,14 @@ client.on("message", (message) => {
     }
     checkEntry(message)
     checkOther(remote)
+    let amount = data[2]
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-      if (data[2] <= row.tickets) {
-        sql.run(`UPDATE scores SET tickets = ${row.tickets - data[2]} WHERE userId = ${message.author.id}`)
+      if (amount <= row.tickets) {
+        sql.run(`UPDATE scores SET tickets = ${row.tickets - amount} WHERE userId = ${message.author.id}`)
         sql.get(`SELECT * FROM scores WHERE userId = "${remote}"`).then(next => {
-          sql.run(`UPDATE scores SET tickets = ${next.tickets + data[2]} WHERE userId = ${remote}`)
+          sql.run(`UPDATE scores SET tickets = ${next.tickets + amount} WHERE userId = ${remote}`)
         })
-        message.reply(`${data[2]}${curren} was sent to ${mentionedu}, you have ${row.tickets - data[2]}${curren} left!`)
+        message.reply(`${amount}${curren} was sent to ${mentionedu}, you have ${row.tickets - amount}${curren} left!`)
         return;
       } else {
         message.reply("You don't have enough!")
