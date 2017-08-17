@@ -456,7 +456,10 @@ client.on("message", (message) => {
   if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
     const devhandle = message.content.split(/\s+/g);
     let devarg = devhandle[1];
-    if (devarg === "printGuildID") {
+    if (devarg === "unseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
+      if (message.mentions.members.first() === undefined) return;
+      sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
+    } else if (devarg === "printGuildID") {
       console.log(message.guild.id) // Working
     // developer links ///////////////////////////////////////////////////////////
     } else if (devarg === "links"){
@@ -597,6 +600,10 @@ client.on("message", (message) => {
             {
               name: "Special Developer Commands",
               value: "sabrestatus, messagedata"
+            },
+            {
+              name: "Sabre Score System (Special Sabre Access)",
+              value: "unseedT (Are you SURE?)"
             }
           ]
         }})
