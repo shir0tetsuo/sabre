@@ -359,23 +359,26 @@ client.on("message", (message) => {
   } else if (message.content.startsWith(prefix + "sshop")){
     const sshop = message.content.split(/\s+/g);
     scoreInit(message);
+    let eticketmsg = "Error"
+    let ebytemsg = "Error"
+    let levelshop = "Error"
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets > 250) {
-          let eticketmsg = "You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
+          var eticketmsg = "You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
         } else {
-          let eticketmsg = "~~You don't have enough tickets!~~"
+          var eticketmsg = "~~You don't have enough tickets!~~"
         }
         if (row.chatBits > 1024) {
-          let ebytemsg = "You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
+          var ebytemsg = "You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
         } else {
-          let ebytemsg = "~~You don't have enough bytes!~~"
+          var ebytemsg = "~~You don't have enough bytes!~~"
         }
         if (row.level === 0) {
-          let levelshop = "You need to buy a level first!"
+          var levelshop = "You need to buy a level first!"
         }
         if (row.level >= 1) {
-          let levelshop = "Coming Soon!"
+          var levelshop = "Coming Soon!"
         }
         const embed = new Discord.RichEmbed()
             .setTitle('Sabre Level Shop!')
