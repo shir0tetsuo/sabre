@@ -365,17 +365,17 @@ client.on("message", (message) => {
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets > 250) {
-          var eticketmsg = "You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
+          var eticketmsg = ":unlock: You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
         } else {
-          var eticketmsg = "~~You don't have enough tickets!~~"
+          var eticketmsg = ":lock: ~~You don't have enough tickets!~~"
         }
         if (row.chatBits > 1024) {
-          var ebytemsg = "You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
+          var ebytemsg = ":unlock: You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
         } else {
-          var ebytemsg = "~~You don't have enough bytes!~~"
+          var ebytemsg = ":lock: ~~You don't have enough bytes!~~"
         }
         if (row.level === 0) {
-          var levelshop = "You need to buy a level first!"
+          var levelshop = ":lock: You need to buy a level first!"
         }
         if (row.level >= 1) {
           var levelshop = "Coming Soon!"
