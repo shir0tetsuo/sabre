@@ -596,6 +596,9 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
       sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
       return;
+    } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
+      message.reply("``Developer Command was Run. This command should not be used again.``")
+      sql.run("CREATE TABLE IF NOT EXISTS makeitrain (tickets INTEGER) VALUES (?)", [100]);
     } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
       if (message.mentions.members.first() === undefined) return;
       sql.get(`SELECT * FROM scores WHERE userId ="${message.mentions.members.first().id}"`).then(row => {
