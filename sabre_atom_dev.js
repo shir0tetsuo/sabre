@@ -116,6 +116,12 @@ function scoreUpBits(mess, xval) {
     sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval} WHERE userId = ${mess.author.id}`)
   })
 }
+function scoreDownBits(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval} WHERE userId = ${mess.author.id}`)
+  })
+}
 // uniq2
 ////////////////////////////////////////////////////////////////////////////////
 function scoreDisplay(mess) {
@@ -394,7 +400,69 @@ client.on("message", (message) => {
         message.author.send({ embed });
       }); // end row data definition
     } // end Sabre Shop help page
-
+    if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "tickets") {
+      scoreInit(message);
+      sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+        if (row.tickets >= 250) {
+          message.channel.send({embed: {
+            color: 0xFFBE00,
+            timestamp: new Date(),
+            footer: {
+              text: "Level Up!"
+            },
+            author: {
+              name: message.member.displayName,
+              icon_url: message.member.avatarURL
+            },
+            fields: [
+              {
+                name: "Cha-Ching!",
+                value: `250${curren} was used. ${message.member.displayName} Levelled Up!`
+              },
+              {
+                name: "\u200b",
+                value: `You are now Level ${row.level*1 + 1}! Congradulations!`
+              }
+            ]
+          }})
+          scoreUpLevel(message, 1)
+          scoreDownTicket(message, 250)
+        } else {
+          message.reply("You don't have enough " + curren + "!")
+        }
+      }) // end buy level tickets / row transfer
+    } else if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "bytes") {
+      scoreInit(message);
+      sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+        if (row.chatBits >= 1024) {
+          message.channel.send({embed: {
+            color: 0xFFBE00,
+            timestamp: new Date(),
+            footer: {
+              text: "Level Up!"
+            },
+            author: {
+              name: message.member.displayName,
+              icon_url: message.member.avatarURL
+            },
+            fields: [
+              {
+                name: "Cha-Ching!",
+                value: `1024${chatBit} was used. ${message.member.displayName} Levelled Up!`
+              },
+              {
+                name: "\u200b",
+                value: `You are now Level ${row.level*1 + 1}! Congradulations!`
+              }
+            ]
+          }})
+          scoreUpLevel(message, 1)
+          scoreDownBits(message, 1024)
+        } else {
+          message.reply("You don't have enough " + chatBit + "!")
+        }
+      }) // end row data transfer
+    } // end buy level bytes
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
