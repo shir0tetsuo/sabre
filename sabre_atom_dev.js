@@ -46,8 +46,8 @@ client.on("ready", () => {
   console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v);
   console.log("INIT: " + Date())
   console.log(systemname, botname, client.guilds.size + " Servers Active.")
-  //client.user.setGame("With " + client.guilds.size + " Servers, v" + config.v)
   // Above no longer works as of Aug 16 Discord update
+  // May modify default settings to disinclude server size
   client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers. v${config.v}`, type: 0}})
   client.user.setStatus("dnd") // online/offline/dnd/invisible
 });
@@ -60,7 +60,7 @@ client.on("ready", () => {
 // Let everything else do the comparisons.
 // userId, tickets, level, chatBits
 // uniq1
-function checkEntry(mess) { // Convert message into mess
+function scoreInit(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
@@ -76,7 +76,7 @@ function checkEntry(mess) { // Convert message into mess
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
-function checkOther(mess) { // Convert message into mess
+function scoreInitByID(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess, 1, 0, 1]);
@@ -90,27 +90,27 @@ function checkOther(mess) { // Convert message into mess
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
-function checkTicket(mess, xval) {
+function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
   })
 }
-function uncheckTicket(mess, xval) {
+function scoreDownTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET tickets = ${row.tickets - xval} WHERE userId = ${mess.author.id}`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
-function checkLevel(mess, xval) {
+function scoreUpLevel(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET level = ${row.level + xval} WHERE userId = ${mess.author.id}`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
-function checkBits(mess, xval) {
+function scoreUpBits(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval} WHERE userId = ${mess.author.id}`)
@@ -118,7 +118,7 @@ function checkBits(mess, xval) {
 }
 // uniq2
 ////////////////////////////////////////////////////////////////////////////////
-function readLevel(mess) {
+function scoreDisplay(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
     mess.reply("Calculating!").then(m => m.edit({embed: {
@@ -187,16 +187,16 @@ client.on("message", message => {
   // Return Conditions: DM or Null Object
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
-  checkEntry(message);
-  checkBits(message);
+  scoreInit(message);
+  scoreUpBits(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
   if (!message.content.startsWith(prefix)) return;
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
   ///////////////////////
   // Add Tickets
-  checkTicket(message, 1);
+  scoreUpTicket(message, 1);
   if (message.content.startsWith(prefix + "level")) {
-    readLevel(message);
+    scoreDisplay(message);
   }
 }); // end client message
 
@@ -263,8 +263,8 @@ client.on("message", (message) => {
     // talkedRecently event, if message.author.id exists in set return.
     if (talkedRecently.has(message.author.id)) {
       if (speedingTicket.has(message.author.id)) {
-        checkEntry(message);
-        uncheckTicket(message, 2);
+        scoreInit(message);
+        scoreDownTicket(message, 2);
         console.log(message.author.tag, "was given a speeding ticket in", message.guild.name, message.channel.name)
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
@@ -336,8 +336,8 @@ client.on("message", (message) => {
       message.reply("You can't send tickets to yourself!")
       return;
     }
-    checkEntry(message)
-    checkOther(remote)
+    scoreInit(message)
+    scoreInitByID(remote)
     let amount = data[2]
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
       if (amount <= row.tickets) {
@@ -431,7 +431,7 @@ client.on("message", (message) => {
           message.channel.send("Cha-Ching! You rolled a " + die.int + "!")
           if (die.int === 12) {
             message.reply("You have earned 5 " + curren + " for scoring high!")
-            checkTicket(message, 5)
+            scoreUpTicket(message, 5)
           }
           return;
     }
@@ -577,21 +577,21 @@ client.on("message", (message) => {
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
-        checkTicket(message, 2)
+        scoreUpTicket(message, 2)
       }
     } else if (rpsmsg === "paper") {
       if (rpsmat.ans === "scissors") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
-        checkTicket(message, 2)
+        scoreUpTicket(message, 2)
       }
     } else if (rpsmsg === "scissors") {
       if (rpsmat.ans === "rock") { // bot wins
         message.channel.send(beatprefix + rpsmat.ans + " " + message.author)
       } else { // bot loses
         message.channel.send(defeatprefix + rpsmat.ans + " " + message.author + gainrpsticket)
-        checkTicket(message, 2)
+        scoreUpTicket(message, 2)
       }
     } else {
       message.channel.send("Sorry, " + message.author + ", your argument should be ``rock``, ``paper``, or ``scissors``.")
