@@ -256,6 +256,7 @@ client.on("guildMemberRemove", (member) => {
 // Handlers; client.on("message", (message)) => {...} else if {...} ...);
 // This is where the prefixed commands begin.
 ////////////////////////////////////////////////////////////////////////////////
+// This is the main cage.
 //
 client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
@@ -354,6 +355,42 @@ client.on("message", (message) => {
         return;
       }
     })
+  // uniq6 Level Shop //////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + "sshop")){
+    const sshop = message.content.split(/\s+/g);
+    scoreInit(message);
+    if (sshop[1] === undefined) {
+      sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+        if (row.tickets > 250) {
+          let eticketmsg = "You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
+        } else {
+          let eticketmsg = "~~You don't have enough tickets!~~"
+        }
+        if (row.chatBits > 1024) {
+          let ebytemsg = "You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
+        } else {
+          let ebytemsg = "~~You don't have enough bytes!~~"
+        }
+        if (row.level === 0) {
+          let levelshop = "You need to buy a level first!"
+        }
+        if (row.level >= 1) {
+          let levelshop = "Coming Soon!"
+        }
+        const embed = new Discord.RichEmbed()
+            .setTitle('Sabre Level Shop!')
+            .setAuthor(client.user.username)
+            .setColor(0x7386FF)
+            .setDescription(`Level: ${row.level}, ${curren}: ${row.tickets}, ${chatBit}: ${row.chatBits}`)
+            .setFooter(`Sabre Shop Menu`)
+            .setTimestamp()
+            .setThumbnail('https://i.imgur.com/OeRogNu.gif')
+            .addField(`:small_orange_diamond: Level Price: 250 Tickets or 1024 Bytes`, `${eticketmsg}\n${ebytemsg}`)
+            .addField(`Level ${row.level} Shop`, `${levelshop}`)
+        message.author.send({ embed });
+      }); // end row data definition
+    } // end Sabre Shop help page
+
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
@@ -362,9 +399,6 @@ client.on("message", (message) => {
       var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
       message.channel.send("Okay okay. Here's a joke. " + joke.text)
     }
-  // PING //////////////////////////////////////////////////////////////////////
-
-    //console.log(m.createdTimestamp, message.createdTimestamp)
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
     if (message.guild.id === config.guild.ALASKA) {
