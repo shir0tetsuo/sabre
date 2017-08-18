@@ -381,14 +381,15 @@ client.on("message", (message) => {
           var levelshop = "Coming Soon!"
         }
         const embed = new Discord.RichEmbed()
-            .setTitle('Sabre Level Shop!')
-            .setAuthor(client.user.username)
+            .setTitle(':left_luggage: Sabre Level Shop!')
+            .setAuthor(message.member.displayName)
             .setColor(0x7386FF)
             .setDescription(`Level: ${row.level}, ${curren}: ${row.tickets}, ${chatBit}: ${row.chatBits}`)
             .setFooter(`Sabre Shop Menu`)
             .setTimestamp()
-            .setThumbnail('https://i.imgur.com/OeRogNu.gif')
-            .addField(`:small_orange_diamond: Level Price: 250 Tickets or 1024 Bytes`, `${eticketmsg}\n${ebytemsg}`)
+            .setThumbnail('https://i.imgur.com/a/QrINH.png')
+            .addField(`:large_orange_diamond: Level Price: **250 Tickets** or **1024 Bytes**`, `${eticketmsg}\n${ebytemsg}`)
+            .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
         message.author.send({ embed });
       }); // end row data definition
