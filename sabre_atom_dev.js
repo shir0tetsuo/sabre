@@ -361,9 +361,12 @@ client.on("message", (message) => {
         return;
       }
     })
+  //////////////////////////////////////////////////////////////////////////////
   // uniq6 Level Shop //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "sshop")){
     const sshop = message.content.split(/\s+/g);
+    /////////// MAIN SHOP CONTENT //////////////////////////////////////////////
     scoreInit(message);
     let eticketmsg = "Error"
     let ebytemsg = "Error"
@@ -400,6 +403,9 @@ client.on("message", (message) => {
         message.author.send({ embed });
       }); // end row data definition
     } // end Sabre Shop help page
+    ////////////////////////////////////////////////////////////////////////////
+    ///////// PURCHASE FOR LEVELS HANDLERS /////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "tickets") {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
@@ -412,7 +418,7 @@ client.on("message", (message) => {
             },
             author: {
               name: message.member.displayName,
-              icon_url: message.member.avatarURL
+              icon_url: message.author.avatarURL
             },
             fields: [
               {
@@ -431,6 +437,8 @@ client.on("message", (message) => {
           message.reply("You don't have enough " + curren + "!")
         }
       }) // end buy level tickets / row transfer
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////// BUY WITH BYTES //////////////////////////
     } else if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "bytes") {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
@@ -443,7 +451,7 @@ client.on("message", (message) => {
             },
             author: {
               name: message.member.displayName,
-              icon_url: message.member.avatarURL
+              icon_url: message.author.avatarURL
             },
             fields: [
               {
