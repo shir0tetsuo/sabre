@@ -387,7 +387,7 @@ client.on("message", (message) => {
             .setDescription(`Level: ${row.level}, ${curren}: ${row.tickets}, ${chatBit}: ${row.chatBits}`)
             .setFooter(`Sabre Shop Menu`)
             .setTimestamp()
-            .setThumbnail('https://i.imgur.com/a/QrINH.png')
+            .setThumbnail('https://i.imgur.com/8ZBnvSt.png')
             .addField(`:large_orange_diamond: Level Price: **250 Tickets** or **1024 Bytes**`, `${eticketmsg}\n${ebytemsg}`)
             .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
