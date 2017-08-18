@@ -411,7 +411,7 @@ client.on("message", (message) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 250) {
           message.channel.send({embed: {
-            color: 0xFFBE00,
+            color: 0x3FFF6D,
             timestamp: new Date(),
             footer: {
               text: "Level Up!"
@@ -444,7 +444,7 @@ client.on("message", (message) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.chatBits >= 1024) {
           message.channel.send({embed: {
-            color: 0xFFBE00,
+            color: 0x3FFF6D,
             timestamp: new Date(),
             footer: {
               text: "Level Up!"
@@ -770,7 +770,7 @@ client.on("message", (message) => {
           },
           {
             name: "Other Commands",
-            value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!"
+            value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!\n**sshop** - Sabre Level Shop!"
           },
           {
             name: "More Coming Soon",
