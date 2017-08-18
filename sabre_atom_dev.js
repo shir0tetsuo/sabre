@@ -584,6 +584,17 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run. Seeded user with " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
       return;
+    } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
+      if (devhandle[3] === undefined) return;
+      let seed = devhandle[3]
+      message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
+      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
+      return;
+    } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
+      let seed = devhandle[3]
+      message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
+      sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
+      return;
     } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
       if (message.mentions.members.first() === undefined) return;
       sql.get(`SELECT * FROM scores WHERE userId ="${message.mentions.members.first().id}"`).then(row => {
@@ -745,7 +756,7 @@ client.on("message", (message) => {
             },
             {
               name: "Sabre Score System (Special Sabre Access)",
-              value: "unseedT (Are you SURE?), seedT"
+              value: "unseedT @user (Are you SURE?), seedT, selfseedT, selfseedL"
             }
           ]
         }})
