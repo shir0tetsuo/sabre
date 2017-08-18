@@ -731,12 +731,12 @@ client.on("message", (message) => {
         fields: [
           {
             name: ":bulb: Concepting",
-            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar,\nEmma```",
+            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar,\nEmma,\nChAirborne```",
             inline: true
           },
           {
             name: ":rocket: Function Testing",
-            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar```" + "and Alaska Discord",
+            value: "```ShadowSword,\nDr Booyah,\nDan,\nRaymond,\nNick,\nMimystar,\nParadise,\nTony```" + "and Alaska Discord",
             inline: true
           },
           {
