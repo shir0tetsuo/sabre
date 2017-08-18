@@ -585,13 +585,14 @@ client.on("message", (message) => {
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
       return;
     } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
-      if (devhandle[3] === undefined) return;
-      let seed = devhandle[3]
+      if (devhandle[2] === undefined) return;
+      let seed = devhandle[2]
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
       return;
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
-      let seed = devhandle[3]
+      if (devhandle[2] === undefined) return;
+      let seed = devhandle[2]
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
       sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
       return;
