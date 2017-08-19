@@ -472,7 +472,7 @@ client.on("message", (message) => {
       }) // end row data transfer
     } // end buy level bytes
   /// MAKE IT RAIN /////////////////////////////////////////////////////////////
-  } else if (message.content.startsWith(prefix + makeitrain)) {
+  } else if (message.content.startsWith(prefix + "makeitrain")) {
     scoreInit(message);
     if (message.mentions.members.first() === undefined) {
       message.reply("You need to @mention someone!")
