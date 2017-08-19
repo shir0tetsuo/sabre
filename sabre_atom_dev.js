@@ -8,6 +8,11 @@ console.log("Initialization.")
 // Constraints /////////////////////////////////////////////////////////////////
 const Discord = require("discord.js"); // Initialize discord wrappers
 const client = new Discord.Client(); // New client authorization
+// Chalk
+const chalk = require ("chalk");
+const chalk_err = chalk.bold.red;
+const chalk_inf = chalk.blue;
+const chalk_dat = chalk.green;
 // Variable and String Constraints /////////////////////////////////////////////
 const config = require("./sabre_init.json") // INIT., Basic Configuration
 const keys = require("./token.json") // Secret Keys
@@ -43,9 +48,9 @@ client.login(keys.token)
 ////////////////////////////////////////////////////////////////////////////////
 // Check if system is ready. ///////////////////////////////////////////////////
 client.on("ready", () => {
-  console.log("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v);
-  console.log("INIT: " + Date())
-  console.log(systemname, botname, client.guilds.size + " Servers Active.")
+  console.log(chalk_inf("System Ready! PREFIX: " + prefix + " SOFTWAREVERSION: " + config.v));
+  console.log(chalk_dat("INIT: " + Date()));
+  console.log(chalk_dat(systemname, botname, client.guilds.size + " Servers Active."));
   // Above no longer works as of Aug 16 Discord update
   // May modify default settings to disinclude server size
   client.user.setPresence({ game: { name: `With ${client.guilds.size} Servers. v${config.v}`, type: 0}})
