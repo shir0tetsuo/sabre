@@ -11,7 +11,7 @@ const client = new Discord.Client(); // New client authorization
 // Chalk
 const chalk = require ("chalk");
 const chalk_err = chalk.bold.red;
-const chalk_inf = chalk.blue;
+const chalk_inf = chalk.bgBlue;
 const chalk_dat = chalk.green;
 // Variable and String Constraints /////////////////////////////////////////////
 const config = require("./sabre_init.json") // INIT., Basic Configuration
