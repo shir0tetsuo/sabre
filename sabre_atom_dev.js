@@ -9,7 +9,7 @@ const chalk_err = chalk.bold.red;
 const chalk_inf = chalk.bgBlue;
 const chalk_dat = chalk.green;
 ////////////////////////////////////////////////////////////////////////////////
-console.log(chalk.inverse("Initialization."))
+console.log(chalk.bold.red("Initialization."))
 // Constraints /////////////////////////////////////////////////////////////////
 const Discord = require("discord.js"); // Initialize discord wrappers
 const client = new Discord.Client(); // New client authorization
@@ -74,7 +74,7 @@ function scoreInit(mess) { // Convert message into mess
     }*/
   }).catch(() => { // Error message generates new table instead
     console.error;
-    console.log("The system recovered from an error.")
+    console.log(chalk_err("The system recovered from an error."))
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
     })
@@ -88,7 +88,7 @@ function scoreInitByID(mess) { // Convert message into mess
     }
   }).catch(() => { // Error message generates new table instead
     console.error;
-    console.log("The system recovered from an error.")
+    console.log(chalk_err("The system recovered from an error."))
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess, 1, 0, 1]);
     })
@@ -184,7 +184,7 @@ function scoreDisplay(mess) {
         mess.react("🌚")
         mess.react("🎲")
       }).catch(function() {
-        console.log("Bug at uu3")
+        console.log(chalk_err("Bug at uu3"))
       }); // end catch
     } // end AMBA achievement
   })
@@ -224,7 +224,7 @@ client.on("guildMemberAdd", (member) => {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
   // Would become member.guild.defaultChannel.send()
-  console.log(member.user.tag + " Joined the server " + member.guild.name)
+  console.log(chalk_dat(member.user.tag + " Joined the server " + member.guild.name))
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA3F700,
     timestamp: new Date(),
@@ -248,7 +248,7 @@ client.on("guildMemberRemove", (member) => {
   } else if (alaska_guild === undefined) {
     var right_guild = config.chan.securitybot
   } // Public bot would need default channels
-  console.log(member.user.tag + " Parted the server " + member.guild.name)
+  console.log(chalk.inverse(member.user.tag + " Parted the server " + member.guild.name))
   member.guild.channels.get(right_guild).send({embed: {
     color: 0xA7A7A5,
     timestamp: new Date(),
@@ -277,10 +277,10 @@ client.on("message", (message) => {
       if (speedingTicket.has(message.author.id)) {
         scoreInit(message);
         scoreDownTicket(message, 2);
-        console.log(message.author.tag, "was given a speeding ticket in", message.guild.name, message.channel.name)
+        console.log(chalk_err(message.author.tag, "was given a speeding ticket in", message.guild.name, message.channel.name))
         message.author.send("You have been given a Speeding Ticket! You have been deducted 2" + curren)
       }
-      console.log(message.author.id, message.author.tag, "is being limtied.")
+      console.log(chalk.yellow(message.author.id, message.author.tag, "is being limtied."))
       message.author.send("Slow down! I'm not The Flash.")
       speedingTicket.add(message.author.id);
       setTimeout(() => {
@@ -488,9 +488,9 @@ client.on("message", (message) => {
       return;
     }
     var winner = Math.random()
-    console.log(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100))
+    console.log(chalk_inf(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100)))
     if (winner < 0.03) {
-      console.log("Somebody won the jackpot!", message.guild.name, message.channel.name)
+      console.log(chalk_dat("Somebody won the jackpot!", message.guild.name, message.channel.name))
       sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
         message.channel.send(message.mentions.members.first() + " Won a pile of " + jackpot.tickets + curren + "!!!!!!!!!!!")
         sql.get(`SELECT * FROM scores WHERE userId = "${message.mentions.members.first().id}"`).then(row => {
@@ -573,9 +573,9 @@ client.on("message", (message) => {
           }
         ]
       }})
-      console.log("Verbose: umath is equal-to " + umath)
+      console.log(chalk.yellow("Verbose: umath is equal-to " + umath))
     } else { message.channel.send("Fish out of water!") // Ray's Mod
-      console.log("Verbose: umath is equal-to " + umath)} // 5 percent chance
+      console.log(chalk_err("Verbose: umath is equal-to " + umath))} // 5 percent chance
   // dice //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "dice")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
@@ -656,14 +656,14 @@ client.on("message", (message) => {
         }
       }).catch(() => { // Error message generates new table instead
         console.error;
-        console.log("The system recovered from an error.")
+        console.log(chalk_err("The system recovered from an error."))
         sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
           sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [message.mentions.members.first().id, 1, 0, 1]);
         })
       })
       return;
     } else if (devarg === "printGuildID") {
-      console.log(message.guild.id) // Working
+      console.log(chalk_dat(message.guild.id)) // Working
     // developer links ///////////////////////////////////////////////////////////
     } else if (devarg === "links"){
       message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
@@ -674,14 +674,14 @@ client.on("message", (message) => {
     } else if (devarg === "chanID") {
       message.guild.channels.find("name", "security-bot") // Doesn't work accurately
       // This is replaced with Developer Mode in Discord
-      console.log(message.channel)
+      console.log(chalk_dat(message.channel))
       message.author.send(ddstc)
     // dev mention test //////////////////////////////////////////////////////////
     } else if (devarg === "mention") {
       let firstmention = message.mentions.members.first()
       message.channel.send("Hello, " + firstmention + "!")
       message.author.send(ddstc)
-      console.log(firstmention.id)
+      console.log(chalk_dat(firstmention.id))
     // dev checkOwnership ////////////////////////////////////////////////////////
     } else if (devarg === "checkOwnership") {
       if(message.author.id !== config.perUser.ownerID) {
@@ -695,11 +695,11 @@ client.on("message", (message) => {
     // dev messagedata ///////////////////////////////////////////////////////////
     } else if (devarg === "messagedata"){
       message.author.send(ddstc)
-      console.log(message.author)
+      console.log(chalk_dat(message.author))
     // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){ // whats going on
       let modRole = message.guild.roles.find("name", "Sabre Achievement 1") // alternatively "string"
-      console.log(modRole)
+      console.log(chalk_dat(modRole))
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
         color: 0xFF0000,
@@ -741,7 +741,7 @@ client.on("message", (message) => {
     var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)]; // rpsmat.ans
     const rpssplit = message.content.split(/\s+/g); // Separate strings and don't fall apart / break
     let rpsmsg = rpssplit[1]; // The second string in the content is the analysis
-    console.log("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans) // Verbose
+    console.log(chalk_inf("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans)) // Verbose
     var beatprefix = "Ha! I beat you with " // bot wins
     var defeatprefix = "Nooo! My answer was " // bot loses
     var gainrpsticket = " You've earned 2 " + curren
@@ -778,7 +778,7 @@ client.on("message", (message) => {
       return;
     }
     //console.log(message.content);
-    console.log(message)
+    console.log(chalk_dat(message))
     message.channel.send(ddstc)
   // Print version.
   } else if (message.content.startsWith(prefix + "v")) {
