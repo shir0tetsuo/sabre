@@ -615,6 +615,7 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 } else if (message.content.startsWith(prefix + "xdev")) {
+  console.log(chalk_err(message.member.displayName, "attempted to use developer commands", message.guild.name, message.channel.name, message.content))
   if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
     const devhandle = message.content.split(/\s+/g);
     let devarg = devhandle[1];
