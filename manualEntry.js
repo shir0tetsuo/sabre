@@ -6,10 +6,10 @@ let newLv = 1
 let newTk = 1
 let newCb = 1
 sql.open("./score.sqlite");
-sql.get(`SELECT * FROM scores WHERE userId = "${userId}"`).then(row => {
+/*sql.get(`SELECT * FROM scores WHERE userId = "${userId}"`).then(row => {
   console.log(chalk.yellow(row.userId))
   console.log(chalk.red(`LV: ${row.level}, TK: ${row.tickets}, CB: ${row.chatBits}`))
-})
+})*/
 ////////////////////////////////////////////////////////////////////////////////
 // Uncomment lines below to activate
 //sql.run(`UPDATE scores SET level = ${newLv} WHERE userId = "${userId}"`)
