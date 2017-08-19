@@ -34,7 +34,7 @@ let chatBit = ":eye_in_speech_bubble:"
 // Executables /////////////////////////////////////////////////////////////////
 var exec = require('child_process').exec;
 // Require sqlite and database
-const sql = require("sqlite");
+const sql = require("sqlite3");
 sql.open("./score.sqlite");
 // 0.3.4.0 Notes: Shop for Level System (ASYNC/AWAIT), Check for Roles,
 // add a "Message Counter" system BUT LIMIT IT!
