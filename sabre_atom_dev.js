@@ -373,12 +373,12 @@ client.on("message", (message) => {
     let levelshop = "Error"
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-        if (row.tickets > 250) {
+        if (row.tickets >= 250) {
           var eticketmsg = ":unlock: You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
         } else {
           var eticketmsg = ":lock: ~~You don't have enough tickets!~~"
         }
-        if (row.chatBits > 1024) {
+        if (row.chatBits >= 1024) {
           var ebytemsg = ":unlock: You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
         } else {
           var ebytemsg = ":lock: ~~You don't have enough bytes!~~"
@@ -471,6 +471,33 @@ client.on("message", (message) => {
         }
       }) // end row data transfer
     } // end buy level bytes
+  /// MAKE IT RAIN /////////////////////////////////////////////////////////////
+  } else if (message.content.startsWith(prefix + makeitrain)) {
+    scoreInit(message);
+    if (message.mentions.members.first() === undefined) {
+      message.reply("You need to @mention someone!")
+      return;
+    }
+    if (message.mentions.members.first().id === message.author.id) {
+      message.reply("You can't use this on yourself!")
+      return;
+    }
+    var winner = Math.random()
+    if (winner < 0.003) {
+      message.reply("Ohh boy! Somebody would have been happy if this was finished.")
+    } else {
+      sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+        if (row.tickets >= 5) {
+          sql.get(`SELECT * FROM makeitrain WHERE place = "here"`).then(jackpot => {
+              message.reply("put 5 " + curren + " into the prize pile. The pile is " + jackpot.tickets + curren + "high!")
+              scoreDownTicket(message, 5);
+          })
+        } else {
+          message.reply("You don't have enough tickets!")
+          return;
+        }
+      }) // end row
+    }
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
@@ -598,8 +625,8 @@ client.on("message", (message) => {
       return;
     } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
       message.reply("``Developer Command was Run. This command should not be used again.``")
-      sql.run("CREATE TABLE IF NOT EXISTS makeitrain (tickets INTEGER)").then(() => {
-        sql.run("INSERT INTO makeitrain (tickets) VALUES (?)", [100]);
+      sql.run("CREATE TABLE IF NOT EXISTS makeitrain (place TEXT, tickets INTEGER)").then(() => {
+        sql.run("INSERT INTO makeitrain (place, tickets) VALUES (?, ?)", ["here", 100]);
       })
     } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
       if (message.mentions.members.first() === undefined) return;
