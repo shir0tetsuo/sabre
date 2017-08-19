@@ -8,6 +8,8 @@ const chalk = require ("chalk");
 const chalk_err = chalk.bold.red;
 const chalk_inf = chalk.bgBlue;
 const chalk_dat = chalk.green;
+// Chalk-Animation
+const chalkAnimation = require('chalk-animation');
 ////////////////////////////////////////////////////////////////////////////////
 console.log(chalk.bold.red("Initialization."))
 // Constraints /////////////////////////////////////////////////////////////////
@@ -618,6 +620,10 @@ client.on("message", (message) => {
   console.log(chalk_err(message.member.displayName, "dev command detected", message.guild.name, message.channel.name, message.content))
   if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
     const devhandle = message.content.split(/\s+/g);
+//uniq7
+    if (devhandle[1].has("prototype")) {
+      chalkAnimation.pulse(`warning`)
+    }
     let devarg = devhandle[1];
     if (devarg === "unseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (message.mentions.members.first() === undefined) return;
