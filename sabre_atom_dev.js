@@ -488,7 +488,7 @@ client.on("message", (message) => {
     } else {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 5) {
-          sql.get(`SELECT * FROM makeitrain WHERE place = "here"`).then(jackpot => {
+          sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
               message.reply("put 5 " + curren + " into the prize pile. The pile is " + jackpot.tickets + curren + "high!")
               scoreDownTicket(message, 5);
           })
@@ -625,8 +625,8 @@ client.on("message", (message) => {
       return;
     } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
       message.reply("``Developer Command was Run. This command should not be used again.``")
-      sql.run("CREATE TABLE IF NOT EXISTS makeitrain (place TEXT, tickets INTEGER)").then(() => {
-        sql.run("INSERT INTO makeitrain (place, tickets) VALUES (?, ?)", ["here", 100]);
+      sql.run("CREATE TABLE IF NOT EXISTS makeitjacky (place TEXT, tickets INTEGER)").then(() => {
+        sql.run("INSERT INTO makeitjacky (place, tickets) VALUES (?, ?)", ["here", 100]);
       })
     } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
       if (message.mentions.members.first() === undefined) return;
