@@ -3,16 +3,16 @@
 // Forewarning: Functions that require external execution are run specifically
 // by the developer's system. Custom commands have been created in order to
 // handle advanced scripting requests.
-////////////////////////////////////////////////////////////////////////////////
-console.log("Initialization.")
-// Constraints /////////////////////////////////////////////////////////////////
-const Discord = require("discord.js"); // Initialize discord wrappers
-const client = new Discord.Client(); // New client authorization
 // Chalk
 const chalk = require ("chalk");
 const chalk_err = chalk.bold.red;
 const chalk_inf = chalk.bgBlue;
 const chalk_dat = chalk.green;
+////////////////////////////////////////////////////////////////////////////////
+console.log(chalk.inverse("Initialization."))
+// Constraints /////////////////////////////////////////////////////////////////
+const Discord = require("discord.js"); // Initialize discord wrappers
+const client = new Discord.Client(); // New client authorization
 // Variable and String Constraints /////////////////////////////////////////////
 const config = require("./sabre_init.json") // INIT., Basic Configuration
 const keys = require("./token.json") // Secret Keys
