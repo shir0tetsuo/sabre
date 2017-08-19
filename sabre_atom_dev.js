@@ -438,7 +438,7 @@ client.on("message", (message) => {
           }})
           scoreUpLevel(message, 1)
           scoreDownTicket(message, 250)
-          console.log(chalk.bgYellow(message.member.displayName, "levelled up using tickets"))
+          console.log(chalk.bgGreen(message.member.displayName, "levelled up using tickets"))
         } else {
           message.reply("You don't have enough " + curren + "!")
         }
@@ -472,7 +472,7 @@ client.on("message", (message) => {
           }})
           scoreUpLevel(message, 1)
           scoreDownBits(message, 1024)
-          console.log(chalk.bgYellow(message.member.displayName, "levelled up using Bytes"))
+          console.log(chalk.bgGreen(message.member.displayName, "levelled up using Bytes"))
         } else {
           message.reply("You don't have enough " + chatBit + "!")
         }
@@ -490,7 +490,7 @@ client.on("message", (message) => {
       return;
     }
     var winner = Math.random()
-    console.log(chalk.bgCyan(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100)))
+    console.log(chalk.bgGreen(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100)))
     if (winner < 0.03) {
       console.log(chalk_dat("Somebody won the jackpot!", message.guild.name, message.channel.name))
       sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
