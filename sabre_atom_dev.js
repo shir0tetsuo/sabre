@@ -741,7 +741,7 @@ client.on("message", (message) => {
     var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)]; // rpsmat.ans
     const rpssplit = message.content.split(/\s+/g); // Separate strings and don't fall apart / break
     let rpsmsg = rpssplit[1]; // The second string in the content is the analysis
-    console.log(chalk_inf("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans)) // Verbose
+    console.log(chalk.magenta("botrps Player-System: " + message.author.tag + " " + rpsmsg + " " + rpsmat.ans)) // Verbose
     var beatprefix = "Ha! I beat you with " // bot wins
     var defeatprefix = "Nooo! My answer was " // bot loses
     var gainrpsticket = " You've earned 2 " + curren
