@@ -663,7 +663,7 @@ client.on("message", (message) => {
       })
       return;
     } else if (devarg === "printGuildID") {
-      console.log(chalk_dat(message.guild.id)) // Working
+      console.log(message.guild.id) // Working
     // developer links ///////////////////////////////////////////////////////////
     } else if (devarg === "links"){
       message.channel.send("``GITHUB:`` https://github.com/shir0tetsuo/sabre - ``TRELLO:`` https://trello.com/b/7UjAWlS5/sabre-development")
@@ -674,14 +674,14 @@ client.on("message", (message) => {
     } else if (devarg === "chanID") {
       message.guild.channels.find("name", "security-bot") // Doesn't work accurately
       // This is replaced with Developer Mode in Discord
-      console.log(chalk_dat(message.channel))
+      console.log(message.channel)
       message.author.send(ddstc)
     // dev mention test //////////////////////////////////////////////////////////
-    } else if (devarg === "mention") {
+    } else if (devarg === "mention") { // can also be used to obtain user IDs
       let firstmention = message.mentions.members.first()
       message.channel.send("Hello, " + firstmention + "!")
       message.author.send(ddstc)
-      console.log(chalk_dat(firstmention.id))
+      console.log(firstmention.id)
     // dev checkOwnership ////////////////////////////////////////////////////////
     } else if (devarg === "checkOwnership") {
       if(message.author.id !== config.perUser.ownerID) {
@@ -695,11 +695,11 @@ client.on("message", (message) => {
     // dev messagedata ///////////////////////////////////////////////////////////
     } else if (devarg === "messagedata"){
       message.author.send(ddstc)
-      console.log(chalk_dat(message.author))
+      console.log(message.author)
     // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){ // whats going on
       let modRole = message.guild.roles.find("name", "Sabre Achievement 1") // alternatively "string"
-      console.log(chalk_dat(modRole))
+      console.log(modRole)
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
         color: 0xFF0000,
@@ -778,7 +778,7 @@ client.on("message", (message) => {
       return;
     }
     //console.log(message.content);
-    console.log(chalk_dat(message))
+    console.log(message)
     message.channel.send(ddstc)
   // Print version.
   } else if (message.content.startsWith(prefix + "v")) {
