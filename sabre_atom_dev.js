@@ -824,7 +824,7 @@ client.on("message", (message) => {
           },
           {
             name: "Other Commands",
-            value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!\n**sshop** - Sabre Level Shop!"
+            value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!\n**sshop** - Sabre Level Shop!\n**makeitrain @user** - Give them a chance to win big! Put in 5" + curren
           },
           {
             name: "More Coming Soon",
