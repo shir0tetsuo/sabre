@@ -635,6 +635,7 @@ client.on("message", (message) => {
       if (devhandle[2] === undefined) return;
       let seed = devhandle[2]
       scoreInit(message)
+      console.log(chalk_dat(seed))
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
       return;
@@ -643,6 +644,7 @@ client.on("message", (message) => {
       let seed = devhandle[2]
       scoreInit(message)
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
+      console.log(chalk_dat(seed))
       sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
       return;
     } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
