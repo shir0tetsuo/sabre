@@ -489,8 +489,10 @@ client.on("message", (message) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 5) {
           sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
-              message.reply("put 5 " + curren + " into the prize pile. The pile is " + jackpot.tickets + curren + "high!")
+            pile = jackpot.tickets*1 + 5
+              message.reply("put 5 " + curren + " into the prize pile. The pile is " + pile + curren + "high!")
               scoreDownTicket(message, 5);
+              sql.run(`UPDATE makeitjacky SET tickets = ${pile} WHERE place = "here"`)
           })
         } else {
           message.reply("You don't have enough tickets!")
