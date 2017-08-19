@@ -508,6 +508,8 @@ client.on("message", (message) => {
         }
       }) // end row
     }
+  } else if (message.content.startsWith(prefix + "waterfall")) {
+    scoreInit(message); // SQL stuff goes here
   // Joke //////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "joke")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_upperctzn)) {
