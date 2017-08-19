@@ -623,6 +623,7 @@ client.on("message", (message) => {
 //uniq7
     if (devhandle[1] === "prototype") {
       chalkAnimation.pulse(`warning`)
+      console.log(chalk.bgWhiteBright.red("See Here"))
     }
     let devarg = devhandle[1];
     if (devarg === "unseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
