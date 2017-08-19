@@ -483,14 +483,21 @@ client.on("message", (message) => {
       return;
     }
     var winner = Math.random()
+    console.log(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100))
     if (winner < 0.003) {
-      message.reply("Ohh boy! Somebody would have been happy if this was finished.")
+      console.log("Somebody won the jackpot!", message.guild.name, message.channel.name)
+      sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
+        message.channel.send(message.mentions.members.first() + " Won a pile of " + jackpot.tickets + curren + "!!!!!!!!!!!")
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.mentions.members.first().id}"`).then(row => {
+          sql.run(`UPDATE scores SET tickets = ${row.tickets*1 + jackpot.tickets*1} WHERE userId = ${message.mentions.members.first().id}`)
+        })
+      })
     } else {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 5) {
           sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
             pile = jackpot.tickets*1 + 5
-              message.reply("put 5 " + curren + " into the prize pile. The pile is " + pile + curren + "high!")
+              message.reply("put 5" + curren + " into the prize pile. The pile is " + pile + curren + "high!")
               scoreDownTicket(message, 5);
               sql.run(`UPDATE makeitjacky SET tickets = ${pile} WHERE place = "here"`)
           })
