@@ -492,6 +492,7 @@ client.on("message", (message) => {
           sql.run(`UPDATE scores SET tickets = ${row.tickets*1 + jackpot.tickets*1} WHERE userId = ${message.mentions.members.first().id}`)
         })
       })
+      sql.run(`UPDATE makeitjacky SET tickets = 100 WHERE place = "here"`)
     } else {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 5) {
