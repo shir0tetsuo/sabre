@@ -621,7 +621,7 @@ client.on("message", (message) => {
   if (message.member.roles.has(config.role.sabredevID) || message.member.roles.has(config.role.alaska_botdev)) {
     const devhandle = message.content.split(/\s+/g);
 //uniq7
-    if (devhandle[1].has("prototype")) {
+    if (devhandle[1] === "prototype") {
       chalkAnimation.pulse(`warning`)
     }
     let devarg = devhandle[1];
