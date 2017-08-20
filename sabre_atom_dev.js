@@ -202,7 +202,7 @@ function ShadowsWord(mess, type) {
     if (type === "oops") {
       mess.reply("``Access Granted`` " + member + " now has Oops")
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
-      member.addrole(oopsrole);
+      member.addRole(oopsrole);
     } else {
       mess.reply("``Available Commands: oops``");
     }
