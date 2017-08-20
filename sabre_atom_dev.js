@@ -107,7 +107,7 @@ function scoreUpTicket(mess, xval) {
 }
 function scoreDownTicket(mess, xval) {
   if (!xval) var xval = 1
-  console.log("Lowering score by", xval*1)
+  console.log("Lowering score by", xval*1, mess.author.id)
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (row.tickets*1 >= xval*1) {
       sql.run(`UPDATE scores SET tickets = ${row.tickets - xval*1} WHERE userId = ${mess.author.id}`)
@@ -132,7 +132,7 @@ function scoreUpBits(mess, xval) {
 }
 function scoreDownBits(mess, xval) {
   if (!xval) var xval = 1
-  console.log("Lowering score by", xval*1)
+  console.log("Lowering score by", xval*1, mess.author.id)
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (row.chatBits*1 >= xval*1) {
       sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
