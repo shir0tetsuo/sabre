@@ -206,7 +206,7 @@ function ShadowsWord(mess, type) {
     var cool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
     if (type === "oops") {
 
-      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " is in trouble!```").then(function (mess) {
+      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " is in trouble!\n.\n.```").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
       })
