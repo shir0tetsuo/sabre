@@ -195,10 +195,10 @@ function scoreDisplay(mess) {
 }
 //uniq8
 function scanKeyword(mess) {
-  if message.content.has(['AMBA', 'amba']).then(function (mess) {
-    message.delete()
+  if mess.content.has(['AMBA', 'amba']).then(function (mess) {
+    mess.delete()
   })
-  message.reply("``CLASSIFIED``")
+  mess.reply("``CLASSIFIED``")
   return;
 }
 function ShadowsWord(mess, type) {
