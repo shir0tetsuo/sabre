@@ -217,7 +217,7 @@ function ShadowsWord(mess, type) {
        mess.react("☣")
      })
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
-    //  member.addRole(davidsnether)
+      member.addRole(davidsnether)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem``");
     }
