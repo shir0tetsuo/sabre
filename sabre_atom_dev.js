@@ -196,7 +196,7 @@ function scoreDisplay(mess) {
 //uniq8
 function scanKeyword(mess) {
   const chanid = mess.channel
-  if (mess.content.has(['AMBA', 'amba', 'BOMB', 'bomb', 'terrorist']))
+  if (mess.content.indexOf(['AMBA', 'amba', 'BOMB', 'bomb', 'terrorist']))
   chanid.send("``CLASSIFIED``").then(function (mess) {
     mess.delete()
   })
