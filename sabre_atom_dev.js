@@ -1052,7 +1052,7 @@ client.on("message", (message) => {
           },
           {
             name: "Other Things Sabre can do",
-            value: "Saying **?night** in any channel will summon NightDelSol.\nCLASSIFIED keywords will be auto-removed."
+            value: "Saying **?night** in any channel will summon NightDelSol.\nCLASSIFIED keywords will be auto-removed\nUsing CLASSIFIED instead of something CLASSIFIED will be rewarded."
           },
           {
             name: "More Coming Soon",
