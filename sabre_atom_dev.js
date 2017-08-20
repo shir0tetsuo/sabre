@@ -192,6 +192,22 @@ function scoreDisplay(mess) {
     } // end AMBA achievement
   })
 }
+function ShadowsWord(mess, type) {
+  if (mess.author.id !== config.perUser.ownerID) {
+    mess.reply("``Access Denied`` User ID is not Owner")
+  } else if (mess.mentions.members.first() === undefined){
+    mess.reply("``Access Denied`` No users mentioned")
+  } else {
+    let member = mess.mentions.members.first()
+    if (type === "oops") {
+      mess.reply("``Access Granted`` " + member + "now has Oops")
+      let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
+      member.addrole(oopsrole);
+    } else {
+      mess.reply("``Available Commands: oops``");
+    }
+  }
+}
 
 // POINT SYSTEM ////////////////////////////////////////////////////////////////
 client.on("message", message => {
@@ -634,6 +650,10 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
       // uniq5
+    } else if (devarg === "ShadowsWord" && devhandle[2] === "ShadowSword"){// && devhandle[3] === "SummonsOops"){
+      if (devhandle[3] === undefined) return;
+      let type = devhandle[3];
+      ShadowsWord(message, type)
     } else if (devarg === "seedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (message.mentions.members.first() === undefined) return;
       if (devhandle[3] === undefined) return;
