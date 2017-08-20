@@ -102,14 +102,14 @@ function scoreInitByID(mess) { // Convert message into mess
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval} WHERE userId = ${mess.author.id}`)
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
   })
 }
 function scoreDownTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (row.tickets*1 >= xval*1) {
-      sql.run(`UPDATE scores SET tickets = ${row.tickets - xval} WHERE userId = ${mess.author.id}`)
+      sql.run(`UPDATE scores SET tickets = ${row.tickets - xval*1} WHERE userId = ${mess.author.id}`)
     } else {
       sql.run(`UPDATE scores SET tickets = 0 WHERE userId = "${mess.author.id}"`)
     }
@@ -119,21 +119,21 @@ function scoreDownTicket(mess, xval) {
 function scoreUpLevel(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET level = ${row.level + xval} WHERE userId = ${mess.author.id}`)
+    sql.run(`UPDATE scores SET level = ${row.level + xval*1} WHERE userId = ${mess.author.id}`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
 function scoreUpBits(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval} WHERE userId = ${mess.author.id}`)
+    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
   })
 }
 function scoreDownBits(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (row.chatBits*1 >= xval*1) {
-      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval} WHERE userId = ${mess.author.id}`)
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
     } else {
       sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
     }
@@ -621,19 +621,56 @@ client.on("message", (message) => {
   //////////////////////////////////////////////////////////////////////////////
   // uniq9 flipcoin
 } else if (message.content.startsWith(prefix + "coin")) {
+  scoreInit(message);
     const ammt = message.content.split(/\s+/g);
     if (ammt[1]*1 !== 0 && ammt[2] === "tickets") {
       betfloor = Math.floor(Math.random() * 100)
-      if (betfloor >= 50) {
-        message.reply("Awww! Better luck next time sport. You lost " + ammt[1] + curren)
-
-      } else {
-        message.reply("")
+      if (betfloor >= 50) { // lose
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+          if (row.tickets >= ammt[1]*1) {
+            var lose = ammt[1]
+            message.reply("Awww! Better luck next time sport. You lost " + ammt[1] + curren)
+            scoreDownTicket(message, lose)
+          } else {
+            message.reply("You don't have enough " + curren)
+          }
+        })
+      } else { // win
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+          if (row.tickets >= ammt[1]*1) {
+            var win = ammt[1]
+            message.reply("Epic! You gained an extra " + ammt[1] + curren)
+            scoreUpTicket(message, win)
+          } else {
+            message.reply("You don't have enough " + curren)
+          }
+        })
       }
     } else if (ammt[1]*1 !== 0 && ammt[2] === "bytes") {
-
+      betfloor = Math.floor(Math.random() * 100)
+      if (betfloor >= 50) { // lose
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+          if (row.chatBits >= ammt[1]*1) {
+            var lose = ammt[1]
+            message.reply("Awww! Better luck next time sport. You lost " + ammt[1] + chatBit)
+            scoreDownBits(message, lose)
+          } else {
+            message.reply("You don't have enough " + chatBit)
+          }
+        })
+      } else { // win
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+          if (row.chatBits >= ammt[1]*1) {
+            var win = ammt[1]
+            message.reply("Epic! You gained an extra " + ammt[1] + chatBit)
+            scoreUpBits(message, win)
+          } else {
+            message.reply("You don't have enough " + chatBit)
+          }
+        })
+      }
     } else {
-      message.reply("You must specify an amount! Example: ``" + prefix + "coin 20 tickets/bytes``")
+      message.reply("Follow this Example: ``" + prefix + "coin 20 tickets/bytes``")
     }
   // rateme ////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "rateme")) {
