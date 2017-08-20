@@ -249,6 +249,7 @@ function scoreDisplay(mess) {
 //uniq8
 function scanKeyword(mess) {
   const summon_night = ["?night", "?Night", "?NIGHT"]
+  const rewarded = ["CLASSIFIED", "classified", "Classified"]
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
   if (summon_night.some(word => mess.content.includes(word))) {
@@ -263,6 +264,9 @@ function scanKeyword(mess) {
     scoreDownBits(au, 21)
     au.channel.send("``CLASSIFIED`` " + au.author + " 20" + chatBit + " redacted")
     return;
+  }
+  if (rewarded.some(word => mess.content.includes(word))) {
+    mess.react("🌠")
   }
 }
 function ShadowsWord(mess, type) {
