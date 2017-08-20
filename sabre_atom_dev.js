@@ -84,6 +84,21 @@ function scoreInit(mess) { // Convert message into mess
     })
   })
 }
+function shopEcho(mess) {
+  sql.get(`SELECT * FROM shopitem WHERE userId ="${mess.author.id}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO shopitem (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [mess.author.id, 0, 0, 0, 0, 0, 0]);
+    } else {
+      var items = `${row.itemA} ${row.itemB} ${row.itemC} ${row.itemD} ${row.itemE} ${row.itemF}`
+    }
+  }).catch(() => { // Error message generates new table instead
+    console.error;
+    console.log(chalk_err("The system recovered from an error."))
+    sql.run("CREATE TABLE IF NOT EXISTS shopitem (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
+      sql.run("INSERT INTO scores (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [mess.author.id, 0, 0, 0, 0, 0, 0]);
+    })
+  })
+}
 ////////////////////////////////////////////////////////////////////////////////
 function scoreInitByID(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess}"`).then(row => {
@@ -452,6 +467,8 @@ client.on("message", (message) => {
     let eticketmsg = "Error"
     let ebytemsg = "Error"
     let levelshop = "Error"
+    let items = "\u200b"
+    let shopcmds = "\u200b"
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 250) {
@@ -467,8 +484,11 @@ client.on("message", (message) => {
         if (row.level === 0) {
           var levelshop = ":lock: You need to buy a level first!"
         }
+        //uniq11
         if (row.level >= 1) {
-          var levelshop = "**Lv 1** - "
+          shopEcho(mess);
+          var levelshop = "**Lv 1** - Item 2131 - Adds :soccer: to your messages.\n**Lv 5** - Item 1133 - Coming Soon"
+          var shopcmds = "``" + prefix + " buy item (itemnumber) (slot 1-6)``"
         }
         const embed = new Discord.RichEmbed()
             .setTitle(':left_luggage: Sabre Level Shop!')
@@ -481,6 +501,7 @@ client.on("message", (message) => {
             .addField(`:large_orange_diamond: Level Price: __**250 Tickets**__ or __**1024 Bytes**__`, `${eticketmsg}\n${ebytemsg}`)
             .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
+            .addField(`${items}`, `${shopcmds}`)
         message.author.send({ embed });
       }); // end row data definition
     } // end Sabre Shop help page
