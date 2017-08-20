@@ -200,7 +200,22 @@ function ShadowsWord(mess, type) {
   } else {
     let member = mess.mentions.members.first()
     if (type === "oops") {
-      mess.reply("``Access Granted`` " + member + " now has Oops")
+      mess.reply("``Access Granted`` " + member + " now has Oops" + { embed:
+        color: 0xFFC400,
+        timestamp: new Date(),
+        footer: {
+          text: "The Power of ShadowShadow Was Summoned"
+        },
+        fields: [
+          {
+            name: "\u200b",
+            value: "```markdown\n\n[!]: Something Weird " + member.member.displayName
+          }
+        ]
+      }).then(function (mess) {
+        mess.react("🚷")
+        mess.react("🎟")
+      })
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
       member.addRole(oopsrole);
     } else {
@@ -650,7 +665,7 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
       // uniq5
-    } else if (devarg === "ShadowsWord" && devhandle[2] === "ShadowSword"){// && devhandle[3] === "SummonsOops"){
+    } else if (devarg === "shadow" && devhandle[2] === "shadow"){// && devhandle[3] === "SummonsOops"){
       if (devhandle[3] === undefined) return;
       let type = devhandle[3];
       ShadowsWord(message, type)
@@ -732,7 +747,7 @@ client.on("message", (message) => {
       console.log(message.author)
     // dev announcerole //////////////////////////////////////////////////////////
   } else if (devarg === "announceRole"){ // whats going on
-      let modRole = message.guild.roles.find("name", "Sabre Achievement 1") // alternatively "string"
+      let modRole = message.guild.roles.find("name", "David's netherworld") // alternatively "string"
       console.log(modRole)
     } else { // Developer Help Command Menu //////////////////////////////////////
       message.author.send({embed: {
@@ -841,6 +856,10 @@ client.on("message", (message) => {
             {
               name: "Sabre Score System (Special Sabre Access)",
               value: "unseedT @user (Are you SURE?), seedT, selfseedT, selfseedL"
+            },
+            {
+              name: "Owner Commands",
+              value: "shadow shadow oops/notmeproblem, poke (Jackpot Reset Switch)"
             }
           ]
         }})
