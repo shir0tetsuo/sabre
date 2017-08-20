@@ -205,8 +205,8 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
-  scoreDownBits(mess, 20)
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
+    scoreDownBits(mess, 20)
     mess.delete()
     console.log(au.member.displayName, " said the following.", au.guild.name, au.channel.name)
     console.log(chalk_err(au.content))
