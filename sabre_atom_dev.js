@@ -228,25 +228,26 @@ function ShadowsWord(mess, type) {
     mess.reply("``Access Denied`` User ID is not Owner")
   } else if (mess.mentions.members.first() === undefined){
     mess.reply("``Access Denied`` No users mentioned")
-  } else {
+  } else { //uniq10
     let member = mess.mentions.members.first()
     var cool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
+    var secondcool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
     if (type === "oops") {
-      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " is in trouble!\n.\n.```").then(function (mess) {
+      mess.reply("Summoned the power of the ShadowSword on Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " is in trouble! " + secondcool.text + "\n.\n.```").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
       })
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
       member.addRole(oopsrole).catch(console.error)
     } else if (type === "notmeproblem") {
-      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n.\n.```").then(function (mess) {
+      mess.reply("summoned the power of the ShadowSword on Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was sent far, far away. " + secondcool.text + "\n.\n.```").then(function (mess) {
        mess.react("☢")
        mess.react("☣")
      })
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
       member.setRoles([davidsnether]).catch(console.error)
     } else if (type === "mute") {
-      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was muted.\n.\n.```" ).then(function (mess) {
+      mess.reply("summoned the power of the ShadowSword on Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was muted. " + secondcool.text + "\n.\n.```" ).then(function (mess) {
         mess.react("🤐")
         mess.react("🌃")
       })
@@ -951,7 +952,7 @@ client.on("message", (message) => {
             },
             {
               name: "Owner Commands",
-              value: "shadow shadow oops/notmeproblem/mute/echo, poke (Jackpot Reset Switch)"
+              value: "shadow shadow oops/notmeproblem/mute/echo, poke (Jackpot Reset Switch), prototype (Make console see whatever is tagged)"
             }
           ]
         }})
