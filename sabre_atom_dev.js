@@ -267,6 +267,8 @@ function scanKeyword(mess) {
   }
   if (rewarded.some(word => mess.content.includes(word))) {
     mess.react("🌠")
+    scoreUpTicket(mess, 5)
+    mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
   }
 }
 function ShadowsWord(mess, type) {
