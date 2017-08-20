@@ -488,7 +488,7 @@ client.on("message", (message) => {
         //uniq11
         if (row.level >= 1) {
           var levelshop = "**Lv 1** - Item 2131 - Adds :soccer: to your messages.\n**Lv 5** - Item 1133 - Coming Soon"
-          var shopcmds = "``" + prefix + "sshop buy item (itemnumber) (slot 1-6)``\n``" + prefix + "sshop sell item (slot1-6)``"
+          var shopcmds = "``" + prefix + "sshop buy item (itemnumber) (slot 1-6)``\n``" + prefix + "sshop sell item (slot1-6)``\n``" + prefix + "sshop items``"
         }
         const embed = new Discord.RichEmbed()
             .setTitle(':left_luggage: Sabre Level Shop!')
