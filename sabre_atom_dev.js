@@ -560,7 +560,7 @@ client.on("message", (message) => {
     }
     var winner = Math.random()
     console.log(chalk.bgMagenta(message.author.tag, "put tickets into the pile. Floor:", Math.floor(winner*100)))
-    if (winner < 0.03) {
+    if (winner < 0.9) { // was 0.03
       console.log(chalk_dat("Somebody won the jackpot!", message.guild.name, message.channel.name))
       sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
         message.channel.send(message.mentions.members.first() + " Won a pile of " + jackpot.tickets + curren + "!!!!!!!!!!!")
