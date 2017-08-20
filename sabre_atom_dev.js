@@ -221,7 +221,6 @@ function ShadowsWord(mess, type) {
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
       member.addRole(davidsnether).catch(console.error)
     } else if (type === "mute") {
-      member.removeRole(member.roles).catch(console.error)
       mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was muted.\n.\n.```" ).then(function (mess) {
         mess.react("🤐")
         mess.react("🌃")
@@ -229,9 +228,7 @@ function ShadowsWord(mess, type) {
       let badboy = mess.guild.roles.find('name', 'Bad Boy')
       let muted = mess.guild.roles.find('name', 'Muted')
       let grounded = mess.guild.roles.find('name', 'Grounded')
-      member.addRole(badboy).catch(console.error)
-      member.addRole(muted).catch(console.error)
-      member.addRole(grounded).catch(console.error)
+      member.setRoles([badboy, muted, grounded]).catch(console.error)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem, mute + @user``");
     }
