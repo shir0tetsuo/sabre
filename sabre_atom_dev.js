@@ -979,8 +979,12 @@ client.on("message", (message) => {
             value: "**level** - Check your Level!\n**giveTicket** @user (amount) - Donate Tickets!\n**sshop** - Sabre Level Shop!\n**coin** - Flip A Coin! Bet!\n**makeitrain @user** - Give them a chance to win big! Put in 5" + curren
           },
           {
+            name: "Other Things Sabre can do",
+            value: "Saying **?night** in any channel will summon NightDelSol.\nCLASSIFIED keywords will be auto-removed."
+          },
+          {
             name: "More Coming Soon",
-            value: "This Week: Waterfall Card Game, Level Shop, Announcement System, Summoning of the Shadow Sword, Purge System, Vote System, Spam Mitigation, Mute System"
+            value: "This Week: Waterfall Card Game, Announcement System, Purge System, Vote System, Spam Mitigation"
           }
         ],
         timestamp: new Date(),
