@@ -210,6 +210,7 @@ function scanKeyword(mess) {
   const au = mess
   if (summon_night.some(word => mess.content.includes(word))) {
     mess.channel.send(`<@!${config.perUser.ownerID}>`)
+    console.log(chalk.yellowBright("Your presence is required in", mess.guild.name, mess.channel.name))
   }
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
