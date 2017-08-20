@@ -193,11 +193,13 @@ function scoreDisplay(mess) {
     } // end AMBA achievement
   })
 }
+//uniq8
 function scanKeyword(mess) {
-  if mess.content.has(['AMBA', 'amba']).then(function (mess) {
-    mess.delete()
+  if message.content.has(['AMBA', 'amba']).then(function (mess) {
+    message.delete()
   })
-  mess.reply("``CLASSIFIED``")
+  message.reply("``CLASSIFIED``")
+  return;
 }
 function ShadowsWord(mess, type) {
 
@@ -249,6 +251,7 @@ client.on("message", message => {
   // Return Conditions: DM or Null Object
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
+  scanKeyword(message);
   scoreInit(message);
   scoreUpBits(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
@@ -321,7 +324,6 @@ client.on("guildMemberRemove", (member) => {
 // This is the main cage.
 //
 client.on("message", (message) => {
-  if (!message.author.bot) scanKeyword(message);
   //////////////////////////////////////////////////////////////////////////////
   if (message.content.startsWith(prefix) && !message.author.bot) {
     // talkedRecently event, if message.author.id exists in set return.
