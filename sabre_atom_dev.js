@@ -108,7 +108,11 @@ function scoreUpTicket(mess, xval) {
 function scoreDownTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET tickets = ${row.tickets - xval} WHERE userId = ${mess.author.id}`)
+    if (row.tickets*1 >= xval*1) {
+      sql.run(`UPDATE scores SET tickets = ${row.tickets - xval} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET tickets = 0 WHERE userId = "${mess.author.id}"`)
+    }
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +132,11 @@ function scoreUpBits(mess, xval) {
 function scoreDownBits(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval} WHERE userId = ${mess.author.id}`)
+    if (row.chatBits*1 >= xval*1) {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
+    }
   })
 }
 // uniq2
@@ -610,6 +618,23 @@ client.on("message", (message) => {
     } else {
       return;
     }
+  //////////////////////////////////////////////////////////////////////////////
+  // uniq9 flipcoin
+} else if (message.content.startsWith(prefix + "coin")) {
+    const ammt = message.content.split(/\s+/g);
+    if (ammt[1]*1 !== 0 && ammt[2] === "tickets") {
+      betfloor = Math.floor(Math.random() * 100)
+      if (betfloor >= 50) {
+        message.reply("Awww! Better luck next time sport. You lost " + ammt[1] + curren)
+
+      } else {
+        message.reply("")
+      }
+    } else if (ammt[1]*1 !== 0 && ammt[2] === "bytes") {
+
+    } else {
+      message.reply("You must specify an amount! Example: ``" + prefix + "coin 20 tickets/bytes``")
+    }
   // rateme ////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "rateme")) {
     if (message.guild.id === config.guild.ALASKA && !message.member.roles.has(config.role.alaska_citizen)) {
@@ -697,7 +722,7 @@ client.on("message", (message) => {
     } else if (devarg === "seedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (message.mentions.members.first() === undefined) return;
       if (devhandle[3] === undefined) return;
-      let seed = devhandle[3]
+      let seed = devhandle[3]*1
       message.reply("Developer Command was Run. Seeded user with " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
     } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
