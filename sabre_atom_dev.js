@@ -266,7 +266,7 @@ function scanKeyword(mess) {
     au.channel.send("``CLASSIFIED`` " + au.author + " 20" + chatBit + " redacted")
     return;
   }
-  if (rewarded.some(word => mess.content.includes(word))) {
+  if (rewarded.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.react("🌠")
     if (rewardWord.has(mess.author.id)) return;
     rewardWord.add(mess.author.id);
