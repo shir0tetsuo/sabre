@@ -196,10 +196,10 @@ function scoreDisplay(mess) {
 //uniq8
 function scanKeyword(mess) {
   const chanid = mess.channel
-  if (mess.content.has(['AMBA', 'amba'])).then(function (mess) {
+  if (mess.content.has(['AMBA', 'amba']))
+  chanid.send("``CLASSIFIED``").then(function (mess) {
     mess.delete()
   })
-  chanid.send("``CLASSIFIED``")
   return;
 }
 function ShadowsWord(mess, type) {
