@@ -628,7 +628,7 @@ client.on("message", (message) => {
       if (betfloor >= 50) { // lose
         sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
           if (row.tickets >= ammt[1]*1) {
-            var lose = ammt[1]
+            var lose = ammt[1]*1
             message.reply("Awww! Better luck next time sport. You lost " + ammt[1] + curren)
             scoreDownTicket(message, lose)
           } else {
@@ -638,7 +638,7 @@ client.on("message", (message) => {
       } else { // win
         sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
           if (row.tickets >= ammt[1]*1) {
-            var win = ammt[1]
+            var win = ammt[1]*1
             message.reply("Epic! You gained an extra " + ammt[1] + curren)
             scoreUpTicket(message, win)
           } else {
@@ -768,7 +768,7 @@ client.on("message", (message) => {
       scoreInit(message)
       console.log(chalk_dat(seed))
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
-      sql.run(`UPDATE scores SET tickets = ${seed*1} WHERE userId = ${message.author.id}`)
+      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       let seed = devhandle[2]*1
