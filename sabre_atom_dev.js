@@ -205,19 +205,32 @@ function ShadowsWord(mess, type) {
     let member = mess.mentions.members.first()
     var cool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
     if (type === "oops") {
-      mess.reply("``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " is in trouble!```").then(function (mess) {
+
+      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " is in trouble!```").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
       })
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
-      member.addRole(oopsrole);
+      member.addRole(oopsrole).catch(console.error)
     } else if (type === "notmeproblem") {
-      mess.reply("``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n\n```").then(function (mess) {
+
+      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n.\n.```").then(function (mess) {
        mess.react("☢")
        mess.react("☣")
      })
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
-      member.addRole(davidsnether)
+      member.addRole(davidsnether).catch(console.error)
+    } else if (type === "mute") {
+      mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " member.displayName + " Was muted.\n.\n.```" + "Roles to Give Back: " + member.roles).then(function (mess) {
+        mess.react("🤐")
+        mess.react("🌃")
+      })
+      let badboy = mess.guild.roles.find('name', 'Bad Boy')
+      let muted = mess.guild.roles.find('name', 'Muted')
+      let grounded = mess.guild.roles.find('name', 'Grounded')
+      member.addRole(badboy).catch(console.error)
+      member.addRole(muted).catch(console.error)
+      member.addRole(grounded).catch(console.error)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem + @user``");
     }
