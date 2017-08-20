@@ -193,6 +193,12 @@ function scoreDisplay(mess) {
     } // end AMBA achievement
   })
 }
+function scanKeyword(mess) {
+  if mess.content.has(['AMBA', 'amba']).then(function (mess) {
+    mess.delete()
+  })
+  mess.reply("``CLASSIFIED``")
+}
 function ShadowsWord(mess, type) {
 
   //<Message>.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
@@ -205,7 +211,6 @@ function ShadowsWord(mess, type) {
     let member = mess.mentions.members.first()
     var cool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
     if (type === "oops") {
-
       mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " is in trouble!\n.\n.```").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
@@ -213,7 +218,6 @@ function ShadowsWord(mess, type) {
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
       member.addRole(oopsrole).catch(console.error)
     } else if (type === "notmeproblem") {
-
       mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n.\n.```").then(function (mess) {
        mess.react("☢")
        mess.react("☣")
@@ -317,6 +321,7 @@ client.on("guildMemberRemove", (member) => {
 // This is the main cage.
 //
 client.on("message", (message) => {
+  if (!message.author.bot) scanKeyword(message);
   //////////////////////////////////////////////////////////////////////////////
   if (message.content.startsWith(prefix) && !message.author.bot) {
     // talkedRecently event, if message.author.id exists in set return.
