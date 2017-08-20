@@ -230,7 +230,7 @@ function ShadowsWord(mess, type) {
       let grounded = mess.guild.roles.find('name', 'Grounded')
       member.setRoles([badboy, muted, grounded]).catch(console.error)
     } else if (type === "echo") {
-      console.log(member.roles.guild.name)
+      console.log(member.roles)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem, mute, echo + @user``");
     }
