@@ -486,7 +486,7 @@ client.on("message", (message) => {
         }
         //uniq11
         if (row.level >= 1) {
-          shopEcho(mess);
+          shopEcho(message);
           var levelshop = "**Lv 1** - Item 2131 - Adds :soccer: to your messages.\n**Lv 5** - Item 1133 - Coming Soon"
           var shopcmds = "``" + prefix + " buy item (itemnumber) (slot 1-6)``"
         }
