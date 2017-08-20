@@ -195,7 +195,7 @@ function scoreDisplay(mess) {
 }
 //uniq8
 function scanKeyword(mess) {
-  const banned = ["AMBA", "amba", "BOMB", "bomb", "terrorist", "special projects", "noctua", "NOCTUA"]
+  const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
