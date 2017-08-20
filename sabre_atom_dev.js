@@ -202,7 +202,7 @@ function scanKeyword(mess) {
     mess.delete()
     console.log(au.member.displayName, " said the following.", au.guild.name, au.channel.name)
     console.log(chalk_err(au.content))
-    au.channel.send("``CLASSIFIED`` " + au.author + " 20 " + chatBit + " redacted")
+    au.channel.send("``CLASSIFIED`` " + au.author + " 20" + chatBit + " redacted")
     return;
   }
 }
