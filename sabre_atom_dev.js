@@ -84,6 +84,7 @@ function scoreInit(mess) { // Convert message into mess
     })
   })
 }
+////////////////////////////////////////////////////////////////////////////////
 function shopEcho(mess) {
   sql.get(`SELECT * FROM shopitem WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
@@ -469,6 +470,7 @@ client.on("message", (message) => {
     let levelshop = "Error"
     let items = "\u200b"
     let shopcmds = "\u200b"
+    shopEcho(message);
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 250) {
@@ -486,7 +488,6 @@ client.on("message", (message) => {
         }
         //uniq11
         if (row.level >= 1) {
-          shopEcho(message);
           var levelshop = "**Lv 1** - Item 2131 - Adds :soccer: to your messages.\n**Lv 5** - Item 1133 - Coming Soon"
           var shopcmds = "``" + prefix + " buy item (itemnumber) (slot 1-6)``"
         }
