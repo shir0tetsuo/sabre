@@ -219,7 +219,7 @@ function ShadowsWord(mess, type) {
        mess.react("☣")
      })
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
-      member.setRoles(davidsnether).catch(console.error)
+      member.setRoles([davidsnether]).catch(console.error)
     } else if (type === "mute") {
       mess.reply("Tag: " + member + ", ``Access Granted`` ```markdown\n.\n" + cool.text + " " + member.displayName + " Was muted.\n.\n.```" ).then(function (mess) {
         mess.react("🤐")
@@ -230,7 +230,7 @@ function ShadowsWord(mess, type) {
       let grounded = mess.guild.roles.find('name', 'Grounded')
       member.setRoles([badboy, muted, grounded]).catch(console.error)
     } else if (type === "echo") {
-      console.log(member.roles.name)
+      console.log(member.roles.guild.name)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem, mute, echo + @user``");
     }
