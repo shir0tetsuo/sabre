@@ -205,10 +205,10 @@ function scoreDisplay(mess) {
 }
 //uniq8
 function scanKeyword(mess) {
-  const summon = ["?night", "?Night", "?NIGHT"]
+  const summon_night = ["?night", "?Night", "?NIGHT"]
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
-  if (summon.some(word => mess.content.includes(word))) {
+  if (summon_night.some(word => mess.content.includes(word))) {
     mess.channel.send(`<@!${config.perUser.ownerID}>`)
   }
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
