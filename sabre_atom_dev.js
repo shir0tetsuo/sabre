@@ -197,7 +197,7 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const banned = ["AMBA", "amba", "BOMB", "bomb", "terrorist", "special projects", "noctua", "NOCTUA"]
   const chanid = mess.channel
-  if (banned.some(word => mess.content.includes(word))) {
+  if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
     chanid.send("``CLASSIFIED``")
     return;
