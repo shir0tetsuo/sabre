@@ -99,7 +99,7 @@ function shopInit(mess) {
   })
 }
 function shopItemBuy(mess, item, slot) {
-  if (item === 2131) {
+  if (item === "2131") {
     mess.reply("This is free! Yay free stuff. :soccer:")
   } else {
     mess.reply("Item not found!")
