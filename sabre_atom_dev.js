@@ -197,9 +197,8 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const chanid = mess.channel
   if (mess.content.indexOf(['AMBA', 'amba', 'BOMB', 'bomb', 'terrorist']))
-  chanid.send("``CLASSIFIED``").then(function (mess) {
-    mess.delete()
-  })
+  mess.delete()
+  chanid.send("``CLASSIFIED``")
   return;
 }
 function ShadowsWord(mess, type) {
