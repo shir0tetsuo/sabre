@@ -761,7 +761,7 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run.")
       sql.run(`UPDATE scores SET tickets = 1 WHERE userId = ${message.mentions.members.first().id}`)
       // uniq5
-    } else if (devarg === "shadow" && devhandle[2] === "shadow"){// && devhandle[3] === "SummonsOops"){
+    } else if (devarg === "shadow" && devhandle[2] === "shadow" && message.guild.id === config.guild.ALASKA){// && devhandle[3] === "SummonsOops"){
       if (devhandle[3] === undefined) return;
       let type = devhandle[3];
       ShadowsWord(message, type)
