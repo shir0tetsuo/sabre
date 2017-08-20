@@ -195,11 +195,13 @@ function scoreDisplay(mess) {
 }
 //uniq8
 function scanKeyword(mess) {
+  const banned = ["AMBA", "amba", "BOMB", "bomb", "terrorist", "special projects", "noctua", "NOCTUA"]
   const chanid = mess.channel
-  if (mess.content.indexOf(['AMBA', 'amba', 'BOMB', 'bomb', 'terrorist']))
-  mess.delete()
-  chanid.send("``CLASSIFIED``")
-  return;
+  if (banned.some(word => mess.content.includes(word))) {
+    mess.delete()
+    chanid.send("``CLASSIFIED``")
+    return;
+  }
 }
 function ShadowsWord(mess, type) {
 
