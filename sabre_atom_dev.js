@@ -93,9 +93,36 @@ function shopInit(mess) {
   }).catch(() => { // Error message generates new table instead
     console.error;
     console.log(chalk_err("The system recovered from an error."))
-    sql.run("CREATE TABLE IF NOT EXISTS shopitem (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
+    sql.run("CREATE TABLE IF NOT EXISTS shopitem (userId TEXT, itemA TEXT, itemB TEXT, itemC TEXT, itemD TEXT, itemE TEXT, itemF TEXT)").then(() => {
       sql.run("INSERT INTO scores (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [mess.author.id, 0, 0, 0, 0, 0, 0]);
     })
+  })
+}
+function shopItemBuy(mess, item, slot) {
+  if (item === 2131) {
+    message.reply("This is free! Yay free stuff. :soccer:")
+  } else {
+    message.reply("Item not found!")
+    return;
+  }
+  if (slot === 1) {
+    var alp = "A";
+  } else if (slot === 2) {
+    var alp = "B";
+  } else if (slot === 3) {
+    var alp = "C";
+  } else if (slot === 4) {
+    var alp = "D";
+  } else if (slot === 5) {
+    var alp = "E";
+  } else if (slot === 6) {
+    var alp = "F";
+  } else {
+    message.reply("Invalid Slot!")
+    return;
+  }
+  sql.get(`SELECT * FROM shopitem WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE userId SET item${alp} = "${item}" WHERE userId = "${mess.author.id}"`)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -468,7 +495,6 @@ client.on("message", (message) => {
     let levelshop = "Error"
     let items = "\u200b"
     let shopcmds = "\u200b"
-    shopInit(message);
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 250) {
@@ -488,7 +514,7 @@ client.on("message", (message) => {
         //uniq11
         if (row.level >= 1) {
           var levelshop = "**Lv 1** - Item 2131 - Adds :soccer: to your messages.\n**Lv 5** - Item 1133 - Coming Soon"
-          var shopcmds = "``" + prefix + "sshop buy item (itemnumber) (slot 1-6)``\n``" + prefix + "sshop sell item (slot1-6)``\n``" + prefix + "sshop items``"
+          var shopcmds = "``" + prefix + "sshop buy item (itemnumber) (slot1-6)``\n``" + prefix + "sshop sell item (slot1-6)``\n``" + prefix + "sshop items``"
         }
         const embed = new Discord.RichEmbed()
             .setTitle(':left_luggage: Sabre Level Shop!')
@@ -574,7 +600,10 @@ client.on("message", (message) => {
           message.reply("You don't have enough " + chatBit + "!")
         }
       }) // end row data transfer
-    } // end buy level bytes
+    } else if (sshop[1] === "buy" && sshop[2] === "item" && sshop[3] !== 0 && sshop[4] !== 0 && sshop[4]*1 <= 6) {
+      shopInit(message);
+      shopItemBuy(message, sshop[3], sshop[4]);
+    } // end buying
   /// MAKE IT RAIN /////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "makeitrain")) {
     scoreInit(message);
