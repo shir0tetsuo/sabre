@@ -232,7 +232,7 @@ function ShadowsWord(mess, type) {
       member.addRole(muted).catch(console.error)
       member.addRole(grounded).catch(console.error)
     } else {
-      mess.reply("``Available Commands: oops, notmeproblem + @user``");
+      mess.reply("``Available Commands: oops, notmeproblem, mute + @user``");
     }
   }
 }
