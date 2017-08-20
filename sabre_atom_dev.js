@@ -211,7 +211,7 @@ function ShadowsWord(mess, type) {
       })
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
       member.addRole(oopsrole);
-    } else if (type = "notmeproblem") {
+    } else if (type === "notmeproblem") {
       mess.reply("``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n\n```").then(function (mess) {
        mess.react("☢")
        mess.react("☣")
@@ -219,7 +219,7 @@ function ShadowsWord(mess, type) {
       let davidsnether = mess.guild.roles.get(config.role.alaska_davidsnetherworld);
       member.addRole(davidsnether)
     } else {
-      mess.reply("``Available Commands: oops, notmeproblem``");
+      mess.reply("``Available Commands: oops, notmeproblem + @user``");
     }
   }
 }
