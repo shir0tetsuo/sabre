@@ -768,8 +768,8 @@ client.on("message", (message) => {
       if (devhandle[2] === undefined) return;
       scoreInit(message)
       message.reply("Developer Command was Run. Self-Seeded " + devhandle[2]*1 + curren)
-      console.log(chalk_dat(devhandle[2]*1))
       sql.run(`UPDATE scores SET tickets = "${devhandle[2]*1}" WHERE userId = "${message.author.id}"`)
+      console.log(chalk_dat(devhandle[2]*1))
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       var seed = devhandle[2]*1
