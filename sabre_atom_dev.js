@@ -196,10 +196,10 @@ function scoreDisplay(mess) {
 //uniq8
 function scanKeyword(mess) {
   const banned = ["AMBA", "amba", "BOMB", "bomb", "terrorist", "special projects", "noctua", "NOCTUA"]
-  const au = mess.author
+  const au = mess
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
-    chanid.send("``CLASSIFIED`` " + au + " 10 " + chatBit + " redacted")
+    au.channel.send("``CLASSIFIED`` " + au.author + " 10 " + chatBit + " redacted")
     scoreDownBits(mess, 10)
     return;
   }
