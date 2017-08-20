@@ -100,9 +100,9 @@ function shopInit(mess) {
 }
 function shopItemBuy(mess, item, slot) {
   if (item === 2131) {
-    message.reply("This is free! Yay free stuff. :soccer:")
+    mess.reply("This is free! Yay free stuff. :soccer:")
   } else {
-    message.reply("Item not found!")
+    mess.reply("Item not found!")
     return;
   }
   if (slot === 1) {
@@ -118,12 +118,12 @@ function shopItemBuy(mess, item, slot) {
   } else if (slot === 6) {
     var alp = "F";
   } else {
-    message.reply("Invalid Slot!")
+    mess.reply("Invalid Slot!")
     return;
   }
   sql.get(`SELECT * FROM shopitem WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE userId SET item${alp} = "${item}" WHERE userId = "${mess.author.id}"`)
-    message.reply("Item " + item + " was purchased for slot " + slot)
+    mess.reply("Item " + item + " was purchased for slot " + slot)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
