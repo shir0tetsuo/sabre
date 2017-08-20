@@ -85,12 +85,10 @@ function scoreInit(mess) { // Convert message into mess
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
-function shopEcho(mess) {
+function shopInit(mess) {
   sql.get(`SELECT * FROM shopitem WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO shopitem (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [mess.author.id, 0, 0, 0, 0, 0, 0]);
-    } else {
-      var items = `SLOT1: ${row.itemA} SLOT2: ${row.itemB} SLOT3: ${row.itemC} SLOT4: ${row.itemD} SLOT5: ${row.itemE} SLOT6: ${row.itemF}`
     }
   }).catch(() => { // Error message generates new table instead
     console.error;
@@ -470,7 +468,7 @@ client.on("message", (message) => {
     let levelshop = "Error"
     let items = "\u200b"
     let shopcmds = "\u200b"
-    shopEcho(message);
+    shopInit(message);
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 250) {
@@ -503,7 +501,7 @@ client.on("message", (message) => {
             .addField(`:large_orange_diamond: Level Price: __**250 Tickets**__ or __**1024 Bytes**__`, `${eticketmsg}\n${ebytemsg}`)
             .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
-            .addField(`${shopcmds}`)
+            .addField(`Other things to do`, `${shopcmds}`)
         message.author.send({ embed });
       }); // end row data definition
     } // end Sabre Shop help page
