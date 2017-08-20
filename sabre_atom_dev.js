@@ -501,8 +501,10 @@ client.on("message", (message) => {
         sql.get(`SELECT * FROM scores WHERE userId = "${message.mentions.members.first().id}"`).then(row => {
           sql.run(`UPDATE scores SET tickets = ${row.tickets*1 + jackpot.tickets} WHERE userId = ${message.mentions.members.first().id}`)
         })
-      }).then()
-      sql.run(`UPDATE makeitjacky SET tickets = 100 WHERE place = "here"`)
+      }).then(row => {
+        sql.run(`UPDATE makeitjacky SET tickets = 100 WHERE place = "here"`)
+      })
+
     } else {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (row.tickets >= 5) {
@@ -638,7 +640,6 @@ client.on("message", (message) => {
       let seed = devhandle[3]
       message.reply("Developer Command was Run. Seeded user with " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
-      return;
     } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       let seed = devhandle[2]
@@ -646,7 +647,6 @@ client.on("message", (message) => {
       console.log(chalk_dat(seed))
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
-      return;
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       let seed = devhandle[2]
@@ -654,7 +654,6 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
       console.log(chalk_dat(seed))
       sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
-      return;
     } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
       message.reply("``Developer Command was Run. This command should not be used again.``")
       sql.run("CREATE TABLE IF NOT EXISTS makeitjacky (place TEXT, tickets INTEGER)").then(() => {
