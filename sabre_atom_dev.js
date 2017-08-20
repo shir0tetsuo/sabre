@@ -485,6 +485,7 @@ client.on("message", (message) => {
         }
         if (row.level === 0) {
           var levelshop = ":lock: You need to buy a level first!"
+          var shopcmds = "\u200b"
         }
         //uniq11
         if (row.level >= 1) {
@@ -502,7 +503,7 @@ client.on("message", (message) => {
             .addField(`:large_orange_diamond: Level Price: __**250 Tickets**__ or __**1024 Bytes**__`, `${eticketmsg}\n${ebytemsg}`)
             .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
-            .addField(`${items}`, `${shopcmds}`)
+            .addField(`${shopcmds}`)
         message.author.send({ embed });
       }); // end row data definition
     } // end Sabre Shop help page
