@@ -766,11 +766,11 @@ client.on("message", (message) => {
       sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.mentions.members.first().id}`)
     } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
-      var seed = devhandle[2]*1
+      var seed = devhandle[2]
       scoreInit(message)
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
       console.log(chalk_dat(seed))
-      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = "${message.author.id}"`)
+      sql.run(`UPDATE scores SET tickets = "${seed*1}" WHERE userId = "${message.author.id}"`)
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       var seed = devhandle[2]*1
