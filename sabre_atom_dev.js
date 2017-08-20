@@ -267,8 +267,8 @@ client.on("message", message => {
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
   scoreInit(message);
-  scanKeyword(message);
   scoreUpBits(message);
+  scanKeyword(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
   if (!message.content.startsWith(prefix)) return;
   if (message.member.roles.has(config.role.alaska_oops_nolvlup)) return;
