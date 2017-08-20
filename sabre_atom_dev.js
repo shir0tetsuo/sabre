@@ -201,7 +201,7 @@ function scanKeyword(mess) {
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
     console.log(au.member.displayName, " said the following.", au.guild.name, au.channel.name)
-    console.log(chalk.red(au.content))
+    console.log(chalk.yellow(au.content))
     au.channel.send("``CLASSIFIED`` " + au.author + " 20 " + chatBit + " redacted")
     return;
   }
