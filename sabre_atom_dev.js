@@ -211,7 +211,7 @@ function scanKeyword(mess) {
     mess.delete()
     console.log(au.member.displayName, " said the following.", au.guild.name, au.channel.name)
     console.log(chalk_err(au.content))
-    scoreDownBits(au, 20)
+    scoreDownBits(au, 21)
     au.channel.send("``CLASSIFIED`` " + au.author + " 20" + chatBit + " redacted")
     return;
   }
