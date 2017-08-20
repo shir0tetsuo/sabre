@@ -21,6 +21,7 @@ const keys = require("./token.json") // Secret Keys
 const rateme = require("./sabre_rateme.json") // Game
 const roast = require("./sabre_roast.json") // Game
 const jokes = require("./sabre_jokes.json") // Game
+const uhoh = require("./shadowshadow.json")
 const help = require("./sabre_helpfile.json") // Core help file
 // Patch Memory ////////////////////////////////////////////////////////////////
 //var sys = require('sys');
@@ -193,9 +194,7 @@ function scoreDisplay(mess) {
   })
 }
 function ShadowsWord(mess, type) {
-  const troubleA = [
-    'Ỏ̷̀̿̉̑̓̀҉̢̞̬̖̩͙͉̮̮͔͖͉͈̝̹̣͙̥ḫ̻̺̹̳͈͇̺͖̽͋̐̑ͧ̿̐ͯ̿͜͟h̵͕͍̰̣̻̬̰̩ͯ̓͐̈̏͛ͩ͂́͌̍ͩ̃́͝͠h͚̮̪͇̹̺̽̇͛͛ͭ̈ͣ̈́ͭ̾̅̐́͘͠ ͛̃̋̐͌̂̓ͮ̿ͤ̄̽ͦ͐͋ͫ̈́̚҉̸̴̭̙͇̯͕̗̞͍̟̙͘N̴̹̝̗͎̯͙̯̦̱ͫ͐͛̀ͯ̿ͩͯͫͧ̄̑͘ͅȏͨ̏̍̓̉̈́҉̵̮̳̤͓͙̣̫̞͔̞̙̥͔̭͍̻̞͇̯ơ̮͔̩̦̘̺͚̞̱̮͙̩̤͕͌̉̌̿̑̂ͯ͂ͯ̍͌ͥͧ͆͗͋͟͠ͅő̴̑̐̋͡͏̢̛̬͕͖̝̹͈͉̥ơ̢̗̺̠͍͖ͣ͌ͥͥͥ͋ͣ̋̇̒͂͌͊̒̀͝͝!̶̛̰̟̩̰͉̲̘̼̟̜͎̥̰̟̉ͩ̋ͪͦ̐̌̀', 'O̴̢̗̰͖̫̱̮͕͙͒̉ͫͨ̊ͫ͛͛͌͂̀̿͆̔͘͜͟ͅȟ̇̄́ͣͮ̏̍͏̹̗͇̮̰͔̮͔͘͠ ̢̼̦͕̤̞͚̭̯̤̘̹͎̝̫͙̙̘͆ͦ̓̚͝͠B̢̽̑̈ͬ̓͆ͭ̉̂͠҉̨̛̰̩̮͓̼u̦͍͉̲̰̹̲͔͉͙͍͚̹̩͎̗̺͖ͧ̒̅͂ͧ̂̓̅̈̅ͭ͛́͢͜͝l̨̆̎͒̅̓͛ͦ́͗̃̈́͏̛͇̰̪̦͚͇͚̀l̸̴͖͖͍̰̖̮͖̼̝͖͉̞ͬ͂ͧͮ͗̾ͦ͆̈̈͒̄ͫͣ̐̚oͣ͑̌ͭ͂̓̈̒̓̌͠͏̘͕̬̦̱͍̹͇͈̹͍̻̫ċ̲̼̯̭͙̘͓ͯ͗̌͝͝͠k̡̛͈͇̞̼͓̞̦̙̱͉̗̣̿̓́̓̀͜s̛̓ͯ̋̆̍͏̖̹͙̦̗̦͖̻͙̣̣̘͘͜!͉̖̠̦͖͇̫̺̟̼̺͙̪̙̬̥͔̺͊̃̉̅̀̋ͨͥ̒̓͐̓ͨ̀̚͞', 'D̜͈͙̱̬̪̱̹̣̪̜̹̻̜ͤͯͫ̐̿̈́ͣ̌͌̉ͨͫ̉̓ͨ͌ͫ̀͘͟͝ą̷̲̖̟̝͓͎͖̫͎͓̣̦͍͍̜̪̰̏ͪ̈̓ͬ͐̌̇̏̾͋ͩ̒͗̈̽̀ͧ͘͟m̸͉͍̠̝͉̒͗̍̾̾ͣ̐̄̄̎ͨ̀͜͡͝ͅͅn̢̝͚̖͍̫̞̞͍̉ͦͨͪͯͤͪ͢͜͝ ̖̯̝̼̗̱͓͉̫ͫ̐ͩ̉́͟S̛͖̪̳͉̱͍͕̼͙͓̀̽ͬ̋ͬ́́͜ͅǫ̵̷̊̉͑͢͏̬̖͚̼̜̳̳͎̟͇̬͙̰̗͖͓̗̤ͅņ̖͇̗̟̥̻̺̲ͩͨͣ͂ͤ́̒̐͂̄ͭͩ̍̋̀̚̕̕͡!̛͚̮̬͎̭̤̖͕͕̹̮̲̆͒̈́͑̇͛̄ͨͪͯ͘͜ͅ'
-  ]
+
   //<Message>.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
   //////////////////////////////////////////////////////////////////////////////
   if (mess.author.id !== config.perUser.ownerID) {
@@ -204,15 +203,16 @@ function ShadowsWord(mess, type) {
     mess.reply("``Access Denied`` No users mentioned")
   } else {
     let member = mess.mentions.members.first()
+    var cool = uhoh.strings[Math.floor(Math.random() * uhoh.strings.length)]
     if (type === "oops") {
-      mess.reply("``Access Granted`` " + "```markdown\n\n" + {troubleA[Math.floor(Math.random() * troubleA.length)]} + " " + member.displayName + " is in trouble!```").then(function (mess) {
+      mess.reply("``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " is in trouble!```").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
       })
       let oopsrole = mess.guild.roles.get(config.role.alaska_oops_nolvlup);
       member.addRole(oopsrole);
     } else if (type = "notmeproblem") {
-      mess.reply("``Access Granted`` ```markdown\n\n" + {troubleA[Math.floor(Math.random() * troubleA.length)]} + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n\n```").then(function (mess) {
+      mess.reply("``Access Granted`` ```markdown\n\n" + cool.text + " " + member.displayName + " Was sent to A place where grass doesn't grow.\n\n```").then(function (mess) {
        mess.react("☢")
        mess.react("☣")
      })
