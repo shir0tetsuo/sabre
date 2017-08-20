@@ -35,6 +35,7 @@ let ddstc = "Developer data sent to console."
 let forbidden = "Forbidden Command! "
 let talkedRecently = new Set();
 let speedingTicket = new Set();
+let rewardWord = new Set();
 // Point System Related
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
@@ -267,6 +268,11 @@ function scanKeyword(mess) {
   }
   if (rewarded.some(word => mess.content.includes(word))) {
     mess.react("🌠")
+    if (rewardWord.has(mess.author.id)) return;
+    rewardWord.add(mess.author.id);
+    setTimeout(() => {
+      rewardWord.delete(mess.author.id);
+    }, 300000) // 5 Minutes
     scoreUpTicket(mess, 5)
     mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
   }
