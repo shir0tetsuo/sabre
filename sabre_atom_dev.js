@@ -768,14 +768,14 @@ client.on("message", (message) => {
       scoreInit(message)
       message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
       console.log(chalk_dat(seed))
-      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = ${message.author.id}`)
+      sql.run(`UPDATE scores SET tickets = ${seed} WHERE userId = "${message.author.id}"`)
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       var seed = devhandle[2]*1
       scoreInit(message)
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
       console.log(chalk_dat(seed))
-      sql.run(`UPDATE scores SET level = ${seed} WHERE userId = ${message.author.id}`)
+      sql.run(`UPDATE scores SET level = ${seed} WHERE userId = "${message.author.id}"`)
     } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
       message.reply("``Developer Command was Run. This command should not be used again.``")
       sql.run("CREATE TABLE IF NOT EXISTS makeitjacky (place TEXT, tickets INTEGER)").then(() => {
