@@ -200,19 +200,7 @@ function ShadowsWord(mess, type) {
   } else {
     let member = mess.mentions.members.first()
     if (type === "oops") {
-      mess.reply("``Access Granted`` " + member + " now has Oops" + { embed:
-        color: 0xFFC400,
-        timestamp: new Date(),
-        footer: {
-          text: "The Power of ShadowShadow Was Summoned"
-        },
-        fields: [
-          {
-            name: "\u200b",
-            value: "```markdown\n\n[!]: Something Weird " + member.member.displayName
-          }
-        ]
-      }).then(function (mess) {
+      mess.reply("``Access Granted`` " + member + " now has Oops").then(function (mess) {
         mess.react("🚷")
         mess.react("🎟")
       })
