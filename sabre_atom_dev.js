@@ -99,26 +99,27 @@ function shopInit(mess) {
   })
 }
 function shopItemBuy(mess, item, slot) {
+  // slots
+  if (slot === "1") {
+    var alp = "A";
+  } else if (slot === "2") {
+    var alp = "B";
+  } else if (slot === "3") {
+    var alp = "C";
+  } else if (slot === "4") {
+    var alp = "D";
+  } else if (slot === "5") {
+    var alp = "E";
+  } else if (slot === "6") {
+    var alp = "F";
+  } else {
+    mess.reply("Invalid Slot!")
+    return;
+  } // items
   if (item === "2131") {
     mess.reply("This is free! Yay free stuff. :soccer:")
   } else {
     mess.reply("Item not found!")
-    return;
-  }
-  if (slot === 1) {
-    var alp = "A";
-  } else if (slot === 2) {
-    var alp = "B";
-  } else if (slot === 3) {
-    var alp = "C";
-  } else if (slot === 4) {
-    var alp = "D";
-  } else if (slot === 5) {
-    var alp = "E";
-  } else if (slot === 6) {
-    var alp = "F";
-  } else {
-    mess.reply("Invalid Slot!")
     return;
   }
   sql.get(`SELECT * FROM shopitem WHERE userId = "${mess.author.id}"`).then(row => {
