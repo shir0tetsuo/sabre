@@ -767,7 +767,7 @@ client.on("message", (message) => {
     } else if (devarg === "selfseedT" && message.member.roles.has(config.role.alaska_specialdev)) {
       if (devhandle[2] === undefined) return;
       scoreInit(message)
-      message.reply("Developer Command was Run. Self-Seeded " + seed + curren)
+      message.reply("Developer Command was Run. Self-Seeded " + devhandle[2]*1 + curren)
       console.log(chalk_dat(devhandle[2]*1))
       sql.run(`UPDATE scores SET tickets = "${devhandle[2]*1}" WHERE userId = "${message.author.id}"`)
     } else if (devarg === "selfseedL" && message.member.roles.has(config.role.alaska_specialdev)) {
