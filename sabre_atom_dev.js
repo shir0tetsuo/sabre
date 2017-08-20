@@ -123,6 +123,7 @@ function shopItemBuy(mess, item, slot) {
   }
   sql.get(`SELECT * FROM shopitem WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE userId SET item${alp} = "${item}" WHERE userId = "${mess.author.id}"`)
+    message.reply("Item " + item + " was purchased for slot " + slot)
   })
 }
 ////////////////////////////////////////////////////////////////////////////////
