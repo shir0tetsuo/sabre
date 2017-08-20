@@ -90,7 +90,7 @@ function shopEcho(mess) {
     if (!row) {
       sql.run("INSERT INTO shopitem (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [mess.author.id, 0, 0, 0, 0, 0, 0]);
     } else {
-      var items = `${row.itemA} ${row.itemB} ${row.itemC} ${row.itemD} ${row.itemE} ${row.itemF}`
+      var items = `SLOT1: ${row.itemA} SLOT2: ${row.itemB} SLOT3: ${row.itemC} SLOT4: ${row.itemD} SLOT5: ${row.itemE} SLOT6: ${row.itemF}`
     }
   }).catch(() => { // Error message generates new table instead
     console.error;
