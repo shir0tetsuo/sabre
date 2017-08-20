@@ -229,6 +229,8 @@ function ShadowsWord(mess, type) {
       let muted = mess.guild.roles.find('name', 'Muted')
       let grounded = mess.guild.roles.find('name', 'Grounded')
       member.setRoles([badboy, muted, grounded]).catch(console.error)
+    } else if (type === "echo") {
+      console.log(member.roles)
     } else {
       mess.reply("``Available Commands: oops, notmeproblem, mute + @user``");
     }
@@ -870,7 +872,7 @@ client.on("message", (message) => {
             },
             {
               name: "Owner Commands",
-              value: "shadow shadow oops/notmeproblem, poke (Jackpot Reset Switch)"
+              value: "shadow shadow oops/notmeproblem/mute, poke (Jackpot Reset Switch)"
             }
           ]
         }})
