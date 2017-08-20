@@ -468,7 +468,7 @@ client.on("message", (message) => {
           var levelshop = ":lock: You need to buy a level first!"
         }
         if (row.level >= 1) {
-          var levelshop = "Coming Soon!"
+          var levelshop = "**Lv 1** - "
         }
         const embed = new Discord.RichEmbed()
             .setTitle(':left_luggage: Sabre Level Shop!')
@@ -784,10 +784,15 @@ client.on("message", (message) => {
       message.reply("Developer Command was Run. Self-Seeded Lvl" + seed)
       console.log(chalk_dat(seed))
       sql.run(`UPDATE scores SET level = ${seed} WHERE userId = "${message.author.id}"`)
-    } else if (devarg === "poke" && message.author.id === config.perUser.ownerID) {
+    } else if (devarg === "poke_jackpot" && message.author.id === config.perUser.ownerID) {
       message.reply("``Developer Command was Run. This command should not be used again.``")
       sql.run("CREATE TABLE IF NOT EXISTS makeitjacky (place TEXT, tickets INTEGER)").then(() => {
         sql.run("INSERT INTO makeitjacky (place, tickets) VALUES (?, ?)", ["here", 100]);
+      })
+    } else if (devarg === "poke_lshop") {
+      message.reply("``Developer Command was Run. This command should not be used again.``")
+      sql.run("CREATE TABLE IF NOT EXISTS shopitem (userId TEXT, itemA TEXT, itemB TEXT, itemC TEXT, itemD TEXT, itemE TEXT, itemF TEXT)").then(() => {
+        sql.run("INSERT INTO shopitem (userId, itemA, itemB, itemC, itemD, itemE, itemF) VALUES (?, ?, ?, ?, ?, ?, ?)", [message.author.id, 0, 0, 0, 0, 0, 0]);
       })
     } else if (devarg === "inspect" && message.member.roles.has(config.role.alaska_botdev)) {
       if (message.mentions.members.first() === undefined) return;
@@ -954,7 +959,7 @@ client.on("message", (message) => {
             },
             {
               name: "Owner Commands",
-              value: "shadow shadow oops/notmeproblem/mute/echo, poke (Jackpot Reset Switch), prototype (Make console see whatever is tagged)"
+              value: "shadow shadow oops/notmeproblem/mute/echo, poke_jackpot/lshop, prototype (Make console see whatever is tagged)"
             }
           ]
         }})
