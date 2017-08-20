@@ -197,11 +197,12 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
+  scoreDownBits(mess, 20)
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === config.guild.ALASKA) {
     mess.delete()
-    console.log(chalk.red(au.content))
-    au.channel.send("``CLASSIFIED`` " + au.author + " 10 " + chatBit + " redacted")
-    scoreDownBits(au, 10)
+    console.log(au.member.displayName, " said the following.", au.guild.name, au.channel.name)
+    console.log(chalk.brightRed(au.content))
+    au.channel.send("``CLASSIFIED`` " + au.author + " 20 " + chatBit + " redacted")
     return;
   }
 }
@@ -255,8 +256,8 @@ client.on("message", message => {
   // Return Conditions: DM or Null Object
   if (message.channel.type === "dm") return;
   if (message.member === null) return; // Should catch nulls
-  scanKeyword(message);
   scoreInit(message);
+  scanKeyword(message);
   scoreUpBits(message);
   // Commands with users that do not have a prefix or with nolvlup are disabled
   if (!message.content.startsWith(prefix)) return;
