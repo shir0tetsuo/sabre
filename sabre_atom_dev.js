@@ -543,7 +543,7 @@ client.on("message", (message) => {
             .setFooter(`Sabre Shop Menu`)
             .setTimestamp()
             .setThumbnail('https://i.imgur.com/8ZBnvSt.png')
-            .addField(`:large_orange_diamond: Level Price: __**250 Tickets**__ or __**1024 Bytes**__`, `${eticketmsg}\n${ebytemsg}`)
+            .addField(`:large_orange_diamond: Level Price: __**${lvrequirement}**__ or __**${cbrequirement} Bytes**__`, `${eticketmsg}\n${ebytemsg}`)
             .addField('\u200b', '\u200b')
             .addField(`Level ${row.level} Shop`, `${levelshop}`)
             .addField(`Other things to do`, `${shopcmds}`)
