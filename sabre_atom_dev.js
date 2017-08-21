@@ -247,13 +247,25 @@ function scoreDisplay(mess) {
     } // end AMBA achievement
   })
 }
+////////////////////////////////////////////////////////////////////////////////
 //uniq8
 function scanKeyword(mess) {
+  const cringeworthy = ["dad", "Dad", "DAD", "daddy", "Daddy", "DADDY"]
   const summon_night = ["?night", "?Night", "?NIGHT"]
   const rewarded = ["CLASSIFIED", "classified", "Classified"]
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
+  if (cringeworthy.some(word => mess.content.includes(word))) {
+    mess.react("💢")
+    mess.react("👎")
+    mess.react("🚫")
+    mess.react("📴")
+    mess.react("😡")
+    au.reply(`${mess.author} lost 15${chatBit}. Stop saying daddy. It's weird.`)
+    scoreDownBits(au, 16)
+  }
   if (summon_night.some(word => mess.content.includes(word))) {
+    // May add function to message phone?
     mess.channel.send(`<@!${config.perUser.ownerID}>`)
     console.log(chalk.yellowBright("Your presence is required in", mess.guild.name, mess.channel.name))
     console.log(chalk.yellowBright(mess.member.displayName, ":", mess.content))
@@ -272,11 +284,12 @@ function scanKeyword(mess) {
     rewardWord.add(mess.author.id);
     setTimeout(() => {
       rewardWord.delete(mess.author.id);
-    }, 300000) // 5 Minutes
+    }, 600000) // 10 Minutes
     scoreUpTicket(mess, 5)
     mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
   }
 }
+////////////////////////////////////////////////////////////////////////////////
 function ShadowsWord(mess, type) {
 
   //<Message>.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
