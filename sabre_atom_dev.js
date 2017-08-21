@@ -252,7 +252,7 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const summon_night = ["?night", "?Night", "?NIGHT"]
   const rewarded = ["CLASSIFIED", "classified", "Classified"]
-  const banned = ["fineprint", "FINEPRINT", "Fineprint", "AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua", "sapphire", "SAPPHIRE", "Sapphire", "project python", "Project Python", "project Python", "PYTHON", "nemesis", "Nemesis", "NEMESIS", "Sentinel", "sentinel", "SENTINEL", "project pyramid", "project Pyramid", "PYRAMID"]
+  const banned = ["fineprint", "FINEPRINT", "Fineprint", "AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua", "sapphire", "SAPPHIRE", "Sapphire", "project python", "Project Python", "project Python", "PYTHON", "nemesis", "Nemesis", "NEMESIS", "Sentinel", "sentinel", "SENTINEL", "project pyramid", "project Pyramid", "PYRAMID", "john", "John", "JOHN", "deen", "Deen", "DEEN", "silenced", "Silenced", "SILENCED", "s1lenced", "S1lenced", "S1LENCED", "silencer", "Silencer", "SILENCER", "white owl", "White Owl", "WHITE OWL"]
   const au = mess
   if (summon_night.some(word => mess.content.includes(word))) {
     // May add function to message phone?
