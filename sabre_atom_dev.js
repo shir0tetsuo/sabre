@@ -281,9 +281,13 @@ function ShadowsWord(mess, type) {
 
   //<Message>.channel.send(`${responses[Math.floor(Math.random() * responses.length)]}`);
   //////////////////////////////////////////////////////////////////////////////
-  if (mess.author.id !== config.perUser.ownerID) {
-    mess.reply("``Access Denied`` User ID is not Owner")
-  } else if (mess.mentions.members.first() === undefined){
+  if (mess.author.id === config.perUser.ownerID || mess.author.id === config.perUser.Jona || mess.author.id === config.perUser.Nick) {
+    mess.reply("``Access Granted`` User ID was recognized")
+  } else {
+    mess.reply("``Access Denied`` User ID is invalid")
+    return;
+  }
+    if (mess.mentions.members.first() === undefined){
     mess.reply("``Access Denied`` No users mentioned")
   } else { //uniq10
     let member = mess.mentions.members.first()
