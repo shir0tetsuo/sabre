@@ -314,6 +314,8 @@ function ShadowsWord(mess, type) {
       member.setRoles([badboy, muted, grounded]).catch(console.error)
     } else if (type === "echo") {
       console.log(member.roles)
+    } else if (type === "ctrl-z") {
+      console.log("To Un-Do OOPS")
     } else {
       mess.reply("``Available Commands: oops, notmeproblem, mute, echo + @user``");
     }
@@ -511,12 +513,15 @@ client.on("message", (message) => {
     let shopcmds = "\u200b"
     if (sshop[1] === undefined) {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-        if (row.tickets >= 250) {
+        // level up math
+        var lvrequirement = row.level*1 * 50 + 250
+        var cbrequirement = row.level*1 * 512 + 1024
+        if (row.tickets >= lvrequirement) {
           var eticketmsg = ":unlock: You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
         } else {
           var eticketmsg = ":lock: ~~You don't have enough tickets!~~"
         }
-        if (row.chatBits >= 1024) {
+        if (row.chatBits >= cbrequirement) {
           var ebytemsg = ":unlock: You have enough bytes to buy a level! ``" + prefix + "sshop buy level bytes``"
         } else {
           var ebytemsg = ":lock: ~~You don't have enough bytes!~~"
@@ -551,7 +556,9 @@ client.on("message", (message) => {
     if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "tickets") {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-        if (row.tickets >= 250) {
+        var lvrequirement = row.level*1 * 50 + 250
+        var cbrequirement = row.level*1 * 512 + 1024
+        if (row.tickets >= lvrequirement) {
           message.channel.send({embed: {
             color: 0x3FFF6D,
             timestamp: new Date(),
@@ -565,7 +572,7 @@ client.on("message", (message) => {
             fields: [
               {
                 name: "Cha-Ching!",
-                value: `250${curren} was used. ${message.member.displayName} Levelled Up!`
+                value: `${lvrequirement}${curren} was used. ${message.member.displayName} Levelled Up!`
               },
               {
                 name: "\u200b",
@@ -574,7 +581,7 @@ client.on("message", (message) => {
             ]
           }})
           scoreUpLevel(message, 1)
-          scoreDownTicket(message, 250)
+          scoreDownTicket(message, lvrequirement)
           console.log(chalk.bgMagenta(message.member.displayName, "levelled up using tickets"))
         } else {
           message.reply("You don't have enough " + curren + "!")
@@ -585,7 +592,9 @@ client.on("message", (message) => {
     } else if (sshop[1] === "buy" && sshop[2] === "level" && sshop[3] === "bytes") {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-        if (row.chatBits >= 1024) {
+        var lvrequirement = row.level*1 * 50 + 250
+        var cbrequirement = row.level*1 * 512 + 1024
+        if (row.chatBits >= cbrequirement) {
           message.channel.send({embed: {
             color: 0x3FFF6D,
             timestamp: new Date(),
@@ -599,7 +608,7 @@ client.on("message", (message) => {
             fields: [
               {
                 name: "Cha-Ching!",
-                value: `1024${chatBit} was used. ${message.member.displayName} Levelled Up!`
+                value: `${cbrequirement}${chatBit} was used. ${message.member.displayName} Levelled Up!`
               },
               {
                 name: "\u200b",
@@ -608,7 +617,7 @@ client.on("message", (message) => {
             ]
           }})
           scoreUpLevel(message, 1)
-          scoreDownBits(message, 1024)
+          scoreDownBits(message, cbrequirement)
           console.log(chalk.bgMagenta(message.member.displayName, "levelled up using Bytes"))
         } else {
           message.reply("You don't have enough " + chatBit + "!")
