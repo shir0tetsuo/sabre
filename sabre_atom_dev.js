@@ -250,20 +250,10 @@ function scoreDisplay(mess) {
 ////////////////////////////////////////////////////////////////////////////////
 //uniq8
 function scanKeyword(mess) {
-  const cringeworthy = ["dad", "Dad", "DAD", "daddy", "Daddy", "DADDY"]
   const summon_night = ["?night", "?Night", "?NIGHT"]
   const rewarded = ["CLASSIFIED", "classified", "Classified"]
   const banned = ["AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
   const au = mess
-  if (cringeworthy.some(word => mess.content.includes(word))) {
-    mess.react("💢")
-    mess.react("👎")
-    mess.react("🚫")
-    mess.react("📴")
-    mess.react("😡")
-    au.reply(`${mess.author} lost 15${chatBit}. Stop saying daddy. It's weird.`)
-    scoreDownBits(au, 16)
-  }
   if (summon_night.some(word => mess.content.includes(word))) {
     // May add function to message phone?
     mess.channel.send(`<@!${config.perUser.ownerID}>`)
