@@ -252,7 +252,7 @@ function scoreDisplay(mess) {
 function scanKeyword(mess) {
   const summon_night = ["?night", "?Night", "?NIGHT"]
   const rewarded = ["CLASSIFIED", "classified", "Classified"]
-  const banned = ["fineprint", "FINEPRINT", "Fineprint", "AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua"]
+  const banned = ["fineprint", "FINEPRINT", "Fineprint", "AMBA", "amba", "Amba", "BOMB", "bomb", "Bomb", "terrorist", "Terrorist", "TERRORIST", "Special Projects", "special projects", "noctua", "NOCTUA", "Noctua", "sapphire", "SAPPHIRE", "Sapphire", "project python", "Project Python", "project Python", "PYTHON", "nemesis", "Nemesis", "NEMESIS", "Sentinel", "sentinel", "SENTINEL", "project pyramid", "project Pyramid", "PYRAMID", "2321"]
   const au = mess
   if (summon_night.some(word => mess.content.includes(word))) {
     // May add function to message phone?
@@ -321,6 +321,8 @@ function ShadowsWord(mess, type) {
       member.setRoles([badboy, muted, grounded]).catch(console.error)
     } else if (type === "echo") {
       console.log(member.roles)
+    } else if (type === "purge") {
+      console.log("To Purge Messages")
     } else if (type === "ctrl-z") {
       console.log("To Un-Do OOPS")
     } else {
@@ -681,7 +683,8 @@ client.on("message", (message) => {
       message.channel.send(forbidden + "This is an Upper Class Citizen command.")
     } else {
       var joke = jokes.strings[Math.floor(Math.random() * jokes.strings.length)]
-      message.channel.send("Okay okay. Here's a joke. " + joke.text)
+    //  message.channel.send("Okay okay. Here's a joke. " + joke.text)
+      message.reply("This command has been disabled!")
     }
   // Marco /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "marco")) {
@@ -1162,6 +1165,8 @@ client.on("message", (message) => {
           }
         ]
       }}) // end devteam
+      /*let messagecount = parseInt(numberofmessages);
+  message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));*/
     ////////////////////////////////////////////////////////////////////////////
   // ROAST /////////////////////////////////////////////////////////////////////
   } else if (message.content.startsWith(prefix + "roast")) {
@@ -1174,6 +1179,7 @@ client.on("message", (message) => {
       return;
     }
     var roastc = roast.strings[Math.floor(Math.random() * roast.strings.length)]
-    message.channel.send(message.mentions.members.first() + ", " + roastc.text)
+    // message.channel.send(message.mentions.members.first() + ", " + roastc.text)
+    message.reply("This command has been disabled!")
   } //else if (message.content.startsWith)
 }); // may break
