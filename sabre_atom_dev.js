@@ -515,7 +515,7 @@ client.on("message", (message) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         // level up math
         var lvrequirement = row.level*1 * 50 + 250
-        var cbrequirement = row.level*1 * 512 + 1024
+        var cbrequirement = row.level*1 * 128 + 1024
         if (row.tickets >= lvrequirement) {
           var eticketmsg = ":unlock: You have enough tickets to buy a level! ``" + prefix + "sshop buy level tickets``"
         } else {
@@ -557,7 +557,7 @@ client.on("message", (message) => {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         var lvrequirement = row.level*1 * 50 + 250
-        var cbrequirement = row.level*1 * 512 + 1024
+        var cbrequirement = row.level*1 * 128 + 1024
         if (row.tickets >= lvrequirement) {
           message.channel.send({embed: {
             color: 0x3FFF6D,
@@ -593,7 +593,7 @@ client.on("message", (message) => {
       scoreInit(message);
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         var lvrequirement = row.level*1 * 50 + 250
-        var cbrequirement = row.level*1 * 512 + 1024
+        var cbrequirement = row.level*1 * 128 + 1024
         if (row.chatBits >= cbrequirement) {
           message.channel.send({embed: {
             color: 0x3FFF6D,
