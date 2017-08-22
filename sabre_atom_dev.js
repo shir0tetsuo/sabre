@@ -323,6 +323,8 @@ function ShadowsWord(mess, type) {
       console.log(member.roles)
     } else if (type === "purge") {
       console.log("To Purge Messages")
+    } else if (type === "nick") {
+      mess.channel.send("<@!133091272406597632> <@!133091272406597632> <@!133091272406597632> <@!133091272406597632> <@!133091272406597632>")
     } else if (type === "ctrl-z") {
       console.log("To Un-Do OOPS")
     } else {
