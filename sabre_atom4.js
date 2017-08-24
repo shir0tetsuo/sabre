@@ -20,7 +20,7 @@ fs.readdir('./main/', (err, files) => { // ** main
   log(`${files.length} Files Found in main`)
   files.forEach(f => {
     let fileread = require(`./main/${f}`);
-    log(`Loading Target: ${fileread.help.name}.`)
+    log(`Loading Plug: ${fileread.help.name}.`)
     client.commands.set(fileread.help.name, fileread);
     fileread.conf.aliases.forEach(alias => {
       client.aliases.set(alias, fileread.help.name);
