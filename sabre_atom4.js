@@ -2,13 +2,14 @@
 // 0.3.7.10E --> 0.4.0.0+
 // Based on AnIdiotsGuide's Tutorial Bot
 // Constraints
+const settings = require('./settings.json')
 const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 const fs = require("fs"); // filesystem r/w enabled
 require('./sys/eventLoader')(client); // ** sys/eventLoader
 const log = message => {
-  console.log(chalk.brightRed(`Sa04: ${message}`))
+  console.log(chalk.redBright(`Sa04: ${message}`))
   console.log(new Date())
 }
 // main -- commands
