@@ -1,4 +1,5 @@
 const settings = require('../settings.json');
+const chalk = require('chalk');
 exports.run = (client, message, params) => {
   if (!params[0]) return;
   const detail = message.content.split(/\s+/g);
