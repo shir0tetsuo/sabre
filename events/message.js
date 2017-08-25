@@ -117,8 +117,9 @@ module.exports = message => {
   if (message === null) return;
   // Line below ensures Sabre will not break due to role permission reading
   if (message.channel.type === "dm") {
-  message.reply("Please use A Server!")
-  return;
+    message.react("🚫")
+    message.reply("Please use a Server!")
+    return;
   }
   // Classified should go here
   // Disable the ability to use Sabre with SQL (future use)
