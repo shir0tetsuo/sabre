@@ -96,7 +96,7 @@ function scanKeyword(mess) {
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"))
     console.log(chalk.gray(msg.content))
     msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
-    scoreDownBits(au, 22)
+    scoreDownBits(msg, 22)
     return;
   }
 
