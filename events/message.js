@@ -12,7 +12,7 @@ let chatBit = ":eye_in_speech_bubble:"
 // Score Init, +Tickets, -Tickets, +Bits, -Bits
 
 function scoreInit(mess) { // Convert message into mess
-  sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
+  sql.get(`SELECT * FROM scores WHERE userId ="${mess.msgthor.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
     } /*else { // Increment chatBits
@@ -93,9 +93,9 @@ function scanKeyword(mess) {
     mess.delete()
     // Export data here (future use)
     console.log(new Date());
-    console.log(chalk.redBright(au.member.displayName, au.author.tag), chalk.yellowBright("Banned Keyword Detected!"))
-    console.log(chalk.gray(au.content))
-    au.channel.send("`CLASSIFIED` " + au.author + ", 20" + chatBit + " was redacted!")
+    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"))
+    console.log(chalk.gray(msg.content))
+    msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
     scoreDownBits(au, 22)
     return;
   }
@@ -104,8 +104,8 @@ function scanKeyword(mess) {
     mess.react("⚠")
     // Export data here (future use)
     console.log(new Date());
-    console.log(chalk.redBright(au.member.displayName, au.author.tag), chalk.yellowBright("Warning Keyword Detected!"))
-    console.log(chalk.gray(au.content))
+    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"))
+    console.log(chalk.gray(msg.content))
   }
 }
 
