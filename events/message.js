@@ -12,7 +12,7 @@ let chatBit = ":eye_in_speech_bubble:"
 // Score Init, +Tickets, -Tickets, +Bits, -Bits
 
 function scoreInit(mess) { // Convert message into mess
-  sql.get(`SELECT * FROM scores WHERE userId ="${mess.msgthor.id}"`).then(row => {
+  sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
     } /*else { // Increment chatBits
