@@ -1,5 +1,8 @@
-
+const settings = require('../settings.json');
+const chalk = require ('chalk');
 exports.run = function(client, message, args) {
+  console.log(new Date());
+  console.log(chalk.bgRed.black("PURGE RUN"), chalk.bgBlue.black(message.member.displayName, message.content), message.guild.name, message.channel.name)
   let messagecount = parseInt(args.join(' '));
   message.channel.fetchMessages({
     limit: messagecount
