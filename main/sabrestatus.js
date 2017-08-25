@@ -3,7 +3,7 @@ const chalk = require('chalk');
 exports.run = (client, message, params) => {
   if (!params[0]) return;
   const detail = message.content.split(/\s+/g);
-  if (detail[1] === "online" || detail[1] === "idle" || detail[1] === "dnd" || detail[1] === "offline" || detail[1] === "invisible") {
+  if (detail[1] === "online" || detail[1] === "idle" || detail[1] === "dnd" || detail[1] === "invisible") {
     client.user.setStatus(`${detail[1]}`)
     message.reply("`Access Granted` Sabre's Status was Updated.")
     console.log(new Date())
@@ -36,6 +36,6 @@ exports.conf = {
 
 exports.help = {
   name: 'sabrestatus',
-  description: 'Changes Sabre\'s Status. Permission Level 3.',
-  usage: 'sabrestatus [game/online/reset/dnd/idle/invisible/offline] [game-message]'
+  description: 'Changes Sabre\'s Status. PermLVL 3.',
+  usage: 'sabrestatus [game/online/reset/dnd/idle/invisible] [game-message]'
 };

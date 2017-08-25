@@ -16,6 +16,6 @@ exports.conf = {
 
 exports.help = {
   name: 'prototype',
-  description: 'Displays the mentioned object as a snowflake. Permission Level 4.',
+  description: 'Displays the mentioned object as a snowflake. PermLVL 4.',
   usage: 'prototype [mention]'
 };
