@@ -17,7 +17,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 fs.readdir('./main/', (err, files) => { // ** main
   if (err) console.err(err);
-  log(`${files.length} Files Found in main`)
+  log(`${files.length} Plugins Found in main`)
   files.forEach(f => {
     let fileread = require(`./main/${f}`);
     log(`Loading Plug: ${fileread.help.name}.`)
