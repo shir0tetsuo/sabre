@@ -1,4 +1,5 @@
 const settings = require('../settings.json');
+const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (!params[0]) return;
   console.log(chalk.yellow(message.content));
