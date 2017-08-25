@@ -9,7 +9,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['prototype'],
+  aliases: ['prototype', 'proto'],
   permLevel: 4
 };
 
