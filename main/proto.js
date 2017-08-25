@@ -2,7 +2,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (!params[0]) return;
-  console.log(chalk.yellow(message.author.id, message.content), chalk.blueBright(message.guild.name, message.channel.name));
+  console.log(chalk.yellow(message.author.displayName, message.content), chalk.blueBright(message.guild.name, message.channel.name));
   message.reply("`Access Granted` System logged snowflake for object.");
 };
 
