@@ -1,7 +1,6 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
-  if (!params[0]) return;
   // From sabre_atom4
   let permlvl = 0;
   let mod_role = message.guild.roles.find('name', settings.modrolename);
