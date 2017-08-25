@@ -48,6 +48,10 @@ client.reload = command => {
 // Permission Levels
 client.elevation = message => {
   let permlvl = 0;
+  let basic_alaska = message.guild.roles.find('name', settings.basicroleALASKA);
+  let basic_davnet = message.guild.roles.find('name', settings.basicroleDAVNET);
+  if (basic_alaska && message.member.roles.has(basic_alaska.id)) permlvl = 1;
+  if (basic_davnet && message.member.roles.has(basic_davnet.id)) permlvl = 1;
   let mod_role = message.guild.roles.find('name', settings.modrolename);
   let mod_davnet = message.guild.roles.find('name', settings.modrolenameDAVNET);
   if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
