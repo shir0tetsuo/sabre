@@ -8,6 +8,7 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 const fs = require("fs"); // filesystem r/w enabled
 require('./sys/eventLoader')(client); // ** sys/eventLoader
+console.log(chalk.greenBright("System Initialization: Version", settings.version))
 const log = message => {
   console.log(chalk.redBright(`Sa04: ${message}`))
   console.log(new Date())
@@ -17,7 +18,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 fs.readdir('./main/', (err, files) => { // ** main
   if (err) console.err(err);
-  log(`${files.length} Plugins Found in main`)
+  log(`${files.length} Plugins Found in ./main`)
   files.forEach(f => {
     let fileread = require(`./main/${f}`);
     log(`Loading Plug: ${fileread.help.name}.`)
