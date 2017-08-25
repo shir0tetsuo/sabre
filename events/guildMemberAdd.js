@@ -9,9 +9,6 @@ module.exports = member => {
     guild.channels.find('name', 'security-bot').send({embed: {
       color: 0xA3F700,
       timestamp: new Date(),
-      footer: {
-        text: client.user.username + ", Server Time"
-      },
       fields: [
         { //member.user.username
           name: member.user.tag + " (" + member.displayName + ")",
@@ -25,9 +22,6 @@ module.exports = member => {
     guild.channels.find('name', 'classified').send({embed: {
       color: 0xA3F700,
       timestamp: new Date(),
-      footer: {
-        text: client.user.username + ", Server Time"
-      },
       fields: [
         { //member.user.username
           name: member.user.tag + " (" + member.displayName + ")",
