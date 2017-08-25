@@ -115,6 +115,8 @@ module.exports = message => {
   let client = message.client;
   if (message.author.bot) return;
   if (message === null) return;
+  // Line below ensures Sabre will not break due to role permission reading
+  if (message.channel.type === "dm") return;
   // Classified should go here
   // Disable the ability to use Sabre with SQL (future use)
   scoreInit(message);
