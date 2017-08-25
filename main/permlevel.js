@@ -11,6 +11,7 @@ exports.run = (client, message, params) => {
   // EoF sabre_atom4
   console.log(new Date())
   console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
+  console.log(chalk.yellow("System returned:", permlvl))
   message.author.send(`Permission Level: ${permlvl}`)
 };
 
