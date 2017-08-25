@@ -1,3 +1,4 @@
+const settings = require('../settings.json')
 const chalk = require('chalk');
 module.exports = member => {
   console.log(new Date());
