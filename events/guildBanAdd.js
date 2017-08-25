@@ -1,14 +1,14 @@
 const settings = require('../settings.json');
 const chalk = require('chalk');
-module.exports = (guild, user, member) => {
-  console.log(chalk.bgWhite.black(`${member.user.tag} ${member.displayName} was BANNED from ${member.guild.name}.`))
+module.exports = (guild, user) => {
+  console.log(chalk.bgWhite.black(`${user.username} was BANNED from ${guild.name}.`))
   if (guild.id === settings.alaskaguild) {
     guild.channels.find('name', 'classified').send({embed: {
       color: 0xFFA500,
       timestamp: new Date(),
       fields: [
         { //member.user.username
-          name: member.user.tag + " (" + member.displayName + ")",
+          name: user.tag,
           value: "Was just banned!"
         }
       ]
@@ -19,7 +19,7 @@ module.exports = (guild, user, member) => {
       timestamp: new Date(),
       fields: [
         { //member.user.username
-          name: member.user.tag + " (" + member.displayName + ")",
+          name: user.tag,
           value: "Was just banned!"
         }
       ]
