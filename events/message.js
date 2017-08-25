@@ -93,7 +93,7 @@ function scanKeyword(mess) {
     mess.delete()
     // Export data here (future use)
     console.log(new Date());
-    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"), chalk.blueBright(message.guild.name, message.channel.name))
+    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
     msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
     scoreDownBits(msg, 22)
@@ -104,7 +104,7 @@ function scanKeyword(mess) {
     mess.react("⚠")
     // Export data here (future use)
     console.log(new Date());
-    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"), chalk.blueBright(message.guild.name, message.channel.name))
+    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
   }
 }
