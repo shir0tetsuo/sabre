@@ -2,7 +2,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (!params[0]) return;
-  log(`${message.author.DisplayName} ran a command with Level ${permlvl} Access.`)
+  console.log(chalk.red(`${message.author.DisplayName} ran a command with Level ${permlvl} Access.`))
   console.log(chalk.yellow(message.content));
   message.reply("`Access Granted` System logged snowflake for object.");
 };
