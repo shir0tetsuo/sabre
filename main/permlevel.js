@@ -4,9 +4,13 @@ exports.run = (client, message, params) => {
   // From sabre_atom4
   let permlvl = 0;
   let mod_role = message.guild.roles.find('name', settings.modrolename);
+  let mod_davnet = message.guild.roles.find('name', settings.modrolenameDAVNET);
   if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
+  if (mod_davnet = message.member.roles.has(mod_davnet.id)) permlvl = 2;
   let admin_role = message.guild.roles.find('name', settings.adminrolename);
+  let admin_davnet = message.guild.roles.find('name', settings.adminrolenameDAVNET);
   if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
+  if (admin_davnet && message.member.roles.has(admin_davnet.id)) permlvl = 3;
   if (message.author.id === settings.ownerid) permlvl = 4;
   // EoF sabre_atom4
   console.log(new Date())
