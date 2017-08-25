@@ -20,7 +20,7 @@ function scoreInit(mess) { // Convert message into mess
     }*/
   }).catch(() => { // Error message generates new table instead
     console.error;
-    console.log(chalk_err("The system recovered from an error."))
+    console.log(chalk.redBright("The system recovered from an error."))
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
     })
