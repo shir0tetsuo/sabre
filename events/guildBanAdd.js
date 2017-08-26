@@ -1,6 +1,7 @@
 const settings = require('../settings.json');
 const chalk = require('chalk');
 module.exports = (guild, user) => {
+  console.log(new Date());
   console.log(chalk.bgWhite.black(`${user.username} was BANNED from ${guild.name}.`))
   if (guild.id === settings.alaskaguild) {
     guild.channels.find('name', 'classified').send({embed: {
