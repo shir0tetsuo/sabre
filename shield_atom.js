@@ -15,7 +15,7 @@ function Keyscore(mess) {
     mess.react("⚠")
     const embed = new Discord.RichEmbed()
       .setTitle('SHIELD')
-      .setAuthor(mess.member.displayName)
+      .setAuthor(mess.member.name)
       .setColor(0xFF3800)
       .setFooter(mess.channel.name)
       .setTimestamp()
