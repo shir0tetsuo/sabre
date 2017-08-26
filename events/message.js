@@ -65,7 +65,7 @@ function scoreDownBits(mess, xval) {
 
 function scanKeyword(mess) {
   const summon = ["?night", "?Night", "?NIGHT"]
-  const reward = ["classified", "Classified", "CLASSIFIED"]
+  //const reward = ["classified", "Classified", "CLASSIFIED"]
   const banned = ["bomb", "Bomb", "BOMB", "fineprint", "Fineprint", "FINEPRINT", "nemesis", "Nemesis", "NEMESIS", "t pyramid", "Pyramid", "PYRAMID", "platform 2", "Platform 2", "PLATFORM 2", "t sentinel", "Sentinel", "SENTINEL", "t sapphire", "Sapphire", "SAPPHIRE", "t floyd", "FLOYD", "jonut", "Jonut", "JONUT", "special projects", "Special Projects", "SPECIAL PR", "white o", "White O", "WHITE O", "White O", "silencer", "Silencer", "SILENCER", "S1", "s1", "t python", "Python", "PYTHON", "nuke", "Nuke", "NUKE", "nuclear", "Nuclear", "NUCLEAR", "launch codes", "Launch codes", "Launch Codes", "LAUNCH C", "LAUNCH c", "DEEE"]
   const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python"]
   const msg = mess
@@ -76,13 +76,13 @@ function scanKeyword(mess) {
     console.log(new Date());
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
-    msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
-    scoreDownBits(msg, 22)
+    //msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
+    //scoreDownBits(msg, 22)
     return;
   }
 
   if (warned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
-    mess.react("⚠")
+    //mess.react("⚠")
     // Export data here (future use)
     console.log(new Date());
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
@@ -96,8 +96,9 @@ function scanKeyword(mess) {
     console.log(chalk.yellowBright("Your presence is required in", mess.guild.name, mess.channel.name))
     console.log(chalk.gray(mess.content))
   }
-  
-  if (reward.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
+
+  // Disabled
+  /*if (reward.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
     mess.react("⭐")
     if (scoreReward.has(mess.author.id)) return;
     scoreReward.add(mess.author.id);
@@ -106,7 +107,7 @@ function scanKeyword(mess) {
     }, 600000) // 10 minutes
     scoreUpTicket(mess, 5)
     mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
-  }
+  }*/
 }
 
 // Parse message content
