@@ -67,7 +67,7 @@ function scanKeyword(mess) {
   const summon = ["?night", "?Night", "?NIGHT"]
   const reward = ["classified", "Classified", "CLASSIFIED"]
   const banned = ["bomb", "Bomb", "BOMB", "amba", "Amba", "AMBA", "fineprint", "Fineprint", "FINEPRINT", "nemesis", "Nemesis", "NEMESIS", "t pyramid", "Pyramid", "PYRAMID", "platform 2", "Platform 2", "PLATFORM 2", "t sentinel", "Sentinel", "SENTINEL", "t sapphire", "Sapphire", "SAPPHIRE", "t floyd", "FLOYD", "jonut", "Jonut", "JONUT", "special projects", "Special Projects", "SPECIAL PR", "white o", "White O", "WHITE O", "White O", "silencer", "Silencer", "SILENCER", "silenced", "Silenced", "SILENCED", "S1", "s1", "t python", "Python", "PYTHON", "noctua", "Noctua", "NOCTUA", "nuke", "Nuke", "NUKE", "nuclear", "Nuclear", "NUCLEAR", "launch codes", "Launch codes", "Launch Codes", "LAUNCH C", "LAUNCH c", "DEEE"]
-  const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python", "john", "John", "deen", "Deen", "JOHN", "DEEN", "j0", "J0"]
+  const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python", "john", "John", "deen", "Deen", "JOHN", "DEEN", "j0", "J0", "dan", "Dan", "DAN"]
   const msg = mess
 
   if (summon.some(word => mess.content.includes(word))) {
