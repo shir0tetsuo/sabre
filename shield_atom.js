@@ -19,7 +19,8 @@ function Keyscore(mess) {
       .setDescription(":large_orange_diamond: Keyword Detected by System")
       .setFooter(mess.channel.name)
       .setTimestamp()
-      .addField(mess.content)
+      .addField(mess.content, '\u200b')
+      .addField('Detected:', word)
     mess.guild.channels.find('name', 'shield').send({ embed })
   }
 
