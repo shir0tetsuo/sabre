@@ -66,28 +66,28 @@ function scoreDownBits(mess, xval) {
 function scanKeyword(mess) {
   const summon = ["?night", "?Night", "?NIGHT"]
   //const reward = ["classified", "Classified", "CLASSIFIED"]
-  const banned = ["bomb", "Bomb", "BOMB", "fineprint", "Fineprint", "FINEPRINT", "nemesis", "Nemesis", "NEMESIS", "t pyramid", "Pyramid", "PYRAMID", "platform 2", "Platform 2", "PLATFORM 2", "t sentinel", "Sentinel", "SENTINEL", "t sapphire", "Sapphire", "SAPPHIRE", "t floyd", "FLOYD", "jonut", "Jonut", "JONUT", "special projects", "Special Projects", "SPECIAL PR", "white o", "White O", "WHITE O", "White O", "silencer", "Silencer", "SILENCER", "S1", "s1", "t python", "Python", "PYTHON", "nuke", "Nuke", "NUKE", "nuclear", "Nuclear", "NUCLEAR", "launch codes", "Launch codes", "Launch Codes", "LAUNCH C", "LAUNCH c", "DEEE"]
-  const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python"]
+  const banned = ["bomb", "Bomb", "BOMB", "fineprint", "Fineprint", "FINEPRINT", "nemesis", "Nemesis", "NEMESIS", "t pyramid", "Pyramid", "PYRAMID", "platform 2", "Platform 2", "PLATFORM 2", "t sentinel", "Sentinel", "SENTINEL", "t sapphire", "Sapphire", "SAPPHIRE", "t floyd", "FLOYD", "jonut", "Jonut", "JONUT", "special projects", "Special Projects", "SPECIAL PR", "white o", "White O", "WHITE O", "White O", "silencer", "Silencer", "SILENCER", "S1", "s1", "t python", "Python", "PYTHON", "nuke", "Nuke", "NUKE", "nuclear", "Nuclear", "NUCLEAR", "launch codes", "Launch codes", "Launch Codes", "LAUNCH C", "LAUNCH c", "DEEE", "n00", "N00", "NOCTUA", "noctua", "Noctua", "CSD", "csd", "doi", "DOI", "DoI", "classified", "Classified", "CLASSIFIED", "AMBA", "amba", "Amba", "silenced", "SILENCED", "Silenced", "Deen", "deen", "DEEN", "testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python"]
+  //const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python"]
   const msg = mess
 
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
     mess.delete()
     // Export data here (future use)
     console.log(new Date());
-    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Banned Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
+    console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
     //msg.channel.send("`CLASSIFIED` " + msg.author + ", 20" + chatBit + " was redacted!")
     //scoreDownBits(msg, 22)
     return;
   }
 
-  if (warned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
+  /*if (warned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
     //mess.react("⚠")
     // Export data here (future use)
     console.log(new Date());
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
-  }
+  }*/
 
   if (summon.some(word => mess.content.includes(word))) {
     mess.channel.send(`<@!${settings.ownerid}> ${mess.content} ((${mess.author}))`)
