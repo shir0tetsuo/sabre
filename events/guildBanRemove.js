@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-require('../settings.json')
+const settings = require('../settings.json')
 const chalk = require('chalk');
 module.exports = (guild, user) => {
   console.log(new Date());
