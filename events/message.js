@@ -71,7 +71,7 @@ function scanKeyword(mess) {
   const msg = mess
 
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
-    mess.delete()
+    //mess.delete()
     // Export data here (future use)
     console.log(new Date());
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
