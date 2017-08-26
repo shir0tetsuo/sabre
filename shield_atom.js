@@ -20,7 +20,7 @@ function Keyscore(mess) {
       .setFooter(mess.channel.name)
       .setTimestamp()
       .addField(mess.content)
-    message.build.channels.find('name', 'shield').send({ embed })
+    mess.guild.channels.find('name', 'shield').send({ embed })
   }
 
 }
