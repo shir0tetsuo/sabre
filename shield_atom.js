@@ -14,7 +14,7 @@ function Keyscore(mess) {
   if (database.some(word => mess.content.includes(word))) {
     const embed = new Discord.RichEmbed()
       .setTitle('SHIELD')
-      .setAuthor(message.member.displayName)
+      .setAuthor(mess.member.displayName)
       .setColor(0xFF3800)
       .setDescription(":large_orange_diamond: Keyword Detected by System")
       .setFooter(mess.channel.name)
