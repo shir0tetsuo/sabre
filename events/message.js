@@ -70,25 +70,6 @@ function scanKeyword(mess) {
   const warned = ["testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python"]
   const msg = mess
 
-  if (summon.some(word => mess.content.includes(word))) {
-    mess.channel.send(`<@!${settings.ownerid}> ${mess.content} ((${mess.author}))`)
-    // Export data here (future use)
-    console.log(new Date())
-    console.log(chalk.yellowBright("Your presence is required in", mess.guild.name, mess.channel.name))
-    console.log(chalk.gray(mess.content))
-  }
-
-  if (reward.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
-    mess.react("⭐")
-    if (scoreReward.has(mess.author.id)) return;
-    scoreReward.add(mess.author.id);
-    setTimeout(() => {
-      scoreReward.delete(mess.author.id);
-    }, 600000) // 10 minutes
-    scoreUpTicket(mess, 5)
-    mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
-  }
-
   if (banned.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
     mess.delete()
     // Export data here (future use)
@@ -106,6 +87,25 @@ function scanKeyword(mess) {
     console.log(new Date());
     console.log(chalk.redBright(msg.member.displayName, msg.author.tag), chalk.yellowBright("Warning Keyword Detected!"), chalk.blueBright(msg.guild.name, msg.channel.name))
     console.log(chalk.gray(msg.content))
+  }
+
+  if (summon.some(word => mess.content.includes(word))) {
+    mess.channel.send(`<@!${settings.ownerid}> ${mess.content} ((${mess.author}))`)
+    // Export data here (future use)
+    console.log(new Date())
+    console.log(chalk.yellowBright("Your presence is required in", mess.guild.name, mess.channel.name))
+    console.log(chalk.gray(mess.content))
+  }
+  
+  if (reward.some(word => mess.content.includes(word)) && mess.guild.id === settings.alaskaguild) {
+    mess.react("⭐")
+    if (scoreReward.has(mess.author.id)) return;
+    scoreReward.add(mess.author.id);
+    setTimeout(() => {
+      scoreReward.delete(mess.author.id);
+    }, 600000) // 10 minutes
+    scoreUpTicket(mess, 5)
+    mess.author.send("You have been rewarded 5" + curren + " for using CLASSIFIED instead of a sensitive word!")
   }
 }
 
