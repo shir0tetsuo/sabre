@@ -15,9 +15,9 @@ function scoreInit(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
-    } else {
-      console.log(mess.author.id, row.level)
-    }
+    } /*else { // Increment chatBits
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + 1} WHERE userId = ${mess.author.id}`);
+    }*/
   }).catch(() => { // Error message generates new table instead
     console.error;
     console.log(chalk.redBright("The system recovered from an error."))

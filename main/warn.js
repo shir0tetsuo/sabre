@@ -4,7 +4,7 @@ const chalk = require ('chalk');
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 exports.run = (client, message, params) => {
-  if (message.mentions.members.first() < 1) return message.reply("No User Mentioned!")
+  if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
   if (params[1] === "unwarn") {
     sql.run(`UPDATE warning SET times = 0 WHERE userid = "${person.id}"`)
