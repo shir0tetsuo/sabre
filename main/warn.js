@@ -26,16 +26,16 @@ exports.run = (client, message, params) => {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]) //same as above
           let actual = row.times*1 + 1
           message.delete()
-          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
+          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
         } else {
           //console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
               let actual = row.times*1 + 1
               message.delete()
-              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
+              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
               if (row.times >= 3) {
-                msg.channel.send("``Warnings Exceeded!!! ``" + person + "`` had too many warnings today!``")
+                msg.channel.send("``Warnings Exceeded!!! ``" + person + " `` had too many warnings today!``")
               }
               //message.channel.send(`${person} has ${row.times} warnings`)
             } else {
@@ -43,7 +43,7 @@ exports.run = (client, message, params) => {
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
               let actual = row.times*1 + 1
               message.delete()
-              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
+              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
               }
         } // if the row does not exist
       }).catch(() => {
@@ -53,7 +53,7 @@ exports.run = (client, message, params) => {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
           let actual = 1
           message.delete()
-          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
+          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
       })
       console.log("Successfully recovered from an error.")
     })
@@ -63,12 +63,12 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['warning'],
+  aliases: ['warning', 'w'],
   permLevel: 2
 };
 
 exports.help = {
   name: 'warn',
   description: 'Warns A user they are doing something wrong. 3 Warnings. PermLVL 2.',
-  usage: 'warn [mention] [description/unwarn]'
+  usage: 'warn [@user] [description/unwarn]'
 };

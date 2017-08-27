@@ -43,7 +43,7 @@ function scoreDisplay(mess) {
       ]
     }}))
     if (mess.author.id === settings.ownerid) {
-      mess.reply("Hello, World!")
+      mess.reply("is the Main Developer!")
     }
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
