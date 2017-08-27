@@ -45,6 +45,7 @@ function scoreDisplay(mess) {
 }
 exports.run = (client, message, params) => {
   if (message.member === null) return;
+  scoreDisplay(message)
 };
 
 exports.conf = {
