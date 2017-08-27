@@ -43,7 +43,8 @@ exports.run = (client, message, params) => {
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
               let actual = row.times*1 + 1
               message.delete()
-              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)            }
+              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
+              }
         } // if the row does not exist
       }).catch(() => {
         console.error;
