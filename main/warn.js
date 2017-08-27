@@ -31,8 +31,8 @@ exports.run = (client, message, params) => {
       sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [message.author.id, 0, "Sun Aug 26"]);
 
   })
+})
 }
-
 exports.conf = {
   enabled: true,
   guildOnly: false,
