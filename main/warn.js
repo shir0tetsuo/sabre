@@ -2,7 +2,7 @@ var exec = require('child_process').exec;
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 const sql = require("sqlite");
-sql.open("./score.sqlite");
+sql.open("../score.sqlite");
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
