@@ -1,5 +1,5 @@
 const sql = require("sqlite");
-sql.open("./score.sqlite");
+sql.open("/root/NC/utils/NorthStar/sabre.discord.js/score.sqlite");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
