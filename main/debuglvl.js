@@ -1,5 +1,4 @@
 const settings = require('../settings.json');
-const chalk = require ('chalk');
 const sql = require('sqlite');
 sql.open('../score.sqlite');
 exports.run = (client, message, params) => {
