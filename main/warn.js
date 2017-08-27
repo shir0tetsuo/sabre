@@ -14,6 +14,7 @@ exports.run = (client, message, params) => {
   }
   if (params[1] === undefined) return message.reply("No Warning Statement!")
   //console.log(person.id)
+  let msg = message
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
       let grabdate = stdout
@@ -24,22 +25,25 @@ exports.run = (client, message, params) => {
         if (!row) {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]) //same as above
           let actual = row.times*1 + 1
-          message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")
+          message.delete()
+          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
         } else {
           //console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
               let actual = row.times*1 + 1
-              message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")
+              message.delete()
+              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
               if (row.times >= 3) {
-                message.channel.send("``Warnings Exceeded!!! ``" + person + "`` had too many warnings today!``")
+                msg.channel.send("``Warnings Exceeded!!! ``" + person + "`` had too many warnings today!``")
               }
               //message.channel.send(`${person} has ${row.times} warnings`)
             } else {
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
               let actual = row.times*1 + 1
-              message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")            }
+              message.delete()
+              msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)            }
         } // if the row does not exist
       }).catch(() => {
         console.error;
