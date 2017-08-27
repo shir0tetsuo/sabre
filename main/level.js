@@ -16,7 +16,7 @@ function scoreDisplay(mess) {
         text: client.user.username
       },
       author: {
-        mess.member.displayName,
+        name: mess.member.displayName,
         icon_url: mess.author.avatarURL
       },
       fields: [
