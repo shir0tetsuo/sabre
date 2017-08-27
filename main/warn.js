@@ -10,6 +10,7 @@ exports.run = (client, message, params) => {
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
       let grabdate = stdout
+      var grabdate = stdout
       message.reply(grabdate)
     })
   sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
