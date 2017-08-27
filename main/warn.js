@@ -22,9 +22,10 @@ exports.run = (client, message, params) => {
           console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
-              if (row.times*1+1 >= 4) {
+              if (row.times >= 4) {
                 message.channel.send(`Warnings Exceeded!!! ${person} had too many warnings!`)
               }
+              message.channel.send(`${person} has ${row.times} warnings`)
             } else {
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
