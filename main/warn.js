@@ -9,6 +9,8 @@ exports.run = (client, message, params) => {
   if (params[1] === "unwarn") {
     sql.run(`UPDATE warning SET times = 0 WHERE userid = "${person.id}"`)
     sql.run(`UPDATE warning SET date = "NULL" WHERE userid = "${person.id}"`)
+    message.channel.send(`${person} had their warnings reset.`)
+    return;
   }
   if (params[1] === undefined) return message.reply("No Warning Statement!")
   //console.log(person.id)
