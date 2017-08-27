@@ -30,6 +30,9 @@ exports.run = (client, message, params) => {
   }).catch(() => {
     console.error;
     console.log(chalk.redBright("The system recovered from an error."))
+    sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
+      sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [message.author.id, 0, "Sun Aug 26"]);
+
   })
 }
 
