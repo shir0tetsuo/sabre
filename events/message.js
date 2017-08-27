@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const settings = require('../settings.json');
 
 const sql = require("sqlite");
-sql.open("../score.sqlite");
+sql.open("./score.sqlite");
 
 let scoreReward = new Set();
 let curren = ":tickets:"
