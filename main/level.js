@@ -14,7 +14,7 @@ function scoreDisplay(mess) {
     /*  footer: {
         icon_url: client.user.avatarURL,
         text: client.user.username
-      },*/
+      },*/ // Footer was removed: promise rejection from client
       author: {
         name: mess.member.displayName,
         icon_url: mess.author.avatarURL
