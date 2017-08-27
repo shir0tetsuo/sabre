@@ -9,36 +9,37 @@ exports.run = (client, message, params) => {
   console.log(person.id)
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
-      var grabdate = stdout
+      let grabdate = stdout
       message.reply(grabdate)
+      sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
+        sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
     })
-  sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
-    sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
-})
 
-  sql.get(`SELECT * FROM warning WHERE userId ="${person.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate])
-    } else {
-      console.log(row.userid, row.times, row.date)
-        if (grabdate === row.date) {
-          sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
-          if (row.times*1+1 >= 4) {
-            mess.reply(`Warnings Exceeded!!! ${person} had too many warnings!`)
-          }
+      sql.get(`SELECT * FROM warning WHERE userId ="${person.id}"`).then(row => {
+        if (!row) {
+          sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate])
         } else {
-          sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
-          sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
-        }
-    } // if the row does not exist
-  }).catch(() => {
-    console.error;
-    console.log(chalk.redBright("The system recovered from an error."))
-    sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
-      sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
-  })
-  console.log("Success")
-})
+          console.log(row.userid, row.times, row.date)
+            if (grabdate === row.date) {
+              sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
+              if (row.times*1+1 >= 4) {
+                mess.reply(`Warnings Exceeded!!! ${person} had too many warnings!`)
+              }
+            } else {
+              sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
+              sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
+            }
+        } // if the row does not exist
+      }).catch(() => {
+        console.error;
+        console.log(chalk.redBright("The system recovered from an error."))
+        sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
+          sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
+      })
+      console.log("Success")
+    })
+    })
+
 }
 exports.conf = {
   enabled: true,
