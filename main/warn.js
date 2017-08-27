@@ -6,6 +6,10 @@ sql.open("../score.sqlite");
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
+  console.log(person.id)
+  sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
+    sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
+})
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
       let grabdate = stdout
@@ -14,6 +18,7 @@ exports.run = (client, message, params) => {
     if (!row) {
       sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate])
     } else {
+      console.log(row.userid, row.times, row.date)
         if (grabdate === row.date) {
           sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
           if (row.times*1+1 >= 4) {
@@ -28,7 +33,7 @@ exports.run = (client, message, params) => {
     console.error;
     console.log(chalk.redBright("The system recovered from an error."))
     sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
-      sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [message.author.id, 0, "Sun Aug 26"]);
+      sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
   })
   console.log("Success")
 })
