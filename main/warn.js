@@ -28,9 +28,9 @@ exports.run = (client, message, params) => {
           //console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
-              message.channel.send(message.content + " - ``You have " + row.times + " Warnings!``")
+              message.channel.send(message.content + " - ``You have " + row.times+1 + " Warnings!``")
               if (row.times >= 3) {
-                message.channel.send("``Warnings Exceeded!!! " + person + " had too many warnings today!``")
+                message.channel.send("``Warnings Exceeded!!! ``" + person + "`` had too many warnings today!``")
               }
               //message.channel.send(`${person} has ${row.times} warnings`)
             } else {
