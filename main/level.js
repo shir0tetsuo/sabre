@@ -11,10 +11,10 @@ function scoreDisplay(mess) {
       color: 0xFFC000,
       timestamp: new Date(),
       description: `Sabre Levels; v${settings.version}`,
-      footer: {
+    /*  footer: {
         icon_url: client.user.avatarURL,
         text: client.user.username
-      },
+      },*/
       author: {
         name: mess.member.displayName,
         icon_url: mess.author.avatarURL
