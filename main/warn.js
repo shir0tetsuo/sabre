@@ -23,12 +23,14 @@ exports.run = (client, message, params) => {
       sql.get(`SELECT * FROM warning WHERE userId ="${person.id}"`).then(row => {
         if (!row) {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]) //same as above
-              message.channel.send(message.content + " - ``You have " + row.times*1+1 + " Warnings!``")
+          let actual = row.times*1 + 1
+          message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")
         } else {
           //console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
-              message.channel.send(message.content + " - ``You have " + row.times*1+1 + " Warnings!``")
+              let actual = row.times*1 + 1
+              message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")
               if (row.times >= 3) {
                 message.channel.send("``Warnings Exceeded!!! ``" + person + "`` had too many warnings today!``")
               }
@@ -36,7 +38,8 @@ exports.run = (client, message, params) => {
             } else {
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
-              message.channel.send(message.content + " - ``You have " + row.times*1+1 + " Warnings!``")            }
+              let actual = row.times*1 + 1
+              message.channel.send(message.content + " - ``You have " + actual + " Warnings!``")            }
         } // if the row does not exist
       }).catch(() => {
         console.error;
