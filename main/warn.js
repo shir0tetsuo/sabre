@@ -57,7 +57,7 @@ exports.run = (client, message, params) => {
       })
       console.log("Successfully recovered from an error.")
     })
-    })
+  }) //end exec
 
 }
 exports.conf = {
