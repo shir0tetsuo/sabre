@@ -9,7 +9,6 @@ exports.run = (client, message, params) => {
   console.log(person.id)
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
-      let grabdate = stdout
       var grabdate = stdout
       message.reply(grabdate)
     })
