@@ -7,6 +7,7 @@ let chatBit = ":eye_in_speech_bubble:"
 function scoreDisplay(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
+    console.log(mess.author.id, row.level, row.tickets, row.chatBits)
     mess.reply("Calculating!").then(m => m.edit({embed: {
       color: 0xFFC000,
       timestamp: new Date(),
