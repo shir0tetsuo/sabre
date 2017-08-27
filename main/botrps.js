@@ -1,7 +1,7 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
-  var rpsmat = [ { ans: "rock" }, { ans: "paper" }, { ans: scissors} ];
+  var rpsmat = [ { ans: "rock" }, { ans: "paper" }, { ans: "scissors" } ];
   var rpsmat = rpsmat[Math.floor(Math.random() * rpsmat.length)];
   if (params[0] === null) return message.reply("Need `rock / paper / scissors`!");
   let rpsinput = params[0]
