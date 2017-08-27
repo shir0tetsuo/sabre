@@ -6,12 +6,9 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 function scoreDisplay(mess) {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    mess.reply(`${row.level}, ${row.tickets}, ${row.chatBits}`)
-  })
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
     //console.log(mess.author.id, row.level, row.tickets, row.chatBits)
-    //mess.reply("Calculating!").then(m => m.edit({embed: {
+    mess.reply("Calculating!").then(m => m.edit({embed: {
       color: 0xFFC000,
       timestamp: new Date(),
       description: `Sabre Levels; v${settings.version}`,
@@ -46,7 +43,7 @@ function scoreDisplay(mess) {
       ]
     }}))
     if (mess.author.id === settings.ownerid) {
-      //mess.reply("Hello, World!")
+      mess.reply("Hello, World!")
     }
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
