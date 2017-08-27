@@ -52,7 +52,7 @@ exports.run = (client, message, params) => {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
           let actual = 1
           message.delete()
-          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)            }
+          msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by ``" + msg.author)
       })
       console.log("Successfully recovered from an error.")
     })
