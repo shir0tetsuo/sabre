@@ -41,6 +41,9 @@ function scoreDisplay(mess) {
         }
       ]
     }}))
+    if (mess.author.id === settings.ownerid) {
+      mess.reply("Hello, World!")
+    }
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
   })
