@@ -6,17 +6,14 @@ sql.open("./score.sqlite");
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
+  exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
+    function(error, stdout, stderr) {
+      let grabdate = stdout
+    })
   sql.get(`SELECT * FROM warning WHERE userId ="${person.id}"`).then(row => {
     if (!row) {
-      exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
-        function(error, stdout, stderr) {
-          let grabdate = stdout
-        }) // Let grabdate equal stdout
       sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate])
     } else {
-        function(error, stdout, stderr) {
-          let grabdate = stdout
-        }
         if (grabdate === row.date) {
           sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
           if (row.times*1+1 >= 4) {
