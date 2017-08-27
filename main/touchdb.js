@@ -8,6 +8,7 @@ exports.run = (client, message, params) => {
   message.reply("`Access Granted` ***This should only be run once per seed!***");
   sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
     sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [message.author.id, 0, "Sun Aug 26"]);
+  };
 };
 
 exports.conf = {
