@@ -4,31 +4,33 @@ const chalk = require ('chalk');
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 exports.run = (client, message, params) => {
-  if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
+  if (message.mentions.members.first() < 1) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
-  console.log(person.id)
+  if (params[1] === undefined) return message.reply("No Warning Statement!")
+  //console.log(person.id)
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
     function(error, stdout, stderr) {
       let grabdate = stdout
-      message.reply(grabdate)
       sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
         sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
-    })
-
+      }) // Create a new entry for the persons ID if no warnings were given
       sql.get(`SELECT * FROM warning WHERE userId ="${person.id}"`).then(row => {
         if (!row) {
-          sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate])
+          sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]) //same as above
+          message.channel.send(`${message.content} - You have ${row.times} Warnings!`)
         } else {
-          console.log(row.userid, row.times, row.date)
+          //console.log(row.userid, row.times, row.date)
             if (grabdate === row.date) {
               sql.run(`UPDATE warning SET times = ${row.times*1 + 1} WHERE userid = "${person.id}"`)
+              message.channel.send(`${message.content} - You have ${row.times} Warnings!`)
               if (row.times >= 4) {
-                message.channel.send(`Warnings Exceeded!!! ${person} had too many warnings!`)
+                message.channel.send(`Warnings Exceeded!!! ${person} had too many warnings today!`)
               }
-              message.channel.send(`${person} has ${row.times} warnings`)
+              //message.channel.send(`${person} has ${row.times} warnings`)
             } else {
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
+              message.channel.send(`${message.content} - You have ${row.times} Warnings!`)
             }
         } // if the row does not exist
       }).catch(() => {
@@ -37,7 +39,7 @@ exports.run = (client, message, params) => {
         sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
           sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 1, grabdate]);
       })
-      console.log("Success")
+      console.log("Successfully recovered from an error.")
     })
     })
 
