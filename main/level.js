@@ -40,10 +40,7 @@ function scoreDisplay(mess) {
           value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
         }
       ]
-    }})
-  if (mess.author.id === settings.ownerid) {
-    mess.reply("Hello, World!")
-  })
+    }}))
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
   })
