@@ -6,6 +6,10 @@ sql.open("../score.sqlite");
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() < 1) return message.reply("No User Mentioned!")
   let person=message.mentions.members.first()
+  if (params[1] === "unwarn") {
+    sql.run(`UPDATE warning SET times = 0 WHERE userid = "${person.id}"`)
+    sql.run(`UPDATE warning SET date = "NULL" WHERE userid = "${person.id}"`)
+  }
   if (params[1] === undefined) return message.reply("No Warning Statement!")
   //console.log(person.id)
   exec('/root/NC/utils/NorthStar/sabre.discord.js/sys/printdate.s',
@@ -53,5 +57,5 @@ exports.conf = {
 exports.help = {
   name: 'warn',
   description: 'Warns A user they are doing something wrong. 3 Warnings. PermLVL 2.',
-  usage: 'warn [mention] [description]'
+  usage: 'warn [mention] [description/unwarn]'
 };
