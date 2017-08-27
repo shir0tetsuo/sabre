@@ -36,7 +36,7 @@ exports.run = (client, message, params) => {
             } else {
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
-              message.channel.send(message.content + " - ``You have " + row.times + " Warnings!``")            }
+              message.channel.send(message.content + " - ``You have " + row.times+1 + " Warnings!``")            }
         } // if the row does not exist
       }).catch(() => {
         console.error;
