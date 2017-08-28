@@ -9,7 +9,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['devteam', 'i', 'devs'],
+  aliases: ['devteam', 'i', 'devs', 'v'],
   permLevel: 0
 };
 
