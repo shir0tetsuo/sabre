@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
     // Line above defines person
     // Everything else below
     //setRoles or addRole
-    let personroles = person.roles.map(role => role.name).replace('\n', ',')
+    let personroles = person.roles.map(role => role.name).join(', ') // was replace('\n', ', ')
     var shadow = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
     var shadowb = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
 
