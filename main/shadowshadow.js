@@ -9,7 +9,9 @@ exports.run = (client, message, params) => {
   if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick") { // oops removed
     if (message.mentions.members.first() === undefined) {
       return message.reply("`ERROR` No user was mentioned!")
-    } else let person = message.mentions.members.first();
+    } else {
+      let person = message.mentions.members.first();
+    }
     // Line above defines person
     // Everything else below
     //setRoles or addRole
@@ -45,7 +47,7 @@ exports.run = (client, message, params) => {
     } else if (params[0] === "nick") {
       message.channel.send(`<@!${settings.nickid}> Your presence is required!`)
     }
-    
+
   } else return message.reply("`ERROR` The command was not understood!")
   console.log(new Date())
   console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
