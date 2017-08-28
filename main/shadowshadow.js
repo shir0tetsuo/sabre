@@ -34,7 +34,7 @@ exports.run = (client, message, params) => {
       member.setRoles([badboy, muted, grounded]).catch(console.error)
 
     } else if (params[0] === "echo") {
-      message.reply(person.roles.reduce)
+      message.reply(person.roles.map(role => role.name))
       console.log(person.roles)
       //message.reply("Role data was forwarded to console!")
 
