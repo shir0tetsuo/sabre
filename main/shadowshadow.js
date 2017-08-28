@@ -12,6 +12,7 @@ exports.run = (client, message, params) => {
     // Line above defines person
     // Everything else below
     //setRoles or addRole
+    let personroles = person.roles.map(role => role.name).replace('\n', ',')
     var shadow = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
     var shadowb = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
 
@@ -21,6 +22,7 @@ exports.run = (client, message, params) => {
         message.react("☢")
         message.react("☣")
       })
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.tag + "\n\nSent to David's Netherworld.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + "```" + new Date()).catch(console.error)
       person.setRoles([davidsplace]).catch(console.error)
 
     } else if (params[0] === "mute") {
@@ -31,11 +33,11 @@ exports.run = (client, message, params) => {
       let badboy = message.guild.roles.find('name', 'Bad Boy')
       let muted = message.guild.roles.find('name', 'Muted')
       let grounded = message.guild.roles.find('name', 'Grounded')
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.tag + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + "```" + new Date()).catch(console.error)
       member.setRoles([badboy, muted, grounded]).catch(console.error)
 
     } else if (params[0] === "echo") {
       message.reply(person.roles.map(role => role.name))
-      console.log(person.roles)
       //message.reply("Role data was forwarded to console!")
 
     } else if (params[0] === "david") {
@@ -47,7 +49,7 @@ exports.run = (client, message, params) => {
 
   } else return message.reply("`ERROR` The command was not understood!")
   console.log(new Date())
-  console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
+  console.log(chalk.greenBright(message.member.displayName), chalk.redBright(message.content), chalk.blueBright(message.guild.name, message.channel.name));
 };
 
 exports.conf = {
@@ -60,5 +62,5 @@ exports.conf = {
 exports.help = {
   name: 'shadowshadow',
   description: 'Bringing down the Hammer of Justice since 1994. PermLVL 4.',
-  usage: 'shadowshadow [mute/notmeproblem/echo/david/nick] [@user] :: notmeproblem = david\'s netherworld :: echo sends role data to console :: names summon user'
+  usage: 'shadowshadow [mute/notmeproblem/echo/david/nick] [@user] :: notmeproblem = david\'s netherworld :: echo prints users roles :: names summon user'
 };
