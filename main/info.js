@@ -1,6 +1,6 @@
 const settings = require('../settings.json');
 exports.run = (client, message, params) => {
-  message.author.send("Sabre was developed primarily by <@!303309686264954881>.")
+  message.author.send("Sabre was developed primarily by <@!303309686264954881> (shadowsword#0179) - Version " + settings.version)
   message.author.send("Special thanks to Dr Booyah, Nick, Mimystar, Dan, Raymond, Emma, Airborne, Paradise, Tony.")
   message.author.send("Also a thanks to the idiots at AnIdiotsGuide for providing the marvellous Discord.js library and examples.")
   message.author.send("Developed primarily for the Alaska Roblox Discord Server & DAVNET Discord Server! Saying ?night in any context will summon the creator.")
