@@ -6,7 +6,7 @@ exports.run = (client, message, params) => {
   if (!params[0]) return; //oops is a toggle
   if (message.guild.id !== settings.alaskaguild) return message.reply("This is an Alaska Only Command!")
 
-  if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick") { // oops removed
+  if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick" || params[0] === "echo") { // oops removed
     if (message.mentions.members.first() === undefined) {
       return message.reply("`ERROR` No user was mentioned!")
     } else {
