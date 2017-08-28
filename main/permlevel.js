@@ -16,6 +16,8 @@ exports.run = (client, message, params) => {
   if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
   if (admin_davnet && message.member.roles.has(admin_davnet.id)) permlvl = 3;
   if (message.author.id === settings.ownerid) permlvl = 4;
+  if (message.author.id === settings.davidid) permlvl = 4;
+  if (message.author.id === settings.nickid) permlvl = 4;
   // EoF sabre_atom4
   console.log(new Date())
   console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
