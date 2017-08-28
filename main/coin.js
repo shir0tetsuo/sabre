@@ -12,11 +12,13 @@ exports.run = (client, message, params) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.tickets) {
           if (betfloor >= 50) {
+            let newcount = row.tickets*1 + params[1]*1
             message.reply("`Super!` You **gained** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 + params[1]*1}" WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
           } else {
+            let newcount = row.tickets*1 - params[1]*1
             message.reply("`Ouchh!` You **lost** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 - params[1]*1}" WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
           }
         } else return message.reply(`You don't have enough ${curren}!`)
       })
@@ -24,11 +26,13 @@ exports.run = (client, message, params) => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.chatBits) {
           if (betfloor >= 50) {
+            let newcount = row.chatBits*1 + params[1]*1
             message.reply("`Epic!` You **gained** " + params[1] + chatBit + "!")
-            sql.run(`UPDATE scores SET chatBits = "${row.chatBits*1 + params[1]*1}" WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
           } else {
+            let newcount = row.chatBits*1 - params[1]*1
             message.reply("`Snap!` You **lost** " + params[1] + chatBit + "!")
-            sql.run(`UPDATE scores SET chatBits = "${row.chatBits*1 - params[1]*1} WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
           }
         } else return message.reply(`You don't have enough ${chatBit}!`)
       })
