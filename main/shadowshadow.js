@@ -7,11 +7,8 @@ exports.run = (client, message, params) => {
   if (message.guild.id !== settings.alaskaguild) return message.reply("This is an Alaska Only Command!")
 
   if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick" || params[0] === "echo") { // oops removed
-    if (message.mentions.members.first() === undefined) {
-      return message.reply("`ERROR` No user was mentioned!")
-    } else {
-      let person = message.mentions.members.first();
-    }
+    let person = message.mentions.members.first();
+    if (person === undefined) return message.reply("`ERROR` No User Mentioned")
     // Line above defines person
     // Everything else below
     //setRoles or addRole
