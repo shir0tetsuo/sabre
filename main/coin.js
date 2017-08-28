@@ -5,10 +5,10 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
-  if (params[0] === "ticket" || params[0] === "tickets" || params[0] === "byte" || params[0] === "bytes") {
+  if (params[0] === "ticket" || params[0] === "t" || params[0] === "tickets" || params[0] === "byte" || params[0] === "b" || params[0] === "bytes") {
     if (params[1] === undefined) return message.reply("You must specify an amount!")
     let betfloor = Math.floor(Math.random() * 100)
-    if (params[0] === "ticket" || params[0] === "tickets") {
+    if (params[0] === "ticket" || params[0] === "tickets" || params[0] === "t") {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.tickets) {
           if (betfloor >= 50) {
@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
           }
         } else return message.reply(`You don't have enough ${curren}!`)
       })
-    } else if (params[0] === "byte" || params[0] === "bytes") {
+    } else if (params[0] === "byte" || params[0] === "bytes" || params[0] === "b") {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.chatBits) {
           if (betfloor >= 50) {
@@ -52,5 +52,5 @@ exports.conf = {
 exports.help = {
   name: 'coin',
   description: 'Displays the mentioned object as a snowflake. PermLVL 1.',
-  usage: 'coin [tickets/bytes] <amount>'
+  usage: 'coin [tickets/bytes/t/b] <amount>'
 };
