@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
     sql.run(`UPDATE scores SET level = "${newlevel}" WHERE userId = "${person.id}"`)
     sql.run(`UPDATE scores SET tickets = "${newtickt}" WHERE userId = "${person.id}"`)
     sql.run(`UPDATE scores SET chatBits = "${newcbyte}" WHERE userId = "${person.id}"`)
-    message.reply(`${person}'s Data has been updated.'`)
+    message.reply(`${person}'s Data has been updated.`)
   })
 };
 
