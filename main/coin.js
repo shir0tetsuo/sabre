@@ -13,10 +13,10 @@ exports.run = (client, message, params) => {
         if (params[1] <= row.tickets) {
           if (betfloor >= 50) {
             message.reply("`Super!` You **gained** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 + param[1]*1}" WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 + params[1]*1}" WHERE userId = "${message.author.id}"`)
           } else {
             message.reply("`Ouchh!` You **lost** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 - param[1]*1}" WHERE userId = "${message.author.id}"`)
+            sql.run(`UPDATE scores SET tickets = "${row.tickets*1 - params[1]*1}" WHERE userId = "${message.author.id}"`)
           }
         } else return message.reply(`You don't have enough ${curren}!`)
       })
