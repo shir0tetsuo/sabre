@@ -69,6 +69,6 @@ exports.conf = {
 
 exports.help = {
   name: 'warn',
-  description: 'Warns A user they are doing something wrong. 3 Warnings. PermLVL 2.',
+  description: 'Warns A user they are doing something wrong. Daily reset. PermLVL 2.',
   usage: 'warn [@user] [description/unwarn]'
 };
