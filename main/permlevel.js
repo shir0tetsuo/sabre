@@ -18,6 +18,7 @@ exports.run = (client, message, params) => {
   if (message.author.id === settings.ownerid) permlvl = 4;
   if (message.author.id === settings.davidid) permlvl = 4;
   if (message.author.id === settings.nickid) permlvl = 4;
+  if (message.author.id === settings.danid) permlvl = 4;
   // EoF sabre_atom4
   console.log(new Date())
   console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
