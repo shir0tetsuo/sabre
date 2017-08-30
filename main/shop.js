@@ -5,6 +5,36 @@ const sql = require("sqlite");
 sql.open("../score.sqlite");
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+
+function scoreDownTicket(mess, xval) {
+  if (!xval) var xval = 1
+  console.log("Lowering ticket score by", xval*1, mess.author.id)
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    if (row.tickets*1 >= xval*1) {
+      sql.run(`UPDATE scores SET tickets = ${row.tickets - xval*1} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET tickets = 0 WHERE userId = "${mess.author.id}"`)
+    }
+  })
+}
+function scoreUpLevel(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET level = ${row.level + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
+function scoreDownBits(mess, xval) {
+  if (!xval) var xval = 1
+  console.log("Lowering byte score by", xval*1, mess.author.id)
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    if (row.chatBits*1 >= xval*1) {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
+    }
+  })
+}
+
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     // define static
