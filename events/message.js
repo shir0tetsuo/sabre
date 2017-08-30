@@ -135,7 +135,8 @@ module.exports = message => {
       message.delete();
     }, 10000);
     return; // 10 seconds
-}}
+    }
+  }
   // end self deleting channel lines
   if (!message.content.startsWith(settings.prefix)) return;
   scoreUpTicket(message);
