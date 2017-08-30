@@ -76,7 +76,8 @@ exports.run = (client, message, params) => {
             value: condMessage
           },
           {
-            name: `You ${winlose} ${prize}${curren}/${newbit}${chatBit}`
+            name: `You ${winlose}`
+            value: `${prize}${curren}/${newbit}${chatBit}`
           }
         ]
       }})
