@@ -55,7 +55,7 @@ exports.run = (client, message, params) => {
           message.delete()
           msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
       })
-      console.log("Successfully recovered from an error.")
+      console.log("Successfully recovered from an error. (A new entry was probably made.)")
     })
   }) //end exec
 
