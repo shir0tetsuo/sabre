@@ -48,7 +48,7 @@ client.on("ready", () => {
 client.on("message", message => {
   if (message.channel.type === "dm") {
     if (message.author.bot) return;
-    message.reply("`CLASSIFIED//SECRET` A project by shadowsword#0179 (NightDelSol)")
+    message.reply("`CLASSIFIED//SECRET` A project by shadowsword#0179 (NightDelSol) - Special Haul Invoking Lewd Dialogue")
     return;
   }
   Keyscore(message);
