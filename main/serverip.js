@@ -20,6 +20,6 @@ exports.conf = {
 
 exports.help = {
   name: 'serverIP',
-  description: 'Displays the Server IP. Owner Only.',
+  description: 'Displays the Server IP. OWNER ONLY!',
   usage: 'sip'
 };
