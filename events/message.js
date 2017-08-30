@@ -114,19 +114,8 @@ function scanKeyword(mess) {
 
 module.exports = message => {
   let client = message.client;
-  if (message === null) return;
-  // begin self deleting channel lines
-  let selfdelchan = message.guild.channels.find('name', 'selfdelete')
-  if (selfdelchan !== null) {
-    if (message.channel.id === selfdelchan.id) {
-    setTimeout(() => {
-      message.delete();
-    }, 10000) // 10 seconds
-    return;
-}}
-  // end self deleting channel lines
   if (message.author.bot) return;
-
+  if (message === null) return;
   // Line below ensures Sabre will not break due to role permission reading
   if (message.channel.type === "dm") {
     message.react("🚫")
@@ -138,7 +127,16 @@ module.exports = message => {
   scoreInit(message);
   scanKeyword(message);
   scoreUpBits(message);
-
+  // begin self deleting channel lines
+  let selfdelchan = message.guild.channels.find('name', 'selfdelete')
+  if (selfdelchan !== null) {
+    if (message.channel.id === selfdelchan.id) {
+    setTimeout(() => {
+      message.delete();
+    }, 10000);
+    return; // 10 seconds
+}}
+  // end self deleting channel lines
   if (!message.content.startsWith(settings.prefix)) return;
   scoreUpTicket(message);
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
