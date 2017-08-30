@@ -62,7 +62,7 @@ exports.run = (client, message, params) => {
       var condColor = 0xCF4F36
       var condMessage = blammo.text
     }
-      message.reply({embed: {
+      message.channel.send({embed: {
         color: condColor,
         timestamp: new Date(),
         description: `pulls the trigger.`,
