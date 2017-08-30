@@ -5,9 +5,6 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-function scoreDisplay(mess) {
-
-}
 exports.run = (client, message, params) => {
   if (message.member === null) return;
   let permlvl = 0;
@@ -88,11 +85,11 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['levels', 'lvl'],
-  permLevel: 1
+  permLevel: 0
 };
 
 exports.help = {
   name: 'level',
-  description: 'Displays a user\'s Sabre Level. PermLVL 1.',
+  description: 'Displays a user\'s Sabre Level.',
   usage: 'level'
 };
