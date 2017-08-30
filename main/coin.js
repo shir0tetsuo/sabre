@@ -51,6 +51,6 @@ exports.conf = {
 
 exports.help = {
   name: 'coin',
-  description: 'Displays the mentioned object as a snowflake. PermLVL 1.',
+  description: 'Flip a Coin! Bet some Tickets or Bytes! PermLVL 1.',
   usage: 'coin [tickets/bytes/t/b] <amount>'
 };
