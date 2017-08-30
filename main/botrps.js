@@ -1,5 +1,8 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
+const sql = require("sqlite");
+sql.open("../score.sqlite");
+let curren = ":tickets:"
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
