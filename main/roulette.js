@@ -1,7 +1,6 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 const sql = require("sqlite");
-const Discord = require ("discord.js");
 sql.open("../score.sqlite");
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
@@ -63,15 +62,24 @@ exports.run = (client, message, params) => {
       let condColor = 0xCF4F36
       let condMessage = blammo.text
     }
-    const embed = new Discord.RichEmbed()
-      .setTitle('Russian Roulette')
-      .setAuthor(client.user.username)
-      .setDescription(`${message.member.displayName} pulls the trigger.`)
-      .setColor(condColor)
-      .setThumbnail('/root/NC/utils/NorthStar/resources/one-bullet.jpg')
-      .setTimestamp()
-      .addField("CLICK!", `${condMessage}`)
-      .addFooter(`You ${winlose} ${prize}${curren}/${newbit}${chatBit}`)
+      message.reply({embed: {
+        color: condColor,
+        timestamp: new Date(),
+        description: `${message.member.displayName} pulls the trigger.`,
+        author: {
+          name: message.member.displayName,
+          icon_url: message.author.avatarURL
+        },
+        fields: [
+          {
+            name: "CLICK!",
+            value: condMessage
+          },
+          {
+            name: `You ${winlose} ${prize}${curren}/${newbit}${chatBit}`
+          }
+        ]
+      }})
   })
 };
 
