@@ -45,9 +45,9 @@ exports.run = (client, message, params) => {
   var blammo = blammo[Math.floor(Math.random() * blammo.length)]
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     let chancefloor = Math.floor(Math.random() * 100) // >17%
-    if (chancefloor > 21) {
-      var prize = Math.floor(row.tickets/22) + 5
-      var newbit = Math.floor(row.chatBits/24)
+    if (chancefloor > 19) {
+      var prize = Math.floor(row.tickets/18) + 5
+      var newbit = Math.floor(row.chatBits/15)
       scoreUpTicket(message, prize)
       scoreUpBits(message, newbit)
       var winlose = "**gained**"
@@ -94,5 +94,5 @@ exports.conf = {
 exports.help = {
   name: 'roulette',
   description: 'Play a Game of Russian Roulette.',
-  usage: 'roulette'
+  usage: 'roulette / rr / russian'
 };
