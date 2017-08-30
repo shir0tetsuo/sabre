@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
     if (!row) {
       message.author.send("This user has never received a warning.")
     } else {
-      message.reply(`Date Warned: ${row.date} - User has ${row.times} warnings.`)
+      message.author.send(`Date Warned: ${row.date} - User has ${row.times} warnings.`)
     }
   })
 };
