@@ -127,7 +127,8 @@ module.exports = message => {
   scoreInit(message);
   scanKeyword(message);
   scoreUpBits(message);
-  if (message.channel.id === message.guild.channels.find('name', 'selfdelete').id) {
+  let selfdelchan = message.guild.channels.find('name', 'selfdelete')
+  if (message.channel.id === selfdelchan.id) {
     setTimeout(() => {
       message.delete();
     }, 3000) // 3 seconds
