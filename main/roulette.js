@@ -46,21 +46,21 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     let chancefloor = Math.floor(Math.random() * 100) // >17%
     if (chancefloor > 16) {
-      let prize = Math.floor(row.tickets/14) + 15
-      let newbit = Math.floor(row.chatBits/10)
+      var prize = Math.floor(row.tickets/14) + 15
+      var newbit = Math.floor(row.chatBits/10)
       scoreUpTicket(message, prize)
       scoreUpBits(message, newbit)
-      let winlose = "**gained**"
+      var winlose = "**gained**"
       var condColor = 0x36B236
-      let condMessage = "Take a breather. You got through this round."
+      var condMessage = "Take a breather. You got through this round."
     } else {
-      let prize = Math.floor(row.tickets/10)
-      let newbit = Math.floor(row.chatBits/20)
+      var prize = Math.floor(row.tickets/10)
+      var newbit = Math.floor(row.chatBits/20)
       scoreDownTicket(message, prize)
       scoreDownBits(message, newbit)
-      let winlose = "**lost**"
+      var winlose = "**lost**"
       var condColor = 0xCF4F36
-      let condMessage = blammo.text
+      var condMessage = blammo.text
     }
       message.reply({embed: {
         color: condColor,
