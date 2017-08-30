@@ -1,6 +1,7 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 const sql = require("sqlite");
+const Discord = require ("discord.js");
 sql.open("../score.sqlite");
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
