@@ -127,15 +127,15 @@ module.exports = message => {
   scoreInit(message);
   scanKeyword(message);
   scoreUpBits(message);
+  // begin self deleting channel lines
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
-  if (selfdelchan === null) {
-    console.log("Nothing!")
-  } else {
+  if (selfdelchan !== null) {
     if (message.channel.id === selfdelchan.id) {
     setTimeout(() => {
       message.delete();
     }, 3000) // 3 seconds
 }}
+  // end self deleting channel lines
   if (!message.content.startsWith(settings.prefix)) return;
   scoreUpTicket(message);
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
