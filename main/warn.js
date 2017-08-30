@@ -38,10 +38,10 @@ exports.run = (client, message, params) => {
                 msg.channel.send("``Warnings Exceeded!!! ``" + person + " `` had too many warnings today!``")
               }
               //message.channel.send(`${person} has ${row.times} warnings`)
-            } else {
+            } else { // let actual be 1 because it's a new day
               sql.run(`UPDATE warning SET times = 1 WHERE userid = "${person.id}"`)
               sql.run(`UPDATE warning SET date = "${grabdate}" WHERE userid = "${person.id}"`)
-              let actual = row.times*1 + 1
+              let actual = 1
               message.delete()
               msg.channel.send(msg.content.substring(2,128) + " - ``You have " + actual + " Warnings! Warned by `` " + msg.author)
               }
