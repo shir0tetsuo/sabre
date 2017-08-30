@@ -87,12 +87,12 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['russian'],
+  aliases: ['russian', 'rr'],
   permLevel: 0
 };
 
 exports.help = {
   name: 'roulette',
   description: 'Play a Game of Russian Roulette.',
-  usage: 'roulette / rr / russian'
+  usage: 'roulette / rr / russian - 19% chance of Failure!'
 };
