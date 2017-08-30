@@ -84,7 +84,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['levels', 'lvl'],
+  aliases: ['levels', 'lvl', 'rank'],
   permLevel: 0
 };
 
