@@ -23,20 +23,20 @@ exports.run = (client, message, params) => {
     if (rpsinput === rpsmat.ans) {
       message.reply(rpsmat.ans + " was also my answer!")
     } else if (rpsinput === "rock" && rpsmat.ans === "paper") {
-      message.reply(botwin + rpsmat.ans + wintk)
-      scoreUpTicket(message, 5)
+      message.reply(botwin + rpsmat.ans)
     } else if (rpsinput === "rock" && rpsmat.ans === "scissors") {
-      message.reply(botlose + rpsmat.ans)
+      message.reply(botlose + rpsmat.ans + wintk)
+            scoreUpTicket(message, 5)
     } else if (rpsinput === "paper" && rpsmat.ans === "rock") {
-      message.reply(botlose + rpsmat.ans)
+      message.reply(botlose + rpsmat.ans + wintk)
+            scoreUpTicket(message, 5)
     } else if (rpsinput === "paper" && rpsmat.ans === "scissors") {
-      message.reply(botwin + rpsmat.ans + wintk)
-      scoreUpTicket(message, 5)
+      message.reply(botwin + rpsmat.ans)
     } else if (rpsinput === "scissors" && rpsmat.ans === "paper") {
-      message.reply(botlose + rpsmat.ans)
+      message.reply(botlose + rpsmat.ans + wintk)
+            scoreUpTicket(message, 5)
     } else if (rpsinput === "scissors" && rpsmat.ans === "rock") {
-      message.reply(botwin + rpsmat.ans + wintk)
-      scoreUpTicket(message, 5)
+      message.reply(botwin + rpsmat.ans)
     }
   } else {
     message.reply("The argument was not understood!")
