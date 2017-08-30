@@ -8,6 +8,13 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${person.id}"`).then(row => {
     message.author.send(`${person}: Lv ${row.level}, Tk ${row.tickets}, B ${row.chatBits}`)
   })
+  sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(row => {
+    if (!row) {
+      message.author.send("This user has never received a warning.")
+    } else {
+      message.reply(`Date Warned: ${row.date} - User has ${row.times} warnings.`)
+    }
+  })
 };
 
 exports.conf = {
@@ -19,6 +26,6 @@ exports.conf = {
 
 exports.help = {
   name: 'examine',
-  description: 'Displays a Users Sabre Level Data. PermLVL 2.',
+  description: 'Displays a Users Sabre Level Data / Warning Counter. PermLVL 2.',
   usage: 'examine [@user]'
 };
