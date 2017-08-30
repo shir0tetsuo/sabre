@@ -6,17 +6,6 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 function scoreDisplay(mess) {
-  if (permlvl === 0) {
-    let barCol = 0x36786A
-  } else if (permlvl === 1) {
-    let barCol = 0x366394
-  } else if (permlvl === 2) {
-    let barCol = 0x802D32
-  } else if (permlvl === 3) {
-    let barCol = 0x992D22
-  } else if (permlvl === 4) {
-    let barCol = 0x00FF00
-  }
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
     //console.log(mess.author.id, row.level, row.tickets, row.chatBits)
@@ -80,6 +69,17 @@ exports.run = (client, message, params) => {
   if (message.author.id === settings.davidid) permlvl = 4;
   if (message.author.id === settings.nickid) permlvl = 4;
   if (message.author.id === settings.danid) permlvl = 4;
+  if (permlvl === 0) {
+    let barCol = 0x36786A
+  } else if (permlvl === 1) {
+    let barCol = 0x366394
+  } else if (permlvl === 2) {
+    let barCol = 0x802D32
+  } else if (permlvl === 3) {
+    let barCol = 0x992D22
+  } else if (permlvl === 4) {
+    let barCol = 0x00FF00
+  }
   scoreDisplay(message)
 };
 
