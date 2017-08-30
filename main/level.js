@@ -33,7 +33,7 @@ exports.run = (client, message, params) => {
   } else if (permlvl === 3) {
     var barCol = 0x992D22
   } else if (permlvl === 4) {
-    var barCol = 0x00FF00
+    var barCol = 0x31BF61
   }
   let mess = message
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
