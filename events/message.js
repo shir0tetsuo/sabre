@@ -133,7 +133,7 @@ module.exports = message => {
     if (message.channel.id === selfdelchan.id) {
     setTimeout(() => {
       message.delete();
-    }, 3000) // 3 seconds
+    }, 10000) // 10 seconds
 }}
   // end self deleting channel lines
   if (!message.content.startsWith(settings.prefix)) return;
