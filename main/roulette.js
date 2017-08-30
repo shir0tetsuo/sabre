@@ -65,7 +65,7 @@ exports.run = (client, message, params) => {
       message.reply({embed: {
         color: condColor,
         timestamp: new Date(),
-        description: `${message.member.displayName} pulls the trigger.`,
+        description: `pulls the trigger.`,
         author: {
           name: message.member.displayName,
           icon_url: message.author.avatarURL
