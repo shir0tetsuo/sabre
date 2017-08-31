@@ -16,7 +16,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['h', 'halp', 'cmds'],
+  aliases: ['h', 'halp', 'cmds', 'man'],
   permLevel: 0
 };
 
