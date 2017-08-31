@@ -4,14 +4,11 @@ exports.run = (client, message, params) => {
   if (params[0] === null) return message.reply("`ERROR` No text detected")
   let annRoomA = message.guild.channels.find('name', 'announce')
   let annRoomB = message.guild.channels.find('name', 'announcements')
-  if (annRoomA !== null && annRoomB !== null) {
-    message.reply("`ERROR` **NO** #announcements **OR** #announce **DETECTED**")
-  }
-  if (annRoomA !== null && annRoomB === undefined) {
+  if (annRoomA !== null) {
     annRoomA.send(message.content.substring(7,1024))
     message.reply("`SUCCESS` Check " + annRoomA)
     return;
-  } else if (annRoomB !== null && annRoomA === undefined) {
+  } else if (annRoomB !== null) {
     annRoomB.send(message.content.substring(7,1024))
     message.reply("`SUCCESS` Check " + annRoomB)
     return;
