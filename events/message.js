@@ -4,6 +4,8 @@ const settings = require('../settings.json');
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 
+let timer = new Set();
+
 let scoreReward = new Set();
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
@@ -139,6 +141,11 @@ module.exports = message => {
   }
   // end self deleting channel lines
   if (!message.content.startsWith(settings.prefix)) return;
+  if (timer.has(message.author.id)) return message.author.send("Slow down, Speedy!")
+  timer.add(message.author.id);
+  setTimeout(() => {
+    timer.delete(message.author.id);
+  }, 1200) // 1.2seconds
   scoreUpTicket(message);
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
   let params = message.content.split(' ').slice(1);
