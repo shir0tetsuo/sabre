@@ -23,13 +23,15 @@ exports.run = (client, message, params) => {
     var authName = message.member.displayName
     var authIcon = message.author.avatarURL
   }
+  let msg = message
+  message.delete()
   data = message.content.substring(slice, 1024)
-  message.channel.send({ embed: {
+  msg.channel.send({ embed: {
     color: slCol,
     timestamp: new Date(),
     footer: {
-      text: message.member.displayName, // client.user.username
-      icon_url: message.author.avatarURL // client.user.avatarURL
+      text: msg.member.displayName, // client.user.username
+      icon_url: msg.author.avatarURL // client.user.avatarURL
     },
     author: {
       name: authName,
