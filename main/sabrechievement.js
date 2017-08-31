@@ -28,8 +28,8 @@ exports.run = (client, message, params) => {
     color: slCol,
     timestamp: new Date(),
     footer: {
-      text: client.user.username,
-      icon_url: client.user.avatarURL
+      text: message.member.displayName, // client.user.username
+      icon_url: message.author.avatarURL // client.user.avatarURL
     },
     author: {
       name: authName,
