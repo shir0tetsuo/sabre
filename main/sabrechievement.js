@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
   } else return message.reply("`ERROR` See Manual!")
   if (message.mentions.members.first() !== undefined) {
     let person = message.mentions.members.first()
-    var authName = person.member.displayName
+    var authName = person.displayName
     var authIcon = person.avatarURL
   } else {
     var authName = message.member.displayName
