@@ -18,7 +18,7 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined) {
     let person = message.mentions.members.first()
     var authName = person.displayName
-    var authIcon = person.avatarURL
+    var authIcon = client.user.avatarURL
   } else {
     var authName = message.member.displayName
     var authIcon = message.author.avatarURL
