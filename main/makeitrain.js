@@ -63,7 +63,7 @@ exports.run = (client, message, params) => {
       if (row.tickets >= 5) {
         sql.get(`SELECT * FROM makeitjacky WHERE place = "here"`).then(jackpot => {
           var pile = jackpot.tickets*1 + 5
-          message.reply(`Put 5${curren} into the prize pile. The pile is ${pile}${curren} high!`)
+          message.reply(`Put 5${curren} into the prize pile. The pile is ${pile}${curren} high! Ain't that fancy?`)
           scoreDownTicket(message, 5)
           sql.run(`UPDATE makeitjacky SET tickets = ${pile} WHERE place = "here"`)
         })
