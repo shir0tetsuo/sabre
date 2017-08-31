@@ -1,6 +1,6 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
-const ssword = require("../sys/shadowshadow.json")
+const ssword = require("../sys/shadowshadow.json") // server-side
 
 exports.run = (client, message, params) => {
   if (!params[0]) return; //oops is a toggle
