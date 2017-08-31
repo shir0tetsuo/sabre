@@ -3,16 +3,16 @@ const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (params[0] === null || params[1] === null) return message.reply("`ERROR` See Manual!")
   if (params[0] === "green") {
-    var slice = 18
+    var slice = 20
     var slCol = 0x00FF00
   } else if (params[0] === "red") {
-    var slice = 16
+    var slice = 18
     var slCol = 0xFF0000
   } else if (params[0] === "yellow") {
-    var slice = 19
+    var slice = 21
     var slCol = 0xFFFF00
   } else if (params[0] === "blue") {
-    var slice = 17
+    var slice = 19
     var slCol = 0x0000FF
   } else return message.reply("`ERROR` See Manual!")
   if (message.mentions.members.first() !== undefined) {
