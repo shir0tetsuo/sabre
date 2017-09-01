@@ -13,7 +13,7 @@ function StringGen(length, chars) {
 exports.run = (client, message, params) => {
   let marker = StringGen(5, 'A#')
   message.channel.send("__**``" + `MARKER: ${marker}` + "``**__")
-  console.log(chalk.blueBright(message.guild.name, message.channel.name), chalk.greenBright(marker), new Date(), message.author.displayName)
+  console.log(chalk.blueBright(message.guild.name, message.channel.name), chalk.greenBright(marker), new Date(), message.member.displayName)
   message.delete();
 };
 
