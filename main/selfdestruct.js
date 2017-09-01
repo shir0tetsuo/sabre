@@ -17,7 +17,11 @@ exports.run = (client, message, params) => {
   let delaySec = params[0]
   let delayMil = params[0]*1000
   let cut = cLen + pLen
-  message.channel.send(message.content.substring(cut, 1024) + "``" + `Self Destruct in ${delaySec} Seconds.` + "``").delete(delayMil)
+  message.channel.send(message.content.substring(cut, 1024) + "``" + `Self Destruct in ${delaySec} Seconds.` + "``").then(message => {
+    setTimeout(() => {
+      message.delete()
+    }, delayMil)
+  })
 };
 
 exports.conf = {
