@@ -31,7 +31,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['del'],
+  aliases: ['del', 'selfdelete'],
   permLevel: 1
 };
 
