@@ -24,7 +24,6 @@ exports.run = (client, message, params) => {
   //mess.content.substring(cut, 1024) + " ``" + `Self Destruct in ${delaySec} Seconds.` + "``"
   mess.channel.send({embed: {
     color: 0x992D22,
-    description: "``" + `Message will Self-Destruct in ${delaySec} Seconds.` + "``",
     timestamp: new Date(),
     author: {
       name: mess.member.displayName,
@@ -32,7 +31,7 @@ exports.run = (client, message, params) => {
     },
     fields: [
       {
-        name: "\u200b",
+        name: "``" + `Message will Self-Destruct in ${delaySec} Seconds;` + "``",
         value: `${mess.content.substring(cut, 1024)}`
       }
     ]
