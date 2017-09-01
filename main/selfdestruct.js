@@ -5,11 +5,13 @@ exports.run = (client, message, params) => {
   if (params[1] === undefined) {
     message.reply("Missing Content!")
     message.delete()
+    return;
   }
   if (params[0] < 1) {
     message.reply("First argument must be a number!")
     message.author.send("`ERROR: Number Required. Original Message: `" + message.content)
     message.delete()
+    return;
   }
   const cmdArg = message.content.split(/\s+/g)
   let cLen = cmdArg[1].length + 4;
