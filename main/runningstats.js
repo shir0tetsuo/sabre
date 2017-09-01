@@ -18,7 +18,7 @@ exports.run = (client, message, params) => {
           }
         ]
       }})
-    }
+    })
 
 };
 
