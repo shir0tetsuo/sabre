@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
         fields: [
           {
             name: `This Server: ${message.guild.name}`,
-            value: `:minidisc: Memory Usage: **${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB**\n:tropical_fish: Users: **${client.users.size}**\n:wave: Active Users in This Server: **${message.guild.members.filter(m => m.presence.status !== 'offline').size} / ${message.guild.memberCount}**\n:satellite: Servers: **${client.guilds.size}**\n:biohazard: Channels: **${client.channels.size}**\n:city_dusk: Region: **${message.guild.region}**\n:calendar_spiral: Server Created: **${days}** Days Ago.\n:gear: Node: ${process.version}\n:white_sun_small_cloud: Server Uptime: **${stdout}**`
+            value: `:minidisc: Memory Usage: **${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB**\n:tropical_fish: Serving: **${client.users.size} Users**\n:wave: Active Users in This Server: **${message.guild.members.filter(m => m.presence.status !== 'offline').size} / ${message.guild.memberCount}**\n:satellite: Servers: **${client.guilds.size}**\n:biohazard: Channels: **${client.channels.size}**\n:city_dusk: Region: **${message.guild.region}**\n:calendar_spiral: Server Created: **${days}** Days Ago.\n:gear: Node: ${process.version}\n:white_sun_small_cloud: Server Uptime: **${stdout}**`
           }
         ]
       }})
