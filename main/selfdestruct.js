@@ -21,7 +21,22 @@ exports.run = (client, message, params) => {
   let cut = cLen + pLen
   let mess = message
   message.delete()
-  mess.channel.send(mess.content.substring(cut, 1024) + " ``" + `Self Destruct in ${delaySec} Seconds.` + "``").then(message => {
+  //mess.content.substring(cut, 1024) + " ``" + `Self Destruct in ${delaySec} Seconds.` + "``"
+  mess.channel.send({embed: {
+    color: 0x992D22,
+    description: "``" + `Message will Self-Destruct in ${delaySec} Seconds.` + "``",
+    timestamp: new Date(),
+    author: {
+      name: mess.member.displayName,
+      icon_url: mess.author.avatarURL
+    },
+    fields: [
+      {
+        name: "\u200b",
+        value: `${mess.content.substring(cut, 1024)}`
+      }
+    ]
+  }}).then(message => {
     setTimeout(() => {
       message.delete()
     }, delayMil)
