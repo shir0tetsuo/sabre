@@ -19,7 +19,7 @@ exports.run = (client, message, params) => {
   let cut = cLen + pLen
   let mess = message
   message.delete()
-  msg.channel.send(msg.content.substring(cut, 1024) + "``" + `Self Destruct in ${delaySec} Seconds.` + "``").then(message => {
+  mess.channel.send(mess.content.substring(cut, 1024) + "``" + `Self Destruct in ${delaySec} Seconds.` + "``").then(message => {
     setTimeout(() => {
       message.delete()
     }, delayMil)
