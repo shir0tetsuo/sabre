@@ -25,7 +25,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'prototype',
+  name: 'marker',
   description: 'Creates a chat marker to search later. PermLVL 1.',
   usage: 'marker'
 };
