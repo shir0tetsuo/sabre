@@ -30,6 +30,7 @@ module.exports = member => {
       ]
     }})
   } else {
+    if (guild.defaultChannel === undefined) return;
     guild.defaultChannel.send(`Please say goodbye to ${member.user.username} we will miss you!`);
   }
 };
