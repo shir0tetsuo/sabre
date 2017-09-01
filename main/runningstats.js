@@ -1,5 +1,6 @@
 const settings = require('../settings.json');
 const Discord = require ("discord.js");
+var exec = require('child_process').exec;
 exports.run = (client, message, params) => {
   exec('uptime',
     function(error, stdout, stderr) {
