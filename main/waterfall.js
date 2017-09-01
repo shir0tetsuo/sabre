@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
         },
         {
           name :"Whatnow?",
-          value: "You can clear a card and move onto the next by guessing if the next card that will replace it will be higher or lower valued."
+          value: "You can clear a card and move onto the next by guessing if the next card that will replace the current card will be higher or lower valued."
         },
         {
           name: "What happens if I get it wrong?",
