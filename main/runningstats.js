@@ -4,7 +4,7 @@ exports.run = (client, message, params) => {
   message.channel.send({ embed: {
     color: 0x009DC4,
     timestamp: new Date(),
-    description: `Sabre v${settings.version}`
+    description: `Sabre v${settings.version}`,
     author: {
       name: client.user.username,
       icon_url: message.author.avatarURL
