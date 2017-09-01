@@ -2,7 +2,7 @@ const settings = require('../settings.json');
 const Discord = require ("discord.js");
 var exec = require('child_process').exec;
 exports.run = (client, message, params) => {
-  exec('uptime',
+  exec(`uptime | awk {'print $2,$3,$4,$5'}`,
     function(error, stdout, stderr) {
       message.channel.send({ embed: {
         color: 0x009DC4,
