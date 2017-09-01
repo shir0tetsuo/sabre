@@ -31,7 +31,7 @@ exports.run = (client, message, params) => {
     },
     fields: [
       {
-        name: "``" + `Message will Self-Destruct in ${delaySec} Seconds;` + "``",
+        name: "``" + `Message will Self-Destruct in ${delaySec} Seconds` + "``",
         value: `${mess.content.substring(cut, 1024)}`
       }
     ]
