@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
     message.delete()
   }
   const cmdArg = message.content.split(/\s+/g)
-  let cLen = cmdArg[1].length + 1;
+  let cLen = cmdArg[1].length + 4;
   let pLen = params[0].length + 1;
   let delaySec = params[0]
   let delayMil = params[0]*1000
