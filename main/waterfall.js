@@ -34,7 +34,7 @@ exports.run = (client, message, params) => {
         },
         {
           name: "Commands?",
-          value: "See " + prefix + "help waterfall"
+          value: "See " + settings.prefix + "help waterfall"
         }
       ]
     }})
