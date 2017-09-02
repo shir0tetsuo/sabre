@@ -4,7 +4,7 @@ exports.run = (client, message, params) => {
     //const commandNames = Array.from(client.commands.keys());
     const level = client.elevation(message)
     console.log(level)
-    const goodCommands = message.guild ? this.client.commands.filter(cmd => cmd.conf.permLevel <= level && cmd.conf.hidden !== true);
+    const goodCommands = client.commands.filter(cmd => cmd.conf.permLevel <= level && cmd.conf.hidden !== true)
     const commandNames = goodCommands.keyArray()
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     if (params[0] === undefined) {
