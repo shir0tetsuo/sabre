@@ -13,7 +13,7 @@ exports.run = (client, message, params) => {
     const commandNames = goodCommands.keyArray()
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     let header = `= Sabre Commands =\n\n[Page ${page}, ${settings.prefix}help <commandname> for details]`;
-    let output = `\n`
+    let output = `\n\n`
     goodCommands.forEach( c => {
       output += `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description} (PL${c.conf.permLevel})\n`
     })
