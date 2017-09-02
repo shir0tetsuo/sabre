@@ -17,6 +17,9 @@ const sResponse_Online_Question = [
   'Don\'t ask me that.',
   'Maybe?',
   'Sure.. Uhhh..',
+  'The first one.',
+  'The second one.',
+  'That uh, other thing.',
   'Ask me later.',
   'Well that\'s obviously too hard of a question.',
   'CSD.',
@@ -31,6 +34,14 @@ const sResponse_Online_Sup = [
   'In deep thought, here..',
   'Helping people right now.',
   'Curing people\'s boredom.'
+]
+const sResponse_Online_Default = [
+  'Hm?',
+  '...Sorry what?',
+  'Pardon?',
+  'Oh.',
+  'Well then.. Not sure what to say.',
+  'I\'m indifferent about this.'
 ]
 
 const sql = require("sqlite");
@@ -185,7 +196,8 @@ module.exports = message => {
         const hru = [
           "how are you?",
           "how are you today?",
-          "hru?"
+          "hru",
+          "how are you"
         ]
         const sup = [
           "whats up",
@@ -206,7 +218,7 @@ module.exports = message => {
             message.channel.send(`${sResponse_Online_Question[Math.floor(Math.random() * sResponse_Online_Question.length)]}`)
             return;
           }
-          message.channel.send("Hm?")
+          message.channel.send(`${sResponse_Online_Default[Math.floor(Math.random() * sResponse_Online_Default.length)]}`)
           console.log(message.content)
         } else if (client.user.localPresence.status === 'invisible') { //INVISIBLE
           message.channel.send("`Test Mode.`")
