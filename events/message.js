@@ -247,7 +247,8 @@ module.exports = message => {
           'nig',
           'assh',
           'shutup',
-          'shut up'
+          'shut up',
+          'shut it'
         ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
@@ -291,17 +292,22 @@ module.exports = message => {
                 {
                   name: "Awards of Alaska",
                   value: "[Here](https://trello.com/b/8fdMwSXW/awards-of-alaska)",
-                  inline: false
+                  inline: true
                 },
                 {
                   name: "Alaska Judicial Board",
                   value: "[Here](https://trello.com/b/s97gZFo1/alaska-judicial-board)",
-                  inline: true
+                  inline: false
                 },
                 {
                   name: "Anchorage Admin Board",
                   value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)",
-                  inline: false
+                  inline: true
+                },
+                {
+                  name: "Donate to Sabre using PayPal to support development",
+                  value: `[D̗̬ͅo̳n̤̲̫͈̝̣a͎̥t̩͕̖e̜̱](${settings.donation})`,
+                  inline: true
                 }
               ]
             }}).then(message => {
