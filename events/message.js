@@ -156,7 +156,7 @@ module.exports = message => {
           if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
             var sabreMsg = sOnHowareyou.strings[Math.floor(Math.random() * sOnHowareyou.strings.length)]
             message.channel.send(sabreMsg.text)
-
+            return;
           } else if (lowCase.indexOf("mad") !== -1) {
             message.channel.send("Well that's just dandy.")
           }
