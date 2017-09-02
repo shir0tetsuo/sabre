@@ -1,5 +1,6 @@
 const chalk = require("chalk");
 const settings = require('../settings.json');
+const sOnHowareyou = require ('../sys/responses_online_howareyou.json')
 
 const sql = require("sqlite");
 sql.open("../score.sqlite");
@@ -148,13 +149,13 @@ module.exports = message => {
       if (message.content.startsWith(settings.prefix)) {
         message.channel.send("What are you dragging me into this for?")
       } else {
-        const ResponseOnlineHowareyou = require("/root/NC/utils/NorthStar/sabre.discord.js/sys/responses_online_howareyou.json")
+
         const lowCase = message.content.toLowerCase();
-        var OnlinePositiveHowareyou = ResponseOnlineHowareyou[Math.floor(Math.random() * ResponseOnlineHowareyou.strings.length)] //sResponse.online.pos.howareyou.text
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
 
           if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
-            message.channel.send(OnlinePositiveHowareyou.text)
+            var sabreMsg = sOnHowareyou.strings[Math.floor(Math.random() * sOnHowareyou.strings.length)]
+            message.channel.send(sabreMsg.text)
 
           } else if (lowCase.indexOf("mad") !== -1) {
             message.channel.send("Well that's just dandy.")
