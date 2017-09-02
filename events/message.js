@@ -152,11 +152,11 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === "339590992044752897") {
-      if (client.status === 'online') {
+      if (client.user.Status === 'online') {
         console.log("ONLINE")
       } else if (client.status === 'invisible') {
         console.log("INVISIBLE")
-      } else if (client.localPresence.status === 'dnd') {
+      } else if (client.user.status === 'dnd') {
         console.log("DND")
       } else if (client.status === 'idle') {
         console.log("IDLE")
