@@ -116,13 +116,13 @@ function scanReply(client, message) {
   if (message.mentions.members.first() === undefined) return;
   let clientID = "339590992044752897"
   if (message.mentions.members.first().id === clientID) { // or client.id
-    if (client.presence.status === 'online') {
+    if (client.status === 'online') {
       message.channel.send(`Hello, ${message.member.displayName}.`)
-    } else if (client.presence.status === 'dnd') {
+    } else if (client.status === 'dnd') {
       message.channel.send(`Sorry. Can't talk right now.`)
-    } else if (client.presence.status === 'invisible') {
+    } else if (client.status === 'invisible') {
       message.channel.send("`MAINTENANCE`")
-    } else if (client.presence.status === 'idle') {
+    } else if (client.status === 'idle') {
       message.channel.send("`///TEST MODE///`")
     }
   }
