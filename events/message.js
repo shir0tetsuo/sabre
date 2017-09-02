@@ -344,6 +344,20 @@ module.exports = message => {
           message.channel.send("`Test Mode.`")
           console.log(message.content)
         } else if (client.user.localPresence.status === 'dnd') { ////////////DND
+          if (badwords.some(word => lowCase.includes(word))) {
+            let output = '';
+            let smiteChance = Math.floor(Math.random() * 100)
+            if (smiteChance >= 80) {
+              output += `\`Sabre is not amused. He smites you.\`\nLanguage, 'Cap.\n`
+              output += `O̻̖͔͔̞̞u͙̹͓c̜͖͖̬ḫ͈͚̜̰͚!̫̞͇\n`
+              output += `Sabre took ${smiteChance}${chatBit}\n`
+              scoreDownBits(message, smiteChance)
+            } else {
+              output += `\`Sabre is hesitant.\`\n`
+            }
+            message.channel.send(`${output}${sResponse_DND_default_1[Math.floor(Math.random() * sResponse_DND_default_1.length)]}${sResponse_DND_default_2[Math.floor(Math.random() * sResponse_DND_default_2.length)]}`)
+            return;
+          }
           message.channel.send(`${sResponse_DND_default_1[Math.floor(Math.random() * sResponse_DND_default_1.length)]}${sResponse_DND_default_2[Math.floor(Math.random() * sResponse_DND_default_2.length)]}`)
           console.log(message.content)
         } else if (client.user.localPresence.status === 'idle') { //////////IDLE
