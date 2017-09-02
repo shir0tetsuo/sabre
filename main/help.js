@@ -19,7 +19,7 @@ exports.run = (client, message, params) => {
     })
     let hLen = 0 + ((page*1 - 1) * 1800)
     let hMax = hLen + 1800
-    console.log(hLen, hMax, level)
+    //console.log(hLen, hMax, level)
     message.author.send(header + output.substring(hLen,hMax), {code:'asciidoc'});
     //let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')
     //let newMap = commandMap.substring(hLen,hMax)
