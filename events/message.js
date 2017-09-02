@@ -216,7 +216,13 @@ module.exports = message => {
           "what's up"
         ]
         const question = [
-          "?"
+          "?",
+          "who",
+          "what",
+          "when",
+          "where",
+          "why",
+          "how"
         ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
