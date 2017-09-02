@@ -224,12 +224,19 @@ module.exports = message => {
           "why",
           "how"
         ]
+        const links = [
+          'trello law',
+          'alaska law',
+          'alaskan law'
+        ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
           scoreUpTicket(message)
           if (hru.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_HowAreYou[Math.floor(Math.random() * sResponse_Online_HowAreYou.length)]}`)
             return;
+          } else if (links.some(word => lowCase.includes(word))) {
+            message.channel.send("https://trello.com/b/JV8cEG1s/laws-of-the-state")
           } else if (sup.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
             return;
