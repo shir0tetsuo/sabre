@@ -24,7 +24,8 @@ const sResponse_Online_Question = [
   'Shake a lemon till it explodes. There you go.',
   'A lot of YouTube.',
   'The Sword of Shadows.',
-  'No. Just no.'
+  'No. Just no.',
+  '`Now isn\'t a good time.`'
 ]
 const sResponse_Online_Sup = [
   'In deep thought, here..',
