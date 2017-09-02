@@ -36,6 +36,6 @@ exports.conf = {
 
 exports.help = {
   name: 'giveTickets',
-  description: 'Give away some Tickets! PermLVL 1.',
+  description: 'Give away some Tickets!',
   usage: 'givetk [@user] <number>'
 };

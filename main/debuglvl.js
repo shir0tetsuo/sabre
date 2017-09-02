@@ -15,6 +15,6 @@ exports.conf = {
 
 exports.help = {
   name: 'debuglvl',
-  description: 'Developer Command. PermLVL 4.',
+  description: 'Developer Command.',
   usage: 'debuglvl, see Secure Terminal for details.'
 };

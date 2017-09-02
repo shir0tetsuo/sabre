@@ -18,6 +18,6 @@ exports.conf = {
 
 exports.help = {
   name: 'purge',
-  description: 'Purges X amount of messages from a given channel. PermLVL 3.',
+  description: 'Purges X amount of messages from a given channel.',
   usage: 'purge <number>'
 };

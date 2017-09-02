@@ -51,6 +51,6 @@ exports.conf = {
 
 exports.help = {
   name: 'coin',
-  description: 'Flip a Coin! Bet some Tickets or Bytes! PermLVL 1.',
+  description: 'Flip a Coin! Bet some Tickets or Bytes!',
   usage: 'coin [tickets/bytes/t/b] <amount>'
 };

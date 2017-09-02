@@ -52,6 +52,6 @@ exports.conf = {
 
 exports.help = {
   name: 'botrps',
-  description: 'Play Rock Paper Scissors against the Bot. PermLVL 1.',
+  description: 'Play Rock Paper Scissors against the Bot.',
   usage: 'botrps <rock/paper/scissors>'
 };

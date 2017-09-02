@@ -26,6 +26,6 @@ exports.conf = {
 
 exports.help = {
   name: 'annc',
-  description: 'Post in announcements room if any as Sabre. PermLVL 3.',
+  description: 'Post in announcements room if any as Sabre.',
   usage: 'annc [message]'
 };

@@ -36,6 +36,6 @@ exports.conf = {
 
 exports.help = {
   name: 'sabrestatus',
-  description: 'Changes Sabre\'s Status. PermLVL 3.',
+  description: 'Changes Sabre\'s Status.',
   usage: 'sabrestatus [game/online/reset/dnd/idle/invisible] [game-message]'
 };

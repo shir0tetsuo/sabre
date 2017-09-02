@@ -51,6 +51,6 @@ exports.conf = {
 
 exports.help = {
   name: 'selfdestruct',
-  description: 'Creates a self-destructing message. PermLVL 1.',
+  description: 'Creates a self-destructing message.',
   usage: 'del <delay in seconds> [message]'
 };

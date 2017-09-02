@@ -25,6 +25,6 @@ exports.conf = {
 
 exports.help = {
   name: 'fixlvl',
-  description: 'Invokes mathematical monkeys to fix broken levels. PermLVL 2.',
+  description: 'Invokes mathematical monkeys to fix broken levels.',
   usage: 'fixlvl [@user]'
 };

@@ -61,6 +61,6 @@ exports.conf = {
 
 exports.help = {
   name: 'shadowshadow',
-  description: 'Bringing down the Hammer of Justice since 1994. PermLVL 4.',
+  description: 'Bringing down the Hammer of Justice since 1994.',
   usage: 'shadowshadow [mute/notmeproblem/echo/david/nick] [@user] :: notmeproblem = david\'s netherworld :: echo prints users roles :: names summon user'
 };

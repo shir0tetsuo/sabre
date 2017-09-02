@@ -36,6 +36,6 @@ exports.conf = {
 
 exports.help = {
   name: 'donate',
-  description: 'Post in announcements room if any as Sabre. PermLVL 1.',
+  description: 'Post in announcements room if any as Sabre.',
   usage: 'donate'
 };

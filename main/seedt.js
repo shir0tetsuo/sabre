@@ -26,6 +26,6 @@ exports.conf = {
 
 exports.help = {
   name: 'seedt',
-  description: 'Allows Administrators to manually seed targets. PermLVL 3.',
+  description: 'Allows Administrators to manually seed targets.',
   usage: 'seed [@user] <lvl> <tickets> <bytes>'
 };

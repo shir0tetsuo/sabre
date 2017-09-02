@@ -42,6 +42,6 @@ exports.conf = {
 
 exports.help = {
   name: 'help',
-  description: 'Displays all available commands.',
+  description: 'Displays all available commands for your level.',
   usage: 'help [command/pagenumber]'
 };

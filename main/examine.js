@@ -26,6 +26,6 @@ exports.conf = {
 
 exports.help = {
   name: 'examine',
-  description: 'Displays a Users Sabre Level Data / Warning Counter. PermLVL 2.',
+  description: 'Displays a Users Sabre Level Data / Warning Counter.',
   usage: 'examine [@user]'
 };

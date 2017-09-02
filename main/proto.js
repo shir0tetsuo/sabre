@@ -16,6 +16,6 @@ exports.conf = {
 
 exports.help = {
   name: 'prototype',
-  description: 'Displays the mentioned object as a snowflake. PermLVL 4.',
+  description: 'Displays the mentioned object as a snowflake.',
   usage: 'prototype [@user/@group/#channel]'
 };

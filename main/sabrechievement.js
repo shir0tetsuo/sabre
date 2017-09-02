@@ -56,6 +56,6 @@ exports.conf = {
 
 exports.help = {
   name: 'achievement',
-  description: 'Give someone a cookie today. PermLVL 1.',
+  description: 'Give someone a cookie today.',
   usage: 'achievement [blue/yellow/red/green] [text]'
 };
