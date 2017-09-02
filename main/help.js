@@ -5,9 +5,10 @@ exports.run = (client, message, params) => {
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     let page = params[0]
     let hLen = 0 + ((params[0]*1 - 1) * 1800)
+    let hMax = hLen + 1800
     console.log(hLen)
-    console.log(hLen*1 + 1800)
-    let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n').substring(hLen,(hLen*1 + 1800))`, {code:'asciidoc'}`
+    console.log(hMax)
+    let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n').substring(hLen,hMax)`, {code:'asciidoc'}`
     message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${commandMap}`, {code:'asciidoc'});
     return;
   }
