@@ -148,7 +148,7 @@ module.exports = message => {
       if (message.content.startsWith(settings.prefix)) {
         message.channel.send("What are you dragging me into this for?")
       } else {
-        const ResponseOnlineHowareyou = require("../sys/responses_online_howareyou.json")
+        const ResponseOnlineHowareyou = require("/root/NC/utils/NorthStar/sys/responses_online_howareyou.json")
         const lowCase = message.content.toLowerCase();
         var OnlinePositiveHowareyou = ResponseOnlineHowareyou[Math.floor(Math.random() * ResponseOnlineHowareyou.strings.length)] //sResponse.online.pos.howareyou.text
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
