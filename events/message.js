@@ -146,7 +146,7 @@ module.exports = message => {
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
       console.log("success")
-      if (client.user.status === 'online') {
+      if (client.user.localPresence.status === 'online') {
         console.log("ONLINE")
       } else if (client.status === 'invisible') {
         console.log("INVISIBLE")
