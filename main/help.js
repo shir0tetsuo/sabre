@@ -37,5 +37,5 @@ exports.conf = {
 exports.help = {
   name: 'help',
   description: 'Displays all available commands.',
-  usage: 'help [command]'
+  usage: 'help [command/pagenumber]'
 };
