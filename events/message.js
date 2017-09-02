@@ -244,7 +244,7 @@ module.exports = message => {
             message.channel.send({embed: {
               color: 0xA5A5A7,
               timestamp: new Date(),
-              description: "This will disappear in 2 minutes."
+              description: "This will disappear in 2 minutes.",
               author: {
                 name: "Alaska Directory",
                 icon_url: client.user.avatarURL
