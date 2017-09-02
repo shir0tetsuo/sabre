@@ -347,7 +347,7 @@ module.exports = message => {
           if (badwords.some(word => lowCase.includes(word))) {
             let output = '';
             let smiteChance = Math.floor(Math.random() * 100)
-            if (smiteChance >= 80) {
+            if (smiteChance >= 20) {
               output += `\`Sabre is not amused. He smites you.\`\nLanguage, 'Cap.\n`
               output += `O̻̖͔͔̞̞u͙̹͓c̜͖͖̬ḫ͈͚̜̰͚!̫̞͇\n`
               output += `Sabre took ${smiteChance}${chatBit}\n`
