@@ -152,15 +152,15 @@ module.exports = message => {
         const lowCase = message.content.toLowerCase();
         const sQuestion = ["?"]
         const sExclam = ["!"]
-        var OnlinePositiveResponse = sResponse[Math.floor(Math.random() * sResponse.online.pos.default.length)] //sResponse.online.pos.default.text
-        var OnlinePositiveHowareyou = sResponse[Math.floor(Math.random() * sResponse.online.pos.howareyou.length)] //sResponse.online.pos.howareyou.text
+        var OnlinePositiveResponse = sResponse[Math.floor(Math.random() * sResponse.online.length)] //sResponse.online.pos.default.text
+        var OnlinePositiveHowareyou = sResponse[Math.floor(Math.random() * sResponse.howareyou.length)] //sResponse.online.pos.howareyou.text
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
           if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
             message.channel.send(OnlinePositiveHowareyou.text)
           } else if (lowCase.indexOf("mad") !== -1) {
             message.channel.send("Well that's just dandy.")
           }
-          message.channel.send("Hm?")
+          message.channel.send(OnlinePositiveResponse.text)
           console.log(message.content)
         } else if (client.user.localPresence.status === 'invisible') { //INVISIBLE
           message.channel.send("`Test Mode.`")

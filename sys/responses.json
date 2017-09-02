@@ -1,21 +1,11 @@
 {
   "online": [{
-    "pos": [{
-      "default": [{
-        "text": "Hm?"
-        },
-        {
-        "text": "What?"
-        }],
-      "howareyou": [{
-        "text": "I'm fine, I guess?"
-        },
-        {
-        "text": "Like everyone's watching what I say."
-          }]
-      }],
-    "neg": [{
-      "text": "Piss off."
-      }]
+    "text": "Hm?"
+    }],
+  "howareyou": [{
+    "text": "I'm fine I guess?"
+    },
+  {
+    "text": "Like everyone's watching what I say."
     }]
 }
