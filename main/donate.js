@@ -5,7 +5,7 @@ exports.run = (client, message, params) => {
   message.channel.send({embed: {
     color: 0x0070BA,
     timestamp: new Date(),
-    description: "`This message will self-destruct in 1 minute.`"
+    description: "`This message will self-destruct in 1 minute.`",
     author: {
       name: "Hello, " + message.member.displayName,
       icon_url: message.author.avatarURL
