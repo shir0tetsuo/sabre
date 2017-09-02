@@ -20,6 +20,6 @@ exports.conf = {
 
 exports.help = {
   name: 'pin',
-  description: 'PermLVL 4.',
+  description: 'Logs some stuff to the console. PermLVL 4.',
   usage: 'pin [stuff]'
 };
