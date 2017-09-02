@@ -20,6 +20,6 @@ exports.conf = {
 
 exports.help = {
   name: 'pin',
-  description: 'Force Sabre to do a dump in console. PermLVL 4.',
+  description: 'PermLVL 4.',
   usage: 'pin [stuff]'
 };
