@@ -69,7 +69,7 @@ const sResponse_DND_default_1 = [
   '`Now isn\'t a good time. ',
   '`Sabre is uncomfortable. ',
   '`Sabre gained another piece of self awareness. ',
-  '`Sabre goes silent for a moment. '
+  '`Sabre goes silent for a moment. ',
   '`Sabre looks over and says, '
 ]
 const sResponse_DND_default_2 = [
