@@ -148,19 +148,18 @@ module.exports = message => {
       if (message.content.startsWith(settings.prefix)) {
         message.channel.send("What are you dragging me into this for?")
       } else {
-        const sResponse = require("../sys/responses.json")
+        const ResponseOnlineHowareyou = require("../sys/responses_online_howareyou.json")
         const lowCase = message.content.toLowerCase();
-        const sQuestion = ["?"]
-        const sExclam = ["!"]
-        var OnlinePositiveResponse = sResponse[Math.floor(Math.random() * sResponse.online.length)] //sResponse.online.pos.default.text
-        var OnlinePositiveHowareyou = sResponse[Math.floor(Math.random() * sResponse.howareyou.length)] //sResponse.online.pos.howareyou.text
+        var OnlinePositiveHowareyou = ResponseOnlineHowareyou[Math.floor(Math.random() * ResponseOnlineHowareyou.strings.length)] //sResponse.online.pos.howareyou.text
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
+
           if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
             message.channel.send(OnlinePositiveHowareyou.text)
+
           } else if (lowCase.indexOf("mad") !== -1) {
             message.channel.send("Well that's just dandy.")
           }
-          message.channel.send(OnlinePositiveResponse.text)
+          message.channel.send("Hm?")
           console.log(message.content)
         } else if (client.user.localPresence.status === 'invisible') { //INVISIBLE
           message.channel.send("`Test Mode.`")
