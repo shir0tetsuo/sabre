@@ -6,6 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
+  console.log(client)
   let person = message.mentions.members.first();
   if (person === undefined) return;
 };
@@ -18,7 +19,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'level',
+  name: 'q',
   description: 'Talk to Sabre.',
   usage: 'q [stuff]'
 };
