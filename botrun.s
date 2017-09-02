@@ -1,6 +1,9 @@
 #!/bin/bash
 sleep 1.5s
 ./pull.sh
+if [ "$1" = "tail" ]; then
+echo "Tail Mode Activated."
+fi
 cat settings.json | head -n 2 | tail -n 1
 echo "-------------------^^^^^^^^"
 read -p "CURRENT VER: " newversion
@@ -31,7 +34,11 @@ else
 kill -9 $killnum
 echo -e "\e[1;31mProcess $killnum Terminated.\e[m"
 fi
+if [ "$1" = "tail" ]; then
+node sabre_atom4.js > '../sabrelogs.txt'; tail -f /root/NC/utils/NorthStar/sabrelogs.txt & disown
+else
 node sabre_atom4.js & disown
+fi
 #node ge.js & disown
 echo -e "\e[1;31mBoot Complete.\e[m"
 #node sabre_bot.js
