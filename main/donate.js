@@ -2,9 +2,10 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
 //  message.reply(`**[D̗̬ͅo̳n̤̲̫͈̝̣a͎̥t̩͕̖e̜̱](${settings.donation})**\n.\nI'll try to be consistent.`)
-  message.channel.send(`This message will self-destruct.` + {embed: {
+  message.channel.send({embed: {
     color: 0x0070BA,
     timestamp: new Date(),
+    description: "`This message will self-destruct in 1 minute.`"
     author: {
       name: "Hello, " + message.member.displayName,
       icon_url: message.author.avatarURL
