@@ -237,6 +237,7 @@ module.exports = message => {
             return;
           } else if (links.some(word => lowCase.includes(word))) {
             message.channel.send("https://trello.com/b/JV8cEG1s/laws-of-the-state")
+            return;
           } else if (sup.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
             return;
