@@ -50,6 +50,6 @@ exports.conf = {
 
 exports.help = {
   name: 'waterfall',
-  description: 'Waterfall Game. See wf usage.',
-  usage: 'wf [new/end/usage/view/high/low]'
+  description: 'Waterfall Game.',
+  usage: 'waterfall [new/end/usage/view/high/low]'
 };
