@@ -56,7 +56,11 @@ const sResponse_Online_Love = [
   'Why are you saying such things?'
 ]
 const sResponse_BadWord = [
-  'Shutup.'
+  'No you.',
+  'How rude.',
+  'I don\'t feel like answering you.',
+  'This isn\'t my cup of tea.',
+  'Language, \'cap.'
 ]
 
 const sql = require("sqlite");
@@ -234,10 +238,24 @@ module.exports = message => {
           'directory',
           'links'
         ]
+        const badwords = [
+          'suck',
+          'tits',
+          'fuck',
+          'cunt',
+          'bitch',
+          'nig',
+          'assh',
+          'shutup',
+          'shut up'
+        ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
           scoreUpTicket(message)
-          if (hru.some(word => lowCase.includes(word))) {
+          if (badwords.some(word => lowCase.includes(word))) {
+            message.channel.send(`${sResponse_BadWord[Math.floor(Math.random() * sResponse_BadWord.length)]}`)
+            return;
+          } else if (hru.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_HowAreYou[Math.floor(Math.random() * sResponse_Online_HowAreYou.length)]}`)
             return;
           } else if (links.some(word => lowCase.includes(word)) && message.guild.id === settings.alaskaguild) {
