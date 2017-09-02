@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
         text: "Waterfall Usage"
       },
       author: {
-        name: message.member.displayName + " --- Waterfall Card Game",
+        name: message.member.displayName + " --- Waterfall Card Game Instructions",
         icon_url: message.author.avatarURL
       },
       fields: [

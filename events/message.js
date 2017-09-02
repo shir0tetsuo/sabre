@@ -112,6 +112,13 @@ function scanKeyword(mess) {
   }*/
 }
 
+function scanReply(message) {
+  if (message.mentions.members.first().id === "339590992044752897") { // or client.id
+    console.log (Hello, World!)
+  }
+
+}
+
 // Parse message content
 
 module.exports = message => {
@@ -129,6 +136,7 @@ module.exports = message => {
   scoreInit(message);
   scanKeyword(message);
   scoreUpBits(message);
+  scanReply(message);
   // begin self deleting channel lines
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
   if (selfdelchan !== null) {
