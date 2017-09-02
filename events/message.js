@@ -156,7 +156,7 @@ module.exports = message => {
         console.log("ONLINE")
       } else if (client.status === 'invisible') {
         console.log("INVISIBLE")
-      } else if (client.status === 'dnd') {
+      } else if (client.user.localPresence.status === 'dnd') {
         console.log("DND")
       } else if (client.status === 'idle') {
         console.log("IDLE")
