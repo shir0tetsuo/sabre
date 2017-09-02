@@ -104,7 +104,9 @@ exports.run = (client, message, params) => {
         let randomChance = Math.floor(Math.random() * 100)
         if (randomChance >= 95) {
           message.react("🎟")
-          sql.run(`UPDATE scores SET tickets = ${row.tickets + randomTickets*1} WHERE userId = "${mess.author.id}"`)
+          sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+            sql.run(`UPDATE scores SET tickets = ${row.tickets + randomTickets*1} WHERE userId = "${mess.author.id}"`)
+          })
         }
       })
     }
