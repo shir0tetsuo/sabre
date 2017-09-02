@@ -12,15 +12,24 @@ const sResponse_Online_HowAreYou = [
 ]
 const sResponse_Online_Question = [
   'Yes?',
-  'No?',
+  'Obviously 42.',
+  'No.',
   'Don\'t ask me that.',
   'Maybe?',
-  'Sure..',
-  'Ask me later.'
+  'Sure.. Uhhh..',
+  'Ask me later.',
+  'Well that\'s obviously too hard of a question.',
+  'CSD.',
+  'David can probably answer that one for you.',
+  'Shake a lemon till it explodes. There you go.',
+  'A lot of YouTube.',
+  'The Sword of Shadows.',
+  'No. Just no.'
 ]
 const sResponse_Online_Sup = [
   'In deep thought, here..',
-  'Helping people right now.'
+  'Helping people right now.',
+  'Curing people\'s boredom.'
 ]
 
 const sql = require("sqlite");
