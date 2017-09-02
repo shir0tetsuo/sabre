@@ -15,11 +15,11 @@ exports.conf = {
   enabled: false,
   guildOnly: false,
   aliases: [''],
-  permLevel: 4
+  permLevel: 5
 };
 
 exports.help = {
   name: 'pin',
-  description: 'Logs some stuff to the console. PermLVL 4.',
+  description: 'Logs some stuff to the console. PermLVL 5.',
   usage: 'pin [stuff]'
 };
