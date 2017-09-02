@@ -112,22 +112,6 @@ function scanKeyword(mess) {
   }*/
 }
 
-function scanReply(client, message) {
-  if (message.mentions.members.first() === undefined) return;
-  let clientID = "339590992044752897"
-  if (message.mentions.members.first().id === clientID) { // or client.id
-    if (client.status === 'online') {
-      message.channel.send(`Hello, ${message.member.displayName}.`)
-    } else if (client.status === 'dnd') {
-      message.channel.send(`Sorry. Can't talk right now.`)
-    } else if (client.status === 'invisible') {
-      message.channel.send("`MAINTENANCE`")
-    } else if (client.status === 'idle') {
-      message.channel.send("`///TEST MODE///`")
-    }
-  }
-
-}
 
 // Parse message content
 
@@ -146,7 +130,6 @@ module.exports = message => {
   scoreInit(message);
   scanKeyword(message);
   scoreUpBits(message);
-  scanReply(client, message);
   // begin self deleting channel lines
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
   if (selfdelchan !== null) {
