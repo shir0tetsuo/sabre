@@ -148,16 +148,27 @@ module.exports = message => {
       if (message.content.startsWith(settings.prefix)) {
         message.channel.send("What are you dragging me into this for?")
       } else {
-        if (client.user.localPresence.status === 'online') {
+        const sResponse = require("../sys/responses.json")
+        const lowCase = message.content.toLowerCase();
+        const sQuestion = ["?"]
+        const sExclam = ["!"]
+        var OnlinePositiveResponse = sResponse[Math.floor(Math.random() * sResponse.online.pos.default.length)] //sResponse.online.pos.default.text
+        var OnlinePositiveHowareyou = sResponse[Math.floor(Math.random() * sResponse.online.pos.howareyou.length)] //sResponse.online.pos.howareyou.text
+        if (client.user.localPresence.status === 'online') { /////////////ONLINE
+          if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
+            message.channel.send(OnlinePositiveHowareyou.text)
+          } else if (lowCase.indexOf("mad") !== -1) {
+            message.channel.send("Well that's just dandy.")
+          }
           message.channel.send("Hm?")
           console.log(message.content)
-        } else if (client.user.localPresence.status === 'invisible') {
+        } else if (client.user.localPresence.status === 'invisible') { //INVISIBLE
           message.channel.send("`Test Mode.`")
           console.log(message.content)
-        } else if (client.user.localPresence.status === 'dnd') {
+        } else if (client.user.localPresence.status === 'dnd') { ////////////DND
           message.channel.send("`Now isn't a good time.`")
           console.log(message.content)
-        } else if (client.user.localPresence.status === 'idle') {
+        } else if (client.user.localPresence.status === 'idle') { //////////IDLE
           message.channel.send("`Now isn't a good time.`")
           console.log(message.content)
         }
