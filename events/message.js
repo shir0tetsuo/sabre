@@ -1,6 +1,27 @@
 const chalk = require("chalk");
 const settings = require('../settings.json');
-const sOnHowareyou = require ('../sys/responses_online_howareyou.json')
+const sResponse_Online_HowAreYou[
+  'Alright I guess?',
+  'Kinda tired.',
+  'Like everyone\'s watching what I say.',
+  'Just fine.',
+  'Alright.',
+  'Am I missing a joke or something?',
+  'Fine I suppose.',
+  'Like I\'m missing out on something.'
+]
+const sResponse_Online_Question[
+  'Yes?',
+  'No?',
+  'Don\'t ask me that.',
+  'Maybe?',
+  'Sure..',
+  'Ask me later.'
+]
+const sResponse_Online_Sup[
+  'In deep thought, here..',
+  'Helping people right now.'
+]
 
 const sql = require("sqlite");
 sql.open("../score.sqlite");
@@ -150,15 +171,30 @@ module.exports = message => {
         message.channel.send("What are you dragging me into this for?")
       } else {
 
-        const lowCase = message.content.toLowerCase();
+        const lowCase = message.content.toLowerCase(); // can use lowCase.indexOf("word") !== -1
+        const hru = [
+          "how are you?",
+          "how are you today?",
+          "hru?"
+        ]
+        const sup = [
+          "whats up",
+          "what's up"
+        ]
+        const question = [
+          "?"
+        ]
+        ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
-
-          if (lowCase.indexOf("how are you") !== -1 && lowCase.includes("?")) {
-            var sabreMsg = sOnHowareyou.strings[Math.floor(Math.random() * sOnHowareyou.strings.length)]
-            message.channel.send(sabreMsg.text)
+          if (hru.some(word => lowCase.includes(word))) {
+            message.channel.send(`${sResponse_Online_HowAreYou[Math.floor(Math.random() * sResponse_Online_HowAreYou.length)]}`)
             return;
-          } else if (lowCase.indexOf("mad") !== -1) {
-            message.channel.send("Well that's just dandy.")
+          } else if (sup.some(word => lowCase.includes(word))) {
+            message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
+            return;
+          } else if (question.some(word => lowCase.includes(word))) {
+            message.channel.send(`${sResponse_Online_Question[Math.floor(Math.random() * sResponse_Online_Question.length)]}`)
+            return;
           }
           message.channel.send("Hm?")
           console.log(message.content)
