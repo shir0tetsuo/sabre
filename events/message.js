@@ -55,6 +55,9 @@ const sResponse_Online_Love = [
   'I feel uncomfortable.',
   'Why are you saying such things?'
 ]
+const sResponse_BadWord = [
+  'Shutup.'
+]
 
 const sql = require("sqlite");
 sql.open("../score.sqlite");
@@ -227,7 +230,9 @@ module.exports = message => {
         const links = [
           'trello law',
           'alaska law',
-          'alaskan law'
+          'alaskan law',
+          'directory',
+          'links'
         ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
@@ -235,8 +240,45 @@ module.exports = message => {
           if (hru.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_HowAreYou[Math.floor(Math.random() * sResponse_Online_HowAreYou.length)]}`)
             return;
-          } else if (links.some(word => lowCase.includes(word))) {
-            message.channel.send("https://trello.com/b/JV8cEG1s/laws-of-the-state")
+          } else if (links.some(word => lowCase.includes(word)) && message.guild.id === settings.alaskaguild) {
+            message.channel.send({embed: {
+              color: 0xA5A5A7,
+              timestamp: new Date(),
+              author: {
+                name: "Alaska Directory",
+                icon_url: client.user.avatarURL
+              },
+              fields: [
+                {
+                  name: "Alaska Trello Directories",
+                  value: "[Here](https://trello.com/b/B2EurXuB/alaska-directory)"
+                },
+                {
+                  name: "Laws of Alaska Trello",
+                  value: "[Here](https://trello.com/b/JV8cEG1s/laws-of-the-state)"
+                },
+                {
+                  name: "Legislation or Congress Trello",
+                  value: "[Here](https://trello.com/b/2ikyOwVE/legislation-of-alaska)"
+                },
+                {
+                  name: "Dev Trello",
+                  value: "[Here](https://trello.com/b/leayQeSP/anchorage-development-board)"
+                },
+                {
+                  name: "Awards of Alaska",
+                  value: "[Here](https://trello.com/b/8fdMwSXW/awards-of-alaska)"
+                },
+                {
+                  name: "Alaska Judicial Board",
+                  value: "[Here](https://trello.com/b/s97gZFo1/alaska-judicial-board)"
+                },
+                {
+                  name: "Anchorage Admin Board",
+                  value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)"
+                }
+              ]
+            }})
             return;
           } else if (sup.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
