@@ -12,14 +12,15 @@ exports.run = (client, message, params) => {
     const goodCommands = client.commands.filter(cmd => cmd.conf.permLevel <= level && cmd.conf.enabled !== false)
     const commandNames = goodCommands.keyArray()
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
-    let output = `= Sabre Commands =\n\n[Page ${page}, ${settings.prefix}help <commandname> for details]\n`;
+    let header = `= Sabre Commands =\n\n[Page ${page}, ${settings.prefix}help <commandname> for details]`;
+    let output = `\n`
     goodCommands.forEach( c => {
       output += `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description} (PL${c.conf.permLevel})\n`
     })
     let hLen = 0 + ((page*1 - 1) * 1800)
     let hMax = hLen + 1800
     console.log(hLen, hMax, level)
-    message.author.send(output.substring(hLen,hMax), {code:'asciidoc'});
+    message.author.send(header, output.substring(hLen,hMax), {code:'asciidoc'});
     //let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')
     //let newMap = commandMap.substring(hLen,hMax)
     //message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${newMap}`, {code:'asciidoc'});
