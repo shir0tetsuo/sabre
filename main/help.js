@@ -8,7 +8,7 @@ exports.run = (client, message, params) => {
     let hMax = hLen + 1800
     console.log(hLen)
     console.log(hMax)
-    let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')`, {code:'asciidoc'}`
+    let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')
     let newMap = commandMap.substring(hLen,hMax)
     message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${newMap}`, {code:'asciidoc'});
     return;
