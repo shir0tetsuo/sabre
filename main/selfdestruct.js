@@ -52,5 +52,5 @@ exports.conf = {
 exports.help = {
   name: 'selfdestruct',
   description: 'Creates a self-destructing message.',
-  usage: 'del <delay in seconds> [message]'
+  usage: 'selfdestruct <delay in seconds> [message]'
 };

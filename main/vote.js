@@ -19,5 +19,5 @@ exports.conf = {
 exports.help = {
   name: 'vote',
   description: 'Displays your message in Vote format.',
-  usage: 'debuglvl, see Secure Terminal for details.'
+  usage: 'vote [message]'
 };

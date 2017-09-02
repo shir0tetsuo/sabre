@@ -94,5 +94,5 @@ exports.conf = {
 exports.help = {
   name: 'roulette',
   description: 'Play a Game of Russian Roulette.',
-  usage: 'roulette / rr / russian - 19% chance of Failure!'
+  usage: 'roulette - 19% chance of Failure!'
 };

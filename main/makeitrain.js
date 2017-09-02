@@ -82,5 +82,5 @@ exports.conf = {
 exports.help = {
   name: 'makeitrain',
   description: 'Stack of Tickets! Buy someone a Lottery Ticket!',
-  usage: 'makeitrain/lotto/mir [@user]'
+  usage: 'makeitrain [@user]'
 };
