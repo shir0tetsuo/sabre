@@ -73,7 +73,7 @@ exports.run = (client, message, params) => {
         }
       ]
     }}))
-    let king = "♚"
+    let king = ":warning:"
     const sReply = [
       'You\'re an awesome fella.',
       'Thank\'s for your support!',
@@ -86,7 +86,6 @@ exports.run = (client, message, params) => {
     if (mess.author.id === settings.danid || message.member.roles.has(donatedRole)) {
       mess.channel.send({embed: {
         color: 0x844F9B,
-        timestamp: new Date(),
         author: {
           name: mess.member.displayName,
           icon_color: mess.author.avatarURL
