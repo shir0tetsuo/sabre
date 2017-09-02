@@ -145,15 +145,18 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
-      console.log("success")
       if (client.user.localPresence.status === 'online') {
-        console.log("ONLINE")
-      } else if (client.status === 'invisible') {
-        console.log("INVISIBLE")
-      } else if (client.user.status === 'dnd') {
-        console.log("DND")
-      } else if (client.status === 'idle') {
-        console.log("IDLE")
+        message.channel.send("Hm?")
+        console.log(message.content)
+      } else if (client.user.localPresence.status === 'invisible') {
+        message.channel.send("`Test Mode.`")
+        console.log(message.content)
+      } else if (client.user.localPresence.status === 'dnd') {
+        message.channel.send("`Now isn't a good time.`")
+        console.log(message.content)
+      } else if (client.user.localPresence.status === 'idle') {
+        message.channel.send("`Now isn't a good time.`")
+        console.log(message.content)
       }
     }
   }
