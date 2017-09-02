@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const settings = require('../settings.json');
-const sResponse_Online_HowAreYou[
+const sResponse_Online_HowAreYou = [
   'Alright I guess?',
   'Kinda tired.',
   'Like everyone\'s watching what I say.',
@@ -10,7 +10,7 @@ const sResponse_Online_HowAreYou[
   'Fine I suppose.',
   'Like I\'m missing out on something.'
 ]
-const sResponse_Online_Question[
+const sResponse_Online_Question = [
   'Yes?',
   'No?',
   'Don\'t ask me that.',
@@ -18,7 +18,7 @@ const sResponse_Online_Question[
   'Sure..',
   'Ask me later.'
 ]
-const sResponse_Online_Sup[
+const sResponse_Online_Sup = [
   'In deep thought, here..',
   'Helping people right now.'
 ]
