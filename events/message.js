@@ -306,11 +306,7 @@ module.exports = message => {
                 },
                 {
                   name: "Donate to Sabre using PayPal to support development",
-<<<<<<< HEAD
                   value: `[D̗̬ͅo̳n̤̲̫͈̝̣a͎̥t̩͕̖e̜̱](${settings.donation})`,
-=======
-                  value: "[D̗̬ͅo̳n̤̲̫͈̝̣a͎̥t̩͕̖e̜̱](https://www.paypal.me/sabredevelopment)",
->>>>>>> 3210eccaf9e7c6d89c417745542b724636bbc6a2
                   inline: true
                 }
               ]
