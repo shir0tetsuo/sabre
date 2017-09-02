@@ -75,7 +75,7 @@ const sResponse_DND_default_1 = [
 const sResponse_DND_default_2 = [
   '"What would David do?"`',
   '"I would smite some more but I\'m being lazy."`',
-  '"Sorry. I need to work on my conversations."`'
+  '"Sorry. I need to work on my conversations."`',
   '"There are things going on."`',
   '"Hmm.. Maybe next time."`',
   '... Nothing.`'
