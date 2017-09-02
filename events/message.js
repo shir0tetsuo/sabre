@@ -43,6 +43,18 @@ const sResponse_Online_Default = [
   'Well then.. Not sure what to say.',
   'I\'m indifferent about this.'
 ]
+const sResponse_Online_Question_Favorite = [
+  'Something with red.',
+  'I don\'t know really.',
+  'Something that doesn\'t smell like socks.',
+  'I had an answer for you a moment ago. Not sure anymore.'
+]
+const sResponse_Online_Love = [
+  'Aww.',
+  'That\'s cute.',
+  'I feel uncomfortable.',
+  'Why are you saying such things?'
+]
 
 const sql = require("sqlite");
 sql.open("../score.sqlite");
@@ -214,6 +226,12 @@ module.exports = message => {
             return;
           } else if (sup.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
+            return;
+          } else if (question.some(word => lowCase.includes(word)) && lowCase.indexOf('favorite') !== -1) {
+            message.channel.send(`${sResponse_Online_Question_Favorite[Math.floor(Math.random() * sResponse_Online_Question_Favorite.length)]}, You?`)
+            return;
+          } else if (lowCase.indexOf('love') !== -1) {
+            message.channel.send(`${sResponse_Online_Love[Math.floor(Math.random() * sResponse_Online_Love.length)]}`)
             return;
           } else if (question.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Question[Math.floor(Math.random() * sResponse_Online_Question.length)]}`)
