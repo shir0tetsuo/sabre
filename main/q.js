@@ -6,20 +6,20 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
-  console.log(client.user)
+  console.log(client.user)/*
   let person = message.mentions.members.first();
-  if (person === undefined) return;
+  if (person === undefined) return;*/
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['levels', 'lvl', 'rank'],
-  permLevel: 0
+  aliases: [''],
+  permLevel: 4
 };
 
 exports.help = {
-  name: 'q',
-  description: 'Talk to Sabre.',
-  usage: 'q [stuff]'
+  name: 'pin',
+  description: 'Force Sabre to do a dump in console. PermLVL 4.',
+  usage: 'pin [stuff]'
 };
