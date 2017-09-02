@@ -35,7 +35,8 @@ kill -9 $killnum
 echo -e "\e[1;31mProcess $killnum Terminated.\e[m"
 fi
 if [ "$1" = "tail" ]; then
-node sabre_atom4.js & disown > '../sabrelogs.txt'; tail -f /root/NC/utils/NorthStar/sabrelogs.txt & disown
+node sabre_atom4.js & disown 1> '../sabrelogs.txt'
+tail -f /root/NC/utils/NorthStar/sabrelogs.txt
 else
 node sabre_atom4.js & disown
 fi
