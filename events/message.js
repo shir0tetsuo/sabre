@@ -244,6 +244,7 @@ module.exports = message => {
             message.channel.send({embed: {
               color: 0xA5A5A7,
               timestamp: new Date(),
+              description: "This will disappear in 2 minutes."
               author: {
                 name: "Alaska Directory",
                 icon_url: client.user.avatarURL
@@ -278,7 +279,11 @@ module.exports = message => {
                   value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)"
                 }
               ]
-            }})
+            }}).then(message => {
+              setTimeout(() => {
+                message.delete()
+              }, 120000) // 2 minutes
+            })
             return;
           } else if (sup.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_Sup[Math.floor(Math.random() * sResponse_Online_Sup.length)]}`)
