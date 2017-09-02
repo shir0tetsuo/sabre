@@ -259,6 +259,7 @@ module.exports = message => {
         ]
         const badwords = [
           'suck',
+          'dick',
           'tits',
           'fuck',
           'cunt',
