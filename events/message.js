@@ -145,19 +145,22 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
-      if (message.content.startsWith(settings.prefix)) return;
-      if (client.user.localPresence.status === 'online') {
-        message.channel.send("Hm?")
-        console.log(message.content)
-      } else if (client.user.localPresence.status === 'invisible') {
-        message.channel.send("`Test Mode.`")
-        console.log(message.content)
-      } else if (client.user.localPresence.status === 'dnd') {
-        message.channel.send("`Now isn't a good time.`")
-        console.log(message.content)
-      } else if (client.user.localPresence.status === 'idle') {
-        message.channel.send("`Now isn't a good time.`")
-        console.log(message.content)
+      if (message.content.startsWith(settings.prefix)) {
+        message.channel.send("What are you dragging me into this for?")
+      } else {
+        if (client.user.localPresence.status === 'online') {
+          message.channel.send("Hm?")
+          console.log(message.content)
+        } else if (client.user.localPresence.status === 'invisible') {
+          message.channel.send("`Test Mode.`")
+          console.log(message.content)
+        } else if (client.user.localPresence.status === 'dnd') {
+          message.channel.send("`Now isn't a good time.`")
+          console.log(message.content)
+        } else if (client.user.localPresence.status === 'idle') {
+          message.channel.send("`Now isn't a good time.`")
+          console.log(message.content)
+        }
       }
     }
   }
