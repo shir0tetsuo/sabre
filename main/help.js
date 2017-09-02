@@ -1,10 +1,18 @@
 const settings = require('../settings.json');
 exports.run = (client, message, params) => {
-  if (params[0] >= 2) {
-    const commandNames = Array.from(client.commands.keys());
+  if (params[0] >= 2 || params[0] === 1 || !params[0]) {
+    //const commandNames = Array.from(client.commands.keys());
+    const level = client.elevation(message)
+    console.log(level)
+    const goodCommands = message.guild ? this.client.commands.filter(cmd => cmd.conf.permLevel <= level && cmd.conf.hidden !== true)
+    const commandNames = goodCommands.keyArray()
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
-    let page = params[0]
-    let hLen = 0 + ((params[0]*1 - 1) * 1800)
+    if (params[0] === undefined) {
+      var page = 1
+    } else {
+      var page = params[0]
+    }
+    let hLen = 0 + ((page*1 - 1) * 1800)
     let hMax = hLen + 1800
     console.log(hLen)
     console.log(hMax)
