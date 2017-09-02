@@ -4,8 +4,8 @@ exports.run = (client, message, params) => {
     const commandNames = Array.from(client.commands.keys());
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     let page = params[0]
-    let hLen = 2001 + (params[0] * 2000)
-    let hMax = 3999 + (params[0] * 2000)
+    let hLen = 1801 + (params[0] * 1800)
+    let hMax = 3600 + (params[0] * 1800)
     message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n').substring(hLen,hMax)}`, {code:'asciidoc'});
     return;
   }
@@ -13,7 +13,7 @@ exports.run = (client, message, params) => {
     const commandNames = Array.from(client.commands.keys());
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
     let page = 1
-    message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n').substring(0,2000)}`, {code:'asciidoc'});
+    message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n').substring(0,1800)}`, {code:'asciidoc'});
   } else {
     let command = params[0];
     if (client.commands.has(command)) {
