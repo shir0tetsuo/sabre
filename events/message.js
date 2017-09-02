@@ -252,31 +252,38 @@ module.exports = message => {
               fields: [
                 {
                   name: "Alaska Trello Directories",
-                  value: "[Here](https://trello.com/b/B2EurXuB/alaska-directory)"
+                  value: "[Here](https://trello.com/b/B2EurXuB/alaska-directory)",
+                  inline: true
                 },
                 {
                   name: "Laws of Alaska Trello",
-                  value: "[Here](https://trello.com/b/JV8cEG1s/laws-of-the-state)"
+                  value: "[Here](https://trello.com/b/JV8cEG1s/laws-of-the-state)",
+                  inline: true
                 },
                 {
                   name: "Legislation or Congress Trello",
-                  value: "[Here](https://trello.com/b/2ikyOwVE/legislation-of-alaska)"
+                  value: "[Here](https://trello.com/b/2ikyOwVE/legislation-of-alaska)",
+                  inline: false
                 },
                 {
                   name: "Dev Trello",
-                  value: "[Here](https://trello.com/b/leayQeSP/anchorage-development-board)"
+                  value: "[Here](https://trello.com/b/leayQeSP/anchorage-development-board)",
+                  inline: true
                 },
                 {
                   name: "Awards of Alaska",
-                  value: "[Here](https://trello.com/b/8fdMwSXW/awards-of-alaska)"
+                  value: "[Here](https://trello.com/b/8fdMwSXW/awards-of-alaska)",
+                  inline: false
                 },
                 {
                   name: "Alaska Judicial Board",
-                  value: "[Here](https://trello.com/b/s97gZFo1/alaska-judicial-board)"
+                  value: "[Here](https://trello.com/b/s97gZFo1/alaska-judicial-board)",
+                  inline: true
                 },
                 {
                   name: "Anchorage Admin Board",
-                  value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)"
+                  value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)",
+                  inline: false
                 }
               ]
             }}).then(message => {
