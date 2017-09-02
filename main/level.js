@@ -79,11 +79,10 @@ exports.run = (client, message, params) => {
       'Thank\'s for your support!',
       'I appreciate it.'
     ]
-    let donatedRole = mess.guild.roles.find('name', 'Sabre Donator')
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
     }
-    if (mess.author.id === settings.danid || mess.member.roles.has(donatedRole)) {
+    if (mess.author.id === settings.danid || mess.member.roles.find('name', 'Sabre Donator')) {
       mess.channel.send({embed: {
         color: 0x844F9B,
         author: {
@@ -93,10 +92,21 @@ exports.run = (client, message, params) => {
         fields: [
           {
             name: "\u200b",
-            value: `**${king}** Donator: ${sReply[Math.floor(Math.random() * sReply.length)]}`
+            value: `**Donator:**\n${sReply[Math.floor(Math.random() * sReply.length)]}`
           }
         ]
-      }})
+      }}).then(message => {
+        message.react("👁‍");
+        message.react("⭐");
+        message.react("🔶");
+        message.react("👍");
+        let randomTickets = row.tickets\19 + 20
+        let randomChance = Math.floor(Math.random() * 100)
+        if (randomChance >= 95) {
+          message.react("🎟")
+          sql.run(`UPDATE scores SET tickets = ${row.tickets + randomTickets*1} WHERE userId = "${mess.author.id}"`)
+        }
+      })
     }
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
