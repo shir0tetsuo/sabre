@@ -113,7 +113,7 @@ function scanKeyword(mess) {
 }
 
 function scanReply(message) {
-  if (message.mentions.members.first() === null) return;
+  if (message.mentions.members.first() === undefined) return;
   if (message.mentions.members.first().id === "339590992044752897") { // or client.id
     console.log ("Hello, World!")
   }
