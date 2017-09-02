@@ -145,6 +145,7 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
+      if (message.content.startsWith(settings.prefix)) return;
       if (client.user.localPresence.status === 'online') {
         message.channel.send("Hm?")
         console.log(message.content)
