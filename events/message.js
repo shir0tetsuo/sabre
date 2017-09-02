@@ -303,11 +303,6 @@ module.exports = message => {
                   name: "Anchorage Admin Board",
                   value: "[Here](https://trello.com/b/N6lKfBul/alaskan-admin-board)",
                   inline: true
-                },
-                {
-                  name: "Donate to Sabre using PayPal to support development",
-                  value: `[D̗̬ͅo̳n̤̲̫͈̝̣a͎̥t̩͕̖e̜̱](${settings.donation})`,
-                  inline: true
                 }
               ]
             }}).then(message => {

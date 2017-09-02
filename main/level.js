@@ -73,8 +73,31 @@ exports.run = (client, message, params) => {
         }
       ]
     }}))
+    let king = "♚"
+    const sReply = [
+      'You\'re an awesome fella.',
+      'Thank\'s for your support!',
+      'I appreciate it.'
+    ]
+    let donatedRole = message.guild.roles.find('name', 'Sabre Donator')
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
+    }
+    if (mess.author.id === settings.danid || if message.member.roles.has(donatedRole) !== undefined) {
+      mess.channel.send({embed: {
+        color: 0x844F9B,
+        timestamp: new Date(),
+        author: {
+          name: mess.member.displayName,
+          icon_color: mess.author.avatarURL
+        },
+        fields: [
+          {
+            name: "\u200b",
+            value: `**${king}** Donator: ${sReply[Math.floor(Math.random() * sReply.length)]}`
+          }
+        ]
+      }})
     }
   }).catch(function() {
     console.log(chalk.redBright("Bug at levels"))
