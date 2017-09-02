@@ -79,7 +79,7 @@ exports.run = (client, message, params) => {
       'Thank\'s for your support!',
       'I appreciate it.'
     ]
-    let donatedRole = message.guild.roles.find('name', 'Sabre Donator')
+    let donatedRole = mess.guild.roles.find('name', 'Sabre Donator')
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
     }
