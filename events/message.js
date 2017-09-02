@@ -145,7 +145,7 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === "339590992044752897") {
-      if (client.localPresence.Status === 'online') {
+      if (client.localPresence.status === 'online') {
         console.log("ONLINE")
       } else if (client.status === 'invisible') {
         console.log("INVISIBLE")
