@@ -208,6 +208,7 @@ module.exports = message => {
         ]
         ////////////////////////////////////////////////////////////////////////
         if (client.user.localPresence.status === 'online') { /////////////ONLINE
+          scoreUpTicket(message)
           if (hru.some(word => lowCase.includes(word))) {
             message.channel.send(`${sResponse_Online_HowAreYou[Math.floor(Math.random() * sResponse_Online_HowAreYou.length)]}`)
             return;
