@@ -6,10 +6,8 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
-  if (params[0] === message.mentions.members.first()) {
-    let person === message.mentions.members.first();
-    let pLen === params[0].length + 1;
-  }
+  let person = message.mentions.members.first();
+  if (person === undefined) return;
 };
 
 exports.conf = {
