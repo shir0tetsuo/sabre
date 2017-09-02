@@ -141,13 +141,6 @@ module.exports = message => {
     }
   }
   // end self deleting channel lines
-  if (!message.content.startsWith(settings.prefix)) return;
-  if (timer.has(message.author.id)) return message.author.send("Slow down, Speedy!")
-  timer.add(message.author.id);
-  setTimeout(() => {
-    timer.delete(message.author.id);
-  }, 1200) // 1.2seconds
-  scoreUpTicket(message);
   // Sabre Response System
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
@@ -164,6 +157,13 @@ module.exports = message => {
     }
   }
   /// End SRS
+  if (!message.content.startsWith(settings.prefix)) return;
+  if (timer.has(message.author.id)) return message.author.send("Slow down, Speedy!")
+  timer.add(message.author.id);
+  setTimeout(() => {
+    timer.delete(message.author.id);
+  }, 1200) // 1.2seconds
+  scoreUpTicket(message);
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
   let params = message.content.split(' ').slice(1);
   let perms = client.elevation(message);
