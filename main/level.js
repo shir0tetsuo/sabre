@@ -100,7 +100,7 @@ exports.run = (client, message, params) => {
         message.react("🔶");
         message.react("👍");
         let randomChance = Math.floor(Math.random() * 100)
-        if (randomChance >= 33) {
+        if (randomChance <= 33) {
           message.react("🎟");
           sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
             let randomTickets = row.tickets/19 + 20
