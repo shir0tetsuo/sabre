@@ -67,13 +67,18 @@ const sResponse_BadWord = [
 ]
 const sResponse_DND_default_1 = [
   '`Now isn\'t a good time. ',
-  '`Sabre said nothing.',
+  '`Sabre is uncomfortable. ',
+  '`Sabre gained another piece of self awareness. ',
+  '`Sabre goes silent for a moment. '
   '`Sabre looks over and says, '
 ]
 const sResponse_DND_default_2 = [
   '"What would David do?"`',
+  '"I would smite some more but I\'m being lazy."`',
+  '"Sorry. I need to work on my conversations."`'
   '"There are things going on."`',
-  '"Hmm.. Maybe next time."`'
+  '"Hmm.. Maybe next time."`',
+  '... Nothing.`'
 ]
 
 
