@@ -114,8 +114,17 @@ function scanKeyword(mess) {
 
 function scanReply(message) {
   if (message.mentions.members.first() === undefined) return;
-  if (message.mentions.members.first().id === "339590992044752897") { // or client.id
-    console.log ("Hello, World!")
+  let clientID = "339590992044752897"
+  if (message.mentions.members.first().id === clientID) { // or client.id
+    if (client.presence.status === 'online') {
+      message.channel.send(`Hello, ${message.member.displayName}.`)
+    } else if (client.presence.status === 'dnd') {
+      message.channel.send(`Sorry. Can't talk right now.`)
+    } else if (client.presence.status === 'invisible') {
+      message.channel.send("`MAINTENANCE`")
+    } else if (client.presence.status === 'idle') {
+      message.channel.send("`///TEST MODE///`")
+    }
   }
 
 }
