@@ -15,12 +15,19 @@ exports.run = (client, message, params) => {
     let header = `= Sabre Commands =\n\n[Page ${page}, ${settings.prefix}help <commandname> for details]`;
     let output = `\n\n`
     goodCommands.forEach( c => {
+      let hLen = 0 + ((page*1 - 1) * 1800)
+      let hMax = hLen + 1800
       output += `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description} (PL${c.conf.permLevel})\n`
+      console.log("Strength:", header.length + output.substring(hLen,hMax).length)
+      if (header.length + output.substring(hLen,hMax).length >= 1800) {
+        message.author.send(header + output.substring(hLen,hMax), {code:'asciidoc'});
+        return;
+      } else {
+        message.author.send(header + output.substring(hLen,hMax), {code:'asciidoc'});
+        return;
+      }
     })
-    let hLen = 0 + ((page*1 - 1) * 1800)
-    let hMax = hLen + 1800
     console.log(hLen, hMax, level)
-    message.author.send(header + output.substring(hLen,hMax), {code:'asciidoc'});
     //let commandMap = client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')
     //let newMap = commandMap.substring(hLen,hMax)
     //message.author.send(`= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n[help page ${page}]\n\n${newMap}`, {code:'asciidoc'});
@@ -43,6 +50,6 @@ exports.conf = {
 
 exports.help = {
   name: 'help',
-  description: 'Displays all available commands for your level.',
+  description: 'Displays all available commands for your permission level.',
   usage: 'help [command/pagenumber]'
 };

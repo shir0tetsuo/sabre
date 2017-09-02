@@ -8,7 +8,7 @@ exports.run = (client, message, params) => {
 };
 
 exports.conf = {
-  enabled: false,
+  enabled: true,
   guildOnly: false,
   aliases: ['prototype', 'proto'],
   permLevel: 4

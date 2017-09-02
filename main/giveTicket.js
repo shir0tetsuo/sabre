@@ -30,12 +30,12 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['giveTicket', 'giveticket', 'givetk'],
+  aliases: ['giveTicket', 'giveticket', 'givetk', 'giveTickets'],
   permLevel: 1
 };
 
 exports.help = {
-  name: 'giveTickets',
+  name: 'givetickets',
   description: 'Give away some Tickets!',
-  usage: 'givetk [@user] <number>'
+  usage: 'givetickets [@user] <number>'
 };
