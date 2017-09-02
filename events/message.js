@@ -148,6 +148,22 @@ module.exports = message => {
     timer.delete(message.author.id);
   }, 1200) // 1.2seconds
   scoreUpTicket(message);
+  // Sabre Response System
+  let sabreFirst = message.mentions.members.first()
+  if (sabreFirst !== undefined) {
+    if (sabreFirst.id === "339590992044752897") {
+      if (client.status === 'online') {
+        console.log("ONLINE")
+      } else if (client.status === 'invisible') {
+        console.log("INVISIBLE")
+      } else if (client.status === 'dnd') {
+        console.log("DND")
+      } else if (client.status === 'idle') {
+        console.log("IDLE")
+      }
+    }
+  }
+  /// End SRS
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
   let params = message.content.split(' ').slice(1);
   let perms = client.elevation(message);
