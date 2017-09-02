@@ -83,7 +83,7 @@ exports.run = (client, message, params) => {
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
     }
-    if (mess.author.id === settings.danid || message.member.roles.has(donatedRole)) {
+    if (mess.author.id === settings.danid || mess.member.roles.has(donatedRole)) {
       mess.channel.send({embed: {
         color: 0x844F9B,
         author: {
