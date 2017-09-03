@@ -287,7 +287,7 @@ module.exports = function processResponse(client, message) {
   const newCase = lowCase.split(/\<.+>/g).join();
   const newerCase = newCase.split(/[, ]/g);
   //const newestCase = newerCase.split(/^[ \t]/g);
-  console.log(lowCase, newCase, newerCase, newestCase)
+  console.log(lowCase, newCase, newerCase)
 
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
