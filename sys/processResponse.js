@@ -284,7 +284,7 @@ module.exports = function processResponse(client, message) {
   let sabre = message.mentions.members.first()
   if (sabre.id !== client.user.id) return; // I may come to regret this.
   const lowCase = message.content.toLowerCase();
-  const newCase = lowCase.split(/\<.+>/g).join().split(/[, ]/g).trim();
+  const newCase = lowCase.split(/\<.+>/g).join().split(/[, ]/g).split(/^[ \t]/g);
   console.log(newCase)
 
   // console.log(`${Rand(test)}`)
