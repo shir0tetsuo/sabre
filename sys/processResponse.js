@@ -75,7 +75,7 @@ const parse_floor2_interjection = [
   'hey!',
   'help!'
 ]
-const parse_floor2_action = [
+const parse_floor2_actionB = [
   'kick',
   'ban',
   'kill',
