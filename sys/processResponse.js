@@ -1,7 +1,4 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Welcome to the mess.
-
-////////////////////////////////////////////////////////////////////////////////
 // Response database
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -20,6 +17,7 @@ const reply_online_howAreYou = [
 // Speech Database
 ////////////////////////////////////////////////////////////////////////////////
 // floor 1 arrays for initializers
+
 const parse_floor1_pronoun_1st_singular_subj = [
   'i ',
   'we '
@@ -256,50 +254,74 @@ const parse_floor3_place = [
   'direction'
 ]
 
+////////////////////////////////////////////////////////////////////////////////
+// Mathematical and Comparison Functions
+
 function Rand(data) {
   // where data is the array
   return data[Math.floor(Math.random() * data.length)]
 }
-
 function Parse(database, content) {
-  // where database is the array and case is the string
+  // where database is the array and content is the string
   if (database.some(word => content.includes(word))) {
     return true
   } else {
     return false
   }
 }
+ /*
 
-// How to Compute
-// PARSE: reactions, humor, relevance, intensity, compare/contrast, visual, narratives, examples, rhetoricals, curiosity
-// COMPUTE: chronological, spatial, causal; logical reason, problem/solution, comparative, refutation
-// floor 1 = subject matter
-// Will determine general direction of response.
-// floor 2 = subject awareness (and question answering array)
-// floor 3 = content awareness
-// floor X = special hangs
+  Sabre processResponse Mainframe
 
-module.exports = function processResponse(client, message) {
-  // make lowCase the primary content object
-  let sabre = message.mentions.members.first()
-  if (sabre.id !== client.user.id) return; // I may come to regret this.
+  This block is for a quick overview on how the response system should handle requests.
+  1. Convert message-content into lower case.
+  2. Remove mentions.
+  3. Cut into 3 sections; HEAD / BODY / TAIL (floor1 floor2 floor3)
+  4. Analyze special conditions (lowCase / floorX)
+  5. Process the HEAD as a subject/topic
+  6. Scan for question words (and to each their own processed response)
+  7. Change response behavior based on the BODY / TAIL
 
-  const lowCase = message.content.toLowerCase();
-  const lowFiltered = lowCase.replace(/<@!?\d+>/g, "").trim()
-  const floorX = lowFiltered
-  const floor1 = lowFiltered.split(' ')[0]
-  const floorArray = lowFiltered.split(' ').slice(1)
-  const floor2 = lowFiltered.split(' ').slice(1).join(' ').split(' ').slice(0, -1).join()
-  const floor3 = floorArray[floorArray.length - 1]
-
-  //const newestCase = newerCase.split(/^[ \t]/g);
+ How to Compute
+ PARSE: reactions, humor, relevance, intensity, compare/contrast, visual, narratives, examples, rhetoricals, curiosity
+ COMPUTE: chronological, spatial, causal; logical reason, problem/solution, comparative, refutation
+ floor 1 = subject matter
+ Will determine general direction of response.
+ floor 2 = subject awareness (and question answering array)
+ floor 3 = content awareness
+ floor X = special hangs
   console.log(lowCase)
   console.log(lowFiltered) // floorX is the same
   console.log(floor1)
   console.log(floor2)
   console.log(floor3)
   console.log(floorArray)
+  */
 
+module.exports = function processResponse(client, message) {
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
+  //////////////////////////////////////////////////////////////////////////////
+  // Identify conditions if met
+  let sabre = message.mentions.members.first()
+  if (sabre.id !== client.user.id) return; // May cancel multiple mentions.
+  //////////////////////////////////////////////////////////////////////////////
+  // Conversions
+  const lowCase = message.content.toLowerCase();
+  // MESSAGE CASE
+  const lowFiltered = lowCase.replace(/<@!?\d+>/g, "").trim()
+  // TRIM EXCESS SUCH AS MENTION
+  const floorX = lowFiltered
+  // MESSAGE
+  const floor1 = lowFiltered.split(' ')[0]
+  // MESSAGE INIT
+  const floorArray = lowFiltered.split(' ').slice(1)
+  // MESSAGE BODY ARRAY
+  const floor2 = lowFiltered.split(' ').slice(1).join(' ').split(' ').slice(0, -1).join()
+  // MESSAGE BODY
+  const floor3 = floorArray[floorArray.length - 1]
+  // MESSAGE CLOSING
+  //////////////////////////////////////////////////////////////////////////////
+  //
+
 };
