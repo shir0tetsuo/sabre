@@ -285,7 +285,7 @@ module.exports = function processResponse(client, message) {
   if (sabre.id !== client.user.id) return; // I may come to regret this.
   const lowCase = message.content.toLowerCase();
   for (var i=lowCase.length-1; i>=0; i--) {
-    if (lowCase[i] === `<@${client.user.id}>`) {
+    if (lowCase[i] === client.user.id) {
       lowCase.splice(i, 1);
     }
   }
