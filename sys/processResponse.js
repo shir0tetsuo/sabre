@@ -284,7 +284,7 @@ module.exports = function processResponse(client, message) {
   let sabre = message.mentions.members.first()
   if (sabre.id !== client.user.id) return; // I may come to regret this.
   const lowCase = message.content.toLowerCase();
-  const newCase = lowCase.split(/\<.+>/g).join().slice(',');
+  const newCase = lowCase.split(/\<.+>/g).join().slice(1);
   const newerCase = newCase.split(/[, ]/g);
   //const newestCase = newerCase.split(/^[ \t]/g);
   console.log(lowCase, newCase, newerCase)

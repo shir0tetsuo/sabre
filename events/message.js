@@ -347,10 +347,10 @@ module.exports = message => {
             return;
           }
           message.channel.send(`${sResponse_Online_Default[Math.floor(Math.random() * sResponse_Online_Default.length)]}`)
-          console.log(message.content)
+          //console.log(message.content)
         } else if (client.user.localPresence.status === 'invisible') { //INVISIBLE
           message.channel.send("`Test Mode.`")
-          console.log(message.content)
+          //console.log(message.content)
         } else if (client.user.localPresence.status === 'dnd') { ////////////DND
           if (badwords.some(word => lowCase.includes(word))) {
             let output = '';
@@ -367,10 +367,10 @@ module.exports = message => {
             return;
           }
           message.channel.send(`${sResponse_DND_default_1[Math.floor(Math.random() * sResponse_DND_default_1.length)]}${sResponse_DND_default_2[Math.floor(Math.random() * sResponse_DND_default_2.length)]}`)
-          console.log(message.content)
+          //console.log(message.content)
         } else if (client.user.localPresence.status === 'idle') { //////////IDLE
           message.channel.send("`Now isn't a good time.`")
-          console.log(message.content)
+          //console.log(message.content)
         }
       }
     }
