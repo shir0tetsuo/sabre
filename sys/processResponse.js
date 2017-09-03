@@ -290,7 +290,7 @@ module.exports = function processResponse(client, message) {
   const floor1 = lowFiltered.split(' ')[0]
   const floorArray = lowFiltered.split(' ').slice(1)
   const floor2 = lowFiltered.split(' ').slice(1).join()
-  const floor3 = floor2_array[floor2_array.length - 1]
+  const floor3 = floorArray[floorArray.length - 1]
 
   //const newestCase = newerCase.split(/^[ \t]/g);
   console.log(lowCase)
