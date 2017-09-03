@@ -1,9 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Welcome to the mess.
 
-const test = [
-  'One',
-  'Two'
+////////////////////////////////////////////////////////////////////////////////
+// Response database
+////////////////////////////////////////////////////////////////////////////////
+
+const reply_online_howAreYou = [
+  'Alright I guess?',
+  'Kinda tired.',
+  'Like everyone\'s watching what I say.',
+  'Just fine.',
+  'Alright.',
+  'Am I missing a joke or something?',
+  'Fine I suppose.',
+  'Like I\'m missing out on something.'
 ]
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -271,7 +281,11 @@ function Parse(database, content) {
 
 module.exports = function processResponse(client, message) {
   // make lowCase the primary content object
+  let sabre = message.mentions.members.first()
+  if (sabre.id !== client.user.id) return; // I may come to regret this.
   const lowCase = message.content.toLowerCase();
+  let floor1 = lowCase.split(' ')[0].slice(sabre)
+  console.log(floor1)
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
 };
