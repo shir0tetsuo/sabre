@@ -227,6 +227,7 @@ module.exports = message => {
   let sabreFirst = message.mentions.members.first()
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
+      processResponse(client, message)
       if (message.content.startsWith(settings.prefix)) {
         message.channel.send("What are you dragging me into this for?")
       } else {
@@ -375,7 +376,6 @@ module.exports = message => {
     }
   }
   /// End SRS
-  processResponse(client, message);
   if (!message.content.startsWith(settings.prefix)) return;
   if (timer.has(message.author.id)) return message.author.send("Slow down, Speedy!")
   timer.add(message.author.id);
