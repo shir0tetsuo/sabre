@@ -1,5 +1,6 @@
 const chalk = require("chalk");
 const settings = require('../settings.json');
+const processResponse = require('../sys/processResponse.js')
 const sResponse_Online_HowAreYou = [
   'Alright I guess?',
   'Kinda tired.',
@@ -374,6 +375,7 @@ module.exports = message => {
     }
   }
   /// End SRS
+  processResponse(client, message);
   if (!message.content.startsWith(settings.prefix)) return;
   if (timer.has(message.author.id)) return message.author.send("Slow down, Speedy!")
   timer.add(message.author.id);
