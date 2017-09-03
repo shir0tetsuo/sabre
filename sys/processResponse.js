@@ -286,14 +286,19 @@ module.exports = function processResponse(client, message) {
 
   const lowCase = message.content.toLowerCase();
   const lowFiltered = lowCase.replace(/<@!?\d+>/g, "").trim()
+  const floorX = lowFiltered
   const floor1 = lowFiltered.split(' ')[0]
-  const floor2 = lowFiltered.split(' ').slice(1)
+  const floorArray = lowFiltered.split(' ').slice(1)
+  const floor2 = lowFiltered.split(' ').slice(1).join()
+  const floor3 = floor2_array[floor2_array.length - 1]
 
   //const newestCase = newerCase.split(/^[ \t]/g);
   console.log(lowCase)
-  console.log(lowFiltered)
+  console.log(lowFiltered) // floorX is the same
   console.log(floor1)
   console.log(floor2)
+  console.log(floor3)
+  console.log(floorArray)
 
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
