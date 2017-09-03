@@ -251,9 +251,9 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
-function Parse(database, case) {
+function Parse(database, content) {
   // where database is the array and case is the string
-  if (database.some(word => case.includes(word))) {
+  if (database.some(word => content.includes(word))) {
     return true
   } else {
     return false
