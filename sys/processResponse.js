@@ -283,12 +283,17 @@ module.exports = function processResponse(client, message) {
   // make lowCase the primary content object
   let sabre = message.mentions.members.first()
   if (sabre.id !== client.user.id) return; // I may come to regret this.
+
   const lowCase = message.content.toLowerCase();
-  //message.content.replace(/<@!?\d+>/g, "")
-  const filtered = lowCase.split(/\<.+>/g).join(' ').trim() // seems to work the best
-  const filtered2 = lowCase.replace(/<@!?\d+>/g, "").trim()
+  const lowFiltered = lowCase.replace(/<@!?\d+>/g, "").trim()
+  const floor1 = lowFiltered.split(' ')[0]
+  const floor2 = lowFiltered.split(' ').slice(1)
+
   //const newestCase = newerCase.split(/^[ \t]/g);
-  console.log("LOWERCASE MESSAGE:", lowCase, "FILTERED MENTION:\n", filtered, filtered2)
+  console.log(lowCase)
+  console.log(lowFiltered)
+  console.log(floor1)
+  console.log(floor2)
 
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
