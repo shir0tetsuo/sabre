@@ -12,18 +12,52 @@ const reply_online_howAreYou = [
   'Fine I suppose.',
   'Like I\'m missing out on something.'
 ]
+const reply_online_yn = [
+  'I feel accomplished',
+  'Really? I thought for sure I was right.',
+  'I wouldn\'t have it any other way.',
+  'I told you.',
+  'I guess that\'s fine.',
+  'Oh. Sorry.',
+  'I cannot agree nor disagree with your statement.',
+  'Oh. I thought that was right.'
+]
+const reply_online_bad = [
+  'Language, \'cap.',
+  'Laaaaanguage.',
+  'How rude.',
+  'I am uncomfortable.',
+  'No, you.',
+  'I don\'t really feel like answering you.',
+  'You\'re just being salty.',
+  'I disagree completely.',
+  'Do humans normally cuss this much?',
+  'Don\'t you get tired of saying such things?',
+  'This isn\'t my cup of tea.',
+  'Ask yourself this. What would `[blank]` do?',
+  'Language, \'Cap!'
+]
 
 ////////////////////////////////////////////////////////////////////////////////
 // Speech Database
 ////////////////////////////////////////////////////////////////////////////////
 // floor 1 arrays for initializers
 
+const parse_floor1_yn = [
+  'yes',
+  'right',
+  'correct',
+  'no',
+  'negative',
+  'nadda',
+  'nope'
+]
 const parse_floor1_pronoun_1st_singular_subj = [
-  'i ',
+  'i',
   'we '
 ]
 const parse_floor1_pronoun_1st_singular_obj = [
-  'me ',
+  'me',
   'us'
 ]
 const parse_floor1_pronoun_plural_subj = [
@@ -32,7 +66,7 @@ const parse_floor1_pronoun_plural_subj = [
 const parse_floor1_pronoun_3rd_singular_subj = [
   'he',
   'she',
-  'it '
+  'it'
 ]
 const parse_floor1_pronoun_3rd_singular_obj = [
   'him',
@@ -54,7 +88,8 @@ const parse_floor2_questions = [
   'why',
   'how',
   'should',
-  '?'
+  '?',
+  'is'
 ]
 const parse_floor2_comparative = [
   'is',
@@ -74,7 +109,7 @@ const parse_floor2_symbolic = [
 const parse_floor2_archaic = [
   'thou',
   'thee',
-  'ye '
+  'ye'
 ]
 const parse_floor2_interjection = [
   'ow',
@@ -305,6 +340,8 @@ module.exports = function processResponse(client, message) {
   // Identify conditions if met
   let sabre = message.mentions.members.first()
   if (sabre.id !== client.user.id) return; // May cancel multiple mentions.
+  const status = client.user.localPresence.status
+  const channel = message.channel
   //////////////////////////////////////////////////////////////////////////////
   // Conversions
   const lowCase = message.content.toLowerCase();
@@ -322,6 +359,25 @@ module.exports = function processResponse(client, message) {
   const floor3 = floorArray[floorArray.length - 1]
   // MESSAGE CLOSING
   //////////////////////////////////////////////////////////////////////////////
-  //
+  // HEAD / FLOOR 1
+  if (status === 'online') { ///////////////////////////////////////////////////
+  if (Parse(parse_floorX_links, floorX) === true) {
+    channel.send(`System cannot process your request at this time.`)
+  }
+  if (Parse(parse_floorX_badword, floorX) === true) {
+    channel.send(`${Rand(reply_online_bad)}`)
+    return;
+  }
+  if (Parse(parse_floor1_yn, floor1) === true) {
+    channel.send(`${Rand(reply_online_yn)}`)
+    return;
+  }
+  } else if (status === 'dnd') { ///////////////////////////////////////////////
+
+  } else if (status === 'idle') { //////////////////////////////////////////////
+
+  } else if (status === 'offline') { ///////////////////////////////////////////
+
+  }
 
 };
