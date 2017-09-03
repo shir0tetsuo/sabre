@@ -284,10 +284,10 @@ module.exports = function processResponse(client, message) {
   let sabre = message.mentions.members.first()
   if (sabre.id !== client.user.id) return; // I may come to regret this.
   const lowCase = message.content.toLowerCase();
-  const newCase = lowCase.split(/\<.+>/g).join().slice(1);
-  const newerCase = newCase.split(/[, ]/g);
+  const newCase = lowCase.split(/\<.+>/g).join()
+  const newerCase = newCase.split(/[, ]/g).join();
   //const newestCase = newerCase.split(/^[ \t]/g);
-  console.log(lowCase, newCase, newerCase)
+  console.log("LOWERCASE MESSAGE:", lowCase, "FILTERED MENTION:", newCase, "MORE FILTER:" newerCase)
 
   // console.log(`${Rand(test)}`)
   // if (Parse(test, lowCase) === true)
