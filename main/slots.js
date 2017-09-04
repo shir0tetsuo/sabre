@@ -197,7 +197,7 @@ exports.run = (client, message, params) => {
     top_vis += `\`!!\``
     mid_vis += `\`!!\``
     low_vis += `\`!!\``
-    msgoutput += `Shazamo! The left column matches!`
+    msgoutput += `Shazamo! The left column matches!\n`
     matchcol += 1
     multiplier += 2
   }
@@ -205,7 +205,7 @@ exports.run = (client, message, params) => {
     top_vis += `\`!!\``
     mid_vis += `\`!!\``
     low_vis += `\`!!\``
-    msgoutput += `Alakazam! The middle column matches!`
+    msgoutput += `Alakazam! The middle column matches!\n`
     matchcol += 1
     multiplier += 5
   }
@@ -213,7 +213,7 @@ exports.run = (client, message, params) => {
     top_vis += `\`!!\``
     mid_vis += `\`!!\``
     low_vis += `\`!!\``
-    msgoutput += `Ridonculous! The right column matches!`
+    msgoutput += `Ridonculous! The right column matches!\n`
     matchcol += 1
     multiplier += 2
   }
@@ -223,7 +223,7 @@ exports.run = (client, message, params) => {
     top_vis += `\`\\\\\``
     mid_vis += `\`\\\\\``
     low_vis += `\`\\\\\``
-    msgoutput += `Hey cool! Top-left to bottom-right matches!`
+    msgoutput += `Hey cool! Top-left to bottom-right matches!\n`
     matchcol += 1
     multiplier += 2
   }
@@ -231,7 +231,7 @@ exports.run = (client, message, params) => {
     top_vis += `//`
     mid_vis += `//`
     low_vis += `//`
-    msgoutput += `I see! Top-right to bottom-left matches!`
+    msgoutput += `I see! Top-right to bottom-left matches!\n`
     matchcol += 1
     multiplier += 2
   }
@@ -240,7 +240,7 @@ exports.run = (client, message, params) => {
   if (top_100 === top_001 && top_001 === low_001 && low_001 === low_100) {
     top_vis += `---`
     low_vis += `---`
-    msgoutput += `Neato! The corners match!`
+    msgoutput += `Neato! The corners match!\n`
     matchcol += 1
     matchrow += 1
     multiplier += 1

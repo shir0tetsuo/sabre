@@ -1,5 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // SHIELD - Special Haul Invoking Extremely Lewd Dialogue
+// convert to lower case for easier scanning
 const settings = require('./settings.json')
 const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
