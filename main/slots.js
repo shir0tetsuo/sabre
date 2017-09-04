@@ -221,7 +221,7 @@ exports.run = (client, message, params) => {
   }
   // here is the munged visual data
   let rowoutput = `${top_vis}\n${mid_vis}\n${low_vis}`
-  let gains = `You gained: ${prize_tickets}${curren} & ${prize_chatbit}${chatBit}`
+  let gains = `${prize_tickets}${curren} & ${prize_chatbit}${chatBit}`
   //message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${bomb}`)
   /*
   console.log(top_row)
@@ -253,7 +253,7 @@ exports.run = (client, message, params) => {
             value: msgoutput
           },
           {
-            name: '\u200b',
+            name: 'Winnings:',
             value: gains
           }
         ],
