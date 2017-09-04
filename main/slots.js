@@ -9,13 +9,7 @@ let chatBit = ":eye_in_speech_bubble:"
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
-// Function to return level for bonus calculations
-function level(message) {
-  sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-    if (!row) return 1;
-    return row.level;
-  })
-}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Assign possible variance
 const slots = [
@@ -269,7 +263,6 @@ exports.run = (client, message, params) => {
   }
 
   if (matchrow !== 0 || matchcol !== 0) {
-    let lvl = level(message)*1
     cross = (matchrow + matchcol) * multiplier
     prize_chatbit += (valfrog * frog) * cross
     prize_tickets += (valfull_moon * full_moon) * cross
@@ -283,7 +276,7 @@ exports.run = (client, message, params) => {
     prize_chatbit += radioactive * (multiplier * 30)
     prize_tickets += (valseven * seven) * cross
     prize_tickets += (valfree * free) * cross
-    prize_tickets += ((valup * up) * cross) * lvl
+    prize_tickets += (valup * up) * cross * matchcol
   }
   if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
