@@ -42,10 +42,19 @@ exports.run = (client, message, params) => {
   var low_row = low_100 + ' ' + low_010 + ' ' + low_001
   var low_row = low_row.split(' ')
   //top_row = top_row.map(function(bombs){return ++bombs;});
-  for (var top_bombs = 0; top_bombs < top_row.length; top_bombs++) {
-    if (top_row[top_bombs] == 'bomb') {
-      top_row[top_bombs] += 1;
-      console.log("recursion")
+  for (var i = 0; i < top_row.length; i++) {
+    if (top_row[i] == 'bomb') {
+      bombs += 1;
+    }
+  }
+  for (var i = 0; i < mid_row.length; i++) {
+    if (top_row[i] == 'bomb') {
+      bombs += 1;
+    }
+  }
+  for (var i = 0; i < low.length; i++) {
+    if (top_row[i] == 'bomb') {
+      bombs += 1;
     }
   }
   console.log(top_row)
