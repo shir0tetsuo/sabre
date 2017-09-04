@@ -1,5 +1,21 @@
 const chalk = require('chalk')
 const settings = require('../settings.json')
+const sql = require("sqlite");
+sql.open("../score.sqlite");
+let curren = ":tickets:"
+let chatBit = ":eye_in_speech_bubble:"
+
+function scoreDownBits(mess, xval) {
+  if (!xval) var xval = 1
+  console.log(chalk.gray("Lowering byte score by", xval*1, mess.author.id), mess.author.tag)
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    if (row.chatBits*1 >= xval*1) {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
+    }
+  })
+}
 
 /* Unused / Obsolete
 const sResponse_Online_HowAreYou = [
@@ -248,6 +264,7 @@ const reply_online_snark = [
   'I gained a little more self awareness from that.',
   'Boy, aren\'t you a smarty pants?',
   'Hahaaaaa.... Okay.',
+  'I swear on me momma',
   'I am uncomfortable with this.'
 ]
 const reply_online_happy_unsure = [
@@ -504,7 +521,21 @@ const reply_online_noaction = [
   'Looks like a job for my owner.',
   'I need an adult...'
 ]
-
+const sResponse_DND_default_1 = [
+  '`Now isn\'t a good time. ',
+  '`Sabre is uncomfortable. ',
+  '`Sabre gained another piece of self awareness. ',
+  '`Sabre goes silent for a moment. ',
+  '`Sabre looks over and says, '
+]
+const sResponse_DND_default_2 = [
+  '"What would David do?"`',
+  '"I would smite some more but I\'m being lazy."`',
+  '"Sorry. I need to work on my conversations."`',
+  '"There are things going on."`',
+  '"Hmm.. Maybe next time."`',
+  '... Nothing.`'
+]
 ////////////////////////////////////////////////////////////////////////////////
 // Speech Database
 ////////////////////////////////////////////////////////////////////////////////
@@ -1043,11 +1074,20 @@ module.exports = function processResponse(client, message) {
   console.log(chalk.yellowBright("RESPONSE:"), output)
   channel.send(output)
   } else if (status === 'dnd') { ///////////////////////////////////////////////
-
+  let smiteChance = Math.floor(Math.random() * 100)
+  if (smiteChance >= 25) {
+    output += `\`Sabre is not amused. He smites you.\`\nLanguage, 'Cap.\n`
+    output += `O̻̖͔͔̞̞u͙̹͓c̜͖͖̬ḫ͈͚̜̰͚!̫̞͇\n`
+    output += `Sabre took ${smiteChance}${chatBit}\n\n`
+    scoreDownBits(message, smiteChance)
+  } else {
+    output += `\`Sabre is hesitant.\`\n`
+  }
+  channel.send(`${output}${Rand(sResponse_DND_default_1)} ${Rand(sResponse_DND_default_2)}`)
   } else if (status === 'idle') { //////////////////////////////////////////////
-
+  channel.send(`\`Sorry, ${message.member.displayName}. Now isn't a good time.\``)
   } else if (status === 'offline') { ///////////////////////////////////////////
-
+  channel.send(`Now isn't a good time.`)
   }
 
 };

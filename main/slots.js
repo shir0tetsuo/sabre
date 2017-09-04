@@ -42,6 +42,7 @@ const slots = [
   let radioactive = 0
   let free = 0
     //message.channel.send(`${message.member.displayName}`)
+    Reactions!
 */
 exports.run = (client, message, params) => {
   //////////////////////////////////////////////////////////////////////////////
