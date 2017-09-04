@@ -229,6 +229,10 @@ exports.run = (client, message, params) => {
   console.log(low_row)
   console.log("BOMBS:", bomb)
   */
+
+  if (!msgoutput) {
+    msgoutput += `Nothing interesting happened.`
+  }
   message.reply({embed: {
       color: 0xE27100,
       timestamp: new Date(),
