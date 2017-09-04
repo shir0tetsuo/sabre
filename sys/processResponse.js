@@ -845,6 +845,12 @@ module.exports = function processResponse(client, message) {
   // MESSAGE BODY
   const floor3 = floorArray[floorArray.length - 1]
   // MESSAGE CLOSING
+  if (floor2 === undefined) {
+    let floor2 = "BLANK"
+  }
+  if (floor3 === undefined) {
+    let floor3 = "BLANK"
+  }
   //////////////////////////////////////////////////////////////////////////////
   let output = '';
   if (status === 'online') { ///////////////////////////////////////////////////
