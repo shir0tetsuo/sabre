@@ -42,9 +42,21 @@ exports.run = (client, message, params) => {
   var low_row = low_100 + low_010 + low_001
   var low_row = low_row.split(' ')
   //top_row = top_row.map(function(bombs){return ++bombs;});
-  top_row = top_row.map(item => item.includes('bomb'){return ++bombs;});
-  mid_row = mid_row.map(item => item.includes('bomb'){return ++bombs;});
-  low_row = low_row.map(item => item.includes('bomb'){return ++bombs;});
+  top_row = top_row.map(item => function(bombs) {
+    if (item.indexOf('bomb') !== -1) {
+      return ++bombs
+    }
+  });
+  mid_row = mid_row.map(item => function(bombs) {
+    if (item.indexOf('bomb') !== -1) {
+      return ++bombs
+    }
+  });
+  low_row = low_row.map(item => function(bombs) {
+    if (item.indexOf('bomb') !== -1) {
+      return ++bombs
+    }
+  });
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
