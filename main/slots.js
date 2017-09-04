@@ -50,8 +50,8 @@ exports.run = (client, message, params) => {
   let top_vis = '';
   let mid_vis = '';
   let low_vis = '';
-  let objBombs = 0
-  let objRadioactive = 0
+  var objBombs = 0
+  var objRadioactive = 0
   //message.channel.send(`${message.member.displayName}`)
   let top_100 = Rand(slots)
   let top_010 = Rand(slots)
