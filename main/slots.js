@@ -9,6 +9,13 @@ let chatBit = ":eye_in_speech_bubble:"
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
+// Function to return level for bonus calculations
+function level(message) {
+  sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+    if (!row) return 1;
+    return row.level;
+  })
+}
 ////////////////////////////////////////////////////////////////////////////////
 // Assign possible variance
 const slots = [
@@ -65,7 +72,7 @@ exports.run = (client, message, params) => {
   let spades = 0
   let valspades = 4
   let clubs = 0
-  let valclubes = 4
+  let valclubs = 4
   let eye_in_speech_bubble = 0
   let valeye_in_speech_bubble = 20
   let bomb = 0
@@ -191,11 +198,59 @@ exports.run = (client, message, params) => {
     multiplier += 1
   }
   //////////////////////////////////////////////////////////////////////////////
-  // COLUMN conditions
-
+  // column conditions
+  if (top_100 === mid_100 && mid_100 === low_100) {
+    top_vis += `\`!!\``
+    mid_vis += `\`!!\``
+    low_vis += `\`!!\``
+    msgoutput += `Shazamo! The left column matches!`
+    matchcol += 1
+    multiplier += 2
+  }
+  if (top_010 === mid_010 && mid_010 === low_010) {
+    top_vis += `\`!!\``
+    mid_vis += `\`!!\``
+    low_vis += `\`!!\``
+    msgoutput += `Alakazam! The middle column matches!`
+    matchcol += 1
+    multiplier += 5
+  }
+  if (top_001 === mid_001 && mid_001 === low_001) {
+    top_vis += `\`!!\``
+    mid_vis += `\`!!\``
+    low_vis += `\`!!\``
+    msgoutput += `Ridonculous! The right column matches!`
+    matchcol += 1
+    multiplier += 2
+  }
   //////////////////////////////////////////////////////////////////////////////
-  // CRISS-CROSS Conditions
-
+  // cris-cross conditions
+  if (top_100 === mid_010 && mid_010 === low_001) {
+    top_vis += `\`\\\\\``
+    mid_vis += `\`\\\\\``
+    low_vis += `\`\\\\\``
+    msgoutput += `Hey cool! Top-left to bottom-right matches!`
+    matchcol += 1
+    multiplier += 2
+  }
+  if (top_001 === mid_010 && mid_010 === low_100) {
+    top_vis += `//`
+    mid_vis += `//`
+    low_vis += `//`
+    msgoutput += `I see! Top-right to bottom-left matches!`
+    matchcol += 1
+    multiplier += 2
+  }
+  //////////////////////////////////////////////////////////////////////////////
+  // special conditions
+  if (top_100 === top_001 && top_001 === low_001 && low_001 === low_100) {
+    top_vis += `---`
+    low_vis += `---`
+    msgoutput += `Neato! The corners match!`
+    matchcol += 1
+    matchrow += 1
+    multiplier += 1
+  }
   //////////////////////////////////////////////////////////////////////////////
   // SPECIAL Conditions (bombs, powerups, etc
   if (free !== 0) {
@@ -208,9 +263,26 @@ exports.run = (client, message, params) => {
     msgoutput += `Ohh! Looks like some :bomb: were defused from :radioactive:!\n`
   }
   if (up !== 0 && matchrow !== 0) {
-    var calculation = (up) + 200 * matchrow
+    var calculation = (up * 200) * matchrow
     msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!\n`
     prize_chatbit += calculation
+  }
+
+  if (matchrow !== 0 || matchcol !== 0) {
+    cross = (matchrow + matchcol) * multiplier
+    prize_chatbit += (valfrog * frog) * cross
+    prize_tickets += (valfull_moon * full_moon) * cross
+    prize_tickets += (valsunny * sunny) * cross
+    prize_tickets += (valtickets * tickets) * cross
+    prize_chatbit += (valanchor * anchor) * cross
+    prize_tickets += (valspades * spades) * cross
+    prize_chatbit += (valclubs * clubs) * cross
+    prize_chatbit += (valeye_in_speech_bubble * eye_in_speech_bubble) * cross
+    prize_tickets += (vallarge_orange_diamond * large_orange_diamond) * cross
+    prize_chatbit += radioactive * (multiplier * 30)
+    prize_tickets += (valseven * seven) * cross
+    prize_tickets += (valfree * free) * cross
+    prize_tickets += ((valup * up) * cross) * level(message)
   }
   if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
@@ -253,7 +325,7 @@ exports.run = (client, message, params) => {
       ],
       footer: {
         icon_url: client.user.avatarURL,
-        text: "slots"
+        text: "slots OPEN BETA TEST"
       }
     }})
 };
@@ -263,7 +335,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [''],
-  permLevel: 4
+  permLevel: 1
 };
 
 exports.help = {
