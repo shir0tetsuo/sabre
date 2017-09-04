@@ -1,4 +1,5 @@
 const chalk = require('chalk')
+const settings = require('../settings.json')
 
 /* Unused / Obsolete
 const sResponse_Online_HowAreYou = [
