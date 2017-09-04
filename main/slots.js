@@ -241,25 +241,26 @@ exports.run = (client, message, params) => {
     setTimeout(() => {
       let msg = message
       message.delete()
+      msg.reply({embed: {
+        color: 0xE27100,
+        timestamp: new Date(),
+        description: rowoutput,
+        author: {
+          name: msg.member.displayName,
+          icon_url: msg.author.avatarURL
+        },
+        fields: [
+          {
+            name: '\u200b',
+            value: msgoutput
+          }
+        ],
+        footer: {
+          name: gains
+        }
+      }})
     }, 3000)
-  }).then(message.reply({embed: {
-    color: 0xE27100,
-    timestamp: new Date(),
-    description: rowoutput,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: '\u200b',
-        value: msgoutput
-      }
-    ],
-    footer: {
-      name: gains
-    }
-  }}))
+  }).
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
