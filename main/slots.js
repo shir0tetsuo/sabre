@@ -214,9 +214,9 @@ exports.run = (client, message, params) => {
   }
   if (bomb !== 0) {
     var newcb = prize_chatbit/bomb
-    var prize_chatbit = newcb
+    prize_chatbit = newcb
     var newtk = prize_tickets/bomb
-    var prize_tickets = newtk
+    prize_tickets = newtk
     msgoutput += `Ouch! The :bomb:s caused you to lose ${bomb} x ${curren}/${chatBit}!`
   }
   // here is the munged visual data
