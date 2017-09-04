@@ -1018,7 +1018,7 @@ module.exports = function processResponse(client, message) {
   if (parse_floor2_questions.some(word => floorX.includes(word)) && parse_floorX_love.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_discomfort)}`
   }
-  if (output === null) {
+  if (!output) {
     output += `${Rand(reply_online_q_who)}`
   }
   console.log(chalk.redBright("REQUEST:"), floorX)
