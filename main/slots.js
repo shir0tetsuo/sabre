@@ -253,7 +253,7 @@ exports.run = (client, message, params) => {
             value: msgoutput
           },
           {
-            name: '\u200b'.
+            name: '\u200b',
             value: gains
           }
         ],
