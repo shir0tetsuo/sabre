@@ -629,6 +629,7 @@ const parse_floor2_actionB = [
 // floor 3 arrays as responders, floor X arrays for shifters
 const parse_floorX_badword = [
   'cunt',
+  'fuck',
   'ass ',
   'bitch',
   'pussy',
