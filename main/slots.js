@@ -4,12 +4,13 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
-
+////////////////////////////////////////////////////////////////////////////////
+// Function to serve as randomization component for arrays
 function Rand(data) {
-  // where data is the array
   return data[Math.floor(Math.random() * data.length)]
 }
-
+////////////////////////////////////////////////////////////////////////////////
+// Assign possible variance
 const slots = [
   'frog',
   'full_moon',
@@ -24,9 +25,11 @@ const slots = [
   'radioactive',
   'seven',
   'free',
-  'up'
+  'up',
+  'hearts',
+  'diamonds',
+  'dizzy'
 ]
-
 /* Notes:
   Make slots cost 10 bytes to play.
   Apply more visuals and padding!
@@ -35,18 +38,38 @@ const slots = [
   Apply something colorful for win/lose situations.
   Possibly power-ups? Such as up = next roll 2x reward?
   Apply some SQL stuff to keep track of all the powerups.
+  let bombs = 0
+  let radioactive = 0
+  let free = 0
+    //message.channel.send(`${message.member.displayName}`)
 */
-
 exports.run = (client, message, params) => {
+  //////////////////////////////////////////////////////////////////////////////
+  // Create blank visualization rows
   let top_vis = '';
   let mid_vis = '';
   let low_vis = '';
-  let objBombs = 0
-  let objRadioactive = 0
-  let objFree = 0
-  //message.channel.send(`${message.member.displayName}`)
   //////////////////////////////////////////////////////////////////////////////
-  // Random Floor
+  // Initialize counters
+  let frog = 0
+  let full_moon = 0
+  let sunny = 0
+  let tickets = 0
+  let anchor = 0
+  let spades = 0
+  let clubs = 0
+  let eye_in_speech_bubble = 0
+  let bomb = 0
+  let large_orange_diamond = 0
+  let radioactive = 0
+  let seven = 0
+  let free = 0
+  let up = 0
+  let hearts = 0
+  let diamonds = 0
+  let dizzy = 0
+  //////////////////////////////////////////////////////////////////////////////
+  // Randomization Floor (Where most of the magic happens)
   let top_100 = Rand(slots)
   let top_010 = Rand(slots)
   let top_001 = Rand(slots)
@@ -65,30 +88,46 @@ exports.run = (client, message, params) => {
   var low_row = low_100 + ' ' + low_010 + ' ' + low_001
   var low_row = low_row.split(' ')
 
+  var full_row = top_100 + ' ' + top_010 + ' ' + top_001 + ' ' + mid_100 + ' ' + mid_010 + ' ' + mid_001 + ' ' + low_100 + ' ' + low_010 + ' ' + low_001
+  var full_row = full_row.split(' ')
   //////////////////////////////////////////////////////////////////////////////
   // Calculate object value
-  for (var i = 0; i < top_row.length; i++) {
-    var Object = top_row[i]
-    if (Object == 'bomb') {
-      objBombs += 1;
+  for (var i = 0; i < full_row.length; i++) {
+    var Object = full_row[i]
+    if (Object == 'frog') {
+      frog += 1;
+    } else if (Object == 'full_moon') {
+      full_moon += 1;
+    } else if (Object == 'sunny') {
+      sunny += 1;
+    } else if (Object == 'tickets') {
+      tickets += 1;
+    } else if (Object == 'anchor') {
+      anchor += 1;
+    } else if (Object == 'spades') {
+      spades += 1;
+    } else if (Object == 'clubs') {
+      clubs += 1;
+    } else if (Object == 'eye_in_speech_bubble') {
+      eye_in_speech_bubble += 1;
+    } else if (Object == 'bomb') {
+      bomb += 1;
+    } else if (Object == 'large_orange_diamond') {
+      large_orange_diamond += 1;
     } else if (Object == 'radioactive') {
-      objRadioactive += 1;
-    }
-  }
-  for (var i = 0; i < mid_row.length; i++) {
-    var Object = mid_row[i]
-    if (Object == 'bomb') {
-      objBombs += 1;
-    } else if (Object == 'radioactive') {
-      objRadioactive += 1;
-    }
-  }
-  for (var i = 0; i < low_row.length; i++) {
-    var Object = low_row[i]
-    if (Object == 'bomb') {
-      objBombs += 1;
-    } else if (Object == 'radioactive') {
-      objRadioactive += 1;
+      radioactive += 1;
+    } else if (Object == 'seven') {
+      seven += 1;
+    } else if (Object == 'free') {
+      free += 1;
+    } else if (Object == 'up') {
+      up += 1;
+    } else if (Object == 'hearts') {
+      hearts += 1;
+    } else if (Object == 'diamonds') {
+      diamonds += 1;
+    } else if (Object == 'dizzy') {
+      dizzy += 1;
     }
   }
   //////////////////////////////////////////////////////////////////////////////
@@ -103,16 +142,15 @@ exports.run = (client, message, params) => {
     low_vis += `:${low_row[i]}: `
   }
   //////////////////////////////////////////////////////////////////////////////
-  // Parse response messages
-  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${objBombs}\nRADIOACTIVE: ${objRadioactive}\n FREE: ${objFree}`)
+  // Parse response messages (Suggest output system)
+  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${bomb}`)
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
-  console.log("BOMBS:", objBombs)
-  console.log("RADIOACTIVE:", objRadioactive)
-  console.log("FREE:", objFree)
+  console.log("BOMBS:", bomb)
 };
-
+////////////////////////////////////////////////////////////////////////////////
+// Basic information about the plugin
 exports.conf = {
   enabled: true,
   guildOnly: false,
