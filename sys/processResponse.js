@@ -848,7 +848,7 @@ module.exports = function processResponse(client, message) {
   //////////////////////////////////////////////////////////////////////////////
   let output = '';
   if (status === 'online') { ///////////////////////////////////////////////////
-  if (Parse(parse_floorX_links, floorX) === true) {
+  if (parse_floorX_links.some(word => floorX.includes(word))) {
     channel.send({embed: {
       color: 0xA5A5A7,
       timestamp: new Date(),
