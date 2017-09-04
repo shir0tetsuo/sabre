@@ -777,6 +777,9 @@ function Rand(data) {
 }
 function Parse(database, context) {
   // where database is the array and content is the string
+  if (!context) {
+    let context = message.content.toLowerCase()
+  }
   if (database.some(word => context.includes(word))) {
     return true
   } else {
