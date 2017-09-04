@@ -212,12 +212,12 @@ exports.run = (client, message, params) => {
     msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!`
     prize_chatbit += calculation
   }
-  if (bomb !== 0) {
+  if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
     prize_chatbit = newcb
     var newtk = prize_tickets/bomb
     prize_tickets = newtk
-    msgoutput += `Ouch! The :bomb:s caused you to lose ${bomb} x ${curren}/${chatBit}!`
+    msgoutput += `Ouch! The :bomb:s caused you to lose some ${curren}/${chatBit}!`
   }
   // here is the munged visual data
   let rowoutput = `${top_vis}\n${mid_vis}\n${low_vis}`
