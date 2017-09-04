@@ -41,15 +41,16 @@ exports.run = (client, message, params) => {
   }
 };
 
+// need this to go back to permLevel 1
 exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['wf'],
-  permLevel: 1
+  permLevel: 4
 };
 
 exports.help = {
   name: 'waterfall',
-  description: 'Waterfall Game.',
+  description: 'Waterfall Game. COMING SOON',
   usage: 'waterfall [new/end/usage/view/high/low]'
 };

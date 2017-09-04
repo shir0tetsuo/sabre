@@ -19,15 +19,42 @@ const slots = [
   'spades',
   'clubs',
   'eye_in_speech_bubble',
-  'bomb'
+  'bomb',
+  'large_orange_diamond',
+  'radioactive',
+  'seven',
+  'free',
+  'up'
 ]
+calculate(obj) {
+  if (obj === 'bomb') {
+    objBombs += 1;
+  } else if (obj === 'radioactive') {
+    objRadioactive += 1;
+  } else if (obj === 'free') {
+    objFree += 1;
+  }
+}
+
+/* Notes:
+  Make slots cost 10 bytes to play.
+  Apply more visuals and padding!
+  Do cris-cross comparisons as well.
+  Bombs anywhere will make you lose bytes.
+  Apply something colorful for win/lose situations.
+  Possibly power-ups? Such as up = next roll 2x reward?
+  Apply some SQL stuff to keep track of all the powerups.
+*/
+
+
 
 exports.run = (client, message, params) => {
   let top_vis = '';
   let mid_vis = '';
   let low_vis = '';
-  let bombs = 0
-  let wins = 0
+  let objBombs = 0
+  let objRadioactive = 0
+  let objFree = 0
   //message.channel.send(`${message.member.displayName}`)
   let top_100 = Rand(slots)
   let top_010 = Rand(slots)
@@ -44,8 +71,18 @@ exports.run = (client, message, params) => {
   var mid_row = mid_row.split(' ')
   var low_row = low_100 + ' ' + low_010 + ' ' + low_001
   var low_row = low_row.split(' ')
-  //top_row = top_row.map(function(bombs){return ++bombs;});
+
+  // test
   for (var i = 0; i < top_row.length; i++) {
+    calculate(top_row[i]) // --> +1 for whatever
+  }
+  for (var i = 0; i < mid_row.length; i++) {
+    calculate(mid_row[i])
+  }
+  for (var i = 0; i < low_row.length; i++) {
+    calculate(low_row[i])
+  }
+  /* for (var i = 0; i < top_row.length; i++) {
     if (top_row[i] == 'bomb') {
       bombs += 1;
     }
@@ -59,8 +96,9 @@ exports.run = (client, message, params) => {
     if (low_row[i] == 'bomb') {
       bombs += 1;
     }
-  }
+  } */
 
+  //////////////////////////////////////////////////////////////////////////////
   // Join the rows back together and apply formatting
   for (var i = 0; i < top_row.length; i++) {
     top_vis += `:${top_row[i]}: `
@@ -71,11 +109,15 @@ exports.run = (client, message, params) => {
   for (var i = 0; i < low_row.length; i++) {
     low_vis += `:${low_row[i]}: `
   }
+  //////////////////////////////////////////////////////////////////////////////
+  // Parse response messages
   message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}`)
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
-  console.log("BOMBS:", bombs)
+  console.log("BOMBS:", objBombs)
+  console.log("RADIOACTIVE:", objRadioactive)
+  console.log("FREE:", objFree)
 };
 
 exports.conf = {
