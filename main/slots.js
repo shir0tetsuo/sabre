@@ -144,6 +144,8 @@ exports.run = (client, message, params) => {
   }
   //////////////////////////////////////////////////////////////////////////////
   // Parse response messages (Suggest output system)
+  // Formula for Bomb Calculation: (wins)/bombs
+  // Formula for Radioactive Calculation: (bombs)-Radioactive
   message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${bomb}`)
   console.log(top_row)
   console.log(mid_row)

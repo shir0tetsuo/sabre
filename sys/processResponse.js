@@ -1075,7 +1075,7 @@ module.exports = function processResponse(client, message) {
   channel.send(output)
   } else if (status === 'dnd') { ///////////////////////////////////////////////
   let smiteChance = Math.floor(Math.random() * 100)
-  if (smiteChance >= 25) {
+  if (smiteChance >= 25 && parse_floorX_badword.some(word => floorX.includes(word))) {
     output += `\`Sabre is not amused. He smites you.\`\nLanguage, 'Cap.\n`
     output += `O̻̖͔͔̞̞u͙̹͓c̜͖͖̬ḫ͈͚̜̰͚!̫̞͇\n`
     output += `Sabre took ${smiteChance}${chatBit}\n\n`
