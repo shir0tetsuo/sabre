@@ -775,6 +775,7 @@ function Rand(data) {
   // where data is the array
   return data[Math.floor(Math.random() * data.length)]
 }
+/*
 function Parse(database, context) {
   // where database is the array and content is the string
   if (!context) {
@@ -785,7 +786,7 @@ function Parse(database, context) {
   } else {
     return false
   }
-}
+}*/
  /*
 
   Sabre processResponse Mainframe
