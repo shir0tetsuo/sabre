@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
         message.react("☢")
         message.react("☣")
       })
-      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.user.username}#${person.user.discriminator})` + "\n\nSent to David's Netherworld.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name} `+ "```" + new Date()).catch(console.error)
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nSent to David's Netherworld.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name} `+ "```" + new Date()).catch(console.error)
       person.setRoles([davidsplace]).catch(console.error)
 
     } else if (params[0] === "mute") {
@@ -30,10 +30,15 @@ exports.run = (client, message, params) => {
         message.react("🤐")
         message.react("🌃")
       })
+      if (params[2] !== undefined) {
+        let timeage = params[2] + ` Hours`
+      } else {
+        let timeage = '--'
+      }
       let badboy = message.guild.roles.find('name', 'Bad Boy')
       let muted = message.guild.roles.find('name', 'Muted')
       let grounded = message.guild.roles.find('name', 'Grounded')
-      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name}` + "```" + new Date()).catch(console.error)
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${timeage}` + "\n\nSent by " + message.author.tag + ` in ${message.channel.name}` + "```" + new Date()).catch(console.error)
       person.setRoles([badboy, muted, grounded]).catch(console.error)
 
     } else if (params[0] === "echo") {
@@ -62,5 +67,5 @@ exports.conf = {
 exports.help = {
   name: 'shadowshadow',
   description: 'Bringing down the Hammer of Justice since 1994.',
-  usage: 'shadowshadow [mute/notmeproblem/echo/david/nick] [@user] :: notmeproblem = david\'s netherworld :: echo prints users roles :: names summon user'
+  usage: 'shadowshadow [mute/notmeproblem/echo/david/nick] [@user] (mute-hours) :: notmeproblem = david\'s netherworld :: echo prints users roles :: names summon user'
 };
