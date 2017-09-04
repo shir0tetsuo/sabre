@@ -31,8 +31,6 @@ function calculate(obj) {
     objBombs += 1;
   } else if (obj === 'radioactive') {
     objRadioactive += 1;
-  } else if (obj === 'free') {
-    objFree += 1;
   }
 }
 
@@ -54,7 +52,6 @@ exports.run = (client, message, params) => {
   let low_vis = '';
   let objBombs = 0
   let objRadioactive = 0
-  let objFree = 0
   //message.channel.send(`${message.member.displayName}`)
   let top_100 = Rand(slots)
   let top_010 = Rand(slots)
@@ -117,7 +114,6 @@ exports.run = (client, message, params) => {
   console.log(low_row)
   console.log("BOMBS:", objBombs)
   console.log("RADIOACTIVE:", objRadioactive)
-  console.log("FREE:", objFree)
 };
 
 exports.conf = {
