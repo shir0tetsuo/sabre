@@ -264,7 +264,7 @@ const reply_online_q_default = [
   'Oh.',
   'Well then... Not sure what to say.',
   'Pardon?',
-  'Huh.'
+  'Huh.',
   'Uhmm.. Not sure.',
   'Yes?',
   'No?',
