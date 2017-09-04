@@ -23,6 +23,9 @@ const slots = [
 ]
 
 exports.run = (client, message, params) => {
+  let top_vis = '';
+  let mid_vis = '';
+  let low_vis = '';
   let bombs = 0
   let wins = 0
   //message.channel.send(`${message.member.displayName}`)
@@ -57,6 +60,18 @@ exports.run = (client, message, params) => {
       bombs += 1;
     }
   }
+
+  // Join the rows back together and apply formatting
+  for (var i = 0; i < top_row.length; i++) {
+    top_vis += `:${top_row[i]}: `
+  }
+  for (var i = 0; i < mid_row.length; i++) {
+    mid_vis += `:${mid_row[i]}: `
+  }
+  for (var i = 0; i < low_row.length; i++) {
+    low_vis += `:${low_row[i]}: `
+  }
+  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}`)
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
