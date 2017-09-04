@@ -899,110 +899,110 @@ module.exports = function processResponse(client, message) {
       }, 120000) // 2 minutes
     })
   }
-  if (Parse(parse_floorX_hru, floorX) === true) {
+  if (parse_floorX_hru.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_howAreYou)}\n`
   }
-  if (Parse(parse_floorX_sup, floorX) === true) {
+  if (parse_floorX_sup.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_q_sup)} ${Rand(parse_floor3_resultB)}\n`
   }
-  if (Parse(parse_floorX_clausal, floorX) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floorX_clausal.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_snark)}\n`
   }
-  if (Parse(parse_floor3_resultB, floor1) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floor3_resultB.some(word => floor1.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_happy_unsure)}\n${Rand(reply_online_q_default)}\n`
   }
-  if (Parse(parse_floorX_badword, floorX) === true) {
+  if (parse_floorX_badword.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_bad)}\n`
   }
-  if (Parse(parse_floor1_yn, floor1) === true) {
+  if (parse_floor1_yn.some(word => floor1.includes(word))) {
     output += `${Rand(reply_online_yn)}\n`
   }
-  if (Parse(parse_floor1_yn, floor1) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floor1_yn.some(word => floor1.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_yn_questioned)}\n`
   }
-  if (Parse(parse_floor2_questions, floor1) === true && floor1.indexOf("who") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word)) && floor1.indexOf("who") !== -1) {
     output += `${Rand(reply_online_q_who)}\n`
   }
-  if (Parse(parse_floor2_questions, floor1) === true && floor1.indexOf("what") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word)) && floor1.indexOf("what") !== -1) {
     output += `${Rand(reply_online_q_what)}\n`
   }
-  if (Parse(parse_floor2_questions, floor1) === true && floor1.indexOf("when") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word)) && floor1.indexOf("when") !== -1) {
     output += `${Rand(reply_online_q_when)}\n` // work on
   }
-  if (Parse(parse_floor2_questions, floorX) === true && floorX.indexOf("is") !== -1) {
+  if (parse_floor2_questions.some(word => floorX.includes(word)) && floorX.indexOf("is") !== -1) {
     output += `${Rand(reply_online_q_what)}\n`
     output += `${Rand(parse_floor3_result)} ${Rand(reply_online_q_what)}\n`
   }
-  if (Parse(parse_floor2_questions, floor1) === true && floorX.indexOf("why") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word))) && floorX.indexOf("why") !== -1) {
     output += `${Rand(parse_floor3_time)} ${Rand(reply_online_q_why)}\n`
   }
-  if (Parse(parse_floor2_questions, floor1) === true && floorX.indexOf("where") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word)) && floorX.indexOf("where") !== -1) {
     output += `${Rand(reply_online_q_where)}\n`
   }
-  if (Parse(parse_floor2_questions, floor2) === true && floor3.indexOf("?") !== -1) {
+  if (parse_floor2_questions.some(word => floor2.includes(word)) && floor3.indexOf("?") !== -1) {
     output += `${Rand(reply_online_q_default)}\n`
   }
-  if (Parse(parse_floorX_badword, floorX) === true && Parse(parse_floor3_resultB, floorX) === true) {
+  if (parse_floorX_badword.some(word => floorX.includes(word)) && parse_floor3_resultB.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_discomfort)}\n`
   }
-  if (Parse(parse_floorX_badword, floorX) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floorX_badword.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_discomfort)} ${Rand(reply_online_q_default)}\n`
   }
-  if (Parse(parse_floor1_pronoun_plural_subj, floor1) && Parse(parse_floor2_symbolic, floor3) === true) {
+  if (parse_floor1_pronoun_plural_subj.some(word => floor1.includes(word)) && parse_floor2_symbolic.some(word => floor3.includes(word))) {
     output += `${Rand(reply_online_q_default)} ${Rand(reply_online_discomfort)}\n`
   }
-  if (Parse(parse_floorX_negativeResult, floorX) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floorX_negativeResult.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(parse_floor3_resultB)}... ${Rand(reply_online_discomfort)}\n`
   }
-  if (Parse(parse_floor1_pronoun_1st_singular_subj, floor1) && Parse(parse_floor2_questions, floorX) === false) {
+  if (parse_floor1_pronoun_1st_singular_subj.some(word => floor1.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_thatsnice)}\n`
   }
-  if (Parse(parse_floor2_actionB, floorX) === true) {
+  if (parse_floor2_actionB.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_noaction)} ${Rand(reply_online_thatsnice)}\n`
   }
-  if (Parse(parse_floor2_action, floorX) === true && Parse(parse_floorX_badword, floorX) === true) {
+  if (parse_floor2_action.some(word => floorX.includes(word)) && parse_floorX_badword.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_q_default)} ${Rand(reply_online_snark)}\n`
   }
-  if (Parse(parse_floorX_badword, floor1) === true && Parse(parse_floorX_badword, floor3) === true) {
+  if (parse_floorX_badword.some(word => floor1.includes(word)) && parse_floorX_badword.some(word => floor3.includes(word))) {
     output += `${Rand(reply_online_happy_unsure)} ${Rand(reply_online_bad)}\n`
   }
-  if (Parse(parse_floor1_pronoun_1st_singular_obj, floor1) === true) {
+  if (parse_floor1_pronoun_1st_singular_obj.some(word => floor1.includes(word))) {
     output += `${Rand(parse_floor2_questions)}..?\n`
   }
-  if (Parse(parse_floor1_pronoun_1st_singular_obj, floor3) === true) {
+  if (parse_floor1_pronoun_1st_singular_obj.some(word => floor3.includes(word))) {
     output += `${Rand(reply_online_snark)}\n`
   }
-  if (Parse(parse_floor1_pronoun_3rd_singular_obj, floorX) === true) {
+  if (parse_floor1_pronoun_3rd_singular_obj.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_thatsnice)}\n`
   }
-  if (Parse(parse_floor1_pronoun_3rd_singular_subj, floorX) === true || Parse(parse_floor1_pronoun_plural_subj, floorX) === true) {
+  if (parse_floor1_pronoun_3rd_singular_subj.some(word => floorX.includes(word)) || parse_floor1_pronoun_plural_subj.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_noaction)}\n`
   }
-  if (Parse(parse_floor2_questions, floorX) === true && Parse(parse_floor2_comparative, floor2) === true) {
+  if (parse_floor2_questions.some(word => floorX.includes(word)) && parse_floor2_comparative.some(word => floor2.includes(word))) {
     output += `${Rand(reply_online_q_default)}\n`
   }
-  if (Parse(parse_floor2_archaic, floorX) === true && Parse(parse_floor2_questions, floorX) === true) {
+  if (parse_floor2_archaic.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_q_godly)}, ${Rand(parse_floor2_archaic)} ${Rand(parse_floor3_result)} ${Rand(parse_floor2_actionB)} ${Rand(parse_floor3_resultB)} ${Rand(parse_floorX_links)}\n`
   }
-  if (Parse(parse_floor2_action, floor1) === true && Parse(parse_floor2_symbolic, floorX) === true) {
+  if (parse_floor2_action.some(word => floor1.includes(word)) && parse_floor2_symbolic.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_funny)}\n`
   }
-  if (Parse(parse_floor2_interjection, floorX) === true) {
+  if (parse_floor2_interjection.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_youllbefine)}\n`
   }
-  if (Parse(parse_floor3_contrast, floorX) === true) {
+  if (parse_floor3_contrast.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_youllbefine)} ${Rand(reply_online_q_what)}\n`
   }
-  if (Parse(parse_floor3_place, floorX) === true && Parse(parse_floor2_symbolic, floorX) === true) {
+  if (parse_floor3_place.some(word => floorX.includes(word)) && parse_floor2_symbolic.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_funny)} ${Rand(reply_online_q_default)}\n`
   }
-  if (Parse(parse_floor3_place, floorX) === true && Parse(parse_floor2_questions, floorX) === false) {
+  if (parse_floor3_place.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(parse_floor3_comparison)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor3_example)} ${Rand(parse_floor3_comparison)} ${Rand(reply_online_q_when)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor2_archaic)} ${Rand(reply_online_q_why)}`
   }
-  if (Parse(parse_floor3_result, floorX) === true && Parse(parse_floor2_questions, floorX) === false) {
+  if (parse_floor3_result.some(word => floorX.includes(word))) {
     output += `${Rand(parse_floor3_resultB)}`
   }
-  if (Parse(parse_floor2_questions, floorX) === true && Parse(parse_floorX_love, floorX) === true) {
+  if (parse_floor2_questions.some(word => floorX.includes(word)) && parse_floorX_love.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_discomfort)}`
   }
   if (output === null) {
