@@ -256,7 +256,8 @@ const reply_online_happy_unsure = [
   'I feel good about this.',
   'Who said I was a bad guy?',
   'I\'m glad you\'re enjoying this as much as I am.',
-  'Haha,'
+  'Haha,',
+  'I\'m feeling frazzled...'
 ]
 const reply_online_q_default = [
   '**Wubbalubba Dub Dub**',
@@ -300,11 +301,13 @@ const reply_online_yn = [
   'Oh. I thought that was right.'
 ]
 const reply_online_discomfort = [
+  '...Meep',
   '...Why must you say such things?',
   'I need an adult...',
   'You make me so uncomfortable.',
   'Please stop.',
-  'Do you kiss your mother with that mouth?'
+  'Do you kiss your mother with that mouth?',
+  'Woah if you take one more diddly darn step, I\'m going to have to diddly darn snap your neck.'
 ]
 const reply_online_yn_questioned = [
   'Honestly though I\'m not sure how I feel about this.',
@@ -630,6 +633,9 @@ const parse_floorX_links = [
   'directory',
   'links'
 ]
+const parse_floorX_greeting = [
+  'hello'
+]
 const parse_floor3_result = [
   'hence',
   'therefore',
@@ -649,6 +655,9 @@ const parse_floor3_resultB = [
 ]
 const parse_floorX_negativeResult = [
   'hell no',
+  'i refuse',
+  'hell to the n',
+  'no my dude',
   'nah',
   'no ',
   'i can\'t',
@@ -674,6 +683,11 @@ const parse_floorX_clausal = [
 ]
 const parse_floor3_summary = [
   'in short',
+  'in conclusion',
+  'with that said',
+  'the point is',
+  'in totality',
+  'in synopsis',
   'on the whole',
   'in other words',
   'to be sure',
@@ -861,6 +875,7 @@ module.exports = function processResponse(client, message) {
   let output = '';
   if (status === 'online') { ///////////////////////////////////////////////////
   if (parse_floorX_links.some(word => floorX.includes(word))) {
+    // Fix some links... something other than HERE
     channel.send({embed: {
       color: 0xA5A5A7,
       timestamp: new Date(),
@@ -1010,13 +1025,16 @@ module.exports = function processResponse(client, message) {
     output += `${Rand(reply_online_funny)} ${Rand(reply_online_q_default)}\n`
   }
   if (parse_floor3_place.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
-    output += `${Rand(parse_floor3_comparison)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor3_example)} ${Rand(parse_floor3_comparison)} ${Rand(reply_online_q_when)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor2_archaic)} ${Rand(reply_online_q_why)}`
+    output += `${Rand(parse_floor3_comparison)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor3_example)} ${Rand(parse_floor3_comparison)} ${Rand(reply_online_q_when)} ${Rand(parse_floor3_contrast)} ${Rand(parse_floor2_archaic)} ${Rand(reply_online_q_why)}\n`
   }
   if (parse_floor3_result.some(word => floorX.includes(word))) {
-    output += `${Rand(parse_floor3_resultB)}`
+    output += `${Rand(parse_floor3_resultB)}\n`
   }
   if (parse_floor2_questions.some(word => floorX.includes(word)) && parse_floorX_love.some(word => floorX.includes(word))) {
-    output += `${Rand(reply_online_discomfort)}`
+    output += `${Rand(reply_online_discomfort)}\n`
+  }
+  if (parse_floor2_comparative.some(word => floorX.includes(word)) && parse_floor1_pronoun_3rd_singular_subj.some(word => floorX.includes(word)) && parse_floor2_actionB.some(word => floorX.includes(word))) {
+    output += `${Rand(reply_online_noaction)}\n`
   }
   if (!output) {
     output += `${Rand(reply_online_q_who)}`
