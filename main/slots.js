@@ -26,7 +26,7 @@ const slots = [
   'free',
   'up'
 ]
-calculate(obj) {
+function calculate(obj) {
   if (obj === 'bomb') {
     objBombs += 1;
   } else if (obj === 'radioactive') {
