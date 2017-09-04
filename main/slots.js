@@ -53,22 +53,44 @@ exports.run = (client, message, params) => {
   //////////////////////////////////////////////////////////////////////////////
   // Initialize counters
   let frog = 0
+  let valfrog = 5
   let full_moon = 0
+  let valfull_moon = 5
   let sunny = 0
+  let valsunny = 5
   let tickets = 0
+  let valtickets = 10
   let anchor = 0
+  let valanchor = 6
   let spades = 0
+  let valspades = 4
   let clubs = 0
+  let valclubes = 4
   let eye_in_speech_bubble = 0
+  let valeye_in_speech_bubble = 20
   let bomb = 0
   let large_orange_diamond = 0
+  let vallarge_orange_diamond = 15
   let radioactive = 0
   let seven = 0
+  let valseven = 14
   let free = 0
-  let up = 0
+  let valfree = 20
+  let up = 0 // value calculated by level
+  let valup = 15
   let hearts = 0
+  let valhearts = 12
   let diamonds = 0
+  let valdiamonds = 12
   let dizzy = 0
+  let valdizzy = 15
+
+  let prize_tickets = 0
+  let prize_chatbit = 0
+  let msgoutput = ''
+  let multiplier = 1
+  let matchrow = 0
+  let matchcol = 0
   //////////////////////////////////////////////////////////////////////////////
   // Randomization Floor (Where most of the magic happens)
   let top_100 = Rand(slots)
@@ -146,11 +168,81 @@ exports.run = (client, message, params) => {
   // Parse response messages (Suggest output system)
   // Formula for Bomb Calculation: (wins)/bombs
   // Formula for Radioactive Calculation: (bombs)-Radioactive
-  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${bomb}`)
+  // msgoutput, rowoutput
+
+  //////////////////////////////////////////////////////////////////////////////
+  // ROW Conditions
+  if (top_100 === top_010 && top_010 === top_001) {
+    top_vis += `\`<----\``
+    msgoutput += `Holy Smokes! The top row matches!\n`
+    matchrow += 1
+    multiplier += 2
+  }
+  if (mid_100 === mid_010 && mid_010 === mid_001) {
+    mid_vis += `\`<----\``
+    msgoutput += `Oh My! The middle row matches!\n`
+    matchrow += 1
+    multiplier += 4
+  }
+  if (low_100 === low_010 && low_010 === low_001) {
+    low_vis += `\`<----\``
+    msgoutput += `Snap! The bottom row matches!\n`
+    matchrow += 1
+    multiplier += 1
+  }
+  //////////////////////////////////////////////////////////////////////////////
+  // COLUMN conditions
+
+  //////////////////////////////////////////////////////////////////////////////
+  // CRISS-CROSS Conditions
+
+  //////////////////////////////////////////////////////////////////////////////
+  // SPECIAL Conditions (bombs, powerups, etc
+  if (free !== 0) {
+    var calculation = free * valfree
+    msgoutput += `You gained ${calculation}${curren} for free from your ${free}:free:\n`
+    prize_tickets += calculation
+  }
+  if (radioactive !== 0 && bomb >= radioactive) {
+    bomb -= radioactive
+    msgoutput += `Ohh! Looks like some :bomb: were defused from :radioactive:!`
+  }
+  if (up !== 0 && matchrow !== 0) {
+    var calculation = (up) + 200 * matchrow
+    msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!`
+    prize_chatbit += calculation
+  }
+  if (bomb !== 0) {
+    var newcb = prize_chatbit/bomb
+    var prize_chatbit = newcb
+    var newtk = prize_tickets/bomb
+    var prize_tickets = newtk
+    msgoutput += `Ouch! The :bomb:s caused you to lose ${bomb} x ${curren}/${chatBit}!`
+  }
+  // here is the munged visual data
+  let rowoutput = `${top_vis}\n${mid_vis}\n${low_vis}`
+  let gains = `You gained: ${prize_tickets}${curren} & ${prize_chatbit}${chatBit}`
+  //message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${bomb}`)
+  /*
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
   console.log("BOMBS:", bomb)
+  */
+  message.reply({embed: {
+    color: 0xE27100,
+    timestamp: new Date(),
+    description: `Rolling! Rolling! Rolling!`
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    }
+  }}).then(message => {
+    setTimeout(() => {
+      let msg = message
+      message.delete()
+    }, 3000)
+  }).then(console.log(msg.content, message.content))
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
