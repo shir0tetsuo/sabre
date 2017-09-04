@@ -37,15 +37,6 @@ const slots = [
   Apply some SQL stuff to keep track of all the powerups.
 */
 
-function calculate(obj) {
-  if (obj === 'bomb') {
-    var objBombs = objBombs*1 + 1;
-  } else if (obj === 'radioactive') {
-    var objRadioactive = objRadioactive*1 + 1;
-  }
-}
-
-
 exports.run = (client, message, params) => {
   let top_vis = '';
   let mid_vis = '';
@@ -77,31 +68,29 @@ exports.run = (client, message, params) => {
   //////////////////////////////////////////////////////////////////////////////
   // Calculate object value
   for (var i = 0; i < top_row.length; i++) {
-    calculate(top_row[i]) // --> +1 for whatever
-  }
-  /*
-  for (var i = 0; i < top_row.length; i++) {
     var Object = top_row[i]
     if (Object == 'bomb') {
       objBombs += 1;
     } else if (Object == 'radioactive') {
-
+      objRadioactive += 1;
     }
   }
   for (var i = 0; i < mid_row.length; i++) {
     var Object = mid_row[i]
     if (Object == 'bomb') {
-      bombs += 1;
+      objBombs += 1;
+    } else if (Object == 'radioactive') {
+      objRadioactive += 1;
     }
   }
   for (var i = 0; i < low_row.length; i++) {
     var Object = low_row[i]
     if (Object == 'bomb') {
-      bombs += 1;
+      objBombs += 1;
+    } else if (Object == 'radioactive') {
+      objRadioactive += 1;
     }
   }
-  */
-
   //////////////////////////////////////////////////////////////////////////////
   // Join the rows back together and apply formatting
   for (var i = 0; i < top_row.length; i++) {
@@ -115,7 +104,7 @@ exports.run = (client, message, params) => {
   }
   //////////////////////////////////////////////////////////////////////////////
   // Parse response messages
-  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}`)
+  message.reply('`BETA` This is solely for testing purposes.' + `\n${top_vis}\n${mid_vis}\n${low_vis}\nBOMBS: ${objBombs}\nRADIOACTIVE: ${objRadioactive}\n FREE: ${objFree}`)
   console.log(top_row)
   console.log(mid_row)
   console.log(low_row)
