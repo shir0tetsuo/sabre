@@ -242,7 +242,24 @@ exports.run = (client, message, params) => {
       let msg = message
       message.delete()
     }, 3000)
-  }).then(console.log(message.content))
+  }).then(message.reply({embed: {
+    color: 0xE27100,
+    timestamp: new Date(),
+    description: rowoutput,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: '\u200b',
+        value: msgoutput
+      }
+    ],
+    footer: {
+      name: gains
+    }
+  }}))
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
