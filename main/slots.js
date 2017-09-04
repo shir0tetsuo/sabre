@@ -242,7 +242,7 @@ exports.run = (client, message, params) => {
       let msg = message
       message.delete()
     }, 3000)
-  }).then(console.log(msg.content, message.content))
+  }).then(console.log(message.content))
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
