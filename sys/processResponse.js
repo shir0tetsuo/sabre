@@ -775,9 +775,9 @@ function Rand(data) {
   // where data is the array
   return data[Math.floor(Math.random() * data.length)]
 }
-function Parse(database, content) {
+function Parse(database, context) {
   // where database is the array and content is the string
-  if (database.some(word => content.includes(word))) {
+  if (database.some(word => context.includes(word))) {
     return true
   } else {
     return false
