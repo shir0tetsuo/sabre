@@ -961,7 +961,7 @@ module.exports = function processResponse(client, message) {
   if (parse_floorX_badword.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_discomfort)} ${Rand(reply_online_q_default)}\n`
   }
-  if (parse_floor1_pronoun_plural_subj.some(word => floor1.includes(word)) && parse_floor2_symbolic.some(word => floor3.includes(word))) {
+  if (parse_floor1_pronoun_plural_subj.some(word => floor1.includes(word)) && parse_floor2_symbolic.some(word => floor2.includes(word))) {
     output += `${Rand(reply_online_q_default)} ${Rand(reply_online_discomfort)}\n`
   }
   if (parse_floorX_negativeResult.some(word => floorX.includes(word)) && parse_floor2_questions.some(word => floorX.includes(word))) {
@@ -976,13 +976,13 @@ module.exports = function processResponse(client, message) {
   if (parse_floor2_action.some(word => floorX.includes(word)) && parse_floorX_badword.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_q_default)} ${Rand(reply_online_snark)}\n`
   }
-  if (parse_floorX_badword.some(word => floor1.includes(word)) && parse_floorX_badword.some(word => floor3.includes(word))) {
+  if (parse_floorX_badword.some(word => floor1.includes(word)) && parse_floorX_badword.some(word => floorX.includes(word))) {
     output += `${Rand(reply_online_happy_unsure)} ${Rand(reply_online_bad)}\n`
   }
   if (parse_floor1_pronoun_1st_singular_obj.some(word => floor1.includes(word))) {
     output += `${Rand(parse_floor2_questions)}..?\n`
   }
-  if (parse_floor1_pronoun_1st_singular_obj.some(word => floor3.includes(word))) {
+  if (parse_floor1_pronoun_1st_singular_obj.some(word => floor2.includes(word))) {
     output += `${Rand(reply_online_snark)}\n`
   }
   if (parse_floor1_pronoun_3rd_singular_obj.some(word => floorX.includes(word))) {
