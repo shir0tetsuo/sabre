@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
         message.react("☢")
         message.react("☣")
       })
-      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.tag})` + "\n\nSent to David's Netherworld.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name} `+ "```" + new Date()).catch(console.error)
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.username})` + "\n\nSent to David's Netherworld.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name} `+ "```" + new Date()).catch(console.error)
       person.setRoles([davidsplace]).catch(console.error)
 
     } else if (params[0] === "mute") {
@@ -33,7 +33,7 @@ exports.run = (client, message, params) => {
       let badboy = message.guild.roles.find('name', 'Bad Boy')
       let muted = message.guild.roles.find('name', 'Muted')
       let grounded = message.guild.roles.find('name', 'Grounded')
-      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.tag})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name}` + "```" + new Date()).catch(console.error)
+      message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + `(${person.username})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n--\n\nSent by " + message.author.tag + ` in ${message.channel.name}` + "```" + new Date()).catch(console.error)
       person.setRoles([badboy, muted, grounded]).catch(console.error)
 
     } else if (params[0] === "echo") {
