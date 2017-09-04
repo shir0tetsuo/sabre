@@ -205,11 +205,11 @@ exports.run = (client, message, params) => {
   }
   if (radioactive !== 0 && bomb >= radioactive) {
     bomb -= radioactive
-    msgoutput += `Ohh! Looks like some :bomb: were defused from :radioactive:!`
+    msgoutput += `Ohh! Looks like some :bomb: were defused from :radioactive:!\n`
   }
   if (up !== 0 && matchrow !== 0) {
     var calculation = (up) + 200 * matchrow
-    msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!`
+    msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!\n`
     prize_chatbit += calculation
   }
   if (bomb >= 2) {
