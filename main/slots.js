@@ -200,7 +200,7 @@ exports.run = (client, message, params) => {
   // SPECIAL Conditions (bombs, powerups, etc
   if (free !== 0) {
     var calculation = free * valfree
-    msgoutput += `You gained ${calculation}${curren} for free from your ${free}:free:\n`
+    msgoutput += `You gained ${calculation}${curren} for free from your ${free} :free:\n`
     prize_tickets += calculation
   }
   if (radioactive !== 0 && bomb >= radioactive) {
@@ -251,10 +251,15 @@ exports.run = (client, message, params) => {
           {
             name: '\u200b',
             value: msgoutput
+          },
+          {
+            name: '\u200b'.
+            value: gains
           }
         ],
         footer: {
-          text: gains
+          icon_url: client.user.avatarURL,
+          text: "slots"
         }
       }})
     }, 3000)
