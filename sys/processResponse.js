@@ -933,7 +933,7 @@ module.exports = function processResponse(client, message) {
     output += `${Rand(reply_online_q_what)}\n`
     output += `${Rand(parse_floor3_result)} ${Rand(reply_online_q_what)}\n`
   }
-  if (parse_floor2_questions.some(word => floor1.includes(word))) && floorX.indexOf("why") !== -1) {
+  if (parse_floor2_questions.some(word => floor1.includes(word)) && floorX.indexOf("why") !== -1) {
     output += `${Rand(parse_floor3_time)} ${Rand(reply_online_q_why)}\n`
   }
   if (parse_floor2_questions.some(word => floor1.includes(word)) && floorX.indexOf("where") !== -1) {
