@@ -893,7 +893,7 @@ module.exports = function processResponse(client, message) {
       setTimeout(() => {
         message.delete()
       }, 120000) // 2 minutes
-    }) return;
+    })
   }
   if (Parse(parse_floorX_hru, floorX) === true) {
     output += `${Rand(reply_online_howAreYou)}\n`
