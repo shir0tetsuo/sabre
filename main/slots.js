@@ -239,15 +239,13 @@ exports.run = (client, message, params) => {
     }
   }}).then(message => {
     setTimeout(() => {
-      let msg = message
-      message.delete()
-      msg.reply({embed: {
+      message.edit({embed: {
         color: 0xE27100,
         timestamp: new Date(),
         description: rowoutput,
         author: {
-          name: msg.member.displayName,
-          icon_url: msg.author.avatarURL
+          name: message.member.displayName,
+          icon_url: message.author.avatarURL
         },
         fields: [
           {
@@ -256,11 +254,11 @@ exports.run = (client, message, params) => {
           }
         ],
         footer: {
-          name: gains
+          text: gains
         }
       }})
     }, 3000)
-  }).
+  })
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
