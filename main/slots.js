@@ -230,40 +230,28 @@ exports.run = (client, message, params) => {
   console.log("BOMBS:", bomb)
   */
   message.reply({embed: {
-    color: 0xE27100,
-    timestamp: new Date(),
-    description: `Rolling! Rolling! Rolling!`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    }
-  }}).then(message => {
-    setTimeout(() => {
-      message.edit({embed: {
-        color: 0xE27100,
-        timestamp: new Date(),
-        description: rowoutput,
-        author: {
-          name: message.member.displayName,
-          icon_url: message.author.avatarURL
+      color: 0xE27100,
+      timestamp: new Date(),
+      description: rowoutput,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
+      },
+      fields: [
+        {
+          name: '\u200b',
+          value: msgoutput
         },
-        fields: [
-          {
-            name: '\u200b',
-            value: msgoutput
-          },
-          {
-            name: 'Winnings:',
-            value: gains
-          }
-        ],
-        footer: {
-          icon_url: client.user.avatarURL,
-          text: "slots"
+        {
+          name: 'Winnings:',
+          value: gains
         }
-      }})
-    }, 3000)
-  })
+      ],
+      footer: {
+        icon_url: client.user.avatarURL,
+        text: "slots"
+      }
+    }})
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
