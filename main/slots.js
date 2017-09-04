@@ -269,6 +269,7 @@ exports.run = (client, message, params) => {
   }
 
   if (matchrow !== 0 || matchcol !== 0) {
+    let lvl = level(message)*1
     cross = (matchrow + matchcol) * multiplier
     prize_chatbit += (valfrog * frog) * cross
     prize_tickets += (valfull_moon * full_moon) * cross
@@ -282,7 +283,7 @@ exports.run = (client, message, params) => {
     prize_chatbit += radioactive * (multiplier * 30)
     prize_tickets += (valseven * seven) * cross
     prize_tickets += (valfree * free) * cross
-    prize_tickets += ((valup * up) * cross) * level(message)
+    prize_tickets += ((valup * up) * cross) * lvl
   }
   if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
