@@ -35,15 +35,15 @@ exports.run = (client, message, params) => {
   let low_100 = Rand(slots)
   let low_010 = Rand(slots)
   let low_001 = Rand(slots)
-  var top_row = top_100 + top_010 + top_001
+  var top_row = top_100 + ' ' + top_010 + ' ' + top_001
   var top_row = top_row.split(' ')
-  var mid_row = mid_100 + mid_010 + mid_001
+  var mid_row = mid_100 + ' ' + mid_010 + ' ' + mid_001
   var mid_row = mid_row.split(' ')
-  var low_row = low_100 + low_010 + low_001
+  var low_row = low_100 + ' ' + low_010 + ' ' + low_001
   var low_row = low_row.split(' ')
   //top_row = top_row.map(function(bombs){return ++bombs;});
   for (var top_bombs = 0; top_bombs < top_row.length; top_bombs++) {
-    if (top_row[top_bombs] === 'bomb') {
+    if (top_row[top_bombs] == 'bomb') {
       top_row[top_bombs] += 1;
     }
   }
