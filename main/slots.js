@@ -232,7 +232,7 @@ exports.run = (client, message, params) => {
   message.reply({embed: {
     color: 0xE27100,
     timestamp: new Date(),
-    description: `Rolling! Rolling! Rolling!`
+    description: `Rolling! Rolling! Rolling!`,
     author: {
       name: message.member.displayName,
       icon_url: message.author.avatarURL
