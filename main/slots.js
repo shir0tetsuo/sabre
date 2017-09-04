@@ -48,12 +48,12 @@ exports.run = (client, message, params) => {
     }
   }
   for (var i = 0; i < mid_row.length; i++) {
-    if (top_row[i] == 'bomb') {
+    if (mid_row[i] == 'bomb') {
       bombs += 1;
     }
   }
-  for (var i = 0; i < low.length; i++) {
-    if (top_row[i] == 'bomb') {
+  for (var i = 0; i < low_row.length; i++) {
+    if (low_row[i] == 'bomb') {
       bombs += 1;
     }
   }
