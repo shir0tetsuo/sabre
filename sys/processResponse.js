@@ -972,7 +972,7 @@ module.exports = function processResponse(client, message) {
   if (Parse(parse_floor1_pronoun_3rd_singular_obj, floorX) === true) {
     output += `${Rand(reply_online_thatsnice)}\n`
   }
-  if (Parse(parse_floor1_pronoun_3rd_singular_subj, floorX) === true || Parse(parse_floor1_pronoun_plural_subj) === true) {
+  if (Parse(parse_floor1_pronoun_3rd_singular_subj, floorX) === true || Parse(parse_floor1_pronoun_plural_subj, floorX) === true) {
     output += `${Rand(reply_online_noaction)}\n`
   }
   if (Parse(parse_floor2_questions, floorX) === true && Parse(parse_floor2_comparative, floor2) === true) {
@@ -990,7 +990,7 @@ module.exports = function processResponse(client, message) {
   if (Parse(parse_floor3_contrast, floorX) === true) {
     output += `${Rand(reply_online_youllbefine)} ${Rand(reply_online_q_what)}\n`
   }
-  if (Parse(parse_floor3_place, floorX) === true && Parse(parse_floor2_symbolic) === true) {
+  if (Parse(parse_floor3_place, floorX) === true && Parse(parse_floor2_symbolic, floorX) === true) {
     output += `${Rand(reply_online_funny)} ${Rand(reply_online_q_default)}\n`
   }
   if (Parse(parse_floor3_place, floorX) === true && Parse(parse_floor2_questions, floorX) === false) {
