@@ -45,6 +45,7 @@ exports.run = (client, message, params) => {
   for (var top_bombs = 0; top_bombs < top_row.length; top_bombs++) {
     if (top_row[top_bombs] == 'bomb') {
       top_row[top_bombs] += 1;
+      console.log("recursion")
     }
   }
   console.log(top_row)
