@@ -17,12 +17,12 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [''],
+  aliases: ['xdev'],
   permLevel: 4
 };
 
 exports.help = {
-  name: 'pin',
-  description: 'Logs some stuff to the console.',
-  usage: 'pin [stuff]'
+  name: 'stt',
+  description: '\'Send To Terminal\' Logs some stuff to the console.',
+  usage: 'stt [stuff]'
 };
