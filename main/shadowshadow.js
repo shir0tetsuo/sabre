@@ -31,9 +31,9 @@ exports.run = (client, message, params) => {
         message.react("🌃")
       })
       if (params[2] !== undefined) {
-        let timeage = params[2] + ` Hours`
+        var timeage = params[2] + ` Hours`
       } else {
-        let timeage = '--'
+        var timeage = '--'
       }
       let badboy = message.guild.roles.find('name', 'Bad Boy')
       let muted = message.guild.roles.find('name', 'Muted')
