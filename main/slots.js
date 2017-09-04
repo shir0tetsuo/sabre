@@ -39,9 +39,9 @@ const slots = [
 
 function calculate(obj) {
   if (obj === 'bomb') {
-    var objBombs += 1;
+    var objBombs = objBombs*1 + 1;
   } else if (obj === 'radioactive') {
-    var objRadioactive += 1;
+    var objRadioactive = objRadioactive*1 + 1;
   }
 }
 
