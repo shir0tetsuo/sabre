@@ -10,6 +10,7 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined) {
     //console.log(message.mentions.members.first())
     console.log(message.mentions.members.first().user)
+    console.log(message.mentions.members.first().user.discriminator)
   }
 };
 
