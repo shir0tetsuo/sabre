@@ -8,7 +8,7 @@ exports.run = (client, message, params) => {
   let person = message.mentions.members.first()
   sql.run("CREATE TABLE IF NOT EXISTS warning (userid TEXT, times INTEGER, date TEXT)").then(() => {
     sql.run("INSERT INTO warning (userid, times, date) VALUES (?, ?, ?)", [person.id, 0, 'NULL']);
-  }
+  })
     sql.run(`UPDATE warning SET times = 0 WHERE userid = "${person.id}"`)
     sql.run(`UPDATE warning SET date = "NULL" WHERE userid = "${person.id}"`)
     message.channel.send(`${person} had their warnings reset.`)
