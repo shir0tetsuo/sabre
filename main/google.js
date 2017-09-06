@@ -10,7 +10,21 @@ exports.run = (client, message, params) => {
   let search = params.join('+')
   let appearance = params.join(' ')
   let link = `https://www.google.ca/search?q=${search}`
-  message.channel.send(`[Let's Google ${appearance}](${link})`)
+  //message.channel.send(`[Let's Google ${appearance}](${link})`)
+  message.channel.send({embed: {
+    color: 0x36B236,
+    timestamp: new Date(),
+    author: {
+      name: client.user.username,
+      icon_url: client.user.avatarURL
+    },
+    fields: [
+      {
+        name: "Need help?",
+        value: `[Let's Google ${appearance}](${link})`
+      }
+    ]
+  }})
 };
 
 /*
