@@ -1,5 +1,6 @@
 const sql = require("sqlite");
 sql.open("../score.sqlite");
+const Discord = require ("discord.js");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
@@ -10,23 +11,20 @@ exports.run = (client, message, params) => {
   let search = params.join('+')
   let appearance = params.join(' ')
   let link = `https://www.google.com/search?q=${search}`
+  let ddglink = `https://duckduckgo.com/?q=${search}`
   //message.channel.send(`[Let's Google ${appearance}](${link})`)
-  message.channel.send({embed: {
-    color: 0x36B236,
-    timestamp: new Date(),
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    fields: [
-      {
-        name: "Need help?",
-        value: `[Let's Google ${appearance}](${link})`
-      }
-    ]
-  }})
+  const embed = new Discord.RichEmbed()
+    .setTitle('Search the Web')
+    .setAuthor(client.user.username, 'https://i.imgur.com/mmhjYyz.png')
+    .setColor(0x36B236)
+    .setTimestamp()
+    .setThumbnail('https://i.imgur.com/mmhjYyz.png')
+    .addField('Need help?', `[Let's Google ${appearance}](${link})`)
+    .addField('Google\'s not your cup of tea?', `[Let's DuckDuckGo ${appearance}](${ddglink})`)
+    .setFooter('Hope that helps')
+    message.channel.send({ embed })
 };
-
+// Maybe change this to richEmbed and add Google's logo?
 /*
 enabled, guildOnly, aliases, permission level
 */
