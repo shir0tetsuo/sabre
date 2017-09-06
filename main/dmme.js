@@ -15,7 +15,7 @@ exports.run = (client, message, params) => {
       message.delete()
     }, 300000) // 5 minutes
   })
-};
+}; // May add ASYNC for texts involving username
 
 /*
 enabled, guildOnly, aliases, permission level
