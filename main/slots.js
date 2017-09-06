@@ -10,13 +10,17 @@ let chatBit = ":eye_in_speech_bubble:"
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    console.log("CURRENT TICKETS:", row.tickets)
     sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+    console.log("NEW AMOUNT TICKETS:", row.tickets + xval*1)
   })
 }
 function scoreUpBits(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    console.log("CURRENT BYTES:", row.chatBits)
     sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+    console.log("NEW AMOUNT BYTES:", row.chatBits + xval*1)
   })
 }
 function scoreDownBits(mess, xval) {
@@ -347,10 +351,16 @@ exports.run = (client, message, params) => {
   //////////////////////////////////////////////////////////////////////////////
   // Append prizes to user's level data
   if (prize_tickets !== 0) {
-    scoreUpTicket(message, prize_tickets)
+    setTimeout(() => {
+      console.log("TICKETS WON:", prize_tickets)
+      scoreUpTicket(message, prize_tickets)
+    }, 2000)
   }
   if (prize_chatbit !== 0) {
-    scoreUpBits(message, prize_chatbit)
+    setTimeout(() => {
+      console.log("BYTES WON:", prize_chatbit)
+      scoreUpBits(message, prize_chatbit)
+    }, 2000)
   }
   message.reply({embed: {
       color: 0xE27100,
