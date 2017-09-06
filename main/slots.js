@@ -4,6 +4,33 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+
+////////////////////////////////////////////////////////////////////////////////
+// Imported Level Mathematics
+function scoreUpTicket(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
+function scoreUpBits(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
+function scoreDownBits(mess, xval) {
+  if (!xval) var xval = 1
+  console.log(chalk.gray("Lowering byte score by", xval*1, mess.author.id), mess.author.tag)
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    if (row.chatBits*1 >= xval*1) {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
+    } else {
+      sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
+    }
+  })
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Function to serve as randomization component for arrays
 function Rand(data) {
@@ -46,6 +73,12 @@ const slots = [
     Reactions!
 */
 exports.run = (client, message, params) => {
+  // Simplistic deduction of bits per usage
+  sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+    if (!row) return message.reply("This command isn't available to you yet.")
+    if (row.chatBits < 10) return message.reply(`You don't have enough ${chatBit}! (Requires 10)`)
+    scoreDownBits(message, 10)
+  })
   //////////////////////////////////////////////////////////////////////////////
   // Create blank visualization rows
   let top_vis = '';
@@ -299,6 +332,14 @@ exports.run = (client, message, params) => {
   if (!msgoutput) {
     msgoutput += `Nothing interesting happened.`
   }
+  //////////////////////////////////////////////////////////////////////////////
+  // Append prizes to user's level data
+  if (prize_tickets !== 0) {
+    scoreUpTicket(message, prize_tickets)
+  }
+  if (prize_chatbit !== 0) {
+    scoreUpBits(message, prize_chatbit)
+  }
   message.reply({embed: {
       color: 0xE27100,
       timestamp: new Date(),
@@ -328,12 +369,12 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [''],
+  aliases: ['slot'],
   permLevel: 1
 };
 
 exports.help = {
   name: 'slots',
-  description: 'COMING SOON',
+  description: 'Try your luck! Roll the machine! Requires 10 Bytes',
   usage: 'slots'
 };
