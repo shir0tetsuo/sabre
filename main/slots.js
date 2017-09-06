@@ -107,7 +107,7 @@ exports.run = (client, message, params) => {
   let vallarge_orange_diamond = 15
   let radioactive = 0
   let seven = 0
-  let valseven = 14
+  let valseven = 28
   let free = 0
   let valfree = 20
   let up = 0 // value calculated by level
@@ -125,6 +125,11 @@ exports.run = (client, message, params) => {
   let multiplier = 1
   let matchrow = 0
   let matchcol = 0
+  let react_star = 0
+  let react_bomb = 0
+  let react_seven = 0
+  let react_radio = 0
+  let react_heart = 0
   //////////////////////////////////////////////////////////////////////////////
   // Randomization Floor (Where most of the magic happens)
   let top_100 = Rand(slots)
@@ -175,6 +180,7 @@ exports.run = (client, message, params) => {
       radioactive += 1;
     } else if (Object == 'seven') {
       seven += 1;
+      react_seven += 1;
     } else if (Object == 'free') {
       free += 1;
     } else if (Object == 'up') {
@@ -284,15 +290,18 @@ exports.run = (client, message, params) => {
     var calculation = free * valfree
     msgoutput += `You gained ${calculation}${curren} for free from your ${free} :free:\n`
     prize_tickets += calculation
+    react_ticket += 1
   }
   if (radioactive !== 0 && bomb >= radioactive) {
     bomb -= radioactive
+    react_radio += 1
     msgoutput += `Ohh! Looks like some :bomb: were defused from :radioactive:!\n`
   }
   if (up !== 0 && matchrow !== 0) {
     var calculation = (up * 200) * matchrow
     msgoutput += `SUPER! You gained a ${calculation}${chatBit} bonus!\n`
     prize_chatbit += calculation
+    react_heart += 1
   }
 
   if (matchrow !== 0 || matchcol !== 0) {
@@ -310,6 +319,7 @@ exports.run = (client, message, params) => {
     prize_tickets += (valseven * seven) * cross
     prize_tickets += (valfree * free) * cross
     prize_tickets += (valup * up) * cross * matchcol
+    react_star += 1
   }
   if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
@@ -317,6 +327,7 @@ exports.run = (client, message, params) => {
     var newtk = prize_tickets/bomb
     prize_tickets = Math.floor(newtk)
     msgoutput += `Ouch! The :bomb:s caused you to lose some ${curren}/${chatBit}!`
+    react_bomb += 1
   }
   // here is the munged visual data
   let rowoutput = `${top_vis}\n${mid_vis}\n${low_vis}`
@@ -362,7 +373,26 @@ exports.run = (client, message, params) => {
         icon_url: client.user.avatarURL,
         text: "slots"
       }
-    }})
+    }}).then(message => {
+      if (react_bomb !== 0) {
+        message.react("💣")
+      }
+      if (react_star !== 0) {
+        message.react("⭐")
+      }
+      if (react_seven !== 0) {
+        message.react("🎉")
+      }
+      if (react_radio !== 0) {
+        message.react("☢")
+      }
+      if (react_heart !== 0) {
+        message.react("♥")
+      }
+      if (react_ticket !== 0) {
+        message.react("🎟")
+      }
+    })
 };
 ////////////////////////////////////////////////////////////////////////////////
 // Basic information about the plugin
