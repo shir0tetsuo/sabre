@@ -156,7 +156,7 @@ module.exports = message => {
   timer.add(message.author.id);
   setTimeout(() => {
     timer.delete(message.author.id);
-  }, 1200) // 1.2seconds
+  }, 2000) // 2seconds
   scoreUpTicket(message);
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
   let params = message.content.split(' ').slice(1);

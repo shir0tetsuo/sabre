@@ -14,11 +14,15 @@ exports.run = (client, message, params) => {
           if (betfloor >= 50) {
             let newcount = row.tickets*1 + params[1]*1
             message.reply("`Super!` You **gained** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
+            setTimeout(() => {
+              sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
+            }, 2000)
           } else {
             let newcount = row.tickets*1 - params[1]*1
             message.reply("`Ouchh!` You **lost** " + params[1] + curren + "!")
-            sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
+            setTimeout(() => {
+              sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)              
+            })
           }
         } else return message.reply(`You don't have enough ${curren}!`)
       })
@@ -28,11 +32,15 @@ exports.run = (client, message, params) => {
           if (betfloor >= 50) {
             let newcount = row.chatBits*1 + params[1]*1
             message.reply("`Epic!` You **gained** " + params[1] + chatBit + "!")
-            sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
+            setTimeout(() => {
+              sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
+            }, 2000)
           } else {
             let newcount = row.chatBits*1 - params[1]*1
             message.reply("`Snap!` You **lost** " + params[1] + chatBit + "!")
-            sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
+            setTimeout(() => {
+              sql.run(`UPDATE scores SET chatBits = ${newcount} WHERE userId = "${message.author.id}"`)
+            }, 2000)
           }
         } else return message.reply(`You don't have enough ${chatBit}!`)
       })
