@@ -16,6 +16,7 @@ exports.run = (client, message, params) => {
     }, 300000) // 5 minutes
   })
 }; // May add ASYNC for texts involving username
+// Wouldn't it be neat if there was an optional expiry time and a slice for the array?
 
 /*
 enabled, guildOnly, aliases, permission level
