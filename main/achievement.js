@@ -2,31 +2,29 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (params[0] === null || params[1] === null) return message.reply("`ERROR` See Manual!")
-  if (params[0] === "green") {
-    var slice = 20
+  var sliced = params.slice(2)
+  if (params[0].toLowerCase() === "green") {
     var slCol = 0x96E000
-  } else if (params[0] === "red") {
-    var slice = 18
+  } else if (params[0].toLowerCase() === "red") {
     var slCol = 0xAB0000
-  } else if (params[0] === "yellow") {
-    var slice = 21
+  } else if (params[0].toLowerCase() === "yellow") {
     var slCol = 0xFFED48
-  } else if (params[0] === "blue") {
-    var slice = 19
+  } else if (params[0].toLowerCase() === "blue") {
     var slCol = 0x0049C0
+  } else if (params[0].toLowerCase() === "purple") {
+    var slCol = 0x844F9B
   } else return message.reply("`ERROR` See Manual!")
   if (message.mentions.members.first() !== undefined) {
     let person = message.mentions.members.first()
     var authName = person.displayName
     var authIcon = client.user.avatarURL
-    var slice = slice + 23
   } else {
     var authName = message.member.displayName
     var authIcon = message.author.avatarURL
   }
   let msg = message // ADD REACTS!
   message.delete()
-  data = message.content.substring(slice, 1024)
+  data = sliced.substring(0, 1024)
   msg.channel.send({ embed: {
     color: slCol,
     timestamp: new Date(),
@@ -57,5 +55,5 @@ exports.conf = {
 exports.help = {
   name: 'achievement',
   description: 'Give someone a cookie today.',
-  usage: 'achievement [blue/yellow/red/green] [text]'
+  usage: 'achievement [blue/yellow/red/green/purple] [text]'
 };
