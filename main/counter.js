@@ -6,6 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
+  message.channel.send("Calculating!")
   var countDownDate = new Date("Jan 5, 2018 15:00:00").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
@@ -16,7 +17,7 @@ exports.run = (client, message, params) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    message.channel.send(`${days} d ${hours} h ${minutes} m ${seconds} s`)
+    message.edit(`${days} d ${hours} h ${minutes} m ${seconds} s`)
     if (distance < 0) {
       clearInterval(x);
       var remainder = "EXPIRED"
