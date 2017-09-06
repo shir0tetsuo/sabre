@@ -60,7 +60,7 @@ exports.run = (client, message, params) => {
     let king = ":warning:"
     const sReply = [
       'You\'re an awesome fella.',
-      'Thank\'s for your support!',
+      'Thanks for your support!',
       'I appreciate it.'
     ]
     if (mess.author.id === settings.ownerid) {
@@ -87,7 +87,7 @@ exports.run = (client, message, params) => {
         if (randomChance <= 33) {
           message.react("🎟");
           sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-            let randomTickets = row.tickets/19 + 20
+            let randomTickets = Math.floor(row.tickets/19 + 20)
             sql.run(`UPDATE scores SET tickets = ${row.tickets + randomTickets*1} WHERE userId = "${mess.author.id}"`)
           })
         }

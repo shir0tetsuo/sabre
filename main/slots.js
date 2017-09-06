@@ -313,9 +313,9 @@ exports.run = (client, message, params) => {
   }
   if (bomb >= 2) {
     var newcb = prize_chatbit/bomb
-    prize_chatbit = newcb
+    prize_chatbit = Math.floor(newcb)
     var newtk = prize_tickets/bomb
-    prize_tickets = newtk
+    prize_tickets = Math.floor(newtk)
     msgoutput += `Ouch! The :bomb:s caused you to lose some ${curren}/${chatBit}!`
   }
   // here is the munged visual data
@@ -360,7 +360,7 @@ exports.run = (client, message, params) => {
       ],
       footer: {
         icon_url: client.user.avatarURL,
-        text: "slots OPEN BETA TEST"
+        text: "slots"
       }
     }})
 };
