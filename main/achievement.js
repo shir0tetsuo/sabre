@@ -2,7 +2,6 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (params[0] === null || params[1] === null) return message.reply("`ERROR` See Manual!")
-  var sliced = params.slice(2)
   if (params[0].toLowerCase() === "green") {
     var slCol = 0x96E000
   } else if (params[0].toLowerCase() === "red") {
@@ -15,10 +14,12 @@ exports.run = (client, message, params) => {
     var slCol = 0x844F9B
   } else return message.reply("`ERROR` See Manual!")
   if (message.mentions.members.first() !== undefined) {
+    var sliced = params.slice(2)
     let person = message.mentions.members.first()
     var authName = person.displayName
     var authIcon = client.user.avatarURL
   } else {
+    var sliced = params.slice(1)
     var authName = message.member.displayName
     var authIcon = message.author.avatarURL
   }
