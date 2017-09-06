@@ -9,7 +9,7 @@ exports.run = (client, message, params) => {
   if (!params[0]) return message.author.send(`${message.author}, some text is required with this command!`)
   let search = params.join('+')
   let appearance = params.join(' ')
-  let link = `https://www.google.ca/search?q=${search}`
+  let link = `https://www.google.com/search?q=${search}`
   //message.channel.send(`[Let's Google ${appearance}](${link})`)
   message.channel.send({embed: {
     color: 0x36B236,
