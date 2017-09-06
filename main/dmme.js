@@ -10,7 +10,7 @@ exports.run = (client, message, params) => {
   let state = `= ${message.member.displayName} is currently unavailable! =`
   let msg = message
   message.delete()
-  msg.channel.send("```asciidoc\n" + `${state}\n\n${params} :: This message expires in 5 minutes.` + "```").then(message => {
+  msg.channel.send("```asciidoc\n" + `${state}\n\n${params.join(' ')} :: This message expires in 5 minutes.` + "```").then(message => {
     setTimeout(() => {
       message.delete()
     }, 300000) // 5 minutes
