@@ -16,14 +16,12 @@ exports.run = (client, message, params) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    message.channel.send(`${days} d ${hours} h ${minutes} m ${seconds} s`)
     if (distance < 0) {
       clearInterval(x);
       var remainder = "EXPIRED"
     }
-  }, 1000).then(m => m.edit({embed: {
-    color: 0xA7A7A5,
-    description: `${days} d ${hours} h ${mintues} m ${seconds} s`
-  }}))
+  }, 1000)
 };
 
 /*
