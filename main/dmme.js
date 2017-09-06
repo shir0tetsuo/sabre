@@ -8,7 +8,9 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   if (!params[0]) return message.author.send(`${message.author}, some text is required with this command!`)
   let state = `= ${message.member.displayName} is currently unavailable! =`
-  message.channel.send("```asciidoc\n" + `${state}\n\n${params} :: This message expires in 5 minutes.` + "```").then(message => {
+  let msg = message
+  message.delete()
+  msg.channel.send("```asciidoc\n" + `${state}\n\n${params} :: This message expires in 5 minutes.` + "```").then(message => {
     setTimeout(() => {
       message.delete()
     }, 300000) // 5 minutes
