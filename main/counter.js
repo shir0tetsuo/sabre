@@ -20,9 +20,10 @@ exports.run = (client, message, params) => {
       clearInterval(x);
       var remainder = "EXPIRED"
     }
-  }, 1000).then(m => m.edit({
-    `${days} d ${hours} h ${minutes} m ${seconds} s`
-  }))
+  }, 1000).then(m => m.edit({embed: {
+    color: 0xA7A7A5,
+    description: `${days} d ${hours} h ${mintues} m ${seconds} s`
+  }}))
 };
 
 /*
