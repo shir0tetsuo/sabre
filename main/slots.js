@@ -130,6 +130,7 @@ exports.run = (client, message, params) => {
   let react_seven = 0
   let react_radio = 0
   let react_heart = 0
+  let react_ticket = 0
   //////////////////////////////////////////////////////////////////////////////
   // Randomization Floor (Where most of the magic happens)
   let top_100 = Rand(slots)
