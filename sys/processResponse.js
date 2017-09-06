@@ -523,7 +523,7 @@ const reply_online_noaction = [
 ]
 const sResponse_DND_default_1 = [
   '`Now isn\'t a good time. ',
-  '`Sabre can\'t come to the phone right now.'
+  '`Sabre can\'t come to the phone right now.',
   '`Sabre is uncomfortable. ',
   '`Sabre gained another piece of self awareness. ',
   '`Sabre goes silent for a moment. ',
