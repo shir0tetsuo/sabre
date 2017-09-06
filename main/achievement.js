@@ -24,7 +24,7 @@ exports.run = (client, message, params) => {
   }
   let msg = message // ADD REACTS!
   message.delete()
-  data = sliced.substring(0, 1024)
+  data = sliced.join(' ').substring(0, 1024)
   msg.channel.send({ embed: {
     color: slCol,
     timestamp: new Date(),
