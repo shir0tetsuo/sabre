@@ -55,7 +55,7 @@ exports.run = (client, message, params) => {
             message.reply("Evaluating.").then(m => {
               setTimeout(() => {
                 m.delete()
-              })
+              }, 10000)
             })
               if (stderr === undefined) {
                 var stderr = "System returned no error."
