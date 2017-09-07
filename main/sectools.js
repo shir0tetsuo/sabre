@@ -38,6 +38,33 @@ exports.run = (client, message, params) => {
           })
       }
     }
+    if (params[0] === "sshx") {
+      if (params[1] === undefined) {
+        return message.reply("Nothing to evaluate!")
+      } else {
+        exec(`${params.slice(1).join(' ')}`,
+          function(error, stdout, stderr) {
+            message.reply("Evaluating.")
+            if (stdout !== null && stdout !== undefined) {
+              message.channel.send(`\`\`\`${stdout.substring(0,1014)}\`\`\``).then(m => {
+                setTimeout(() => {
+                  m.delete()
+                }, 10000)
+              })
+            }
+            if (stderr !== null && stderr !== undefined) {
+              message.channel.send(`\`\`\`${stderr.substring(0,1014)}\`\`\``).then(m => {
+                setTimeout(() => {
+                  m.delete()
+                }, 10000)
+              })
+            }
+          /*  if (error !== null && error !== undefined) {
+              message.channel.send(`\`\`\`${error.substring(0,1014)}\`\`\``)
+            } */
+          })
+      }
+    }
   } else {
     message.reply("`ERROR` You are not the Owner! `This action has been logged.`")
     console.log(chalk.redBright("WARNING"), new Date())
@@ -62,5 +89,5 @@ name is also the command alias
 exports.help = {
   name: 'sectools',
   description: 'Security tools suite. OWNER ONLY!',
-  usage: 'sectools [a2link (keyword)]'
+  usage: 'sectools [a2link (keyword) / ssh (command) / sshx (command)]'
 };
