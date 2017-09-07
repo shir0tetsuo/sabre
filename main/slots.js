@@ -80,7 +80,10 @@ exports.run = (client, message, params) => {
   // Simplistic deduction of bits per usage
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) return message.reply("This command isn't available to you yet.")
-    if (row.chatBits < 10) return message.reply(`You don't have enough ${chatBit}! (Requires 10)`)
+    if (row.chatBits < 10) {
+      message.reply(`You don't have enough ${chatBit}! (Requires 10)`)
+      return;
+    }
     scoreDownBits(message, 10)
   })
   //////////////////////////////////////////////////////////////////////////////
