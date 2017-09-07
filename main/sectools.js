@@ -60,7 +60,7 @@ exports.run = (client, message, params) => {
               if (stderr === undefined || stderr === null || !stderr) {
                 var stderr = "System returned no error."
               }
-              if (stdout === undefined) {
+              if (stdout === undefined || stdout === null || !stdout) {
                 var stdout = "System returned no output."
               }
 
