@@ -68,10 +68,10 @@ exports.run = (client, message, params) => {
                 .setColor(0xCF4F36)
                 .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
                 .setFooter(`${seconds} s`, client.user.avatarURL)
-                .addField('OUT:', `\`\`\`${stdout.substring(0, 1024)}\`\`\``)
-                .addField('OUT:', `\`\`\`${stdout.substring(1025, 2048)}`)
-                .addField('ERR:', `\`\`\`${stderr.substring(0,1024)}`)
-                .addField('ERR:', `\`\`\`${stderr.substring(1025, 2048)}`)
+                .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
+                .addField('OUT:', `\`\`\`${stdout.substring(1001, 2000)}\`\`\``)
+                .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
+                .addField('ERR:', `\`\`\`${stderr.substring(1001, 2000)}\`\`\``)
                 .setTimestamp()
                 message.channel.send({ embed }).then(m => {
                   var expiry = new Date().getTime()
@@ -80,6 +80,7 @@ exports.run = (client, message, params) => {
                     var now = new Date().getTime();
                     var distance = expiry - now;
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    console.log(seconds)
                     m.edit({ embed })
                     if (distance < 0) {
                       clearInterval(x);
