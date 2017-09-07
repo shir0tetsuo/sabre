@@ -64,14 +64,14 @@ exports.run = (client, message, params) => {
 
                 message.channel.send(`\`ACCESS GRANTED. SYSTEM LOGGED IN.\``).then(m => {
                   var expiry = new Date().getTime()
-                  expiry += 15000
+                  expiry += 30000
                   var x = setInterval(function() {
                     var now = new Date().getTime();
                     var distance = expiry - now;
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                     console.log(seconds)
                     const embed = new Discord.RichEmbed()
-                      .setTitle('COMMAND WAS JUST RUN!')
+                      .setTitle(`COMMAND WAS JUST RUN! Self-Destructing in: ${seconds} s`)
                       .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
                       .setColor(0xCF4F36)
                       .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
@@ -80,7 +80,6 @@ exports.run = (client, message, params) => {
                       .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
                       .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
                       .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
-                      .addField('EXPIRY', `${seconds} s`)
                       .setTimestamp()
                     m.edit({ embed })
                     if (distance < 0) {
