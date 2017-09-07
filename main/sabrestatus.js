@@ -10,7 +10,7 @@ exports.run = (client, message, params) => {
     console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
     console.log(chalk.yellow("Sabre's Status changed."))
   } else if (detail[1] === "game") {
-    client.user.setPresence({ game: { name: `${message.content.substring(18,128)}`, type: 0}})
+    client.user.setPresence({ game: { name: `${message.content.slice(2).join(' ').substring(0, 128)}`, type: 0}})
     message.reply("`Access Granted` Sabre's Presence was Updated.")
     console.log(new Date())
     console.log(chalk.greenBright(message.member.displayName), chalk.yellow(message.content), chalk.blueBright(message.guild.name, message.channel.name));
