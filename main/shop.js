@@ -153,7 +153,7 @@ exports.run = (client, message, params) => {
       if (params[1] === "b") {
         message.reply("`ERROR` This command isn't available yet!")
       } else if (params[1] === "t") {
-        if (row.tickets >= 100) {
+        if (row.level >= 5 && row.tickets >= 100) {
           setTimeout(() => {
             scoreDownTicket(message, 100)
             scoreUpBits(message, 512)
