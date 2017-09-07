@@ -79,6 +79,8 @@ exports.run = (client, message, params) => {
                       .setFooter(`${seconds} s`, client.user.avatarURL)
                       .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
                       .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
+                      .addField('OUT:', `\`\`\`${stdout.substring(2000, 3000)}\`\`\``)
+                      .addField('OUT:', `\`\`\`${stdout.substring(3000, 4000)}\`\`\``)
                       .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
                       .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
                       .setTimestamp()
