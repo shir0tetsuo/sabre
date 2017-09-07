@@ -34,6 +34,12 @@ function scoreDownBits(mess, xval) {
     }
   })
 }
+function scoreUpBits(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
