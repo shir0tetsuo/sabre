@@ -30,7 +30,7 @@ exports.run = (client, message, params) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [''],
+  aliases: ['support'],
   permLevel: 1
 };
 
