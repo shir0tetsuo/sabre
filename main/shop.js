@@ -62,6 +62,10 @@ exports.run = (client, message, params) => {
       if (row.level === 0) {
         var levelshop = ":lock: You need to buy a level first."
         var shopcmds = "\u200b"
+      } else if (row.level > 5) {
+        var levelshop = ":unlock: You can now examine the Item Shop!"
+        var shopcmds = `Trade ${chatBit} for ${curren} \`${settings.prefix}shop trade [t/b]\`\n`
+        shopcmds += `See available items with \`\`${settings.prefix} shop items\`\` ((COMING SOON))`
       } else {
         var levelshop = ":unlock: You can now examine the Item Shop!"
         var shopcmds = "See available items with ``" + settings.prefix + "shop items`` ((COMING SOON!))"
@@ -139,7 +143,21 @@ exports.run = (client, message, params) => {
       } else {
         message.reply("`ERROR` The request was not understood! See manual")
       }
-    } // end Level Buying Integration
+    } else if (params[0] === "trade") {
+      if (params[1] === "b") {
+        message.reply("`ERROR` This command isn't available yet!")
+      } else if (params[1] === "t") {
+        if (row.tickets >= 100) {
+          setTimeout(() => {
+            scoreDownTicket(message, 100)
+            scoreUpBits(message, 512)
+            message.reply(`Success! 100 ${curren} was traded for 512 ${chatBit}`)
+          }, 2000)
+        } else {
+          message.reply(`Sorry! You need 100 tickets to get 512 bytes`)
+        }
+      }
+    }// end Level Buying Integration
 
 
 
@@ -157,5 +175,5 @@ exports.conf = {
 exports.help = {
   name: 'sabreshop',
   description: 'Displays the Sabre Shop and available items.',
-  usage: 'Examine Level Shop: shop  :: Buy a Level: shop buy level [t/b/tickets/bytes]  :: Examine Item Shop: shop items  :: Buy Item: shop buy item <number> <slot 1-6> [t/b/tickets/bytes]'
+  usage: 'Examine Level Shop: shop\nBuy a Level :: shop buy level [t/b/tickets/bytes]\nExamine Item Shop :: shop items\nBuy Item :: shop buy item <number> <slot 1-6> [t/b/tickets/bytes]\nTrade :: shop trade [t/b]'
 };
