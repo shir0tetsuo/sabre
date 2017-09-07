@@ -1,6 +1,7 @@
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
+  const permlvl = client.elevation(message)
   if (params[0] === null || params[1] === null) return message.reply("`ERROR` See Manual!")
   if (params[0].toLowerCase() === "green") {
     var slCol = 0x96E000
@@ -43,7 +44,11 @@ exports.run = (client, message, params) => {
         value: `${data}`
       }
     ]
-  }}).then(m => m.pin())
+  }}).then(m => {
+    if (permlvl >= 3) {
+      m.pin()
+    }
+  })
 };
 
 exports.conf = {
