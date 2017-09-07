@@ -58,7 +58,6 @@ exports.run = (client, message, params) => {
               })
             })
             if (stdout !== null && stdout !== undefined) {
-              var seconds = 15
               if (!stderr || stderr === null || stderr === undefined) {
                 var stderr = "System returned no error."
               }
@@ -74,6 +73,7 @@ exports.run = (client, message, params) => {
                     .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
                     .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
                     .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
+                    .addField('EXPIRY', `${seconds} s`)
                     .setTimestamp()
                   var expiry = new Date().getTime()
                   expiry += 15000
