@@ -32,9 +32,9 @@ exports.run = (client, message, params) => {
             if (stderr !== null && stderr !== undefined) {
               message.channel.send(`\`\`\`${stderr.substring(0,1014)}\`\`\``)
             }
-            if (error !== null && error !== undefined) {
+          /*  if (error !== null && error !== undefined) {
               message.channel.send(`\`\`\`${error.substring(0,1014)}\`\`\``)
-            }
+            } */
           })
       }
     }
