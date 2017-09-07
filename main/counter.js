@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
         clearInterval(x);
         m.edit(`EXPIRED`)
       }
-    }, 1000)
+    }, 30000) // 30 seconds
   })
 
 };

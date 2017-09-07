@@ -43,7 +43,7 @@ exports.run = (client, message, params) => {
         value: `${data}`
       }
     ]
-  }})
+  }}).then(m => m.pin())
 };
 
 exports.conf = {
