@@ -63,18 +63,6 @@ exports.run = (client, message, params) => {
               }
 
                 message.channel.send(`\`ACCESS GRANTED. SYSTEM LOGGED IN.\``).then(m => {
-                  const embed = new Discord.RichEmbed()
-                    .setTitle('COMMAND WAS JUST RUN!')
-                    .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
-                    .setColor(0xCF4F36)
-                    .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
-                    .setFooter(`${seconds} s`, client.user.avatarURL)
-                    .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
-                    .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
-                    .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
-                    .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
-                    .addField('EXPIRY', `${seconds} s`)
-                    .setTimestamp()
                   var expiry = new Date().getTime()
                   expiry += 15000
                   var x = setInterval(function() {
@@ -82,6 +70,18 @@ exports.run = (client, message, params) => {
                     var distance = expiry - now;
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                     console.log(seconds)
+                    const embed = new Discord.RichEmbed()
+                      .setTitle('COMMAND WAS JUST RUN!')
+                      .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
+                      .setColor(0xCF4F36)
+                      .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
+                      .setFooter(`${seconds} s`, client.user.avatarURL)
+                      .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
+                      .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
+                      .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
+                      .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
+                      .addField('EXPIRY', `${seconds} s`)
+                      .setTimestamp()
                     m.edit({ embed })
                     if (distance < 0) {
                       clearInterval(x);
