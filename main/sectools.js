@@ -14,9 +14,9 @@ exports.run = (client, message, params) => {
       } else {
         var keyword = params[1]
       }
-      exec('curl icanhazip.com',
+      exec(`echo "http://$(curl icanhazip.com)/${keyword}"`,
         function(error, stdout, stderr) {
-          message.author.send(`http://${stdout}${keyword}`)
+          message.author.send(stdout)
         })
     }
   } else {
