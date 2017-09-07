@@ -71,7 +71,6 @@ exports.run = (client, message, params) => {
                     var now = new Date().getTime();
                     var distance = expiry - now;
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    console.log(seconds)
                     const embed = new Discord.RichEmbed()
                       .setTitle(`COMMAND WAS JUST RUN! Self-Destructing in: ${seconds} s`)
                       .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
