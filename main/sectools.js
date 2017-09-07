@@ -8,6 +8,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   if (message.author.id === settings.ownerid) {
+    if (params[0] === undefined) return message.reply("`ERROR` See Manual!")
     if (params[0] === "a2link") {
       if (params[1] === undefined) {
         var keyword = "help"
