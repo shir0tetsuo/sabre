@@ -1,5 +1,6 @@
 const sql = require("sqlite");
 sql.open("../score.sqlite");
+var exec = require('child_process').exec;
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
@@ -31,7 +32,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['sectool'],
+  aliases: ['sectool', 'ctool'],
   permLevel: 4
 };
 
