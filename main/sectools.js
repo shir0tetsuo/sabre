@@ -57,7 +57,7 @@ exports.run = (client, message, params) => {
                 m.delete()
               }, 10000)
             })
-              if (stderr === undefined || stderr === null) {
+              if (stderr === undefined || stderr === null || !stderr) {
                 var stderr = "System returned no error."
               }
               if (stdout === undefined) {
