@@ -27,13 +27,13 @@ exports.run = (client, message, params) => {
           function(error, stdout, stderr) {
             message.reply("Evaluating.")
             if (stdout !== null && stdout !== undefined) {
-              message.channel.send(`\`\`\`stdout.substring(0,1014)\`\`\``)
+              message.channel.send(`\`\`\`${stdout.substring(0,1014)}\`\`\``)
             }
             if (stderr !== null && stderr !== undefined) {
-              message.channel.send(`\`\`\`stderr.substring(0,1014)\`\`\``)
+              message.channel.send(`\`\`\`${stderr.substring(0,1014)}\`\`\``)
             }
             if (error !== null && error !== undefined) {
-              message.channel.send(`\`\`\`error.substring(0,1014)\`\`\``)
+              message.channel.send(`\`\`\`${error.substring(0,1014)}\`\`\``)
             }
           })
       }
