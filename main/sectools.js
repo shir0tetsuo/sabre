@@ -57,9 +57,11 @@ exports.run = (client, message, params) => {
                 m.delete()
               })
             })
-            if (stdout !== null && stdout !== undefined) {
-              if (!stderr || stderr === null || stderr === undefined) {
+              if (stderr === undefined) {
                 var stderr = "System returned no error."
+              }
+              if (stdout === undefined) {
+                var stdout = "System returned no output."
               }
 
                 message.channel.send(`\`ACCESS GRANTED. SYSTEM LOGGED IN.\``).then(m => {
@@ -88,7 +90,6 @@ exports.run = (client, message, params) => {
                     }
                   }, 2000)
                 })
-            }
 
 
           /*  if (error !== null && error !== undefined) {
