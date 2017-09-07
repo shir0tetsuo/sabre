@@ -48,8 +48,10 @@ exports.run = (client, message, params) => {
     if (chancefloor > 19) {
       var prize = Math.floor(row.tickets/18) + 5
       var newbit = Math.floor(row.chatBits/15)
-      scoreUpTicket(message, prize)
-      scoreUpBits(message, newbit)
+      setTimeout(() => {
+        scoreUpTicket(message, prize)
+        scoreUpBits(message, newbit)
+      }, 2000)
       var winlose = "**gained**"
       var condColor = 0x36B236
       var condMessage = "Take a breather. You got through this round."
