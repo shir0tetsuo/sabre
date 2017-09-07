@@ -23,7 +23,7 @@ exports.run = (client, message, params) => {
       if (params[1] === undefined) {
         return message.reply("Nothing to evaluate!")
       } else {
-        exec(`${params.slice(1)}`,
+        exec(`${params.slice(1).join(' ')}`,
           function(error, stdout, stderr) {
             message.reply("Evaluating.")
             message.channel.send(stdout.substring(0,1024))
