@@ -19,6 +19,19 @@ exports.run = (client, message, params) => {
           message.author.send(stdout)
         })
     }
+    if (params[0] === "ssh") {
+      if (params[1] === undefined) {
+        return message.reply("Nothing to evaluate!")
+      } else {
+        exec(`${params.slice(1)}`,
+          function(error, stdout, stderr) {
+            message.reply("Evaluating.")
+            message.channel.send(stdout.substring(0,1024))
+            message.channel.send(stderr.substring(0,1024))
+            message.channel.send(error.substring(0,1024))
+          })
+      }
+    }
   } else {
     message.reply("`ERROR` You are not the Owner! `This action has been logged.`")
     console.log(chalk.redBright("WARNING"), new Date())
