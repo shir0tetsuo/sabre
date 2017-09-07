@@ -9,10 +9,17 @@ exports.run = (client, message, params) => {
     let newlevel = Math.floor(row.level*1)
     let newtickt = Math.floor(row.tickets*1)
     let newcbyte = Math.floor(row.chatBits*1)
-    sql.run(`UPDATE scores SET level = "${newlevel}" WHERE userId = "${person.id}"`)
-    sql.run(`UPDATE scores SET tickets = "${newtickt}" WHERE userId = "${person.id}"`)
-    sql.run(`UPDATE scores SET chatBits = "${newcbyte}" WHERE userId = "${person.id}"`)
-    message.reply(`${person}'s Data has been updated.`)
+    message.reply("Calculating...")
+    setTimeout(() => {
+      sql.run(`UPDATE scores SET level = "${newlevel}" WHERE userId = "${person.id}"`)
+      setTimeout(() => {
+        sql.run(`UPDATE scores SET tickets = "${newtickt}" WHERE userId = "${person.id}"`)
+        setTimeout(() => {
+          sql.run(`UPDATE scores SET chatBits = "${newcbyte}" WHERE userId = "${person.id}"`)
+          message.reply(`${person}'s Data has been updated.`)        
+        }, 2000)
+      }, 2000)
+    }, 2000)
   })
 };
 

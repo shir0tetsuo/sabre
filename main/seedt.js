@@ -10,6 +10,7 @@ exports.run = (client, message, params) => {
     let newlevel = params[1]
     let newtickt = params[2]
     let newcbyte = params[3]
+    message.reply("Calculating...")
     setTimeout(() => {
       sql.run(`UPDATE scores SET level = "${newlevel}" WHERE userId = "${person.id}"`)
       setTimeout(() => {
