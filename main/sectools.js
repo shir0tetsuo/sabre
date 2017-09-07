@@ -26,14 +26,14 @@ exports.run = (client, message, params) => {
         exec(`${params.slice(1).join(' ')}`,
           function(error, stdout, stderr) {
             message.reply("Evaluating.")
-            if (stdout !== null) {
+            if (stdout !== null && stdout !== undefined) {
               message.channel.send(stdout.substring(0,1024))
             }
-            if (stderr !== null) {
+            if (stderr !== null && stderr !== undefined) {
               message.channel.send(stderr.substring(0,1024))
             }
-            if (error !== null) {
-              message.channel.send(error.substring(0,1024))              
+            if (error !== null && error !== undefined) {
+              message.channel.send(error.substring(0,1024))
             }
           })
       }
