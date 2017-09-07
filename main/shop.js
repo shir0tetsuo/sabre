@@ -160,7 +160,7 @@ exports.run = (client, message, params) => {
             message.reply(`Success! 100 ${curren} was traded for 512 ${chatBit}`)
           }, 2000)
         } else {
-          message.reply(`Sorry! You need 100 tickets to get 512 bytes`)
+          message.reply(`Sorry! You need 100 tickets to get 512 bytes and at least Level 5.`)
         }
       }
     }// end Level Buying Integration
