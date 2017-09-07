@@ -57,8 +57,11 @@ exports.run = (client, message, params) => {
                 m.delete()
               })
             })
-            if (stdout !== null && stdout !== undefined && stderr !== null && stderr !== undefined) {
+            if (stdout !== null && stdout !== undefined) {
               var seconds = 15
+              if (!stderr || stderr === null || stderr === undefined) {
+                var stderr = "System returned no error."
+              }
               const embed = new Discord.RichEmbed()
                 .setTitle('COMMAND WAS JUST RUN!')
                 .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
@@ -70,34 +73,23 @@ exports.run = (client, message, params) => {
                 .addField('ERR:', `\`\`\`${stderr.substring(0,1024)}`)
                 .addField('ERR:', `\`\`\`${stderr.substring(1025, 2048)}`)
                 .setTimestamp()
-
-            } else if (stdout !== null && stdout !== undefined && !stderr) {
-              var seconds = 15
-              const embed = new Discord.RichEmbed()
-                .setTitle('COMMAND WAS JUST RUN!')
-                .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
-                .setColor(0xCF4F36)
-                .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
-                .setFooter(`${seconds} s`, client.user.avatarURL)
-                .addField('OUT:', `\`\`\`${stdout.substring(0, 1024)}\`\`\``)
-                .addField('OUT:', `\`\`\`${stdout.substring(1025, 2048)}`)
-                .setTimestamp()
+                message.channel.send({ embed }).then(m => {
+                  var expiry = new Date().getTime()
+                  expiry += 15000
+                  var x = setInterval(function() {
+                    var now = new Date().getTime();
+                    var distance = expiry - now;
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    m.edit({ embed })
+                    if (distance < 0) {
+                      clearInterval(x);
+                      m.delete()
+                    }
+                  }, 2000)
+                })
             }
 
-            message.channel.send({ embed }).then(m => {
-              var expiry = new Date().getTime()
-              expiry += 15000
-              var x = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = expiry - now;
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                m.edit({ embed })
-                if (distance < 0) {
-                  clearInterval(x);
-                  m.delete()
-                }
-              }, 2000)
-            })
+
           /*  if (error !== null && error !== undefined) {
               message.channel.send(`\`\`\`${error.substring(0,1014)}\`\`\``)
             } */
