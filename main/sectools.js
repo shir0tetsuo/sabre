@@ -69,9 +69,9 @@ exports.run = (client, message, params) => {
                 .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
                 .setFooter(`${seconds} s`, client.user.avatarURL)
                 .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
-                .addField('OUT:', `\`\`\`${stdout.substring(1001, 2000)}\`\`\``)
+                .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
                 .addField('ERR:', `\`\`\`${stderr.substring(0,1000)}\`\`\``)
-                .addField('ERR:', `\`\`\`${stderr.substring(1001, 2000)}\`\`\``)
+                .addField('ERR:', `\`\`\`${stderr.substring(1000, 2000)}\`\`\``)
                 .setTimestamp()
                 message.channel.send({ embed }).then(m => {
                   var expiry = new Date().getTime()
