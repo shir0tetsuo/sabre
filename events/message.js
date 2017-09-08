@@ -1,8 +1,8 @@
 const chalk = require("chalk");
 const settings = require('../settings.json');
 const processResponse = require('../sys/processResponse.js')
-
-
+const Enmap = require('enmap')
+const isAvail = new Enmap({name: "isAvail", persistent: true});
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 
@@ -48,6 +48,8 @@ function scoreDownTicket(mess, xval) {
   })
 }
 function scoreUpBits(mess, xval) {
+  client.isAvail = new Enmap({name: "isAvail", persistent: true});
+  client.isAvail.set(`${mess.author.id}`, true); // sets enmap stuff
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
