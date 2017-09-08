@@ -401,7 +401,7 @@ exports.run = (client, message, params) => {
       if (wincondition >= 1) {
         var winCol = 0x36B236
       } else {
-        var winCol 0xE27100
+        var winCol = 0xE27100
       }
       message.reply({embed: {
           color: winCol,
