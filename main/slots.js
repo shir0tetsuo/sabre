@@ -318,7 +318,7 @@ exports.run = (client, message, params) => {
         multiplier += 4
         wincondition += 1
       }
-      if (mid_001 === mid_100 && mid_010 === free) {
+      if (mid_001 === mid_100 && mid_010 === 'free') {
         low_vis += `???`
         msgoutput += `Smashed Potatoes! Middleman!\n`
         matchrow += 1
