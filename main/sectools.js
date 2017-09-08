@@ -1,8 +1,6 @@
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 const Discord = require ("discord.js");
-const Enmap = require('enmap')
-const isAvail = new Enmap({name: "isAvail", persistent: true});
 var exec = require('child_process').exec;
 const settings = require('../settings.json');
 const chalk = require ('chalk');
@@ -12,13 +10,6 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   if (message.author.id === settings.ownerid) {
     if (params[0] === undefined) return message.reply("`ERROR` See Manual!")
-    if (params[0] === "edb") {
-      if (client.isAvail.get(`${message.author.id}`) === "true") { // outputs table stuff
-        message.reply("`TRUE`")
-      } else {
-        message.reply("`FALSE`")
-      }
-    }
     if (params[0] === "a2link") {
       if (params[1] === undefined) {
         var keyword = "help"
