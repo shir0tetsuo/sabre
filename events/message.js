@@ -180,7 +180,11 @@ module.exports = message => {
     } else {
       sql.get(`SELECT * FROM avail WHERE userId ="${message.author.id}"`).then(row => {
         if (row.avail !== 1) {
-          let message.reply(`\`\`\`asciidoc\n${availResponse[Math.floor(Math.random() * availResponse.length)]}\n\n${sabreFirst.displayName} ${availReply[Math.floor(Math.random() * availReply.length)]} :: Thanks.\`\`\``)
+          let message.reply(`\`\`\`asciidoc\n${availResponse[Math.floor(Math.random() * availResponse.length)]}\n\n${sabreFirst.displayName} ${availReply[Math.floor(Math.random() * availReply.length)]} :: Thanks.\`\`\``).then(m => {
+            setTimeout(() => {
+              m.delete()
+            }, 10000)
+          })
         }
       })
     }
