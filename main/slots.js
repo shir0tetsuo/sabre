@@ -138,6 +138,7 @@ exports.run = (client, message, params) => {
       let react_radio = 0
       let react_heart = 0
       let react_ticket = 0
+      let wincondition = 0
       //////////////////////////////////////////////////////////////////////////////
       // Randomization Floor (Where most of the magic happens)
       let top_100 = Rand(slots)
@@ -225,18 +226,21 @@ exports.run = (client, message, params) => {
         msgoutput += `Holy Smokes! The top row matches!\n`
         matchrow += 1
         multiplier += 2
+        wincondition += 1
       }
       if (mid_100 === mid_010 && mid_010 === mid_001) {
         mid_vis += `\`<----\``
         msgoutput += `Oh My! The middle row matches!\n`
         matchrow += 1
         multiplier += 4
+        wincondition += 1
       }
       if (low_100 === low_010 && low_010 === low_001) {
         low_vis += `\`<----\``
         msgoutput += `Snap! The bottom row matches!\n`
         matchrow += 1
         multiplier += 1
+        wincondition += 1
       }
       //////////////////////////////////////////////////////////////////////////////
       // column conditions
@@ -247,6 +251,7 @@ exports.run = (client, message, params) => {
         msgoutput += `Shazamo! The left column matches!\n`
         matchcol += 1
         multiplier += 2
+        wincondition += 1
       }
       if (top_010 === mid_010 && mid_010 === low_010) {
         top_vis += `\`!!\``
@@ -255,6 +260,7 @@ exports.run = (client, message, params) => {
         msgoutput += `Alakazam! The middle column matches!\n`
         matchcol += 1
         multiplier += 5
+        wincondition += 1
       }
       if (top_001 === mid_001 && mid_001 === low_001) {
         top_vis += `\`!!\``
@@ -263,6 +269,7 @@ exports.run = (client, message, params) => {
         msgoutput += `Ridonculous! The right column matches!\n`
         matchcol += 1
         multiplier += 2
+        wincondition += 1
       }
       //////////////////////////////////////////////////////////////////////////////
       // cris-cross conditions
@@ -273,6 +280,7 @@ exports.run = (client, message, params) => {
         msgoutput += `Hey cool! Top-left to bottom-right matches!\n`
         matchcol += 1
         multiplier += 2
+        wincondition += 1
       }
       if (top_001 === mid_010 && mid_010 === low_100) {
         top_vis += `//`
@@ -281,16 +289,41 @@ exports.run = (client, message, params) => {
         msgoutput += `I see! Top-right to bottom-left matches!\n`
         matchcol += 1
         multiplier += 2
+        wincondition += 1
       }
       //////////////////////////////////////////////////////////////////////////////
       // special conditions
       if (top_100 === top_001 && top_001 === low_001 && low_001 === low_100) {
-        top_vis += `---`
-        low_vis += `---`
+        top_vis += `X-X`
+        low_vis += `X-X`
         msgoutput += `Neato! The corners match!\n`
         matchcol += 1
         matchrow += 1
-        multiplier += 1
+        multiplier += 6
+        wincondition += 1
+      }
+      if (top_100 === low_001 && mid_010 === 'free') {
+        low_vis += `???`
+        msgoutput += `Holesmokes! Free-Diagonal!\n`
+        matchcol += 1
+        matchrow += 1
+        multiplier += 4
+        wincondition += 1
+      }
+      if (top_001 === low_100 && mid_010 === 'free') {
+        low_vis += `???`
+        msgoutput += `Holesmokes! Free-Diagonal!\n`
+        matchcol += 1
+        matchrow += 1
+        multiplier += 4
+        wincondition += 1
+      }
+      if (mid_001 === mid_100 && mid_010 === free) {
+        low_vis += `???`
+        msgoutput += `Smashed Potatoes! Middleman!\n`
+        matchrow += 1
+        multiplier += 3
+        wincondition += 1
       }
       //////////////////////////////////////////////////////////////////////////////
       // SPECIAL Conditions (bombs, powerups, etc
@@ -365,8 +398,13 @@ exports.run = (client, message, params) => {
           scoreUpBits(message, prize_chatbit)
         }, 2000)
       }
+      if (wincondition >= 1) {
+        var winCol = 0x36B236
+      } else {
+        var winCol 0xE27100
+      }
       message.reply({embed: {
-          color: 0xE27100,
+          color: winCol,
           timestamp: new Date(),
           description: rowoutput,
           author: {
