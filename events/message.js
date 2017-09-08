@@ -3,7 +3,22 @@ const settings = require('../settings.json');
 const processResponse = require('../sys/processResponse.js')
 const sql = require("sqlite");
 sql.open("../score.sqlite");
-
+const availResponse = [
+  '= Sadface =',
+  '= Bugger =',
+  '= Snap =',
+  '= Darnit =',
+]
+const availReply = [
+  'can\'t come to the phone right now. Please DM.',
+  'is probably eating more cookies. Please DM.',
+  'is really interested in what you have to say! You should DM.',
+  'might be raiding the fridge. Please DM.',
+  'went for a walk. Please DM.',
+  'may not respond right away. Please DM.',
+  'might be doing chores. Please DM.',
+  'says you should DM.'
+]
 let timer = new Set();
 
 let scoreReward = new Set();
@@ -25,6 +40,22 @@ function scoreInit(mess) { // Convert message into mess
     console.log(chalk.redBright("The system recovered from an error."))
     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)").then(() => {
       sql.run("INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)", [mess.author.id, 1, 0, 1]);
+    })
+  })
+}
+function availInit(mess) { // Convert message into mess
+  sql.get(`SELECT * FROM avail WHERE userId ="${mess.author.id}"`).then(row => {
+    if (!row) {
+      console.log(chalk.redBright(`System created avail entry for ${mess.member.displayName}`))
+      sql.run("INSERT INTO avail (userId, avail) VALUES (?, ?)", [mess.author.id, 1]);
+    } /*else { // Increment chatBits
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + 1} WHERE userId = ${mess.author.id}`);
+    }*/
+  }).catch(() => { // Error message generates new table instead
+    console.error;
+    console.log(chalk.redBright(`System created table avail`))
+    sql.run("CREATE TABLE IF NOT EXISTS avail (userId TEXT, avail INTEGER)").then(() => {
+      sql.run("INSERT INTO avail (userId, avail) VALUES (?, ?)", [mess.author.id, 1]);
     })
   })
 }
@@ -146,6 +177,12 @@ module.exports = message => {
   if (sabreFirst !== undefined) {
     if (sabreFirst.id === client.user.id) {
       processResponse(client, message)
+    } else {
+      sql.get(`SELECT * FROM avail WHERE userId ="${message.author.id}"`).then(row => {
+        if (row.avail !== 1) {
+          let message.reply(`\`\`\`asciidoc\n${availResponse[Math.floor(Math.random() * availResponse.length)]}\n\n${sabreFirst.displayName} ${availReply[Math.floor(Math.random() * availReply.length)]} :: Thanks.\`\`\``)
+        }
+      })
     }
   }
   /// End SRS
