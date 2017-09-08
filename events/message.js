@@ -159,6 +159,7 @@ module.exports = message => {
   // Classified should go here
   // Disable the ability to use Sabre with SQL (future use)
   scoreInit(message);
+  availInit(message);
   scanKeyword(message);
   scoreUpBits(message);
   // begin self deleting channel lines
