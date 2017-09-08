@@ -88,37 +88,37 @@ exports.run = (client, message, params) => {
     var cardE = Rand(cards)
     var wfRow = `${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`
     var wfRow = wfRow.split(' ')
-    var wfRVL = wfRow.split(' ')
+    var wfRVL = wfRow
     for (var i = 0; i < wfRow.length; i++) {
       var cardX = wfRow[i]
       if (cardX == 'a') {
-        var wfRVL[i] = a
+        wfRVL[i] = a
       } else if (cardX == 'one') {
-        var wfRVL[i] = one
+        wfRVL[i] = one
       } else if (cardX == 'two') {
-        var wfRVL[i] = two
+        wfRVL[i] = two
       } else if (cardX == 'three') {
-        var wfRVL[i] = three
+        wfRVL[i] = three
       } else if (cardX == 'four') {
-        var wfRVL[i] = four
+        wfRVL[i] = four
       } else if (cardX == 'five') {
-        var wfRVL[i] = five
+        wfRVL[i] = five
       } else if (cardX == 'six') {
-        var wfRVL[i] = six
+        wfRVL[i] = six
       } else if (cardX == 'seven') {
-        var wfRVL[i] = seven
+        wfRVL[i] = seven
       } else if (cardX == 'eight') {
-        var wfRVL[i] = eight
+        wfRVL[i] = eight
       } else if (cardX == 'nine') {
-        var wfRVL[i] = nine
+        wfRVL[i] = nine
       } else if (cardX == 'keycap_ten') {
-        var wfRVL[i] = keycap_ten
+        wfRVL[i] = keycap_ten
       } else if (cardX == 'regional_indicator_j') {
-        var wfRVL[i] = regional_indicator_j
+        wfRVL[i] = regional_indicator_j
       } else if (cardX == 'regional_indicator_q') {
-        var wfRVL[i] = regional_indicator_q
+        wfRVL[i] = regional_indicator_q
       } else if (cardX == 'regional_indicator_k') {
-        var wfRVL[i] = regional_indicator_k
+        wfRVL[i] = regional_indicator_k
       }
       visualization += `:${wfRow[i]}: `
     }
