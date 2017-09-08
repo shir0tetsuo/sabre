@@ -17,6 +17,12 @@ function scoreDownTicket(mess, xval) {
     }
   })
 }
+function scoreUpTicket(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
 function scoreUpLevel(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
@@ -151,16 +157,24 @@ exports.run = (client, message, params) => {
       }
     } else if (params[0] === "trade") {
       if (params[1] === "b") {
-        message.reply("`ERROR` This command isn't available yet!")
-      } else if (params[1] === "t") {
-        if (row.level >= 5 && row.tickets >= 100) {
+        if (row.level >= 5 && row.chatBits >= 512) {
           setTimeout(() => {
-            scoreDownTicket(message, 100)
-            scoreUpBits(message, 512)
-            message.reply(`Success! 100 ${curren} was traded for 512 ${chatBit}`)
+            scoreUpTicket(message, 125)
+            scoreDownBits(message, 512)
+            message.reply(`Success! 512 ${chatBit} was traded for 125 ${curren}`)
           }, 2000)
         } else {
-          message.reply(`Sorry! You need 100 tickets to get 512 bytes and at least Level 5.`)
+          message.reply(`Sorry! You don't have 512 ${chatBit} or you aren't level 5 or higher.`)
+        }
+      } else if (params[1] === "t") {
+        if (row.level >= 5 && row.tickets >= 125) {
+          setTimeout(() => {
+            scoreDownTicket(message, 125)
+            scoreUpBits(message, 512)
+            message.reply(`Success! 125 ${curren} was traded for 512 ${chatBit}`)
+          }, 2000)
+        } else {
+          message.reply(`Sorry! You don't have 125 ${curren} or you aren't level 5 or higher.`)
         }
       }
     }// end Level Buying Integration
