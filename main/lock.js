@@ -42,6 +42,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'lock',
-  description: 'Changes your account AFK Status. Users will be responded with an AFK Message.',
-  usage: 'lock'
+  description: 'Changes your account AFK Status.',
+  usage: 'Overview ::  Users will be responded with an AFK Message.\nAvailable for Level 8 or Higher :: lock'
 };
