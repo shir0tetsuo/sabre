@@ -31,7 +31,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['saberstatus', 'sst'],
-  permLevel: 3
+  permLevel: 4
 };
 
 exports.help = {
