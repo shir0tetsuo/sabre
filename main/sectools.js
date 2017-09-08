@@ -2,6 +2,7 @@ const sql = require("sqlite");
 sql.open("../score.sqlite");
 const Discord = require ("discord.js");
 const Enmap = require('enmap')
+const isAvail = new Enmap({name: "isAvail", persistent: true});
 var exec = require('child_process').exec;
 const settings = require('../settings.json');
 const chalk = require ('chalk');
