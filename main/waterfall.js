@@ -88,7 +88,7 @@ exports.run = (client, message, params) => {
     var cardE = Rand(cards)
     var wfRow = `${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`
     var wfRow = wfRow.split(' ')
-    var wfRVL = wfRow
+    var wfRVL = wfRow.split(' ')
     for (var i = 0; i < wfRow.length; i++) {
       var cardX = wfRow[i]
       if (cardX == 'a') {
