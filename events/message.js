@@ -179,7 +179,7 @@ module.exports = message => {
     if (sabreFirst.id === client.user.id) {
       processResponse(client, message)
     } else {
-      sql.get(`SELECT * FROM avail WHERE userId ="${message.author.id}"`).then(row => {
+      sql.get(`SELECT * FROM avail WHERE userId ="${sabreFirst.id}"`).then(row => {
         if (row.avail !== 1) {
           message.reply(`\`\`\`asciidoc\n${availResponse[Math.floor(Math.random() * availResponse.length)]}\n\n${sabreFirst.displayName} ${availReply[Math.floor(Math.random() * availReply.length)]} :: Thanks.\`\`\``).then(m => {
             setTimeout(() => {
