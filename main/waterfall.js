@@ -89,6 +89,9 @@ exports.run = (client, message, params) => {
     var wfRow = `${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`
     console.log(wfRow)
     var wfRow = wfRow.split(' ')
+    for (var i = 0; i < wfRow.length; i++) {
+      visualization += `:${wfRow[i]}: `
+    }
     var wfRVL = wfRow
     for (var i = 0; i < wfRow.length; i++) {
       var cardX = wfRow[i]
@@ -121,7 +124,6 @@ exports.run = (client, message, params) => {
       } else if (cardX == 'regional_indicator_k') {
         wfRVL[i] = regional_indicator_k
       }
-      visualization += `:${wfRow[i]}: `
     }
     message.reply(`${visualization}`)
     console.log(visualization, wfRVL)
