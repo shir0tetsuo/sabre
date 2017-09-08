@@ -195,5 +195,5 @@ exports.conf = {
 exports.help = {
   name: 'sabreshop',
   description: 'Displays the Sabre Shop and available items.',
-  usage: 'Examine Level Shop: shop\nBuy a Level :: shop buy level [t/b/tickets/bytes]\nExamine Item Shop :: shop items\nBuy Item :: shop buy item <number> <slot 1-6> [t/b/tickets/bytes]\nTrade :: shop trade [t/b]'
+  usage: 'Examine Level Shop: shop\nBuy a Level :: shop buy level [t/b/tickets/bytes]\nExamine Item Shop :: shop items\nBuy Item :: shop buy item <number> <slot 1-6> [t/b/tickets/bytes]\nTrade :: shop trade [t/b]\nTrade Requirement (Level) :: 8\nTrade Requirement :: 125 Tickets or 512 Bytes'
 };
