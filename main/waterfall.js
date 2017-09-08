@@ -79,7 +79,7 @@ exports.run = (client, message, params) => {
         }
       ]
     }})
-  } else (params[0] === 'new') {
+  } else if (params[0] === 'new') {
     var visualization = ''
     var cardA = Rand(cards)
     var cardB = Rand(cards)
