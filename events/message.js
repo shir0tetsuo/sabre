@@ -8,6 +8,8 @@ const availResponse = [
   '= Bugger =',
   '= Snap =',
   '= Darnit =',
+  '= Dang =',
+  '= Shoot ='
 ]
 const availReply = [
   'can\'t come to the phone right now. Please DM.',
@@ -17,7 +19,9 @@ const availReply = [
   'went for a walk. Please DM.',
   'may not respond right away. Please DM.',
   'might be doing chores. Please DM.',
-  'says you should DM.'
+  'says you should DM.',
+  'is out doing spy stuff. Please DM.',
+  'can\'t be summoned right now. Please DM.'
 ]
 let timer = new Set();
 

@@ -16,8 +16,14 @@ function availLock(message) {
   })
 }
 
-exports.run = (client, message, params) => {
-  availLock(message)
+exports.run = (client, message, params) => { // this wouldn't work without being a second init
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    if (row.level >= 8) {
+      availLock(message)
+    } else {
+      message.reply("`Action Unavailable` You must be Level 8 or higher")
+    }
+  })
 };
 
 /*
@@ -27,7 +33,7 @@ exports.conf = {
   enabled: true,
   guildOnly: true,
   aliases: ['available'],
-  permLevel: 2
+  permLevel: 1
 };
 
 /*
