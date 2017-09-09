@@ -4,6 +4,12 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+function scoreUpTicket(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
 
 exports.run = (client, message, params) => {
   var startDate = new Date().getTime()
@@ -20,7 +26,10 @@ exports.run = (client, message, params) => {
       message.channel.send(`${collected.first().author} exploded the duck ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
     })
     .catch(() => {
-      message.channel.send(`The duck got away. ${message.author} gained X ${curren}.`);
+      var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
+      var winfloor = (active * 1) + 1
+      message.channel.send(`The duck got away. ${message.author} gained ${winfloor}${curren}.`);
+      scoreDownTicket(message, winfloor)
     });
 });
 };
