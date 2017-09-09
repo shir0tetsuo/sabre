@@ -12,6 +12,7 @@ exports.run = (client, message, params) => {
     //console.log(message.mentions.members.first().user)
     //console.log(message.mentions.members.first().user.discriminator)
     console.log(message.guild.members)
+    console.log(`${message.guild.members.filter(m => m.presence.status !== 'offline').size} / ${message.guild.memberCount}`)
   }
 };
 
