@@ -29,7 +29,7 @@ exports.run = (client, message, params) => {
       var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
       var winfloor = (active * 1) + 1
       message.channel.send(`The duck got away. ${message.author} gained ${winfloor}${curren}.`);
-      scoreDownTicket(message, winfloor)
+      scoreUpTicket(message, winfloor)
     });
 });
 };
