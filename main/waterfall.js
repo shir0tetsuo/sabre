@@ -7,6 +7,40 @@ sql.open("../score.sqlite");
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
+function convertToInt(wfRow, wfRVL) {
+  for (var i = 0; i < wfRow.length; i++) {
+    var cardX = wfRow[i]
+    if (cardX == 'a') {
+      wfRVL[i] = a
+    } else if (cardX == 'one') {
+      wfRVL[i] = one
+    } else if (cardX == 'two') {
+      wfRVL[i] = two
+    } else if (cardX == 'three') {
+      wfRVL[i] = three
+    } else if (cardX == 'four') {
+      wfRVL[i] = four
+    } else if (cardX == 'five') {
+      wfRVL[i] = five
+    } else if (cardX == 'six') {
+      wfRVL[i] = six
+    } else if (cardX == 'seven') {
+      wfRVL[i] = seven
+    } else if (cardX == 'eight') {
+      wfRVL[i] = eight
+    } else if (cardX == 'nine') {
+      wfRVL[i] = nine
+    } else if (cardX == 'keycap_ten') {
+      wfRVL[i] = keycap_ten
+    } else if (cardX == 'regional_indicator_j') {
+      wfRVL[i] = regional_indicator_j
+    } else if (cardX == 'regional_indicator_q') {
+      wfRVL[i] = regional_indicator_q
+    } else if (cardX == 'regional_indicator_k') {
+      wfRVL[i] = regional_indicator_k
+    }
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////
 // symbol floor
 const cards = [
@@ -80,6 +114,8 @@ exports.run = (client, message, params) => {
       ]
     }})
   } else if (params[0] === 'new') {
+    ////////////////////////////////////////////////////////////////////////////
+    // initialization
     var visualization = ''
     var cardA = Rand(cards)
     var cardB = Rand(cards)
@@ -93,40 +129,11 @@ exports.run = (client, message, params) => {
       visualization += `:${wfRow[i]}: `
     }
     var wfRVL = wfRow
-    for (var i = 0; i < wfRow.length; i++) {
-      var cardX = wfRow[i]
-      if (cardX == 'a') {
-        wfRVL[i] = a
-      } else if (cardX == 'one') {
-        wfRVL[i] = one
-      } else if (cardX == 'two') {
-        wfRVL[i] = two
-      } else if (cardX == 'three') {
-        wfRVL[i] = three
-      } else if (cardX == 'four') {
-        wfRVL[i] = four
-      } else if (cardX == 'five') {
-        wfRVL[i] = five
-      } else if (cardX == 'six') {
-        wfRVL[i] = six
-      } else if (cardX == 'seven') {
-        wfRVL[i] = seven
-      } else if (cardX == 'eight') {
-        wfRVL[i] = eight
-      } else if (cardX == 'nine') {
-        wfRVL[i] = nine
-      } else if (cardX == 'keycap_ten') {
-        wfRVL[i] = keycap_ten
-      } else if (cardX == 'regional_indicator_j') {
-        wfRVL[i] = regional_indicator_j
-      } else if (cardX == 'regional_indicator_q') {
-        wfRVL[i] = regional_indicator_q
-      } else if (cardX == 'regional_indicator_k') {
-        wfRVL[i] = regional_indicator_k
-      }
-    }
+    convertToInt(wfRow, wfRVL)
+    ////////////////////////////////////////////////////////////////////////////
+    // returns ${visualization} and ${wfRVL}
     message.reply(`${visualization}`)
-    console.log(visualization, wfRVL)
+    console.log(wfRVL)
   }
 };
 
