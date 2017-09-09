@@ -37,6 +37,9 @@ exports.run = (client, message, params) => {
 /*
 enabled, guildOnly, aliases, permission level
 IMPLEMENT HOW MANY PEOPLE ARE CURRENTLY ONLINE INTO THE CALCULATIONS VIA STATS AS REFERENCE
+DONE
+
+MAKE A TIMER SO PEOPLE CAN'T USE THIS COMMAND EVERY FIVE BLOODY SECONDS
 */
 exports.conf = {
   enabled: true,
