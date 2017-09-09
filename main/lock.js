@@ -8,10 +8,10 @@ function availLock(message) {
   sql.get(`SELECT * FROM avail WHERE userId = "${message.author.id}"`).then(row => {
     if (row.avail === 0) {
     sql.run(`UPDATE avail SET avail = "1" WHERE userId = ${message.author.id}`)
-    message.reply(`\`Account Unlocked\` Users can now mention you freely.`)
+    message.reply(`:unlock: \`Account Unlocked\` Users can now mention you freely.`)
     } else {
     sql.run(`UPDATE avail SET avail = "0" WHERE userId = ${message.author.id}`)
-    message.reply(`\`Account Locked\` Users mentioning you will be responded with an AFK Message.`)
+    message.reply(`:lock: \`Account Locked\` Users mentioning you will be responded with an AFK Message.`)
     }
   })
 }
