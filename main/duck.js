@@ -7,7 +7,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   var startDate = new Date().getTime()
-  message.channel.sendMessage('A random duck was released. `Typing quack will shoot the duck.`')
+  message.channel.send('A random duck was released. `Typing quack will shoot the duck.`')
 .then(() => {
   message.channel.awaitMessages(response => response.content === 'quack', {
     max: 1,
@@ -27,6 +27,7 @@ exports.run = (client, message, params) => {
 
 /*
 enabled, guildOnly, aliases, permission level
+IMPLEMENT HOW MANY PEOPLE ARE CURRENTLY ONLINE INTO THE CALCULATIONS VIA STATS AS REFERENCE
 */
 exports.conf = {
   enabled: true,
