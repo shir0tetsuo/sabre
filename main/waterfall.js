@@ -40,6 +40,7 @@ function convertToInt(wfRow, wfRVL) {
       wfRVL[i] = regional_indicator_k
     }
   }
+  console.log(wfRVL)
 }
 ////////////////////////////////////////////////////////////////////////////////
 // symbol floor
@@ -133,7 +134,6 @@ exports.run = (client, message, params) => {
     ////////////////////////////////////////////////////////////////////////////
     // returns ${visualization} and ${wfRVL}
     message.reply(`${visualization}`)
-    console.log(wfRVL)
   }
 };
 
