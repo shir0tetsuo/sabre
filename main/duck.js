@@ -50,6 +50,9 @@ IMPLEMENT HOW MANY PEOPLE ARE CURRENTLY ONLINE INTO THE CALCULATIONS VIA STATS A
 DONE
 
 MAKE A TIMER SO PEOPLE CAN'T USE THIS COMMAND EVERY FIVE BLOODY SECONDS
+DONE
+
+Randomized responses for releasing and exploding ducks
 */
 exports.conf = {
   enabled: true,
