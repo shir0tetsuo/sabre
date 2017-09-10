@@ -13,14 +13,14 @@ function scoreUpTicket(mess, xval) {
 }
 
 exports.run = (client, message, params) => {
-  var startDate = new Date().getTime()
   if (noDuck.has(message.author.id)) {
-    message.reply("There's already a duck loose!")
+    message.reply(`\`You must wait at least 10 seconds before releasing another duck!\``)
   } else {
     noDuck.add(message.author.id);
     setTimeout(() => {
-      noDuck.delete(message.author.id);
-    }, 60000)
+      noDuck.delete(message.author.id)
+    }, 10000)
+    var startDate = new Date().getTime()
     message.channel.send('A random duck was released. `Typing quack will shoot the duck.`')
   .then(() => {
     message.channel.awaitMessages(response => response.content === 'quack', {
@@ -29,7 +29,6 @@ exports.run = (client, message, params) => {
       errors: ['time'],
     })
     .then((collected) => {
-        noDuck.delete(nessage.author.id);
         //message.channel.send(`The collected message was: ${collected.first().content}`);
         var subDate = new Date().getTime()
         message.channel.send(`${collected.first().author} exploded the duck ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
