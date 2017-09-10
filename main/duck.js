@@ -4,6 +4,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+let noDuck = new Set();
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
@@ -13,25 +14,35 @@ function scoreUpTicket(mess, xval) {
 
 exports.run = (client, message, params) => {
   var startDate = new Date().getTime()
-  message.channel.send('A random duck was released. `Typing quack will shoot the duck.`')
-.then(() => {
-  message.channel.awaitMessages(response => response.content === 'quack', {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then((collected) => {
-      //message.channel.send(`The collected message was: ${collected.first().content}`);
-      var subDate = new Date().getTime()
-      message.channel.send(`${collected.first().author} exploded the duck ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
+  if (noDuck.has(message.author.id)) {
+    message.reply("There's already a duck loose!")
+  } else {
+    noDuck.add(message.author.id);
+    setTimeout(() => {
+      noDuck.delete(message.author.id);
+    }, 60000)
+    message.channel.send('A random duck was released. `Typing quack will shoot the duck.`')
+  .then(() => {
+    message.channel.awaitMessages(response => response.content === 'quack', {
+      max: 1,
+      time: 60000,
+      errors: ['time'],
     })
-    .catch(() => {
-      var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
-      var winfloor = (active * 1) + 1
-      message.channel.send(`The duck got away. ${message.author} gained ${winfloor}${curren}.`);
-      scoreUpTicket(message, winfloor)
-    });
-});
+    .then((collected) => {
+        noDuck.delete(nessage.author.id);
+        //message.channel.send(`The collected message was: ${collected.first().content}`);
+        var subDate = new Date().getTime()
+        message.channel.send(`${collected.first().author} exploded the duck ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
+      })
+      .catch(() => {
+        var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
+        var winfloor = (active * 1) + 1
+        message.channel.send(`The duck got away. ${message.author} gained ${winfloor}${curren}.`);
+        scoreUpTicket(message, winfloor)
+      });
+  });
+
+  }
 };
 
 /*
