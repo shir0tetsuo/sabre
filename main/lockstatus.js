@@ -7,8 +7,6 @@ exports.run = (client, message, params) => {
   if (params[0] === undefined) {
     sql.get(`SELECT * FROM avail WHERE userId = "${message.author.id}"`).then(row => {
       if (row.avail === 0) { // "Is Available: "
-        var onlineStatus = `:lock:`
-      } else if (row.avail === 0) {
         var onlineStatus = `:lock: being displayed as AFK!`
       } else {
         var onlineStatus = `:unlock: being displayed as Active and Available!`
