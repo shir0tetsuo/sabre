@@ -6,7 +6,7 @@ exports.run = (client, message, params) => {
   if (!params[0]) return; //oops is a toggle
   if (message.guild.id !== settings.alaskaguild) return message.reply("This is an Alaska Only Command!")
 
-  if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick" || params[0] === "echo") { // oops removed
+  if (params[0] === "notmeproblem" || params[0] === "mute" || params[0] === "david" || params[0] === "nick" || params[0] === "echo" || params[0] === "scythe" || params[0] === "sword") { // oops removed
     let person = message.mentions.members.first();
     if (person === undefined) return message.reply("`ERROR` No User Mentioned")
     // Line above defines person
@@ -53,7 +53,10 @@ exports.run = (client, message, params) => {
 
     } else if (params[0] === "scythe") {
       message.channel.send(`\`LordDeath's Scythe of Death was summoned.\`\n${person} is in trouble.`)
-    } // why doesn't this work?
+
+    } else if (params[0] === "sword") {
+      message.channel.send(`\`Shadow Shadow, Hear my call. Bring me A Sword to destroy them all.\nThe Sword of Shadows has been summoned.\``)
+    }
 
   } else return message.reply("`ERROR` The command was not understood!")
   console.log(new Date())
