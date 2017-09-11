@@ -53,7 +53,7 @@ exports.run = (client, message, params) => {
 
     } else if (params[0] === "scythe") {
       message.channel.send(`\`LordDeath's Scythe of Death was summoned.\`\n${person} is in trouble.`)
-    }
+    } // why doesn't this work?
 
   } else return message.reply("`ERROR` The command was not understood!")
   console.log(new Date())
