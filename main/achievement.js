@@ -18,7 +18,7 @@ exports.run = (client, message, params) => {
     var sliced = params.slice(2)
     let person = message.mentions.members.first()
     var authName = person.displayName
-    var authIcon = person.avatarURL
+    var authIcon = person.user.avatarURL
   } else {
     var sliced = params.slice(1)
     var authName = message.member.displayName
