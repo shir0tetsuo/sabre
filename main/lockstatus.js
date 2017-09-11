@@ -13,8 +13,8 @@ exports.run = (client, message, params) => {
       } else {
         var onlineStatus = `:unlock: being displayed as AFK!`
       }
+      message.reply(`You are ${onlineStatus}`)
     })
-    message.reply(`You are ${onlineStatus}`)
   }
 };
 
