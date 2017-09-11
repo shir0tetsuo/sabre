@@ -9,9 +9,9 @@ exports.run = (client, message, params) => {
       if (row.avail === 0) { // "Is Available: "
         var onlineStatus = `:lock:`
       } else if (row.avail === 0) {
-        var onlineStatus = `:unlock: being displayed as Active!`
+        var onlineStatus = `:lock: being displayed as AFK!`
       } else {
-        var onlineStatus = `:unlock: being displayed as AFK!`
+        var onlineStatus = `:unlock: being displayed as Active and Available!`
       }
       message.reply(`You are ${onlineStatus}`)
     })
