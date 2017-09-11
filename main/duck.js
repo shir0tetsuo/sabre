@@ -5,6 +5,19 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let noDuck = new Set();
+const openFloor = [
+  'exploded the duck',
+  'popped a cap in the duck',
+  'made the duck disappear',
+  'slapped that duck',
+  'punched the duck in the face',
+  'bit clean through the duck\'s neck',
+  'drowned the duck'
+]
+function Rand(data) {
+  // where data is the array
+  return data[Math.floor(Math.random() * data.length)]
+}
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
@@ -31,7 +44,7 @@ exports.run = (client, message, params) => {
     .then((collected) => {
         //message.channel.send(`The collected message was: ${collected.first().content}`);
         var subDate = new Date().getTime()
-        message.channel.send(`${collected.first().author} exploded the duck ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
+        message.channel.send(`${collected.first().author} ${Rand(openFloor)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
       })
       .catch(() => {
         var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
