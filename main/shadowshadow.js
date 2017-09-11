@@ -50,6 +50,9 @@ exports.run = (client, message, params) => {
 
     } else if (params[0] === "nick") {
       message.channel.send(`<@!${settings.nickid}> Your presence is required!`)
+
+    } else if (params[0] === "scythe") {
+      message.channel.send(`\`LordDeath's Scythe of Death was summoned.\`\n${person} is in trouble.`)
     }
 
   } else return message.reply("`ERROR` The command was not understood!")
