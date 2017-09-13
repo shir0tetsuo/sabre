@@ -1,6 +1,6 @@
 # Project Sabre
 ### Overview
-Project Sabre is a Discord bot created upon the Discord.js wrappers for NodeJS.
+Project Sabre is a Discord bot created upon the Discord.js wrappers for NodeJS!
 I thank AnIdiotsGuide and his Discord team for helping greatly with their examples.
 *The Trello for this project is mentioned in the Issues page.*
 ### Supported Servers
