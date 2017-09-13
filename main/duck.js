@@ -7,6 +7,8 @@ let chatBit = ":eye_in_speech_bubble:"
 let noDuck = new Set();
 const openFloor = [
   'exploded the duck',
+  'quack quack smacked that duck',
+  'made the duck quack',
   'popped a cap in the duck',
   'made the duck disappear',
   'slapped that duck',
