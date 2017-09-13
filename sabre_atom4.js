@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 0.3.7.10E --> 0.4.0.0+
 // Based on AnIdiotsGuide's Tutorial Bot
-// Constraints
+// Constraints!!
 const settings = require('./settings.json')
 const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
