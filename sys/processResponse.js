@@ -508,7 +508,18 @@ const reply_online_q_why = [
 ]
 const reply_online_q_how = [
   'Oh, I just know. But I\'m not going to tell you.',
-  'Extreme discomfort.'
+  'Extreme discomfort.',
+  'By licking the spoon three times and calling yourself a muffin.',
+  'Only on Tuesdays.'
+]
+const reply_online_q_where = [
+  'Space, of course.',
+  'A thousand miles away from you.',
+  'America.',
+  'Canada.',
+  'Uranus.',
+  'Pluto.',
+  'An observatory.'
 ]
 const reply_online_noaction = [
   'I would but I\'m too lazy.',
