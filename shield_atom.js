@@ -35,6 +35,7 @@ function Keyscore(mess) {
       .setFooter(mess.channel.name)
       .setTimestamp()
       .addField('MILITARY-OPERATIONS System Logged Event', `${mess.content}`)
+    mess.guild.channels.find('name', 'shield').send({ embed })
   }
   if (database.some(word => mess.content.toLowerCase().includes(word))) {
     mess.react("⚠")
