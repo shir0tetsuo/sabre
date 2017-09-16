@@ -12,20 +12,31 @@ client.login(settings.token_shield);
 
 function Keyscore(mess) {
   if (mess.guild === null) return;
-  const currentop = ["k1m", "K1m", "K1M", "kim", "Kim", "KIM"]
-  const database = ["bomb", "Bomb", "BOMB", "fineprint", "Fineprint", "FINEPRINT", "nemesis", "Nemesis", "NEMESIS", "t pyramid", "Pyramid", "PYRAMID", "platform 2", "Platform 2", "PLATFORM 2", "t sentinel", "Sentinel", "SENTINEL", "t sapphire", "Sapphire", "SAPPHIRE", "t floyd", "FLOYD", "jonut", "Jonut", "JONUT", "special projects", "Special Projects", "SPECIAL PR", "white o", "White O", "WHITE O", "White O", "silencer", "Silencer", "SILENCER", "S1", "s1", "t python", "Python", "PYTHON", "nuke", "Nuke", "NUKE", "nuclear", "Nuclear", "NUCLEAR", "launch codes", "Launch codes", "Launch Codes", "LAUNCH C", "LAUNCH c", "DEEE", "n00", "N00", "NOCTUA", "noctua", "Noctua", "CSD", "csd", "doi", "DOI", "DoI", "classified", "Classified", "CLASSIFIED", "AMBA", "amba", "Amba", "silenced", "SILENCED", "Silenced", "Deen", "deen", "DEEN", "testwarn", "david", "David", "DAVID", "allah", "Alla", "ALLA", "riot", "Riot", "RIOT", "Not My", "NOT M", "not m", "not M", "protest", "Protest", "PROTEST", "pyramid", "sentinel", "sapphire", "Floyd", "terror", "Terror", "TERROR", "python", "satellite", "Satellite", "SATELLITE", "hack", "Hack", "HACK", "explo", "Explo", "EXPLO"]
-  if (currentop.some(word => mess.content.includes(word))) {
+  const currentop = ["kim", "k1m"]
+  const milop = ["fiveg", "adr", "coco", "ifailed", "yoloman", "gaming"]
+  const database = ["bomb", "fineprint", "nemesis", "pyramid", "platform 2", "sentinel", "saphire", "floyd", "jonut", "special pr", "white o", "silencer", "s1", "python", "nuke", "nuclear", "launch c", "deee", "n00", "noctua", "csd", "doi", "classified", "amba", "silenced", "deen", "testwarn", "david", "allah", "riot", "not m", "protest", "terror", "satellite", "hack", "explo"]
+  if (currentop.some(word => mess.content.toLowerCase().includes(word))) {
     mess.react("☢")
     const embed = new Discord.RichEmbed()
       .setTitle('SHIELD CURRENT-OPERATIONS')
       //.setAuthor(mess.member.name)
-      .setColor(0xFF0000)
+      .setColor(0xD4C750)
       .setFooter(mess.channel.name)
       .setTimestamp()
       .addField('Current-Operations System Logged Event', `${mess.content}`)
     mess.guild.channels.find('name', 'shield').send({ embed })
   }
-  if (database.some(word => mess.content.includes(word))) {
+  if (milop.some(word => mess.content.toLowerCase().includes(word))) {
+    mess.react("❗")
+    const embed = new Discord.RichEmbed()
+      .setTitle('SHIELD MILITARY-OPERATIONS')
+      //.setAuthor(mess.member.name)
+      .setColor(0xFFAA7A)
+      .setFooter(mess.channel.name)
+      .setTimestamp()
+      .addField('MILITARY-OPERATIONS System Logged Event', `${mess.content}`)
+  }
+  if (database.some(word => mess.content.toLowerCase().includes(word))) {
     mess.react("⚠")
     const embed = new Discord.RichEmbed()
       .setTitle('SHIELD')
@@ -52,5 +63,5 @@ client.on("message", message => {
     message.reply("`CLASSIFIED//SECRET` A project by shadowsword#0179 (NightDelSol) - Special Haul Invoking Lewd Dialogue")
     return;
   }
-  Keyscore(message);
+  Keyscore(message);//
 })
