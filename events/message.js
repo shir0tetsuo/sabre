@@ -98,6 +98,23 @@ function scoreDownBits(mess, xval) {
   })
 }
 
+function lootInit(mess) { // Convert message into mess
+  sql.get(`SELECT * FROM loot WHERE userId ="${mess.author.id}"`).then(row => {
+    if (!row) {
+      console.log(chalk.redBright(`System created loot entry for ${mess.member.displayName}`))
+      sql.run("INSERT INTO loot (userId, last) VALUES (?, ?)", [mess.author.id, "NULL"]);
+    } /*else { // Increment chatBits
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + 1} WHERE userId = ${mess.author.id}`);
+    }*/
+  }).catch(() => { // Error message generates new table instead
+    console.error;
+    console.log(chalk.redBright(`System created table loot`))
+    sql.run("CREATE TABLE IF NOT EXISTS loot (userId TEXT, last TEXT)").then(() => {
+      sql.run("INSERT INTO avail (userId, last) VALUES (?, ?)", [mess.author.id, "NULL"]);
+    })
+  })
+}
+
 // CLASSIFIED//TOP-SECRET
 
 function scanKeyword(mess) {
@@ -166,6 +183,7 @@ module.exports = message => {
   availInit(message);
   scanKeyword(message);
   scoreUpBits(message);
+  lootInit(message);
   // begin self deleting channel lines
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
   if (selfdelchan !== null) {
