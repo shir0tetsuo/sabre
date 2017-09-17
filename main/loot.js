@@ -12,8 +12,8 @@ function lootUpdate(mess) {
 
 function lootScore(message) {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-    var lootBoxTickets = (row.tickets/5)+125
-    var lootBoxBits = (row.chatBits/5)+255
+    var lootBoxTickets = Math.floor((row.tickets/5)+125)
+    var lootBoxBits = Math.floor((row.chatBits/5)+255)
     setTimeout(() => {
       sql.run(`UPDATE scores SET tickets = "${row.tickets*1 + lootBoxTickets*1}" WHERE userId = "${message.author.id}"`)
       sql.run(`UPDATE scores SET chatBits = "${row.chatBits*1 + lootBoxBits*1}" WHERE userId = "${message.author.id}"`)
@@ -26,7 +26,7 @@ exports.run = (client, message, params) => {
   // may add level requirement later
   message.channel.send("Calculating!").then(m => {
     sql.get(`SELECT * FROM loot WHERE userId = "${message.author.id}"`).then(row => {
-      let future = row.last*1 + 10000
+      let future = row.last*1 + 86400000
       if (new Date().getTime() >= future) {
         lootUpdate(message);
         //winnings calc through fn
