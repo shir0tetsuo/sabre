@@ -26,7 +26,7 @@ exports.run = (client, message, params) => {
   // may add level requirement later
   message.channel.send("Calculating!").then(m => {
     sql.get(`SELECT * FROM loot WHERE userId = "${message.author.id}"`).then(row => {
-      let future = row.last + 10000
+      let future = row.last + 10
       if (new Date().getTime() >= future) {
         lootUpdate(message);
         //winnings calc through fn
