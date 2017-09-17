@@ -24,43 +24,50 @@ function lootScore(message) {
 
 exports.run = (client, message, params) => {
   // may add level requirement later
-  message.channel.send("Calculating!").then(m => {
-    sql.get(`SELECT * FROM loot WHERE userId = "${message.author.id}"`).then(row => {
-      let future = row.last*1 + 86400000
-      if (new Date().getTime() >= future) {
-        lootUpdate(message);
-        //winnings calc through fn
-        lootScore(message);
-      } else if (row.last === "NULL") {
-        lootUpdate(message);
-        //winnings calc through fn
-        lootScore(message);
-      } else {
-        var distance = future - new Date().getTime()
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        message.channel.send(`...${message.author} needs to wait **${hours} h ${minutes} m ${seconds} s** to use this command again!`)
-      }
-    })
-    /*
-    hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var countDownDate = new Date(`Sep 6, 2017 15:36:00`).getTime();
-    var x = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
+  sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(check => {
+    if (check.level <= 10) {
+      message.channel.send("Calculating!").then(m => {
+        sql.get(`SELECT * FROM loot WHERE userId = "${message.author.id}"`).then(row => {
+          let future = row.last*1 + 86400000
+          if (new Date().getTime() >= future) {
+            lootUpdate(message);
+            //winnings calc through fn
+            lootScore(message);
+          } else if (row.last === "NULL") {
+            lootUpdate(message);
+            //winnings calc through fn
+            lootScore(message);
+          } else {
+            var distance = future - new Date().getTime()
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            message.channel.send(`...${message.author} needs to wait **${hours} h ${minutes} m ${seconds} s** to use this command again!`)
+          }
+        })
+        /*
+        hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var countDownDate = new Date(`Sep 6, 2017 15:36:00`).getTime();
+        var x = setInterval(function() {
+          var now = new Date().getTime();
+          var distance = countDownDate - now;
 
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      m.edit(`${days} d ${hours} h ${minutes} m ${seconds} s`)
-      if (distance < 0) {
-        clearInterval(x);
-        m.edit(`EXPIRED`)
-      }
-    }, 30000) // 30 seconds */
+          m.edit(`${days} d ${hours} h ${minutes} m ${seconds} s`)
+          if (distance < 0) {
+            clearInterval(x);
+            m.edit(`EXPIRED`)
+          }
+        }, 30000) // 30 seconds */
+      })
+
+    } else {
+      message.reply(`You must be Level 10 to Access This Command!`)
+    }
   })
 
 };
@@ -82,5 +89,5 @@ name is also the command alias
 exports.help = {
   name: 'daily',
   description: 'Get some Daily Loot.',
-  usage: 'daily'
+  usage: 'daily\nLevel Requirement :: 10'
 };
