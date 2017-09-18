@@ -26,7 +26,7 @@ exports.run = (client, message, params) => {
   // may add level requirement later
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(check => {
     console.log(check.level)
-    if (check.level <= 10) {
+    if (check.level*1 <= 10) {
       message.channel.send("Calculating!").then(m => {
         sql.get(`SELECT * FROM loot WHERE userId = "${message.author.id}"`).then(row => {
           let future = row.last*1 + 86400000
