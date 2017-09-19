@@ -5,7 +5,7 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-function uPersonAmb(uid, tb, amount) {
+function uPersonAmb(uid, tb, amount, message) {
   if (tb === "b") {
     sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
       if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
@@ -32,8 +32,8 @@ exports.run = (client, message, params) => {
     message.channel.send(`Calculating! \`This may take a while.\``)
     for (var i = 0; i < users.length; i++) { // users[i]
       setTimeout(() => {
-        uPersonAmb(users[i], params[0], params[1])
-      }, 1800)
+        uPersonAmb(users[i], params[0], params[1], message)
+      }, 2000)
     }
     message.channel.send(`System successfully updated data (\`${params[1]}${params[0]}\`) for the following users;\n${displays}`)
   } else {
