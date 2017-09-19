@@ -6,7 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 function uPersonAmb(uid, tb, amount, message) {
-  console.log(users[i], params[0], params[1], message.content)
+  console.log(uid, tb, amount, message.content)
   if (tb === "b") {
     sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
       if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
