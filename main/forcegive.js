@@ -5,16 +5,39 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
+function uPersonAmb(uid, tb, amount) {
+  if (tb === "b") {
+    sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
+      if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+      sql.run(`UPDATE scores SET chatBits = "${row.chatBits + amount*1}" WHERE userId = "${uid}"`)
+    })
+  } else if (tb === "t") {
+    sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
+      if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+      sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
+    })
+  }
+}
+
 exports.run = (client, message, params) => {
-  if (message.mentions.members.first() !== undefined) {
-    let output = '';
+  if (params[0] !== "t" && params[0] !== "b") {
+    return message.reply(`\`ERROR\` See Manual (Missing Currency Argument)`)
+  }
+  if (params[1] === message.mentions.members.first()) {
+    return message.reply(`\`ERROR\` See Manual (Missing Amount Argument)`)
+  }
+  if (message.mentions.members.first() !== undefined && params[1] !== 0) {
     let users = message.mentions.users.map(m => m.id)
-    for (var i = 0; i < users.length; i++) {
-      output += `ID: ${users[i]}`
+    let displays = message.mentions.users.map(m => m.displayName).join('\n')
+    message.channel.send(`Calculating! \`This may take a while.\``)
+    for (var i = 0; i < users.length; i++) { // users[i]
+      setTimeout(() => {
+        uPersonAmb(user[i], params[0], params[1])
+      }, 1800)
     }
-    message.channel.send(output)
+    message.channel.send(`System successfully updated data (\`${params[1]}${params[0]}\`) for the following users;\n${displays}`)
   } else {
-    message.reply(`\`ERROR\` No user defined`)
+    message.reply(`\`ERROR\` See Manual (Missing Correct Properties)`)
   }
 };
 
@@ -35,5 +58,5 @@ name is also the command alias
 exports.help = {
   name: 'forcegive',
   description: 'Allows administrators to force ticket/byte incrementation.',
-  usage: 'forcegive [@user] [t/b] [amount]'
+  usage: 'forcegive [t/b] [amount] [@users]'
 };
