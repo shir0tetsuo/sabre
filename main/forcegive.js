@@ -19,7 +19,7 @@ function uPersonAmb(uid, tb, amount, message, output) {
         sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
       })
     }
-    message.channel.send(`<@${uid}> Updated.`)
+    message.channel.send(`Successfully updated <@${uid}>'s data.`)
   }, 2000)
 }
 
