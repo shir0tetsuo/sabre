@@ -7,17 +7,22 @@ let chatBit = ":eye_in_speech_bubble:"
 
 function uPersonAmb(uid, tb, amount, message) {
   //console.log(uid, tb, amount, message.content)
-  if (tb === "b") {
-    sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
-      if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
-      sql.run(`UPDATE scores SET chatBits = "${row.chatBits + amount*1}" WHERE userId = "${uid}"`)
-    })
-  } else if (tb === "t") {
-    sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
-      if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
-      sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
-    })
-  }
+  setTimeout(() => {
+    if (tb === "b") {
+      sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
+        if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+        sql.run(`UPDATE scores SET chatBits = "${row.chatBits + amount*1}" WHERE userId = "${uid}"`)
+      })
+    } else if (tb === "t") {
+      sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
+        if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+        sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
+      })
+    }
+  }, 2000).then(m => {
+    output += `\n<@${uid}> Updated.`
+    m.edit(output)
+  })
 }
 
 exports.run = (client, message, params) => {
@@ -31,13 +36,13 @@ exports.run = (client, message, params) => {
     //console.log(message.mentions.members)
     var users = message.mentions.members.map(m => m.id)
     var displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
-    message.channel.send(`Calculating! \`This may take a while.\``)
-    setTimeout(() => {
+    let output = `Calculating! \`This may take a while.\`\n`
+    output += `**Request:** ${params[1]}${params[0]}\n`
+    output += `__Users__\n${displays}\n`
+    message.channel.send(output)
       for (var i = 0; i < users.length; i++) {
         uPersonAmb(users[i], params[0], params[1], message)
       }
-      message.channel.send(`System successfully updated data (\`${params[1]}${params[0]}\`) for the following users;\n${displays}`)
-    }, 2000)
   } else {
     message.reply(`\`ERROR\` See Manual (Missing Correct Properties)`)
   }
