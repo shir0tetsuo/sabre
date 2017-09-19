@@ -7,11 +7,12 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined) {
-    let persons = message.mentions.members.first()
     let output = '';
-    for (var i = 0; i < persons.length; i++) {
-      console.log("System returns:", persons[i])
+    let users = message.mentions.users.map(m => m.id)
+    for (Var i = 0; i < users.length; i++) {
+      output += `ID: ${users[i]}`
     }
+    message.channel.send(output)
   } else {
     message.reply(`\`ERROR\` No user defined`)
   }
