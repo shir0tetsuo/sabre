@@ -35,7 +35,7 @@ exports.run = (client, message, params) => {
     var users = message.mentions.members.map(m => m.id)
     var displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
     let output = `Calculating! \`This may take a while.\`\n`
-    output += `**Request:** ${params[1]}${params[0]}\n`
+    output += `**Request:** \`${params[1]}${params[0]}\`\n`
     output += `__Users__\n${displays}\n`
     message.channel.send(output)
       for (var i = 0; i < users.length; i++) {
