@@ -14,7 +14,7 @@ function uPersonAmb(uid, tb, amount, message, output) {
         sql.run(`UPDATE scores SET chatBits = "${row.chatBits + amount*1}" WHERE userId = "${uid}"`)
       }).then(m => {
         output += `\n<@${uid}> Bytes Updated.`
-        m.edit(output)
+        message.edit(output)
       })
     } else if (tb === "t") {
       sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
@@ -22,7 +22,7 @@ function uPersonAmb(uid, tb, amount, message, output) {
         sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
       }).then(m => {
         output += `\n<@${uid}> Tickets Updated.`
-        m.edit(output)
+        message.edit(output)
       })
     }
   }, 2000)
