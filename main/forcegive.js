@@ -28,6 +28,7 @@ exports.run = (client, message, params) => {
     return message.reply(`\`ERROR\` See Manual (Missing Amount Argument)`)
   }
   if (message.mentions.members.first() !== undefined && params[1] !== 0) {
+    console.log(message.mentions.members)
     let users = message.mentions.members.map(m => `${m.id}`)
     let displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
     message.channel.send(`Calculating! \`This may take a while.\``)
