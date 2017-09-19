@@ -6,7 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 function uPersonAmb(uid, tb, amount, message) {
-  console.log(uid, tb, amount, message.content)
+  //console.log(uid, tb, amount, message.content)
   if (tb === "b") {
     sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
       if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
@@ -28,13 +28,13 @@ exports.run = (client, message, params) => {
     return message.reply(`\`ERROR\` See Manual (Missing Amount Argument)`)
   }
   if (message.mentions.members.first() !== undefined && params[1] !== 0) {
-    console.log(message.mentions.members)
-    let users = message.mentions.members.map(m => `${m.id}`)
-    let displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
+    //console.log(message.mentions.members)
+    var users = message.mentions.members.map(m => `${m.id}`)
+    var displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
     message.channel.send(`Calculating! \`This may take a while.\``)
     for (var i = 0; i < users.length; i++) { // users[i]
       setTimeout(() => {
-        console.log(users[i], params[0], params[1], message.content)
+        //console.log(users[i], params[0], params[1], message.content)
         uPersonAmb(users[i], params[0], params[1], message)
       }, 2000)
     }
