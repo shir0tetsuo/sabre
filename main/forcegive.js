@@ -10,9 +10,8 @@ exports.run = (client, message, params) => {
     let persons = message.mentions.members
     let output = '';
     for (var i = 0; i < persons.length; i++) {
-      output += `${persons[i]}\n`
+      message.channel.send(persons[i])
     }
-    message.channel.send(output)
   } else {
     message.reply(`\`ERROR\` No user defined`)
   }
