@@ -5,7 +5,7 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-function uPersonAmb(uid, tb, amount, message) {
+function uPersonAmb(uid, tb, amount, message, output) {
   //console.log(uid, tb, amount, message.content)
   setTimeout(() => {
     if (tb === "b") {
@@ -44,7 +44,7 @@ exports.run = (client, message, params) => {
     output += `__Users__\n${displays}\n`
     message.channel.send(output)
       for (var i = 0; i < users.length; i++) {
-        uPersonAmb(users[i], params[0], params[1], message)
+        uPersonAmb(users[i], params[0], params[1], message, output)
       }
   } else {
     message.reply(`\`ERROR\` See Manual (Missing Correct Properties)`)
