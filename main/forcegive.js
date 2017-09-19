@@ -7,7 +7,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined) {
-    let persons = message.mentions.members
+    let persons = message.mentions.members.first()
     let output = '';
     for (var i = 0; i < persons.length; i++) {
       console.log("System returns:", persons.id[i])
