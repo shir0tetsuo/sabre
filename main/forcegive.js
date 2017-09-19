@@ -28,8 +28,8 @@ exports.run = (client, message, params) => {
     return message.reply(`\`ERROR\` See Manual (Missing Amount Argument)`)
   }
   if (message.mentions.members.first() !== undefined && params[1] !== 0) {
-    let users = message.mentions.users.map(m => `${m.id}`)
-    let displays = message.mentions.users.map(m => `${m.displayName}`).join('\n')
+    let users = message.mentions.members.map(m => `${m.id}`)
+    let displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
     message.channel.send(`Calculating! \`This may take a while.\``)
     for (var i = 0; i < users.length; i++) { // users[i]
       setTimeout(() => {
@@ -37,7 +37,7 @@ exports.run = (client, message, params) => {
         uPersonAmb(users[i], params[0], params[1], message)
       }, 2000)
     }
-    message.channel.send(`System successfully updated data (\`${params[1]}${params[0]}\`) for the following users;\n${displays}`)
+    //message.channel.send(`System successfully updated data (\`${params[1]}${params[0]}\`) for the following users;\n${displays}`)
   } else {
     message.reply(`\`ERROR\` See Manual (Missing Correct Properties)`)
   }
