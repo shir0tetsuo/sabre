@@ -39,7 +39,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['attackcalculator', 'calcatk'],
+  aliases: ['attackcalculator', 'calcatk', 'atk'],
   permLevel: 1
 };
 
