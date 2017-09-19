@@ -9,7 +9,7 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined) {
     let output = '';
     let users = message.mentions.users.map(m => m.id)
-    for (Var i = 0; i < users.length; i++) {
+    for (var i = 0; i < users.length; i++) {
       output += `ID: ${users[i]}`
     }
     message.channel.send(output)
