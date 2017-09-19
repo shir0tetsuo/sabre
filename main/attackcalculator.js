@@ -18,12 +18,14 @@ exports.run = (client, message, params) => {
     nullchance = Math.floor(Math.random() * 100)
     let output = `${person} was attacked by ${message.author}!\n`;
     if (damage >= defence) {
-      output += `${message.author} attempts to **strike ${person}** with ${data}!\n`
+      output += `${message.author} attempts to **strike ${person} with ${data}!**\n`
       if (nullchance >= 92) {
-        output += `...but ${message.author}'s attack misses!\n`
+        output += `...but ${message.author}'s \`attack misses!\`\n`
+      } else {
+        output += `\`Strike Landed!\` **${person} was damaged!**`
       }
     } else if (damage < defence) {
-      output += `...but ${message.author}'s attack fails!\n`
+      output += `...but ${message.author}'s \`attack fails!\`\n`
     }
     message.channel.send(output)
   } else {
