@@ -12,17 +12,20 @@ function uPersonAmb(uid, tb, amount, message) {
       sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
         if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
         sql.run(`UPDATE scores SET chatBits = "${row.chatBits + amount*1}" WHERE userId = "${uid}"`)
+      }).then(m => {
+        output += `\n<@${uid}> Bytes Updated.`
+        m.edit(output)
       })
     } else if (tb === "t") {
       sql.get(`SELECT * FROM scores WHERE userId = "${uid}"`).then(row => {
         if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
         sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
+      }).then(m => {
+        output += `\n<@${uid}> Tickets Updated.`
+        m.edit(output)
       })
     }
-  }, 2000).then(m => {
-    output += `\n<@${uid}> Updated.`
-    m.edit(output)
-  })
+  }, 2000)
 }
 
 exports.run = (client, message, params) => {
