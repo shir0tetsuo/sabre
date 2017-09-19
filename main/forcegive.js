@@ -19,7 +19,11 @@ function uPersonAmb(uid, tb, amount, message, output) {
         sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
       })
     }
-    message.channel.send(`Successfully updated <@${uid}>'s data.`)
+    message.channel.send(`Successfully updated <@${uid}>'s data.`).then(m => {
+      setTimeout(() => {
+        m.delete()
+      }, 20000)
+    })
   }, 2000)
 }
 
@@ -37,7 +41,11 @@ exports.run = (client, message, params) => {
     let output = `Calculating! \`This may take a while.\`\n`
     output += `**Request:** \`${params[1]}${params[0]}\`\n`
     output += `__Users__\n${displays}\n`
-    message.channel.send(output)
+    message.channel.send(output).then(m => {
+      setTimeout(() => {
+        m.delete()
+      }, 10000)
+    })
       for (var i = 0; i < users.length; i++) {
         uPersonAmb(users[i], params[0], params[1], message, output)
       }
