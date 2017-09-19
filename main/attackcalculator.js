@@ -9,7 +9,7 @@ exports.run = (client, message, params) => {
   if (params[1] === message.mentions.members.first() || params[1] === undefined) {
     return message.reply(`\`ERROR\` See Manual!`)
   }
-  var sliced = params.slice(2)
+  var sliced = params.slice(1)
   data = sliced.join(' ').substring(0, 1024)
   if (message.mentions.members.first() !== undefined) {
     person = message.mentions.members.first()
