@@ -29,7 +29,7 @@ exports.run = (client, message, params) => {
   }
   if (message.mentions.members.first() !== undefined && params[1] !== 0) {
     //console.log(message.mentions.members)
-    console.log(message.mentions.users.map(m => m.displayName))
+    console.log(message.mentions.members.map(m => m.displayName))
     var users = message.mentions.members.map(m => `${m.id}`)
     var displays = message.mentions.members.map(m => `${m.displayName}`).join('\n')
     message.channel.send(`Calculating! \`This may take a while.\``)
