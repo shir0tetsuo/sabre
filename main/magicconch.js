@@ -23,7 +23,7 @@ exports.run = (client, message, params) => {
   message.channel.send({embed: {
     color: 0xd742b2,
     timestamp: new Date(),
-    description: `Conch says: ${Rand(answers)}\n${message.member.displayName}: ${params.join(' ')}`
+    description: `${message.member.displayName} Asked: ${params.join(' ')}\nConch says: ${Rand(answers)}`
   }})
 };
 
