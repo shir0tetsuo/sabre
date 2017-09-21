@@ -11,7 +11,7 @@ exports.run = (client, message, params) => {
   //const days = Math.floor(millis / 1000 / 60 / 60 / 24);
   //console.log(client.user)
 
-  const jtime = message.member.joinedTimestamp
+  const jtime = message.member.joinedAt
   const jtimeDays = Math.floor(jtime / 1000 / 60 / 60 / 24);
 
   //console.log(message.member.joinedTimestamp)
