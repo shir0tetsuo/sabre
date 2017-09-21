@@ -6,10 +6,18 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
+
+  //const millis = new Date().getTime() - message.guild.createdAt.getTime();
+  //const days = Math.floor(millis / 1000 / 60 / 60 / 24);
   //console.log(client.user)
-  console.log(message.member.joinedTimestamp)
+
+  const jtime = message.guild.createdAt.getTime() - message.member.joinedTimestamp.getTime()
+  const jtimeDays = Math.floor(jtime / 1000 / 60 / 60 / 24);
+
+  //console.log(message.member.joinedTimestamp)
+  console.log(jtimeDays)
   if (message.mentions.members.first() !== undefined) {
-    console.log(message.mentions.members.first().joinedTimestamp)
+    //console.log(message.mentions.members.first().joinedTimestamp)
     //console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().user)
     //console.log(message.mentions.members.first().user.discriminator)
