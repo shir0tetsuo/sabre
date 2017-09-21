@@ -5,6 +5,7 @@ const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person = message.mentions.members.first();
+  let output = '';
   const millisJoined = new Date().getTime() - person.joinedAt.getTime();
   const daysJoined = Math.floor(millisJoined / 1000 / 60 / 60 / 24);
   sql.get(`SELECT * FROM scores WHERE userId = "${person.id}"`).then(row => {
