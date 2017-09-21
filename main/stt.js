@@ -7,7 +7,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   //console.log(client.user)
-  console.log(message.author)
+  console.log(message.member)
   if (message.mentions.members.first() !== undefined) {
     //console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().user)
