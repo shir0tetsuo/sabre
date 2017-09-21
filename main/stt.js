@@ -7,12 +7,13 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   //console.log(client.user)
+  console.log(message.author)
   if (message.mentions.members.first() !== undefined) {
     //console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().user)
     //console.log(message.mentions.members.first().user.discriminator)
-    console.log(message.guild.members)
-    console.log(`${message.guild.members.filter(m => m.presence.status !== 'offline').size} / ${message.guild.memberCount}`)
+    //console.log(message.guild.members)
+    //console.log(`${message.guild.members.filter(m => m.presence.status !== 'offline').size} / ${message.guild.memberCount}`)
   }
 };
 
