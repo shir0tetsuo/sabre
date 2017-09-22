@@ -16,7 +16,7 @@ exports.run = async(client, message, params) => {
       let delayMil = 45000
       let output = '';
       let selfdestruct = `This message self destructs in 45 seconds.`
-      if (params[0] === undefined || params[0] !== 't' || params[0] !=='b') {
+      if (params[0] === undefined && params[0] !== 't' && params[0] !=='b') {
         sql.all(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(data => {
           output += `__**TOP 10 :: LEVEL**__\n\n`
           output += data.map(m => `<@${m.userId}>\`\`\`asciidoc\nLEVEL :: ${m.level}\nTICKETS :: ${m.tickets}\nBYTES :: ${m.chatBits}\`\`\``).join('\n')
@@ -29,7 +29,7 @@ exports.run = async(client, message, params) => {
         })
       } else if (params[0] === 't') {
         sql.all(`SELECT * FROM scores ORDER BY tickets DESC LIMIT 10`).then(data => {
-          output += `__**TOP 10 :: LEVEL**__\n`
+          output += `__**TOP 10 :: TICKETS**__\n`
           output += data.map(m => `<@${m.userId}>\`\`\`asciidoc\nLEVEL :: ${m.level}\nTICKETS :: ${m.tickets}\nBYTES :: ${m.chatBits}\`\`\``).join('\n')
           output += `\n${selfdestruct}`
           message.channel.send(`${output}`).then(message => {
@@ -40,7 +40,7 @@ exports.run = async(client, message, params) => {
         })
       } else if (params[0] === 'b') {
         sql.all(`SELECT * FROM scores ORDER BY chatBits DESC LIMIT 10`).then(data => {
-          output += `__**TOP 10 :: LEVEL**__\n`
+          output += `__**TOP 10 :: BYTES**__\n`
           output += data.map(m => `<@${m.userId}>\`\`\`asciidoc\nLEVEL :: ${m.level}\nTICKETS :: ${m.tickets}\nBYTES :: ${m.chatBits}\`\`\``).join('\n')
           output += `\n${selfdestruct}`
           message.channel.send(`${output}`).then(message => {
