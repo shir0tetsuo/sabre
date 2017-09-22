@@ -6,7 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
-  let randomness = Math.floor(Math.random() ^ 10)
+  let randomness = Math.floor(Math.random() * 100 * 100 * 100 * 100)
   message.channel.send(`Generating some Randomness.\n\`${randomness}\``)
 };
 
