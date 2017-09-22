@@ -13,13 +13,16 @@ exports.run = async(client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) return message.reply(`\`FATAL-ERROR\``)
     if (row.level >= 9000) {
-      sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
+      sql.all(`SELECT * FROM scores ORDER BY level DESC`, function(result) {
+        console.log(result)
+      })
+      /* sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
         console.log(dat)
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
           let output = `${d[i]} :: ${l[i]}`
           message.channel.send(`${output}`, {code:'asciidoc'})
         }
-      })
+      }) */
     } else {
       message.reply(`\`FATAL-ERROR\` You aren't level 9000, silly!`)
     }
