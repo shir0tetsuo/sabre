@@ -17,8 +17,7 @@ exports.run = async(client, message, params) => {
         let output = `TOP USERS`;
         console.log(output)
         for (i = 0; i > 10; uid = data.userId, level = data.level, tickets = data.tickets, bytes = data.chatBits, i++) {
-          console.log(output)
-          return output += `<@${uid[i]}>\`\`\`asciidoc\nLevel :: ${level[i]}\nTickets :: ${tickets[i]}\nBytes :: ${level[i]}\`\`\``;
+          message.channel.send(`LEADERBOARD: <@${uid[i]}>\`\`\`asciidoc\nLevel :: ${level[i]}\nTickets :: ${tickets[i]}\nBytes :: ${level[i]}\`\`\``);
         }
         console.log(output)
       })
