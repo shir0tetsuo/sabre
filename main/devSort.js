@@ -5,7 +5,7 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-afterloop(output) {
+function afterloop(output) {
   message.channel.send(`${output}`, {code:'asciidoc'})
 }
 
