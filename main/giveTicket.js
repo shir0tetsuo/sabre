@@ -7,7 +7,8 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
   let person = message.mentions.members.first();
   if (params[1] === undefined) return message.reply("No Value Specified!")
-
+  const permlvl = client.elevation(message)
+  if (params[1]*1 < 1 && permlvl !== 4) return message.reply(`\`You are not allowed to take tickets!\``)
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (params[1] <= row.tickets) {
       sql.run(`UPDATE scores SET tickets = "${row.tickets - params[1]*1}" WHERE userId = "${message.author.id}"`)
