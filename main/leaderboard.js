@@ -81,5 +81,5 @@ name is also the command alias
 exports.help = {
   name: 'leaderboard',
   description: 'Displays Global Sabre Leaderboards.',
-  usage: 'leaderboard [l/t/b]'
+  usage: 'leaderboard [l/t/b]\nLevel Requirements :: 10'
 };
