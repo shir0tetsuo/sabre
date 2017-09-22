@@ -13,7 +13,7 @@ exports.run = async(client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) return message.reply(`\`FATAL-ERROR\``)
     if (row.level >= 9000) {
-      const userData = await sql.get(`SELECT * FROM scores LIMIT 10 ORDER BY level DESC`);
+      const userData = sql.get(`SELECT * FROM scores LIMIT 10 ORDER BY level DESC`);
       console.log(userData)
     } else {
       message.reply(`\`FATAL-ERROR\` You aren't level 9000, silly!`)
