@@ -20,7 +20,7 @@ const answers = [
 ]
 
 exports.run = (client, message, params) => {
-  if (message.content.has('nuke')) {
+  if (message.content.indexOf('nuke')) {
     message.channel.send({embed: {
       color: 0xd742b2,
       timestamp: new Date(),
