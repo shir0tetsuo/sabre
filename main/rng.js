@@ -16,7 +16,7 @@ function generateRandomness(xlen) {
 }
 
 exports.run = (client, message, params) => {
-  message.channel.send(`${generateRandomness(params[0])}`)
+  message.channel.send(`**Generating Randomness!**\n\`${generateRandomness(params[0])}\``)
 };
 
 /*
@@ -36,5 +36,5 @@ name is also the command alias
 exports.help = {
   name: 'rng',
   description: 'Invoke mathematical monkeys to fling numbers.',
-  usage: 'rng'
+  usage: 'rng [integer]'
 };
