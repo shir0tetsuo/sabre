@@ -12,6 +12,8 @@ const openFloor = [
   'popped a cap in the duck',
   'made the duck disappear',
   'slapped that duck',
+  'ran over the duck',
+  'put the duck in lava',
   'punched the duck in the face',
   'bit clean through the duck\'s neck',
   'drowned the duck'
