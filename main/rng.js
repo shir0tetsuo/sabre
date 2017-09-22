@@ -16,6 +16,7 @@ function generateRandomness(xlen) {
 }
 
 exports.run = (client, message, params) => {
+  if (params[0] > 2000) return message.reply(`Too long! Woah!`)
   message.channel.send(`**Generating Randomness!**\n\`${generateRandomness(params[0])}\``)
 };
 
