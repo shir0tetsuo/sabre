@@ -14,7 +14,7 @@ exports.run = async(client, message, params) => {
     if (!row) return message.reply(`\`FATAL-ERROR\``)
     if (row.level >= 9000) {
       sql.get(`SELECT * FROM scores ORDER BY userId DESC, level DESC`).then(dat => {
-        var output = '';
+        let output = '';
         output += `__\`TOP 10 SABRE USERS\`__`
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
           output += `${d[i]} :: ${l[i]}\n`
