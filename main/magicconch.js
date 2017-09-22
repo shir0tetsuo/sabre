@@ -20,7 +20,7 @@ const answers = [
 ]
 
 exports.run = (client, message, params) => {
-  if (message.content.includes('nuke')) {
+  if (message.content.toLowerCase().includes('nuk')) {
     message.channel.send({embed: {
       color: 0xd742b2,
       timestamp: new Date(),
