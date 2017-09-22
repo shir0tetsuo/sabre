@@ -5,9 +5,18 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
+function generateRandomness(xlen) {
+  if (!xlen) var xlen = 8
+    var charset = "0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < xlen; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+}
+
 exports.run = (client, message, params) => {
-  let randomness = Math.floor(Math.random() * 100 * 100 * 100 * 100)
-  message.channel.send(`Generating some Randomness.\n\`${randomness}\``)
+  message.channel.send(`${generateRandomness(params[0])}`)
 };
 
 /*
