@@ -19,7 +19,7 @@ exports.run = async(client, message, params) => {
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
           output += `${d[i]} :: ${l[i]}\n`
           if (i == 5) {
-            message.channel.send(output)
+            message.channel.send(`${output}`, {code:'asciidoc'})
           }
         }
       })
