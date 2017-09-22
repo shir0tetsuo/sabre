@@ -27,7 +27,7 @@ exports.run = (client, message, params) => {
         }
         message.channel.send(`:right_facing_fist: :left_facing_fist:\n__Some users were fistbumped__\n${users.join('\n')}\n\nType \`bump\` to respond!`)
         .then(() => {
-          message.channel.awaitMessages(response => response.content === 'bump' && users.includes(response.author.id), { // incomplete!
+          message.channel.awaitMessages(response => response.content === 'bump', { // incomplete!
             max: increment,
             time: 30000,
             errors: ['time']
