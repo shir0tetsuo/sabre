@@ -15,10 +15,12 @@ exports.run = async(client, message, params) => {
     if (row.level >= 9000) {
       sql.all(`SELECT * FROM scores ORDER BY level DESC`).then(data => {
         let output = `TOP USERS`;
+        console.log(output)
         for (i = 0; i > 10; uid = data.userId, level = data.level, tickets = data.tickets, bytes = data.chatBits, i++) {
-          output += `<@${uid[i]}>\`\`\`asciidoc\nLevel :: ${level[i]}\nTickets :: ${tickets[i]}\nBytes :: ${level[i]}\`\`\``;
-          if (i == 5) {message.channel.send(output)}
+          console.log(output)
+          return output += `<@${uid[i]}>\`\`\`asciidoc\nLevel :: ${level[i]}\nTickets :: ${tickets[i]}\nBytes :: ${level[i]}\`\`\``;
         }
+        console.log(output)
       })
       /* sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
         console.log(dat)
