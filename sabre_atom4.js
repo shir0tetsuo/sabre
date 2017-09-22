@@ -10,7 +10,7 @@ const fs = require("fs"); // filesystem r/w enabled
 require('./sys/eventLoader')(client); // ** sys/eventLoader
 console.log(chalk.greenBright("System Initialization: Version", settings.version))
 const log = message => {
-  console.log(chalk.redBright(`Sa04: ${message}`))
+  console.log(chalk.redBright(`SabreCore: ${message}`))
   console.log(new Date())
 }
 // main -- commands
