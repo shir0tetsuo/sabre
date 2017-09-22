@@ -13,7 +13,7 @@ exports.run = async(client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) return message.reply(`\`FATAL-ERROR\``)
     if (row.level >= 9000) {
-      sql.get(`SELECT * FROM scores ORDER BY userId ASC, level ASC`).then(dat => {
+      sql.get(`SELECT 10 FROM scores ORDER BY userId ASC, level ASC`).then(dat => {
         console.log(dat[1])
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
           let output = `${d[i]} :: ${l[i]}`
