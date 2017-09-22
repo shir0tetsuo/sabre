@@ -15,7 +15,7 @@ exports.run = async(client, message, params) => {
     if (row.level >= 9000) {
       sql.get(`SELECT * FROM scores ORDER BY userId DESC, level DESC`).then(dat => {
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
-          var output = `${d[i]} :: ${l[i]}`
+          let output = `${d[i]} :: ${l[i]}`
           message.channel.send(`${output}`, {code:'asciidoc'})
         }
       })
