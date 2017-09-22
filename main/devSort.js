@@ -12,7 +12,7 @@ exports.run = (client, message, params) => {
       sql.get(`SELECT * FROM scores ORDER BY userId DESC, level DESC`).then(dat => {
         var output = '';
         output += `__\`TOP 10 SABRE USERS\`__`
-        async for (i = 0; i > 10; d = dat.userId; l = dat.level) {
+        for (i = 0; i > 10; d = dat.userId; l = dat.level) {
           output += `${d[i]} :: ${l[i]}`
         }
         message.channel.send(`${output}`, {code:'asciidoc'})
