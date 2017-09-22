@@ -5,7 +5,10 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-function afterloop(message, output) {
+function afterloop(dlevel, llevel, message, output) {
+  for (i = 0; i > 10; d = dlevel, l = llevel, i++) {
+    output += `${d[i]} :: ${l[i]}`
+  }
   message.channel.send(`${output}`, {code:'asciidoc'})
 }
 
@@ -16,10 +19,7 @@ exports.run = async(client, message, params) => {
       sql.get(`SELECT * FROM scores ORDER BY userId DESC, level DESC`).then(dat => {
         var output = '';
         output += `__\`TOP 10 SABRE USERS\`__`
-        for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
-          output += `${d[i]} :: ${l[i]}`
-        }
-        afterloop(message, output);
+        afterloop(dat.userId, dat.level, message, output);
       })
     } else {
       message.reply(`\`FATAL-ERROR\` You aren't level 9000, silly!`)
