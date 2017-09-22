@@ -49,7 +49,7 @@ exports.run = async(client, message, params) => {
             }, delayMil)
           })
         })
-      }
+      } else return message.reply(`Can't compute`)
 
       /* sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
         console.log(dat)
