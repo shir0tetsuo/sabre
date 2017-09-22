@@ -20,6 +20,14 @@ const answers = [
 ]
 
 exports.run = (client, message, params) => {
+  if (message.content.has('nuke')) {
+    message.channel.send({embed: {
+      color: 0xd742b2,
+      timestamp: new Date(),
+      description: `${message.member.displayName} Asked: ${params.join(' ')}\nConch says: Yes.`
+    }})
+    return;
+  }
   message.channel.send({embed: {
     color: 0xd742b2,
     timestamp: new Date(),
