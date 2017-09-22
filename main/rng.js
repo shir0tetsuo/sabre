@@ -16,7 +16,7 @@ function generateRandomness(xlen) {
 }
 
 exports.run = (client, message, params) => {
-  if (Number.isInteger(params[0]) !== true) return message.reply(`That's not a number!`)
+  if (Number.isInteger(params[0]*1) !== true) return message.reply(`That's not a number!`)
   if (params[0] > 1950) return message.reply(`Too long! Woah! Keep it under 1950 Characters plz.`)
   message.channel.send(`**Generating Randomness!**\n\`${generateRandomness(params[0])}\``)
 };
