@@ -18,10 +18,8 @@ exports.run = async(client, message, params) => {
         output += `__\`TOP 10 SABRE USERS\`__`
         for (i = 0; i > 10; d = dat.userId, l = dat.level, i++) {
           output += `${d[i]} :: ${l[i]}\n`
-          if (i == 5) {
-            message.channel.send(`${output}`, {code:'asciidoc'})
-          }
         }
+        message.channel.send(`${output}`, {code:'asciidoc'})
       })
     } else {
       message.reply(`\`FATAL-ERROR\` You aren't level 9000, silly!`)
