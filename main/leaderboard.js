@@ -49,7 +49,7 @@ exports.run = async(client, message, params) => {
             }, delayMil)
           })
         })
-      } else return message.reply(`Can't compute`)
+      } else return message.reply(`\`ERROR\` See Manual`)
 
       /* sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
         console.log(dat)
@@ -71,7 +71,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['sldb'],
-  permLevel: 2
+  permLevel: 0
 };
 
 /*
