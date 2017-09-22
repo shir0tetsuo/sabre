@@ -15,8 +15,8 @@ exports.run = async(client, message, params) => {
     if (row.level >= 9000) {
       let output = '';
       sql.all(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(data => {
-        let output = data.map(m => `<@${m.userId}>`)
-        message.channel.send(output)
+        let output = data.map(m => `<@${m.userId}>\`\`\`asciidoc\nLEVEL :: ${m.level}\nTICKETS :: ${m.tickets}\nBYTES :: ${m.chatBits}\`\`\``)
+        message.channel.send(`${output}`)
         console.log(output)
       })
       /* sql.get(`SELECT * FROM scores ORDER BY level DESC LIMIT 10`).then(dat => {
