@@ -66,8 +66,12 @@ exports.run = (client, message, params) => {
     output += `operation `
   }
   output += `**${Rand(attributes)} ${Rand(objects)}**`
-  output += `\n\`Modified from projectcodename.com\``
-  message.channel.send(output.toUpperCase())
+  //output += `\n\`Modified from projectcodename.com\``
+  message.channel.send(output.toUpperCase(), `\n\`Modified from projectcodename.com\`\nSelf-Destructing in 30 Seconds.`).then(m => {
+		setTimeout(() => {
+			m.delete()
+		}, 30000)
+	})
 };
 
 /*
