@@ -65,8 +65,8 @@ exports.run = (client, message, params) => {
   } else if (params[0] === "op") {
     output += `operation `
   }
-  output += `${Rand(attributes)} ${Rand(objects)}`
-  output += `\`Modified from projectcodename.com\``
+  output += `**${Rand(attributes)} ${Rand(objects)}**`
+  output += `\n\`Modified from projectcodename.com\``
   message.channel.send(output.toUpperCase())
 };
 
