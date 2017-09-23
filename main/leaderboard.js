@@ -70,7 +70,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['sldb'],
+  aliases: ['sldb', 'ldrb', 'leaderboards'],
   permLevel: 0
 };
 
