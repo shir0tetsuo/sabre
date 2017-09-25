@@ -124,9 +124,9 @@ exports.run = (client, message, params) => {
         // Check date -> provide response
         if (mo <= 3) {
           message.channel.send(`${collected.first().author} ${Rand(springSeason)} ${message.author} released. It took ${(subDate - startDate / 1000)} Seconds.`)
-        } else if (mo <= 8) {
+        } else if (mo <= 7) {
           message.channel.send(`${collected.first().author} ${Rand(duckSeason)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
-        } else if (mo <= 9) {
+        } else if (mo <= 8) {
           message.channel.send(`${collected.first().author} ${Rand(HalloweenA)} It's ${message.author}'s ${HalloweenB} ${collected.first().author} ${HalloweenC}`)
         } else {
           message.channel.send(`Something for Christmas goes here. Snowmen and such.`)
