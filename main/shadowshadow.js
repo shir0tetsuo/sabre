@@ -39,7 +39,7 @@ exports.run = (client, message, params) => {
       let muted = message.guild.roles.find('name', 'Muted')
       let grounded = message.guild.roles.find('name', 'Grounded')
       message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${timeage}` + "\n\nSent by " + message.author.tag + ` in ${message.channel.name}` + "```" + new Date()).catch(console.error)
-      person.setRoles([badboy, muted, grounded]).catch(console.error)
+      person.setRoles([badboy]).catch(console.error) //([badboy, muted, grounded])
 
     } else if (params[0] === "echo") {
       message.reply(person.roles.map(role => role.name))

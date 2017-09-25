@@ -21,7 +21,7 @@ exports.run = (client, message, params) => {
             let newcount = row.tickets*1 - params[1]*1
             message.reply("`Ouchh!` You **lost** " + params[1] + curren + "!")
             setTimeout(() => {
-              sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)              
+              sql.run(`UPDATE scores SET tickets = ${newcount} WHERE userId = "${message.author.id}"`)
             })
           }
         } else return message.reply(`You don't have enough ${curren}!`)
@@ -54,7 +54,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['flip', 'coinflip'],
-  permLevel: 1
+  permLevel: 0
 };
 
 exports.help = {

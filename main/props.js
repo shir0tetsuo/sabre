@@ -6,6 +6,8 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let noProps = new Set();
 
+// This command is not ready.
+
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) return message.reply(`\`FATAL-ERROR\``)
@@ -63,6 +65,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'props',
-  description: 'Give props to @users.',
+  description: 'Give props to @users. (SL15)',
   usage: 'props [@users]\nLevel Requirement: 15'
 };
