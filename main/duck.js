@@ -5,7 +5,17 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let noDuck = new Set();
-const openFloor = [
+const springSeason = [
+  'Exploded the Wild Turkey',
+  'Chopped up the Wild Turkey',
+  'Roasted the Wild Turkey',
+  'Sautee\'d the Wild Turkey',
+  'Grilled the Wild Turkey',
+  'BBQ\'d the Wild Turkey',
+  'Slapped tons of sauce on the Turkey',
+  'Munched on some Turkey'
+]
+const duckSeason = [
   'exploded the duck',
   'quack quack smacked that duck',
   'made the duck quack',
@@ -17,6 +27,61 @@ const openFloor = [
   'punched the duck in the face',
   'bit clean through the duck\'s neck',
   'drowned the duck'
+]
+const HalloweenA = [
+  'Look out!',
+  'Oh jeez!',
+  'Yikes!',
+  'Holy Smokes, Batman!',
+  'Look, Morty!',
+  'o_O,',
+  'Cool!',
+  'Huh?',
+  'Spooky!',
+  'Haha!',
+]
+const HalloweenB = [
+  'Jack-O-Lantern!',
+  'Wild Turkey!',
+  'Unattended Candy Jar!',
+  'Sabre Costume!',
+  'Walkey-Talkey!',
+  'Cat!',
+  'Wand of Wizardry!',
+  'Ghost...',
+  'Shadow!',
+  'Ticket Jar!',
+  'Doctor Pepper!',
+  'Peach Fuzz!',
+  'Pom Poms!',
+  'Alaskan ID Card!',
+  'Portable Light!',
+  'Cellphone!',
+  'Adult Drink!',
+  'KitKat!',
+  'Snickers!',
+  'Skittles!',
+  'Fizzy Drink!',
+  'Candy!',
+  'Candy Bag!',
+  'Staff of Power!',
+  'Fairy-Catching Net!',
+  'Book of Shadows!',
+  'Sword of Lightning!',
+  'Gameboy Advanced!',
+  'Pizza!',
+  'Ouija Board!'
+]
+const HalloweenC = [
+  'decides to throw it into David\'s Netherworld. Ain\'t that Dandy?',
+  'uses their mystical powers to make it explode. It will not be missed!',
+  'invokes mathematical monkeys to turn it into code. The answer is Pi.',
+  'threw it into a pit of lava, yelling \'My Precioussssss!\'',
+  'made some slight modifications with a Light Saber.',
+  'called upon the ghosts to take it far away!',
+  'hit it with a bow and arrow. It spontaneously combusts!',
+  'threw salt on it. Wasn\'t very effective!',
+  'got too scared to continue.'
 ]
 function Rand(data) {
   // where data is the array
@@ -46,9 +111,26 @@ exports.run = (client, message, params) => {
       errors: ['time'],
     })
     .then((collected) => {
+        var now = new Date();
+        var milli = now.getMilliseconds(),
+        sec = now.getSeconds(),
+        min = now.getMinutes(),
+        hou = now.getHours(),
+        mo = now.getMonth(),
+        dy = now.getDate(),
+        yr = now.getFullYear();
         //message.channel.send(`The collected message was: ${collected.first().content}`);
         var subDate = new Date().getTime()
-        message.channel.send(`${collected.first().author} ${Rand(openFloor)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
+        // Check date -> provide response
+        if (mo <= 3) {
+          message.channel.send(`${collected.first().author} ${Rand(springSeason)} ${message.author} released. It took ${(subDate - startDate / 1000)} Seconds.`)
+        } else if (mo <= 8) {
+          message.channel.send(`${collected.first().author} ${Rand(duckSeason)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
+        } else if (mo <= 9) {
+          message.channel.send(`${collected.first().author} ${Rand(HalloweenA)} It's ${message.author}'s ${HalloweenB} ${collected.first().author} ${HalloweenC}`)
+        } else {
+          message.channel.send(`Something for Christmas goes here. Snowmen and such.`)
+        }
       })
       .catch(() => {
         var active = `${message.guild.members.filter(m => m.presence.status == 'online').size}`
