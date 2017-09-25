@@ -127,7 +127,7 @@ exports.run = (client, message, params) => {
         } else if (mo <= 7) {
           message.channel.send(`${collected.first().author} ${Rand(duckSeason)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
         } else if (mo <= 8) {
-          message.channel.send(`${collected.first().author} ${Rand(HalloweenA)} It's ${message.author}'s ${Rand(HalloweenB)} ${collected.first().author} ${Rand(HalloweenC)}`)
+          message.channel.send(`${Rand(HalloweenA)} It's ${message.author}'s ${Rand(HalloweenB)} ${collected.first().author} ${Rand(HalloweenC)}`)
         } else {
           message.channel.send(`Something for Christmas goes here. Snowmen and such.`)
         }
