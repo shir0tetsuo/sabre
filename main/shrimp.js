@@ -108,6 +108,7 @@ exports.run = (client, message, params) => {
       output += data.map(m => `${m.shrimpScore} :: ${m.userDisplay}`).join('\n')
       output += `\`\`\``
     })
+    message.channel.send(output)
   } else {
     var judgeVariance = Math.round(Math.random() * 100)
     var judge1 = Rand(shrimpTally)
@@ -141,9 +142,10 @@ exports.run = (client, message, params) => {
         shrimpUpdate(message, overall)
         scoreUpTicket(message, prizeValue)
       }, 2000)
+      message.channel.send(output)
     }
   }
-  message.channel.send(output)
+
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
 };
 
