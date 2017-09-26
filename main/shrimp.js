@@ -107,8 +107,8 @@ exports.run = (client, message, params) => {
       output += `\`\`\`asciidoc\n`
       output += data.map(m => `${m.shrimpScore} :: ${m.userDisplay}`).join('\n')
       output += `\`\`\``
+      message.channel.send(output)
     })
-    message.channel.send(output)
   } else {
     var judgeVariance = Math.round(Math.random() * 100)
     var judge1 = Rand(shrimpTally)
@@ -138,11 +138,11 @@ exports.run = (client, message, params) => {
       output += `Your overall score: ${overall} /50\n`
       let prizeValue = (overall * 20)
       output += `You gained ${prizeValue}${curren}!`
+      message.channel.send(output)
       setTimeout(() => {
         shrimpUpdate(message, overall)
         scoreUpTicket(message, prizeValue)
       }, 2000)
-      message.channel.send(output)
     }
   }
 
