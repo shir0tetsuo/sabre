@@ -123,6 +123,7 @@ exports.run = (client, message, params) => {
     let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
     if (noShrimp.has(message.author.id)) {
       output += `You must wait a few minutes to be judged again.`
+      message.channel.send(output)
     } else {
       noShrimp.add(message.author.id);
       setTimeout(() => {
