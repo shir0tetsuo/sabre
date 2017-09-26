@@ -4,6 +4,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+let noShrimp = new Set();
 
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
@@ -112,13 +113,29 @@ exports.run = (client, message, params) => {
   }
 
   let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
-  output += `__The judges have a seat at the table.__\n\n`
-  output += `Judge 1: ${Respond(judge1)} They give a ${judge1}\n`
-  output += `Judge 2: ${Respond(judge2)} They give a ${judge2}\n`
-  output += `Judge 3: ${Respond(judge3)} They give a ${judge3}\n`
-  output += `Judge 4: ${Respond(judge4)} They give a ${judge4}\n`
-  output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}\n\n`
-  output += `Your overall score: ${judge1 + judge2 + judge3 + judge4 + judge5}`
+  if (noShrimp.has(message.author.id)) {
+    output += `You must wait a few minutes to be judged again.`
+  } else {
+    noShrimp.add(message.author.id);
+    setTimeout(() => {
+      noShrimp.delete(message.author.id);
+    }, 300000)
+    output += `__The judges have a seat at the table.__\n\n`
+    output += `Judge 1: ${Respond(judge1)} They give a ${judge1}!\n`
+    output += `Judge 2: ${Respond(judge2)} They give a ${judge2}!\n`
+    output += `Judge 3: ${Respond(judge3)} They give a ${judge3}!\n`
+    output += `Judge 4: ${Respond(judge4)} They give a ${judge4}!\n`
+    output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}!\n\n`
+    let overall = judge1*1 + judge2*1 + judge3*1 + judge4*1 + judge5*1
+    output += `Your overall score: ${overall} /50\n`
+    let prizeValue = (overall * 25)
+    output += `You gained ${prizeValue}${curren}!`
+    setTimeout(() => {
+      shrimpUpdate(message, overall)
+      scoreUpTicket(message, prizeValue)
+    }, 2000)
+  }
+
   message.channel.send(output)
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
 };
