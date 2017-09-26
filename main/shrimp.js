@@ -100,7 +100,7 @@ exports.run = (client, message, params) => {
   var tallyScore = judge1 + ' ' + judge2 + ' ' + judge3 + ' ' + judge4 + ' ' + judge5
   var tallyScore = tallyScore.split(' ')
   for (i = 0; i < tallyScore.length; i++) {
-    var numero = NU + tallyScore[i]
+    var numero = "NU" + tallyScore[i]
     if (tallyScore[i] == 1) {
       var numero = "This judge is not amused. They can't finish their meal."
     }
