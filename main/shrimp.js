@@ -84,6 +84,19 @@ function shrimpUpdate(mess, xval) {
     sql.run(`UPDATE shrimp SET shrimpScore = "${xval}" WHERE userId = ${mess.author.id}`)
   })
 }
+function Respond(int) {
+  if (!int) var int = 1
+  if (int == 1) return "This judge is not amused. They can't finish their meal."
+  if (int == 2) return "This judge finds that there is something fairly lacking with this shrimp."
+  if (int == 3) return "This judge likes the preparation, but still finds it sub-par."
+  if (int == 4) return "This judge doesn't find it the worst, but can do better."
+  if (int == 5) return "This judge finds it within acceptable parameters."
+  if (int == 6) return "This judge somewhat likes it, but is not the best they've had."
+  if (int == 7) return "This judge rather enjoyed the meal."
+  if (int == 8) return "This judge **really** enjoyed it!"
+  if (int == 9) return "A tear was brought to their eyes before saying **'This is a meal from Heaven!'**"
+  if (int == 10) return "The meal was **so good**, they had a heart attack and was rushed to the hospital!"
+}
 
 exports.run = (client, message, params) => {
   shrimpInit(message);
@@ -97,48 +110,14 @@ exports.run = (client, message, params) => {
   } else {
     var judge5 = Rand(shrimpUnfair)
   }
-  var tallyScore = judge1 + ' ' + judge2 + ' ' + judge3 + ' ' + judge4 + ' ' + judge5
-  var tallyScore = tallyScore.split(' ')
-  for (i = 0; i < tallyScore.length; i++) {
-    var numero = "NU" + tallyScore[i]
-    if (tallyScore[i] == 1) {
-      var numero = "This judge is not amused. They can't finish their meal."
-    }
-    if (tallyScore[i] == 2) {
-      var numero = "This judge finds that there is something fairly lacking with this shrimp."
-    }
-    if (tallyScore[i] == 3) {
-      var numero = "This judge likes the preparation, but still finds it sub-par."
-    }
-    if (tallyScore[i] == 4) {
-      var numero = "This judge doesn't find it the worst, but can do better."
-    }
-    if (tallyScore[i] == 5) {
-      var numero = "This judge finds it within acceptable parameters."
-    }
-    if (tallyScore[i] == 6) {
-      var numero = "This judge somewhat likes it, but is not the best they've had."
-    }
-    if (tallyScore[i] == 7) {
-      var numero = "This judge rather enjoyed the meal."
-    }
-    if (tallyScore[i] == 8) {
-      var numero = "This judge **really** enjoyed it!"
-    }
-    if (tallyScore[i] == 9) {
-      var numero = "A tear was brought to their eyes before saying **'This is a meal from Heaven!'**"
-    }
-    if (tallyScore[i] == 10) {
-      var numero = "The meal was **so good**, they had a heart attack and was rushed to the hospital!"
-    }
-  }
+
   let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
   output += `__The judges have a seat at the table.__\n\n`
-  output += `Judge 1: ${NU1} They give a ${judge1}\n`
-  output += `Judge 2: ${NU2} They give a ${judge2}\n`
-  output += `Judge 3: ${NU3} They give a ${judge3}\n`
-  output += `Judge 4: ${NU4} They give a ${judge4}\n`
-  output += `Judge 5: This judge is very salty. ${NU5} They give a ${judge5}\n\n`
+  output += `Judge 1: ${Respond(judge1)} They give a ${judge1}\n`
+  output += `Judge 2: ${Respond(judge2)} They give a ${judge2}\n`
+  output += `Judge 3: ${Respond(judge3)} They give a ${judge3}\n`
+  output += `Judge 4: ${Respond(judge4)} They give a ${judge4}\n`
+  output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}\n\n`
   output += `Your overall score: ${judge1 + judge2 + judge3 + judge4 + judge5}`
   message.channel.send(output)
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
