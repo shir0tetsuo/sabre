@@ -101,43 +101,43 @@ exports.run = (client, message, params) => {
   var tallyScore = tallyScore.split(' ')
   for (i = 0; i < tallyScore.length; i++) {
     if (tallyScore[i] == 1) {
-      var ts[i] = "This judge is not amused. They can't finish their meal."
+      var ts.tallyScore[i] = "This judge is not amused. They can't finish their meal."
     }
     if (tallyScore[i] == 2) {
-      var ts[i] = "This judge finds that there is something fairly lacking with this shrimp."
+      var ts.tallyScore[i] = "This judge finds that there is something fairly lacking with this shrimp."
     }
     if (tallyScore[i] == 3) {
-      var ts[i] = "This judge likes the preparation, but still finds it sub-par."
+      var ts.tallyScore[i] = "This judge likes the preparation, but still finds it sub-par."
     }
     if (tallyScore[i] == 4) {
-      var ts[i] = "This judge doesn't find it the worst, but can do better."
+      var ts.tallyScore[i] = "This judge doesn't find it the worst, but can do better."
     }
     if (tallyScore[i] == 5) {
-      var ts[i] = "This judge finds it within acceptable parameters."
+      var ts.tallyScore[i] = "This judge finds it within acceptable parameters."
     }
     if (tallyScore[i] == 6) {
-      var ts[i] = "This judge somewhat likes it, but is not the best they've had."
+      var ts.tallyScore[i] = "This judge somewhat likes it, but is not the best they've had."
     }
     if (tallyScore[i] == 7) {
-      var ts[i] = "This judge rather enjoyed the meal."
+      var ts.tallyScore[i] = "This judge rather enjoyed the meal."
     }
     if (tallyScore[i] == 8) {
-      var ts[i] = "This judge **really** enjoyed it!"
+      var ts.tallyScore[i] = "This judge **really** enjoyed it!"
     }
     if (tallyScore[i] == 9) {
-      var ts[i] = "A tear was brought to their eyes before saying **'This is a meal from Heaven!'**"
+      var ts.tallyScore[i] = "A tear was brought to their eyes before saying **'This is a meal from Heaven!'**"
     }
     if (tallyScore[i] == 10) {
-      var ts[i] = "The meal was **so good**, they had a heart attack and was rushed to the hospital!"
+      var ts.tallyScore[i] = "The meal was **so good**, they had a heart attack and was rushed to the hospital!"
     }
   }
   let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
   output += `__The judges have a seat at the table.__\n\n`
-  output += `Judge 1: ${ts1} They give a ${judge1}\n`
-  output += `Judge 2: ${ts2} They give a ${judge2}\n`
-  output += `Judge 3: ${ts3} They give a ${judge3}\n`
-  output += `Judge 4: ${ts4} They give a ${judge4}\n`
-  output += `Judge 5: This judge is very salty. ${ts5} They give a ${judge5}\n\n`
+  output += `Judge 1: ${ts.1} They give a ${judge1}\n`
+  output += `Judge 2: ${ts.2} They give a ${judge2}\n`
+  output += `Judge 3: ${ts.3} They give a ${judge3}\n`
+  output += `Judge 4: ${ts.4} They give a ${judge4}\n`
+  output += `Judge 5: This judge is very salty. ${ts.5} They give a ${judge5}\n\n`
   output += `Your overall score: ${judge1 + judge2 + judge3 + judge4 + judge5}`
   message.channel.send(output)
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
