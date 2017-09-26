@@ -62,13 +62,13 @@ const shrimpUnfair = [
 function shrimpInit(mess) { // Convert message into mess
   sql.get(`SELECT * FROM shrimp WHERE userId ="${mess.author.id}"`).then(row => {
     if (!row) {
-      sql.run("INSERT INTO shrimp (userId, userDisplay, shrimpScore) VALUES (?, ?, ?)", [mess.author.id, mess.member.displayName, 0]);
+      sql.run("INSERT INTO shrimp (userId, userDisplay, shrimpScore) VALUES (?, ?, ?)", [mess.author.id, mess.author.username, 0]);
     }
   }).catch(() => { // Error message generates new table instead
     console.error;
     console.log(chalk.redBright("The system recovered from an error (New Shrimp Entry)."))
     sql.run("CREATE TABLE IF NOT EXISTS shrimp (userId TEXT, userDisplay TEXT, shrimpScore INTEGER)").then(() => {
-      sql.run("INSERT INTO shrimp (userId, userDisplay, shrimpScore) VALUES (?, ?, ?)", [mess.author.id, mess.member.displayName, 0]);
+      sql.run("INSERT INTO shrimp (userId, userDisplay, shrimpScore) VALUES (?, ?, ?)", [mess.author.id, mess.author.username, 0]);
     })
   })
 }
@@ -81,7 +81,7 @@ function scoreUpTicket(mess, xval) {
 function shrimpUpdate(mess, xval) {
   if (!xval) var xval = 1
   sql.get(`SELECT * FROM shrimp WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE shrimp SET userDisplay = "${mess.member.displayName}" WHERE userId = ${mess.author.id}`)
+    sql.run(`UPDATE shrimp SET userDisplay = "${mess.author.username}" WHERE userId = ${mess.author.id}`)
     sql.run(`UPDATE shrimp SET shrimpScore = "${xval}" WHERE userId = ${mess.author.id}`)
   })
 }
