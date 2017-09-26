@@ -123,7 +123,8 @@ exports.run = (client, message, params) => {
     } else {
       var judge5 = Rand(shrimpUnfair)
     }
-    let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
+    let meal = Rand(returned)
+    let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${meal}\n\n`
     if (noShrimp.has(message.author.id)) {
       output += `You must wait a few minutes to be judged again.`
       message.channel.send(output)
@@ -141,7 +142,7 @@ exports.run = (client, message, params) => {
       let overall = judge1*1 + judge2*1 + judge3*1 + judge4*1 + judge5*1
       output += `Your overall score: ${overall} /50\n`
       let prizeValue = (overall * 20)
-      output += `You gained ${prizeValue}${curren}!`
+      output += `You gained ${prizeValue}${curren} for your ${meal}!`
       message.channel.send(output)
       setTimeout(() => {
         shrimpUpdate(message, overall)
