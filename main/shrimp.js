@@ -100,7 +100,7 @@ exports.run = (client, message, params) => {
   var tallyScore = judge1 + ' ' + judge2 + ' ' + judge3 + ' ' + judge4 + ' ' + judge5
   var tallyScore = tallyScore.split(' ')
   for (i = 0; i < tallyScore.length; i++) {
-    var numero = tallyScore[i] + NU
+    var numero = NU + tallyScore[i]
     if (tallyScore[i] == 1) {
       var numero = "This judge is not amused. They can't finish their meal."
     }
@@ -134,11 +134,11 @@ exports.run = (client, message, params) => {
   }
   let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
   output += `__The judges have a seat at the table.__\n\n`
-  output += `Judge 1: ${1NU} They give a ${judge1}\n`
-  output += `Judge 2: ${2NU} They give a ${judge2}\n`
-  output += `Judge 3: ${3NU} They give a ${judge3}\n`
-  output += `Judge 4: ${3NU} They give a ${judge4}\n`
-  output += `Judge 5: This judge is very salty. ${5NU} They give a ${judge5}\n\n`
+  output += `Judge 1: ${NU1} They give a ${judge1}\n`
+  output += `Judge 2: ${NU2} They give a ${judge2}\n`
+  output += `Judge 3: ${NU3} They give a ${judge3}\n`
+  output += `Judge 4: ${NU4} They give a ${judge4}\n`
+  output += `Judge 5: This judge is very salty. ${NU5} They give a ${judge5}\n\n`
   output += `Your overall score: ${judge1 + judge2 + judge3 + judge4 + judge5}`
   message.channel.send(output)
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
