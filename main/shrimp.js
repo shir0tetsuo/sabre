@@ -101,41 +101,48 @@ function Respond(int) {
 
 exports.run = (client, message, params) => {
   shrimpInit(message);
-  var judgeVariance = Math.round(Math.random() * 100)
-  var judge1 = Rand(shrimpTally)
-  var judge2 = Rand(shrimpTally)
-  var judge3 = Rand(shrimpTally)
-  var judge4 = Rand(shrimpTally)
-  if (judgeVariance >= 90) {
-    var judge5 = Rand(shrimpTally)
+  if (params[0] === "score") {
+    let output = `__Top 6 Shrimp Chefs!__`
+    sql.all(`SELECT * FROM shrimp ORDER BY shrimpScore DESC LIMIT 6`).then(data => {
+      output += `\`\`\`asciidoc\n`
+      output += data.map(m => `${m.shrimpScore} :: ${m.userDisplay}`).join('\n')
+      output += `\`\`\``
+    })
   } else {
-    var judge5 = Rand(shrimpUnfair)
+    var judgeVariance = Math.round(Math.random() * 100)
+    var judge1 = Rand(shrimpTally)
+    var judge2 = Rand(shrimpTally)
+    var judge3 = Rand(shrimpTally)
+    var judge4 = Rand(shrimpTally)
+    if (judgeVariance >= 90) {
+      var judge5 = Rand(shrimpTally)
+    } else {
+      var judge5 = Rand(shrimpUnfair)
+    }
+    let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
+    if (noShrimp.has(message.author.id)) {
+      output += `You must wait a few minutes to be judged again.`
+    } else {
+      noShrimp.add(message.author.id);
+      setTimeout(() => {
+        noShrimp.delete(message.author.id);
+      }, 300000)
+      output += `__The judges have a seat at the table.__\n\n`
+      output += `Judge 1: ${Respond(judge1)} They give a ${judge1}!\n`
+      output += `Judge 2: ${Respond(judge2)} They give a ${judge2}!\n`
+      output += `Judge 3: ${Respond(judge3)} They give a ${judge3}!\n`
+      output += `Judge 4: ${Respond(judge4)} They give a ${judge4}!\n`
+      output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}!\n\n`
+      let overall = judge1*1 + judge2*1 + judge3*1 + judge4*1 + judge5*1
+      output += `Your overall score: ${overall} /50\n`
+      let prizeValue = (overall * 20)
+      output += `You gained ${prizeValue}${curren}!`
+      setTimeout(() => {
+        shrimpUpdate(message, overall)
+        scoreUpTicket(message, prizeValue)
+      }, 2000)
+    }
   }
-
-  let output = `${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}\n\n`
-  if (noShrimp.has(message.author.id)) {
-    output += `You must wait a few minutes to be judged again.`
-  } else {
-    noShrimp.add(message.author.id);
-    setTimeout(() => {
-      noShrimp.delete(message.author.id);
-    }, 300000)
-    output += `__The judges have a seat at the table.__\n\n`
-    output += `Judge 1: ${Respond(judge1)} They give a ${judge1}!\n`
-    output += `Judge 2: ${Respond(judge2)} They give a ${judge2}!\n`
-    output += `Judge 3: ${Respond(judge3)} They give a ${judge3}!\n`
-    output += `Judge 4: ${Respond(judge4)} They give a ${judge4}!\n`
-    output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}!\n\n`
-    let overall = judge1*1 + judge2*1 + judge3*1 + judge4*1 + judge5*1
-    output += `Your overall score: ${overall} /50\n`
-    let prizeValue = (overall * 25)
-    output += `You gained ${prizeValue}${curren}!`
-    setTimeout(() => {
-      shrimpUpdate(message, overall)
-      scoreUpTicket(message, prizeValue)
-    }, 2000)
-  }
-
   message.channel.send(output)
   //message.channel.send(`${message.author} ${Rand(cooktype)} dat Shrimp. Made some ${Rand(returned)}`)
 };
@@ -157,5 +164,5 @@ name is also the command alias
 exports.help = {
   name: 'shrimp',
   description: 'Make different kinds of Shrimp.',
-  usage: 'shrimp'
+  usage: 'shrimp\nShrimp High Score :: shrimp score'
 };
