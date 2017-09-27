@@ -63,6 +63,7 @@ const HalloweenB = [
   'Skittles! :rainbow:',
   'Fizzy Drink!',
   'Candy! :candy:',
+  'Spooky Scary Skeletons!',
   'Candy Bag! :shopping_bags:',
   'Staff of Power! :joystick:',
   'Fairy-Catching Net!',
