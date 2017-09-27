@@ -41,36 +41,36 @@ const HalloweenA = [
   'Haha!',
 ]
 const HalloweenB = [
-  'Jack-O-Lantern!',
-  'Wild Turkey!',
-  'Unattended Candy Jar!',
+  'Jack-O-Lantern! :jack_o_lantern:',
+  'Wild Turkey! :turkey:',
+  'Unattended Candy Jar! :candy:',
   'Sabre Costume!',
-  'Walkey-Talkey!',
-  'Cat!',
-  'Wand of Wizardry!',
-  'Ghost...',
-  'Shadow!',
-  'Ticket Jar!',
+  'Walkey-Talkey! :radio:',
+  'Cat! :cat:',
+  'Wand of Wizardry! :zap:',
+  'Ghost... :ghost:',
+  'Shadow! :bust_in_silhouette:',
+  'Ticket Jar! :tickets:',
   'Doctor Pepper!',
-  'Peach Fuzz!',
-  'Pom Poms!',
-  'Alaskan ID Card!',
-  'Portable Light!',
-  'Cellphone!',
-  'Adult Drink!',
-  'KitKat!',
-  'Snickers!',
-  'Skittles!',
+  'Peach Fuzz! :tropical_drink:',
+  'Pom Poms! :confetti_ball:',
+  'Alaskan ID Card! :id:',
+  'Portable Light! :flashlight:',
+  'Cellphone! :iphone:',
+  'Adult Drink! :beers:',
+  'KitKat! :chocolate_bar:',
+  'Snickers! :chocolate_bar:',
+  'Skittles! :rainbow:',
   'Fizzy Drink!',
-  'Candy!',
-  'Candy Bag!',
-  'Staff of Power!',
+  'Candy! :candy:',
+  'Candy Bag! :shopping_bags:',
+  'Staff of Power! :joystick:',
   'Fairy-Catching Net!',
-  'Book of Shadows!',
-  'Sword of Lightning!',
-  'Gameboy Advanced!',
-  'Pizza!',
-  'Ouija Board!'
+  'Book of Shadows! :notebook_with_decorative_cover: ',
+  'Sword of Lightning! :dagger:',
+  'Gameboy Advanced! :video_game:',
+  'Pizza! :pizza:',
+  'Ouija Board! :clipboard:'
 ]
 const HalloweenC = [
   'decides to throw it into David\'s Netherworld. Ain\'t that Dandy?',
@@ -127,7 +127,7 @@ exports.run = (client, message, params) => {
         } else if (mo <= 7) {
           message.channel.send(`${collected.first().author} ${Rand(duckSeason)} ${message.author} released. It took ${(subDate - startDate) / 1000} Seconds.`)
         } else if (mo <= 8) {
-          message.channel.send(`${Rand(HalloweenA)} It's ${message.author}'s ${Rand(HalloweenB)} ${collected.first().author} ${Rand(HalloweenC)}`)
+          message.channel.send(`${Rand(HalloweenA)} It's ${message.author}'s ${Rand(HalloweenB)} ${collected.first().author} ${Rand(HalloweenC)} It only took ${(subDate - startDate / 1000)} Seconds!`)
         } else {
           message.channel.send(`Something for Christmas goes here. Snowmen and such.`)
         }

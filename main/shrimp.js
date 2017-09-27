@@ -34,7 +34,9 @@ const returned = [
   'Pepper Shrimp!',
   'Shrimp Soup!',
   'Shrimp Stew!',
+  'Shrimp Cocktail!',
   'Shrimp Salad!',
+  'Shrimp Teriyaki!',
   'Ordinary Shrimp!'
 ]
 const shrimpTally = [
