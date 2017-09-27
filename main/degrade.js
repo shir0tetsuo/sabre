@@ -64,11 +64,11 @@ exports.run = (client, message, params) => {
       message.channel.send({ embed: {
         color: embedColor,
         timestamp: new Date(),
-        description: output,
         author: {
           name: message.author.displayName,
           icon_url: message.author.avatarURL
-        }
+        },
+        description: output
       }})
       setTimeout(() => {
         scoreDownTicket(message, 1000)
