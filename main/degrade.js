@@ -57,7 +57,7 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     if (row.level >= 12 && row.tickets >= 1000) {
       let output = `${message.member.displayName} ran the **D E G R A D E** Command...\n`;
-      let dgchance = Math.floor(Math.random())
+      let dgchance = Math.floor(Math.random() * 100)
       let thePercent = (100 - dgchance*1)
       output += `You are the ${thePercent}%.\n`
       embedColor = colorCalc(dgchance);
