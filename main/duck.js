@@ -33,6 +33,7 @@ const HalloweenA = [
   'Oh jeez!',
   'Yikes!',
   'Holy Smokes, Batman!',
+  'Ahh jeez, Rick!',
   'Look, Morty!',
   'o_O,',
   'Cool!',
