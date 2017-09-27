@@ -68,7 +68,13 @@ exports.run = (client, message, params) => {
           name: message.author.displayName,
           icon_url: message.author.avatarURL
         },
-        description: output
+        description: output,
+        fields: [
+          {
+            name: `Something.`,
+            value: `Something.`
+          }
+        ]
       }})
       setTimeout(() => {
         scoreDownTicket(message, 1000)
