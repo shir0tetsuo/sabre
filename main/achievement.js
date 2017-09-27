@@ -2,7 +2,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   const permlvl = client.elevation(message)
-  if (params[0] === null || params[1] === null) return message.reply("`ERROR` See Manual!")
+  if (params[0] === null || params[1] === null || params[0] === undefined || params[0] === undefined) return message.reply("`ERROR` See Manual!")
   if (params[0].toLowerCase() === "green") {
     var slCol = 0x96E000
   } else if (params[0].toLowerCase() === "red") {
