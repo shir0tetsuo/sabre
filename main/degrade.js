@@ -267,7 +267,7 @@ exports.run = (client, message, params) => {
 enabled, guildOnly, aliases, permission level
 */
 exports.conf = {
-  enabled: false,
+  enabled: true,
   guildOnly: false,
   aliases: ['dgrd'],
   permLevel: 1
