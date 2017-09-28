@@ -204,14 +204,14 @@ exports.run = (client, message, params) => {
       let damageText = '';
       let dandyText = '';
       if (dgchance >= 80) { // how lucky you were, calcs
-        var ticketGain = Math.round(Math.random() * 2500)
+        var ticketGain = Math.round(Math.random() * 2500) + 800
         setTimeout(() => {
           scoreUpTicket(message, ticketGain)
         }, 2500)
         damageText += `You were so lucky, you returned with ${ticketGain}${curren}`
         dandyText += `Ain't that swell?`
       } else if (dgchance >= 55) {
-        var ticketGain = Math.round(Math.random() * 1500)
+        var ticketGain = Math.round(Math.random() * 1500) + 500
         setTimeout(() => {
           scoreUpTicket(message, ticketGain)
         }, 2500)
