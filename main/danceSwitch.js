@@ -61,7 +61,10 @@ exports.run = (client, message, params) => {
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
     if (!danceRoom || danceRoom === undefined) {
-      message.guild.createChannel('dancefloor', 'text').overwritePermissions('Partymode!', {'SEND_MESSAGES': true})
+      message.guild.createChannel('dancefloor', 'text')
+      .then(ch => {
+        ch.edit()
+      })
     }
   }
   message.reply(`DANCE MODE ACTIVATED! (Check roles/channels)`)
