@@ -49,7 +49,7 @@ function Rand(data) {
 
 exports.run = (client, message, params) => {
   if (params[0] === "on") {
-    let danceRole = message.guild.roles.find("name", "Partymode!")
+    var danceRole = message.guild.roles.find("name", "Partymode!")
     if (!danceRole || danceRole === undefined) {
       message.guild.createRole().then(role => {
         role.edit({
@@ -58,12 +58,13 @@ exports.run = (client, message, params) => {
               mentionable: true
             })
       })
+      var danceRole = message.guild.roles.find("name", "Partymode!")
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
     if (!danceRoom || danceRoom === undefined) {
       message.guild.createChannel('dancefloor', 'text')
       .then(ch => {
-        ch.edit()
+        ch.edit({permissionOverwrites: danceRole<'SEND_MESSAGES': true>})
       })
     }
   }
