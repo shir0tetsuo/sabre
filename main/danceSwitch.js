@@ -51,14 +51,15 @@ exports.run = (client, message, params) => {
   if (params[0] === "on") {
     let danceRole = message.guild.roles.find("name", "Partymode!")
     if (!danceRole || danceRole === undefined) {
-      message.guild.createRole({
-        data: {
-        name: 'Partymode!',
-        color: 0xcc0000,
-        mentionable: true,
-        permissions: ["attachFiles", "sendMessages"]
-      },
-        reason: 'Partymode Ran'
+      message.guild.createRole().then(role => {
+        role.edit({
+          data: {
+            name: "Partymode!",
+            color: 0xcc0000,
+            mentionable: true
+          },
+          reason: "Partymode Activated"
+        })
       })
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
