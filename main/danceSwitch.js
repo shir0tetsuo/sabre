@@ -63,10 +63,17 @@ exports.run = (client, message, params) => {
     let danceRoom = message.guild.channels.find("name", "dancefloor")
     if (!danceRoom || danceRoom === undefined) {
       message.guild.createChannel('dancefloor', 'text')
-      .then(ch => {
-        ch.edit({
-          overwrites: everyone<('SEND_MESSAGES': false)>
-        })
+      .overwritePermissions(everyone, {
+        READ_MESSAGES: false,
+        SEND_MESSAGES: false
+      })
+      .overwritePermissions(danceRole, {
+        READ_MESSAGES: true,
+        SEND_MESSAGES: true,
+        READ_MESSAGE_HISTORY: true,
+        MENTION_EVERYONE: true,
+        EMBED_LINKS: true,
+        ATTACH_FILES: true
       })
     }
   }
