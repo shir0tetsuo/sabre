@@ -66,7 +66,7 @@ exports.run = (client, message, params) => {
       /* .overwritePermissions(message.guild.channels.find("name", "dancefloor"), {
         READ_MESSAGES: false,
         SEND_MESSAGES: false
-      }) */
+      }) 
       .overwritePermissions(danceRole, {
         READ_MESSAGES: true,
         SEND_MESSAGES: true,
@@ -74,10 +74,10 @@ exports.run = (client, message, params) => {
         MENTION_EVERYONE: true,
         EMBED_LINKS: true,
         ATTACH_FILES: true
-      })
+      }) */
     }
+    message.reply(`DANCE MODE ACTIVATED! (Check roles/channels)`)
   }
-  message.reply(`DANCE MODE ACTIVATED! (Check roles/channels)`)
   if (params[0] === "off") {
 
   }
