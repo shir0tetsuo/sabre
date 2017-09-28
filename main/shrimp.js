@@ -134,7 +134,7 @@ exports.run = (client, message, params) => {
       noShrimp.add(message.author.id);
       setTimeout(() => {
         noShrimp.delete(message.author.id);
-      }, 300000)
+      }, 600000)
       output += `__The judges have a seat at the table.__\n\n`
       output += `Judge 1: ${Respond(judge1)} They give a ${judge1}!\n`
       output += `Judge 2: ${Respond(judge2)} They give a ${judge2}!\n`
