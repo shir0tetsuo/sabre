@@ -64,7 +64,16 @@ exports.run = (client, message, params) => {
       message.guild.createChannel('dancefloor', 'text').then(ch => {
         var danceRole = message.guild.roles.find("name", "Partymode!")
         ch.overwritePermissions(danceRole, {
-          READ_MESSAGES: true
+          READ_MESSAGES: true,
+          SEND_MESSAGES: true,
+          READ_MESSAGE_HISTORY: true,
+          MENTION_EVERYONE: true,
+          EMBED_LINKS: true,
+          ATTACH_FILES: true
+        })
+        ch.overwritePermissions(message.guild.id, {
+          READ_MESSAGES: false,
+          SEND_MESSAGES: false
         })
       })
       /* .overwritePermissions(message.guild.channels.find("name", "dancefloor"), {
