@@ -56,9 +56,7 @@ exports.run = (client, message, params) => {
               name: "Partymode!",
               color: 0xcc0000,
               mentionable: true
-            },
-            reason: "Partymode Activated"
-          )
+            })
       })
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
