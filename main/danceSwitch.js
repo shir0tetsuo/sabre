@@ -58,11 +58,11 @@ exports.run = (client, message, params) => {
               mentionable: true
             })
       })
-      var danceRole = message.guild.roles.find("name", "Partymode!")
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
     if (!danceRoom || danceRoom === undefined) {
       message.guild.createChannel('dancefloor', 'text').then(ch => {
+        var danceRole = message.guild.roles.find("name", "Partymode!")
         ch.overwritePermissions(danceRole, {
           READ_MESSAGES: true
         })
