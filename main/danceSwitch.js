@@ -61,7 +61,7 @@ exports.run = (client, message, params) => {
     }
     let danceRoom = message.guild.channels.find("name", "dancefloor")
     if (!danceRoom || danceRoom === undefined) {
-      message.guild.createChannel('dancefloor', 'text', [reason: 'Dance Mode'])
+      message.guild.createChannel('dancefloor', 'text')
     }
   }
   message.reply(`DANCE MODE ACTIVATED! (Check roles/channels)`)
