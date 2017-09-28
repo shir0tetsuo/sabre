@@ -64,7 +64,7 @@ exports.run = (client, message, params) => {
     if (!danceRoom || danceRoom === undefined) {
       message.guild.createChannel('dancefloor', 'text')
       .then(ch => {
-        ch.edit({permissionOverwrites: danceRole<'SEND_MESSAGES': true>})
+        ch.edit({permissionOverwrites: danceRole})
       })
     }
   }
