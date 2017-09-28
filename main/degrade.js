@@ -129,14 +129,61 @@ function dungeonTx(luck, dnum) {
     }
   } else if (dnum >= 5) {
     texts += 'They couldn\'t keep their eyes open.\n' // fire
+    if (luck >= 95) {
+      texts += 'They end up having an amazing dream about a lottery. When they wake up they win something from buying a ticket.'
+    } else if (luck >= 40) {
+      texts += 'They wake in the middle of the night to a fire. They leave but see their building get destroyed.'
+    } else {
+      texts += 'Their lungs fill with smoke in the middle of the night as a fire starts.'
+    }
   } else if (dnum >= 4) {
     texts += 'They climbed up a steep hill.\n' // wind
+    if (luck >= 40) {
+      texts += 'At the top of the hill they are greeted by a trader. You exchange some words about buying and selling.'
+    } else if (luck >= 20) {
+      texts += 'They are blown down the hill, and they drop their wallet. They are greeted by a huge rock.'
+    } else {
+      texts += 'They are sucked into a tornado upon the horizon, and never heard from again.'
+    }
   } else if (dnum >= 3) {
     texts += 'They had a weird dream.\n' // shadow
+    if (luck >= 92) {
+      texts += 'They dreamt of becoming famous. They look at the newspaper and see their face on the cover.'
+    } else if (luck >= 85) {
+      texts += 'They dreamt of shooting rainbows out of their eyelids. They make a novel out of it.'
+    } else if (luck >= 55) {
+      texts += 'They go to the store the next morning and notice a huge sale on everything.'
+    } else if (luck >= 39) {
+      texts += 'It is of the same haunting nightmare they\'ve had for weeks.'
+    } else {
+      texts += 'Sabre kidnaps them in their sleep. Who knows what happens next.'
+    }
   } else if (dnum >= 2) {
     texts += 'They went on a walk.\n'
+    if (luck >= 95) {
+      texts += 'They are greeted with fame and fortune; There was a bunch of fans outside paying hundreds for autographs. The paper was a bit expensive.'
+    } else if (luck >= 55) {
+      texts += 'Nothing overly interesting happens throughout the day. When they get home they open their cheque.'
+    } else {
+      texts += 'A million ravens come out of nowhere and carry them far, far away.'
+    }
   } else {
     texts += 'They get off the phone.\n'
+    if (luck >= 92) {
+      texts += 'They successfully win a case in court.'
+    } else if (luck >= 85) {
+      texts += 'Their franchise expands vastly.'
+    } else if (luck >= 55) {
+      texts += 'They win some more stocks.'
+    } else if (luck >= 50) {
+      texts += 'It\'s their landlord again. They forgot to pay some bills.'
+    } else if (luck >= 40) {
+      texts += 'They were sent a bill for the ambulance fee for the last time they ran this command.'
+    } else if (luck >= 33) {
+      texts += 'They started to throw up violently.'
+    } else {
+      texts += 'A truck runs them over due to not paying any attention.'
+    }
   }
   return texts;
 }
@@ -158,10 +205,16 @@ exports.run = (client, message, params) => {
       let dandyText = '';
       if (dgchance >= 80) { // how lucky you were, calcs
         var ticketGain = Math.round(Math.random() * 2500)
+        setTimeout(() => {
+          scoreUpTicket(message, ticketGain)
+        }, 2500)
         damageText += `You were so lucky, you returned with ${ticketGain}${curren}`
         dandyText += `Ain't that swell?`
       } else if (dgchance >= 55) {
         var ticketGain = Math.round(Math.random() * 1500)
+        setTimeout(() => {
+          scoreUpTicket(message, ticketGain)
+        }, 2500)
         damageText += `You were so lucky, you returned with ${ticketGain}${curren}`
         dandyText += `I like this adventure.`
       } else if (dgchance >= 40) { // 40 - 54 non successful
@@ -169,10 +222,16 @@ exports.run = (client, message, params) => {
         dandyText += `Could of been worse, right?`
       } else if (dgchance >= 33) {
         var ticketGain = Math.round(Math.random() * 500)
+        setTimeout(() => {
+          scoreDownTicket(message, ticketGain)
+        }, 2500)
         damageText += `You felt like going to the hospital.`
         dandyText += `It costed ${ticketGain}${curren} to get patched up.`
       } else {
         var ticketGain = Math.round(Math.random() * 2000)
+        setTimeout(() => {
+          scoreDownTicket(message, ticketGain)
+        }, 2500)
         damageText += `You have suffered a fatal injury.`
         dandyText += `It costed ${ticketGain}${curren} in funeral expenses.`
       }
