@@ -8,10 +8,12 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   const user = message.mentions.users.first()
   if (!user) {
-    throw 'PLZ Mention the user'
+    message.reply('PLZ Mention the user')
+    return
   }
   if (!user.avatarURL) {
-    throw 'There\'s no avatar bro'
+    message.reply('There\'s no avatar bro')
+    return
   }
   let msg = message;
   message.delete();
