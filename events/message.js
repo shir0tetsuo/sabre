@@ -128,6 +128,9 @@ function findJob(name, client, message) {
   if (name.toLowerCase().indexOf("owner") !== -1) {
     return 0xbc0fbf
   }
+  if (name.toLowerCase().indexOf("DSI") !== -1) {
+    return 0xff7300
+  }
   if (name.indexOf("DOI") !== -1) {
     return 0x4e4f14
   }
