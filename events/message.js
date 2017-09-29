@@ -199,32 +199,34 @@ module.exports = message => {
     }
   }
   let danceRoom = message.guild.channels.find('name', 'dancefloor')
-  if (message.channel.id === danceRoom.id) {
-    const quoteArray = [
-      'He exclaimed!',
-      'More quotes coming soon'
-    ]
-    msg = message;
-    var roleCol = person.roles[1].colorAsHex();
-    if (roleCol === null || roleCol === undefined) {
-      var roleCol = 0xA7A7A5
-    }
-    message.delete()
-    msg.channel.send({embed: {
-      color: roleCol,
-      timestamp: new Date(),
-      description: `**Partymode**`,
-      author: {
-        name: msg.member.displayName,
-        icon_url: msg.author.avatarURL
-      },
-      fields: [
-        {
-          name: `${Rand(quoteArray)}`,
-          value: `${msg.content}`
-        }
+  if (danceRoom !== null) {
+    if (message.channel.id === danceRoom.id) {
+      const quoteArray = [
+        'He exclaimed!',
+        'More quotes coming soon'
       ]
-    }})
+      msg = message;
+      var roleCol = person.roles[1].colorAsHex();
+      if (roleCol === null || roleCol === undefined) {
+        var roleCol = 0xA7A7A5
+      }
+      message.delete()
+      msg.channel.send({embed: {
+        color: roleCol,
+        timestamp: new Date(),
+        description: `**Partymode**`,
+        author: {
+          name: msg.member.displayName,
+          icon_url: msg.author.avatarURL
+        },
+        fields: [
+          {
+            name: `${Rand(quoteArray)}`,
+            value: `${msg.content}`
+          }
+        ]
+      }})
+    }
   }
   // end self deleting channel lines
   // Sabre Response System
