@@ -34,6 +34,9 @@ const returned = [
   'Pepper Shrimp!',
   'Shrimp Soup!',
   'Shrimp Stew!',
+  'Shrimp in Potatoes!',
+  'Shrimp Burger!',
+  'Shrimp Sandwich!',
   'Shrimp Cocktail!',
   'Shrimp Salad!',
   'Shrimp Teriyaki!',
@@ -135,6 +138,7 @@ exports.run = (client, message, params) => {
       setTimeout(() => {
         noShrimp.delete(message.author.id);
       }, 600000)
+      output += `***Shrimp is the Fruit of the Sea!***\n`
       output += `__The judges have a seat at the table.__\n\n`
       output += `Judge 1: ${Respond(judge1)} They give a ${judge1}!\n`
       output += `Judge 2: ${Respond(judge2)} They give a ${judge2}!\n`
