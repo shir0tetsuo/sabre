@@ -206,7 +206,7 @@ module.exports = message => {
         'More quotes coming soon'
       ]
       msg = message;
-      console.log(msg.member.roles)
+      console.log(msg.member.roles.first())
       var roleCol = msg.member.roles[1].colorAsHex();
       if (roleCol === null || roleCol === undefined) {
         var roleCol = 0xA7A7A5
