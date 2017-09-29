@@ -91,15 +91,12 @@ exports.run = (client, message, params) => {
     message.reply(`\`DANCE MODE DISABLED\``)
   }
   if (params[0] === "nominate") {
-    if (message.mentions.members.first() !== undefined) {
-      var users = message.mentions.members
-      for (i = 0; i < users.length; i++) {
-        let danceRole = message.guild.roles.find("name", "Partymode!")
-        users[i].addRole(danceRole).catch(console.error)
-      }
+    let danceRole = message.guild.roles.find("name", "Partymode!")
+    if (message.mentions.members.first() !== undefined && danceRole !== undefined && danceRole !== null) {
+      var users = message.mentions.members.map(u => u.addRole(danceRoom))
       message.reply(`\`Done\``)
     } else {
-      return message.reply(`\`ERROR\` No Mentions`)
+      return message.reply(`\`ERROR\` No Mentions / Role to Give`)
     }
   }
   // Everything that happens
