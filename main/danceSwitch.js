@@ -80,12 +80,14 @@ exports.run = (client, message, params) => {
     message.reply(`\`DANCE MODE ENABLED\``)
   }
   if (params[0] === "off") {
-    let danceRole = message.guild.roles.find("name", "Partymode!").then(r => {
-      r.delete()
-    }).catch(console.error);
-    let danceRoom = message.guild.channels.find("name", "dancefloor").then(c => {
-      c.delete()
-    }).catch(console.error);
+    let danceRole = message.guild.roles.find("name", "Partymode!")
+    let danceRoom = message.guild.channels.find("name", "dancefloor")
+    if (danceRole !== undefined) {
+      danceRole.delete()
+    }
+    if (danceRoom !== undefined) {
+      danceRoom.delete()
+    }
     message.reply(`\`DANCE MODE DISABLED\``)
   }
   if (params[0] === "nominate") {
