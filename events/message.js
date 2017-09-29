@@ -121,7 +121,7 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
-function findJob(name) {
+function findJob(name, client) {
   if (name.indexOf("MD") !== -1) {
     return 0x60d917
   }
@@ -253,7 +253,7 @@ module.exports = message => {
       /*if (roleCol === null || roleCol === undefined) {
         var roleCol = 0xA7A7A5
       }*/
-      roleCol = findJob(message.member.displayName);
+      roleCol = findJob(message.member.displayName, client);
       message.delete()
       msg.channel.send({embed: {
         color: roleCol,
