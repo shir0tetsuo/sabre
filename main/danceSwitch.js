@@ -76,26 +76,29 @@ exports.run = (client, message, params) => {
           SEND_MESSAGES: false
         })
       })
-      /* .overwritePermissions(message.guild.channels.find("name", "dancefloor"), {
-        READ_MESSAGES: false,
-        SEND_MESSAGES: false
-      })
-      .overwritePermissions(danceRole, {
-        READ_MESSAGES: true,
-        SEND_MESSAGES: true,
-        READ_MESSAGE_HISTORY: true,
-        MENTION_EVERYONE: true,
-        EMBED_LINKS: true,
-        ATTACH_FILES: true
-      }) */
     }
-    message.reply(`DANCE MODE ACTIVATED! (Check roles/channels)`)
+    message.reply(`\`DANCE MODE ENABLED\``)
   }
   if (params[0] === "off") {
-
+    let danceRole = message.guild.roles.find("name", "Partymode!").then(r => {
+      r.delete()
+    }).catch(console.error);
+    let danceRoom = message.guild.channels.find("name", "dancefloor").then(c => {
+      c.delete()
+    }).catch(console.error);
+    message.reply(`\`DANCE MODE DISABLED\``)
   }
   if (params[0] === "nominate") {
-
+    if (message.mentions.members.first() !== undefined) {
+      var users = message.mentions.members
+      for (i = 0; i < users.length; i++) {
+        let danceRole = message.guild.roles.find("name", "Partymode!")
+        users[i].addRole(danceRole).catch(console.error)
+      }
+      message.reply(`\`Done\``)
+    } else {
+      return message.reply(`\`ERROR\` No Mentions`)
+    }
   }
   // Everything that happens
 };
@@ -117,5 +120,5 @@ name is also the command alias
 exports.help = {
   name: 'danceswitch',
   description: 'It\'s everyone\'s favorite party room!',
-  usage: 'danceswitch [nominate/on/off]'
+  usage: 'danceswitch [nominate/on/off] (@users)'
 };
