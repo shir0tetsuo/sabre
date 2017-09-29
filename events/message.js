@@ -207,7 +207,7 @@ module.exports = message => {
       ]
       msg = message;
       console.log(msg.member.roles.first(2))
-      var roleCol = msg.member.roles[1].colorAsHex();
+      var roleCol = msg.member.roles.first(2).colorAsHex();
       if (roleCol === null || roleCol === undefined) {
         var roleCol = 0xA7A7A5
       }
