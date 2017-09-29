@@ -108,7 +108,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['dance'],
+  aliases: ['dance', 'dancemode', 'party', 'partymode'],
   permLevel: 3
 };
 
