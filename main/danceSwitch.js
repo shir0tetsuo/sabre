@@ -91,9 +91,9 @@ exports.run = (client, message, params) => {
     message.reply(`\`DANCE MODE DISABLED\``)
   }
   if (params[0] === "nominate") {
-    var danceRole = message.guild.roles.find("name", "Partymode!")
+    let danceRole = message.guild.roles.find("name", "Partymode!")
     if (message.mentions.members.first() !== undefined && danceRole !== undefined && danceRole !== null) {
-      var users = message.mentions.members.map(u => u.addRole(danceRoom))
+      var users = message.mentions.members.map(u => u.addRole(danceRole))
       message.reply(`\`Done\``)
     } else {
       return message.reply(`\`ERROR\` No Mentions / Role to Give`)
