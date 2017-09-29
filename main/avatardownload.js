@@ -21,7 +21,7 @@ exports.run = (client, message, params) => {
     description: `Abrakadabra, Sabre did magic maybe`,
     author: {
       name: user.displayName,
-      icon_url: user.avatarURL
+      icon_url: client.user.avatarURL
     },
     fields: [
       {
