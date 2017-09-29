@@ -244,8 +244,17 @@ module.exports = message => {
   if (danceRoom !== null) {
     if (message.channel.id === danceRoom.id) {
       const quoteArray = [
-        'He exclaimed!',
-        'More quotes coming soon'
+        'EXCLAIMS,',
+        'SHOUTS,',
+        'YELLS,',
+        'BOOGIES,',
+        'DANCEDANCED,',
+        'MEOWMEOWD,',
+        'QUOTHED,',
+        'COPIED',
+        'ZIGZAGGED,',
+        'BURPED,',
+        'SPOKE IN RUSSIAN,'
       ]
       msg = message;
       //console.log(msg.member.roles.first(2).split(1))
@@ -258,7 +267,6 @@ module.exports = message => {
       msg.channel.send({embed: {
         color: roleCol,
         timestamp: new Date(),
-        description: `**Partymode**`,
         author: {
           name: msg.member.displayName,
           icon_url: msg.author.avatarURL
