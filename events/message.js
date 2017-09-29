@@ -117,6 +117,10 @@ function lootInit(mess) { // Convert message into mess
 
 // CLASSIFIED//TOP-SECRET
 
+function Rand(data) {
+  return data[Math.floor(Math.random() * data.length)]
+}
+
 function scanKeyword(mess) {
   const summon = ["?night", "?Night", "?NIGHT"]
   //const reward = ["classified", "Classified", "CLASSIFIED"]
@@ -193,6 +197,34 @@ module.exports = message => {
     }, 10000);
     return; // 10 seconds
     }
+  }
+  let danceRoom = message.guild.channels.find('name', 'dancefloor')
+  if (message.channel.id === danceRoom.id) {
+    const quoteArray = [
+      'He exclaimed!',
+      'More quotes coming soon'
+    ]
+    msg = message;
+    var roleCol = person.roles[1].colorAsHex();
+    if (roleCol === null || roleCol === undefined) {
+      var roleCol = 0xA7A7A5
+    }
+    message.delete()
+    msg.channel.send({embed: {
+      color: roleCol,
+      timestamp: new Date(),
+      description: `**Partymode**`,
+      author: {
+        name: msg.member.displayName,
+        icon_url: msg.author.avatarURL
+      },
+      fields: [
+        {
+          name: `${Rand(quoteArray)}`,
+          value: `${msg.content}`
+        }
+      ]
+    }})
   }
   // end self deleting channel lines
   // Sabre Response System
