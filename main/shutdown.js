@@ -7,9 +7,14 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
   if (message.author.id === settings.ownerid) {
-    message.channel.send(`\`EMERGENCY SHUTDOWN\` Goodbye :wave:`).then(() => {
-      process.exit(666)
-    })
+    if (params[0] !== "dewit") {
+      message.reply(`\`FATAL ERROR\` DOESN'T WANNA \`DEWIT\``)
+    } else {
+      message.channel.send(`\`EMERGENCY SHUTDOWN\` Goodbye :wave:`).then(() => {
+        process.exit(666)
+      })
+    }
+
   } else {
     message.reply(`\`FATAL ERROR\` NOT OWNER!`)
   }
