@@ -121,6 +121,48 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
+function findJob(name) {
+  if (name.indexOf("MD") !== -1) {
+    return 0x60d917
+  }
+  if (name.toLowerCase().indexOf("owner") !== -1) {
+    return 0xbc0fbf
+  }
+  if (name.indexOf("DOI") !== -1) {
+    return 0x4e4f14
+  }
+  if (name.indexOf("CSD") !== -1) {
+    return 0x000000
+  }
+  if (name.indexOf("SBI") !== -1) {
+    return 0x135d82
+  }
+  if (name.indexOf("SS") !== -1) {
+    return 0x383838
+  }
+  if (name.indexOf("ACAA") !== -1) {
+    return 0xc60751
+  }
+  if (name.indexOf("AST") !== -1) {
+    return 0x0021ff
+  }
+  if (name.indexOf("NG") !== -1) {
+    return 0xb00000
+  }
+  const permlvl = client.elevation(message)
+  if (permlvl === 0) {
+    return 0x36786A
+  } else if (permlvl === 1) {
+    return 0x366394
+  } else if (permlvl === 2) {
+    return 0x802D32
+  } else if (permlvl === 3) {
+    return 0x992D22
+  } else if (permlvl === 4) {
+    return 0x31BF61
+  }
+}
+
 function scanKeyword(mess) {
   const summon = ["?night", "?Night", "?NIGHT"]
   //const reward = ["classified", "Classified", "CLASSIFIED"]
@@ -206,11 +248,12 @@ module.exports = message => {
         'More quotes coming soon'
       ]
       msg = message;
-      console.log(msg.member.roles.first(2).split(1))
+      //console.log(msg.member.roles.first(2).split(1))
       //var roleCol = msg.member.roles.first(2).colorAsHex();
-      if (roleCol === null || roleCol === undefined) {
+      /*if (roleCol === null || roleCol === undefined) {
         var roleCol = 0xA7A7A5
-      }
+      }*/
+      roleCol = findJob(message.member.displayName);
       message.delete()
       msg.channel.send({embed: {
         color: roleCol,
