@@ -25,7 +25,7 @@ exports.run = (client, message, params) => {
     },
     fields: [
       {
-        name: `${user.displayName}'s Avatar`,
+        name: `${user.member.displayName}'s Avatar`,
         value: `[Download](${user.avatarURL})`
       }
     ]
