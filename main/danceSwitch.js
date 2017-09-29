@@ -82,10 +82,10 @@ exports.run = (client, message, params) => {
   if (params[0] === "off") {
     let danceRole = message.guild.roles.find("name", "Partymode!")
     let danceRoom = message.guild.channels.find("name", "dancefloor")
-    if (danceRole !== undefined) {
+    if (danceRole !== undefined && danceRole !== null) {
       danceRole.delete()
     }
-    if (danceRoom !== undefined) {
+    if (danceRoom !== undefined && danceRoom !== null) {
       danceRoom.delete()
     }
     message.reply(`\`DANCE MODE DISABLED\``)
