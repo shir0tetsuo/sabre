@@ -37,5 +37,5 @@ name is also the command alias
 exports.help = {
   name: 'shutdown',
   description: 'Emergency Shutdown',
-  usage: 'shutdown'
+  usage: 'shutdown dewit'
 };
