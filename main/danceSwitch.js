@@ -58,26 +58,28 @@ exports.run = (client, message, params) => {
               mentionable: true
             })
       })
-    }
-    let danceRoom = message.guild.channels.find("name", "dancefloor")
-    if (!danceRoom || danceRoom === undefined) {
-      message.guild.createChannel('dancefloor', 'text').then(ch => {
-        var danceRole = message.guild.roles.find("name", "Partymode!")
-        ch.overwritePermissions(danceRole, {
-          READ_MESSAGES: true,
-          SEND_MESSAGES: true,
-          READ_MESSAGE_HISTORY: true,
-          MENTION_EVERYONE: true,
-          EMBED_LINKS: true,
-          ATTACH_FILES: true
-        })
-        ch.overwritePermissions(message.guild.id, {
-          READ_MESSAGES: false,
-          SEND_MESSAGES: false
-        })
+      .then(() => {
+        let danceRoom = message.guild.channels.find("name", "dancefloor")
+        if (!danceRoom || danceRoom === undefined) {
+          message.guild.createChannel('dancefloor', 'text').then(ch => {
+            var danceRole = message.guild.roles.find("name", "Partymode!")
+            ch.overwritePermissions(danceRole, {
+              READ_MESSAGES: true,
+              SEND_MESSAGES: true,
+              READ_MESSAGE_HISTORY: true,
+              MENTION_EVERYONE: true,
+              EMBED_LINKS: true,
+              ATTACH_FILES: true
+            })
+            ch.overwritePermissions(message.guild.id, {
+              READ_MESSAGES: false,
+              SEND_MESSAGES: false
+            })
+          })
+        }
+        message.reply(`\`DANCE MODE ENABLED\``)
       })
     }
-    message.reply(`\`DANCE MODE ENABLED\``)
   }
   if (params[0] === "off") {
     let danceRole = message.guild.roles.find("name", "Partymode!")
