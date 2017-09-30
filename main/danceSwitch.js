@@ -108,10 +108,10 @@ exports.run = (client, message, params) => {
 enabled, guildOnly, aliases, permission level
 */
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['dance', 'dancemode', 'party', 'partymode'],
-  permLevel: 3
+  permLevel: 4
 };
 
 /*
