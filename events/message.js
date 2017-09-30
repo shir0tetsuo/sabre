@@ -254,10 +254,27 @@ module.exports = message => {
         'DANCEDANCED,',
         'MEOWMEOWD,',
         'QUOTHED,',
-        'COPIED',
+        'COPIED,',
+        'PHONATED,',
+        'RELATED,',
+        'RELAYED,',
+        'RUMORED,',
         'ZIGZAGGED,',
         'BURPED,',
-        'SPOKE IN RUSSIAN,'
+        'SPOKE IN RUSSIAN,',
+        'SPOKE IN FRENCH,',
+        'SPOKE IN JAVASCRIPT,',
+        'SPOKE IN BAT :bat:,',
+        'SPOKE IN MORSE-CODE,',
+        'SPOKE IN FUTURE TENSE,',
+        'SPOKE WHILST ON THE TOILET,',
+        'STUMBLED,',
+        'TUMBLED,',
+        'TRUMPLED,',
+        'MADE SABRE SAY,',
+        'MENTIONED,',
+        'SPILLED THE BEANS,',
+        'SAID WHILE SMOKING,'
       ]
       msg = message;
       //console.log(msg.member.roles.first(2).split(1))
