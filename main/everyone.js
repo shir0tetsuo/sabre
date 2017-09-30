@@ -6,6 +6,9 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
+  if (message.mentions.members.first() !== undefined && message.mentions.members.first() !== null) {
+    message.channel.send(`:warning: ${message.content.split(1)}`)
+  }
   message.channel.send(`@everyone :warning:`)
 };
 
