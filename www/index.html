@@ -16,6 +16,12 @@
   .check {
     display: none;
   }
+  .imgView {
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: orange;
+    display: inline-block;
+  }
   h3 {
     color: #cb4b27;
   }
@@ -141,6 +147,14 @@
       div.style.display = "none";
     }
   }
+  function imgView() {
+    var divB = document.getElementById("imgViewDIV")
+    divB.style.display = "block"
+  }
+  function imgViewX() {
+    var divB = document.getElementById("imgViewDIV")
+    divB.style.display = "none"
+  }
   </script>
 </head>
 <body onload="seeOn()">
@@ -240,6 +254,20 @@
           <b style="color: #cb4b27;">s!warn</b> 3-Time Warn System, resets daily <b style="color: #7a9900">(PL2)</b><br>
         </p>
       </div>
+      <!-- Img Start -->
+        <p><a id="imgView" onclick="imgView()" style="padding-top: 5px;">Expand</a> Sabre command examples</p>
+      <div style="display: none;" id="imgViewDIV">
+        <div class="inletBody">
+          <h3>s!degrade</h3>
+        </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364105949486645249/Screenshot_38.png" width="100%"></img>
+          <div class="inletBody">
+            <h3>s!shadowshadow logs</h3>
+          </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364110503426916363/Screenshot_46.png" width="100%"></img>
+          <br><a id="imgViewX" onclick="imgViewX()" style="padding-top: 5px;">Contract</a>
+      </div>
+      <!-- Img End -->
     </div>
     <div class="MainContent">
       <div class="inletBody"><span id="perms"></span>
@@ -277,7 +305,7 @@
         <div class="center"><img height="18px" width="18px" src="" style="border-radius: 50%"></img> marciscool21#5125</div>
         <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/269924818101469186/efcc7b8d730ba7ce639bdc83662a5cb4.png" style="border-radius: 50%"></img> Mr.Burfict(Pen11)#0790</div>
         <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/300336015195766784/ebb2d47853092c453a180803690a315d.png" style="border-radius: 50%"></img> Paradise#2477</div>
-        Last updated September 30, 2017
+        Last updated October 1, 2017
       </div>
     </div>
   <!-- End -------------------------------------------------------------------->
