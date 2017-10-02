@@ -3,159 +3,9 @@
 <html>
 <head>
   <title>Sabre Home</title>
-  <style type="text/css">
-  body {
-    background-color: #36393e;
-    color: #789496;
-    width: 50%;
-    min-width: 320px;
-    margin: auto;
-    font-family: monospace;
-    font-size: 18px;
-  }
-  .check {
-    display: none;
-  }
-  .imgView {
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: orange;
-    display: inline-block;
-  }
-  h3 {
-    color: #cb4b27;
-  }
-  .inletOrange {
-    min-width: 200px;
-    background-color: #2f3136;
-    border-left: 5px solid orange;
-    padding-left: 20px;
-    padding-right: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-radius: 2px;
-  }
-  .inletWarn {
-    background-color: #4a433a;
-    border-radius: 2px;
-    position: fixed;
-    top: 3px;
-    border-left: 5px solid orange;
-    padding-left: 20px;
-  }
-  .inletBody {
-    background-color: #4a433a;
-    border-radius: 2px;
-    border-left: 5px solid orange;
-    padding-left: 20px;
-  }
-  .inletNorm {
-    background-color: #2f3136;
-    border-radius: 2px;
-    border-left: 5px solid orange;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .avtext {
-    float: left;
-    padding-right: 50px;
-  }
-  a {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    border-left: 5px solid #2d74d2;
-    color: #2d74d2;
-    background-color: #2f3136;
-    border-radius: 2px;
-  }
-  .center {
-    padding-left: 10px;
-    padding-bottom: 5px;
-  }
-  a:hover {
-    color: #b5891c;
-    background-color: #36393e;
-    border-left: 5px solid #b5891c;
-    -moz-transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
-  }
-
-  input#toggle {
-  max-height: 0;
-  max-width: 0;
-  opacity: 0;
-  }
-  input#toggle + label {
-  display: inline-block;
-  position: relative;
-  box-shadow: inset 0 0 0px 1px #d5d5d5;
-  text-indent: -5000px;
-  height: 30px;
-  width: 50px;
-  border-radius: 15px;
-  }
-
-  input#toggle + label:before {
-  content: "";
-  position: absolute;
-  display: block;
-  height: 30px;
-  width: 30px;
-  top: 0;
-  left: 0;
-  border-radius: 15px;
-  background: rgba(255,191,17,0);
-  -moz-transition: .25s ease-in-out;
-  -webkit-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
-  }
-
-  input#toggle + label:after {
-  content: "";
-  position: absolute;
-  display: block;
-  height: 30px;
-  width: 30px;
-  top: 0;
-  left: 0px;
-  border-radius: 15px;
-  background: white;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
-  -moz-transition: .25s ease-in-out;
-  -webkit-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
-  }
-  input#toggle:checked + label:before {
-  width: 50px;
-  background: rgba(255,191,17,1);
-  }
-
-  input#toggle:checked + label:after {
-  left: 20px;
-  box-shadow: inset 0 0 0 1px rgba(255,191,17,1), 0 2px 4px rgba(0,0,0,.2);
-  }
-  </style>
-  <script type="text/javascript">
-  function seeOn() {
-    var div = document.getElementById("check");
-    if (document.getElementById("toggle").checked == true) {
-      div.style.display = "block";
-    }
-    if (document.getElementById("toggle").checked == false) {
-      div.style.display = "none";
-    }
-  }
-  function imgView() {
-    var divB = document.getElementById("imgViewDIV")
-    divB.style.display = "block"
-  }
-  function imgViewX() {
-    var divB = document.getElementById("imgViewDIV")
-    divB.style.display = "none"
-  }
-  </script>
+  <link rel="stylesheet" href="sabre.css">
+  <script type="text/javascript" src="miniShrimp.js"></script>
+  <script type="text/javascript" src="toggles.js"></script>
 </head>
 <body onload="seeOn()">
   <!-- Start ------------------------------------------------------------------>
@@ -184,7 +34,7 @@
     <p></p>
     </div>
   </div>
-      <div class="inletWarn">Welcome to Sabre's Lair! <a href="#top">&Delta;<b></b></a></div>
+      <div class="inletWarn" id="WelcomeFloor" style="opacity: 0.7;">Welcome to Sabre's Lair! <a href="#top"><b>&Delta;</b></a></div>
     </div>
       <div class="MainContent">
       <div class="inletBody"><span id="about"></span>
@@ -255,7 +105,7 @@
         </p>
       </div>
       <!-- Img Start -->
-        <p><a id="imgView" onclick="imgView()" style="padding-top: 5px;">Expand</a> Sabre command examples</p>
+        <p id="BorderExpand"><a id="imgView" onclick="imgView()" style="padding-top: 5px;">Expand</a> Sabre command examples</p>
       <div style="display: none;" id="imgViewDIV">
         <div class="inletBody">
           <h3>s!degrade</h3>
@@ -265,7 +115,21 @@
             <h3>s!shadowshadow logs</h3>
           </div>
           <img src="https://cdn.discordapp.com/attachments/350070991583707136/364110503426916363/Screenshot_46.png" width="100%"></img>
-          <br><a id="imgViewX" onclick="imgViewX()" style="padding-top: 5px;">Contract</a>
+          <div class="inletBody">
+            <h3>#selfdelete</h3>
+          </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364467817719791636/Screenshot_69.png" width="100%"></img>
+          <div class="inletBody">
+            <h3>s!shrimp</h3>
+            <p>
+            <b><i><u>Shrimp is the Fruit of the Sea!</u></i></b>
+          </p>
+          <p>
+            <a onclick="fryShrimp()" style="padding-top: 5px;">Cook</a>
+            <span id="shrimpDisplay"></span>
+          </p>
+          </div>
+          <br><a id="imgViewX" onclick="imgViewX()" style="padding-top: 5px;" href="#BorderExpand">Collapse</a>
       </div>
       <!-- Img End -->
     </div>
