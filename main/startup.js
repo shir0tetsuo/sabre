@@ -19,7 +19,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['start'],
+  aliases: ['start', 'ssu'],
   permLevel: 2
 };
 
