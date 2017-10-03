@@ -196,5 +196,5 @@ exports.conf = {
 exports.help = {
     name: 'fight',
     usage: 'fight info|<@user>',
-    description: 'Start a fight with another user and see who will win.'
+    description: 'Start a fight with another user and see who will win. Experimental.'
 };
