@@ -11,13 +11,13 @@ exports.run = (client, message, params) => {
   if (permlvl >= 4 && params[0] === "commit") {
     exec(`./www/cpsite.s`,
       function(error, stdout, stderr) {
-        message.author.send(stdout)
-        console.log(error)
+        message.channel.send(stdout)
+        //console.log(error)
       })
   } else {
     exec(`echo "http://$(curl icanhazip.com)/sabre"`,
       function(error, stdout, stderr) {
-        message.author.send(stdout)
+        message.channel.send(stdout)
       })
   }
 };
