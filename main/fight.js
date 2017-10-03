@@ -186,6 +186,13 @@ function fight(message, player1, player2, turn) {
     });
 }
 
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ['f'],
+  permLevel: 4
+};
+
 exports.help = {
     name: 'fight',
     usage: 'fight info|<@user>',
