@@ -13,7 +13,7 @@ exports.run = (client, msg, params) => {
           let color = 0x000000;
       }
   msg.channel.send({embed: {
-    color: member.highestRole.hexColor,
+    color: `(${member.highestRole.hexColor})`,
     timestamp: new Date(),
     fields: [
       {
