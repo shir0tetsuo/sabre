@@ -14,11 +14,12 @@ exports.run = (client, message, params) => {
         message.author.send(stdout)
         console.log(error)
       })
+  } else {
+    exec(`echo "http://$(curl icanhazip.com)/sabre"`,
+      function(error, stdout, stderr) {
+        message.author.send(stdout)
+      })
   }
-  exec(`echo "http://$(curl icanhazip.com)/sabre"`,
-    function(error, stdout, stderr) {
-      message.author.send(stdout)
-    })
 };
 
 /*
