@@ -6,13 +6,14 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, msg, params) => {
-      let color = 0x000000;
       let member = msg.guild.members.get(msg.author.id);
       if (member) {
-          color = '0x' + member.highestRole.hexColor.substring(1,7).toUpperCase();
+          color = member.highestRole.hexColor.substring(1,7).toUpperCase();
+      } else {
+          let color = 0x000000;
       }
   msg.channel.send({embed: {
-    color: color,
+    color: '0x' + color,
     timestamp: new Date(),
     fields: [
       {
