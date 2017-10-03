@@ -15,9 +15,9 @@ exports.run = (client, message, params) => {
         //console.log(error)
       })
   } else {
-    exec(`echo "http://$(curl icanhazip.com)/sabre"`,
+    exec(`echo "$(curl icanhazip.com)/sabre"`,
       function(error, stdout, stderr) {
-        message.channel.send(stdout)
+        message.channel.send(`Encrypted\nhttps://${stdout}\nUnencrypted\nhttp://${stdout}`)
       })
   }
 };
