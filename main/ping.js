@@ -94,7 +94,7 @@ exports.run = (client, message, params) => {
         },
         {
           name: `:small_orange_diamond: RAM`,
-          value: `\`\`\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+          value: `\`\`\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\`\`\``,
           inline: true
         }
       ]
