@@ -7,7 +7,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, msg, params) => {
       let color = 0x000000,
-      let member = msg.guild.members.get(msg.author.id);
+      var member = msg.guild.members.get(msg.author.id);
       if (member) {
           color = member.highestRole.hexColor;
       }
