@@ -55,7 +55,8 @@ exports.run = (client, message, params) => {
       message.channel.send(`\`LordDeath's Scythe of Death was summoned.\`\n${person} is in trouble.`)
 
     } else if (params[0] === "sword") {
-      message.channel.send(`\`Shadow Shadow, Hear my call. Bring me A Sword to destroy them all.\nThe Sword of Shadows has been summoned.\``)
+      let SwordCardTag = "https://cdn.discordapp.com/attachments/350070991583707136/364922459822096395/createcard.php.jpg"
+      message.channel.send(`\`Shadow Shadow, Hear My Call. I summon ShadowSword to Banish Them All.\n${SwordCardTag}\``)
     }
 
   } else return message.reply("`ERROR` The command was not understood!")
