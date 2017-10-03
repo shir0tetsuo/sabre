@@ -190,7 +190,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['f'],
-  permLevel: 4
+  permLevel: 1
 };
 
 exports.help = {
