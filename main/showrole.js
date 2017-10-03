@@ -9,7 +9,7 @@ exports.run = (client, msg, params) => {
       let color = 0x000000;
       let member = msg.guild.members.get(msg.author.id);
       if (member) {
-          color = member.highestRole.hexColor;
+          color = '0x' + member.highestRole.hexColor.substring(1,7);
       }
   msg.channel.send({embed: {
     color: color,
