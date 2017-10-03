@@ -6,8 +6,8 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, msg, params) => {
-      let color = 0x000000,
-      var member = msg.guild.members.get(msg.author.id);
+      let color = 0x000000;
+      let member = msg.guild.members.get(msg.author.id);
       if (member) {
           color = member.highestRole.hexColor;
       }
