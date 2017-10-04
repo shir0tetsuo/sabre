@@ -271,6 +271,10 @@ exports.run = (bot, message, args) => {
         //throw 'You can\'t fight by yourself!';
     }
 
+    if (mention.presence.status === "offline") {
+        return message.reply(`\`ERROR\` You can't challenge a user who isn't there!`)
+    }
+
     const you = new Player(message.author);
     if (you.isFighting) {
         return message.reply(`\`ERROR\` You can't pick a fight with someone while you're being punched in the face!`)
