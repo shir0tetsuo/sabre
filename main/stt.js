@@ -20,6 +20,7 @@ exports.run = (client, message, params) => {
   //console.log(jtimeDays)
   if (message.mentions.members.first() !== undefined) {
     console.log(message.mentions.members.first())
+    console.log(message.mentions.members.first().presence.status)
     //console.log(message.mentions.members.first().joinedTimestamp)
     //console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().user)
