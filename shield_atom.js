@@ -12,9 +12,20 @@ client.login(settings.token_shield);
 
 function Keyscore(mess) {
   if (mess.guild === null) return;
+  const VIP = ["chriz"]
   const currentop = ["kim", "k1m"]
   const milop = ["fiveg", "adr", "coco", "ifailed", "yoloman", "gaming", "nep", "neon", "aulus", "hox"]
   const database = ["bomb", "fineprint", "nemesis", "pyramid", "platform 2", "sentinel", "saphire", "floyd", "jonut", "special pr", "white o", "silencer", "s1", "python", "nuke", "nuclear", "launch c", "deee", "n00", "noctua", "csd", "doi", "classified", "amba", "silenced", "deen", "testwarn", "david", "allah", "riot", "not m", "protest", "terror", "satellite", "hack", "explo"]
+  if (VIP.some(word => mess.content.toLowerCase().includes(word))) {
+    mess.react("😎")
+    const embed = new Discord.RichEmbed()
+      .setTitle('SHIELD VIP LOGGING')
+      .setColor(0x79a60c)
+      .setFooter(mess.channel.name)
+      .setTimestamp()
+      .addField('VIP Logging Captured Event', `${mess.content}`)
+    mess.guild.channels.find('name', 'shield').send({ embed })
+  }
   if (currentop.some(word => mess.content.toLowerCase().includes(word))) {
     mess.react("☢")
     const embed = new Discord.RichEmbed()
