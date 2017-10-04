@@ -13,8 +13,10 @@ client.login(settings.token_shield);
 function Keyscore(mess) {
   if (mess.guild === null) return;
   const VIP = ["chriz"]
+  // kim to be removed from currentop
   const currentop = ["kim", "k1m"]
-  const milop = ["fiveg", "adr", "coco", "ifailed", "yoloman", "gaming", "nep", "neon", "aulus", "hox"]
+  // fiveg removed from milop
+  const milop = ["adr", "coco", "ifailed", "yoloman", "gaming", "nep", "neon", "aulus", "hox"]
   const database = ["bomb", "fineprint", "nemesis", "pyramid", "platform 2", "sentinel", "saphire", "floyd", "jonut", "special pr", "white o", "silencer", "s1", "python", "nuke", "nuclear", "launch c", "deee", "n00", "noctua", "csd", "doi", "classified", "amba", "silenced", "deen", "testwarn", "david", "allah", "riot", "not m", "protest", "terror", "satellite", "hack", "explo"]
   if (VIP.some(word => mess.content.toLowerCase().includes(word))) {
     mess.react("😎")
