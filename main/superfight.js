@@ -176,7 +176,7 @@ const attacks = {
         'was posessed! The ghosts made them hit themselves. Coulda been',
         'suddenly died and was brought back by'
       ]
-    }
+    },
     shadowsword: {
       damage: {
         min: 1000.0,
