@@ -283,7 +283,7 @@ exports.run = (bot, message, args) => {
 
     sql.get(`SELECT * FROM avail WHERE userId = "${mention.id}"`).then(row => {
       if (row.avail === 0) {
-        return message.reply(`\`ERROR\` This user has their lock on!`)
+        message.reply(`\`WARN\` This user has their lock on!`)
       }
     })
 
