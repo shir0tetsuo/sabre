@@ -1,4 +1,8 @@
 // https://github.com/RayzrDev/RayzrDevBot/blob/master/src/commands/games/fight.js
+
+const sql = require("sqlite");
+sql.open("../score.sqlite");
+
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
@@ -274,6 +278,14 @@ exports.run = (bot, message, args) => {
     if (mention.presence.status === "offline") {
         return message.reply(`\`ERROR\` You can't challenge a user who isn't there!`)
     }
+
+    // add in lock to prevent locked users from fighting
+
+    sql.get(`SELECT * FROM avail WHERE userId = "${mention.id}"`).then(row => {
+      if (row.avail === 0) {
+        return message.reply(`\`ERROR\` This user has their lock on!`)
+      }
+    })
 
     const you = new Player(message.author);
     if (you.isFighting) {
