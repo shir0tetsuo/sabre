@@ -78,7 +78,7 @@ const attacks = {
         'spontaneously combusted! Blame',
         'fell into a pit of lava! It was placed by'
       ]
-    }
+    },
     earthquake: {
       damage: {
         min: 500.0,
