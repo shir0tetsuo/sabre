@@ -8,7 +8,9 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   msg = message;
   message.delete()
-  msg.channel.send(`\`${msg.member.displayName}\` ${params.slice().join(' ')}`)
+  msg.channel.send(`${params.slice().join(' ')}`)
+  console.log(new Date())
+  console.log(`${msg.member.displayName} ran messg; ${msg.content}`)
 };
 
 /*
