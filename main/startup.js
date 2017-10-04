@@ -10,7 +10,11 @@ exports.run = (client, message, params) => {
   msg = message
   if (message.guild.id !== settings.alaskaguild) return;
   message.delete()
-  msg.channel.send("Server Startup! https://www.roblox.com/games/318692041/Anchorage-Alaska")
+  if (params[0] === "immigration") {
+    msg.channel.send("Immigration Center! https://www.roblox.com/games/1010198530/Immigration-Center")
+  } else {
+    msg.channel.send("Server Startup! https://www.roblox.com/games/318692041/Anchorage-Alaska")
+  }
 };
 
 /*
@@ -30,5 +34,5 @@ name is also the command alias
 exports.help = {
   name: 'startup',
   description: 'Displays Alaska server Startup Message.',
-  usage: 'startup'
+  usage: 'startup (immigration)'
 };
