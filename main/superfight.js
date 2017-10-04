@@ -4,27 +4,27 @@ function randomItem(array) {
 }
 
 const missMessage = [
-  'You missed!',
-  'Flyball! No damage dealt!',
-  'Oh snap, the attack failed!',
-  'Opponent dodged at lightning speed!',
-  'The hit didn\'t land!',
-  'You hit a tree instead!',
-  'They got out of the way just in time!'
+  ':anger: You missed!',
+  ':anger: Flyball! No damage dealt!',
+  ':anger: Oh snap, the attack failed!',
+  ':anger: Opponent dodged at lightning speed!',
+  ':anger: The hit didn\'t land!',
+  ':anger: You hit a tree instead!',
+  ':anger: They got out of the way just in time!'
 ]
 
 const turnSkip = [
-  'didn\'t respond, skipping their turn.',
-  'got distracted and couldn\'t fight back.',
-  'was busy eating pizza! Skipping their turn.',
-  'became disoriented after that last one, oh well.'
+  ':alarm_clock: didn\'t respond, skipping their turn.',
+  ':alarm_clock: got distracted and couldn\'t fight back.',
+  ':alarm_clock: was busy eating pizza! Skipping their turn.',
+  ':alarm_clock: became disoriented after that last one, oh well.'
 ]
 
 const afkTerminate = [
-  'Looks like the fight ended.',
-  'Neither opponent could finish the fight.',
-  'Everybody left.',
-  'Both opponents fell asleep.'
+  ':zzz: Looks like the fight ended.',
+  ':zzz: Neither opponent could finish the fight.',
+  ':zzz: Everybody left.',
+  ':zzz: Both opponents fell asleep.'
 ]
 
 // Attack Floor
