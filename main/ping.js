@@ -77,7 +77,7 @@ exports.run = (client, message, params) => {
     message.reply("Calculating!").then(m => m.edit({embed: {
       color: 0xebe100,
       timestamp: new Date(),
-      description: "Lag Panel",
+      description: `Lag Panel (${settings.version})`,
       author: {
         name: client.user.username,
         value: client.user.avatarURL
