@@ -187,7 +187,7 @@ function fight(message, player1, player2, turn) {
 }
 
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['f'],
   permLevel: 1
