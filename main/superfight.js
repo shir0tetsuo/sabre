@@ -84,7 +84,7 @@ const attacks = {
         min: 500.0,
         max: 1200.0
       },
-      attackChance: 0.30,
+      attackChance: 0.35,
       messages: [
         'fell into the depths of the Earth! Caused by',
         'was shook harder than a Martini! Blame',
@@ -97,7 +97,7 @@ const attacks = {
         min: 750.0,
         max: 1500.0
       },
-      attackChance: 0.25,
+      attackChance: 0.33,
       messages: [
         'was verbally assaulted by David! He was summoned by',
         'became investigated by David! Looks like it was',
@@ -186,6 +186,17 @@ const attacks = {
       messages: [
         'was sliced by the Sword of Shadows! Look out, it\'s',
         'was verbally abused by Shadow\'s Word! It was'
+      ]
+    },
+    slap: {
+      damage: {
+        min: 20.0,
+        max: 100.0
+      },
+      attackChance: 0.95,
+      messages: [
+        'was slapped up da face by',
+        'was hit in the noggin by'
       ]
     }
 };
