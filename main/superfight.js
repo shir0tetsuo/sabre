@@ -164,6 +164,29 @@ const attacks = {
         'was choked from lack of oxygen! Suffocated by',
         'was tumbled off a cliff by extreme winds! Blame'
       ]
+    },
+    ghosts: {
+      damage: {
+        min: 500.0,
+        max: 2000.0
+      },
+      attackChance: 0.40,
+      messages: [
+        'was picked up by the ghosts and dropped from up high! Might of been',
+        'was posessed! The ghosts made them hit themselves. Coulda been',
+        'suddenly died and was brought back by'
+      ]
+    }
+    shadowsword: {
+      damage: {
+        min: 1000.0,
+        max: 2500.0
+      },
+      attackChance: 0.25,
+      messages: [
+        'was sliced by the Sword of Shadows! Look out, it\'s',
+        'was verbally abused by Shadow\'s Word! It was'
+      ]
     }
 };
 
@@ -223,29 +246,29 @@ exports.run = (bot, message, args) => {
     const mention = message.mentions.users.first();
 
     if (!mention) {
-        message.reply(`\`ERROR\` You need to mention a user!`)
+        return message.reply(`\`ERROR\` You need to mention a user!`)
         //throw 'You must mention someone to fight them!';
     }
 
     if (mention.bot) {
-        message.reply(`\`ERROR\` Bots can't play!`)
+        return message.reply(`\`ERROR\` Bots can't play!`)
         //throw 'You can\'t play with a bot!';
     }
 
     if (mention.id === message.author.id) {
-        message.reply(`\`ERROR\` You can't commit harakiri!`)
+        return message.reply(`\`ERROR\` You can't commit harakiri!`)
         //throw 'You can\'t fight by yourself!';
     }
 
     const you = new Player(message.author);
     if (you.isFighting) {
-        message.reply(`\`ERROR\` You can't pick a fight with someone while you're being punched in the face!`)
+        return message.reply(`\`ERROR\` You can't pick a fight with someone while you're being punched in the face!`)
         //throw 'You\'re already fighting someone!';
     }
 
     const opponent = new Player(mention);
     if (opponent.isFighting) {
-        message.reply(`\`ERROR\` This player is a little distracted!`)
+        return message.reply(`\`ERROR\` This player is a little distracted!`)
         //throw 'Your opponent is already in a fight!';
     }
 
