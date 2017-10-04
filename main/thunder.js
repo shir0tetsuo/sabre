@@ -57,7 +57,7 @@ exports.run = (client, message, params) => {
 
   var zapped = message.mentions.members.map(m => `:cloud_lightning: ${m.displayName}`).join(', ')
 
-  message.channel.send(`***ZAP!*** was struck by lightning.`)
+  message.channel.send(`***ZAP!*** ${zapped} was struck by lightning.`)
 };
 
 /*
