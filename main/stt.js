@@ -13,12 +13,13 @@ exports.run = (client, message, params) => {
 
   //const jtime = message.member.joinedAt
   //const jtimeDays = Math.floor(jtime / 1000 / 60 / 60 / 24);
-  const millisJoined = new Date().getTime() - message.member.joinedAt.getTime();
-  const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
-  console.log(daysJoined)
+  //const millisJoined = new Date().getTime() - message.member.joinedAt.getTime();
+  //const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
+  //console.log(daysJoined)
   //console.log(message.member.joinedTimestamp)
   //console.log(jtimeDays)
   if (message.mentions.members.first() !== undefined) {
+    console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().joinedTimestamp)
     //console.log(message.mentions.members.first())
     //console.log(message.mentions.members.first().user)
