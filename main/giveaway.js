@@ -56,8 +56,6 @@ exports.run = (client, message, params) => {
   }
   message.channel.send(`@everyone Free Sabre Tickets! **${params[0]}** to be exact!\n\`Use the reaction to obtain!\``).then(m => {
     m.react('💰')
-    let reaction = await m.react('💰');
-    let reactionUsers = await reaction.fetchUsers();
     console.log(reactionUsers)
   })
 };
