@@ -20,6 +20,7 @@ exports.run = (client, message, params) => {
     var barCol = 0x31BF61
   }
   let mess = message
+  let keep = message
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
     //console.log(mess.author.id, row.level, row.tickets, row.chatBits)
@@ -66,7 +67,8 @@ exports.run = (client, message, params) => {
     var jobs = [
       'csd','sbi','dsi','ddsi','bmi','ang','ss'
     ]
-    if (mess.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
+  //  if (parse_floorX_links.some(word => floorX.includes(word)))
+    if (keep.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
       console.log('Hit')
       mess.react("😎")
     }
