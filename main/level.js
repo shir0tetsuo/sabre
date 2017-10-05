@@ -63,7 +63,10 @@ exports.run = (client, message, params) => {
       'Thanks for your support!',
       'I appreciate it.'
     ]
-    if (mess.member.displayName.toLowerCase().indexOf(['csd','sbi','dsi','ddsi','bmi','ang']) !== -1) {
+    var jobs = [
+      'csd','sbi','dsi','ddsi','bmi','ang','ss'
+    ]
+    if (mess.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
       console.log('Hit')
       mess.react("😎")
     }
