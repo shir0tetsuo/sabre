@@ -8,21 +8,6 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-function leechTarget(id) {
-  sql.get(`SELECT * FROM scores WHERE userId = "${id}"`).then(row => {
-    return row.tickets/10
-  })
-}
-function scoreLeech(targetID, winnerID, amount) {
-  if (!amount) var amount = 100
-  sql.get(`SELECT * FROM scores WHERE userId = "${targetID}"`).then(tgt => {
-    sql.run(`UPDATE scores SET tickets = "${tgt.tickets - amount*1}" WHERE userId = "${targetID}"`)
-  })
-  sql.get(`SELECT * FROM scores WHERE userId = "${winnerID}"`).then(winner => {
-    sql.run(`UPDATE scores SET tickets = "${winner.tickets + amount*1}" WHERE userId = "${winnerID}"`)
-  })
-}
-
 const missMessage = [
   ':anger: You missed!',
   ':anger: Flyball! No damage dealt!',
@@ -41,10 +26,11 @@ const turnSkip = [
 ]
 
 const afkTerminate = [
-  ':zzz: Looks like the fight ended.',
-  ':zzz: Neither opponent could finish the fight.',
-  ':zzz: Everybody left.',
-  ':zzz: Both opponents fell asleep.'
+  'Looks like the fight ended.',
+  'Neither opponent could finish the fight.',
+  'Everybody left.',
+  'Both opponents fell asleep.',
+  'The lights are on but nobody\'s home.'
 ]
 
 // Attack Floor
@@ -369,12 +355,9 @@ function fight(message, player1, player2, turn) {
 
             if (targetPlayer.hp <= 0) {
               // This is where the ticket deductions and additions should occur
-                message.channel.send(`**FATALITY! ${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**! Earnings: ${leechTarget(targetPlayer.id)}${curren}.`);
+                message.channel.send(`**FATALITY! ${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**!`);
                 targetPlayer.reset();
                 currentPlayer.reset();
-                setTimeout(() => {
-                  scoreLeech(targetPlayer.id, currentPlayer.id, leechTarget(targetPlayer.id))
-                }, 2000)
                 return;
             }
         }
