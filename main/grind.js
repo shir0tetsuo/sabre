@@ -65,6 +65,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'grind',
-  description: 'The level grind is real.',
+  description: 'The level grind is real. Do it before someone else does.',
   usage: 'grind'
 };
