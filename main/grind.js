@@ -23,7 +23,7 @@ exports.run = (client, message, params) => {
     noGrind.add(message.author.id);
     setTimeout(() => {
       noGrind.delete(message.author.id)
-    }, 30000)
+    }, 1800000)
     message.channel.send(`The level grind is real!\nType \`grind\` to obtain prize.`)
     .then(() => {
       message.channel.awaitMessages(response => response.content === 'grind', {
