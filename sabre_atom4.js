@@ -12,7 +12,7 @@ require('./sys/eventLoader')(client); // ** sys/eventLoader
 console.log(chalk.greenBright("System Initialization: Version", settings.version))
 const log = message => {
   var initEndDate = new Date();
-  console.log(chalk.redBright(`SabreCore: ${message} (${initEndDate.getTime() - initDate.getTime()}ms)`))
+  console.log(chalk.redBright(`SabreCore: ${message} (at ${initEndDate.getTime() - initDate.getTime()}ms)`))
   console.log(new Date())
 }
 // main -- commands
