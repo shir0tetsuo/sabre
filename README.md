@@ -6,7 +6,7 @@
 # The contents of this library are CLASSIFIED//TOP-SECRET
 # Do not attempt to open any code without authorization.
 #/////////////////////////////////////////////////////////
-# Authorized by Director of State Intelligence [Redacted],
+# Authorized by Director of State Intelligence shadowsword#0179,
 # the Deputy Director of State Intelligence [Redacted],
 # the Defense Security Council [Redacted]
 ```
