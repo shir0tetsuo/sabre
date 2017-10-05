@@ -5,40 +5,6 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-function scoreUpTicket(mess, xval) {
-  if (!xval) var xval = 1
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
-  })
-}
-function scoreDownTicket(mess, xval) {
-  if (!xval) var xval = 1
-  console.log(chalk.gray("Lowering ticket score by", xval*1, mess.author.id), mess.author.tag)
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    if (row.tickets*1 >= xval*1) {
-      sql.run(`UPDATE scores SET tickets = ${row.tickets - xval*1} WHERE userId = ${mess.author.id}`)
-    } else {
-      sql.run(`UPDATE scores SET tickets = 0 WHERE userId = "${mess.author.id}"`)
-    }
-  })
-}
-function scoreUpBits(mess, xval) {
-  if (!xval) var xval = 1
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
-  })
-}
-function scoreDownBits(mess, xval) {
-  if (!xval) var xval = 1
-  console.log(chalk.gray("Lowering byte score by", xval*1, mess.author.id), mess.author.tag)
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    if (row.chatBits*1 >= xval*1) {
-      sql.run(`UPDATE scores SET chatBits = ${row.chatBits - xval*1} WHERE userId = ${mess.author.id}`)
-    } else {
-      sql.run(`UPDATE scores SET chatBits = 0 WHERE userId = ${mess.author.id}`)
-    }
-  })
-}
 function Rand(data) {
   // where data is the array
   return data[Math.floor(Math.random() * data.length)]
@@ -47,8 +13,40 @@ function Rand(data) {
 // exports.run
 ////////////////////////////////////////////////////////////////////////////////
 
+let noGrind = new Set();
+
 exports.run = (client, message, params) => {
-  // Everything that happens
+  if (noGrind.has(message.author.id)) {
+    message.reply(`No grind for you! Gotta wait.`)
+  } else {
+    noGrind.add(message.author.id);
+    setTimeout(() => {
+      noGrind.delete(message.author.id)
+    }, 30000)
+    message.channel.send(`The level grind is real!\nType \`grind\` to add some stuff.`)
+    .then(() => {
+      message.channel.awaitMessages(response => response.content === 'grind', {
+        max: 1,
+        time: 10000,
+        errors: ['time'],
+      })
+      .then((collected) => {
+        sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+          var grinded = row.level*750
+          if (grinded === 0) var grind = 150
+          const collectedU = collected.first().author
+          message.channel.send(`${collectedU} collected dat grind! There was ${grinded}${curren}`)
+          setTimeout(() => {
+            sql.get(`SELECT * FROM scores WHERE userId = "${collectedU.id}"`).then(cur => {
+              sql.run(`UPDATE scores SET tickets = "${cur.tickets + grinded*1}" WHERE userId = "${collectedU.id}"`)
+            })
+          }, 2000)
+        })
+      })
+      .catch(() => {
+        message.channel.send(`Too late, the oppertunity passed.`)
+      })
+  }
 };
 
 /*
@@ -57,8 +55,8 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [''],
-  permLevel: 4
+  aliases: ['levelgrind'],
+  permLevel: 1
 };
 
 /*
@@ -66,7 +64,7 @@ name, desc., usage
 name is also the command alias
 */
 exports.help = {
-  name: '',
-  description: '',
-  usage: ''
+  name: 'grind',
+  description: 'The level grind is real.',
+  usage: 'grind'
 };
