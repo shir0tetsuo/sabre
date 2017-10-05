@@ -63,11 +63,12 @@ exports.run = (client, message, params) => {
       'Thanks for your support!',
       'I appreciate it.'
     ]
+    if (mess.member.displayName.toLowerCase().indexOf(['csd','sbi','dsi','ddsi','bmi','ang']) !== -1) {
+      console.log('Hit')
+      mess.react("😎")
+    }
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
-    }
-    if (mess.member.displayName.toLowerCase().indexOf(['csd','sbi','dsi','ddsi','bmi','ang']) !== -1) {
-      mess.react("😎")
     }
     if (mess.author.id === settings.danid || mess.member.roles.find('name', 'Sabre Donator')) {
       mess.channel.send({embed: {
