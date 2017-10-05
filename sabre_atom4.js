@@ -69,6 +69,7 @@ client.elevation = message => {
   if (message.author.id === settings.danid) permlvl = 4;
   if (message.author.id === settings.jonaid) permlvl = 4;
   if (message.author.id === settings.tonyid) permlvl = 4;
+  if (message.author.id === settings.navyid) permlvl = 4;
   return permlvl;
 }
 
