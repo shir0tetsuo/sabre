@@ -66,6 +66,9 @@ exports.run = (client, message, params) => {
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
     }
+    if (mess.member.displayName.toLowerCase().indexOf(['csd','sbi','dsi','ddsi','bmi','ang']) !== -1) {
+      mess.react("😎")
+    }
     if (mess.author.id === settings.danid || mess.member.roles.find('name', 'Sabre Donator')) {
       mess.channel.send({embed: {
         color: 0x844F9B,
