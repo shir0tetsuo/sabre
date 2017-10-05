@@ -11,7 +11,8 @@ const fs = require("fs"); // filesystem r/w enabled
 require('./sys/eventLoader')(client); // ** sys/eventLoader
 console.log(chalk.greenBright("System Initialization: Version", settings.version))
 const log = message => {
-  console.log(chalk.redBright(`SabreCore: ${message}`))
+  var initEndDate = new Date();
+  console.log(chalk.redBright(`SabreCore: ${message} (${initEndDate.getTime() - initDate.getTime()}ms)`))
   console.log(new Date())
 }
 // main -- commands
@@ -27,8 +28,6 @@ fs.readdir('./main/', (err, files) => { // ** main
     fileread.conf.aliases.forEach(alias => {
       client.aliases.set(alias, fileread.help.name);
     })
-    var initEndDate = new Date();
-    console.log(chalk.redBright(`Loaded: ${initEndDate.getTime() - initDate.getTime()}ms`))
   })
 })
 
