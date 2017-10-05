@@ -28,7 +28,7 @@ fs.readdir('./main/', (err, files) => { // ** main
       client.aliases.set(alias, fileread.help.name);
     })
     var initEndDate = new Date();
-    console.log(`Initialized in ${initEndDate.getTime() - initDate.getTime()}ms`)
+    console.log(chalk.blueBright(`Init Marker: ${initEndDate.getTime() - initDate.getTime()}ms`))
   })
 })
 
