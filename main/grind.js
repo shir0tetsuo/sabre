@@ -32,7 +32,7 @@ exports.run = (client, message, params) => {
       })
       .then((collected) => {
         sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-          var grinded = row.level*750
+          var grinded = row.level*150
           if (grinded === 0) var grinded = 150
           const collectedU = collected.first().author
           message.channel.send(`${collectedU} collected dat grind! Got ${grinded}${curren}`)
