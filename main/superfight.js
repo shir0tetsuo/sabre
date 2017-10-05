@@ -2,9 +2,25 @@
 
 const sql = require("sqlite");
 sql.open("../score.sqlite");
+let curren = ":tickets:"
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
+}
+
+function leechTarget(id) {
+  sql.get(`SELECT * FROM scores WHERE userId = "${id}"`).then(row => {
+    return row.tickets/10
+  })
+}
+function scoreLeech(targetID, winnerID, amount) {
+  if (!amount) var amount = 100
+  sql.get(`SELECT * FROM scores WHERE userId = "${targetID}"`).then(tgt => {
+    sql.run(`UPDATE scores SET tickets = "${tgt.tickets - amount*1}" WHERE userId = "${targetID}"`)
+  })
+  sql.get(`SELECT * FROM scores WHERE userId = "${winnerID}"`).then(winner => {
+    sql.run(`UPDATE scores SET tickets = "${winner.tickets + amount*1}" WHERE userId = "${winnerID}"`)
+  })
 }
 
 const missMessage = [
@@ -353,9 +369,12 @@ function fight(message, player1, player2, turn) {
 
             if (targetPlayer.hp <= 0) {
               // This is where the ticket deductions and additions should occur
-                message.channel.send(`**${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**!`);
+                message.channel.send(`**FATALITY! ${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**! Earnings: ${leechTarget(targetPlayer.id)}${curren}.`);
                 targetPlayer.reset();
                 currentPlayer.reset();
+                setTimeout(() => {
+                  scoreLeech(targetPlayer.id, currentPlayer.id, leechTarget(targetPlayer.id))
+                }, 2000)
                 return;
             }
         }
