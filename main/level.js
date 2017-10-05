@@ -67,9 +67,9 @@ exports.run = (client, message, params) => {
     var jobs = [
       'csd','sbi','dsi','ddsi','bmi','ang','ss'
     ]
-  //  if (parse_floorX_links.some(word => floorX.includes(word)))
-    if (keep.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
-      console.log('Hit')
+    if (jobs.some(word => keep.member.displayName.toLowerCase().includes(word))) {
+  //  if (keep.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
+  //    console.log('Hit')
       mess.react("😎")
     }
     if (mess.author.id === settings.ownerid) {
