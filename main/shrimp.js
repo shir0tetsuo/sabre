@@ -39,6 +39,7 @@ const returned = [
   'Shrimp Sandwich!',
   'Shrimp Cocktail!',
   'Shrimp Salad!',
+  'Shrimp Pot Pie!',
   'Shrimp Teriyaki!',
   'Ordinary Shrimp!'
 ]
