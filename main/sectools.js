@@ -10,6 +10,12 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   if (message.author.id === settings.ownerid) {
     if (params[0] === undefined) return message.reply("`ERROR` See Manual!")
+    if (params[0] === "update") {
+      exec(`./pull.sh`,
+      function(error, stdout, stderr) {
+        message.reply(`\`\`\`${stdout}\`\`\`\n\`\`\`${stderr}\`\`\``)
+      })
+    }
     if (params[0] === "a2link") {
       if (params[1] === undefined) {
         var keyword = "help"
@@ -123,5 +129,5 @@ name is also the command alias
 exports.help = {
   name: 'sectools',
   description: 'Security tools suite. OWNER ONLY!',
-  usage: 'sectools [a2link (keyword) / ssh (command) / sshx (command)]'
+  usage: 'sectools [a2link (keyword) / sshx (command) / update]'
 };
