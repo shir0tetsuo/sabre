@@ -2,6 +2,7 @@
 // 0.3.7.10E --> 0.4.0.0+
 // Based on AnIdiotsGuide's Tutorial Bot
 // Constraints!!
+var initDate = new Date();
 const settings = require('./settings.json')
 const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
@@ -26,6 +27,9 @@ fs.readdir('./main/', (err, files) => { // ** main
     fileread.conf.aliases.forEach(alias => {
       client.aliases.set(alias, fileread.help.name);
     })
+  }).then({
+    var initEndDate = new Date();
+    console.log(`Initialized in ${initEndDate.getTime() - initDate.getTime()}ms`)
   })
 })
 
