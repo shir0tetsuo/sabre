@@ -46,7 +46,7 @@ exports.run = (client, message, params) => {
       .catch(() => {
         message.channel.send(`Too late, the oppertunity passed.`)
       })
-  }
+  })
 };
 
 /*
