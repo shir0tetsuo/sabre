@@ -27,7 +27,6 @@ fs.readdir('./main/', (err, files) => { // ** main
     fileread.conf.aliases.forEach(alias => {
       client.aliases.set(alias, fileread.help.name);
     })
-  }).then({
     var initEndDate = new Date();
     console.log(`Initialized in ${initEndDate.getTime() - initDate.getTime()}ms`)
   })
