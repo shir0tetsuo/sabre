@@ -57,21 +57,20 @@ exports.run = (client, message, params) => {
           value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
         }
       ]
-    }})) // do something here to make special things have output +=
+    }})).then(m => {
+      var jobs = [
+        'csd','sbi','dsi','ddsi','bmi','ang','ss'
+      ]
+      if (jobs.some(word => keep.member.displayName.toLowerCase().includes(word))) {
+        m.react("😎")
+      }
+    }) // do something here to make special things have output +=
     let king = ":warning:"
     const sReply = [
       'You\'re an awesome fella.',
       'Thanks for your support!',
       'I appreciate it.'
     ]
-    var jobs = [
-      'csd','sbi','dsi','ddsi','bmi','ang','ss'
-    ]
-    if (jobs.some(word => keep.member.displayName.toLowerCase().includes(word))) {
-  //  if (keep.member.displayName.toLowerCase().indexOf(jobs) !== -1) {
-  //    console.log('Hit')
-      mess.react("😎")
-    }
     if (mess.author.id === settings.ownerid) {
       mess.reply("is the Main Developer!")
     }
