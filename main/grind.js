@@ -18,6 +18,7 @@ let noGrind = new Set();
 exports.run = (client, message, params) => {
   if (noGrind.has(message.author.id)) {
     message.reply(`No grind for you! Gotta wait.`)
+    return;
   } else {
     noGrind.add(message.author.id);
     setTimeout(() => {
