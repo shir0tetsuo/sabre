@@ -6,10 +6,12 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 var attributes = [
+	// Metal
+	"steel", "iron", "metal", "oxidized", "aluminum", "tin", "silver",
 	// Environ
-	"desert", "tundra", "mountain", "space", "field", "urban",
+	"desert", "tundra", "mountain", "space", "field", "urban", "standalone", "nightfall",
 	// Stealth and cunning
-	"hidden", "covert", "uncanny", "scheming", "decisive", "untouchable", "stalking",
+	"hidden", "covert", "uncanny", "scheming", "decisive", "untouchable", "stalking", "invisible",
 	// Volitility
 	"rowdy", "dangerous", "explosive", "threatening", "warring", "deadly", "killer", "insane", "wild",
 	// Needs correction
@@ -19,7 +21,7 @@ var attributes = [
 	// Regular Gems
 	"agate", "beryl", "diamond", "opal", "ruby", "onyx", "sapphire", "emerald", "jade",
 	// Colors
-	"red", "orange", "yellow", "green", "blue", "violet",
+	"red", "orange", "yellow", "green", "blue", "violet", "brown", "aqua",
 	// Unsorted
 	"draconic", "wireless", "spinning", "falling", "orbiting", "hunting", "chasing", "searching", "revealing", "flying", "destroyed", "inconceivable", "tarnished"
 ]
@@ -29,6 +31,8 @@ var objects = [
 	"panther", "wildcat", "tiger", "lion", "cheetah", "cougar", "leopard",
 	// Snakes
 	"viper", "cottonmouth", "python", "boa", "sidewinder", "cobra",
+	// Other animals
+	"turtle", "tortoise", "cat", "feline",
 	// Other predators
 	"grizzly", "jackal", "falcon",
 	// Prey
@@ -40,9 +44,9 @@ var objects = [
 	// Occupations
 	"nomad", "wizard", "cleric", "pilot", "captain", "commander", "general", "major", "admiral", "chef", "inspector",
 	// Technology
-	"mainframe", "device", "motherboard", "network", "transistor", "packet", "robot", "android", "cyborg", "display", "battery", "memory", "disk", "cartridge", "tape", "camera", "projector",
+	"mainframe", "device", "motherboard", "network", "transistor", "packet", "robot", "android", "cyborg", "display", "battery", "memory", "disk", "cartridge", "tape", "camera", "projector", "matrix", "complex",
 	// Sea life
-	"octopus", "lobster", "crab", "barnacle", "hammerhead", "orca", "piranha",
+	"octopus", "lobster", "crab", "barnacle", "hammerhead", "orca", "piranha", "fugu",
 	// Weather
 	"storm", "thunder", "lightning", "rain", "hail", "sun", "drought", "snow", "drizzle",
 	// Musical
