@@ -19,22 +19,22 @@ exports.run = (client, message, params) => {
       */
       if (message.mentions.members.first() !== undefined) {
         let zap = '';
-        zap += `   x   /xx\n`
-        zap += `    x / Xx\n`
-        zap += `     x|xX\n`
-        zap += `      XX\n`
+        zap += `   X   /xx  XXx\n`
+        zap += `    x / Xx XXx\n`
+        zap += `     x|xX XX\n`
+        zap += `      XX X\n`
         zap += `      -X^\n`
-        zap += `     /  X\n`
-        zap += `     | xX\n`
-        zap += `    /  Xx\n`
-        zap += `   /   xX\n`
+        zap += `     /  Xx\n`
+        zap += `     | xX xX\n`
+        zap += `    /  Xx  X\n`
+        zap += `   /   xX xX\n`
         zap += `    x x XX\n`
         zap += `     x   Xx\n`
         zap += `     ${message.mentions.members.first().displayName}\n`
         zap += `       was just ZAPPED!`
         msg = message;
         message.delete();
-        msg.channel.send(`\`\`\`${zap}\`\`\``)
+        msg.channel.send(`${message.mentions.members.first()}\`\`\`${zap}\`\`\``)
       }
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
