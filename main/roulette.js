@@ -41,7 +41,7 @@ function scoreDownBits(mess, xval) {
 }
 
 exports.run = (client, message, params) => {
-  var blammo = [ { text: "BLAMMO!" }, { text: "WHAMMY-WHAMMED!" }, { text: "BOMBBOOZLED!" }, { text: "OHHH, NOOOOO!" }, { text: "POP goes the DYNAMITE!" } ]
+  var blammo = [ { text: "BLAMMO!" }, { text: "WHAMMY-WHAMMED!" }, { text: "BOMBBOOZLED!" }, { text: "OHHH, NOOOOO!" }, { text: "POP goes the DYNAMITE!" }, { text: "POW! Right in the Kisser!" }, { text: "Cleanup on Ilse YOU!" } ]
   var blammo = blammo[Math.floor(Math.random() * blammo.length)]
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     let chancefloor = Math.floor(Math.random() * 100) // >17%
