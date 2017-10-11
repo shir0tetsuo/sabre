@@ -9,7 +9,8 @@ exports.run = (client, message, params) => {
     setTimeout(() => {
       sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
         if (!hl) {
-          sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [message.author.id, 1, 0, 0]);
+          let parameters = params[2]
+          sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [message.author.id, parameters, 0, 0]);
         }
         sql.run(`UPDATE hyperlevels SET hlvl = "${params[2]}" WHERE userId = "${person.id}"`)
       })
