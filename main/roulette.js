@@ -45,7 +45,7 @@ exports.run = (client, message, params) => {
   var blammo = blammo[Math.floor(Math.random() * blammo.length)]
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
     let chancefloor = Math.floor(Math.random() * 100) // >17%
-    if (chancefloor > 19) {
+    if (chancefloor > 20) {
       var prize = Math.floor(row.tickets/18) + 5
       var newbit = Math.floor(row.chatBits/15)
       if (prize > 1000000) var prize = 1000000
@@ -60,8 +60,8 @@ exports.run = (client, message, params) => {
     } else {
       var prize = Math.floor(row.tickets/7)
       var newbit = Math.floor(row.chatBits/5)
-      if (prize > 1200000) var prize = 1200000
-      if (newbit > 1700000) var newbit = 1700000
+      if (prize > 5000000) var prize = 5000000
+      if (newbit > 3000000) var newbit = 3000000
       scoreDownTicket(message, prize)
       scoreDownBits(message, newbit)
       var winlose = "**lost**"
