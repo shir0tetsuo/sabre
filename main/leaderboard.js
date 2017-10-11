@@ -34,7 +34,12 @@ exports.run = async(client, message, params) => {
           output += `\`\`\`asciidoc\n`
           output += data.map(m => `${m.shrimpScore} :: ${m.userDisplay}`).join('\n')
           output += `\`\`\``
-          message.channel.send(output)
+          output += `${selfdestruct}`
+          message.channel.send(output).then(message => {
+            setTimeout(() => {
+              message.delete()
+            }, delayMil)
+          })
         })
       } else if (params[0] === 'h') {
         sql.all(`SELECT * FROM hyperlevels ORDER BY hlvl DESC LIMIT 10`).then(data => {
