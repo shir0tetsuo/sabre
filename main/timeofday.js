@@ -14,7 +14,7 @@ exports.run = (client, message, params) => {
     mo = now.getMonth(),
     dy = now.getDate(),
     yr = now.getFullYear();
-  let localtime = `[${hou}:${min}:${sec}] ${dy}/${mo}/${yr}`
+  let localtime = `[${hou}:${min}:${sec}] ${dy}/${mo}/${yr} SERVERCLOCK(GMT-0400EST/NYC)`
   if (hou >= 18) {
     message.reply(`Evening! \`${localtime}\``).then(m => {
       m.react("🌆")
