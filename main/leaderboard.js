@@ -27,6 +27,15 @@ exports.run = async(client, message, params) => {
             }, delayMil)
           })
         })
+      } else if (params[0] === 's') {
+        sql.all(`SELECT * FROM shrimp ORDER BY shrimpScore DESC LIMIT 20`).then(data => {
+          let output = '';
+          output += `***Shrimp is the Fruit of the Sea!***`
+          output += `\`\`\`asciidoc\n`
+          output += data.map(m => `${m.shrimpScore} :: ${m.userDisplay}`).join('\n')
+          output += `\`\`\``
+          message.channel.send(output)
+        })
       } else if (params[0] === 'h') {
         sql.all(`SELECT * FROM hyperlevels ORDER BY hlvl DESC LIMIT 10`).then(data => {
           output += `__**TOP 10 :: HYPERLEVEL**__\n`
@@ -92,5 +101,5 @@ name is also the command alias
 exports.help = {
   name: 'leaderboard',
   description: 'Displays Global Sabre Leaderboards. (SL10)',
-  usage: 'leaderboard [l/t/b/h]\nLevel Requirements :: 10'
+  usage: 'leaderboard [l/t/b/h/s]\nLevel Requirements :: 10\nlevel :: l\ntickets :: t\nbytes :: b\nHyperlevel :: h\nshrimp :: s'
 };
