@@ -52,7 +52,7 @@ const attacks = {
             min: 600.0,
             max: 1000.0
         },
-        attackChance: 0.60,
+        attackChance: 0.65,
         messages: [
             'was kicked in the gut by',
             'was dropkicked by',
@@ -77,7 +77,7 @@ const attacks = {
         min: 700.0,
         max: 1000.0
       },
-      attackChance: 0.35,
+      attackChance: 0.70,
       messages: [
         'was badly burnt by a ball of fire by',
         'was lit by a Zippo from',
@@ -90,7 +90,7 @@ const attacks = {
         min: 500.0,
         max: 1200.0
       },
-      attackChance: 0.35,
+      attackChance: 0.60,
       messages: [
         'fell into the depths of the Earth! Caused by',
         'was shook harder than a Martini! Blame',
@@ -103,7 +103,7 @@ const attacks = {
         min: 750.0,
         max: 1500.0
       },
-      attackChance: 0.33,
+      attackChance: 0.55,
       messages: [
         'was verbally assaulted by David! He was summoned by',
         'became investigated by David! Looks like it was',
@@ -116,7 +116,7 @@ const attacks = {
         min: 400.0,
         max: 1000.0
       },
-      attackChance: 0.40,
+      attackChance: 0.70,
       messages: [
         'was raided by CSD! They were called in by',
         'was investigated by CSD! Blame',
@@ -128,7 +128,7 @@ const attacks = {
         min: 300.0,
         max: 2000.0
       },
-      attackChance: 0.40,
+      attackChance: 0.60,
       messages: [
         'was hyperpunched! Hurray for',
         'had their jaw broken by the might of',
@@ -141,7 +141,7 @@ const attacks = {
         min: 700.0,
         max: 3000.0
       },
-      attackChance: 0.20,
+      attackChance: 0.40,
       messages: [
         'was zapped! Opponent summoned a lightning strike! It was caused by',
         'was struck by lightning from'
@@ -152,7 +152,7 @@ const attacks = {
         min: 500.0,
         max: 2000.0
       },
-      attackChance: 0.25,
+      attackChance: 0.50,
       messages: [
         'was drowned in the nearby pool! It was',
         'experienced a Tsunami! Blame',
@@ -164,7 +164,7 @@ const attacks = {
         min: 900.0,
         max: 3000.0
       },
-      attackChance: 0.30,
+      attackChance: 0.35,
       messages: [
         'was sliced up by wind! It was',
         'was choked from lack of oxygen! Suffocated by',
@@ -176,7 +176,7 @@ const attacks = {
         min: 500.0,
         max: 2000.0
       },
-      attackChance: 0.40,
+      attackChance: 0.55,
       messages: [
         'was picked up by the ghosts and dropped from up high! Might of been',
         'was posessed! The ghosts made them hit themselves. Coulda been',
@@ -188,7 +188,7 @@ const attacks = {
         min: 1000.0,
         max: 2500.0
       },
-      attackChance: 0.25,
+      attackChance: 0.40,
       messages: [
         'was sliced by the Sword of Shadows! Look out, it\'s',
         'was verbally abused by Shadow\'s Word! It was'
@@ -197,7 +197,7 @@ const attacks = {
     slap: {
       damage: {
         min: 20.0,
-        max: 100.0
+        max: 1000.0
       },
       attackChance: 0.95,
       messages: [
