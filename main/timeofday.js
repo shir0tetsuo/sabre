@@ -14,14 +14,23 @@ exports.run = (client, message, params) => {
     mo = now.getMonth(),
     dy = now.getDate(),
     yr = now.getFullYear();
+  let localtime = `[${hou}:${min}:${sec}] ${dy}/${mo}/${yr}`
   if (hou >= 18) {
-    message.reply(`Evening!`)
+    message.reply(`Evening! \`${localtime}\``).then(m => {
+      m.react("🌆")
+    })
   } else if (hou >= 12) {
-    message.reply(`Afternoon!`)
+    message.reply(`Afternoon! \`${localtime}\``).then(m => {
+      m.react("🏙")
+    })
   } else if (hou >= 7) {
-    message.reply(`Morning!`)
+    message.reply(`Morning! \`${localtime}\``).then(m => {
+      m.react("🌇")
+    })
   } else if (hou >= 0) {
-    message.reply(`Night!`)
+    message.reply(`Night! \`${localtime}\``).then(m => {
+      m.react("🌃")
+    })
   }
 };
 // NOTE: This can be implemented for using time of day with intervals
