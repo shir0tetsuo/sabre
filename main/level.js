@@ -24,6 +24,13 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
     if (!row) return mess.reply("Your current level is 0.");
     //console.log(mess.author.id, row.level, row.tickets, row.chatBits)
+    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${mess.author.id}"`).then(hl => {
+      if (!hl) var hyperLevel = 0
+      var hyperLevel = hl.hlvl
+    })
+    var slev = '';
+    slev += row.level
+    if (hyperLevel >= 1) slev += `\n(HyperLevel: ${hyperLevel})`
     mess.reply("Calculating!").then(m => m.edit({embed: {
       color: barCol,
       timestamp: new Date(),
@@ -39,7 +46,7 @@ exports.run = (client, message, params) => {
       fields: [
         {
           name: `:small_orange_diamond:: Level`,
-          value: "```" + row.level + "```",
+          value: `\`\`\`${slev}\`\`\``,
           inline: true
         },
         {
