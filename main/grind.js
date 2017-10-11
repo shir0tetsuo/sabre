@@ -33,7 +33,7 @@ exports.run = (client, message, params) => {
       })
       .then((collected) => {
         sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-          var grinded = row.level*70
+          var grinded = row.level*85
           if (grinded === 0) var grinded = 50
           if (grinded > 1000000) var grinded = 1000000
           const collectedU = collected.first().author
