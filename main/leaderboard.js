@@ -29,7 +29,7 @@ exports.run = async(client, message, params) => {
         })
       } else if (params[0] === 'h') {
         sql.all(`SELECT * FROM hyperlevels ORDER BY hlvl DESC LIMIT 10`).then(data => {
-          output += `__**TOP 10 :: HYPERLEVEL**__\n\n`
+          output += `__**TOP 10 :: HYPERLEVEL**__\n`
           output += data.map(m => `<@${m.userId}> \`HYPERLEVEL ${m.hlvl}\``).join('\n')
           output += `\n${selfdestruct}`
           message.channel.send(`${output}`).then(message => {
