@@ -41,7 +41,7 @@ function scoreDownBits(mess, xval) {
 }
 
 exports.run = (client, message, params) => {
-  if (message.author.id === settings.ownerid && params[0] === "set" && isInteger(params[1]) === true) {
+  if (message.author.id === settings.ownerid && params[0] === "set" && params[1] > 100) {
     sql.run(`UPDATE makeitjacky SET tickets = "${params[2]}" WHERE place = "here"`)
     message.reply(`Jackpot updated (${params[2]} ${curren})`)
     return;

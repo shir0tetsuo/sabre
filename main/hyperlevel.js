@@ -91,7 +91,8 @@ exports.conf = {
   aliases: ['hlvl'],
   permLevel: 0
 };
-// NOTE: Add to seed and exam
+// NOTE: Add to seed and exam and leaderboard
+// NOTE: ADD BANK and FIX SHRIMP and FIX DUCK and FIX ROULETTE CAUSE IT DEDUCTS TOO MUCH
 /*
 name, desc., usage
 name is also the command alias
