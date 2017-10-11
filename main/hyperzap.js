@@ -36,6 +36,7 @@ exports.run = (client, message, params) => {
         msg = message;
         message.delete();
         msg.channel.send(`${message.mentions.members.first()}\n${lightning}\`\`\`${zap}\`\`\``)
+        msg.react("🌩")
       }
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
