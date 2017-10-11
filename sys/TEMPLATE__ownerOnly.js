@@ -29,6 +29,6 @@ name is also the command alias
 */
 exports.help = {
   name: '',
-  description: '',
+  description: '(PL4O)',
   usage: ''
 };
