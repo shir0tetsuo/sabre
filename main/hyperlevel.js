@@ -53,13 +53,13 @@ exports.run = (client, message, params) => {
       return message.reply(`\`ERROR\` You don't have a level.`)
     }
     if (row.level > 9001) {
-      message.reply(`${message.author}\n\`\`\`markdown\n[+1 Hyperlevel]: You have been prestiged.\`\`\``)
+      message.reply(`\n\`\`\`markdown\n[+1 Hyperlevel]: You have been prestiged.\`\`\``)
       setTimeout(() => {
         sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
           if (!hl) {
             sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [message.author.id, 1, 0, 0]);
           }
-          sql.run(`UPDATE hyperlevels SET hlvl = "${hl.hlvl*1 + 1}"`)
+          sql.run(`UPDATE hyperlevels SET hlvl = "${hl.hlvl*1 + 1}" WHERE userId = "${message.author.id}"`)
         }).catch(() => {
           console.error;
           console.log(chalk.redBright("!!! The system recovered from an error (database creation for hyperlevels)"))
