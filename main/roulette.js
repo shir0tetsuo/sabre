@@ -60,6 +60,8 @@ exports.run = (client, message, params) => {
     } else {
       var prize = Math.floor(row.tickets/7)
       var newbit = Math.floor(row.chatBits/5)
+      if (prize > 1200000) var prize = 1200000
+      if (newbit > 1700000) var newbit = 1700000
       scoreDownTicket(message, prize)
       scoreDownBits(message, newbit)
       var winlose = "**lost**"

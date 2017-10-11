@@ -41,9 +41,10 @@ function scoreDownBits(mess, xval) {
 }
 
 exports.run = (client, message, params) => {
-  if (message.author.id === settings.ownerid && params[1] === "set" && params[2].isInteger() === true) {
+  if (message.author.id === settings.ownerid && params[0] === "set" && isInteger(params[1]) === true) {
     sql.run(`UPDATE makeitjacky SET tickets = "${params[2]}" WHERE place = "here"`)
     message.reply(`Jackpot updated (${params[2]} ${curren})`)
+    return;
   }
   let person = message.mentions.members.first()
   if (person === undefined) return message.reply("No user was @mentioned!")
