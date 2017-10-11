@@ -42,7 +42,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['tod'],
-  permLevel: 4
+  permLevel: 1
 };
 
 /*
