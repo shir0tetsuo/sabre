@@ -14,10 +14,17 @@ exports.run = (client, message, params) => {
     mo = now.getMonth(),
     dy = now.getDate(),
     yr = now.getFullYear();
-  if (hou == 9) {
-    //something
+  if (hou >= 18) {
+    message.reply(`Evening!`)
+  } else if (hou >= 12) {
+    message.reply(`Afternoon!`)
+  } else if (hou >= 7) {
+    message.reply(`Morning!`)
+  } else if (hou >= 0) {
+    message.reply(`Night!`)
   }
 };
+// NOTE: This can be implemented for using time of day with intervals
 
 /*
 enabled, guildOnly, aliases, permission level

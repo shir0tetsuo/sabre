@@ -355,7 +355,13 @@ function fight(message, player1, player2, turn) {
 
             if (targetPlayer.hp <= 0) {
               // This is where the ticket deductions and additions should occur
-                message.channel.send(`**FATALITY! ${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**!`);
+              let excessTk = Math.round(Math.random() * (100000 - 1600) + 1600)
+                message.channel.send(`**FATALITY! ${targetPlayer.user.username}** was defeated by **${currentPlayer.user.username}**! Gained ${excessTk}${curren}`);
+                setTimeout(() => {
+                  sql.get(`SELECT * FROM scores WHERE userId = "${currentPlayer.id}"`).then(row => {
+                    sql.run(`UPDATE scores SET tickets = "${row.tickets + excessTk*1}"`)
+                  })
+                }, 2000)
                 targetPlayer.reset();
                 currentPlayer.reset();
                 return;
