@@ -11,9 +11,7 @@ exports.run = (client, message, params) => {
         sql.run(`UPDATE hyperlevels SET hlvl = "${params[2]}" WHERE userId = "${person.id}"`)
       })
     }, 2000)
-    .then(() => {
       message.reply(`Updated ${person} with HyperLevel of ${params[2]}`)
-    })
     return;
   }
   if (params[3] === undefined) return message.reply("Please see Help Menu for this command!")
