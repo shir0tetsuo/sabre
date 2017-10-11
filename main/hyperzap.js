@@ -30,11 +30,12 @@ exports.run = (client, message, params) => {
         zap += `   /   xX xX\n`
         zap += `    x x XX\n`
         zap += `     x   Xx\n`
-        zap += `     ${message.mentions.members.first().displayName}\n`
-        zap += `       was just ZAPPED!`
+        zap += `   ${message.mentions.members.first().displayName}\n`
+        zap += `     was just ZAPPED!`
+        let lightning = ':cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: '
         msg = message;
         message.delete();
-        msg.channel.send(`${message.mentions.members.first()}\`\`\`${zap}\`\`\``)
+        msg.channel.send(`${message.mentions.members.first()}\n${lightning}\`\`\`${zap}\`\`\``)
       }
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
