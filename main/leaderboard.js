@@ -27,6 +27,17 @@ exports.run = async(client, message, params) => {
             }, delayMil)
           })
         })
+      } else if (params[0] === 'h') {
+        sql.all(`SELECT * FROM hyperlevels ORDER BY hlvl DESC LIMIT 10`).then(data => {
+          output += `__**TOP 10 :: HYPERLEVEL**__\n\n`
+          output += data.map(m => `<@${m.userId}> \`HYPERLEVEL ${m.hlvl}\``).join('\n')
+          output += `\n${selfdestruct}`
+          message.channel.send(`${output}`).then(message => {
+            setTimeout(() => {
+              message.delete()
+            }, delayMil)
+          })
+        })
       } else if (params[0] === 't') {
         sql.all(`SELECT * FROM scores ORDER BY tickets DESC LIMIT 10`).then(data => {
           output += `__**TOP 10 :: TICKETS**__\n`
@@ -81,5 +92,5 @@ name is also the command alias
 exports.help = {
   name: 'leaderboard',
   description: 'Displays Global Sabre Leaderboards. (SL10)',
-  usage: 'leaderboard [l/t/b]\nLevel Requirements :: 10'
+  usage: 'leaderboard [l/t/b/h]\nLevel Requirements :: 10'
 };

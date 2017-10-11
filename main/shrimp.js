@@ -148,7 +148,7 @@ exports.run = (client, message, params) => {
       output += `Judge 5: This judge is very salty. ${Respond(judge5)} They give a ${judge5}!\n\n`
       let overall = judge1*1 + judge2*1 + judge3*1 + judge4*1 + judge5*1
       output += `Your overall score: ${overall} /50\n`
-      let prizeValue = (overall * 20)
+      let prizeValue = (overall * 75)
       output += `You gained ${prizeValue}${curren} for your ${meal}!`
       message.channel.send(output)
       setTimeout(() => {

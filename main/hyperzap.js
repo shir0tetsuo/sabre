@@ -52,7 +52,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['hzap'],
-  permLevel: 3
+  permLevel: 0
 };
 
 /*
