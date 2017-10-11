@@ -15,7 +15,7 @@ var attributes = [
 	// Volitility
 	"rowdy", "dangerous", "explosive", "threatening", "warring", "deadly", "killer", "insane", "wild",
 	// Needs correction
-	"bad", "unnecessary", "unknown", "unexpected", "waning",
+	"bad", "unnecessary", "unknown", "unexpected", "waning", "future",
 	// Organic Gems and materials
 	"amber", "bone", "coral", "ivory", "jet", "nacre", "pearl", "obsidian", "glass",
 	// Regular Gems
@@ -54,7 +54,7 @@ var objects = [
 	// Tools
 	"screwdiver", "sander", "lathe", "mill", "welder", "mask", "hammer", "drill", "compressor", "wrench", "mixer", "router", "vacuum",
 	// Other
-	"warning", "presence", "weapon", "player", "ink", "case", "cup", "chain", "door"
+	"warning", "presence", "weapon", "player", "ink", "case", "cup", "chain", "door", "vision"
 ]
 
 function Rand(data) {
