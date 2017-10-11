@@ -26,15 +26,15 @@ exports.run = (client, message, params) => {
       message.reply(botwin + rpsmat.ans)
     } else if (rpsinput === "rock" && rpsmat.ans === "scissors") {
       message.reply(botlose + rpsmat.ans + wintk)
-            scoreUpTicket(message, 5)
+            scoreUpTicket(message, 200)
     } else if (rpsinput === "paper" && rpsmat.ans === "rock") {
       message.reply(botlose + rpsmat.ans + wintk)
-            scoreUpTicket(message, 5)
+            scoreUpTicket(message, 200)
     } else if (rpsinput === "paper" && rpsmat.ans === "scissors") {
       message.reply(botwin + rpsmat.ans)
     } else if (rpsinput === "scissors" && rpsmat.ans === "paper") {
       message.reply(botlose + rpsmat.ans + wintk)
-            scoreUpTicket(message, 5)
+            scoreUpTicket(message, 200)
     } else if (rpsinput === "scissors" && rpsmat.ans === "rock") {
       message.reply(botwin + rpsmat.ans)
     }

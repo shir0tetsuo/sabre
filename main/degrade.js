@@ -221,6 +221,8 @@ exports.run = (client, message, params) => {
         damageText += `This wasn't really a successful adventure.`
         dandyText += `Could of been worse, right?`
       } else if (dgchance >= 33) {
+        //const damage = Math.round(Math.random() * (attack.damage.max - attack.damage.min) + attack.damage.min);
+
         var ticketGain = Math.round(Math.random() * 500)
         setTimeout(() => {
           scoreDownTicket(message, ticketGain)
@@ -228,7 +230,7 @@ exports.run = (client, message, params) => {
         damageText += `You felt like going to the hospital.`
         dandyText += `It costed ${ticketGain}${curren} to get patched up.`
       } else {
-        var ticketGain = Math.round(Math.random() * 2000)
+        var ticketGain = Math.round(Math.random() * (20000 - 900) + 900)
         setTimeout(() => {
           scoreDownTicket(message, ticketGain)
         }, 2500)
@@ -245,8 +247,8 @@ exports.run = (client, message, params) => {
         description: output,
         fields: [
           {
-            name: `${message.member.displayName} is on an adventure.`,
-            value: `${dungeonText}`
+            name: `${message.member.displayName} is on an adventure!`,
+            value: `1000 Tickets were spent to get this adventure going.\n${dungeonText}`
           },
           {
             name: `${damageText}`,

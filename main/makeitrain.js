@@ -41,6 +41,10 @@ function scoreDownBits(mess, xval) {
 }
 
 exports.run = (client, message, params) => {
+  if (message.author.id === settings.ownerid && params[1] === "set" && params[2].isInteger() === true) {
+    sql.run(`UPDATE makeitjacky SET tickets = "${params[2]}" WHERE place = "here"`)
+    message.reply(`Jackpot updated (${params[2]} ${curren})`)
+  }
   let person = message.mentions.members.first()
   if (person === undefined) return message.reply("No user was @mentioned!")
   if (person.id === message.author.id) return message.reply("You can't buy yourself a ticket! Ironic right?")
@@ -56,7 +60,7 @@ exports.run = (client, message, params) => {
         sql.run(`SELECT * FROM scores SET tickets = ${row.tickets*1 + jackpot.tickets} WHERE userId = "${person.id}"`)
       })
     }).then(row => {
-      sql.run(`UPDATE makeitjacky SET tickets = 125 WHERE place = "here"`)
+      sql.run(`UPDATE makeitjacky SET tickets = 500 WHERE place = "here"`)
     })
   } else {
     sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
@@ -82,5 +86,5 @@ exports.conf = {
 exports.help = {
   name: 'makeitrain',
   description: 'Stack of Tickets! Buy someone a Lottery Ticket!',
-  usage: 'makeitrain [@user]'
+  usage: 'makeitrain [@user]\nUpdate Pile (PL4O) :: makeitrain set (integer)'
 };

@@ -13,6 +13,13 @@ exports.run = (client, message, params) => {
     //output += `User joined ${daysJoined} Days Ago (${message.guild.name}).\n`
     message.author.send(`${person}: Lv ${row.level}, Tk ${row.tickets}, B ${row.chatBits}\nUser joined: ${daysJoined} Days Ago (${message.guild.name})`)
   })
+  sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(row => {
+    if (!row) {
+      message.author.send(`This user does not have a hyperlevel.`)
+    } else {
+      message.author.send(`This user has a hyperlevel of ${row.hlvl}.`)
+    }
+  })
   sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(row => {
     if (!row) {
       message.author.send("This user has never received a warning.")

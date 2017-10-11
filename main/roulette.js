@@ -48,6 +48,8 @@ exports.run = (client, message, params) => {
     if (chancefloor > 19) {
       var prize = Math.floor(row.tickets/18) + 5
       var newbit = Math.floor(row.chatBits/15)
+      if (prize > 1000000) var prize = 1000000
+      if (newbit > 1500000) var newbit = 1500000
       setTimeout(() => {
         scoreUpTicket(message, prize)
         scoreUpBits(message, newbit)

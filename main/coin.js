@@ -11,6 +11,9 @@ exports.run = (client, message, params) => {
     if (params[0] === "ticket" || params[0] === "tickets" || params[0] === "t") {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.tickets) {
+          if (params[1] > 1000000) {
+            return message.reply(`\`ERROR\` Cannot coin over 1 Million Tickets`)
+          }
           if (betfloor >= 50) {
             let newcount = row.tickets*1 + params[1]*1
             message.reply("`Super!` You **gained** " + params[1] + curren + "!")
@@ -29,6 +32,9 @@ exports.run = (client, message, params) => {
     } else if (params[0] === "byte" || params[0] === "bytes" || params[0] === "b") {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (params[1] <= row.chatBits) {
+          if (params[1] > 1500000) {
+            return message.reply(`\`ERROR\` Cannot coin over 1.5 Million Bytes`)
+          }
           if (betfloor >= 50) {
             let newcount = row.chatBits*1 + params[1]*1
             message.reply("`Epic!` You **gained** " + params[1] + chatBit + "!")
