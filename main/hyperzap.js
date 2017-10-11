@@ -35,8 +35,9 @@ exports.run = (client, message, params) => {
         let lightning = ':cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: :cloud_lightning: '
         msg = message;
         message.delete();
-        msg.channel.send(`${message.mentions.members.first()}\n${lightning}\`\`\`${zap}\`\`\``)
-        msg.react("🌩")
+        msg.channel.send(`${message.mentions.members.first()}\n${lightning}\`\`\`${zap}\`\`\``).then(m => {
+          m.react("🌩")
+        })
       }
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
