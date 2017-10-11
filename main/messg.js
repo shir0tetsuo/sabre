@@ -10,7 +10,7 @@ exports.run = (client, message, params) => {
   message.delete()
   msg.channel.send(`${params.slice().join(' ')}`)
   console.log(new Date())
-  console.log(`${msg.member.displayName} ran messg; ${msg.content}`)
+  console.log(`${msg.member.displayName} ran messg ${msg.guild.name} ${msg.channel.name}; ${msg.content}`)
 };
 
 /*

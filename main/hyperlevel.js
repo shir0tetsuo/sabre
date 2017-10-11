@@ -93,6 +93,7 @@ exports.conf = {
 };
 // NOTE: Add to seed and exam and leaderboard
 // NOTE: ADD BANK and FIX SHRIMP and FIX DUCK and FIX ROULETTE CAUSE IT DEDUCTS TOO MUCH
+// NOTE: Add location to console log in message for sabre
 /*
 name, desc., usage
 name is also the command alias
