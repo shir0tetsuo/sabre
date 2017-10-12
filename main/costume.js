@@ -1,9 +1,10 @@
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
-const chalk = require ('chalk');
+const chalk = require('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+const Discord = require ("discord.js"); // discord client
 
 function costumeTable(message) {
   message.reply(`\`WARN: Database Creation\``)
@@ -13,9 +14,29 @@ function costumeTable(message) {
   })
 }
 
+function mungeC(message, c) {
+  var uid = c.userId,
+    origNick = c.oNick,
+    setNick = c.nNick,
+    avURL = c.avURL,
+    cDescription = c.desc;
+    if (origNick === "NULL" || setNick === "NULL" || avURL === "NULL" || cDescription === "NULL") {
+      return message.reply(`\`ERROR\` Insufficient Configuration!`)
+    } else {
+      const embed = new Discord.RichEmbed()
+        .setTitle(`${setNick}'s Costume (${origNick})`)
+        .setColor(0x0aaa79)
+        .setAuthor(`${message.member.displayName}`)
+        .setThumbnail(`${avURL}`)
+        .setTimestamp()
+        .addField('Description', `${cDescription}`)
+      message.channel.send({ embed });
+    }
+}
+
 exports.run = (client, message, params) => {
   var now = new Date();
-    var milli = now.getMilliseconds(),
+  var milli = now.getMilliseconds(),
     sec = now.getSeconds(),
     min = now.getMinutes(),
     hou = now.getHours(),
@@ -24,6 +45,8 @@ exports.run = (client, message, params) => {
     yr = now.getFullYear();
   if (mo == 9) {
     // RUN
+    ////////////////////////////////////////////////////////////////////////////
+    // New Description
     if (params[0] === 'new' && params[1] === 'desc') {
       sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
         if (!c) {
@@ -40,6 +63,8 @@ exports.run = (client, message, params) => {
         console.log(chalk.redBright(`Database Created for costume`))
         costumeTable(message)
       })
+      //////////////////////////////////////////////////////////////////////////
+      // Set/Revert Nickname
     } else if (params[0] === 'revert' || params[0] === 'set') {
       sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
         if (!c) {
@@ -47,15 +72,19 @@ exports.run = (client, message, params) => {
         }
         if (params[0] === 'set') {
           // Make Sabre set nickname from data and ADD NEW NICKNAME
-
+          message.guild.members.get(message.author.id).setNickname(`${c.nNick}`);
+          message.reply(`Done!`)
         } else if (params[0] === 'revert') {
-          // Make Sabre revert nickname from data
+          message.guild.members.get(message.author.id).setNickname(`${c.oNick}`);
+          message.reply(`Done!`)
         }
       }).catch(() => {
         console.error;
         console.log(chalk.redBright(`Database Created for costume`))
         costumeTable(message)
       })
+      //////////////////////////////////////////////////////////////////////////
+      // NEW Nickname
     } else if (params[0] === 'new' && params[1] === 'nick') {
       sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
         if (!c) {
@@ -66,6 +95,7 @@ exports.run = (client, message, params) => {
         } else {
           sql.run(`UPDATE costume SET oNick = "${message.member.displayName}" WHERE userId = "${message.author.id}"`)
           sql.run(`UPDATE costume SET nNick = "${params.slice(2).join(' ')}" WHERE userId = "${message.author.id}"`)
+          message.reply(`\`SUCCESS\` Nickname data appended (${params.slice(2).join(' ')})`)
         }
       }).catch(() => {
         console.error;
@@ -73,30 +103,42 @@ exports.run = (client, message, params) => {
         costumeTable(message)
       })
     } else if (params[0] === 'new' && params[1] === 'avatar') {
-
+      sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
+        if (!c) {
+          costumeTable(message)
+        }
+        sql.run(`UPDATE costume SET avURL = "${params.slice(2).join('%20')}" WHERE userId = "${message.author.id}"`)
+        message.reply(`\`SUCCESS\` Avatar set to ${params.slice(2).join('%20')}`)
+      })
     } else if (params[0] === 'view') {
+      if (message.mentions.members.first() !== undefined) {
+        var person = message.mentions.members.first()
+        sql.get(`SELECT * FROM costume WHERE userId = "${person.id}"`).then(c => {
+          if (!c) {
+            return message.reply(`\`ERROR\` This user isn't festive (costume missing!)`)
+          } else {
+            mungeC(message, c)
+          }
+        }).catch(() => {
+          console.error;
+          console.log(chalk.redBright(`Database Created for costume`))
+          costumeTable(message)
+        })
+      } else {
+        return message.reply(`\`ERROR\` No user specified!`)
+      }
 
     } else {
       // Print existing data, check if all variables are set
       sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
         if (!c) {
           return message.reply(`\`ERROR\` Did you run the configurations first?`)
+        } else {
+          mungeC(message, c)
         }
 
         // displayName = oNick/nNick
-        var uid = c.userId,
-          origNick = c.oNick,
-          setNick = c.nNick,
-          avURL = c.avURL,
-          cDescription = c.desc;
 
-        if (origNick === "NULL" || setNick === "NULL" || avURL === "NULL" || cDescription === "NULL") {
-          return message.reply(`\`ERROR\` Missing Configuration! See manual.`)
-
-        } else {
-          message.channel.send(`${uid} ${origNick} ${setNick} ${avURL} ${cDescription}`)
-          // MUNGE ALL DATA
-        }
         // put a catch to create a db or table on each i/o
       }).catch(() => {
         console.error;
