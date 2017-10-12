@@ -2,7 +2,6 @@ const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
-const { Canvas } = require ('canvas-constructor')
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
@@ -26,6 +25,7 @@ exports.run = (client, message, params) => {
       const plate = await fsn.readFile('./testcard.png');
       const png = person.replace(/\.gif.+/g, '.png');
       const { body } = await snek.get(png);
+      const { Canvas } = require ('canvas-constructor')
       return new Canvas(320, 64)
         .addImage(plate, 0, 0, 320, 64)
         .addImage(body, 16, 16, 32, 32, { type: 'round', radius: 16 })
