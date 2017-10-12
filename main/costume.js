@@ -24,9 +24,9 @@ function mungeC(message, c) {
       return message.reply(`\`ERROR\` Insufficient Configuration!`)
     } else {
       const embed = new Discord.RichEmbed()
-        .setTitle(`${setNick}'s Costume (${origNick})`)
+        .setTitle(`${origNick}'s Costume __(**${setNick}**)__`)
         .setColor(0x0aaa79)
-        .setAuthor(`${message.member.displayName}`)
+        .setAuthor(`${message.member.displayName}, Here's`)
         .setThumbnail(`${avURL}`)
         .setTimestamp()
         .addField('Description', `${cDescription}`)
