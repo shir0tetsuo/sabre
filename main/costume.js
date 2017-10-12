@@ -72,10 +72,10 @@ exports.run = (client, message, params) => {
         }
         if (params[0] === 'set') {
           // Make Sabre set nickname from data and ADD NEW NICKNAME
-          message.guild.members.get(message.author.id).setNickname(`${c.nNick}`);
+          message.author.setNickname(`${c.nNick}`);
           message.reply(`Done!`)
         } else if (params[0] === 'revert') {
-          message.guild.members.get(message.author.id).setNickname(`${c.oNick}`);
+          message.author.setNickname(`${c.oNick}`);
           message.reply(`Done!`)
         }
       }).catch(() => {
