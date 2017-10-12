@@ -20,5 +20,7 @@ exports.conf = {
 exports.help = {
   name: 'plvl',
   description: 'Displays your command permission level.',
-  usage: 'plvl'
+  usage: 'plvl\n\n(PL4O) :: Owner Only\n(PL4) :: Developer*\n(PL3) :: Admin, Super Administrator\n(PL2) :: Moderator\n(PL1) :: Shadowling, Citizen of Alaska\n(PL0) :: Nothing*\n\n'
 };
+
+// NOTE: Add in tiers
