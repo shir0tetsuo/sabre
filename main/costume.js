@@ -16,31 +16,7 @@ exports.run = (client, message, params) => {
     yr = now.getFullYear();
   if (mo == 9) {
     // RUN
-    /*
-      The following is test data.
-    */
-    const fsn = require('fs-nextra');
-    const snek = require('snekfetch');
-    const getAchievement = async (text, person) => {
-      const plate = await fsn.readFile('./testcard.png');
-      const png = person.replace(/\.gif.+/g, '.png');
-      const { body } = await snek.get(png);
-      const { Canvas } = require('canvas-constructor');
-      return new Canvas(320, 64)
-        .addImage(plate, 0, 0, 320, 64)
-        .addImage(body, 16, 16, 32, 32, { type: 'round', radius: 16 })
-        .restore()
-        //.setTextFont('12pt Minecraftia')
-        .setColor('#FFFFFF')
-        .addText(text, 60, 58)
-        .toBuffer();
-    };
-    const person = (message.mentions.users.first() || message.author).displayAvatarURL;
-    const text = "TEST"
-    const result = getAchievement(text, person);
-    setTimeout(() => {
-      message.channel.send({ files: [{ attachment: result, name: 'achievementGet.png' }] });
-    }, 3000)
+
   } else {
     message.reply(`Halloween's over, my guy`)
   }
