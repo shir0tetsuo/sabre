@@ -2,7 +2,7 @@ const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
-const Canvas = require ('canvas-constructor')
+const { Canvas } = require ('canvas-constructor')
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
