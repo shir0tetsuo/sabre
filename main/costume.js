@@ -37,7 +37,9 @@ exports.run = (client, message, params) => {
     const person = (message.mentions.users.first() || message.author).displayAvatarURL;
     const text = "TEST"
     const result = getAchievement(text, person);
-    message.channel.send({ files: [{ attachment: result, name: 'achievementGet.png' }] });
+    setTimeout(() => {
+      message.channel.send({ files: [{ attachment: result, name: 'achievementGet.png' }] });
+    }, 3000)
   } else {
     message.reply(`Halloween's over, my guy`)
   }
