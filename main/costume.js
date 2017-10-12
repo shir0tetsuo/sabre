@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
     const fsn = require('fs-nextra');
     const snek = require('snekfetch');
     const getAchievement = async (text, person) => {
-      const plate = await fsn.readFile('./amain/sabreCard/testcard.png');
+      const plate = await fsn.readFile('./main/sabreCard/testcard.png');
       const png = person.replace(/\.gif.+/g, '.png');
       const { body } = await snek.get(png);
       return new Canvas(320, 64)
