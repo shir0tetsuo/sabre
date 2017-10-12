@@ -6,6 +6,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 function costumeTable(message) {
+  message.reply(`\`WARN: Database Creation\``)
   sql.run(`CREATE TABLE IF NOT EXISTS costume (userId TEXT, oNick TEXT, nNick TEXT, avURL TEXT, desc TEXT)`).then(() => {
     let nil = "NULL"
     sql.run(`INSERT INTO costume (userId, oNick, nNick, avURL, desc) VALUES (?, ?, ?, ?, ?)`, [message.author.id, message.member.displayName, nil, nil, nil])
@@ -28,17 +29,49 @@ exports.run = (client, message, params) => {
         if (!c) {
           costumeTable(message);
         }
-        if (params.slice(2).length > 128) {
+        if (params.slice(2).join(' ').length > 128) {
           return message.reply(`\`ERROR\` Your description can only be 128 characters in length.`)
         } else {
-          sql.run(`UPDATE costume SET desc = "${params.slice(2)}" WHERE userId = "${message.author.id}"`)
-          return message.reply(`\`SUCCESS\` Description appended.\n"${params.slice(2)}"`)
+          sql.run(`UPDATE costume SET desc = "${params.slice(2).join(' ')}" WHERE userId = "${message.author.id}"`)
+          return message.reply(`\`SUCCESS\` Description appended.\n"${params.slice(2).join(' ')}"`)
         }
+      }).catch(() => {
+        console.error;
+        console.log(chalk.redBright(`Database Created for costume`))
+        costumeTable(message)
       })
     } else if (params[0] === 'revert' || params[0] === 'set') {
+      sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
+        if (!c) {
+          costumeTable(message);
+        }
+        if (params[0] === 'set') {
+          // Make Sabre set nickname from data and ADD NEW NICKNAME
 
+        } else if (params[0] === 'revert') {
+          // Make Sabre revert nickname from data
+        }
+      }).catch(() => {
+        console.error;
+        console.log(chalk.redBright(`Database Created for costume`))
+        costumeTable(message)
+      })
     } else if (params[0] === 'new' && params[1] === 'nick') {
-
+      sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
+        if (!c) {
+          costumeTable(message);
+        }
+        if (params.slice(2).join(' ').length > 15) {
+          message.reply(`\`ERROR\` Cannot be over 15 characters in length.`)
+        } else {
+          sql.run(`UPDATE costume SET oNick = "${message.member.displayName}" WHERE userId = "${message.author.id}"`)
+          sql.run(`UPDATE costume SET nNick = "${params.slice(2).join(' ')}" WHERE userId = "${message.author.id}"`)
+        }
+      }).catch(() => {
+        console.error;
+        console.log(chalk.redBright(`Database Created for costume`))
+        costumeTable(message)
+      })
     } else if (params[0] === 'new' && params[1] === 'avatar') {
 
     } else if (params[0] === 'view') {
@@ -93,5 +126,5 @@ name is also the command alias
 exports.help = {
   name: 'costume',
   description: 'Create and display Halloween Costumes.',
-  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (nickname) / avatar (avatar URL)]\nSee Costume :: costume view [@user]\nSet/Reset Nickname :: costume [revert/set]'
+  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (nickname) / avatar (avatar URL)]\nSee Costume :: costume view [@user]\nSet/Reset Nickname :: costume [revert/set (nickname)]'
 };
