@@ -1,3 +1,4 @@
+// ctrl-p = find a file
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
