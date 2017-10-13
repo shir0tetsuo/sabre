@@ -11,7 +11,7 @@ exports.run = (client, message, params) => {
     return message.reply(`\`FATAL ERROR\` This is a dangerous command! \`dewit\``)
   } else {
     if (params[1] === 'backup') {
-      exec(`cp ../scores.sqlite ../scores_${new Date().getTime()}_bak.sqlite`,
+      exec(`cp ../score.sqlite ../score_${new Date().getTime()}_bak.sqlite`,
         function(error, stdout, stderr) {
           message.reply(`\`DATABASE COPIED AND BACKED UP\`\n${error} ${stdout} ${stderr}`)
         })
