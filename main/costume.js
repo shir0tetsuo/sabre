@@ -24,12 +24,12 @@ function mungeC(message, c) {
       return message.reply(`\`ERROR\` Insufficient Configuration!`)
     } else {
       const embed = new Discord.RichEmbed()
-        .setTitle(`${origNick}'s Costume __(**${setNick}**)__`)
+        .setTitle(`${origNick}'s Costume`)
         .setColor(0x0aaa79)
-        .setAuthor(`${message.member.displayName}, Here's`)
+        .setAuthor(`${message.author}, Here's`)
         .setThumbnail(`${avURL}`)
         .setTimestamp()
-        .addField('Description', `${cDescription}`)
+        .addField(' __**${setNick}**__', `${cDescription}`)
       message.channel.send({ embed });
     }
 }
