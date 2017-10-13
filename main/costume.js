@@ -21,7 +21,7 @@ function mungeC(message, c) {
     avURL = c.avURL,
     cDescription = c.desc;
     if (origNick === "NULL" || setNick === "NULL" || avURL === "NULL" || cDescription === "NULL") {
-      return message.reply(`\`ERROR\` Insufficient Configuration!`)
+      return message.reply(`\`ERROR\` Insufficient Configuration!\n__\`Debug Information:\`__\nNickname: ${setNick} || ${origNick}\nDescription: ${cDescription}\nAvatar URL: \`${avURL}\``)
     } else {
       const embed = new Discord.RichEmbed()
         .setTitle(`${origNick}'s Costume`)
