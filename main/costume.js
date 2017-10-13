@@ -148,5 +148,5 @@ name is also the command alias
 exports.help = {
   name: 'costume',
   description: 'Create and display Halloween Costumes.',
-  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (costume\'s name) / avatar (avatar URL)]\nSee Costume :: costume view [@user]'
+  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (costume\'s name) / avatar (avatar URL)]\nSee Costume :: costume view [@user]\n\nStep One :: costume new nick <costumename>\nStep Two :: costume new desc <description>\nStep Three :: costume new avatar <avatar url>\n'
 };
