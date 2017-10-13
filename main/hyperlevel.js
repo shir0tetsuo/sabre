@@ -93,7 +93,7 @@ exports.run = (client, message, params) => {
             .setAuthor(`${message.member.displayName}`)
             .setColor(embedCol)
             .setDescription(`Hyperlevel`)
-            .setFooter(`${localtime}`)
+            .setFooter(`\`${localtime}\``)
             .setThumbnail(`${message.author.avatarURL}`)
             .setTimestamp()
             .addField(`:radioactive:`, `\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``, true)
