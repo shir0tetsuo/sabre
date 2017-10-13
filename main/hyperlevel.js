@@ -4,6 +4,8 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+const Discord = require ("discord.js"); // discord client
+
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
@@ -76,7 +78,30 @@ exports.run = (client, message, params) => {
         if (!hl) {
           return message.reply(`\`ERROR\` You are not prestiged.`)
         } else {
-          return message.reply(`\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``)
+          var embedCol = 0xa73e0b;
+          var now = new Date();
+          var milli = now.getMilliseconds(),
+            sec = now.getSeconds(),
+            min = now.getMinutes(),
+            hou = now.getHours(),
+            mo = now.getMonth(),
+            dy = now.getDate(),
+            yr = now.getFullYear();
+          let localtime = `[${hou}:${min}:${sec}] ${dy}/${mo}/${yr} SERVERCLOCK(GMT-0400EST/NYC)`
+          const embed = new Discord.RichEmbed()
+            .setTitle(`${settings.version}`)
+            .setAuthor(`${message.member.displayName}`)
+            .setColor(embedCol)
+            .setDescription(`Hyperlevel`)
+            .setFooter(`${localtime}`)
+            .setThumbnail(`${message.author.avatarURL}`)
+            .setTimestamp()
+            .addField(`:radioactive:`, `\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``, true)
+            .addField(`:key2:`, `\`\`\`asciidoc\nQuest Keys :: ${hl.spaceA}\`\`\``, true)
+            .addField(`:pound:`, `\`\`\`asciidoc\nDark Tickets :: ${hl.spaceB}\`\`\``, true)
+          return message.reply();
+          // original ending
+          // return message.reply(`\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``)
         }
       })
     }
