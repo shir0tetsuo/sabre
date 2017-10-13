@@ -88,13 +88,13 @@ exports.run = (client, message, params) => {
             mo = now.getMonth(),
             dy = now.getDate(),
             yr = now.getFullYear();
-          let localtime = `[${hou}:${min}:${sec}] ${dy}/${mo}/${yr} SERVERCLOCK(GMT-0400EST/NYC)`
+          let localtime = `[${hou}:${min}:${sec}]`
           const embed = new Discord.RichEmbed()
-            .setTitle(`${settings.version} \`${permlvl}\``)
+            .setTitle(`${settings.version}`)
             .setAuthor(`${message.member.displayName}`)
             .setColor(embedCol)
-            .setDescription(`Dark Card`)
-            .setFooter(`\`${localtime}\``)
+            .setDescription(`Dark Card (PL\`${permlvl}\`)`)
+            .setFooter(`${localtime}`)
             .setThumbnail(`${message.author.avatarURL}`)
             .setTimestamp()
             .addField(`:radioactive:`, `\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``, true)
