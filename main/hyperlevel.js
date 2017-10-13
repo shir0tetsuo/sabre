@@ -79,7 +79,7 @@ exports.run = (client, message, params) => {
           return message.reply(`\`ERROR\` You are not prestiged.`)
         } else {
           var embedCol = 0xa73e0b;
-          const permlvl = client.elevation(message)
+          const permlvl = client.elevation(message);
           var now = new Date();
           var milli = now.getMilliseconds(),
             sec = now.getSeconds(),
