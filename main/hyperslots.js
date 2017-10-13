@@ -26,7 +26,31 @@ exports.run = (client, message, params) => {
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.hlvl !== 0) {
-      message.reply(`\`Rolling!\``)
+      const cMath = Math.round(Math.random() * (2000 - 100) + 100); // return number between 100-2000
+      const cMath = Math.round(Math.random() * (2000 - 100) + 100) // return number between 100-2000
+      if (cMath >= 1800) {
+        var cName = 'Obtained 1 :key2:',
+          cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
+        hSpaceAUpdate(message);
+      } else {
+        var cName = 'Sorry',
+          cVal = 'Nothing Obtained.'
+      }
+      message.channel.send({embed: {
+        color: 0x4fe63b,
+        timestamp: new Date(),
+        author: {
+          name: message.member.displayName,
+          icon_url: message.author.avatarURL
+        },
+        fields: [
+          {
+            name: `${cName}`,
+            value: `${cVal}`
+          }
+        ]
+      }})
+    /*  message.reply(`\`Rolling!\``)
       .then(m => {
         setTimeout(() => {
           m.edit(`\`Almost There!\``)
@@ -40,23 +64,10 @@ exports.run = (client, message, params) => {
                 var cName = 'Sorry',
                   cVal = 'You didn\'t win anything.'
               }// else ifs
-              m.edit({embed: {
-                color: 0x4fe63b,
-                timestamp: new Date(),
-                author: {
-                  name: message.member.displayName,
-                  icon_url: message.author.avatarURL
-                },
-                fields: [
-                  {
-                    name: `${cName}`,
-                    value: `${cVal}`
-                  }
-                ]
-              }})
+              m.edit
             })
         }, 5000)
-      })
+      }) */
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
     }
