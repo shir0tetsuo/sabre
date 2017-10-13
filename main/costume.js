@@ -26,7 +26,7 @@ function mungeC(message, c) {
       const embed = new Discord.RichEmbed()
         .setTitle(`${origNick}'s Costume`)
         .setColor(0x0aaa79)
-        .setAuthor(`${message.author}, Here's`)
+        .setAuthor(`${message.author.username}, Here's`)
         .setThumbnail(`${avURL}`)
         .setTimestamp()
         .addField(` __**${setNick}**__`, `${cDescription}`)
