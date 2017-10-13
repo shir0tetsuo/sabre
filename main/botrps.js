@@ -18,7 +18,7 @@ exports.run = (client, message, params) => {
   let rpsinput = params[0]
   let botwin = "Ha! I won against you with "
   let botlose = "Ouch! I lost because I had "
-  let wintk = ", You gained 5" + curren
+  let wintk = ", You gained 200" + curren
   if (rpsinput === "rock" || rpsinput === "paper" || rpsinput === "scissors") {
     if (rpsinput === rpsmat.ans) {
       message.reply(rpsmat.ans + " was also my answer!")
