@@ -99,7 +99,7 @@ exports.run = (client, message, params) => {
             .addField(`:radioactive:`, `\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``, true)
             .addField(`:key2:`, `\`\`\`asciidoc\nQuest Keys :: ${hl.spaceA}\`\`\``, true)
             .addField(`:pound:`, `\`\`\`asciidoc\nDark Tickets :: ${hl.spaceB}\`\`\``, true)
-          return message.reply();
+          return message.reply({embed});
           // original ending
           // return message.reply(`\`\`\`markdown\n[Hyperlevel]: ${hl.hlvl}\`\`\``)
         }
