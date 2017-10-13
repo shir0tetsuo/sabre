@@ -15,6 +15,7 @@ exports.run = (client, message, params) => {
         function(error, stdout, stderr) {
           message.reply(`\`DATABASE COPIED AND BACKED UP\`\n${error} ${stdout} ${stderr}`)
         })
+      return;
     }
     if (message.author.id !== settings.ownerid) {
       return message.reply(`\`FATAL ERROR\` You are not the owner! This action has been logged.`)
