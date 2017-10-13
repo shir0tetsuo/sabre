@@ -65,33 +65,13 @@ exports.run = (client, message, params) => {
       })
       //////////////////////////////////////////////////////////////////////////
       // Set/Revert Nickname
-    } else if (params[0] === 'revert' || params[0] === 'set') {
-      sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
-        if (!c) {
-          costumeTable(message);
-        }
-        if (params[0] === 'set') {
-          // Make Sabre set nickname from data and ADD NEW NICKNAME
-          message.author.setNickname(`${c.nNick}`);
-          message.reply(`Done!`)
-        } else if (params[0] === 'revert') {
-          message.author.setNickname(`${c.oNick}`);
-          message.reply(`Done!`)
-        }
-      }).catch(() => {
-        console.error;
-        console.log(chalk.redBright(`Database Created for costume`))
-        costumeTable(message)
-      })
-      //////////////////////////////////////////////////////////////////////////
-      // NEW Nickname
     } else if (params[0] === 'new' && params[1] === 'nick') {
       sql.get(`SELECT * FROM costume WHERE userId = "${message.author.id}"`).then(c => {
         if (!c) {
           costumeTable(message);
         }
-        if (params.slice(2).join(' ').length > 15) {
-          message.reply(`\`ERROR\` Cannot be over 15 characters in length.`)
+        if (params.slice(2).join(' ').length > 64) {
+          message.reply(`\`ERROR\` Cannot be over 64 characters in length.`)
         } else {
           sql.run(`UPDATE costume SET oNick = "${message.member.displayName}" WHERE userId = "${message.author.id}"`)
           sql.run(`UPDATE costume SET nNick = "${params.slice(2).join(' ')}" WHERE userId = "${message.author.id}"`)
@@ -168,5 +148,5 @@ name is also the command alias
 exports.help = {
   name: 'costume',
   description: 'Create and display Halloween Costumes.',
-  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (nickname) / avatar (avatar URL)]\nSee Costume :: costume view [@user]\nSet/Reset Nickname :: costume [revert/set]'
+  usage: 'costume\nNew Costume :: costume new [desc (description) / nick (costume\'s name) / avatar (avatar URL)]\nSee Costume :: costume view [@user]'
 };
