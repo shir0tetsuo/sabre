@@ -29,7 +29,7 @@ function mungeC(message, c) {
         .setAuthor(`${message.author}, Here's`)
         .setThumbnail(`${avURL}`)
         .setTimestamp()
-        .addField(' __**${setNick}**__', `${cDescription}`)
+        .addField(` __**${setNick}**__`, `${cDescription}`)
       message.channel.send({ embed });
     }
 }
