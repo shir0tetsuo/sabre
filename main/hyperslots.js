@@ -23,7 +23,7 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
-    }
+    } /*
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.hlvl !== 0) {
       const cMath = Math.round(Math.random() * (2000 - 100) + 100); // return number between 100-2000
@@ -66,10 +66,10 @@ exports.run = (client, message, params) => {
               m.edit
             })
         }, 5000)
-      }) */
+      }) *//*
     } else {
       return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
-    }
+    }*/
   })
 };
 
