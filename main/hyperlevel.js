@@ -80,9 +80,6 @@ exports.run = (client, message, params) => {
         } else {
           var embedCol = 0xa73e0b;
           const permlvl = client.elevation(message)
-          if (settings.ownerid === message.author.id) {
-            var permlvl = '4O'
-          }
           var now = new Date();
           var milli = now.getMilliseconds(),
             sec = now.getSeconds(),
