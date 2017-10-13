@@ -69,8 +69,8 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [''],
-  permLevel: 0
+  aliases: ['hs'],
+  permLevel: 1
 };
 
 /*
@@ -78,7 +78,7 @@ name, desc., usage
 name is also the command alias
 */
 exports.help = {
-  name: '',
-  description: '(HL1)',
-  usage: ''
+  name: 'hyperslot',
+  description: 'Win keys and dark tickets. (HL1)',
+  usage: 'hyperslot'
 };
