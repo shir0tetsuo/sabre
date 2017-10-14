@@ -288,7 +288,7 @@ exports.run = (client, message, params) => {
 
           legend += `${validActionString}`
       //    fight(message, 1, 3000); // message, boss, bossHP
-          legend += `>\n`
+          legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
           var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
