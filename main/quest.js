@@ -185,7 +185,7 @@ function isBossDepleted(bossHP) {
 }
 
 function fight(message, uid, boss, bossHP, h, baseHP) {
-  console.log(message.content, uid, boss, bossHP, h, baseHP)
+  //console.log(message.content, uid, boss, bossHP, h, baseHP)
   /*if (!isFighting.has(message.author.id)) {
     doReset(message);
 
@@ -391,7 +391,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
     console.error;
-    console.log(message.content, uid, boss, bossHP, h, baseHP)
+    //console.log(message.content, uid, boss, bossHP, h, baseHP)
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
 
     doReset(message);
