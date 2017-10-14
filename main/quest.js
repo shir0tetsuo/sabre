@@ -128,6 +128,11 @@ exports.run = (client, message, params) => {
       giveKey(message, params[1])
       return message.reply(`\`Done.\``)
     }
+    if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
+      let chance = Math.floor(Math.random() * 100)
+    } else {
+      let chance = params[1]
+    }
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
       var header = '```md',
@@ -168,16 +173,40 @@ exports.run = (client, message, params) => {
       */
       if (hl.hlvl >= 0) {
         // define defaults
-        let chance = Math.floor(Math.random() * 100)
         let top = `> ${topLeft}${horz}${topRight}`
+        let topBoss = `/* ${topLeft}${horz}${horz}${topRight} *`
         let mid = `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
+        let midBoss = `/* ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${lightshade}${vert} *`
         let bot = `> ${botLeft}${horz}${botRight}`
+        let botBoss = `/* ${botLeft}${horz}${horz}${botRight} *`
         // munge top half
-        content += `[Area](1 :: Dark Forest ::)\n`
-        content += `# Discovered Dark Room\n`
-        content += `${top}\n${mid}\n`
+        if (chance >= 95) {
+          content += `[Area](1 :: Dark Chasm ::)\n`
+          content += `/* A Boss wants to Fight! *\n`
+          content += `${topBoss}\n${midBoss}\n`
+        } else {
+          content += `[Area](1 :: Dark Forest ::)\n`
+          content += `# Discovered Dark Room\n`
+          content += `${top}\n${mid}\n`
+        }
+
         // randomness
-        if (chance >= 90) {
+        if (chance >= 95) {
+          // first boss
+          content += `/* ${vert}${lightshadeFill}${lightshadeFill}${fisheye}${lightshadeFill}${lightshade}${vert} *\n`
+          var legend = `* You are in danger.\n`
+          legend += `< You have the following options.\n`
+          /*
+
+                  Invoke some battle here.
+
+          */
+          legend += `punch || guard || run || special `
+
+
+
+          legend += `>`
+        } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
           var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
           legend += `${Rand(vendorsResponse)} >\n`
@@ -211,11 +240,19 @@ exports.run = (client, message, params) => {
             hSpaceBUpdate(message)
           }
         }
-        content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
-        // munge bottom half
-        content += `${mid}\n${bot}\n\n`
-        // what happened
-        content += `${legend}`
+        if (chance >= 95) {
+          content += ` /* ${vert}${lightshadeFill}${qUser}${lightshadeFill}${lightshadeFill}${lightshade}${vert} *\n`
+          content += `${midBoss}\n${midBoss}\n${botBoss}\n\n`
+          content += `${legend}`
+        } else {
+          content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
+          // munge bottom half
+          content += `${mid}\n${bot}\n\n`
+          // what happened
+          content += `${legend}`
+        }
+
+
       }
       content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
@@ -228,7 +265,7 @@ exports.run = (client, message, params) => {
           icon_url: client.user.avatarURL
         },
         footer: {
-          text: `${message.author.username}#${message.author.discriminator}`
+          text: `${message.author.username}#${message.author.discriminator} (v${settings.version})`
         },
         fields: [
           {
@@ -261,5 +298,5 @@ name is also the command alias
 exports.help = {
   name: 'quest',
   description: 'Let Sabre\'s Forest take you away. (HK1)',
-  usage: 'quest\nPL4O :: quest devmode [num] = give keys'
+  usage: 'quest\nPL4O :: quest devmode [num] = give keys\nPL4O :: quest force [0-100] = Force Chance.'
 };
