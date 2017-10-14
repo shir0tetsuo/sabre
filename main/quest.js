@@ -193,7 +193,9 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     const input = msg.content.toLowerCase();
 
     if (input === 'guard') {
+      console.log('Guarded')
 
+      return;
     }
     if (input === 'run') {
       msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
@@ -202,7 +204,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       return;
     }
 
-    message.author.miss = 0;
+  //  message.author.miss = 0;
 
     const attack = attacks[input];
 
