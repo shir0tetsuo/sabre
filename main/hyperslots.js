@@ -5,6 +5,20 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+let noHS = new Set();
+
+function scoreUpTicket(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
+function scoreUpBits(mess, xval) {
+  if (!xval) var xval = 1
+  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+  })
+}
 
 function hSpaceAUpdate(m) {
   setTimeout(() => {
@@ -18,6 +32,30 @@ function hSpaceAUpdate(m) {
     })
   }, 2000)
 }
+function hSpaceBUpdate(m) {
+  setTimeout(() => {
+    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
+      if (!hl) {
+        return message.reply(`\`Internal Error\``)
+      } else {
+        sql.run(`UPDATE hyperlevels SET spaceB = "${hl.spaceB*1 + 1*1}" WHERE userId = "${m.author.id}"`)
+        console.log(chalk.greenBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Dark Ticket`))
+      }
+    })
+  }, 2000)
+}
+
+/*
+
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+              May add items. But quest items are good enough so far.
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+
+*/
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
@@ -25,50 +63,60 @@ exports.run = (client, message, params) => {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
-    if (hl.hlvl !== 0) {
-      const cMath = Math.round(Math.random() * (2000 - 100) + 100); // return number between 100-2000
-      if (cMath >= 800) {
-        var cName = 'Obtained 1 :key2:',
-          cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
-        hSpaceAUpdate(message);
-      } else {
-        var cName = 'Sorry',
-          cVal = 'Nothing Obtained.'
-      }
-      message.channel.send({embed: {
-        color: 0x4fe63b,
-        timestamp: new Date(),
-        author: {
-          name: message.member.displayName,
-          icon_url: message.author.avatarURL
-        },
-        fields: [
-          {
-            name: `${cName}`,
-            value: `${cVal}`
-          }
-        ]
-      }})
-    /*  message.reply(`\`Rolling!\``)
-      .then(m => {
-        setTimeout(() => {
-          m.edit(`\`Almost There!\``)
-            .then(m => {
-              const cMath = Math.round(Math.random() * (2000 - 100) + 100) // return number between 100-2000
-              if (cMath >= 1800) {
-                var cName = 'Obtained 1 :key2:',
-                  cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
-                hSpaceAUpdate(message);
-              } else {
-                var cName = 'Sorry',
-                  cVal = 'You didn\'t win anything.'
-              }// else ifs
-              m.edit
-            })
-        }, 5000)
-      }) */
+    if (noHS.has(message.author.id)) {
+      return message.reply(`\`Slots are locked. Try again in a while.\``)
     } else {
-      return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
+      noHS.add(message.author.id)
+      setTimeout(() => {
+        noHS.delete(message.author.id)
+      }, 1800000)
+      if (hl.hlvl !== 0) {
+        const cMath = Math.round(Math.random() * (2000 - 100) + 100); // return number between 100-2000
+        if (cMath >= 1800) {
+          var cName = 'Obtained 1 :key2:',
+            cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
+          setTimeout(() => {
+            hSpaceAUpdate(message);
+          }, 2000)
+        } else if (cMath >= 1600) {
+          var cName = 'Obtained 1 :pound:',
+            cVal = `You can use the \`${settings.prefix}darkshop\` command with this ticket.`
+          setTimeout(() => {
+            hSpaceBUpdate(message);
+          }, 2000)
+        } else if (cMath >= 1400) {
+          var cName = `Obtained 3000 ${curren}`,
+            cVal = `Lucky you`
+          setTimeout(() => {
+            scoreUpTicket(message, 3000)
+          }, 2000)
+        } else if (cMath >= 1300) {
+          var cName = `Obtained 8000 ${chatBit}`,
+            cVal = `Lucky you`
+          setTimeout(() => {
+            scoreUpBits(message, 8000)
+          }, 2000)
+        } else {
+          var cName = 'Sorry',
+            cVal = 'Nothing Obtained.'
+        }
+        message.channel.send({embed: {
+          color: 0x4fe63b,
+          timestamp: new Date(),
+          author: {
+            name: message.member.displayName,
+            icon_url: message.author.avatarURL
+          },
+          fields: [
+            {
+              name: `${cName}`,
+              value: `${cVal}`
+            }
+          ]
+        }})
+      } else {
+        return message.reply(`\`ERROR\` HyperLevel isn't high enough.`)
+      }
     }
   })
 };
