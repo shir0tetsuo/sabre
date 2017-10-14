@@ -257,7 +257,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
       }
 
-      sendContent += `${atkMessage}\n`
+      sendContent += `${atkMessage}`
       sendContent += `${npcMessage}\n`
 
       if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
@@ -294,7 +294,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
       }
 
-      sendContent += `${atkMessage}\n`
+      sendContent += `${atkMessage}`
       sendContent += `${npcMessage}\n`
 
       if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
