@@ -1,7 +1,7 @@
 // ctrl-p = find a file
 
 
-const Rand = require('../main/quest-data/random.js')
+const Rand = require('../sys/quest-data/random.js')
 
 
 
