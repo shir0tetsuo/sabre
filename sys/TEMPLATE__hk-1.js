@@ -20,14 +20,15 @@ exports.run = (client, message, params) => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
-    if (message.author.id === settings.ownerid && params[0] === 'devmode' && params[1] >= 1) {
-      getKey(message, params[1])
-      message.reply(`\`Done.\``)
-    }
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
       message.reply(`Spent 1 :key2:`)
       getKey(message, 1);
+      /*
+
+      code should go here.
+
+      */
     } else {
       return message.reply(`\`ERROR\` You don't have any keys.`)
     }
@@ -40,7 +41,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['q'],
+  aliases: [''],
   permLevel: 1
 };
 
@@ -49,7 +50,7 @@ name, desc., usage
 name is also the command alias
 */
 exports.help = {
-  name: 'quest',
-  description: 'Let Sabre\'s Forest take you away. (HK1)',
-  usage: 'quest\nPL4O :: quest devmode [num] = give keys'
+  name: '',
+  description: ' (HK1)',
+  usage: ''
 };
