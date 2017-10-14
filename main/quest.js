@@ -260,9 +260,8 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     //  npcHitChance = Math.floor(Math.random() * (100 - npcAccuracy));
 
 // NPC Floor
-  if (!baseHP) var baseHP = 8000;
     var npcAccuracy = 74 + h.hlvl,
-      oldPHP = baseHP*1;
+      oldPHP = baseHP;
     if (npcAccuracy >= 100) {
       var npcMaxAccuracy = 100
     } else {
@@ -272,12 +271,10 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
     if (npcHitChance >= npcMaxAccuracy) {
       var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
-      var newHP = oldHP*1
     } else {
       var npcDamage = Math.round(Math.random() * (h.hlvl*750 - h.hlvl*300) + h.hlvl*300)
-      console.log(npcDamage)
-      newHP = baseHP*1 - npcDamage*1;
-      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${newHP})\`\`\``
+      baseHP -= npcDamage;
+      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
     }
 
 // ATK Floor
@@ -288,7 +285,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
       isBossDepleted(msg, bossHP)
-      fight(message, uid, boss, bossHP, h, newHP)
+      fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'special') {
       var sendContent = '';
@@ -297,7 +294,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
       isBossDepleted(msg, bossHP)
-      fight(message, uid, boss, bossHP, h, newHP)
+      fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'guard') {
       var sendContent = '';
@@ -305,7 +302,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
-      fight(message, uid, boss, bossHP, h, newHP)
+      fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'run') {
       msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
