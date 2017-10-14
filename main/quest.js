@@ -31,15 +31,6 @@ function getColor(hl) {
     return 0x34d1a2
   }
 }
-function map(hl) {
-  var data = '';
-  if (hl.lvl >= 0) {
-    data += `> /////////////\n`
-    data += `> //   \u233e\u2324    //\n`
-    data += `> /////////////\n`
-  }
-  return data;
-}
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
@@ -60,7 +51,11 @@ exports.run = (client, message, params) => {
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
-      content += `${map(hl)}\n`
+      if (hl.hlvl >= 0) {
+        content += `> ////////////\n`
+        content += `> //  \u233e\u2324    //\n`
+        content += `> ////////////\n`
+      }
 
 
       message.reply({embed: {
