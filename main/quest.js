@@ -57,7 +57,7 @@ function newQChapter(m) {
     }).catch(() => {
       console.error;
       console.log(chalk.redBright(`Database qchapter for quests created.`))
-      sql.run(`CREATE TABLE IF NOT EXISTS qchapter (userId TEXT, chap INTEGER, inBattle INTEGER, micro INTEGER, hp INTEGER) VALUES (?, ?, ?, ?, ?)`, [m.author.id, 1, 0, 0, 100]).then(() => {
+      sql.run(`CREATE TABLE IF NOT EXISTS qchapter (userId TEXT, chap INTEGER, inBattle INTEGER, micro INTEGER, hp INTEGER)`).then(() => {
         sql.run(`INSERT INTO qchapter (userId, chap, inBattle, micro, hp) VALUES (?, ?, ?, ?, ?)`, [m.author.id, 1, 0, 0, 100])
       })
     })
