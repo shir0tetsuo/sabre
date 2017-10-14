@@ -1,6 +1,6 @@
 const sql = require("sqlite");
-sql.open("../score.sqlite");
-const settings = require('../settings.json');
+sql.open("../../score.sqlite");
+const settings = require('../../settings.json');
 const chalk = require('chalk');
 
 // tk tickets
