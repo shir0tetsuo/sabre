@@ -323,6 +323,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         if (isBossDepleted(bossHP) === true) {
           sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
         }
+        return msg.channel.send(`${sendContent}`);
       }
 
       msg.channel.send(`${sendContent}`)
@@ -358,6 +359,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         if (isBossDepleted(bossHP) === true) {
           sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
         }
+        return msg.channel.send(`${sendContent}`);
       }
 
       msg.channel.send(`${sendContent}`)
@@ -373,6 +375,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       if (isBaseDepleted(baseHP) === true) {
         sendContent += `\`\`\`diff\n- You died.\`\`\``
         doReset(message);
+        return msg.channel.send(`${sendContent}`);
       }
 
       msg.channel.send(`${sendContent}`)
@@ -490,7 +493,7 @@ exports.run = (client, message, params) => {
           //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, message.author.id, fisheye, 3000, h, 8000); // message, boss, bossHP
+          fight(message, message.author.id, fisheye, 100000, h, 8000); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
