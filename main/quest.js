@@ -169,18 +169,18 @@ function getColor(hl) {
     return 0x34d1a2
   }
 }
-function isBaseDepleted(message, baseHP) {
+function isBaseDepleted(baseHP) {
   if (baseHP <= 0) {
-    message.reply(`Some lose message.`)
-    doReset(message);
-    return;
+    return true;
+  } else {
+    return false;
   }
 }
-function isBossDepleted(message, bossHP) {
+function isBossDepleted(bossHP) {
   if (bossHP <= 0) {
-    message.reply(`Some win message.`)
-    doReset(message);
-    return;
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -293,13 +293,13 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
     }
 
-// ATK Floor
+// ATK Floor, higher the accuracy, lower the chance
     if (input === 'atk') {
       var sendContent = '';
 
       sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
 
-      var atkAccuracy = 0.75,
+      var atkAccuracy = 0.25,
         atkHitChance = Math.round(Math.random());
       if (atkHitChance >= atkAccuracy) {
         var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
@@ -313,8 +313,9 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       sendContent += `${atkMessage}\n`
       sendContent += `${npcMessage}`
       msg.channel.send(`${sendContent}`)
-      isBaseDepleted(msg, baseHP)
-      isBossDepleted(msg, bossHP)
+      if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+        return doReset(message);
+      }
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'special') {
@@ -322,7 +323,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
       sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
 
-      var atkAccuracy = 0.65,
+      var atkAccuracy = 0.35,
         atkHitChance = Math.round(Math.random());
       if (atkHitChance >= atkAccuracy) {
         var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
@@ -336,8 +337,9 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       sendContent += `${atkMessage}\n`
       sendContent += `${npcMessage}`
       msg.channel.send(`${sendContent}`)
-      isBaseDepleted(msg, baseHP)
-      isBossDepleted(msg, bossHP)
+      if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+        return doReset(message);
+      }
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'guard') {
@@ -345,7 +347,9 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       console.log('Guarded')
 
       msg.channel.send(`${sendContent}`)
-      isBaseDepleted(msg, baseHP)
+      if (isBaseDepleted(baseHP) === true) {
+        return doReset(message);
+      }
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
     } else if (input === 'run') {
