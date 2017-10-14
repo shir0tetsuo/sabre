@@ -3,7 +3,7 @@
 
 const Rand = require('../sys/quest-data/random.js')
 const UDat = require('../sys/quest-data/unicodeAssets.js')
-console.log(UDat.uc.data1)
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
@@ -553,6 +553,7 @@ exports.run = (client, message, params) => {
     // spaceA = Quest Keys
     if (hl.spaceA * 1 >= 1) {
       // Invoke Styling Mechanisms
+      console.log(UDat.uc.data1) // REMOVEME
       var header = '```md',
         footer = '```',
         // Call upon Color to Set Sidebar Color
