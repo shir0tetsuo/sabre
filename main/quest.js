@@ -3,7 +3,7 @@
 
 const Rand = require('../sys/quest-data/random.js')
 const UDat = require('../sys/quest-data/unicodeAssets.js')
-console.log(uDat.uc.data1)
+console.log(UDat.uc.data1)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
