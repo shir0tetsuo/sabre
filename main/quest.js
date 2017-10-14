@@ -62,7 +62,8 @@ const attacks = {
     ]
   }
 }
-const validActions = Object.keys(attacks).concat('special').concat('run')
+const validActions = Object.keys(attacks).concat('special').concat('run');
+const validActionRegex = new RegExp(validActions.join('|'), 'i');
 const validActionString = validActions.map(action => `${action}`).join(' || ');
 
 /*
