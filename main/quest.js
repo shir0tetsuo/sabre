@@ -15,53 +15,10 @@ function Rand(data) {
 function doReset(message) {
   isFighting.delete(message.author.id)
 }
-
-const attacks = {
-  atk: {
-    damage: {
-      min: 500.0,
-      max: 900.0
-    },
-    attackChance: 0.75,
-    messages: [
-      'attempted to punch it in the face.',
-      'attempted to kick it in the face.',
-      'attempted to slam the entity.',
-      'attempted to elbow it in the face.'
-    ]
-  },
-  special: {
-    damage: {
-      min: 525.0,
-      max: 1200.0 // and multiplier
-    },
-    attackChance: 0.65,
-    messages: [
-      'casted a fireball.',
-      'summoned a heatwave.',
-      'invoked magma.',
-      'summoned a familiar.',
-      'used the power of Death.',
-      'casted NightBall.',
-      'resurrected the Dead.',
-      'invoked the power of Wind.',
-      'used Shatter Wave.',
-      'used Telekinesis.',
-      'used Earthquake.',
-      'summoned Leaf of Time.',
-      'used Foresight Destruction.',
-      'summoned Ice Blade.',
-      'casted Megafreeze.',
-      'invoked a Tsunami.',
-      'used Shadow Sword.',
-      'used Death Scythe.',
-      'used Deadly Nightshade.',
-      'used Epic Pistol.',
-      'used Samurai Sword.',
-      'used Alien Gun.'
-    ]
-  }
-}
+const attacks = [
+  'atk',
+  'special'
+]
 const validActions = Object.keys(attacks).concat('guard').concat('run');
 const validActionRegex = new RegExp(validActions.join('|'), 'i');
 const validActionString = validActions.map(action => `${action}`).join(' || ');
