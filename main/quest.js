@@ -140,7 +140,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     return;
   }*/
   message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**, type \`${validActionString}\` to continue.`)
-  message.channel.awaitMessages(response => response.author.id === uid && validActionRegex.test(response.content), {
+  message.channel.awaitMessages(response => response.author.id === uid && validActions.some(word => response.content.toLowerCase().startsWith(word)), {
     max: 1,
     time: 60000,
     errors: ['time'],
@@ -261,7 +261,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
     console.error;
-    console.log(message.content, uid, boss, bossHP, h, baseHP, response.content)
+    console.log(message.content, uid, boss, bossHP, h, baseHP)
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
 
     doReset(message);
