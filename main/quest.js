@@ -196,12 +196,12 @@ exports.run = (client, message, params) => {
           legend += `/* Mysterious Object was discovered ${mysteriousObject}. *\n`
           let mysteryObj = Math.round(Math.random() * 3);
           if (mysteryObj >= 3) {
-            let tk = Math.round(Math.random() * (5000 - 100) + 100)
+            let tk = Math.round(Math.random() * (10000 - 100) + 100)
             legend += `< ${mysteriousObject} It was tickets.\n`
             legend += `Obtained ${tk} tickets. >\n`
             scoreUpTicket(message, tk)
           } else if (mysteryObj >= 2) {
-            let bytes = Math.round(Math.random() * (10000 - 256) + 256)
+            let bytes = Math.round(Math.random() * (30000 - 256) + 256)
             legend += `< ${mysteriousObject} It was bytes.\n`
             legend += `Obtained ${bytes} bytes. >\n`
             scoreUpBits(message, bytes)
