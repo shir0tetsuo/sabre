@@ -220,81 +220,6 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     const msg = collected.first();
     const input = msg.content.toLowerCase();
 
-    // var sendContent = '';
-    /*
-    if (input === 'atk' || input === 'special') {
-      if (input === 'atk') {
-        const messages = [
-          'attempted to punch it in the face.',
-          'attempted to kick it in the face.',
-          'attempted to slam the entity.',
-          'attempted to elbow it in the face.'
-        ]
-        var attackChance = 0.75,
-          min = 500.0,
-          max = 900.0;
-      } else if (input === 'special') {
-        const messages = [
-
-        ]
-        var attackChance = 0.65,
-          min = 525.0,
-          max = 1200.0;
-      } else {
-        fight(message, uid, boss, bossHP, h, baseHP)
-        return;
-      }
-
-      if (Math.random() > attackChance) {
-        sendContent += `\`\`\`diff\n- ${message.author.username} missed.\`\`\``
-      } else {
-        const damage = Math.round(Math.random() * (max - min) + min);
-
-        var oldHP = bossHP;
-        bossHP -= damage;
-
-        sendContent += `**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** ${Rand(messages)}\n`
-        sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
-      }
-
-      sendContent += `It's ${boss}'s move.\n`
-      // boss turn
-      var oldPHP = baseHP;
-      const misschance = Math.round(Math.random() * 100)
-      const missminimum = Math.round(h.hlvl + 65)
-      if (missminimum >= misschance) {
-        sendContent += `\`\`\`diff\n--- ${boss} missed.\`\`\``
-      } else {
-        const npcmax = Math.round(Math.random() * (h.hlvl * 750))
-        const npcmin = Math.round(Math.random() * (h.hlvl * 100))
-        const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
-
-        baseHP -= npcdamage;
-        sendContent += `\`\`\`diff\n- ${message.author.username}#${message.author.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
-      }
-
-      message.channel.send(`${sendContent}`)
-
-      if (baseHP <= 0) {
-        // LOSS DATA GOES HERE!
-        sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
-        doReset(message);
-        return;
-      }
-      if (bossHP <= 0) {
-        sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
-        doReset(message);
-        return;
-      }
-
-      // loop again after turn
-      fight(message, uid, boss, bossHP, h, baseHP)
-      return;
-    } */
-
-  //  var npcAccuracy = 74 + h.hlvl,
-    //  npcHitChance = Math.floor(Math.random() * (100 - npcAccuracy));
-
 // NPC Floor
     var npcAccuracy = 58 + h.hlvl,
       oldPHP = baseHP;
@@ -364,7 +289,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
       } else {
         var oldHP = bossHP;
-        var atkDamage = Math.round(Math.random() * (1200 - 525) + 525)
+        var atkDamage = Math.round(Math.random() * (h.hlvl*1200 - h.hlvl*525) + h.hlvl*525)
         bossHP -= atkDamage;
         var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
       }
@@ -392,7 +317,19 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 // guard
     } else if (input === 'guard') {
       var sendContent = '';
-      console.log('Guarded')
+      //console.log('Guarded')
+
+      if (!npcDamage) {
+        sendContent += `\`\`\`diff\n+ ${boss}'s attack failed\`\`\``
+        healCalculation = h.hlvl*500
+        baseHP += healCalculation
+        sendContent += `\`\`\`diff\n+ ${msg.author.username} healed (${oldPHP} + ${healCalculation} -> ${baseHP})`
+      } else {
+        npcGuarded = Math.round(npcDamage/8 * 3)
+        baseHP += npcGuarded
+        sendContent += `\`\`\`diff\n- ${msg.author.username} was damaged (${oldPHP} -> ${baseHP})\n`
+        sendContent += `+ Protected against (${npcGuarded} damage)\`\`\``
+      }
 
       if (isBaseDepleted(baseHP) === true) {
         sendContent += `\`\`\`diff\n- You died.\`\`\``
@@ -515,6 +452,7 @@ exports.run = (client, message, params) => {
           //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
+          console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Picked a Fight.`))
           fight(message, message.author.id, fisheye, 4000, h, 8000); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
