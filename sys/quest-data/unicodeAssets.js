@@ -1,3 +1,3 @@
 exports.uc = {
-  data1: 'data';
+  data1: 'data'
 }
