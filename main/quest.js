@@ -182,7 +182,7 @@ function fight(message, boss, bossHP, h, baseHP) {
 
     return;
   }*/
-  message.channel.send(`**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})**, type \`${validActionString}\` to continue.`)
+  message.channel.send(`**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})**, type \`${validActionString}\` to continue.`)
   message.channel.awaitMessages(response => response.author.id === message.author.id && validActionRegex.test(response.content), {
     max: 1,
     time: 60000,
@@ -195,7 +195,7 @@ function fight(message, boss, bossHP, h, baseHP) {
 
     }
     if (input === 'run') {
-      msg.channel.send(`**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** Ran Away.`)
+      msg.channel.send(`**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** Ran Away.`)
 
       doReset(message);
       return;
@@ -215,7 +215,7 @@ function fight(message, boss, bossHP, h, baseHP) {
       var oldHP = bossHP;
       bossHP -= damage;
 
-      sendContent += `**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** ${Rand(attack.messages)}\n`
+      sendContent += `**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** ${Rand(attack.messages)}\n`
       sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
 
     }
