@@ -226,13 +226,14 @@ function isBossDepleted(bossHP) {
 
 function generateReward(message, h) {
   var rewardPrint = Math.round(Math.random())
+  // Level 1 Winnings
   if (h.hlvl >= 1) {
     if (rewardPrint <= 0.33) {
-      var rTk = Math.round(Math.random() * (1000000 - 10000 * h.hlvl) + 10000 * h.hlvl)
+      var rTk = Math.round(Math.random() * (100000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rTk} Sabre Tickets`
       scoreUpTicket(message, rTk)
     } else if (rewardPrint <= 0.66) {
-      var rBy = Math.round(Math.random() * (1200000 - 5000 * h.hlvl) + 5000 * h.hlvl)
+      var rBy = Math.round(Math.random() * (120000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rBy} Bytes`
       scoreUpBits(message, rBy)
     } else if (rewardPrint <= 1) {
@@ -294,7 +295,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         // NPC Accuracy Success
       } else {
         // NPC Damage Calculation
-        var npcDamage = Math.round(Math.random() * (h.hlvl * 750 - h.hlvl * 300) + h.hlvl * 300)
+        var npcDamage = Math.round(Math.random() * (h.hlvl * 1550 - h.hlvl * 455) + h.hlvl * 455)
 
         // Lower Player's HP
         baseHP -= npcDamage;
@@ -570,6 +571,8 @@ exports.run = (client, message, params) => {
         - Enemy Database
         - Functionize Map Generation
         - Append Enemy Database to Fight Function
+        - Decrease Earnings (Done)
+        - Increase NPC Damage (Done)
 
       */
       // Begin: hlvl0 Randomness
