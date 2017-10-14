@@ -323,7 +323,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         sendContent += `\`\`\`diff\n+ ${boss}'s attack failed\`\`\``
         healCalculation = h.hlvl*500
         baseHP += healCalculation
-        sendContent += `\`\`\`diff\n+ ${msg.author.username} healed (${oldPHP} + ${healCalculation} -> ${baseHP})`
+        sendContent += `\`\`\`diff\n+ ${msg.author.username} healed (${oldPHP} + ${healCalculation} -> ${baseHP})\`\`\``
       } else {
         npcGuarded = Math.round(npcDamage/8 * 3)
         baseHP += npcGuarded
