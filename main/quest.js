@@ -272,7 +272,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
     if (npcHitChance >= npcMaxAccuracy) {
       var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
-      var newHP = baseHP*1
+      var newHP = oldHP*1
     } else {
       var npcDamage = Math.round(Math.random() * (h.lvl*750 - h.hlvl*300) + h.hlvl*300)
       console.log(npcDamage)
@@ -288,7 +288,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
       isBossDepleted(msg, bossHP)
-      fight(message, uid, boss, bossHP, h, baseHP)
+      fight(message, uid, boss, bossHP, h, newHP)
       return;
     } else if (input === 'special') {
       var sendContent = '';
@@ -297,7 +297,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
       isBossDepleted(msg, bossHP)
-      fight(message, uid, boss, bossHP, h, baseHP)
+      fight(message, uid, boss, bossHP, h, newHP)
       return;
     } else if (input === 'guard') {
       var sendContent = '';
@@ -305,7 +305,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
-      fight(message, uid, boss, bossHP, h, baseHP)
+      fight(message, uid, boss, bossHP, h, newHP)
       return;
     } else if (input === 'run') {
       msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
