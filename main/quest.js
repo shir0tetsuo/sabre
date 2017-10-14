@@ -132,6 +132,20 @@ function getColor(hl) {
     return 0x34d1a2
   }
 }
+function isBaseDepleted(message, baseHP) {
+  if (baseHP <= 0) {
+    message.reply(`Some lose message.`)
+    doReset(message);
+    return;
+  }
+}
+function isBossDepleted(message, bossHP) {
+  if (bossHP <= 0) {
+    message.reply(`Some win message.`)
+    doReset(message);
+    return;
+  }
+}
 
 function fight(message, uid, boss, bossHP, h, baseHP) {
   console.log(message.content, uid, boss, bossHP, h, baseHP)
@@ -149,7 +163,8 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     const msg = collected.first();
     const input = msg.content.toLowerCase();
 
-    var sendContent = '';
+    // var sendContent = '';
+    /*
     if (input === 'atk' || input === 'special') {
       if (input === 'atk') {
         const messages = [
@@ -239,25 +254,62 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       // loop again after turn
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
-    }
-    if (input === 'guard') {
-      console.log('Guarded')
+    } */
 
+  //  var npcAccuracy = 74 + h.hlvl,
+    //  npcHitChance = Math.floor(Math.random() * (100 - npcAccuracy));
+
+// NPC Floor
+    var npcAccuracy = 74 + h.hlvl,
+      oldPHP = baseHP;
+    if (npcAccuracy >= 100) {
+      var npcMaxAccuracy = 100
+    } else {
+      var npcMaxAccuracy = npcAccuracy;
+    }
+    var npcHitChance = Math.round(Math.random() * 100);
+
+    if (npcHitChance >= npcMaxAccuracy) {
+      var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
+    } else {
+      var npcDamage = Math.round(Math.random() * (h.lvl*750 - h.hlvl*300) + h.hlvl*300)
+      baseHP -= npcDamage;
+      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})`
+    }
+
+// ATK Floor
+    if (input === 'atk') {
+      var sendContent = '';
+
+      sendContent += `${npcMessage}`
+      msg.channel.send(`${sendContent}`)
+      isBaseDepleted(msg, baseHP)
+      isBossDepleted(msg, bossHP)
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
-    }
-    if (input === 'run') {
+    } else if (input === 'special') {
+      var sendContent = '';
+
+      sendContent += `${npcMessage}`
+      msg.channel.send(`${sendContent}`)
+      isBaseDepleted(msg, baseHP)
+      isBossDepleted(msg, bossHP)
+      fight(message, uid, boss, bossHP, h, baseHP)
+      return;
+    } else if (input === 'guard') {
+      var sendContent = '';
+      console.log('Guarded')
+
+      msg.channel.send(`${sendContent}`)
+      isBaseDepleted(msg, baseHP)
+      fight(message, uid, boss, bossHP, h, baseHP)
+      return;
+    } else if (input === 'run') {
       msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
 
       doReset(message);
       return;
     }
-
-
-
-
-
-
     /*  message.channel.send(`${sendContent}`)
       fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
