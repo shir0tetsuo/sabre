@@ -15,10 +15,8 @@ function Rand(data) {
 function doReset(message) {
   isFighting.delete(message.author.id)
 }
-const basic = [
-  'atk'
-]
-const validActions = Object.keys(basic).concat('special').concat('guard').concat('run');
+//const validActions = Object.keys(basic).concat('special').concat('guard').concat('run');
+const validActions = (['atk', 'guard', 'special', 'run'])
 const validActionRegex = new RegExp(validActions.join('|'), 'i');
 const validActionString = validActions.map(action => `${action}`).join(' || ');
 
