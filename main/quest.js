@@ -2,7 +2,7 @@
 
 
 const Rand = require('../sys/quest-data/random.js')
-const UDat = require('../sys/quest-data/unicodeAssets.js')
+const Transaction = require('../sys/quest-data/transactions.js')
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ const vendorsResponse = [
 ////////////////////////////////////////////////////////////////////////////////
 // Standard Sabre Transaction Functions
 ////////////////////////////////////////////////////////////////////////////////
-
+/*
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
   setTimeout(() => {
@@ -138,11 +138,11 @@ function scoreUpBits(mess, xval) {
     })
   }, 2000)
 }
-
+*/
 ////////////////////////////////////////////////////////////////////////////////
 // Hyperlevel Sabre Transaction Functions
 ////////////////////////////////////////////////////////////////////////////////
-
+/*
 function hSpaceAUpdate(m) {
   setTimeout(() => {
     sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
@@ -168,7 +168,7 @@ function hSpaceBUpdate(m) {
     })
   }, 2000)
 }
-
+*/
 function getKey(m, keys) {
   if (!keys) var keys = 1;
   setTimeout(() => {
@@ -232,14 +232,14 @@ function generateReward(message, h) {
     if (rewardPrint <= 0.33) {
       var rTk = Math.round(Math.random() * (100000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rTk} Sabre Tickets`
-      scoreUpTicket(message, rTk)
+      Transaction(message, 'tk', rTk)
     } else if (rewardPrint <= 0.66) {
       var rBy = Math.round(Math.random() * (120000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rBy} Bytes`
-      scoreUpBits(message, rBy)
+      Transaction(message, 'b', rBy)
     } else if (rewardPrint <= 1) {
       var rewObject = `1 Dark Ticket`
-      hSpaceBUpdate(message)
+      Transaction(message, 'dtk', 1)
     }
   } else {
     var rewObject = "nothing."
@@ -553,7 +553,6 @@ exports.run = (client, message, params) => {
     // spaceA = Quest Keys
     if (hl.spaceA * 1 >= 1) {
       // Invoke Styling Mechanisms
-      console.log(UDat.uc.data1) // REMOVEME
       var header = '```md',
         footer = '```',
         // Call upon Color to Set Sidebar Color
@@ -630,7 +629,7 @@ exports.run = (client, message, params) => {
           content += `> ${vert}${lightshadeFill}${qKey}${lightshadeFill}${vert}\n`
           content += `${mid}\n`
           var legend = `< You found another Quest Key ${qKey} >\n`
-          giveKey(message, 1)
+          Transaction(message, 'qkey', 1)
         } else {
           content += `> ${vert}${lightshadeFill}${qWarp}${lightshadeFill}${vert}\n`
           content += `> ${vert}${lightshadeFill}${mysteriousObject}${lightshadeFill}${vert}\n`
@@ -641,16 +640,16 @@ exports.run = (client, message, params) => {
             let tk = Math.round(Math.random() * (10000 - 100) + 100)
             legend += `< ${mysteriousObject} It was tickets.\n`
             legend += `Obtained ${tk} tickets. >\n`
-            scoreUpTicket(message, tk)
+            Transaction(message, 'tk', tk)
           } else if (mysteryObj >= 2) {
             let bytes = Math.round(Math.random() * (30000 - 256) + 256)
             legend += `< ${mysteriousObject} It was bytes.\n`
             legend += `Obtained ${bytes} bytes. >\n`
-            scoreUpBits(message, bytes)
+            Transaction(message, 'b', bytes)
           } else {
             legend += `< ${mysteriousObject} It was a Dark Ticket.\n`
             legend += `Obtained 1 Dark Ticket. >\n`
-            hSpaceBUpdate(message)
+            Transaction(message, 'dtk', 1)
           }
         }
         if (chance >= 95) {
@@ -697,7 +696,7 @@ exports.run = (client, message, params) => {
         }
       })
       // Key Transaction
-      getKey(message, 1);
+      Transaction(message, 'qkey', -1);
     } else {
       return message.reply(`\`ERROR\` You don't have any keys.`)
     }
