@@ -1,4 +1,4 @@
-const Rand = require('random.js')
+const Rand = require('./random.js')
 
 const attackMessage = [
   'attempted to punch it in the face.',
