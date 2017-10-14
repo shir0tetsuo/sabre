@@ -7,6 +7,10 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
 
+function Rand(data) {
+  return data[Math.floor(Math.random() * data.length)]
+}
+
 /*
 
         other symbols
@@ -16,6 +20,7 @@ let hkey = ":key2:"
 let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398' //  ⎘
 let qUser = '\u24C5' // Ⓟ
+let qKey = '\u2ECF'
 let topLeft = '\u2554'
 let topRight = '\u2557'
 let botLeft = '\u255A'
@@ -28,6 +33,61 @@ let medshade = '\u2592'
 let darkshade = '\u2593'
 let mysteriousObject = '\u25A8'
 let fisheye = '\u25C9'
+
+const vendors = [
+  'Jerry',
+  'Ian',
+  'Kevin',
+  'Morpheus'
+]
+const vendorsResponse = [
+  '"Keep your head up high. You won\'t find hope lying on the ground."',
+  '"I\'m addicted to Sabre help!"',
+  '"...oh, Hello."',
+  '"Pardon me."'
+]
+
+function scoreUpTicket(mess, xval) {
+  if (!xval) var xval = 1
+  setTimeout(() => {
+    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+      sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+    })
+  }, 2000)
+}
+function scoreUpBits(mess, xval) {
+  if (!xval) var xval = 1
+  setTimeout(() => {
+    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+    })
+  }, 2000)
+}
+
+function hSpaceAUpdate(m) {
+  setTimeout(() => {
+    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
+      if (!hl) {
+        return message.reply(`\`Internal Error\``)
+      } else {
+        sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + 1*1}" WHERE userId = "${m.author.id}"`)
+        console.log(chalk.greenBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Key`))
+      }
+    })
+  }, 2000)
+}
+function hSpaceBUpdate(m) {
+  setTimeout(() => {
+    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
+      if (!hl) {
+        return message.reply(`\`Internal Error\``)
+      } else {
+        sql.run(`UPDATE hyperlevels SET spaceB = "${hl.spaceB*1 + 1*1}" WHERE userId = "${m.author.id}"`)
+        console.log(chalk.greenBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Dark Ticket`))
+      }
+    })
+  }, 2000)
+}
 
 function getKey(m, keys) {
   if (!keys) var keys = 1;
@@ -108,20 +168,43 @@ exports.run = (client, message, params) => {
         let mid = `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
         let bot = `> ${botLeft}${horz}${botRight}`
         // munge top half
+        content += `[Area](1 :: Dark Forest ::)\n`
+        content += `# Discovered Dark Room\n`
         content += `${top}\n${mid}\n`
         // randomness
         if (chance >= 90) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
-          var legend = `< You are greeted by the area vendor ${qVendor} >\n`
+          var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
+          var legend += `${Rand(vendorsResponse)} >`
         } else if (chance >= 50) {
-
+          var legend = `< The room was empty. >`
         } else if (chance >= 15) {
-
+          content += `${mid}\n`
+          content += `> ${vert}${lightshadeFill}${qKey}${lightshadeFill}${lightshadeFill}\n`
+          content += `${mid}\n`
+          var legend = `< You found another Quest Key ${qKey} >\n`
+          giveKey(message, 1)
         } else {
           content += `> ${vert}${lightshadeFill}${qWarp}${lightshadeFill}${vert}\n`
           content += `> ${vert}${lightshadeFill}${mysteriousObject}${lightshadeFill}${vert}\n`
           var legend = `# A Warp Gate Appeared ${qWarp}.\n`
-          legend += `/* Mysterious Object was discovered. *\n`
+          legend += `/* Mysterious Object was discovered ${mysteriousObject}. *\n`
+          let mysteryObj = Math.round(Math.random() * 3);
+          if (mysteryObj >= 3) {
+            let tk = Math.round(Math.random() * (5000 - 100) - 100)
+            legend += `< ${mysteriousObject} It was tickets.\n`
+            legend += `Obtained ${tk} tickets. >\n`
+            scoreUpTicket(message, tk)
+          } else if (mysteryObj >= 2) {
+            let bytes = Math.round(Math.random() * (10000 - 256) - 256)
+            legend += `< ${mysteriousObject} It was bytes.\n`
+            legend += `Obtained ${bytes} bytes. >\n`
+            scoreUpBits(message, bytes)
+          } else {
+            legend += `< ${mysteriousObject} It was a Dark Ticket.\n`
+            legend += `Obtained 1 Dark Ticket. >\n`
+            hSpaceBUpdate(message)
+          }
         }
         content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
         // munge bottom half
