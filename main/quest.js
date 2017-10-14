@@ -13,16 +13,20 @@ let hkey = ":key2:"
         // http://www.fileformat.info/info/unicode/category/So/list.htm
 
 */
-let qVendor = '\u2324'
+let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398'
-let qUser = '\u24C5'
+let qUser = '\u24C5' // Ⓟ
 let topLeft = '\u2554'
 let topRight = '\u2557'
 let botLeft = '\u255A'
 let botRight = '\u255D'
 let horz = '\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550' // 10 spaces
 let vert = '\u2551'
-let fill = '....'
+let lightshadeFill = '\u2591\u2591\u2591\u2591'
+let lightshade = '\u2591'
+let medshade = '\u2592'
+let darkshade = '\u2593'
+let mysteriousObject = '\u25A8'
 
 function getKey(m, keys) {
   if (!keys) var keys = 1;
@@ -69,10 +73,11 @@ exports.run = (client, message, params) => {
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
       if (hl.hlvl >= 0) {
         content += `> ${topLeft}${horz}${topRight}\n`
-        content += `> ${vert}${fill}${qVendor}${fill}${vert}\n`
-        content += `> ${vert}${fill}${qUser}${fill}${vert}\n`
+        content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
+        content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
         content += `> ${botLeft}${horz}${botRight}\n`
       }
+      content += `< ${qUser} = ${message.author.username}#${message.author.discriminator} >\n`
 
 
       message.reply({embed: {
