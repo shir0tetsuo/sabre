@@ -123,6 +123,7 @@ function fight(message, boss, bossHP) {
 
 
   // let newHP =
+  let newHP = something
   fight(message, boss, newHP)
 }
 
@@ -286,7 +287,7 @@ exports.run = (client, message, params) => {
         //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, 1, 3000); // message, boss, bossHP
+      //    fight(message, 1, 3000); // message, boss, bossHP
           legend += `>\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
