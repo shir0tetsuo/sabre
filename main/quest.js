@@ -119,13 +119,7 @@ const vendorsResponse = [
   '"Read ALL The Words!"'
 ]
 
-function fight(message, boss, bossHP) {
 
-
-  // let newHP =
-  let newHP = something
-  fight(message, boss, newHP)
-}
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
@@ -198,11 +192,97 @@ function getColor(hl) {
   }
 }
 
+function fight(message, player, boss, bossHP, h) {
+  if (!player.isFighting) {
+    player.reset();
+
+    return;
+  }
+  message.channel.send(`**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})**, type \`${validActionString}\` to continue.`)
+  message.channel.awaitMessages(response => response.author.id === currentPlayer.id && validActionRegex.test(response.content), {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  }).then(collected => {
+    const msg = collected.first();
+    const input = msg.content.toLowerCase();
+
+    if (input === 'guard') {
+
+    }
+    if (input === 'run') {
+      msg.channel.send(`**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})** Ran Away.`)
+
+      currentPlayer.reset();
+      return;
+    }
+
+    currentPlayer.miss = 0;
+
+    const attack = attacks[input];
+
+    var sendContent = '';
+
+    if (Math.random() > attackChance) {
+      sendContent += `\`\`\`diff\n- ${currentPlayer.user.username} missed.\`\`\``
+    } else {
+      const damage = Math.round(Math.random() * (attack.damage.max - attack.damage.min) + attack.damage.min);
+
+      var oldHP = bossHP;
+      bossHP -= damage;
+
+      sendContent += `**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})** ${Rand(attack.messages)}\n`
+      sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
+
+    }
+    sendContent += `It's ${boss}'s move.\n`
+
+    var oldPHP = currentPlayer.hp;
+
+    const misschance = Math.round(Math.random() * 100)
+    const missminimum = Math.round(h.hlvl + 65)
+    if (missminimum >= misschance) {
+      sendContent += `\`\`\`diff\n--- ${boss} missed.`
+    } else {
+      const npcmax = Math.round(Math.random() * (h.hlvl * 750))
+      const npcmin = Math.round(Math.random() * (h.hlvl * 100))
+      const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
+
+      currentPlayer.hp -= npcdamage;
+      sendContent += `\`\`\`diff\n- ${currentPlayer.user.username}#${currentPlayer.user.discriminator} took damage. (${oldPHP} -> ${currentPlayer.hp})\`\`\``
+    }
+
+    if (currentPlayer.hp <= 0) {
+      // LOSS DATA GOES HERE!
+      sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
+      currentPlayer.reset();
+    }
+    if (bossHP <= 0) {
+      sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
+      currentPlayer.reset();
+    }
+
+    message.channel.send(`${sendContent}`)
+    fight(message, currentPlayer, boss, bossHP, h)
+  }).catch(() => {
+    message.channel.send(`**${currentPlayer.user.username}** wasn't able to respond.`);
+    currentPlayer.miss++;
+
+    if (currentPlayer.miss >= 2) {
+      message.channel.send(`${currentPlayer.user.username}#${currentPlayer.user.discriminator} went AFK.`)
+      currentPlayer.reset();
+      return;
+    }
+    fight(message, currentPlayer, boss, bossHP, h)
+  })
+}
+
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
+    var h = hl;
     if (message.author.id === settings.ownerid && params[0] === 'devmode' && params[1] >= 1) {
       giveKey(message, params[1])
       return message.reply(`\`Done.\``)
@@ -266,6 +346,8 @@ exports.run = (client, message, params) => {
           content += `[Area](1 :: Dark Chasm ::)\n`
           content += `/* A Boss wants to Fight! ${fisheye} *\n`
           content += `${topBoss}\n${midBoss}\n`
+          const you = new Player(message.author);
+          you.isFighting = true;
         } else {
           content += `[Area](1 :: Dark Forest ::)\n`
           content += `# Discovered Dark Room\n`
@@ -287,7 +369,7 @@ exports.run = (client, message, params) => {
         //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-      //    fight(message, 1, 3000); // message, boss, bossHP
+          fight(message, player, fisheye, 3000, h); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
