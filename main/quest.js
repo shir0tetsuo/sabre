@@ -176,15 +176,15 @@ function getColor(hl) {
   }
 }
 
-function fight(message, boss, bossHP, h, baseHP) {
-  console.log(message.content, boss, bossHP, h, baseHP)
+function fight(message, uid, boss, bossHP, h, baseHP) {
+  console.log(message.content, uid, boss, bossHP, h, baseHP)
   /*if (!isFighting.has(message.author.id)) {
     doReset(message);
 
     return;
   }*/
   message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**, type \`${validActionString}\` to continue.`)
-  message.channel.awaitMessages(response => response.author.id === message.author.id && validActionRegex.test(response.content), {
+  message.channel.awaitMessages(response => response.author.id === uid && validActionRegex.test(response.content), {
     max: 1,
     time: 60000,
     errors: ['time'],
@@ -248,7 +248,7 @@ function fight(message, boss, bossHP, h, baseHP) {
     }
 
     message.channel.send(`${sendContent}`)
-    fight(message, boss, bossHP, h, baseHP)
+    fight(message, uid, boss, bossHP, h, baseHP)
   }).catch(() => {
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
     message.author.miss++;
@@ -258,7 +258,7 @@ function fight(message, boss, bossHP, h, baseHP) {
       doReset(message);
       return;
     }
-    fight(message, boss, bossHP, h, baseHP)
+    fight(message, uid, boss, bossHP, h, baseHP)
   })
 }
 
@@ -354,7 +354,7 @@ exports.run = (client, message, params) => {
         //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, fisheye, 3000, h, 8000); // message, boss, bossHP
+          fight(message, message.author.id, fisheye, 3000, h, 8000); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
