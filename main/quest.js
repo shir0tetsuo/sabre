@@ -52,6 +52,7 @@ function scoreUpTicket(mess, xval) {
   setTimeout(() => {
     sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
       sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+      console.log(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; + ${xval} Tickets`)
     })
   }, 2000)
 }
@@ -60,6 +61,7 @@ function scoreUpBits(mess, xval) {
   setTimeout(() => {
     sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
       sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+      console.log(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; + ${xval} Bytes`)
     })
   }, 2000)
 }
@@ -94,6 +96,7 @@ function getKey(m, keys) {
   setTimeout(() => {
     sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
       sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 - keys*1}" WHERE userId = "${m.author.id}"`)
+      console.log(chalk.purpleBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Quest Key`))
     })
   }, 2000)
 }
