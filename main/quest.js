@@ -135,7 +135,7 @@ exports.run = (client, message, params) => {
       var chance = Math.floor(Math.random() * 100)
       console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; (${chance})`))
     }
-    console.log(chance)
+    //console.log(chance)
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
       var header = '```md',
@@ -196,6 +196,7 @@ exports.run = (client, message, params) => {
         // randomness
         if (chance >= 95) {
           // first boss
+          content += `/* ${vert}${lightshadeFill}${medshade}${darkshade}${medshade}${lightshadeFill}${vert} *\n`
           content += `/* ${vert}${lightshadeFill}${lightshadeFill}${fisheye}${lightshadeFill}${darkshade}${lightshade}${vert} *\n`
           var legend = `* You are in danger!\n`
           legend += `< You have the following options.\n`
