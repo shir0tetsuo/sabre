@@ -9,15 +9,19 @@ let noHS = new Set();
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
-  })
+  setTimeout(() => {
+    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+      sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
+    })
+  }, 2000)
 }
 function scoreUpBits(mess, xval) {
   if (!xval) var xval = 1
-  sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-    sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
-  })
+  setTimeout(() => {
+    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
+      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
+    })
+  }, 2000)
 }
 
 function hSpaceAUpdate(m) {
@@ -75,27 +79,19 @@ exports.run = (client, message, params) => {
         if (cMath >= 1800) {
           var cName = 'Obtained 1 :key2:',
             cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
-          setTimeout(() => {
             hSpaceAUpdate(message);
-          }, 2000)
         } else if (cMath >= 1600) {
           var cName = 'Obtained 1 :pound:',
             cVal = `You can use the \`${settings.prefix}darkshop\` command with this ticket.`
-          setTimeout(() => {
             hSpaceBUpdate(message);
-          }, 2000)
         } else if (cMath >= 1400) {
           var cName = `Obtained 3000 ${curren}`,
             cVal = `Lucky you`
-          setTimeout(() => {
             scoreUpTicket(message, 3000)
-          }, 2000)
         } else if (cMath >= 1300) {
           var cName = `Obtained 8000 ${chatBit}`,
             cVal = `Lucky you`
-          setTimeout(() => {
             scoreUpBits(message, 8000)
-          }, 2000)
         } else {
           var cName = 'Sorry',
             cVal = 'Nothing Obtained.'
