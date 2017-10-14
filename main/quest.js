@@ -261,6 +261,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
   /*  message.channel.send(`${sendContent}`)
     fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
+    console.error;
     console.log(message.content, uid, boss, bossHP, h, baseHP, response.content)
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
 
