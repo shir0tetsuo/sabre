@@ -58,7 +58,7 @@ exports.run = (client, message, params) => {
       var condColor = 0x36B236
       var condMessage = "Take a breather. You got through this round."
     } else {
-      var prize = Math.floor(row.tickets/7)
+      var prize = Math.floor(row.tickets/6)
       var newbit = Math.floor(row.chatBits/5)
       if (prize > 5000000) var prize = 5000000
       if (newbit > 3000000) var newbit = 3000000
