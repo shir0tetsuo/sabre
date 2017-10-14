@@ -184,7 +184,7 @@ exports.run = (client, message, params) => {
           var legend = `< The room was empty. >\n`
         } else if (chance >= 15) {
           content += `${mid}\n`
-          content += `> ${vert}${lightshadeFill}${qKey}${lightshadeFill}${lightshadeFill}\n`
+          content += `> ${vert}${lightshadeFill}${qKey}${lightshadeFill}${vert}\n`
           content += `${mid}\n`
           var legend = `< You found another Quest Key ${qKey} >\n`
           giveKey(message, 1)
