@@ -6,32 +6,15 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
+let isFighting = new Set();
 
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
-function currentPlayer(user) {
-  if (currentPlayer.cache[user.id]) {
-    return currentPlayer.cache[user.id]
-  }
-
-  currentPlayer.cache[user.id] = this;
-
-  this.user = user;
-
-  doReset();
+function doReset(message) {
+  isFighting.delete(message.author.id)
 }
-function doReset() {
-  this.hp = 8000;
-  this.isFighting = false;
-  this.miss = 0;
-}
-currentPlayer.prototype.debug = function() {
-  console.log(`${this.user.username}'s HP: ${this.hp}`)
-}
-
-currentPlayer.cache = {};
 
 const attacks = {
   atk: {
@@ -192,16 +175,15 @@ function getColor(hl) {
   }
 }
 
-function fight(message, currentPlayer, boss, bossHP, h) {
-  console.log(message.content, currentPlayer.id, currentPlayer.hp, currentPlayer.isFighting, boss, bossHP, h)
-  //if (currentPlayer.hp >= 8000) currentPlayer.isFighting = true;
-  if (!currentPlayer.isFighting) {
-    doReset();
+function fight(message, boss, bossHP, h, baseHP) {
+  console.log(message.content, boss, bossHP, h, baseHP)
+  /*if (!isFighting.has(message.author.id)) {
+    doReset(message);
 
     return;
-  }
-  message.channel.send(`**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})**, type \`${validActionString}\` to continue.`)
-  message.channel.awaitMessages(response => response.author.id === currentPlayer.id && validActionRegex.test(response.content), {
+  }*/
+  message.channel.send(`**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})**, type \`${validActionString}\` to continue.`)
+  message.channel.awaitMessages(response => response.author.id === message.author.id && validActionRegex.test(response.content), {
     max: 1,
     time: 60000,
     errors: ['time'],
@@ -213,33 +195,33 @@ function fight(message, currentPlayer, boss, bossHP, h) {
 
     }
     if (input === 'run') {
-      msg.channel.send(`**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})** Ran Away.`)
+      msg.channel.send(`**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** Ran Away.`)
 
-      doReset();
+      doReset(message);
       return;
     }
 
-    currentPlayer.miss = 0;
+    message.author.miss = 0;
 
     const attack = attacks[input];
 
     var sendContent = '';
 
     if (Math.random() > attackChance) {
-      sendContent += `\`\`\`diff\n- ${currentPlayer.user.username} missed.\`\`\``
+      sendContent += `\`\`\`diff\n- ${message.author.user.username} missed.\`\`\``
     } else {
       const damage = Math.round(Math.random() * (attack.damage.max - attack.damage.min) + attack.damage.min);
 
       var oldHP = bossHP;
       bossHP -= damage;
 
-      sendContent += `**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})** ${Rand(attack.messages)}\n`
+      sendContent += `**${message.author.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** ${Rand(attack.messages)}\n`
       sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
 
     }
     sendContent += `It's ${boss}'s move.\n`
 
-    var oldPHP = currentPlayer.hp;
+    var oldPHP = baseHP;
 
     const misschance = Math.round(Math.random() * 100)
     const missminimum = Math.round(h.hlvl + 65)
@@ -250,37 +232,37 @@ function fight(message, currentPlayer, boss, bossHP, h) {
       const npcmin = Math.round(Math.random() * (h.hlvl * 100))
       const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
 
-      currentPlayer.hp -= npcdamage;
-      sendContent += `\`\`\`diff\n- ${currentPlayer.user.username}#${currentPlayer.user.discriminator} took damage. (${oldPHP} -> ${currentPlayer.hp})\`\`\``
+      baseHP -= npcdamage;
+      sendContent += `\`\`\`diff\n- ${message.author.user.username}#${message.author.user.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
     }
 
-    if (currentPlayer.hp <= 0) {
+    if (baseHP <= 0) {
       // LOSS DATA GOES HERE!
       sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
-      doReset();
+      doReset(message);
     }
     if (bossHP <= 0) {
       sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
-      doReset();
+      doReset(message);
     }
 
     message.channel.send(`${sendContent}`)
-    fight(message, currentPlayer, boss, bossHP, h)
+    fight(message, boss, bossHP, h, baseHP)
   }).catch(() => {
-    message.channel.send(`**${currentPlayer.user.username}** wasn't able to respond.`);
-    currentPlayer.miss++;
+    message.channel.send(`**${message.author.user.username}** wasn't able to respond.`);
+    message.author.miss++;
 
-    if (currentPlayer.miss >= 2) {
-      message.channel.send(`${currentPlayer.user.username}#${currentPlayer.user.discriminator} went AFK.`)
-      doReset();
+    if (message.author.miss >= 2) {
+      message.channel.send(`${message.author.user.username}#${message.author.user.discriminator} went AFK.`)
+      doReset(message);
       return;
     }
-    fight(message, currentPlayer, boss, bossHP, h)
+    fight(message, boss, bossHP, h, baseHP)
   })
 }
 
 exports.run = (client, message, params) => {
-  const you = new currentPlayer(message.author);
+  doReset(message)
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
@@ -349,7 +331,7 @@ exports.run = (client, message, params) => {
           content += `[Area](1 :: Dark Chasm ::)\n`
           content += `/* A Boss wants to Fight! ${fisheye} *\n`
           content += `${topBoss}\n${midBoss}\n`
-          you.isFighting = true;
+          isFighting.add(message.author.id)
         } else {
           content += `[Area](1 :: Dark Forest ::)\n`
           content += `# Discovered Dark Room\n`
@@ -371,7 +353,7 @@ exports.run = (client, message, params) => {
         //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, currentPlayer, fisheye, 3000, h); // message, boss, bossHP
+          fight(message, fisheye, 3000, h, 8000); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
