@@ -24,6 +24,23 @@ function giveKey(m, keys) {
   }, 2000)
 }
 
+function getColor(hl) {
+  if (hl.hlvl >= 5) {
+    return '0x5FEFBF';
+  } else if (hl.hlvl >= 0) {
+    return '0x34d1a2';
+  }
+}
+function map(hl) {
+  let data = '';
+  if (hl.lvl >= 0) {
+    data += `> /////////////`
+    data += `> //   \u233e\u2324    //`
+    data += `> /////////////`
+  }
+  return data;
+}
+
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
@@ -41,12 +58,17 @@ exports.run = (client, message, params) => {
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
+      content += `${map(hl)}\n`
+
       message.reply({embed: {
-        color: 0x34d1a2,
+        color: getColor(hl),
         timestamp: new Date(),
         author: {
           name: `${client.user.username}'s Forest`,
           icon_url: client.user.avatarURL
+        },
+        footer: {
+          text: `${message.author.username}#${message.author.discriminator}`
         },
         fields: [
           {
