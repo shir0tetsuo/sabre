@@ -393,7 +393,7 @@ exports.run = (client, message, params) => {
   const validActionString = PLY(message, 'validActionString', isFighting)
 
   // reset any vs if any
-  doReset(message)
+  PLY(message, 'reset', isFighting)
 
   ////////////////////////////////////////////////////////////////////////////////
   // Load Hyperlevel Data to Memory
