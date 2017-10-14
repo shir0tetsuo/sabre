@@ -188,14 +188,14 @@ function generateReward(message, h) {
   if (h.hlvl >= 1) {
     if (rewardPrint <= 0.33) {
       var rTk = Math.round(Math.random() * (1000000 - 10000*h.hlvl) + 10000*h.hlvl)
-      var rewObject = `${rTk} ${curren}`
+      var rewObject = `${rTk} Sabre Tickets`
       scoreUpTicket(message, rTk)
     } else if (rewardPrint <= 0.66) {
       var rBy = Math.round(Math.random() * (1200000 - 5000*h.hlvl) + 5000*h.hlvl)
-      var rewObject = `${rBy} ${chatBit}`
+      var rewObject = `${rBy} Bytes`
       scoreUpBits(message, rBy)
     } else if (rewardPrint <= 1) {
-      var rewObject = `1 :pound:`
+      var rewObject = `1 Dark Ticket`
       hSpaceBUpdate(message)
     }
   } else {
