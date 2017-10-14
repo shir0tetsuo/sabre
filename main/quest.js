@@ -14,7 +14,7 @@ let hkey = ":key2:"
 
 */
 let qVendor = '\u2324' // ⌤
-let qWarp = '\u2398'
+let qWarp = '\u2398' //  ⎘
 let qUser = '\u24C5' // Ⓟ
 let topLeft = '\u2554'
 let topRight = '\u2557'
@@ -74,11 +74,15 @@ exports.run = (client, message, params) => {
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
       if (hl.hlvl >= 0) {
         content += `> ${topLeft}${horz}${topRight}\n`
+        content += `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
+
         content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
         content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
+
         content += `> ${botLeft}${horz}${botRight}\n`
 
         content += `\n`
+        content += `< You are greeted by the area vendor ${qVendor}>\n`
       }
       content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
