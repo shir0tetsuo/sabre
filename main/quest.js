@@ -192,9 +192,12 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     const msg = collected.first();
     const input = msg.content.toLowerCase();
 
+    var sendContent = '';
+
     if (input === 'guard') {
       console.log('Guarded')
 
+      fight(message, uid, boss, bossHP, h, baseHP)
       return;
     }
     if (input === 'run') {
@@ -203,71 +206,108 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       doReset(message);
       return;
     }
-    if (response.content.toLowerCase() === 'atk' || reponse.content.toLowerCase() === 'special') {
-      const attack = attacks[input]
-      console.log('attacked with ', attack)
+    if (input === 'atk' || input === 'special') {
+      if (input === 'atk') {
+        const messages = [
+              'attempted to punch it in the face.',
+              'attempted to kick it in the face.',
+              'attempted to slam the entity.',
+              'attempted to elbow it in the face.'
+            ]
+        var attackChance = 0.75,
+          min = 500.0,
+          max = 900.0;
+      } else if (input === 'special') {
+        const messages = [
+              'casted a fireball.',
+              'summoned a heatwave.',
+              'invoked magma.',
+              'summoned a familiar.',
+              'used the power of Death.',
+              'casted NightBall.',
+              'resurrected the Dead.',
+              'invoked the power of Wind.',
+              'used Shatter Wave.',
+              'used Telekinesis.',
+              'used Earthquake.',
+              'summoned Leaf of Time.',
+              'used Foresight Destruction.',
+              'summoned Ice Blade.',
+              'casted Megafreeze.',
+              'invoked a Tsunami.',
+              'used Shadow Sword.',
+              'used Death Scythe.',
+              'used Deadly Nightshade.',
+              'used Epic Pistol.',
+              'used Samurai Sword.',
+              'used Alien Gun.'
+            ]
+        var attackChance = 0.65,
+          min = 525.0,
+          max = 1200.0;
+      } else {
+        fight(message, uid, boss, bossHP, h, baseHP)
+        return;
+      }
 
+      if (Math.random() > attackChance) {
+        sendContent += `\`\`\`diff\n- ${message.author.username} missed.\`\`\``
+      } else {
+        const damage = Math.round(Math.random() * (max - min) + min);
+
+        var oldHP = bossHP;
+        bossHP -= damage;
+
+        sendContent += `**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** ${Rand(messages)}\n`
+        sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
+      }
+
+      sendContent += `It's ${boss}'s move.\n`
+      // boss turn
+      var oldPHP = baseHP;
+      const misschance = Math.round(Math.random() * 100)
+      const missminimum = Math.round(h.hlvl + 65)
+      if (missminimum >= misschance) {
+        sendContent += `\`\`\`diff\n--- ${boss} missed.`
+      } else {
+        const npcmax = Math.round(Math.random() * (h.hlvl * 750))
+        const npcmin = Math.round(Math.random() * (h.hlvl * 100))
+        const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
+
+        baseHP -= npcdamage;
+        sendContent += `\`\`\`diff\n- ${message.author.username}#${message.author.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
+      }
+
+      message.channel.send(`${sendContent}`)
+
+      if (baseHP <= 0) {
+        // LOSS DATA GOES HERE!
+        sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
+        doReset(message);
+        return;
+      }
+      if (bossHP <= 0) {
+        sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
+        doReset(message);
+        return;
+      }
+
+      // loop again after turn
+      fight(message, uid, boss, bossHP, h, baseHP)
       return;
     }
 
-  //  message.author.miss = 0;
 
-    const attack = attacks[input];
 
-    var sendContent = '';
 
-    if (Math.random() > attackChance) {
-      sendContent += `\`\`\`diff\n- ${message.author.username} missed.\`\`\``
-    } else {
-      const damage = Math.round(Math.random() * (attack.damage.max - attack.damage.min) + attack.damage.min);
 
-      var oldHP = bossHP;
-      bossHP -= damage;
-
-      sendContent += `**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** ${Rand(attack.messages)}\n`
-      sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
-
-    }
-    sendContent += `It's ${boss}'s move.\n`
-
-    var oldPHP = baseHP;
-
-    const misschance = Math.round(Math.random() * 100)
-    const missminimum = Math.round(h.hlvl + 65)
-    if (missminimum >= misschance) {
-      sendContent += `\`\`\`diff\n--- ${boss} missed.`
-    } else {
-      const npcmax = Math.round(Math.random() * (h.hlvl * 750))
-      const npcmin = Math.round(Math.random() * (h.hlvl * 100))
-      const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
-
-      baseHP -= npcdamage;
-      sendContent += `\`\`\`diff\n- ${message.author.username}#${message.author.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
-    }
-
-    if (baseHP <= 0) {
-      // LOSS DATA GOES HERE!
-      sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
-      doReset(message);
-    }
-    if (bossHP <= 0) {
-      sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
-      doReset(message);
-    }
-
-    message.channel.send(`${sendContent}`)
-    fight(message, uid, boss, bossHP, h, baseHP)
+  /*  message.channel.send(`${sendContent}`)
+    fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
     console.log(message.content, uid, boss, bossHP, h, baseHP)
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
-    message.author.miss++;
 
-    if (message.author.miss >= 2) {
-      message.channel.send(`${message.author.username}#${message.author.discriminator} went AFK.`)
-      doReset(message);
-      return;
-    }
-    fight(message, uid, boss, bossHP, h, baseHP)
+    doReset(message);
   })
 }
 
