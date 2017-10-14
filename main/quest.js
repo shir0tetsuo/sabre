@@ -32,11 +32,11 @@ function getColor(hl) {
   }
 }
 function map(hl) {
-  let data = '';
+  var data = '';
   if (hl.lvl >= 0) {
-    data += `> /////////////`
-    data += `> //   \u233e\u2324    //`
-    data += `> /////////////`
+    data += `> /////////////\n`
+    data += `> //   \u233e\u2324    //\n`
+    data += `> /////////////\n`
   }
   return data;
 }
