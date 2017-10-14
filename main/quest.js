@@ -185,7 +185,7 @@ exports.run = (client, message, params) => {
         // munge top half
         if (chance >= 95) {
           content += `[Area](1 :: Dark Chasm ::)\n`
-          content += `/* A Boss wants to Fight! ${fisheye}*\n`
+          content += `/* A Boss wants to Fight! ${fisheye} *\n`
           content += `${topBoss}\n${midBoss}\n`
         } else {
           content += `[Area](1 :: Dark Forest ::)\n`
