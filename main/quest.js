@@ -3,7 +3,7 @@
 
 const Rand = require('../sys/quest-data/random.js')
 const Transaction = require('../sys/quest-data/transaction.js')
-
+const NPC = require('../sys/quest-data/NPCData.js')
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
@@ -114,80 +114,6 @@ const vendorsResponse = [
   '"Pardon me."',
   '"Read ALL The Words!"'
 ]
-
-////////////////////////////////////////////////////////////////////////////////
-// Standard Sabre Transaction Functions
-////////////////////////////////////////////////////////////////////////////////
-/*
-function scoreUpTicket(mess, xval) {
-  if (!xval) var xval = 1
-  setTimeout(() => {
-    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-      sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
-      console.log(`${mess.member.displayName} in ${mess.channel.name}, ${mess.guild.name}; + ${xval} Tickets`)
-    })
-  }, 2000)
-}
-
-function scoreUpBits(mess, xval) {
-  if (!xval) var xval = 1
-  setTimeout(() => {
-    sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
-      sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
-      console.log(`${mess.member.displayName} in ${mess.channel.name}, ${mess.guild.name}; + ${xval} Bytes`)
-    })
-  }, 2000)
-}
-*/
-////////////////////////////////////////////////////////////////////////////////
-// Hyperlevel Sabre Transaction Functions
-////////////////////////////////////////////////////////////////////////////////
-/*
-function hSpaceAUpdate(m) {
-  setTimeout(() => {
-    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
-      if (!hl) {
-        return message.reply(`\`Internal Error\``)
-      } else {
-        sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + 1*1}" WHERE userId = "${m.author.id}"`)
-        console.log(chalk.greenBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Key`))
-      }
-    })
-  }, 2000)
-}
-
-function hSpaceBUpdate(m) {
-  setTimeout(() => {
-    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
-      if (!hl) {
-        return message.reply(`\`Internal Error\``)
-      } else {
-        sql.run(`UPDATE hyperlevels SET spaceB = "${hl.spaceB*1 + 1*1}" WHERE userId = "${m.author.id}"`)
-        console.log(chalk.greenBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Dark Ticket`))
-      }
-    })
-  }, 2000)
-}
-*/
-function getKey(m, keys) {
-  if (!keys) var keys = 1;
-  setTimeout(() => {
-    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
-      sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 - keys*1}" WHERE userId = "${m.author.id}"`)
-      console.log(chalk.blueBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; -1 Quest Key`))
-    })
-  }, 2000)
-}
-
-function giveKey(m, keys) {
-  if (!keys) var keys = 1;
-  setTimeout(() => {
-    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
-      sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + keys*1}" WHERE userId = "${m.author.id}"`)
-      console.log(chalk.blueBright(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; +1 Quest Key`))
-    })
-  }, 2000)
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // hlvl to Sidebar Color

@@ -38,7 +38,7 @@ module.exports = (message, type, value) =>  {
       })
     }, 2000)
   } else if (type === "dtk") {
-    console.log(Chalk.blueBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; +${value} Dark Tickets`))
+    console.log(chalk.blueBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; +${value} Dark Tickets`))
     setTimeout(() => {
       sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
         if (!hl) return message.reply(`\`INTERNAL ERROR\` Transaction Failed.`)
