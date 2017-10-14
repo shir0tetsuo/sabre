@@ -193,7 +193,8 @@ function getColor(hl) {
 }
 
 function fight(message, currentPlayer, boss, bossHP, h) {
-  if (currentPlayer.hp >= 8000) currentPlayer.isFighting = true;
+  console.log(message.content, currentPlayer, boss, hossHP, h)
+  //if (currentPlayer.hp >= 8000) currentPlayer.isFighting = true;
   if (!currentPlayer.isFighting) {
     doReset();
 
