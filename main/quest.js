@@ -307,7 +307,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       ////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////
       // PLAYER'S MOVE
-      // ATK Floor, higher the accuracy, lower the chance
+      // ATK Floor, higher the accuracy, higher the chance
       ////////////////////////////////////////////////////////////////////////////////
       // atk
       if (input === 'atk') {
@@ -319,7 +319,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
 
         // Calculate Player Accuracy and Chance
-        var atkAccuracy = 0.25,
+        var atkAccuracy = 0.75,
           atkHitChance = Math.round(Math.random());
 
         // Player Accuracy Failure, Generate Player Message (GPM)
@@ -380,7 +380,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
 
         // Calculate Player Accuracy and Chance
-        var atkAccuracy = 0.35,
+        var atkAccuracy = 0.65,
           atkHitChance = Math.round(Math.random());
 
         // Player Accuracy Failure, Generate Player Message (GPM)
