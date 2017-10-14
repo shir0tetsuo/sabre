@@ -274,7 +274,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
     } else {
       var npcDamage = Math.round(Math.random() * (h.lvl*750 - h.hlvl*300) + h.hlvl*300)
-      baseHP -= npcDamage;
+      baseHP -= npcDamage*1;
       var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
     }
 
