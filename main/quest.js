@@ -183,6 +183,26 @@ function isBossDepleted(bossHP) {
     return false;
   }
 }
+function generateReward(message, h) {
+  var rewardPrint = Math.round(Math.random())
+  if (h.hlvl >= 1) {
+    if (rewardPrint <= 0.33) {
+      var rTk = Math.round(Math.random() * (1000000 - 10000*h.hlvl) + 10000*h.hlvl)
+      var rewObject = `${rTk} ${curren}`
+      scoreUpTicket(message, rTk)
+    } else if (rewardPrint <= 0.66) {
+      var rBy = Math.round(Math.random() * (1200000 - 5000*h.hlvl) + 5000*h.hlvl)
+      var rewObject = `${rBy} ${chatBit}`
+      scoreUpBits(message, rBy)
+    } else if (rewardPrint <= 1) {
+      var rewObject = `1 :pound:`
+      hSpaceBUpdate(message)
+    }
+  } else {
+    var rewObject = "nothing."
+  }
+  return `Obtained ${rewObject}`
+}
 
 function fight(message, uid, boss, bossHP, h, baseHP) {
   //console.log(message.content, uid, boss, bossHP, h, baseHP)
@@ -276,7 +296,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     //  npcHitChance = Math.floor(Math.random() * (100 - npcAccuracy));
 
 // NPC Floor
-    var npcAccuracy = 74 + h.hlvl,
+    var npcAccuracy = 58 + h.hlvl,
       oldPHP = baseHP;
     if (npcAccuracy >= 100) {
       var npcMaxAccuracy = 100
@@ -307,7 +327,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
       } else {
         var oldHP = bossHP;
-        var atkDamage = Math.round(Math.random() * (900 - 455) + 455)
+        var atkDamage = Math.round(Math.random() * (h.hlvl*900 - h.hlvl*455) + h.hlvl*455)
         bossHP -= atkDamage;
         var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
       }
@@ -321,7 +341,8 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
           sendContent += `\`\`\`diff\n- You died.\`\`\``
         }
         if (isBossDepleted(bossHP) === true) {
-          sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
+          var rewardObject = generateReward(msg, h)
+          sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
         }
         return msg.channel.send(`${sendContent}`);
       }
@@ -357,7 +378,8 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
           sendContent += `\`\`\`diff\n- You died.\`\`\``
         }
         if (isBossDepleted(bossHP) === true) {
-          sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
+          var rewardObject = generateReward(msg, h)
+          sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
         }
         return msg.channel.send(`${sendContent}`);
       }
@@ -493,7 +515,7 @@ exports.run = (client, message, params) => {
           //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, message.author.id, fisheye, 100000, h, 8000); // message, boss, bossHP
+          fight(message, message.author.id, fisheye, 4000, h, 8000); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
