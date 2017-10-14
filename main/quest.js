@@ -20,7 +20,7 @@ let topLeft = '\u2554'
 let topRight = '\u2557'
 let botLeft = '\u255A'
 let botRight = '\u255D'
-let horz = '\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550' // 9 spaces
+let horz = '\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550' // 10 spaces
 let vert = '\u2551'
 let fill = '....'
 
