@@ -196,8 +196,8 @@ exports.run = (client, message, params) => {
         // randomness
         if (chance >= 95) {
           // first boss
-          content += `/* ${vert}${lightshadeFill}${lightshadeFill}${fisheye}${lightshadeFill}${lightshade}${vert} *\n`
-          var legend = `* You are in danger.\n`
+          content += `/* ${vert}${lightshadeFill}${lightshadeFill}${fisheye}${lightshadeFill}${darkshade}${lightshade}${vert} *\n`
+          var legend = `* You are in danger!\n`
           legend += `< You have the following options.\n`
           /*
 
@@ -208,7 +208,7 @@ exports.run = (client, message, params) => {
 
 
 
-          legend += `>`
+          legend += `>\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
           var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
@@ -244,7 +244,7 @@ exports.run = (client, message, params) => {
           }
         }
         if (chance >= 95) {
-          content += ` /* ${vert}${lightshadeFill}${qUser}${lightshadeFill}${lightshadeFill}${lightshade}${vert} *\n`
+          content += `/* ${vert}${darkshade}${lightshadeFill}${qUser}${lightshadeFill}${lightshadeFill}${darkshade}${lightshade}${vert} *\n`
           content += `${midBoss}\n${midBoss}\n${botBoss}\n\n`
           content += `${legend}`
         } else {
