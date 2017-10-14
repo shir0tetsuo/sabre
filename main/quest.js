@@ -272,11 +272,12 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
     if (npcHitChance >= npcMaxAccuracy) {
       var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
+      var newHP = baseHP*1
     } else {
       var npcDamage = Math.round(Math.random() * (h.lvl*750 - h.hlvl*300) + h.hlvl*300)
       console.log(npcDamage)
-      baseHP -= npcDamage*1;
-      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
+      newHP = baseHP*1 - npcDamage*1;
+      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${newHP})\`\`\``
     }
 
 // ATK Floor
