@@ -129,9 +129,9 @@ exports.run = (client, message, params) => {
       return message.reply(`\`Done.\``)
     }
     if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
-      let chance = Math.floor(Math.random() * 100)
+      var chance = Math.floor(Math.random() * 100)
     } else {
-      let chance = params[1]
+      var chance = params[1]
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
