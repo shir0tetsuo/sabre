@@ -203,7 +203,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       doReset(message);
       return;
     }
-    if (attacks.has(response.content)) {
+    if (response.content.toLowerCase() === 'atk' || reponse.content.toLowerCase() === 'special') {
       const attack = attacks[input]
       console.log('attacked with ', attack)
 
