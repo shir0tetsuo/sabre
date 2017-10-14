@@ -52,7 +52,7 @@ function scoreUpTicket(mess, xval) {
   setTimeout(() => {
     sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
       sql.run(`UPDATE scores SET tickets = ${row.tickets + xval*1} WHERE userId = ${mess.author.id}`)
-      console.log(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; + ${xval} Tickets`)
+      console.log(`${mess.member.displayName} in ${mess.channel.name}, ${mess.guild.name}; + ${xval} Tickets`)
     })
   }, 2000)
 }
@@ -61,7 +61,7 @@ function scoreUpBits(mess, xval) {
   setTimeout(() => {
     sql.get(`SELECT * FROM scores WHERE userId = "${mess.author.id}"`).then(row => {
       sql.run(`UPDATE scores SET chatBits = ${row.chatBits + xval*1} WHERE userId = ${mess.author.id}`)
-      console.log(`${m.member.displayName} in ${m.channel.name}, ${m.guild.name}; + ${xval} Bytes`)
+      console.log(`${mess.member.displayName} in ${mess.channel.name}, ${mess.guild.name}; + ${xval} Bytes`)
     })
   }, 2000)
 }
