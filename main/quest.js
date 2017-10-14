@@ -2,7 +2,7 @@
 
 
 const Rand = require('../sys/quest-data/random.js')
-const Transaction = require('../sys/quest-data/transactions.js')
+const Transaction = require('../sys/quest-data/transaction.js')
 
 
 ////////////////////////////////////////////////////////////////////////////////
