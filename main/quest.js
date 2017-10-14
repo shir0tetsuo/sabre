@@ -45,12 +45,12 @@ exports.run = (client, message, params) => {
         color: 0x34d1a2,
         timestamp: new Date(),
         author: {
-          name: client.user.username,
-          avatarURL: client.user.avatarURL
+          name: `${client.user.username}'s Forest`,
+          icon_url: client.user.avatarURL
         },
         fields: [
           {
-            name: `-1 ${hkey}`,
+            name: `-1 ${hkey}: You seek adventures in the Dark Forest.`,
             value: `${header}\n${content}\n${footer}`
           }
         ]
