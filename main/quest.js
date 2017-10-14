@@ -8,6 +8,43 @@ let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
 let isFighting = new Set();
 
+const atkM = [
+  'attempted to punch it in the face.',
+  'attempted to kick it in the face.',
+  'attempted to slam the entity.',
+  'attempted to elbow in the face.'
+]
+const specM = [
+  // fire
+  'casted a fireball.',
+  'summoned a heatwave.',
+  'invoked magma.',
+  // spirit
+  'summoned a familiar.',
+  'used the power of Death.',
+  'casted NightBall.',
+  'resurrected the Dead.',
+  // wind
+  'invoked the power of Wind.',
+  'used Shatter Wave.',
+  'used Telekinesis.',
+  // earth
+  'used Earthquake.',
+  'summoned Leaf of Time.',
+  'used Foresight Destruction.',
+  // water
+  'summoned Ice Blade.',
+  'casted Megafreeze.',
+  'invoked a Tsunami.',
+  // other
+  'used Shadow Sword.',
+  'used Death Scythe.',
+  'used Deadly Nightshade.',
+  'used Epic Pistol.',
+  'used Samurai Sword.',
+  'used Alien Gun.'
+]
+
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
@@ -178,28 +215,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
           max = 900.0;
       } else if (input === 'special') {
         const messages = [
-          'casted a fireball.',
-          'summoned a heatwave.',
-          'invoked magma.',
-          'summoned a familiar.',
-          'used the power of Death.',
-          'casted NightBall.',
-          'resurrected the Dead.',
-          'invoked the power of Wind.',
-          'used Shatter Wave.',
-          'used Telekinesis.',
-          'used Earthquake.',
-          'summoned Leaf of Time.',
-          'used Foresight Destruction.',
-          'summoned Ice Blade.',
-          'casted Megafreeze.',
-          'invoked a Tsunami.',
-          'used Shadow Sword.',
-          'used Death Scythe.',
-          'used Deadly Nightshade.',
-          'used Epic Pistol.',
-          'used Samurai Sword.',
-          'used Alien Gun.'
+
         ]
         var attackChance = 0.65,
           min = 525.0,
@@ -281,6 +297,20 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     if (input === 'atk') {
       var sendContent = '';
 
+      sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
+
+      var atkAccuracy = 0.75,
+        atkHitChance = Math.round(Math.random());
+      if (atkHitChance >= atkAccuracy) {
+        var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
+      } else {
+        var oldHP = bossHP;
+        var atkDamage = Math.round(Math.random() * (900 - 455) + 455)
+        bossHP -= atkDamage;
+        var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
+      }
+
+      sendContent += `${atkMessage}\n`
       sendContent += `${npcMessage}`
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
@@ -290,6 +320,20 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     } else if (input === 'special') {
       var sendContent = '';
 
+      sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
+
+      var atkAccuracy = 0.65,
+        atkHitChance = Math.round(Math.random());
+      if (atkHitChance >= atkAccuracy) {
+        var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
+      } else {
+        var oldHP = bossHP;
+        var atkDamage = Math.round(Math.random() * (1200 - 525) + 525)
+        bossHP -= atkDamage;
+        var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
+      }
+
+      sendContent += `${atkMessage}\n`
       sendContent += `${npcMessage}`
       msg.channel.send(`${sendContent}`)
       isBaseDepleted(msg, baseHP)
