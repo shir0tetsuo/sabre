@@ -260,6 +260,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     //  npcHitChance = Math.floor(Math.random() * (100 - npcAccuracy));
 
 // NPC Floor
+  if (!baseHP) var baseHP = 8000;
     var npcAccuracy = 74 + h.hlvl,
       oldPHP = baseHP;
     if (npcAccuracy >= 100) {
@@ -274,7 +275,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     } else {
       var npcDamage = Math.round(Math.random() * (h.lvl*750 - h.hlvl*300) + h.hlvl*300)
       baseHP -= npcDamage;
-      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})`
+      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
     }
 
 // ATK Floor
