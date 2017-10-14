@@ -26,9 +26,9 @@ function giveKey(m, keys) {
 
 function getColor(hl) {
   if (hl.hlvl >= 5) {
-    return '0x5FEFBF';
+    return 0x5FEFBF
   } else if (hl.hlvl >= 0) {
-    return '0x34d1a2';
+    return 0x34d1a2
   }
 }
 function map(hl) {
@@ -51,17 +51,20 @@ exports.run = (client, message, params) => {
       return message.reply(`\`Done.\``)
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
+    // http://www.fileformat.info/info/unicode/category/So/list.htm
     if (hl.spaceA*1 >= 1) {
       var header = '```md',
-        footer = '```'
+        footer = '```',
+        questColor = getColor(hl);
       let content = '';
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
       content += `${map(hl)}\n`
 
+
       message.reply({embed: {
-        color: getColor(hl),
+        color: questColor,
         timestamp: new Date(),
         author: {
           name: `${client.user.username}'s Forest`,
