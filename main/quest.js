@@ -5,6 +5,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+let hkey = ":key2:"
 
 function getKey(m, keys) {
   if (!keys) var keys = 1;
@@ -30,11 +31,30 @@ exports.run = (client, message, params) => {
     }
     if (message.author.id === settings.ownerid && params[0] === 'devmode' && params[1] >= 1) {
       giveKey(message, params[1])
-      message.reply(`\`Done.\``)
+      return message.reply(`\`Done.\``)
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
-      message.reply(`Spent 1 :key2:`)
+      var header = '```md',
+        footer = '```'
+      let content = '';
+      content += `/* ${message.member.displayName} *\n`
+      content += `< You spent 1 Quest Key >\n`
+      content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}\n\n`
+      message.reply({embed: {
+        color: qCol,
+        timestamp: new Date(),
+        author: {
+          name: client.user.username,
+          avatarURL: client.user.avatarURL
+        },
+        fields: [
+          {
+            name: `-1 ${hkey}`,
+            value: `${header}\n${content}\n${footer}`
+          }
+        ]
+      }})
       getKey(message, 1);
     } else {
       return message.reply(`\`ERROR\` You don't have any keys.`)
