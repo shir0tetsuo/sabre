@@ -51,12 +51,14 @@ function newQChapter(m) {
   setTimeout(() => {
     sql.get(`SELECT * FROM qchapter WHERE userId = "${m.author.id}"`).then(q => {
       if (!q) {
+        m.reply(`\`WARN Table Creation\``)
         console.log(chalk.redBright(`New quest db for ${m.member.displayName}`))
         sql.run(`INSERT INTO qchapter (userId, chap, inBattle, micro, hp) VALUES (?, ?, ?, ?, ?)`, [m.author.id, 1, 0, 0, 100])
       }
     }).catch(() => {
       console.error;
       console.log(chalk.redBright(`Database qchapter for quests created.`))
+      m.reply(`\`WARN Database Creation\``)
       sql.run(`CREATE TABLE IF NOT EXISTS qchapter (userId TEXT, chap INTEGER, inBattle INTEGER, micro INTEGER, hp INTEGER)`).then(() => {
         sql.run(`INSERT INTO qchapter (userId, chap, inBattle, micro, hp) VALUES (?, ?, ?, ?, ?)`, [m.author.id, 1, 0, 0, 100])
       })
