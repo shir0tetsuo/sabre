@@ -12,8 +12,8 @@ function lootUpdate(mess) {
 
 function lootScore(message) {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-    var lootBoxTickets = Math.floor((row.tickets/5)+300)
-    var lootBoxBits = Math.floor((row.chatBits/5)+500)
+    var lootBoxTickets = Math.floor((row.tickets/5)+500)
+    var lootBoxBits = Math.floor((row.chatBits/5)+700)
     if (lootBoxBits > 2000000) var lootBoxBits = 2000000
     if (lootBoxTickets > 1500000) var lootBoxTickets = 1500000
     setTimeout(() => {

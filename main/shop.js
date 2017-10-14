@@ -58,8 +58,8 @@ exports.run = (client, message, params) => {
     let levelshop = "Error"
     let items = "\u200b"
     let shopcmds = "\u200b"*/
-    var lvrequirement = row.level*1 * 125 + 250
-    var cbrequirement = row.level*1 * 256 + 1024
+    var lvrequirement = row.level*1 * 500 + 250
+    var cbrequirement = row.level*1 * 1024 + 1024
     // if parameters = 0 - display level shop
     if (params[0] === undefined) {
       // parse tickets
