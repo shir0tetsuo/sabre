@@ -175,7 +175,7 @@ exports.run = (client, message, params) => {
         if (chance >= 90) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
           var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
-          var legend += `${Rand(vendorsResponse)} >`
+          legend += `${Rand(vendorsResponse)} >`
         } else if (chance >= 50) {
           var legend = `< The room was empty. >`
         } else if (chance >= 15) {
