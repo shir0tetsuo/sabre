@@ -294,6 +294,8 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     }
 
 // ATK Floor, higher the accuracy, lower the chance
+////////////////////////////////////////////////////////////////////////////////
+// atk
     if (input === 'atk') {
       var sendContent = '';
 
@@ -311,13 +313,24 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       }
 
       sendContent += `${atkMessage}\n`
-      sendContent += `${npcMessage}`
-      msg.channel.send(`${sendContent}`)
+      sendContent += `${npcMessage}\n`
+
       if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
-        return doReset(message);
+        doReset(message);
+        if (isBaseDepleted(baseHP) === true) {
+          sendContent += `\`\`\`diff\n- You died.\`\`\``
+        }
+        if (isBossDepleted(bossHP) === true) {
+          sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
+        }
       }
+
+      msg.channel.send(`${sendContent}`)
+
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
+////////////////////////////////////////////////////////////////////////////////
+// special
     } else if (input === 'special') {
       var sendContent = '';
 
@@ -335,23 +348,39 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       }
 
       sendContent += `${atkMessage}\n`
-      sendContent += `${npcMessage}`
-      msg.channel.send(`${sendContent}`)
+      sendContent += `${npcMessage}\n`
+
       if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
-        return doReset(message);
+        doReset(message);
+        if (isBaseDepleted(baseHP) === true) {
+          sendContent += `\`\`\`diff\n- You died.\`\`\``
+        }
+        if (isBossDepleted(bossHP) === true) {
+          sendContent += `\`\`\`diff\n! Some Win message.\`\`\``
+        }
       }
+
+      msg.channel.send(`${sendContent}`)
+
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
+////////////////////////////////////////////////////////////////////////////////
+// guard
     } else if (input === 'guard') {
       var sendContent = '';
       console.log('Guarded')
 
-      msg.channel.send(`${sendContent}`)
       if (isBaseDepleted(baseHP) === true) {
-        return doReset(message);
+        sendContent += `\`\`\`diff\n- You died.\`\`\``
+        doReset(message);
       }
+
+      msg.channel.send(`${sendContent}`)
+
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
+////////////////////////////////////////////////////////////////////////////////
+// run
     } else if (input === 'run') {
       msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
 
