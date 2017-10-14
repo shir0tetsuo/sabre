@@ -40,9 +40,9 @@ exports.run = (client, message, params) => {
       let content = '';
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
-      content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}\n\n`
+      content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
       message.reply({embed: {
-        color: qCol,
+        color: 0x34d1a2,
         timestamp: new Date(),
         author: {
           name: client.user.username,
