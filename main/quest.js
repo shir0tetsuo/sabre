@@ -222,7 +222,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       const misschance = Math.round(Math.random() * 100)
       const missminimum = Math.round(h.hlvl + 65)
       if (missminimum >= misschance) {
-        sendContent += `\`\`\`diff\n--- ${boss} missed.`
+        sendContent += `\`\`\`diff\n--- ${boss} missed.\`\`\``
       } else {
         const npcmax = Math.round(Math.random() * (h.hlvl * 750))
         const npcmin = Math.round(Math.random() * (h.hlvl * 100))
