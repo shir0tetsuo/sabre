@@ -27,6 +27,7 @@ let lightshade = '\u2591'
 let medshade = '\u2592'
 let darkshade = '\u2593'
 let mysteriousObject = '\u25A8'
+let fisheye = '\u25C9'
 
 function getKey(m, keys) {
   if (!keys) var keys = 1;
@@ -76,8 +77,10 @@ exports.run = (client, message, params) => {
         content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
         content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
         content += `> ${botLeft}${horz}${botRight}\n`
+
+        content += `\n`
       }
-      content += `< ${qUser} = ${message.author.username}#${message.author.discriminator} >\n`
+      content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
 
       message.reply({embed: {
