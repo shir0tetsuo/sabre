@@ -18,6 +18,16 @@ function uPersonAmb(uid, tb, amount, message, output) {
         if (!row) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
         sql.run(`UPDATE scores SET tickets = "${row.tickets + amount*1}" WHERE userId = "${uid}"`)
       })
+    } else if (tb === "hq") {
+      sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid}"`).then(hl => {
+        if (!hl) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+        sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + amount*1}" WHERE userId = "${uid}"`)
+      })
+    } else if (tb === "ht") {
+      sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid}"`).then(hl => {
+        if (!hl) return message.reply(`\`INTERNAL ERROR\` <@${uid}> has no record!`)
+        sql.run(`UPDATE hyperlevels SET spaceB = "${hl.spaceB*1 + amount*1}" WHERE userId = "${uid}"`)
+      })
     }
     message.channel.send(`Successfully updated <@${uid}>'s data with ${amount}${tb}. \`This expires in 20 Seconds.\``).then(m => {
       setTimeout(() => {
@@ -28,7 +38,7 @@ function uPersonAmb(uid, tb, amount, message, output) {
 }
 
 exports.run = (client, message, params) => {
-  if (params[0] !== "t" && params[0] !== "b") {
+  if (params[0] !== "t" && params[0] !== "b" && params[0] !== "ht" && params[0] !== "hq") {
     return message.reply(`\`ERROR\` See Manual (Missing Currency Argument)`)
   }
   if (params[1] === message.mentions.members.first()) {
@@ -72,5 +82,5 @@ name is also the command alias
 exports.help = {
   name: 'forcegive',
   description: 'Allows administrators to force ticket/byte incrementation.',
-  usage: 'forcegive [t/b] [amount] [@users]'
+  usage: 'forcegive [t/b/ht/hq] [amount] [@users]'
 };
