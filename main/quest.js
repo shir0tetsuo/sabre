@@ -20,9 +20,9 @@ function currentPlayer(user) {
 
   this.user = user;
 
-  this.reset();
+  doReset();
 }
-currentPlayer.prototype.reset = function() {
+function doReset() {
   this.hp = 8000;
   this.isFighting = false;
   this.miss = 0;
@@ -194,7 +194,7 @@ function getColor(hl) {
 
 function fight(message, currentPlayer, boss, bossHP, h) {
   if (!currentPlayer.isFighting) {
-    currentPlayer.reset();
+    doReset();
 
     return;
   }
@@ -213,7 +213,7 @@ function fight(message, currentPlayer, boss, bossHP, h) {
     if (input === 'run') {
       msg.channel.send(`**${currentPlayer.member.displayName} (${currentPlayer.user.username}#${currentPlayer.user.discriminator})** Ran Away.`)
 
-      currentPlayer.reset();
+      doReset();
       return;
     }
 
@@ -255,11 +255,11 @@ function fight(message, currentPlayer, boss, bossHP, h) {
     if (currentPlayer.hp <= 0) {
       // LOSS DATA GOES HERE!
       sendContent += `\`\`\`asciidoc\nYou died! :: Lost X\`\`\``
-      currentPlayer.reset();
+      doReset();
     }
     if (bossHP <= 0) {
       sendContent += `\`\`\`asciidoc\nYou defeated ${boss} :: Gained X\`\`\``
-      currentPlayer.reset();
+      doReset();
     }
 
     message.channel.send(`${sendContent}`)
@@ -270,7 +270,7 @@ function fight(message, currentPlayer, boss, bossHP, h) {
 
     if (currentPlayer.miss >= 2) {
       message.channel.send(`${currentPlayer.user.username}#${currentPlayer.user.discriminator} went AFK.`)
-      currentPlayer.reset();
+      doReset();
       return;
     }
     fight(message, currentPlayer, boss, bossHP, h)
