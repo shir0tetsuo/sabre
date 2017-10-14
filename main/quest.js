@@ -203,6 +203,12 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       doReset(message);
       return;
     }
+    if (attacks.has(response.content)) {
+      const attack = attacks[input]
+      console.log('attacked with ', attack)
+
+      return;
+    }
 
   //  message.author.miss = 0;
 
