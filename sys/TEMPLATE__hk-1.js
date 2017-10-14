@@ -14,6 +14,14 @@ function getKey(m, keys) {
     })
   }, 2000)
 }
+function giveKey(m, keys) {
+  if (!keys) var keys = 1;
+  setTimeout(() => {
+    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
+      sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + keys*1}" WHERE userId = "${m.author.id}"`)
+    })
+  }, 2000)
+}
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
