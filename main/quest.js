@@ -72,17 +72,62 @@ exports.run = (client, message, params) => {
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
+
+      // map data //////////////////////////////////////////////////////////////
+      /*
       if (hl.hlvl >= 0) {
-        content += `> ${topLeft}${horz}${topRight}\n`
-        content += `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
+        // define defaults
+        let chance = Math.floor(Math.random() * 100)
+        let top = `> ${topLeft}${horz}${topRight}`
+        let mid = `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
+        let bot = `> ${botLeft}${horz}${botRight}`
+        // munge top half
+        content += `${top}\n${mid}\n`
+        // randomness
+        if (chance >= 90) {
+          content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
+          var legend = `< You are greeted by the area vendor ${qVendor} >\n`
+        } else if (chance >= 50) {
 
-        content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
+        } else if (chance >= 20) {
+
+        } else {
+
+        }
         content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
+        // munge bottom half
+        content += `${mid}\n${bot}\n\n`
+        // what happened
+        content += `${legend}`
+      }
+      */
+      if (hl.hlvl >= 0) {
+        // define defaults
+        let chance = Math.floor(Math.random() * 100)
+        let top = `> ${topLeft}${horz}${topRight}`
+        let mid = `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
+        let bot = `> ${botLeft}${horz}${botRight}`
+        // munge top half
+        content += `${top}\n${mid}\n`
+        // randomness
+        if (chance >= 90) {
+          content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
+          var legend = `< You are greeted by the area vendor ${qVendor} >\n`
+        } else if (chance >= 50) {
 
-        content += `> ${botLeft}${horz}${botRight}\n`
+        } else if (chance >= 15) {
 
-        content += `\n`
-        content += `< You are greeted by the area vendor ${qVendor}>\n`
+        } else {
+          content += `> ${vert}${lightshadeFill}${qWarp}${lightshadeFill}${vert}\n`
+          content += `> ${vert}${lightshadeFill}${mysteriousObject}${lightshadeFill}${vert}\n`
+          var legend = `# A Warp Gate Appeared ${qWarp}.\n`
+          legend += `/* Mysterious Object was discovered. *\n`
+        }
+        content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
+        // munge bottom half
+        content += `${mid}\n${bot}\n\n`
+        // what happened
+        content += `${legend}`
       }
       content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
