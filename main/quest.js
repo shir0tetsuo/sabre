@@ -20,6 +20,9 @@ let hkey = ":key2:"
 let isFighting = new Set();
 
 //const validActions = Object.keys(basic).concat('special').concat('guard').concat('run');
+const validActions = PLY('NULL', 'validActions', isFighting)
+const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
+const validActionString = PLY('NULL', 'validActionString', isFighting)
 
 /*
 
@@ -388,10 +391,6 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 ////////////////////////////////////////////////////////////////////////////////
 
 exports.run = (client, message, params) => {
-  const validActions = PLY(message, 'validActions', isFighting)
-  const validActionRegex = PLY(message, 'validActionRegex', isFighting)
-  const validActionString = PLY(message, 'validActionString', isFighting)
-
   // reset any vs if any
   PLY(message, 'reset', isFighting)
 
