@@ -4,6 +4,7 @@
 const Rand = require('../sys/quest-data/random.js')
 const Transaction = require('../sys/quest-data/transaction.js')
 const NPC = require('../sys/quest-data/NPCData.js')
+const PLY = require('../sys/quest-data/PlayerData.js')
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
