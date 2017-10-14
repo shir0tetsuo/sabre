@@ -1,4 +1,9 @@
 // ctrl-p = find a file
+
+////////////////////////////////////////////////////////////////////////////////
+// Plugin Assets
+////////////////////////////////////////////////////////////////////////////////
+
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
@@ -8,6 +13,9 @@ let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
 let isFighting = new Set();
 
+////////////////////////////////////////////////////////////////////////////////
+// Define User Attack Messages
+////////////////////////////////////////////////////////////////////////////////
 const atkM = [
   'attempted to punch it in the face.',
   'attempted to kick it in the face.',
@@ -45,6 +53,10 @@ const specM = [
   'used Alien Gun.'
 ]
 
+////////////////////////////////////////////////////////////////////////////////
+// Random, Reset, Valid Actions
+////////////////////////////////////////////////////////////////////////////////
+
 function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
@@ -63,6 +75,10 @@ const validActionString = validActions.map(action => `${action}`).join(' || ');
         // http://www.fileformat.info/info/unicode/category/So/list.htm
 
 */
+////////////////////////////////////////////////////////////////////////////////
+// Unicode Assets
+////////////////////////////////////////////////////////////////////////////////
+
 let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398' //  ⎘
 let qUser = '\u24C5' // Ⓟ
@@ -80,6 +96,10 @@ let darkshade = '\u2593'
 let mysteriousObject = '\u25A8'
 let fisheye = '\u25C9'
 
+////////////////////////////////////////////////////////////////////////////////
+// Vendor Assets
+////////////////////////////////////////////////////////////////////////////////
+
 const vendors = [
   'Jerry',
   'Ian',
@@ -94,7 +114,9 @@ const vendorsResponse = [
   '"Read ALL The Words!"'
 ]
 
-
+////////////////////////////////////////////////////////////////////////////////
+// Standard Sabre Transaction Functions
+////////////////////////////////////////////////////////////////////////////////
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
@@ -115,6 +137,10 @@ function scoreUpBits(mess, xval) {
     })
   }, 2000)
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Hyperlevel Sabre Transaction Functions
+////////////////////////////////////////////////////////////////////////////////
 
 function hSpaceAUpdate(m) {
   setTimeout(() => {
@@ -162,6 +188,10 @@ function giveKey(m, keys) {
   }, 2000)
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// hlvl to Sidebar Color
+////////////////////////////////////////////////////////////////////////////////
+
 function getColor(hl) {
   if (hl.hlvl >= 5) {
     return 0x5FEFBF
@@ -169,6 +199,11 @@ function getColor(hl) {
     return 0x34d1a2
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Depleted HP Conditions
+////////////////////////////////////////////////////////////////////////////////
+
 function isBaseDepleted(baseHP) {
   if (baseHP <= 0) {
     return true;
@@ -176,6 +211,7 @@ function isBaseDepleted(baseHP) {
     return false;
   }
 }
+
 function isBossDepleted(bossHP) {
   if (bossHP <= 0) {
     return true;
@@ -183,15 +219,20 @@ function isBossDepleted(bossHP) {
     return false;
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// hlvl to Reward on Boss Fight Win
+////////////////////////////////////////////////////////////////////////////////
+
 function generateReward(message, h) {
   var rewardPrint = Math.round(Math.random())
   if (h.hlvl >= 1) {
     if (rewardPrint <= 0.33) {
-      var rTk = Math.round(Math.random() * (1000000 - 10000*h.hlvl) + 10000*h.hlvl)
+      var rTk = Math.round(Math.random() * (1000000 - 10000 * h.hlvl) + 10000 * h.hlvl)
       var rewObject = `${rTk} Sabre Tickets`
       scoreUpTicket(message, rTk)
     } else if (rewardPrint <= 0.66) {
-      var rBy = Math.round(Math.random() * (1200000 - 5000*h.hlvl) + 5000*h.hlvl)
+      var rBy = Math.round(Math.random() * (1200000 - 5000 * h.hlvl) + 5000 * h.hlvl)
       var rewObject = `${rBy} Bytes`
       scoreUpBits(message, rBy)
     } else if (rewardPrint <= 1) {
@@ -204,219 +245,337 @@ function generateReward(message, h) {
   return `Obtained ${rewObject}`
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// generate Fight
+////////////////////////////////////////////////////////////////////////////////
+
 function fight(message, uid, boss, bossHP, h, baseHP) {
   //console.log(message.content, uid, boss, bossHP, h, baseHP)
-  /*if (!isFighting.has(message.author.id)) {
-    doReset(message);
 
-    return;
-  }*/
-  message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**, type \`${validActionString}\` to continue.`)
+
+  // Invoke Await
+  message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**,\n type \`${validActionString}\` to continue.`)
   message.channel.awaitMessages(response => response.author.id === uid && validActions.some(word => response.content.toLowerCase().startsWith(word)), {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  }).then(collected => {
-    const msg = collected.first();
-    const input = msg.content.toLowerCase();
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
 
-// NPC Floor
-    var npcAccuracy = 58 + h.hlvl,
-      oldPHP = baseHP;
-    if (npcAccuracy >= 100) {
-      var npcMaxAccuracy = 100
-    } else {
-      var npcMaxAccuracy = npcAccuracy;
-    }
-    var npcHitChance = Math.round(Math.random() * 100);
+    // Use Collected Data
+    .then(collected => {
+      const msg = collected.first();
+      const input = msg.content.toLowerCase();
 
-    if (npcHitChance >= npcMaxAccuracy) {
-      var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
-    } else {
-      var npcDamage = Math.round(Math.random() * (h.hlvl*750 - h.hlvl*300) + h.hlvl*300)
-      baseHP -= npcDamage;
-      var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
-    }
+      ////////////////////////////////////////////////////////////////////////////
+      // NPC DATA
+      ////////////////////////////////////////////////////////////////////////////
 
-// ATK Floor, higher the accuracy, lower the chance
-////////////////////////////////////////////////////////////////////////////////
-// atk
-    if (input === 'atk') {
-      var sendContent = '';
+      // Accuracy increases as hlvl increases
+      var npcAccuracy = 59 + h.hlvl,
 
-      sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
+        // Load Player's HP to Memory
+        oldPHP = baseHP;
 
-      var atkAccuracy = 0.25,
-        atkHitChance = Math.round(Math.random());
-      if (atkHitChance >= atkAccuracy) {
-        var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
+      // Keep NPC's Accuracy within Acceptable Parameters
+      if (npcAccuracy >= 95) {
+        var npcMaxAccuracy = 95
       } else {
-        var oldHP = bossHP;
-        var atkDamage = Math.round(Math.random() * (h.hlvl*900 - h.hlvl*455) + h.hlvl*455)
-        bossHP -= atkDamage;
-        var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
+        var npcMaxAccuracy = npcAccuracy;
       }
 
-      sendContent += `${atkMessage}`
-      sendContent += `${npcMessage}\n`
+      // Calculate NPC's Accuracy
+      var npcHitChance = Math.round(Math.random() * 100);
 
-      if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
-        doReset(message);
+      ////////////////////////////////////////////////////////////////////////////////
+      // NPC Accuracy Failure, Generate NPC Message (GNPCM)
+      if (npcHitChance >= npcMaxAccuracy) {
+        var npcMessage = `\`\`\`diff\n--- ${boss} Missed!\`\`\``
+
+        // NPC Accuracy Success
+      } else {
+        // NPC Damage Calculation
+        var npcDamage = Math.round(Math.random() * (h.hlvl * 750 - h.hlvl * 300) + h.hlvl * 300)
+
+        // Lower Player's HP
+        baseHP -= npcDamage;
+
+        // Generate NPC Message (GNPCM)
+        var npcMessage = `\`\`\`diff\n- ${msg.author.username} was Damaged (${oldPHP} -> ${baseHP})\`\`\``
+      }
+      ////////////////////////////////////////////////////////////////////////////////
+
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
+      // PLAYER'S MOVE
+      // ATK Floor, higher the accuracy, lower the chance
+      ////////////////////////////////////////////////////////////////////////////////
+      // atk
+      if (input === 'atk') {
+
+        // Define content handling.
+        var sendContent = '';
+
+        // Player used Object
+        sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
+
+        // Calculate Player Accuracy and Chance
+        var atkAccuracy = 0.25,
+          atkHitChance = Math.round(Math.random());
+
+        // Player Accuracy Failure, Generate Player Message (GPM)
+        if (atkHitChance >= atkAccuracy) {
+          var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
+
+          // Player Accuracy Success
+        } else {
+          // Load NPC's HP to Memory
+          var oldHP = bossHP;
+
+          // Calculate Player's Damage
+          var atkDamage = Math.round(Math.random() * (h.hlvl * 900 - h.hlvl * 455) + h.hlvl * 455)
+
+          // Decrease Boss HP
+          bossHP -= atkDamage;
+
+          // Generate Player Message (GPM)
+          var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
+        }
+
+        // Munge GNPCM + GPM
+        sendContent += `${atkMessage}`
+        sendContent += `${npcMessage}\n`
+
+        //////////////////////////////////////////////////////////////////////////
+        // Someone Died
+        if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+          // Invoke Reset
+          doReset(message);
+          if (isBaseDepleted(baseHP) === true) {
+            sendContent += `\`\`\`diff\n- You died.\`\`\``
+          }
+          if (isBossDepleted(bossHP) === true) {
+            var rewardObject = generateReward(msg, h)
+            sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
+          }
+          // Return Compiled Data
+          return msg.channel.send(`${sendContent}`);
+        }
+        //////////////////////////////////////////////////////////////////////////
+
+        // Submit Compiled Data
+        msg.channel.send(`${sendContent}`)
+
+        // Continue Processing
+        fight(message, uid, boss, bossHP, h, baseHP)
+        return;
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // special atk
+      } else if (input === 'special') {
+
+        // Define content handling.
+        var sendContent = '';
+
+        // Player used Special Object
+        sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
+
+        // Calculate Player Accuracy and Chance
+        var atkAccuracy = 0.35,
+          atkHitChance = Math.round(Math.random());
+
+        // Player Accuracy Failure, Generate Player Message (GPM)
+        if (atkHitChance >= atkAccuracy) {
+          var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
+
+          // Player Accuracy Success
+        } else {
+          // Load NPC's HP to Memory
+          var oldHP = bossHP;
+
+          // Calculate Player's Damage
+          var atkDamage = Math.round(Math.random() * (h.hlvl * 1200 - h.hlvl * 525) + h.hlvl * 525)
+
+          // Decrease Boss HP
+          bossHP -= atkDamage;
+
+          // Generate Player Message (GPM)
+          var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
+        }
+
+        // Munge GPCM + GPM
+        sendContent += `${atkMessage}`
+        sendContent += `${npcMessage}\n`
+
+        //////////////////////////////////////////////////////////////////////////
+        // Someone Died
+        if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+          // Invoke Reset
+          doReset(message);
+          if (isBaseDepleted(baseHP) === true) {
+            sendContent += `\`\`\`diff\n- You died.\`\`\``
+          }
+          if (isBossDepleted(bossHP) === true) {
+            var rewardObject = generateReward(msg, h)
+            sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
+          }
+          // Return Compiled Data
+          return msg.channel.send(`${sendContent}`);
+        }
+        //////////////////////////////////////////////////////////////////////////
+
+        // Submit Compiled Data
+        msg.channel.send(`${sendContent}`)
+
+        // Continue Processing
+        fight(message, uid, boss, bossHP, h, baseHP)
+        return;
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Special Moves
+        ////////////////////////////////////////////////////////////////////////////////
+        // guard
+      } else if (input === 'guard') {
+
+        // Define content handling.
+        var sendContent = '';
+        //console.log('Guarded')
+
+        // PLAYER HEAL on No NPC Damage Defined (Accuracy Failure)
+        if (!npcDamage) {
+          // Generate NPC Message (GNPCM)
+          sendContent += `\`\`\`diff\n+ ${boss}'s attack failed\`\`\``
+          // Player HP Heal Calculation
+          healCalculation = h.hlvl * 500
+
+          // Append Player's Saved HP
+          baseHP += healCalculation
+
+          // Generate Player Message (GPM)
+          sendContent += `\`\`\`diff\n+ ${msg.author.username} healed (${oldPHP} + ${healCalculation} -> ${baseHP})\`\`\``
+
+          // PLAYER GETS DAMAGED
+        } else {
+          // Shave off some NPC Damage
+          npcGuarded = Math.round(npcDamage / 8 * 3)
+          // Append shaved NPC Damage to Player HP
+          baseHP += npcGuarded
+
+          // Generate Player Message (GPM)
+          sendContent += `\`\`\`diff\n- ${msg.author.username} was damaged (${oldPHP} -> ${baseHP})\n`
+          sendContent += `+ Protected against (${npcGuarded} damage)\`\`\``
+        }
+
+        //////////////////////////////////////////////////////////////////////////
+        // Somebody Died
         if (isBaseDepleted(baseHP) === true) {
           sendContent += `\`\`\`diff\n- You died.\`\`\``
+          // Invoke Reset
+          doReset(message);
+          // Return Compiled Data
+          return msg.channel.send(`${sendContent}`);
         }
-        if (isBossDepleted(bossHP) === true) {
-          var rewardObject = generateReward(msg, h)
-          sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
-        }
-        return msg.channel.send(`${sendContent}`);
-      }
+        //////////////////////////////////////////////////////////////////////////
 
-      msg.channel.send(`${sendContent}`)
+        // Submit Compiled Data
+        msg.channel.send(`${sendContent}`)
 
-      fight(message, uid, boss, bossHP, h, baseHP)
-      return;
-////////////////////////////////////////////////////////////////////////////////
-// special
-    } else if (input === 'special') {
-      var sendContent = '';
+        // Continue Processing
+        fight(message, uid, boss, bossHP, h, baseHP)
+        return;
+        ////////////////////////////////////////////////////////////////////////////////
+        // run
+      } else if (input === 'run') {
+        msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
 
-      sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
-
-      var atkAccuracy = 0.35,
-        atkHitChance = Math.round(Math.random());
-      if (atkHitChance >= atkAccuracy) {
-        var atkMessage = `\`\`\`diff\n--- ${msg.author.username} Missed!\`\`\``
-      } else {
-        var oldHP = bossHP;
-        var atkDamage = Math.round(Math.random() * (h.hlvl*1200 - h.hlvl*525) + h.hlvl*525)
-        bossHP -= atkDamage;
-        var atkMessage = `\`\`\`diff\n+ ${boss} was Damaged (${oldHP} -> ${bossHP})\`\`\``
-      }
-
-      sendContent += `${atkMessage}`
-      sendContent += `${npcMessage}\n`
-
-      if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
         doReset(message);
-        if (isBaseDepleted(baseHP) === true) {
-          sendContent += `\`\`\`diff\n- You died.\`\`\``
-        }
-        if (isBossDepleted(bossHP) === true) {
-          var rewardObject = generateReward(msg, h)
-          sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
-        }
-        return msg.channel.send(`${sendContent}`);
+        return;
       }
+      /*  message.channel.send(`${sendContent}`)
+        fight(message, uid, boss, bossHP, h, baseHP) */
 
-      msg.channel.send(`${sendContent}`)
-
-      fight(message, uid, boss, bossHP, h, baseHP)
-      return;
-////////////////////////////////////////////////////////////////////////////////
-// guard
-    } else if (input === 'guard') {
-      var sendContent = '';
-      //console.log('Guarded')
-
-      if (!npcDamage) {
-        sendContent += `\`\`\`diff\n+ ${boss}'s attack failed\`\`\``
-        healCalculation = h.hlvl*500
-        baseHP += healCalculation
-        sendContent += `\`\`\`diff\n+ ${msg.author.username} healed (${oldPHP} + ${healCalculation} -> ${baseHP})\`\`\``
-      } else {
-        npcGuarded = Math.round(npcDamage/8 * 3)
-        baseHP += npcGuarded
-        sendContent += `\`\`\`diff\n- ${msg.author.username} was damaged (${oldPHP} -> ${baseHP})\n`
-        sendContent += `+ Protected against (${npcGuarded} damage)\`\`\``
-      }
-
-      if (isBaseDepleted(baseHP) === true) {
-        sendContent += `\`\`\`diff\n- You died.\`\`\``
-        doReset(message);
-        return msg.channel.send(`${sendContent}`);
-      }
-
-      msg.channel.send(`${sendContent}`)
-
-      fight(message, uid, boss, bossHP, h, baseHP)
-      return;
-////////////////////////////////////////////////////////////////////////////////
-// run
-    } else if (input === 'run') {
-      msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
+      ////////////////////////////////////////////////////////////////////////////////
+      // Player was unable to respond
+    }).catch(() => {
+      console.error;
+      //console.log(message.content, uid, boss, bossHP, h, baseHP)
+      message.channel.send(`**${message.author.username}** wasn't able to respond.`);
 
       doReset(message);
-      return;
-    }
-    /*  message.channel.send(`${sendContent}`)
-      fight(message, uid, boss, bossHP, h, baseHP) */
-  }).catch(() => {
-    console.error;
-    //console.log(message.content, uid, boss, bossHP, h, baseHP)
-    message.channel.send(`**${message.author.username}** wasn't able to respond.`);
-
-    doReset(message);
-  })
+    })
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// run command
+////////////////////////////////////////////////////////////////////////////////
+
 exports.run = (client, message, params) => {
+
+  // reset any vs if any
   doReset(message)
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Load Hyperlevel Data to Memory
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
+
+    ////////////////////////////////////////////////////////////////////////////
+    // User has no Hyperlevel
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Condensed row
     var h = hl;
+
+    ////////////////////////////////////////////////////////////////////////////
+    // User Parameters
+    ////////////////////////////////////////////////////////////////////////////
+    /*
     if (message.author.id === settings.ownerid && params[0] === 'devmode' && params[1] >= 1) {
       giveKey(message, params[1])
       return message.reply(`\`Done.\``)
-    }
+    } */
+
+    ////////////////////////////////////////////////////////////////////////////
+    // PL4O Developer Force Chance
     if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
       var chance = params[1]
       console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Developer Mode (${chance})`))
+      // Master Chance
     } else {
       var chance = Math.floor(Math.random() * 100)
       console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; (${chance})`))
     }
-    //console.log(chance)
+
     // Set hyperlevel requirement here (hl.hlvl >= int)
+    // spaceA = Quest Keys
     if (hl.spaceA * 1 >= 1) {
+      // Invoke Styling Mechanisms
       var header = '```md',
         footer = '```',
+        // Call upon Color to Set Sidebar Color
         questColor = getColor(hl);
+
+      //////////////////////////////////////////////////////////////////////////
+      // Define content handling.
       let content = '';
+      // User Statistics
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
       content += `> HLVL: ${hl.hlvl}, HQKY: ${hl.spaceA*1 - 1}, HDTK: ${hl.spaceB}.\n\n`
-
-      // map data //////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////
       /*
-      if (hl.hlvl >= 0) {
-        // define defaults
-        let chance = Math.floor(Math.random() * 100)
-        let top = `> ${topLeft}${horz}${topRight}`
-        let mid = `> ${vert}${lightshadeFill}${lightshade}${lightshadeFill}${vert}`
-        let bot = `> ${botLeft}${horz}${botRight}`
-        // munge top half
-        content += `${top}\n${mid}\n`
-        // randomness
-        if (chance >= 90) {
-          content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
-          var legend = `< You are greeted by the area vendor ${qVendor} >\n`
-        } else if (chance >= 50) {
 
-        } else if (chance >= 20) {
+        Todo:
+        - Enemy Database
+        - Functionize Map Generation
+        - Append Enemy Database to Fight Function
 
-        } else {
-
-        }
-        content += `> ${vert}${lightshadeFill}${qUser}${lightshadeFill}${vert}\n`
-        // munge bottom half
-        content += `${mid}\n${bot}\n\n`
-        // what happened
-        content += `${legend}`
-      }
       */
+      // Begin: hlvl0 Randomness
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
       if (hl.hlvl >= 0) {
         // define defaults
         let top = `> ${topLeft}${horz}${topRight}`
@@ -500,12 +659,21 @@ exports.run = (client, message, params) => {
           // what happened
           content += `${legend}`
         }
-
-
       }
+      // EOF: hlvl0
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
+
+      // End with stating what symbol the user is.
       content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
 
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
+      // Munge all data and print quest results.
+      ////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////
       message.reply({
         embed: {
           color: questColor,
@@ -523,6 +691,7 @@ exports.run = (client, message, params) => {
           }]
         }
       })
+      // Key Transaction
       getKey(message, 1);
     } else {
       return message.reply(`\`ERROR\` You don't have any keys.`)
