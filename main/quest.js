@@ -19,57 +19,10 @@ let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
 let isFighting = new Set();
 
-////////////////////////////////////////////////////////////////////////////////
-// Define User Attack Messages
-////////////////////////////////////////////////////////////////////////////////
-const atkM = [
-  'attempted to punch it in the face.',
-  'attempted to kick it in the face.',
-  'attempted to slam the entity.',
-  'attempted to elbow in the face.'
-]
-const specM = [
-  // fire
-  'casted a fireball.',
-  'summoned a heatwave.',
-  'invoked magma.',
-  // spirit
-  'summoned a familiar.',
-  'used the power of Death.',
-  'casted NightBall.',
-  'resurrected the Dead.',
-  // wind
-  'invoked the power of Wind.',
-  'used Shatter Wave.',
-  'used Telekinesis.',
-  // earth
-  'used Earthquake.',
-  'summoned Leaf of Time.',
-  'used Foresight Destruction.',
-  // water
-  'summoned Ice Blade.',
-  'casted Megafreeze.',
-  'invoked a Tsunami.',
-  // other
-  'used Shadow Sword.',
-  'used Death Scythe.',
-  'used Deadly Nightshade.',
-  'used Epic Pistol.',
-  'used Samurai Sword.',
-  'used Alien Gun.'
-]
-
-////////////////////////////////////////////////////////////////////////////////
-// Random, Reset, Valid Actions
-////////////////////////////////////////////////////////////////////////////////
-
-function doReset(message) {
-  isFighting.delete(message.author.id)
-}
 //const validActions = Object.keys(basic).concat('special').concat('guard').concat('run');
-const validActions = (['atk', 'guard', 'special', 'run'])
-const validActionRegex = new RegExp(validActions.join('|'), 'i');
-const validActionString = validActions.map(action => `${action}`).join(' || ');
+const validActions = PLY(message, 'validActions', isFighting)
+const validActionRegex = PLY(message, 'validActionRegex', isFighting)
+const validActionString = PLY(message, 'validActionString', isFighting)
 
 /*
 
@@ -245,7 +198,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var sendContent = '';
 
         // Player used Object
-        sendContent += `**${msg.author.username}** ${Rand(atkM)}\n`
+        sendContent += `**${msg.author.username}** ${PLY(message, 'attackMessage', isFighting)}\n`
 
         // Calculate Player Accuracy and Chance
         var atkAccuracy = 0.75,
@@ -278,7 +231,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         // Someone Died
         if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
           // Invoke Reset
-          doReset(message);
+          PLY(message, 'reset', isFighting);
           if (isBaseDepleted(baseHP) === true) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
@@ -306,7 +259,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var sendContent = '';
 
         // Player used Special Object
-        sendContent = `**${msg.author.username}** ${Rand(specM)}\n`
+        sendContent = `**${msg.author.username}** ${PLY(message, 'specialMessage', isFighting)}\n`
 
         // Calculate Player Accuracy and Chance
         var atkAccuracy = 0.65,
@@ -339,7 +292,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         // Someone Died
         if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
           // Invoke Reset
-          doReset(message);
+          PLY(message, 'reset', isFighting);
           if (isBaseDepleted(baseHP) === true) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
@@ -399,7 +352,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         if (isBaseDepleted(baseHP) === true) {
           sendContent += `\`\`\`diff\n- You died.\`\`\``
           // Invoke Reset
-          doReset(message);
+          PLY(message, 'reset', isFighting);
           // Return Compiled Data
           return msg.channel.send(`${sendContent}`);
         }
@@ -416,7 +369,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       } else if (input === 'run') {
         msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
 
-        doReset(message);
+        PLY(message, 'reset', isFighting);
         return;
       }
       /*  message.channel.send(`${sendContent}`)
@@ -429,7 +382,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       //console.log(message.content, uid, boss, bossHP, h, baseHP)
       message.channel.send(`**${message.author.username}** wasn't able to respond.`);
 
-      doReset(message);
+      PLY(message, 'reset', isFighting);
     })
 }
 
