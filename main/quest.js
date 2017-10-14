@@ -62,7 +62,7 @@ const attacks = {
     ]
   }
 }
-const validActions = Object.keys(attacks).concat('special').concat('run');
+const validActions = Object.keys(attacks).concat('guard').concat('run');
 const validActionRegex = new RegExp(validActions.join('|'), 'i');
 const validActionString = validActions.map(action => `${action}`).join(' || ');
 
@@ -250,6 +250,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     message.channel.send(`${sendContent}`)
     fight(message, uid, boss, bossHP, h, baseHP)
   }).catch(() => {
+    console.log(message.content, uid, boss, bossHP, h, baseHP)
     message.channel.send(`**${message.author.username}** wasn't able to respond.`);
     message.author.miss++;
 
