@@ -2,7 +2,7 @@
 const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
-const chalk = require ('chalk');
+const chalk = require('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 let hkey = ":key2:"
@@ -68,6 +68,7 @@ function scoreUpTicket(mess, xval) {
     })
   }, 2000)
 }
+
 function scoreUpBits(mess, xval) {
   if (!xval) var xval = 1
   setTimeout(() => {
@@ -90,6 +91,7 @@ function hSpaceAUpdate(m) {
     })
   }, 2000)
 }
+
 function hSpaceBUpdate(m) {
   setTimeout(() => {
     sql.get(`SELECT * FROM hyperlevels WHERE userId = "${m.author.id}"`).then(hl => {
@@ -112,6 +114,7 @@ function getKey(m, keys) {
     })
   }, 2000)
 }
+
 function giveKey(m, keys) {
   if (!keys) var keys = 1;
   setTimeout(() => {
@@ -147,55 +150,42 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
     const input = msg.content.toLowerCase();
 
     var sendContent = '';
-
-    if (input === 'guard') {
-      console.log('Guarded')
-
-      fight(message, uid, boss, bossHP, h, baseHP)
-      return;
-    }
-    if (input === 'run') {
-      msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
-
-      doReset(message);
-      return;
-    }
     if (input === 'atk' || input === 'special') {
       if (input === 'atk') {
         const messages = [
-              'attempted to punch it in the face.',
-              'attempted to kick it in the face.',
-              'attempted to slam the entity.',
-              'attempted to elbow it in the face.'
-            ]
+          'attempted to punch it in the face.',
+          'attempted to kick it in the face.',
+          'attempted to slam the entity.',
+          'attempted to elbow it in the face.'
+        ]
         var attackChance = 0.75,
           min = 500.0,
           max = 900.0;
       } else if (input === 'special') {
         const messages = [
-              'casted a fireball.',
-              'summoned a heatwave.',
-              'invoked magma.',
-              'summoned a familiar.',
-              'used the power of Death.',
-              'casted NightBall.',
-              'resurrected the Dead.',
-              'invoked the power of Wind.',
-              'used Shatter Wave.',
-              'used Telekinesis.',
-              'used Earthquake.',
-              'summoned Leaf of Time.',
-              'used Foresight Destruction.',
-              'summoned Ice Blade.',
-              'casted Megafreeze.',
-              'invoked a Tsunami.',
-              'used Shadow Sword.',
-              'used Death Scythe.',
-              'used Deadly Nightshade.',
-              'used Epic Pistol.',
-              'used Samurai Sword.',
-              'used Alien Gun.'
-            ]
+          'casted a fireball.',
+          'summoned a heatwave.',
+          'invoked magma.',
+          'summoned a familiar.',
+          'used the power of Death.',
+          'casted NightBall.',
+          'resurrected the Dead.',
+          'invoked the power of Wind.',
+          'used Shatter Wave.',
+          'used Telekinesis.',
+          'used Earthquake.',
+          'summoned Leaf of Time.',
+          'used Foresight Destruction.',
+          'summoned Ice Blade.',
+          'casted Megafreeze.',
+          'invoked a Tsunami.',
+          'used Shadow Sword.',
+          'used Death Scythe.',
+          'used Deadly Nightshade.',
+          'used Epic Pistol.',
+          'used Samurai Sword.',
+          'used Alien Gun.'
+        ]
         var attackChance = 0.65,
           min = 525.0,
           max = 1200.0;
@@ -222,7 +212,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       const misschance = Math.round(Math.random() * 100)
       const missminimum = Math.round(h.hlvl + 65)
       if (missminimum >= misschance) {
-        sendContent += `\`\`\`diff\n--- ${boss} missed.`
+        sendContent += `\`\`\`diff\n--- ${boss} missed.\`\`\``
       } else {
         const npcmax = Math.round(Math.random() * (h.hlvl * 750))
         const npcmin = Math.round(Math.random() * (h.hlvl * 100))
@@ -250,13 +240,26 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
       fight(message, uid, boss, bossHP, h, baseHP)
       return;
     }
+    if (input === 'guard') {
+      console.log('Guarded')
+
+      fight(message, uid, boss, bossHP, h, baseHP)
+      return;
+    }
+    if (input === 'run') {
+      msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})** Ran Away.`)
+
+      doReset(message);
+      return;
+    }
 
 
 
 
 
-  /*  message.channel.send(`${sendContent}`)
-    fight(message, uid, boss, bossHP, h, baseHP) */
+
+    /*  message.channel.send(`${sendContent}`)
+      fight(message, uid, boss, bossHP, h, baseHP) */
   }).catch(() => {
     console.error;
     console.log(message.content, uid, boss, bossHP, h, baseHP)
@@ -286,7 +289,7 @@ exports.run = (client, message, params) => {
     }
     //console.log(chance)
     // Set hyperlevel requirement here (hl.hlvl >= int)
-    if (hl.spaceA*1 >= 1) {
+    if (hl.spaceA * 1 >= 1) {
       var header = '```md',
         footer = '```',
         questColor = getColor(hl);
@@ -355,7 +358,7 @@ exports.run = (client, message, params) => {
                   Invoke some battle here.
 
           */
-        //  legend += `atk || guard || special || run`
+          //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
           fight(message, message.author.id, fisheye, 3000, h, 8000); // message, boss, bossHP
@@ -411,23 +414,23 @@ exports.run = (client, message, params) => {
       content += `/* ${qUser} = ${message.author.username}#${message.author.discriminator} *\n`
 
 
-      message.reply({embed: {
-        color: questColor,
-        timestamp: new Date(),
-        author: {
-          name: `${client.user.username}'s Forest`,
-          icon_url: client.user.avatarURL
-        },
-        footer: {
-          text: `${message.author.username}#${message.author.discriminator} (v${settings.version})`
-        },
-        fields: [
-          {
+      message.reply({
+        embed: {
+          color: questColor,
+          timestamp: new Date(),
+          author: {
+            name: `${client.user.username}'s Forest`,
+            icon_url: client.user.avatarURL
+          },
+          footer: {
+            text: `${message.author.username}#${message.author.discriminator} (v${settings.version})`
+          },
+          fields: [{
             name: `-1 ${hkey}: You seek adventures in the Dark Forest.`,
             value: `${header}\n${content}\n${footer}`
-          }
-        ]
-      }})
+          }]
+        }
+      })
       getKey(message, 1);
     } else {
       return message.reply(`\`ERROR\` You don't have any keys.`)
