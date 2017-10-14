@@ -182,7 +182,7 @@ function fight(message, boss, bossHP, h, baseHP) {
 
     return;
   }*/
-  message.channel.send(`**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})**, type \`${validActionString}\` to continue.`)
+  message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.user.discriminator})**, type \`${validActionString}\` to continue.`)
   message.channel.awaitMessages(response => response.author.id === message.author.id && validActionRegex.test(response.content), {
     max: 1,
     time: 60000,
@@ -195,7 +195,7 @@ function fight(message, boss, bossHP, h, baseHP) {
 
     }
     if (input === 'run') {
-      msg.channel.send(`**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** Ran Away.`)
+      msg.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.user.discriminator})** Ran Away.`)
 
       doReset(message);
       return;
@@ -208,14 +208,14 @@ function fight(message, boss, bossHP, h, baseHP) {
     var sendContent = '';
 
     if (Math.random() > attackChance) {
-      sendContent += `\`\`\`diff\n- ${message.author.user.username} missed.\`\`\``
+      sendContent += `\`\`\`diff\n- ${message.author.username} missed.\`\`\``
     } else {
       const damage = Math.round(Math.random() * (attack.damage.max - attack.damage.min) + attack.damage.min);
 
       var oldHP = bossHP;
       bossHP -= damage;
 
-      sendContent += `**${message.member.displayName} (${message.author.user.username}#${message.author.user.discriminator})** ${Rand(attack.messages)}\n`
+      sendContent += `**${message.member.displayName} (${message.author.username}#${message.author.user.discriminator})** ${Rand(attack.messages)}\n`
       sendContent += `\`\`\`diff\n+ ${boss} took damage. (${oldHP} -> ${bossHP})\`\`\`\n`
 
     }
@@ -233,7 +233,7 @@ function fight(message, boss, bossHP, h, baseHP) {
       const npcdamage = Math.round(Math.random() * (npcmax - npcmin) + npcmin)
 
       baseHP -= npcdamage;
-      sendContent += `\`\`\`diff\n- ${message.author.user.username}#${message.author.user.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
+      sendContent += `\`\`\`diff\n- ${message.author.username}#${message.author.user.discriminator} took damage. (${oldPHP} -> ${baseHP})\`\`\``
     }
 
     if (baseHP <= 0) {
@@ -249,11 +249,11 @@ function fight(message, boss, bossHP, h, baseHP) {
     message.channel.send(`${sendContent}`)
     fight(message, boss, bossHP, h, baseHP)
   }).catch(() => {
-    message.channel.send(`**${message.author.user.username}** wasn't able to respond.`);
+    message.channel.send(`**${message.author.username}** wasn't able to respond.`);
     message.author.miss++;
 
     if (message.author.miss >= 2) {
-      message.channel.send(`${message.author.user.username}#${message.author.user.discriminator} went AFK.`)
+      message.channel.send(`${message.author.username}#${message.author.user.discriminator} went AFK.`)
       doReset(message);
       return;
     }
