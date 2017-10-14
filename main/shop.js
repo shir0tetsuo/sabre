@@ -49,8 +49,8 @@ function scoreUpBits(mess, xval) {
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-    if (row.level > 9001) {
-      return message.reply(`Error! Your level is over 9000!\n${settings.prefix}hyperlevel`)
+    if (row.level > 1000) {
+      return message.reply(`Error! Your level is over 1000!\n${settings.prefix}hyperlevel`)
     }
     // define static
     /*let eticketmsg = "Error"

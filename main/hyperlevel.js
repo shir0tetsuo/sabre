@@ -54,7 +54,7 @@ exports.run = (client, message, params) => {
     if (!row) {
       return message.reply(`\`ERROR\` You don't have a level.`)
     }
-    if (row.level > 9001) {
+    if (row.level > 1000) {
       message.reply(`\n\`\`\`markdown\n[+1 Hyperlevel]: You have been prestiged.\`\`\``)
       setTimeout(() => {
         sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
@@ -127,6 +127,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'hyperlevel',
-  description: 'Users with a level over 9000 can earn prestige levels.',
+  description: 'Users with a level over 1000 can earn prestige levels.',
   usage: 'hyperlevel'
 };
