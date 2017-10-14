@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
     if (!row) {
       message.author.send(`This user does not have a hyperlevel.`)
     } else {
-      message.author.send(`This user has a hyperlevel of ${row.hlvl}.`)
+      message.author.send(`HLVL: ${row.hlvl}, HQKY: ${row.spaceA}, HDTK: ${row.spaceB}.`)
     }
   })
   sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(row => {
