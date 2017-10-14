@@ -278,6 +278,7 @@ function fight(message, player, boss, bossHP, h) {
 }
 
 exports.run = (client, message, params) => {
+  const you = new Player(message.author);
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
@@ -346,7 +347,6 @@ exports.run = (client, message, params) => {
           content += `[Area](1 :: Dark Chasm ::)\n`
           content += `/* A Boss wants to Fight! ${fisheye} *\n`
           content += `${topBoss}\n${midBoss}\n`
-          const you = new Player(message.author);
           you.isFighting = true;
         } else {
           content += `[Area](1 :: Dark Forest ::)\n`
