@@ -11,6 +11,77 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
+function Player(user) {
+  if (Player.cache[user.id]) {
+    return Player.cache[user.id]
+  }
+
+  Player.cache[user.id] = this;
+
+  this.user = user;
+
+  this.reset();
+}
+Player.prototype.reset = function() {
+  this.hp = 8000;
+  this.isFighting = false;
+  this.miss = 0;
+}
+Player.prototype.debug = function() {
+  console.log(`${this.user.username}'s HP: ${this.hp}`)
+}
+
+Player.cache = {};
+
+const attacks = {
+  atk: {
+    damage: {
+      min: 500.0,
+      max: 900.0
+    },
+    attackChance: 0.75,
+    messages: [
+      'attempted to punch it in the face.',
+      'attempted to kick it in the face.',
+      'attempted to slam the entity.',
+      'attempted to elbow it in the face.'
+    ]
+  },
+  special: {
+    damage: {
+      min: 525.0,
+      max: 1200.0 // and multiplier
+    },
+    attackChance: 0.65,
+    messages: [
+      'casted a fireball.',
+      'summoned a heatwave.',
+      'invoked magma.',
+      'summoned a familiar.',
+      'used the power of Death.',
+      'casted NightBall.',
+      'resurrected the Dead.',
+      'invoked the power of Wind.',
+      'used Shatter Wave.',
+      'used Telekinesis.',
+      'used Earthquake.',
+      'summoned Leaf of Time.',
+      'used Foresight Destruction.',
+      'summoned Ice Blade.',
+      'casted Megafreeze.',
+      'invoked a Tsunami.',
+      'used Shadow Sword.',
+      'used Death Scythe.',
+      'used Deadly Nightshade.',
+      'used Epic Pistol.',
+      'used Samurai Sword.',
+      'used Alien Gun.'
+    ]
+  }
+}
+const validActions = Object.keys(attacks).concat('special').concat('run')
+const validActionString = validActions.map(action => `${action}`).join(' || ');
+
 /*
 
         other symbols
@@ -47,6 +118,13 @@ const vendorsResponse = [
   '"Pardon me."',
   '"Read ALL The Words!"'
 ]
+
+function fight(message, boss, bossHP) {
+
+
+  // let newHP =
+  fight(message, boss, newHP)
+}
 
 function scoreUpTicket(mess, xval) {
   if (!xval) var xval = 1
@@ -205,10 +283,10 @@ exports.run = (client, message, params) => {
                   Invoke some battle here.
 
           */
-          legend += `punch || guard || run || special `
+        //  legend += `atk || guard || special || run`
 
-
-
+          legend += `${validActionString}`
+          fight(message, 1, 3000); // message, boss, bossHP
           legend += `>\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
