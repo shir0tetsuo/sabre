@@ -11,27 +11,27 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
-function Player(user) {
-  if (Player.cache[user.id]) {
-    return Player.cache[user.id]
+function currentPlayer(user) {
+  if (currentPlayer.cache[user.id]) {
+    return currentPlayer.cache[user.id]
   }
 
-  Player.cache[user.id] = this;
+  currentPlayer.cache[user.id] = this;
 
   this.user = user;
 
   this.reset();
 }
-Player.prototype.reset = function() {
+currentPlayer.prototype.reset = function() {
   this.hp = 8000;
   this.isFighting = false;
   this.miss = 0;
 }
-Player.prototype.debug = function() {
+currentPlayer.prototype.debug = function() {
   console.log(`${this.user.username}'s HP: ${this.hp}`)
 }
 
-Player.cache = {};
+currentPlayer.cache = {};
 
 const attacks = {
   atk: {
@@ -192,9 +192,9 @@ function getColor(hl) {
   }
 }
 
-function fight(message, player, boss, bossHP, h) {
-  if (!player.isFighting) {
-    player.reset();
+function fight(message, currentPlayer, boss, bossHP, h) {
+  if (!currentPlayer.isFighting) {
+    currentPlayer.reset();
 
     return;
   }
@@ -278,7 +278,7 @@ function fight(message, player, boss, bossHP, h) {
 }
 
 exports.run = (client, message, params) => {
-  const you = new Player(message.author);
+  const you = new currentPlayer(message.author);
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
@@ -369,7 +369,7 @@ exports.run = (client, message, params) => {
         //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
-          fight(message, player, fisheye, 3000, h); // message, boss, bossHP
+          fight(message, currentPlayer, fisheye, 3000, h); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
