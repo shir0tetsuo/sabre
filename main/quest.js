@@ -20,7 +20,7 @@ function Rand(data) {
 let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398' //  ⎘
 let qUser = '\u24C5' // Ⓟ
-let qKey = '\u2ECF'
+let qKey = '\u26BF'
 let topLeft = '\u2554'
 let topRight = '\u2557'
 let botLeft = '\u255A'
