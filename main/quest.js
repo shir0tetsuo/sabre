@@ -129,10 +129,13 @@ exports.run = (client, message, params) => {
       return message.reply(`\`Done.\``)
     }
     if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
-      var chance = Math.floor(Math.random() * 100)
-    } else {
       var chance = params[1]
+      console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Developer Mode (${chance})`))
+    } else {
+      var chance = Math.floor(Math.random() * 100)
+      console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; (${chance})`))
     }
+    console.log(chance)
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceA*1 >= 1) {
       var header = '```md',
