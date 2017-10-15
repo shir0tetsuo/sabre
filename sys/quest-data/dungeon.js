@@ -45,8 +45,8 @@ var player = MAP.player,
 // Tile Randomness
   function tile(condition) {
     var adjustment = '';
+    tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
     if (condition === true) {
-        tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
         for (var i=0, t=8; i<t; i++) {
             adjustment += `${Rand(tileArray)}`
         }
