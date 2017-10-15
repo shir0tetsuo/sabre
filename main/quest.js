@@ -80,7 +80,7 @@ exports.run = (client, message, params) => {
 
       //////////////////////////////////////////////////////////////////////////
       // Define content handling.
-      let content = '';
+      const content = '';
       // User Statistics
       content += `/* ${message.member.displayName} *\n`
       content += `< You spent 1 Quest Key >\n`
