@@ -102,6 +102,6 @@ module.exports = (message, mode, isFighting, h) =>  {
       var amt = Math.round(Math.random() * (6000 - 500) + 500)
     }
     Transaction(message, 'tk', amt)
-    return `< You found ${amt} tickets. >`
+    return `< You found ${amt} tickets. >\n`
   }
 }

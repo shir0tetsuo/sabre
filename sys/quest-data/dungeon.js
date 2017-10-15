@@ -121,9 +121,9 @@ var player = MAP.player,
       Transaction(message, 'dtk', CoT)
     }
     if (ev === 'tk') {
-      mapData += `> ${vert}${tile(true)}${NPC('item1')}${tile(true)}${vert}\n`
-      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(true)}${vert}\n`
-      mapData += `> ${vert}${tile(true)}${player}${tile(true)}${tile(false)}\n`
+      mapData += `> ${vert}${tile(false)}${NPC('item1')}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(false)}${player}${tile(true)}${tile(false)}\n`
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(true)}${tile(false)}\n`
       mapData += `${PLY(message, 'genTickets', false, h)}`
     }
