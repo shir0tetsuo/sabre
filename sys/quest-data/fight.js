@@ -4,6 +4,8 @@ const NPC = require('./NPCData.js')
 const PLY = require('./PlayerData.js')
 const Reward = require('./reward.js')
 
+var isFighting = 'null'
+
 const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
