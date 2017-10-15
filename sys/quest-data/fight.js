@@ -10,9 +10,10 @@ const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
 
-function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
+function fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC) {
   //console.log(message.content, uid, boss, bossHP, h, baseHP)
 
+  if (!npcACC) var npcACC = 59 + h.hlvl
 
   // Invoke Await
   message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**,\n type \`${validActionString}\` to continue.`)
@@ -32,7 +33,7 @@ function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
       ////////////////////////////////////////////////////////////////////////////
 
       // Accuracy increases as hlvl increases
-      var npcAccuracy = 59 + h.hlvl,
+      var npcAccuracy = npcACC,
 
         // Load Player's HP to Memory
         oldPHP = baseHP;
@@ -127,7 +128,7 @@ function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
         msg.channel.send(`${sendContent}`)
 
         // Continue Processing
-        fight(message, uid, boss, bossHP, h, baseHP)
+        fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
         return;
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +189,7 @@ function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
         msg.channel.send(`${sendContent}`)
 
         // Continue Processing
-        fight(message, uid, boss, bossHP, h, baseHP)
+        fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
         return;
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -241,7 +242,7 @@ function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
         msg.channel.send(`${sendContent}`)
 
         // Continue Processing
-        fight(message, uid, boss, bossHP, h, baseHP)
+        fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
         return;
         ////////////////////////////////////////////////////////////////////////////////
         // run

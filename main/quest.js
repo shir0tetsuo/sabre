@@ -7,6 +7,8 @@ const NPC = require('../sys/quest-data/NPCData.js')
 const PLY = require('../sys/quest-data/PlayerData.js')
 const Reward = require('../sys/quest-data/reward.js')
 const fight = require('../sys/quest-data/fight.js')
+const MAP = require('../sys/quest-data/set_map.json')
+const generateForest = require('../sys/quest-data/dungeon.js')
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
@@ -25,7 +27,7 @@ let isFighting = new Set();
 const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
-
+/*
 let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398' //  ⎘
 let qUser = '\u24C5' // Ⓟ
@@ -42,36 +44,18 @@ let medshade = '\u2592'
 let darkshade = '\u2593'
 let mysteriousObject = '\u25A8'
 let fisheye = '\u25C9'
-
-////////////////////////////////////////////////////////////////////////////////
-// hlvl to Reward on Boss Fight Win
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// generate Fight
-////////////////////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////////////////////
-// run command
-////////////////////////////////////////////////////////////////////////////////
-
+*/
 exports.run = (client, message, params) => {
   // reset any vs if any
   PLY(message, 'reset', isFighting)
-
   ////////////////////////////////////////////////////////////////////////////////
   // Load Hyperlevel Data to Memory
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
-
     ////////////////////////////////////////////////////////////////////////////
     // User has no Hyperlevel
     if (!hl) {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
-
     ////////////////////////////////////////////////////////////////////////////
     // Condensed row
     var h = hl;
@@ -117,7 +101,9 @@ exports.run = (client, message, params) => {
       ////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////
       var boss = `${NPC('enemy')}${NPC('ename')}`
-      if (hl.hlvl >= 0) {
+      var bossTiny = `${boss.substring(0, 1)}`
+      generateForest(message, boss, bossTiny, h, content) // returns content
+  /*    if (hl.hlvl >= 0) {
         // define defaults
         let top = `> ${topLeft}${horz}${topRight}`
         let topBoss = `/* ${topLeft}${horz}${horz}${topRight} *`
@@ -149,7 +135,7 @@ exports.run = (client, message, params) => {
 
                   Invoke some battle here.
 
-          */
+
           //  legend += `atk || guard || special || run`
 
           legend += `${validActionString}`
@@ -201,7 +187,7 @@ exports.run = (client, message, params) => {
           // what happened
           content += `${legend}`
         }
-      }
+      } */
       // EOF: hlvl0
       ////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////
