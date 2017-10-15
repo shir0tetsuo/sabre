@@ -48,13 +48,19 @@ var player = MAP.player,
   }
 
   function dungeonMode(ev, h, message, bossTiny) {
+    const validActions = PLY('NULL', 'validActions')
+    const validActionRegex = PLY('NULL', 'validActionRegex')
+    const validActionString = PLY('NULL', 'validActionString')
     var mapData = '';
     if (ev === 'fight') {
       mapData += `/* ${vert}${tile(true)}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(false)}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${tile(true)}${tile(false)}${tile(false)}${vert} * \n`
-      mapData += `/* ${botleft}${horz2}${botright} *\n`
+      mapData += `/* ${botleft}${horz2}${botright} *\n\n`
+      mapData += `* You are in danger!\n`
+      mapData += `< You have the following options.\n`
+      mapData += `${validActionString} >\n`
     }
     return mapData;
   }
