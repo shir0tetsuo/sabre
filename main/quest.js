@@ -27,10 +27,11 @@ let isFighting = new Set();
 const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
+qUser = '\u24C5' // Ⓟ
 /*
 let qVendor = '\u2324' // ⌤
 let qWarp = '\u2398' //  ⎘
-let qUser = '\u24C5' // Ⓟ
+
 let qKey = '\u26BF'
 let topLeft = '\u2554'
 let topRight = '\u2557'
