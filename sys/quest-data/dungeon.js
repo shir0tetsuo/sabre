@@ -21,31 +21,32 @@ var player = MAP.player,
   DARKPADDING = MAP.DARKPADDING
 
   function bossMode(condition, boss, area, areaName, areaDungeon) {
+    var blade = '';
     if (condition === true) {
-      content += `[Area](${area} :: ${areaName} ::)\n`
-      content += `/* A Boss wants to Fight! ${boss} *\n`
-      content += `/* ${topleft}${horz2}${topright} *\n`
-      return content
+      blade += `[Area](${area} :: ${areaName} ::)\n`
+      blade += `/* A Boss wants to Fight! ${boss} *\n`
+      blade += `/* ${topleft}${horz2}${topright} *\n`
+      return blade;
     } else {
-      content += `[Area](${area} :: ${areaName} ::)\n`
-      content += `# Discovered ${areaDungeon}\n`
-      content += `> ${topleft}${horz}${topright}\n`
-      return content
+      blade += `[Area](${area} :: ${areaName} ::)\n`
+      blade += `# Discovered ${areaDungeon}\n`
+      blade += `> ${topleft}${horz}${topright}\n`
+      return blade;
     }
   }
 
-module.exports = (message, boss, bossTiny, h, content, chance) => {
+module.exports = (message, boss, bossTiny, h, chance) => {
   var uid = message.author.id,
     isFighting = false;
 
-    if (!content) var content = '';
+    var mungedData = '';
 
     if (h.hlvl >= 1) {
 
       // bossmode
       ////////////////////
       if (chance >= 96) {
-        bossMode(true, boss, 1, 'Dark Chasm', 'a Dark Room')
+        mungedData += `${bossMode(true, boss, 1, 'Dark Chasm', 'a Dark Room')}`
         // formulas
         // boss health / accuracy,
         // player health
@@ -55,32 +56,34 @@ module.exports = (message, boss, bossTiny, h, content, chance) => {
           if (npcACC >= 95) var npcACC = 95
         fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
       } else {
-        bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
       }
       ////////////////////
       // Chance Core
       ////////////////////
+      /*
       if (chance >= 96) {
-        dungeonMode('fight', content)
+        dungeonMode('fight')
       } else if (chance >= 85) {
-        dungeonMode('stranger', content)
+        dungeonMode('stranger')
       } else if (chance >= 80) {
-        dungeonMode('hdtk', content)
+        dungeonMode('hdtk')
       } else if (chance >= 70) {
-        dungeonMode('tk', content)
+        dungeonMode('tk')
       } else if (chance >= 50) {
-        dungeonMode('newt', content)
+        dungeonMode('newt')
       } else if (chance >= 30) {
-        dungeonMode('empty', content)
+        dungeonMode('empty')
       } else if (chance >= 25) {
-        dungeonMode('qkey', content)
+        dungeonMode('qkey')
       } else if (chance >= 15) {
-        dungeonMode('byte', content)
+        dungeonMode('byte')
       } else if (chance >= 0) {
-        dungeonMode('mystery', content)
+        dungeonMode('mystery')
       }
+      */
 
     }
 
-    return content;
+    return mungedData;
 }
