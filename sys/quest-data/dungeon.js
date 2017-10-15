@@ -84,23 +84,23 @@ module.exports = (message, boss, bossTiny, h, chance) => {
       // Chance Core
       ////////////////////
       if (chance >= 96) {
-        dungeonMode('fight', h, message, bossTiny)
+        mungedData += `${dungeonMode('fight', h, message, bossTiny)}`
       } else if (chance >= 85) {
-        dungeonMode('stranger', h, message, bossTiny)
+        mungedData += `${dungeonMode('stranger', h, message, bossTiny)}`
       } else if (chance >= 80) {
-        dungeonMode('hdtk', h, message, bossTiny)
+        mungedData += `${dungeonMode('hdtk', h, message, bossTiny)}`
       } else if (chance >= 70) {
-        dungeonMode('tk', h, message, bossTiny)
+        mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
       } else if (chance >= 50) {
-        dungeonMode('newt', h, message, bossTiny)
+        mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
       } else if (chance >= 30) {
-        dungeonMode('empty', h, message, bossTiny)
+        mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
       } else if (chance >= 25) {
-        dungeonMode('qkey', h, message, bossTiny)
+        mungedData += `${dungeonMode('qkey', h, message, bossTiny)}`
       } else if (chance >= 15) {
-        dungeonMode('byte', h, message, bossTiny)
+        mungedData += `${dungeonMode('byte', h, message, bossTiny)}`
       } else if (chance >= 0) {
-        dungeonMode('mystery', h, message, bossTiny)
+        mungedData += `${dungeonMode('mystery', h, message, bossTiny)}`
       }
 
     }
