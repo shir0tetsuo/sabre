@@ -125,7 +125,7 @@ var player = MAP.player,
       mapData += `> ${vert}${tile(true)}${tile(false)}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(true)}${player}${tile(true)}${tile(false)}\n`
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(true)}${tile(false)}\n`
-      mapData += `${PLY(message, 'genTickets', isFighting, h)}`
+      mapData += `${PLY(message, 'genTickets', false, h)}`
     }
     return mapData;
   }
