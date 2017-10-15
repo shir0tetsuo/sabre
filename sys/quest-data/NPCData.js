@@ -11,13 +11,6 @@ const qEnemy = [
 ]
 
 const qEnemyNameA = [
-  // eastereggs
-  //'Ronaldo', 'Boba Fett', 'George', 'David', 'Tony', 'Dan',
-  // main
-  //'Shadow', 'Shadowling', 'Underdweller', 'King', 'Darkness',
-  // star wars
-  //'Wookie', 'Weird Symbol', 'Jerry'
-
   // Nationality
   'Roman', 'Russian', 'Canadian', 'British', 'French', 'Domestic', 'Foreign', 'Aztec', 'Egyptian', 'Norwegian', 'Atlantic',
   // Rank
@@ -51,7 +44,7 @@ module.exports = (mode) =>  {
     return Rand(qEnemy)
   }
   if (mode === 'ename') {
-    return Rand(`${qEnemyNameA} ${qEnemyNameB}`)
+    return `${Rand(qEnemyNameA)} ${Rand(qEnemyNameB)}`
   }
   if (mode === 'common') {
     return qObject[1];
