@@ -68,8 +68,7 @@ module.exports = (message, mode, isFighting, h) =>  {
     return validActionString;
   }
   if (mode === 'reset') { // Close Session
-    isFighting.delete(message.author.id);
-    return isFighting; // may be buggy
+    //return isFighting; // may be buggy
   }
   if (mode === 'attackMessage') { // special
     return Rand(attackMessage);
