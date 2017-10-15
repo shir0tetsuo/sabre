@@ -1,4 +1,5 @@
 const Rand = require('./random.js')
+const Transaction = require('./transaction.js')
 const sql = require("sqlite");
 sql.open("../../score.sqlite");
 
@@ -87,11 +88,20 @@ module.exports = (message, mode, isFighting, h) =>  {
   }
   if (mode === 'getColor') {
     ///
-    if (h.lvl >= 5) {
+    if (h.hlvl >= 5) {
       return 0x5FEFBF;
-    } else if (h.lvl >= 1) {
+    } else if (h.hlvl >= 1) {
       return 0x34d1a2;
     }
     ///
+  }
+  if (mode === 'genTickets') {
+    if (h.hlvl >= 5) {
+      var amt = Math.round(Math.random() * (100000 - 1000) + 1000)
+    } else if (h.hlvl >= 0) {
+      var amt = Math.round(Math.random() * (6000 - 500) + 500)
+    }
+    Transaction(message, 'tk', amt)
+    return `< You found ${amt} tickets. >`
   }
 }

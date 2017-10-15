@@ -5,6 +5,8 @@ const NPC = require('./NPCData.js')
 const Reward = require('./reward.js')
 const MAP = require('./set_map.json')
 const PLY = require('./PlayerData.js')
+////////////////////////////////////////////////////////////////////////////////
+// Map all map data
 var player = MAP.player,
   topleft = MAP.topleft,
   topright = MAP.topright,
@@ -19,8 +21,12 @@ var player = MAP.player,
   MED = MAP.MED,
   MEDPADDING = MAP.MEDPADDING,
   DARK = MAP.DARK,
-  DARKPADDING = MAP.DARKPADDING
+  DARKPADDING = MAP.DARKPADDING,
+  DARKTRIANGLE = MAP.DARKTRIANGLE,
+  LIGHTTRIANGLE = MAP.LIGHTTRIANGLE
 
+////////////////////////////////////////////////////////////////////////////////
+// Bossmode or Normal Initializer
   function bossMode(condition, boss, area, areaName, areaDungeon) {
     var blade = '';
     if (condition === true) {
@@ -35,6 +41,8 @@ var player = MAP.player,
     return blade;
   }
 
+////////////////////////////////////////////////////////////////////////////////
+// Tile Randomness
   function tile(condition) {
     var adjustment = '';
     if (condition === true) {
@@ -50,6 +58,9 @@ var player = MAP.player,
     return adjustment;
   }
 
+////////////////////////////////////////////////////////////////////////////////
+// Valid Actions
+
   function appendValid() {
     var validData = '';
     const validActions = PLY('NULL', 'validActions')
@@ -60,6 +71,9 @@ var player = MAP.player,
     validData += `${validActionString} >\n`
     return validData;
   }
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate Dungeon
 
   function dungeonMode(ev, h, message, bossTiny) {
     var floorCalculation = Math.floor(Math.random() * 5)
@@ -76,6 +90,7 @@ var player = MAP.player,
       mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz.substring(0, 2)}${vert} *\n`
       mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${tile(false)}${botright} *\n`
       mapData += `/* ${horz2}${tile(false)}${botright} *\n`
+      mapData += `<${Reward(message, h)}>`
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 0) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${vert} *\n`
@@ -104,6 +119,13 @@ var player = MAP.player,
       var CoT = Math.round(Math.random() * 3);
       mapData += `< Obtained ${CoT} Dark Tickets >\n`
       Transaction(message, 'dtk', CoT)
+    }
+    if (ev === 'tk') {
+      mapData += `> ${vert}${tile(true)}${NPC('item1')}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)}${player}${tile(true)}${tile(false)}\n`
+      mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(true)}${tile(false)}\n`
+      mapData += `${PLY(message, 'genTickets', isFighting, h)}`
     }
     return mapData;
   }
