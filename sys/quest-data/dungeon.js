@@ -48,20 +48,38 @@ var player = MAP.player,
     return adjustment;
   }
 
-  function dungeonMode(ev, h, message, bossTiny) {
+  function appendValid() {
+    var validData = '';
     const validActions = PLY('NULL', 'validActions')
     const validActionRegex = PLY('NULL', 'validActionRegex')
     const validActionString = PLY('NULL', 'validActionString')
+    validData += `* You are in danger!\n`
+    validData += `< You have the following options.\n`
+    validData += `${validActionString} >\n`
+    return validData;
+  }
+
+  function dungeonMode(ev, h, message, bossTiny) {
+    var floorCalculation = Math.floor(Math.random() * 5)
     var mapData = '';
-    if (ev === 'fight') {
+    if (ev === 'fight' && floorCalculation >= 4) {
       mapData += `/* ${vert}${tile(true)}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(false)}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${tile(true)}${vert} *\n`
       mapData += `/* ${vert}${tile(true)}${tile(true)}${tile(false)}${tile(false)}${vert} * \n`
       mapData += `/* ${botleft}${horz2}${botright} *\n\n`
-      mapData += `* You are in danger!\n`
-      mapData += `< You have the following options.\n`
-      mapData += `${validActionString} >\n`
+      mapData += `${appendValid()}`
+    } else if (ev === 'fight' && floorCalculation >= 3) {
+      mapData += `/* ${vert}${tile(true)}${player}${tile(true)}${vert} *\n`
+      mapData += `/* ${botleft}${horz}${tile(false)}${tile(true)}${horz}${vert} *\n`
+      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${botright} *\n`
+      mapData += `/* ${horz2}${tile(false)}${botright} *\n`
+      mapData += `${appendValid()}`
+    } else if (ev === 'fight' && floorCalculation >= 0) {
+      mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${vert} *\n`
+      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
+      mapData += `/* ${botleft}${horz2}${botright}* \n`
+      mapData += `${appendValid()}`
     }
     if (ev === 'stranger') {
 
