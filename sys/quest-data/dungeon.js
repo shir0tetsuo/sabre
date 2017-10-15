@@ -89,13 +89,13 @@ var player = MAP.player,
       mapData += `/* ${vert}${tile(true)}${player}${tile(true)}${vert} *\n`
       mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz.substring(0, 2)}${vert} *\n`
       mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${tile(false)}${botright} *\n`
-      mapData += `/* ${horz2}${tile(false)}${botright} *\n`
-      mapData += `<${Reward(message, h)}>`
+      mapData += `/* ${horz2}${tile(false)}${botright} *\n\n`
+      mapData += `\n<${Reward(message, h)}>\n`
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 0) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${vert} *\n`
       mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
-      mapData += `/* ${botleft}${horz2}${botright}* \n`
+      mapData += `/* ${botleft}${horz2}${botright}* \n\n`
       mapData += `${appendValid()}`
     }
     if (ev === 'stranger') {
@@ -105,7 +105,7 @@ var player = MAP.player,
       mapData += `> ${vert}${MED}${MED}${player}${MED}${tile(true)}${vert}\n`
       mapData += `> ${vert}${MED}${tile(true)}${tile(false)}${vert}\n`
       mapData += `> ${vert}${DARK}${tile(true)}${tile(false)}${vert}\n`
-      mapData += `> ${botleft}${horz}${botright}\n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
       mapData += `< You encounter ${NPC('common')}${PLY(message, 'vendMessageA')} \n`
       mapData += ` ${PLY(message, 'vendMessageB')} >\n`
     }
@@ -115,7 +115,7 @@ var player = MAP.player,
       mapData += `>  ${tile(true)}${tile(true)}\n`
       mapData += `* ${vert}${tile(false)}${NPC('item1')}${tile(true)}   ${vert}\n`
       mapData += `> ${vert}${LIGHT}${MED}${DARK}${MED}${player}${tile(true)}${vert}\n`
-      mapData += `> ${botleft}${horz}${botright}\n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
       var CoT = Math.round(Math.random() * 3);
       mapData += `< Obtained ${CoT} Dark Tickets >\n`
       Transaction(message, 'dtk', CoT)
@@ -124,7 +124,7 @@ var player = MAP.player,
       mapData += `* ${vert}${tile(false)}${NPC('item1')}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(false)}${player}${tile(true)}${tile(false)}\n`
-      mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n`
+      mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n\n`
       mapData += `${PLY(message, 'genTickets', false, h)}`
     }
     return mapData;
