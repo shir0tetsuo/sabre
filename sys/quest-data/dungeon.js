@@ -42,7 +42,7 @@ var player = MAP.player,
             adjustment += `${Rand(tileArray)}`
         }
     } else {
-      adjustment += `LIGHT`
+      adjustment += `${LIGHT}`
     }
     return adjustment;
   }
