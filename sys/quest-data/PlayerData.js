@@ -43,14 +43,16 @@ const vendors = [
   'Jerry',
   'Ian',
   'Kevin',
-  'Morpheus'
+  'Morpheus',
+  'Anthony'
 ]
 const vendorsResponse = [
   '"Keep your head up high. You won\'t find hope lying on the ground."',
   '"I\'m addicted to Sabre help!"',
   '"...oh, Hello."',
   '"Pardon me."',
-  '"Read ALL The Words!"'
+  '"Read ALL The Words!"',
+  '"I lost a Dark Ticket somewhere."'
 ]
 module.exports = (message, mode, isFighting, h) =>  {
 // this data must run first and doesn't touch message
