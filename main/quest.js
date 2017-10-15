@@ -5,6 +5,7 @@ const Rand = require('../sys/quest-data/random.js')
 const Transaction = require('../sys/quest-data/transaction.js')
 const NPC = require('../sys/quest-data/NPCData.js')
 const PLY = require('../sys/quest-data/PlayerData.js')
+const Reward = require('../sys/quest-data/reward.js')
 
 ////////////////////////////////////////////////////////////////////////////////
 // Plugin Assets
@@ -45,27 +46,7 @@ let fisheye = '\u25C9'
 // hlvl to Reward on Boss Fight Win
 ////////////////////////////////////////////////////////////////////////////////
 
-function generateReward(message, h) {
-  var rewardPrint = Math.round(Math.random())
-  // Level 1 Winnings
-  if (h.hlvl >= 1) {
-    if (rewardPrint <= 0.33) {
-      var rTk = Math.round(Math.random() * (100000 - 1000 * h.hlvl) + 1000 * h.hlvl)
-      var rewObject = `${rTk} Sabre Tickets`
-      Transaction(message, 'tk', rTk)
-    } else if (rewardPrint <= 0.66) {
-      var rBy = Math.round(Math.random() * (120000 - 1000 * h.hlvl) + 1000 * h.hlvl)
-      var rewObject = `${rBy} Bytes`
-      Transaction(message, 'b', rBy)
-    } else if (rewardPrint <= 1) {
-      var rewObject = `1 Dark Ticket`
-      Transaction(message, 'dtk', 1)
-    }
-  } else {
-    var rewObject = "nothing."
-  }
-  return `Obtained ${rewObject}`
-}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // generate Fight
@@ -138,7 +119,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
         var sendContent = '';
 
         // Player used Object
-        sendContent += `**${msg.author.username}** ${PLY(message, 'attackMessage', isFighting)}\n`
+        sendContent += `**${msg.author.username}** ${PLY(message, 'attackMessage', isFighting, h)}\n`
 
         // Calculate Player Accuracy and Chance
         var atkAccuracy = 0.75,
@@ -176,7 +157,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
           if (Transaction(msg, 'baseHPZero', bossHP) === true) {
-            var rewardObject = generateReward(msg, h)
+            var rewardObject = Reward(msg, h)
             sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
           }
           // Return Compiled Data
@@ -237,7 +218,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
           if (Transaction(msg, 'baseHPZero', bossHP) === true) {
-            var rewardObject = generateReward(msg, h)
+            var rewardObject = Reward(msg, h)
             sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
           }
           // Return Compiled Data
@@ -428,8 +409,8 @@ exports.run = (client, message, params) => {
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
-          var legend = `< You are greeted by ${qVendor}${PLY(message, 'vendMessageA', isFighting)}\n`
-          legend += `${PLY(message, 'vendMessageB', isFighting)} >\n`
+          var legend = `< You are greeted by ${qVendor}${PLY(message, 'vendMessageA', isFighting, h)}\n`
+          legend += `${PLY(message, 'vendMessageB', isFighting, h)} >\n`
         } else if (chance >= 50) {
           var legend = `< The room was empty. >\n`
         } else if (chance >= 15) {
