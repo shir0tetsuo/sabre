@@ -20,6 +20,8 @@ var player = MAP.player,
   DARK = MAP.DARK,
   DARKPADDING = MAP.DARKPADDING
 
+  var content = '';
+
   function bossMode(condition, boss, area, areaName, areaDungeon) {
     if (condition === true) {
       content += `[Area](${area} :: ${areaName} ::)\n`
