@@ -50,9 +50,11 @@ var player = MAP.player,
   function dungeonMode(ev, h, message, bossTiny) {
     var mapData = '';
     if (ev === 'fight') {
-      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
-      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
-      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(false)}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(true)}${tile(false)}${tile(false)}${vert} * \n`
+      mapData += `/* ${botleft}${horz2}${botright} *\n`
     }
     return mapData;
   }
