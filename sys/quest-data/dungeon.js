@@ -26,13 +26,36 @@ var player = MAP.player,
       blade += `[Area](${area} :: ${areaName} ::)\n`
       blade += `/* A Boss wants to Fight! ${boss} *\n`
       blade += `/* ${topleft}${horz2}${topright} *\n`
-      return blade;
     } else {
       blade += `[Area](${area} :: ${areaName} ::)\n`
       blade += `# Discovered ${areaDungeon}\n`
       blade += `> ${topleft}${horz}${topright}\n`
-      return blade;
     }
+    return blade;
+  }
+
+  function tile(condition) {
+    var adjustment = '';
+    if (condition === true) {
+      var xlen = 4,
+        tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
+      for (i = 0; n = tileArray.length; i < xlen; i++) {
+        adjustment += tileArray.charAt(Math.floor(Math.random() * n));
+      }
+    } else {
+      adjustment += `LIGHT`
+    }
+    return adjustment;
+  }
+
+  function dungeonMode(ev, h, message, bossTiny) {
+    var mapData = '';
+    if (ev === 'fight') {
+      mapData += `/* ${vert}${tile(true)}${vert} *`
+      mapData += `/* ${vert}${tile(true)}${vert} *`
+      mapData += `/* ${vert}${tile(true)}${vert} *`
+    }
+    return mapData;
   }
 
 module.exports = (message, boss, bossTiny, h, chance) => {
@@ -61,27 +84,25 @@ module.exports = (message, boss, bossTiny, h, chance) => {
       ////////////////////
       // Chance Core
       ////////////////////
-      /*
       if (chance >= 96) {
-        dungeonMode('fight')
+        dungeonMode('fight', h, message, bossTiny)
       } else if (chance >= 85) {
-        dungeonMode('stranger')
+        dungeonMode('stranger', h, message, bossTiny)
       } else if (chance >= 80) {
-        dungeonMode('hdtk')
+        dungeonMode('hdtk', h, message, bossTiny)
       } else if (chance >= 70) {
-        dungeonMode('tk')
+        dungeonMode('tk', h, message, bossTiny)
       } else if (chance >= 50) {
-        dungeonMode('newt')
+        dungeonMode('newt', h, message, bossTiny)
       } else if (chance >= 30) {
-        dungeonMode('empty')
+        dungeonMode('empty', h, message, bossTiny)
       } else if (chance >= 25) {
-        dungeonMode('qkey')
+        dungeonMode('qkey', h, message, bossTiny)
       } else if (chance >= 15) {
-        dungeonMode('byte')
+        dungeonMode('byte', h, message, bossTiny)
       } else if (chance >= 0) {
-        dungeonMode('mystery')
+        dungeonMode('mystery', h, message, bossTiny)
       }
-      */
 
     }
 
