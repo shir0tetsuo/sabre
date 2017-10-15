@@ -38,7 +38,7 @@ var player = MAP.player,
     var adjustment = '';
     if (condition === true) {
         tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
-        for (var i=0, t=4; i<t; i++) {
+        for (var i=0, t=8; i<t; i++) {
             adjustment += `${Rand(tileArray)}`
         }
     } else {
@@ -50,9 +50,9 @@ var player = MAP.player,
   function dungeonMode(ev, h, message, bossTiny) {
     var mapData = '';
     if (ev === 'fight') {
-      mapData += `/* ${vert}${tile(true)}${vert} *\n`
-      mapData += `/* ${vert}${tile(true)}${vert} *\n`
-      mapData += `/* ${vert}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
+      mapData += `/* ${vert}${tile(true)}${tile(false)}${tile(true)}${vert} *\n`
     }
     return mapData;
   }
