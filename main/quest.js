@@ -142,7 +142,7 @@ exports.run = (client, message, params) => {
         if (chance >= 95) {
           // first boss
           content += `/* ${vert}${lightshadeFill}${medshade}${darkshade}${medshade}${lightshadeFill}${vert} *\n`
-          content += `/* ${vert}${lightshadeFill}${lightshadeFill}${fisheye}${lightshadeFill}${darkshade}${lightshade}${vert} *\n`
+          content += `/* ${vert}${lightshadeFill}${lightshadeFill}${boss.substring(0, 1)}${lightshadeFill}${darkshade}${lightshade}${vert} *\n`
           var legend = `* You are in danger!\n`
           legend += `< You have the following options.\n`
           /*
