@@ -35,4 +35,7 @@ module.exports = (mode) =>  {
   if (mode === 'common') {
     return qObject[1];
   }
+  if (mode === 'item1') {
+    return qObject[2]
+  }
 }

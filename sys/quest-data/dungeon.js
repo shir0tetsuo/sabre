@@ -74,6 +74,17 @@ var player = MAP.player,
       mapData += `< You encounter ${NPC('common')}${PLY(message, 'vendMessageA')} \n`
       mapData += ` ${PLY(message, 'vendMessageB')} >\n`
     }
+    if (ev === 'hdtk') {
+
+      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `>  ${tile(true)}${tile(true)}\n`
+      mapData += `* ${vert}${tile(false)}${NPC('item1')}${tile(true)}   ${vert}\n`
+      mapData += `> ${vert}${LIGHT}${MED}${DARK}${MED}${player}${tile(true)}${vert}\n`
+      mapData += `> ${botleft}${horz}${botright}`
+      var CoT = Math.round(Math.random() * 3);
+      mapData += `< Obtained ${CoT} Dark Tickets >`
+      Transaction(message, 'dtk', CoT)
+    }
     return mapData;
   }
 
