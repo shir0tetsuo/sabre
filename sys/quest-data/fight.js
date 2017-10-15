@@ -1,4 +1,4 @@
-const Rand = require('../random.js')
+const Rand = require('./random.js')
 const Transaction = require('./transaction.js')
 const NPC = require('./NPCData.js')
 const PLY = require('./PlayerData.js')
