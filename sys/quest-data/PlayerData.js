@@ -1,4 +1,6 @@
 const Rand = require('./random.js')
+const sql = require("sqlite");
+sql.open("../../score.sqlite");
 
 const attackMessage = [
   'attempted to punch it in the face.',
@@ -37,26 +39,46 @@ const specialMessage = [
   'used Alien Gun.'
 ]
 
+const vendors = [
+  'Jerry',
+  'Ian',
+  'Kevin',
+  'Morpheus'
+]
+const vendorsResponse = [
+  '"Keep your head up high. You won\'t find hope lying on the ground."',
+  '"I\'m addicted to Sabre help!"',
+  '"...oh, Hello."',
+  '"Pardon me."',
+  '"Read ALL The Words!"'
+]
 module.exports = (message, mode, isFighting) =>  {
+// this data must run first and doesn't touch message
   const validActions = (['atk', 'guard', 'special', 'run'])
   const validActionRegex = new RegExp(validActions.join('|'), 'i');
   const validActionString = validActions.map(action => `${action}`).join(' || ');
-  if (mode === 'validActions') {
+  if (mode === 'validActions') { // atk, guard, special, run
+    // NOTE: More experience = better commands?
     return validActions;
   }
-  if (mode === 'validActionRegex') {
+  if (mode === 'validActionRegex') { // regular expression for grabbing this data
     return validActionRegex;
   }
-  if (mode === 'validActionString') {
+  if (mode === 'validActionString') { // the printed result
     return validActionString;
   }
-  if (mode === 'reset') {
+  if (mode === 'reset') { // Close Session
     isFighting.delete(message.author.id);
+    return isFighting; // may be buggy
   }
-  if (mode === 'attackMessage') {
+  if (mode === 'attackMessage') { // special
     return Rand(attackMessage);
   }
-  if (mode === 'specialMessage') {
+  if (mode === 'specialMessage') { // atk
     return Rand(specialMessage);
+  }
+  if (mode === 'vendMessage') { // response = vendorname
+    // NOTE: Do more with this
+    return Rand(vendors);
   }
 }

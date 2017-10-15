@@ -55,19 +55,7 @@ let fisheye = '\u25C9'
 // Vendor Assets
 ////////////////////////////////////////////////////////////////////////////////
 
-const vendors = [
-  'Jerry',
-  'Ian',
-  'Kevin',
-  'Morpheus'
-]
-const vendorsResponse = [
-  '"Keep your head up high. You won\'t find hope lying on the ground."',
-  '"I\'m addicted to Sabre help!"',
-  '"...oh, Hello."',
-  '"Pardon me."',
-  '"Read ALL The Words!"'
-]
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // hlvl to Sidebar Color
