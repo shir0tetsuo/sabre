@@ -24,6 +24,23 @@ const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
 
+let qVendor = '\u2324' // ⌤
+let qWarp = '\u2398' //  ⎘
+let qUser = '\u24C5' // Ⓟ
+let qKey = '\u26BF'
+let topLeft = '\u2554'
+let topRight = '\u2557'
+let botLeft = '\u255A'
+let botRight = '\u255D'
+let horz = '\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550' // 10 spaces
+let vert = '\u2551'
+let lightshadeFill = '\u2591\u2591\u2591\u2591'
+let lightshade = '\u2591'
+let medshade = '\u2592'
+let darkshade = '\u2593'
+let mysteriousObject = '\u25A8'
+let fisheye = '\u25C9'
+
 ////////////////////////////////////////////////////////////////////////////////
 // hlvl to Reward on Boss Fight Win
 ////////////////////////////////////////////////////////////////////////////////
