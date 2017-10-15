@@ -25,7 +25,7 @@ const qEnemyNameA = [
   // description
   'Fuzzy', 'Tainted', 'Old', 'Moldy', 'Yellow', 'Salty', 'Rough', 'Benign', 'Underdwelling',
   // Quirky Name
-  'Bubba', 'Jerry', 'Adam', 'Willy'
+  'Bubba', 'Jerry', 'Adam', 'Willy', 'Ronaldo', 'Ron', 'Lord'
 
 ]
 
@@ -37,7 +37,7 @@ const qEnemyNameB = [
   // Clothing
   'Sandles', 'Mittens', 'Boots', 'Shoes', 'Socks',
   // Title
-  'King', 'Knight', 'Guard', 'Manager', 'David', 'Bot'
+  'King', 'Knight', 'Guard', 'Manager', 'David', 'Bot', 'Satan'
 ]
 
 const qObject = [
