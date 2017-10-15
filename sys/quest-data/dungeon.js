@@ -4,6 +4,7 @@ const Transaction = require('./transaction.js')
 const NPC = require('./NPCData.js')
 const Reward = require('./reward.js')
 const MAP = require('./set_map.json')
+const PLY = require('./PlayerData.js')
 var player = MAP.player,
   topleft = MAP.topleft,
   topright = MAP.topright,
