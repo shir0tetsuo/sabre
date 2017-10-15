@@ -20,8 +20,6 @@ var player = MAP.player,
   DARK = MAP.DARK,
   DARKPADDING = MAP.DARKPADDING
 
-  var content = '';
-
   function bossMode(condition, boss, area, areaName, areaDungeon) {
     if (condition === true) {
       content += `[Area](${area} :: ${areaName} ::)\n`
@@ -39,6 +37,8 @@ var player = MAP.player,
 module.exports = (message, boss, bossTiny, h, content, chance) => {
   var uid = message.author.id,
     isFighting = false;
+
+    if (!content) var content = '';
 
     if (h.hlvl >= 1) {
 
