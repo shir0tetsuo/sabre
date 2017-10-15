@@ -45,5 +45,12 @@ module.exports = (message, type, value) =>  {
         sql.run(`UPDATE hyperlevels SET spaceB = ${hl.spaceB*1 + value*1}`)
       })
     }, 2000)
-  }
+    // Transaction(message, HPZero, HP)
+  } else if (type === 'baseHPZero') {
+    if (value <= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
 }

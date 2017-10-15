@@ -24,71 +24,6 @@ const validActions = PLY('NULL', 'validActions', isFighting)
 const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
 const validActionString = PLY('NULL', 'validActionString', isFighting)
 
-/*
-
-        other symbols
-        // http://www.fileformat.info/info/unicode/category/So/list.htm
-
-*/
-////////////////////////////////////////////////////////////////////////////////
-// Unicode Assets
-////////////////////////////////////////////////////////////////////////////////
-
-let qVendor = '\u2324' // ⌤
-let qWarp = '\u2398' //  ⎘
-let qUser = '\u24C5' // Ⓟ
-let qKey = '\u26BF'
-let topLeft = '\u2554'
-let topRight = '\u2557'
-let botLeft = '\u255A'
-let botRight = '\u255D'
-let horz = '\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550' // 10 spaces
-let vert = '\u2551'
-let lightshadeFill = '\u2591\u2591\u2591\u2591'
-let lightshade = '\u2591'
-let medshade = '\u2592'
-let darkshade = '\u2593'
-let mysteriousObject = '\u25A8'
-let fisheye = '\u25C9'
-
-////////////////////////////////////////////////////////////////////////////////
-// Vendor Assets
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// hlvl to Sidebar Color
-////////////////////////////////////////////////////////////////////////////////
-
-function getColor(hl) {
-  if (hl.hlvl >= 5) {
-    return 0x5FEFBF
-  } else if (hl.hlvl >= 0) {
-    return 0x34d1a2
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Depleted HP Conditions
-////////////////////////////////////////////////////////////////////////////////
-
-function isBaseDepleted(baseHP) {
-  if (baseHP <= 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function isBossDepleted(bossHP) {
-  if (bossHP <= 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // hlvl to Reward on Boss Fight Win
 ////////////////////////////////////////////////////////////////////////////////
@@ -217,13 +152,13 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
         //////////////////////////////////////////////////////////////////////////
         // Someone Died
-        if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+        if (Transaction(msg, 'baseHPZero', baseHP) === true || Transaction(msg, 'baseHPZero', bossHP) === true) {
           // Invoke Reset
           PLY(message, 'reset', isFighting);
-          if (isBaseDepleted(baseHP) === true) {
+          if (Transaction(msg, 'baseHPZero', baseHP) === true) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
-          if (isBossDepleted(bossHP) === true) {
+          if (Transaction(msg, 'baseHPZero', bossHP) === true) {
             var rewardObject = generateReward(msg, h)
             sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
           }
@@ -278,13 +213,13 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
         //////////////////////////////////////////////////////////////////////////
         // Someone Died
-        if (isBaseDepleted(baseHP) === true || isBossDepleted(bossHP) === true) {
+        if (Transaction(msg, 'baseHPZero', baseHP) === true || Transaction(msg, 'baseHPZero', bossHP) === true) {
           // Invoke Reset
           PLY(message, 'reset', isFighting);
-          if (isBaseDepleted(baseHP) === true) {
+          if (Transaction(msg, 'baseHPZero', baseHP) === true) {
             sendContent += `\`\`\`diff\n- You died.\`\`\``
           }
-          if (isBossDepleted(bossHP) === true) {
+          if (Transaction(msg, 'baseHPZero', bossHP) === true) {
             var rewardObject = generateReward(msg, h)
             sendContent += `\`\`\`diff\n! ${rewardObject}\`\`\``
           }
@@ -337,7 +272,7 @@ function fight(message, uid, boss, bossHP, h, baseHP) {
 
         //////////////////////////////////////////////////////////////////////////
         // Somebody Died
-        if (isBaseDepleted(baseHP) === true) {
+        if (Transaction(msg, 'baseHPZero', baseHP) === true) {
           sendContent += `\`\`\`diff\n- You died.\`\`\``
           // Invoke Reset
           PLY(message, 'reset', isFighting);
@@ -396,17 +331,6 @@ exports.run = (client, message, params) => {
     // Condensed row
     var h = hl;
 
-    ////////////////////////////////////////////////////////////////////////////
-    // User Parameters
-    ////////////////////////////////////////////////////////////////////////////
-    /*
-    if (message.author.id === settings.ownerid && params[0] === 'devmode' && params[1] >= 1) {
-      giveKey(message, params[1])
-      return message.reply(`\`Done.\``)
-    } */
-
-    ////////////////////////////////////////////////////////////////////////////
-    // PL4O Developer Force Chance
     if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
       var chance = params[1]
       console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Developer Mode (${chance})`))
@@ -423,7 +347,7 @@ exports.run = (client, message, params) => {
       var header = '```md',
         footer = '```',
         // Call upon Color to Set Sidebar Color
-        questColor = getColor(hl);
+        questColor = PLY(message, 'getColor', isFighting, h);
 
       //////////////////////////////////////////////////////////////////////////
       // Define content handling.

@@ -52,7 +52,7 @@ const vendorsResponse = [
   '"Pardon me."',
   '"Read ALL The Words!"'
 ]
-module.exports = (message, mode, isFighting) =>  {
+module.exports = (message, mode, isFighting, h) =>  {
 // this data must run first and doesn't touch message
   const validActions = (['atk', 'guard', 'special', 'run'])
   const validActionRegex = new RegExp(validActions.join('|'), 'i');
@@ -83,5 +83,14 @@ module.exports = (message, mode, isFighting) =>  {
   }
   if (mode === 'vendMessageB') {
     return Rand(vendorsResponse);
+  }
+  if (mode === 'getColor') {
+    ///
+    if (h.lvl >= 5) {
+      return 0x5FEFBF;
+    } else if (h.lvl >= 1) {
+      return 0x34d1a2;
+    }
+    ///
   }
 }
