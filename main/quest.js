@@ -487,8 +487,8 @@ exports.run = (client, message, params) => {
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`
-          var legend = `< You are greeted by ${qVendor}${Rand(vendors)}\n`
-          legend += `${Rand(vendorsResponse)} >\n`
+          var legend = `< You are greeted by ${qVendor}${PLY(message, 'vendMessageA', isFighting)}\n`
+          legend += `${PLY(message, 'vendMessageB', isFighting)} >\n`
         } else if (chance >= 50) {
           var legend = `< The room was empty. >\n`
         } else if (chance >= 15) {

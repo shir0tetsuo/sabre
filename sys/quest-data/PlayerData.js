@@ -77,8 +77,11 @@ module.exports = (message, mode, isFighting) =>  {
   if (mode === 'specialMessage') { // atk
     return Rand(specialMessage);
   }
-  if (mode === 'vendMessage') { // response = vendorname
+  if (mode === 'vendMessageA') { // response = vendorname
     // NOTE: Do more with this
     return Rand(vendors);
+  }
+  if (mode === 'vendMessageB') {
+    return Rand(vendorsResponse);
   }
 }
