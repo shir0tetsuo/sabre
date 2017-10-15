@@ -4,6 +4,10 @@ const NPC = require('./NPCData.js')
 const PLY = require('./PlayerData.js')
 const Reward = require('./reward.js')
 
+const validActions = PLY('NULL', 'validActions', isFighting)
+const validActionRegex = PLY('NULL', 'validActionRegex', isFighting)
+const validActionString = PLY('NULL', 'validActionString', isFighting)
+
 function fight(message, uid, boss, bossHP, h, baseHP, isFighting) {
   //console.log(message.content, uid, boss, bossHP, h, baseHP)
 
