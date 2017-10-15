@@ -80,9 +80,9 @@ var player = MAP.player,
       mapData += `>  ${tile(true)}${tile(true)}\n`
       mapData += `* ${vert}${tile(false)}${NPC('item1')}${tile(true)}   ${vert}\n`
       mapData += `> ${vert}${LIGHT}${MED}${DARK}${MED}${player}${tile(true)}${vert}\n`
-      mapData += `> ${botleft}${horz}${botright}`
+      mapData += `> ${botleft}${horz}${botright}\n`
       var CoT = Math.round(Math.random() * 3);
-      mapData += `< Obtained ${CoT} Dark Tickets >`
+      mapData += `< Obtained ${CoT} Dark Tickets >\n`
       Transaction(message, 'dtk', CoT)
     }
     return mapData;
