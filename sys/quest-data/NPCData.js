@@ -10,13 +10,34 @@ const qEnemy = [
   '\u2324', '\u25C9', '\u2331', '\u238A', '>))\u25C9>', '\u00B0', '\u233A', '\u2325', '\u2349', '\u235A', '\u235F', '\u2368', '\u2386', '\u238C', '\u2392', '\u23E3', '\u23F0'
 ]
 
-const qEnemyName = [
+const qEnemyNameA = [
   // eastereggs
-  'Ronaldo', 'Boba Fett', 'George', 'David', 'Tony', 'Dan',
+  //'Ronaldo', 'Boba Fett', 'George', 'David', 'Tony', 'Dan',
   // main
-  'Shadow', 'Shadowling', 'Underdweller', 'King', 'Darkness',
+  //'Shadow', 'Shadowling', 'Underdweller', 'King', 'Darkness',
   // star wars
-  'Wookie', 'Weird Symbol', 'Jerry'
+  //'Wookie', 'Weird Symbol', 'Jerry'
+
+  // Nationality
+  'Roman', 'Russian', 'Canadian', 'British', 'French', 'Domestic', 'Foreign', 'Aztec', 'Egyptian', 'Norwegian', 'Atlantic',
+  // Rank
+  'Sergeant', 'Corporal', 'Master', 'Apprentice', 'Colonel', 'Captain', 'General',
+  // description
+  'Fuzzy', 'Tainted', 'Old', 'Moldy', 'Yellow', 'Salty', 'Rough', 'Benign', 'Underdwelling',
+  // Quirky Name
+  'Bubba', 'Jerry', 'Adam', 'Willy'
+
+]
+
+const qEnemyNameB = [
+  // fruit
+  'Apple', 'Banana', 'Orange', 'Peach', 'Melon', 'Kiwi', 'Berry',
+  // Veg
+  'Pepper', 'Tomato', 'Potato', 'Cucumber',
+  // Clothing
+  'Sandles', 'Mittens', 'Boots', 'Shoes', 'Socks',
+  // Title
+  'King', 'Knight', 'Guard', 'Manager', 'David', 'Bot'
 ]
 
 const qObject = [
@@ -30,7 +51,7 @@ module.exports = (mode) =>  {
     return Rand(qEnemy)
   }
   if (mode === 'ename') {
-    return Rand(qEnemyName)
+    return Rand(`${qEnemyNameA} ${qEnemyNameB}`)
   }
   if (mode === 'common') {
     return qObject[1];
