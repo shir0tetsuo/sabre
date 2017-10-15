@@ -71,8 +71,8 @@ var player = MAP.player,
       mapData += `> ${vert}${MED}${tile(true)}${tile(false)}${vert}\n`
       mapData += `> ${vert}${DARK}${tile(true)}${tile(false)}${vert}\n`
       mapData += `> ${botleft}${horz}${botright}\n`
-      mapData += `< You encounter ${PLY(message, 'vendMessageA')} \n`
-      mapData += ` ${PLY(message, 'vendMessageB')} >`
+      mapData += `< You encounter ${NPC('common')}${PLY(message, 'vendMessageA')} \n`
+      mapData += ` ${PLY(message, 'vendMessageB')} >\n`
     }
     return mapData;
   }
