@@ -43,7 +43,9 @@ var player = MAP.player,
             adjustment += `${Rand(tileArray)}`
         }
     } else {
-      adjustment += `${LIGHT}`
+      for (var i=0, t=1; i<t; i++) {
+          adjustment += `${Rand(tileArray)}`
+      }
     }
     return adjustment;
   }
@@ -71,8 +73,8 @@ var player = MAP.player,
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 3) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(true)}${vert} *\n`
-      mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz}${vert} *\n`
-      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${botright} *\n`
+      mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz.substring(0, 2)}${vert} *\n`
+      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${tile(false)}${botright} *\n`
       mapData += `/* ${horz2}${tile(false)}${botright} *\n`
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 0) {
