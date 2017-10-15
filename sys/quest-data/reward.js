@@ -12,7 +12,7 @@ function generateReward(message, h) {
       var rBy = Math.round(Math.random() * (120000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rBy} Bytes`
       Transaction(message, 'b', rBy)
-    } else if (rewardPrint <= 0.95) {
+    } else if (rewardPrint <= 0.97) {
       var rewObject = `1 Dark Ticket`
       Transaction(message, 'dtk', 1)
     } else {
