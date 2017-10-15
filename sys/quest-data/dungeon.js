@@ -37,11 +37,10 @@ var player = MAP.player,
   function tile(condition) {
     var adjustment = '';
     if (condition === true) {
-      var xlen = 4,
         tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
-      for (i = 0, n = tileArray.length; i < xlen; i++) {
-        adjustment += tileArray.charAt(Math.floor(Math.random() * n));
-      }
+        for (var i=0, t=4; i<t; i++) {
+            tileArray.push(Math.round(Math.random() * t))
+        }
     } else {
       adjustment += `LIGHT`
     }
