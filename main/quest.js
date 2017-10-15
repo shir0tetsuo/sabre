@@ -103,7 +103,7 @@ exports.run = (client, message, params) => {
       ////////////////////////////////////////////////////////////////////////////////
       var boss = `${NPC('enemy')}${NPC('ename')}`
 //      var bossTiny = `${boss}`
-//      var bossTiny = `${boss.substring(0, 1)}`
+      var bossTiny = `${boss.substring(0, 1)}`
       content += `${generateForest(message, boss, bossTiny, h, chance)}` // returns content
   /*    if (hl.hlvl >= 0) {
         // define defaults
