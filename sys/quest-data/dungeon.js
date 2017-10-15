@@ -39,7 +39,7 @@ var player = MAP.player,
     if (condition === true) {
       var xlen = 4,
         tileArray = [`${LIGHT}`, `${MED}`, `${DARK}`, ` `];
-      for (i = 0; n = tileArray.length; i < xlen; i++) {
+      for (i = 0, n = tileArray.length; i < xlen; i++) {
         adjustment += tileArray.charAt(Math.floor(Math.random() * n));
       }
     } else {
