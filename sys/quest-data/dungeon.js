@@ -62,6 +62,17 @@ var player = MAP.player,
       mapData += `< You have the following options.\n`
       mapData += `${validActionString} >\n`
     }
+    if (ev === 'stranger') {
+
+      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(false)}${vert}\n`
+      mapData += `> ${vert}${NPC('common')}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${MED}${MED}${player}${MED}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${MED}${tile(true)}${tile(false)}${vert}\n`
+      mapData += `> ${vert}${DARK}${tile(true)}${tile(false)}${vert}\n`
+      mapData += `> ${botleft}${horz}${botright}\n`
+      mapData += `< You encounter ${PLY(message, 'vendMessageA')} \n`
+      mapData += ` ${PLY(message, 'vendMessageB')} >`
+    }
     return mapData;
   }
 

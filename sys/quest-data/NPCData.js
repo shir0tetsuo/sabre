@@ -32,4 +32,7 @@ module.exports = (mode) =>  {
   if (mode === 'ename') {
     return Rand(qEnemyName)
   }
+  if (mode === 'common') {
+    return qObject[1];
+  }
 }
