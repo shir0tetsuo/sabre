@@ -116,6 +116,7 @@ exports.run = (client, message, params) => {
       ////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////
+      var boss = NPC(enemy)
       if (hl.hlvl >= 0) {
         // define defaults
         let top = `> ${topLeft}${horz}${topRight}`
@@ -127,7 +128,8 @@ exports.run = (client, message, params) => {
         // munge top half
         if (chance >= 95) {
           content += `[Area](1 :: Dark Chasm ::)\n`
-          content += `/* A Boss wants to Fight! ${fisheye} *\n`
+
+          content += `/* A Boss wants to Fight! ${boss} *\n`
           content += `${topBoss}\n${midBoss}\n`
           isFighting.add(message.author.id)
         } else {
@@ -152,7 +154,7 @@ exports.run = (client, message, params) => {
 
           legend += `${validActionString}`
           console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Picked a Fight.`))
-          fight(message, message.author.id, fisheye, 4000, h, 8000, isFighting); // message, boss, bossHP
+          fight(message, message.author.id, boss, 4000, h, 8000, isFighting); // message, boss, bossHP
           legend += ` >\n`
         } else if (chance >= 80) {
           content += `> ${vert}${lightshadeFill}${qVendor}${lightshadeFill}${vert}\n`

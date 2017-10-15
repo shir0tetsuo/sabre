@@ -1,4 +1,5 @@
 const MAP = require('./set_map.json')
+const Rand = require('./random.js')
 /*
 
         other symbols
@@ -9,6 +10,15 @@ const qEnemy = [
   '\u2324', '\u25C9', '\u2331', '\u238A', '>))\u25C9>'
 ]
 
+const qEnemyName = [
+  // eastereggs
+  'Ronaldo', 'Boba Fett', 'George', 'David', 'Tony', 'Dan',
+  // main
+  'Shadow', 'Shadowling', 'Underdweller', 'King', 'Darkness',
+  // star wars
+  'Wookie', 'Weird Symbol', 'Jerry'
+]
+
 const qObject = [
   '\u2398', // 0 // warpGate
   '\u2324', // 1 // -^-
@@ -16,7 +26,10 @@ const qObject = [
 ]
 
 module.exports = (mode) =>  {
-  if (mode === 'new') {
-
+  if (mode === 'enemy') {
+    return Rand(qEnemy)
+  }
+  if (mode === 'ename') {
+    return Rand(qEnemyName)
   }
 }
