@@ -90,7 +90,7 @@ var player = MAP.player,
       mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz.substring(0, 2)}${vert} *\n`
       mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${tile(false)}${botright} *\n`
       mapData += `/* ${horz2}${tile(false)}${botright} *\n\n`
-      mapData += `\n<${Reward(message, h)}>\n`
+      mapData += `<${Reward(message, h)}>\n`
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 0) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${vert} *\n`
