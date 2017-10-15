@@ -71,8 +71,8 @@ var player = MAP.player,
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 3) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(true)}${vert} *\n`
-      mapData += `/* ${botleft}${horz}${tile(false)}${tile(true)}${horz}${vert} *\n`
-      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${botright} *\n`
+      mapData += `/* ${botleft}${horz}${NPC('item1')}${tile(true)}${horz}${vert} *\n`
+      mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${tile(true)}${botright} *\n`
       mapData += `/* ${horz2}${tile(false)}${botright} *\n`
       mapData += `${appendValid()}`
     } else if (ev === 'fight' && floorCalculation >= 0) {
