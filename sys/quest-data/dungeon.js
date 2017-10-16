@@ -36,7 +36,7 @@ var player = MAP.player,
   BlackShield = MAP.BlackShield,
   LIGHTTRIANGLE = MAP.LIGHTTRIANGLE,
   BLACKDIAMOND = MAP.BLACKDIAMOND,
-  WHITEDIAMOND = MAP.WHITEDIAMOND,
+  WHITEDIAMOND = MAP.WHITEDIAMOND;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Bossmode or Normal Initializer
