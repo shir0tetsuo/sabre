@@ -147,7 +147,7 @@ var player = MAP.player,
       mapData += `${PLY(message, 'genTickets', false, h)}\n`
     }
     if (ev === 'newt') {
-      mapData += `[Area](NA :: Realm Lord ::)`
+      mapData += `[Area](NA :: Realm Lord ::)\n`
       mapData += `# \u2606 Discovered a Secret Area!\n`
       mapData += `* \u2553\u2594\u2594\u2594\u2556\n`
       mapData += `* ${vert}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
