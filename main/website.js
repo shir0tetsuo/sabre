@@ -7,6 +7,8 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 exports.run = (client, message, params) => {
+  message.reply(`https://shir0tetsuo.github.io/sabre/`)
+  /*
   const permlvl = client.elevation(message)
   if (permlvl >= 4 && params[0] === "commit") {
     exec(`./www/cpsite.s`,
@@ -20,6 +22,7 @@ exports.run = (client, message, params) => {
         message.channel.send(`Encrypted\nhttps://${stdout}\nUnencrypted\nhttp://${stdout}`)
       })
   }
+  */
 };
 
 /*
