@@ -1,9 +1,184 @@
 <!DOCTYPE html>
+<!-- shadowsword#0179 --------------------------------------------------------->
 <html>
 <head>
-  <title>Hello, World!</title>
+  <title>Sabre Home</title>
+  <link rel="stylesheet" href="sabre.css">
+  <script type="text/javascript" src="miniShrimp.js"></script>
+  <script type="text/javascript" src="toggles.js"></script>
 </head>
-<body>
-  Hello, World!
+<body onload="seeOn()">
+  <!-- Start ------------------------------------------------------------------>
+  <div class="MainContent">
+  <div class="inletOrange">
+    <div class="avtext"><img style="border-radius: 50%" height="100px" width="100px" src="https://cdn.discordapp.com/avatars/339590992044752897/25d1deed8daf081a356452abe1bfe69e.png"></img></div>
+    <br>General Links<br><br>
+
+    &nbsp;&nbsp;<input type="checkbox" name="toggle" id="toggle" onclick="seeOn()"><label for="toggle"></label>
+    <br>
+  </div>
+  <div id="check" class="check">
+    <div class="inletOrange"><h3>&lt;/Links&gt;</h3>
+      <h3>
+      <br><a href="https://discord.gg/xb5fWE3">Sabre's Lair Discord</a>
+      <br><a href="https://discord.gg/PMa3H65">DAVNET Discord</a>
+      <br><a href="https://github.com/shir0tetsuo/sabre">Sabre Source Code</a>
+      <br><a href="https://trello.com/b/7UjAWlS5/bot-development">Sabre Developer Trello</a>
+      <br><a href="https://atom.io">Atom.io</a>
+      <br><a href="https://discord.js.org/#/">Discord.js</a>
+      <br><br><h3><a style="color: #f1c40f; border-left: 5px solid #f1c40f" href="#about">#ABOUT</a>
+      <br><a style="color: #f1c40f; border-left: 5px solid #f1c40f" href="#commands">#COMMANDS</a>
+      <br><a style="color: #f1c40f; border-left: 5px solid #f1c40f" href="#perms">#PERMISSIONS</a>
+      <br><a style="color: #f1c40f; border-left: 5px solid #f1c40f" href="#specthx">#SPECIALTHANKS</a></h3>
+    </h3>
+    <p></p>
+    </div>
+  </div>
+      <div class="inletWarn" id="WelcomeFloor" style="opacity: 0.7;">Welcome to Sabre's Lair! <a href="#top"><b>&Delta;</b></a></div>
+    </div>
+      <div class="MainContent">
+      <div class="inletBody"><span id="about"></span>
+        <p><h3>&lt;/About&gt;</h3></p>
+      </div>
+      <div class="inletNorm">
+        <p style="text-align: justify">Sabre is a chatbot written almost entirely in Node Javascript using the Discord.js Wrapper Library. With the exception of a few functions such as a built-in SQLite system, Sabre nearly runs purely over the Discord.js wrapper. Sabre is almost entirely maintained over Github through Atom.io.</p>
+        <p style="text-align: justify">A secure shell is used to access the server where the latest version of the program is loaded.</p>
+        <p style="text-align: justify">I would like to thank An Idiot's Guide for their examples in using the Discord.js wrapper, as well as my hand-picked team of developers helping me with tasks ranging from ideas to programming.</p>
+      </div>
+      <div class="inletBody"><span id="commands"></span>
+        <h3>&lt;/Commands&gt;</h3>
+      </div>
+      <div class="inletNorm">
+        <p style="color: #cb4b27;">This list may not be up to date! See Sabre's help pages.</p>
+        <p>
+          <b style="color: #cb4b27;">s!achievement</b> Displays an "achievement" <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!annc</b> Post in Announcements as Sabre <b style="color: #7a9900">(PL3)</b><br>
+          <b style="color: #cb4b27;">s!atkcalc</b> A random RPG Attack Calculator <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!avatardownload</b> Displays a link to a user's avatar <b style="color: #7a9900">(PL4)</b><br>
+          <b style="color: #cb4b27;">s!botrps</b> Play Rock Paper Scissors against the Bot <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!coin</b> Betting is a dangerous game <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!daily</b> Daily Tickets/Bytes <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!degrade</b> Like flipping a coin except hardcore <b style="color: #7a9900">(SL12-TK1000)(PL1)</b><br>
+          <b style="color: #cb4b27;">s!dmme</b> Displays a message saying you are unavailable <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!donate</b> Displays a link for donations <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!duck</b> Explode a Duck <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!everyone</b> Mentions everyone <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!examine</b> Examine data from a User <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!fixlvl</b> Fix some weird numbers <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!forcegive</b> Forces incrementation <b style="color: #7a9900">(PL3)</b><br>
+          <b style="color: #cb4b27;">s!givetickets</b> Share tickets <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!google</b> Invokes Google <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!help</b> Displays commands and command help <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!info</b> Basic info <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!laws</b> Alaska Discord Laws <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!leaderboard</b> Global Sabre Leaderboards <b style="color: #7a9900">(SL10)(PL0)</b><br>
+          <b style="color: #cb4b27;">s!level</b> Displays your level data <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!lock</b> Any mentions will be shown DM Notice <b style="color: #7a9900">(SL8)(PL1)</b><br>
+          <b style="color: #cb4b27;">s!lockstatus</b> Check if account lock is on <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!magicconch</b> Ask it a question <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!makeitrain</b> Make someone's day happy if they're lucky <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!marker</b> Places a marker for later reference <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!plvl</b> Checks permission level <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!projectcodename</b> Randomly generates a codename <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!prototype</b> Lists mentioned objects as snowflakes in console <b style="color: #7a9900">(PL4)</b><br>
+          <b style="color: #cb4b27;">s!purge</b> Erase messages up to 100 at a time <b style="color: #7a9900">(PL3)</b><br>
+          <b style="color: #cb4b27;">s!rng</b> A random number generator <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!roulette</b> Russian Roulette <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!sabrestatus</b> Change Sabre's presence <b style="color: #7a9900">(PL4)</b><br>
+          <b style="color: #cb4b27;">s!sectools</b> Direct access to SSH Console <b style="color: #7a9900">(PL4O)</b><br>
+          <b style="color: #cb4b27;">s!seedt</b> Force stats upon user <b style="color: #7a9900">(PL3)</b><br>
+          <b style="color: #cb4b27;">s!seewarn</b> See how many warnings you have received <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!selfdestruct</b> Erase message after X Seconds <b style="color: #7a9900">(PL1)</b><br>
+          <b style="color: #cb4b27;">s!serverIP</b> Print the Server IP <b style="color: #7a9900">(PL4O)</b><br>
+          <b style="color: #cb4b27;">s!shadowshadow</b> Administration Utility <b style="color: #7a9900">(PL4)</b><br>
+          <b style="color: #cb4b27;">s!sabreshop</b> Buy levels or trade tickets/bytes <b style="color: #7a9900">(SL8*)(PL0)</b><br>
+          <b style="color: #cb4b27;">s!shrimp</b> Bubba will be missed <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!shutdown</b> Emergency shutdown of Sabre <b style="color: #7a9900">(PL4O)</b><br>
+          <b style="color: #cb4b27;">s!slots</b> Chance-win calculation <b style="color: #7a9900">(B10)(PL1)</b><br>
+          <b style="color: #cb4b27;">s!startup</b> Displays Alaska Server Startup Message <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!stats</b> System Statistics <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!stt</b> Send developer data to terminal <b style="color: #7a9900">(PL4)</b><br>
+          <b style="color: #cb4b27;">s!unwarn</b> Unwarns a user <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!version</b> Displays Version Number <b style="color: #7a9900">(PL0)</b><br>
+          <b style="color: #cb4b27;">s!vote</b> Creates a basic vote <b style="color: #7a9900">(PL2)</b><br>
+          <b style="color: #cb4b27;">s!warn</b> 3-Time Warn System, resets daily <b style="color: #7a9900">(PL2)</b><br>
+        </p>
+      </div>
+      <!-- Img Start -->
+        <p id="BorderExpand"><a id="imgView" onclick="imgView()" style="padding-top: 5px;">Expand</a> Sabre command examples</p>
+      <div style="display: none;" id="imgViewDIV">
+        <div class="inletBody">
+          <h3>s!degrade</h3>
+        </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364105949486645249/Screenshot_38.png" width="100%"></img>
+          <div class="inletBody">
+            <h3>s!shadowshadow logs</h3>
+          </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364110503426916363/Screenshot_46.png" width="100%"></img>
+          <div class="inletBody">
+            <h3>#selfdelete</h3>
+          </div>
+          <img src="https://cdn.discordapp.com/attachments/350070991583707136/364467817719791636/Screenshot_69.png" width="100%"></img>
+          <div class="inletBody">
+            <h3>?night</h3>
+          </div>
+          <div class="inletNorm">
+            <p>Saying ?night in any context will make Sabre tag shadowsword#0179 with any provided message.</p>
+          </div>
+          <div class="inletBody">
+            <h3>s!shrimp</h3>
+            <p>
+            <b><i><u>Shrimp is the Fruit of the Sea!</u></i></b>
+          </p>
+          <p>
+            <a onclick="fryShrimp()" style="padding-top: 5px;">Cook</a>
+            <span id="shrimpDisplay"></span>
+          </p>
+          </div>
+          <br><a id="imgViewX" onclick="imgViewX()" style="padding-top: 5px;" href="#BorderExpand">Collapse</a>
+      </div>
+      <!-- Img End -->
+    </div>
+    <div class="MainContent">
+      <div class="inletBody"><span id="perms"></span>
+        <p><h3>&lt;/PermissionSystem&gt;</h3></p>
+      </div>
+      <div class="inletNorm">
+        <p style="color: #2aa198;">&#8226; (PL4O) Owner Only
+          <br>&#8226; (PL4) Developers
+          <br>&#8226; (PL3) Admin / Super Administrator
+          <br>&#8226; (PL2) Moderator / Shadow Moderator
+          <br>&#8226; (PL1) Shadowling / Citizen of Alaska
+          <br>&#8226; (PL0) Nothing
+        </p>
+        <p style="text-align: justify">
+          The permission tier system (or <b>P</b>ermission <b>L</b>evel system) ensures that only users with the above specified roles have access to specific Sabre commands.
+        </p>
+        <p style="text-align: justify">
+          Sabre was originally intended to be used as a small-scale moderation system for functions relating to Cyber Security. It was then brought online for the small gaming community of Roblox Anchorage Alaska - soon after, Sabre exploded in popularity featuring many minigames. It was brought online August 4, 2017.
+        </p>
+      </div>
+      <div class="inletBody"><span id="specthx"></span>
+        <h3>&lt;/SpecialThanks&gt;</h3>
+        <div class="center" style="color: #cb4b27;"><img height="50px" width="50px" src="https://cdn.discordapp.com/avatars/303309686264954881/51b6c767a512b37ec447ebf0c47bcae2.png" style="border-radius: 50%"></img><b> My discord handle is shadowsword#0179</b></div>
+        I would like to thank my hand-picked development team;<br><br>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/179701140357644290/723d09071e8ac50107bde9f513a84e73.png" style="border-radius: 50%"></img> mimystar#2979</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/133091272406597632/58af920a6ca8fb13015a5b1227f4f923.png" style="border-radius: 50%"></img> Nick#1581</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/205069278783733760/0cd1d564ae75c9ca608c5bc8c7fdc0f0.png" style="border-radius: 50%"></img> DrBooyah_CollazoMD#3978</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/314488500575666177/bdc204998795c0b458368b30dd23fb91.png" style="border-radius: 50%"></img> General Nighthawk#2982</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/159451724614991875/6cc86d1c9e4a5c8f9cc8f1e8b4b4f48e.png" style="border-radius: 50%"></img> Hubbles_Constant#8714</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/305179183636807683/ec5cd5abf687a5385ceeb073a1430262.png" style="border-radius: 50%"></img> NinjaTheDev#8577</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/225285702827507712/af9d21693bff74a9bbf674848b21f69c.png" style="border-radius: 50%"></img> Cody#3890</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/199505723934113792/8d6e3489d7b8e4dce73d250b23ce36cd.png" style="border-radius: 50%"></img> WolfbaneAlpha12#8444</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/263391006479613952/bd606e88f2c4c44e984296a4c64940a1.png" style="border-radius: 50%"></img> evil eq#5299</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/213342190020067329/50ce8468c739e5fa76cb0a53457ffe02.png" style="border-radius: 50%"></img> KingTheReaper#8298</div>
+        <div class="center"><img height="18px" width="18px" src="" style="border-radius: 50%"></img> marciscool21#5125</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/269924818101469186/efcc7b8d730ba7ce639bdc83662a5cb4.png" style="border-radius: 50%"></img> Mr.Burfict(Pen11)#0790</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/300336015195766784/ebb2d47853092c453a180803690a315d.png" style="border-radius: 50%"></img> Paradise#2477</div>
+        <div class="center"><img height="18px" width="18px" src="https://cdn.discordapp.com/avatars/233375102836801537/ae1b17f4178bfae446aa9a5e1c93b11c.png" style="border-radius: 50%"></img> Lewis#3214</div>
+        Last updated October 1, 2017
+      </div>
+    </div>
+  <!-- End -------------------------------------------------------------------->
 </body>
 </html>
