@@ -5,6 +5,7 @@ const NPC = require('./NPCData.js')
 const Reward = require('./reward.js')
 const MAP = require('./set_map.json')
 const PLY = require('./PlayerData.js')
+const Portal = require('./portal.js')
 ////////////////////////////////////////////////////////////////////////////////
 // Map all map data
 var player = MAP.player,
@@ -23,8 +24,19 @@ var player = MAP.player,
   DARK = MAP.DARK,
   DARKPADDING = MAP.DARKPADDING,
   DARKTRIANGLE = MAP.DARKTRIANGLE,
+  LEFTTRIANGLE = MAP.LEFTTRIANGLE,
+  WHITELEFTTRIANGLE = MAP.WHITELEFTTRIANGLE,
+  Radioactive = MAP.Radioactive,
+  Snowman = MAP.Snowman,
+  SunBehindCloud = MAP.SunBehindCloud,
+  Rain = MAP.Rain,
+  BlackSnowman = MAP.BlackSnowman,
+  ThunderCloudRain = MAP.ThunderCloudRain,
+  WhiteShield = MAP.WhiteShield,
+  BlackShield = MAP.BlackShield,
   LIGHTTRIANGLE = MAP.LIGHTTRIANGLE,
-  BLACKDIAMOND = MAP.BLACKDIAMOND
+  BLACKDIAMOND = MAP.BLACKDIAMOND,
+  WHITEDIAMOND = MAP.WHITEDIAMOND,
 
 ////////////////////////////////////////////////////////////////////////////////
 // Bossmode or Normal Initializer
@@ -134,8 +146,20 @@ var player = MAP.player,
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${botright}\n\n`
       mapData += `${PLY(message, 'genTickets', false, h)}\n`
     }
-    if (ev === 'newt') {
-      mapData += `< Coming Soon >\n`
+    if (ev === 'newt' && floorCalculation >= 4) {
+      mapData += `[Area](NA :: Realm Lord ::)`
+      mapData += `# Discovered a Secret Area!`
+      mapData += `* \u2553\u2594\u2594\u2594\u2594\u2594\u2556\n`
+      mapData += `* ${vert}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
+      mapData += `> ${vert}${MED}${MED}${tile(false)} ${LIGHT}${vert}\n`
+      mapData += `> ${vert}${topleft}${horz.substring(0, 2)}${topright}${vert}\n`
+      mapData += `* ${vert}${vert}${ThunderCloudRain} ${SunBehindCloud}${vert}${vert}\n`
+      mapData += `* ${vert}${vert} ${NPC('item3')} ${vert}${vert}\n`
+      mapData += `* ${vert}${botleft}${horz.substring(0, 2)}${botright}${vert}\n`
+      mapData += `> ${vert}${tile(false)}${tile(false)} ${vert}\n`
+      mapData += `> ${botleft}${player}${tile(false)}${bossTiny}${botleft}\n\n`
+      mapData += `< You have encountered a portal! >\n`
+      mapData += `* ${bossTiny}: "Do you wish to proceed?"`
     }
     if (ev === 'empty' && floorCalculation >= 2.5) {
       mapData += `> ${vert}${tile(true)}${tile(false)}${vert}\n`
@@ -174,6 +198,11 @@ var player = MAP.player,
     return mapData;
   }
 
+
+function CalculateBaseHP(h) {
+  let baseHP = Math.round(Math.random() * (6500 - 5500) + 5500 + 1250 * h.hlvl);
+  return baseHP;
+}
 module.exports = (message, boss, bossTiny, h, chance) => {
   var uid = message.author.id,
     isFighting = false;
@@ -189,7 +218,8 @@ module.exports = (message, boss, bossTiny, h, chance) => {
         mungedData += `${bossMode(true, boss, 1, 'Dark Chasm', 'a Dark Room')}`
         var bossHP = Math.round(Math.random() * (7600 - 1500*h.hlvl) + 1500*h.hlvl),
           npcACC = Math.round(Math.random() * (65 - 33) + 33 + h.hlvl),
-          baseHP = Math.round(Math.random() * (6500 - 5500) + 5500 + 1250 * h.hlvl);
+          baseHP = CalculateBaseHP(h);
+        //  baseHP = Math.round(Math.random() * (6500 - 5500) + 5500 + 1250 * h.hlvl);
           if (npcACC >= 95) var npcACC = 95
         fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
         mungedData += `${dungeonMode('fight', h, message, bossTiny)}`
@@ -205,12 +235,14 @@ module.exports = (message, boss, bossTiny, h, chance) => {
       } else if (chance >= 70) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
-  // something
-      } else if (chance >= 55) {
+  // portal
+      } else if (chance >= 65) {
+        var baseHP = CalculateBaseHP(h);
         //mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
+        Portal(message, h, baseHP, boss)
   // empty
-      } else if (chance >= 38) {
+      } else if (chance >= 50) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'Empty Room')}`
         mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
   // questkey
