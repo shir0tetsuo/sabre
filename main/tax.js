@@ -23,7 +23,7 @@ exports.run = (client, message, params) => {
 enabled, guildOnly, aliases, permission level
 */
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['tax'],
   permLevel: 4
