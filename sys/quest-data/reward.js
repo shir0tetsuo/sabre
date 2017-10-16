@@ -4,6 +4,7 @@ function generateReward(message, h) {
   var rewardPrint = Math.round(Math.random())
   // Level 1 Winnings
   if (h.hlvl >= 1) {
+    console.log(rewardPrint)
     if (rewardPrint <= 0.33) {
       var rTk = Math.round(Math.random() * (100000 - 1000 * h.hlvl) + 1000 * h.hlvl)
       var rewObject = `${rTk} Sabre Tickets`
@@ -17,6 +18,7 @@ function generateReward(message, h) {
       Transaction(message, 'dtk', 1)
     } else if (rewardPrint <= 1) {
       var rewObject = `Nothing.`
+      console.log(rewardPrint)
     }
   } else {
     var rewObject = "nothing."
