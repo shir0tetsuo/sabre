@@ -127,6 +127,9 @@ var player = MAP.player,
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n\n`
       mapData += `${PLY(message, 'genTickets', false, h)}`
     }
+    if (ev === 'newt') {
+      
+    }
     return mapData;
   }
 
