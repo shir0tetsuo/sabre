@@ -125,10 +125,25 @@ var player = MAP.player,
       mapData += `> ${vert}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(false)}${player}${tile(true)}${tile(false)}\n`
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n\n`
-      mapData += `${PLY(message, 'genTickets', false, h)}`
+      mapData += `${PLY(message, 'genTickets', false, h)}\n`
     }
     if (ev === 'newt') {
-
+      mapData += `< Coming Soon >\n`
+    }
+    if (ev === 'empty') {
+      mapData += `> ${vert}${tile(true)}${tile(false)}${vert}\n`
+      mapData += `> ${vert}${player}${tile(true)}${vert}\n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
+      mapData += `< The room was empty. >\n`
+    }
+    if (ev === 'qkey') {
+      mapData += `< Coming Soon >\n`
+    }
+    if (ev === 'byte') {
+      mapData += `< Coming Soon >\n`
+    }
+    if (ev === 'mystery') {
+      mapData += `< Coming Soon >\n`
     }
     return mapData;
   }
@@ -161,7 +176,7 @@ module.exports = (message, boss, bossTiny, h, chance) => {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
       } else if (chance >= 50) {
-        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
+        //mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
       } else if (chance >= 30) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
