@@ -148,18 +148,18 @@ var player = MAP.player,
     }
     if (ev === 'newt') {
       mapData += `[Area](NA :: Realm Lord ::)`
-      mapData += `# Discovered a Secret Area!`
-      mapData += `* \u2553\u2594\u2594\u2594\u2594\u2594\u2556\n`
+      mapData += `# \u2606 Discovered a Secret Area!`
+      mapData += `*  \u2553\u2594\u2594\u2594\u2556\n`
       mapData += `* ${vert}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
       mapData += `> ${vert}${MED}${MED}${tile(false)} ${LIGHT}${vert}\n`
       mapData += `> ${vert}${topleft}${horz.substring(0, 2)}${topright}${vert}\n`
-      mapData += `* ${vert}${vert}${ThunderCloudRain} ${SunBehindCloud}${vert}${vert}\n`
-      mapData += `* ${vert}${vert} ${NPC('item3')} ${vert}${vert}\n`
+      mapData += `* ${vert}${vert}${ThunderCloudRain}${vert}${vert}\n`
+      mapData += `* ${vert}${vert}${NPC('item3')}${vert}${vert}\n`
       mapData += `* ${vert}${botleft}${horz.substring(0, 2)}${botright}${vert}\n`
-      mapData += `> ${vert}${tile(false)}${tile(false)} ${vert}\n`
-      mapData += `> ${botleft}${player}${tile(false)}${bossTiny}${botleft}\n\n`
+      mapData += `> ${vert}${tile(false)}${tile(false)}${tile(false)}${tile(false)}${vert}\n`
+      mapData += `> ${botleft}${player}${tile(false)}${bossTiny}${botright}\n\n`
       mapData += `< You have encountered a portal! >\n`
-      mapData += `* ${bossTiny}: "Do you wish to proceed?"`
+      mapData += `* ${bossTiny}: "Do you wish to proceed?"\n`
     }
     if (ev === 'empty' && floorCalculation >= 2.5) {
       mapData += `> ${vert}${tile(true)}${tile(false)}${vert}\n`
