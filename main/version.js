@@ -26,5 +26,5 @@ name is also the command alias
 exports.help = {
   name: 'version',
   description: 'Displays the current Sabre version.',
-  usage: 'version\nAlpha :: A (Everything should work)\nBeta :: B (May have bugs but is stable)\nExperimental :: C (Version number may not increment, developer build)\nDelta :: D (Known bugs, developer build)\nEnd-of-Line :: E (Final support for this version)'
+  usage: 'version\nAlpha :: A (Everything should work)\nBeta :: B (May have bugs but is stable)\nExperimental :: C (Version number may not increment, developer build)\nDelta :: D (Known bugs, developer build)\nEnd-of-Line :: E (Final support for this version)\nQEU :: Quest Engine Update'
 };
