@@ -5,7 +5,7 @@ function runPortal(message, h, baseHP, boss, state) {
     const AvailableCommands = calcPortal('ProcedureCall', message, h, baseHP, boss, state)
     const AvailableCommandsRegex = calcPortal('Regex', message, h, baseHP, boss, state)
     const AvailableCommandsString = calcPortal('String', message, h, baseHP, boss, state)
-    message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**,\ntype \`${AvailableCommandsString} to continue.`)
+    message.channel.send(`**${message.member.displayName} (${message.author.username}#${message.author.discriminator})**,\ntype \`${AvailableCommandsString}\` to continue.`)
     message.channel.awaitMessages(response => response.author.id === message.author.id && AvailableCommands.some(word => response.content.toLowerCase().startsWith(word)), {
       max: 1,
       time: 120000,

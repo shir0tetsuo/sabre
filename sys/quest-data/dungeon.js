@@ -6,6 +6,7 @@ const Reward = require('./reward.js')
 const MAP = require('./set_map.json')
 const PLY = require('./PlayerData.js')
 const Portal = require('./portal.js')
+const calcPortal = require('./portal-calc.js')
 ////////////////////////////////////////////////////////////////////////////////
 // Map all map data
 var player = MAP.player,
@@ -160,6 +161,7 @@ var player = MAP.player,
       mapData += `> ${botleft}${player}${tile(false)}${tile(false)}${bossTiny}${botright}\n\n`
       mapData += `< You have encountered a portal! >\n`
       mapData += `* ${bossTiny}: "Do you wish to proceed?"\n`
+      mapData += `< ${calcPortal('String', message, h, 'NULL', 'NULL', 1)} >\n`
     }
     if (ev === 'empty' && floorCalculation >= 2.5) {
       mapData += `> ${vert}${tile(true)}${tile(false)}${vert}\n`
