@@ -76,7 +76,7 @@ var player = MAP.player,
 // Generate Dungeon
 
   function dungeonMode(ev, h, message, bossTiny) {
-    var floorCalculation = Math.floor(Math.random() * 5)
+    var floorCalculation = (Math.random() * 5)
     var mapData = '';
     if (ev === 'fight' && floorCalculation >= 4) {
       mapData += `/* ${vert}${tile(true)}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
@@ -92,10 +92,16 @@ var player = MAP.player,
       mapData += `/* ${horz2}${tile(false)}${botright} *\n\n`
       mapData += `<${Reward(message, h)}>\n`
       mapData += `${appendValid()}`
-    } else if (ev === 'fight' && floorCalculation >= 0) {
+    } else if (ev === 'fight' && floorCalculation >= 1) {
       mapData += `/* ${vert}${tile(true)}${player}${tile(false)}${vert} *\n`
       mapData += `/* ${vert}${tile(false)}${bossTiny}${tile(true)}${vert} *\n`
       mapData += `/* ${botleft}${horz2}${botright}* \n\n`
+      mapData += `${appendValid()}`
+    } else if (ev === 'fight' && floorCalculation >= 0) {
+      mapData += `/* ${vert}${tile(true)}${tile(true)}${tile(false)} *\n`
+      mapData += `/* ${botleft}${horz}${tile(false)}${horz.substring(0, 6)}${botright} *\n`
+      mapData += `/* ${vert}${LIGHT}${MED}${DARK}${player}${bossTiny}${DARK}${MED}${LIGHT}${vert} *\n`
+      mapData += `/* ${botleft}${horz2.substring(0, 8)}${botright} *\n\n`
       mapData += `${appendValid()}`
     }
     if (ev === 'stranger') {
@@ -130,9 +136,16 @@ var player = MAP.player,
     if (ev === 'newt') {
       mapData += `< Coming Soon >\n`
     }
-    if (ev === 'empty') {
+    if (ev === 'empty' && floorCalculation >= 2.5) {
       mapData += `> ${vert}${tile(true)}${tile(false)}${vert}\n`
       mapData += `> ${vert}${player}${tile(true)}${vert}\n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
+      mapData += `< The room was empty. >\n`
+    }
+    if (ev === 'empty' && floorCalculation >= 0) {
+      mapData += `> ${vert}${DARK}${DARK}${MED}${LIGHT}${MED}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
+      mapData += `> ${vert}${DARK}${player}${MED}${LIGHT}${LIGHT}${MED}${DARK}${MED}${LIGHT}${DARK}${vert}\n`
+      mapData += `> ${vert}${tile(false)}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n`
       mapData += `> ${botleft}${horz}${botright}\n\n`
       mapData += `< The room was empty. >\n`
     }
