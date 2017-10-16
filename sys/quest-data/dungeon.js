@@ -124,7 +124,7 @@ var player = MAP.player,
       mapData += `* ${vert}${tile(false)}${NPC('item1')}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
       mapData += `> ${vert}${tile(false)}${player}${tile(true)}${tile(false)}\n`
-      mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n\n`
+      mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${botright}\n\n`
       mapData += `${PLY(message, 'genTickets', false, h)}\n`
     }
     if (ev === 'newt') {
@@ -158,6 +158,7 @@ module.exports = (message, boss, bossTiny, h, chance) => {
       ////////////////////
       // Chance Core
       ////////////////////
+  // bossfight
       if (chance >= 96) {
         mungedData += `${bossMode(true, boss, 1, 'Dark Chasm', 'a Dark Room')}`
         var bossHP = Math.round(Math.random() * (7600 - 1500*h.hlvl) + 1500*h.hlvl),
@@ -166,27 +167,35 @@ module.exports = (message, boss, bossTiny, h, chance) => {
           if (npcACC >= 95) var npcACC = 95
         fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
         mungedData += `${dungeonMode('fight', h, message, bossTiny)}`
+  // stranger
       } else if (chance >= 85) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('stranger', h, message, bossTiny)}`
+  // dark tickets
       } else if (chance >= 80) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('hdtk', h, message, bossTiny)}`
+  // tickets
       } else if (chance >= 70) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
+  // something
       } else if (chance >= 50) {
         //mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
+  // empty
       } else if (chance >= 30) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
+  // questkey
       } else if (chance >= 25) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('qkey', h, message, bossTiny)}`
+  // bytes
       } else if (chance >= 15) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('byte', h, message, bossTiny)}`
+  // random item
       } else if (chance >= 0) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('mystery', h, message, bossTiny)}`
