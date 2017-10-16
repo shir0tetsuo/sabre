@@ -146,7 +146,7 @@ var player = MAP.player,
       mapData += `> ${botleft}${tile(true)}${tile(false)}${tile(false)}${botright}\n\n`
       mapData += `${PLY(message, 'genTickets', false, h)}\n`
     }
-    if (ev === 'newt' && floorCalculation >= 4) {
+    if (ev === 'newt') {
       mapData += `[Area](NA :: Realm Lord ::)`
       mapData += `# Discovered a Secret Area!`
       mapData += `* \u2553\u2594\u2594\u2594\u2594\u2594\u2556\n`
