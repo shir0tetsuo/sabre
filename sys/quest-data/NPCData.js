@@ -57,7 +57,7 @@ const qEnemyNameA = [
   // description
   'Fuzzy', 'Tainted', 'Old', 'Moldy', 'Yellow', 'Salty', 'Rough', 'Benign', 'Underdwelling',
   // Quirky Name
-  'Bubba', 'Jerry', 'Adam', 'Willy', 'Ronaldo', 'Ron', 'Lord'
+  'Bubba', 'Jerry', 'Adam', 'Willy', 'Ronaldo', 'Ron', 'Lord', 'Italian'
 
 ]
 
