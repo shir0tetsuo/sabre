@@ -141,8 +141,7 @@ var player = MAP.player,
       mapData += `> ${vert}${player}${tile(true)}${vert}\n`
       mapData += `> ${botleft}${horz}${botright}\n\n`
       mapData += `< The room was empty. >\n`
-    }
-    if (ev === 'empty' && floorCalculation >= 0) {
+    } else if (ev === 'empty' && floorCalculation >= 0) {
       mapData += `> ${vert}${DARK}${DARK}${MED}${LIGHT}${MED}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
       mapData += `> ${vert}${DARK}${player}${MED}${LIGHT}${LIGHT}${MED}${DARK}${MED}${LIGHT}${DARK}${vert}\n`
       mapData += `> ${vert}${tile(false)}${tile(true)}${tile(false)}${tile(false)}${tile(false)}\n`
