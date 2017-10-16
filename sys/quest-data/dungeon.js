@@ -154,13 +154,13 @@ var player = MAP.player,
       mapData += `* ${vert}${DARK}${DARK}${DARK}${DARK}${DARK}${vert}\n`
       mapData += `> ${vert}${MED}${MED}${tile(false)} ${LIGHT}${vert}\n`
       mapData += `> ${vert}${topleft}${horz.substring(0, 3)}${topright}${vert}\n`
-      mapData += `* ${vert}${vert}${ThunderCloudRain} ${vert}${vert}\n`
-      mapData += `* ${vert}${vert} ${NPC('item3')}${vert}${vert}\n`
+      mapData += `* ${vert}${vert}${ThunderCloudRain}\u2601${vert}${vert}\n`
+      mapData += `* ${vert}${vert}\u2609${NPC('item3')}${vert}${vert}\n`
       mapData += `* ${vert}${botleft}${horz.substring(0, 3)}${botright}${vert}\n`
       mapData += `> ${vert}${tile(false)}${tile(false)}${tile(false)}${tile(false)}${tile(false)}${vert}\n`
       mapData += `> ${botleft}${player}${tile(false)}${tile(false)}${bossTiny}${botright}\n\n`
       mapData += `< You have encountered a portal! >\n`
-      mapData += `* ${bossTiny}: "Do you wish to proceed?"\n`
+      mapData += `* ${bossTiny}: "Welcome"\n`
       mapData += `< ${calcPortal('String', message, h, 'NULL', 'NULL', 1)} >\n`
     }
     if (ev === 'empty' && floorCalculation >= 2.5) {
