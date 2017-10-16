@@ -162,7 +162,7 @@ var player = MAP.player,
       mapData += `> ${vert} ${LIGHT}${MED}${player}${DARK}${DARK}${DARK}\n`
       mapData += `> ${vert}${LIGHT}${MED}${DARK}${DARK}${MED}${LIGHT}\n`
       mapData += `> ${botleft}${horz}${botright}\n\n`
-      mapData += `<${PLY(message, 'genBytes', false, h)}>\n`
+      mapData += `${PLY(message, 'genBytes', false, h)}\n`
     }
     if (ev === 'mystery') {
       mapData += `> ${vert}${tile(true)}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
@@ -206,11 +206,11 @@ module.exports = (message, boss, bossTiny, h, chance) => {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
   // something
-      } else if (chance >= 50) {
+      } else if (chance >= 55) {
         //mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
   // empty
-      } else if (chance >= 30) {
+      } else if (chance >= 38) {
         mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'Empty Room')}`
         mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
   // questkey

@@ -102,7 +102,7 @@ module.exports = (message, mode, isFighting, h) =>  {
       var amt = Math.round(Math.random() * (6000 - 500) + 500)
     }
     Transaction(message, 'tk', amt)
-    return `< You found ${amt} tickets. >\n`
+    return `<Found ${amt} tickets.>\n`
   }
   if (mode === 'genBytes') {
     if (h.hlvl >= 5) {
@@ -111,6 +111,6 @@ module.exports = (message, mode, isFighting, h) =>  {
       var amt = Math.round(Math.random() * (12000 - 500) + 500)
     }
     Transaction(message, 'b', amt)
-    return `< You found ${amt} bytes. >\n`
+    return `<Found ${amt} bytes.>\n`
   }
 }
