@@ -15,7 +15,7 @@ function generateReward(message, h) {
     } else if (rewardPrint <= 0.97) {
       var rewObject = `1 Dark Ticket`
       Transaction(message, 'dtk', 1)
-    } else {
+    } else if (rewardPrint <= 1) {
       var rewObject = `Nothing.`
     }
   } else {
