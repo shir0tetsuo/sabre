@@ -16,7 +16,7 @@ module.exports = (message, type, value) =>  {
     setTimeout(() => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (!row) return message.reply(`\`INTERNAL ERROR\` Transaction Failed.`)
-        sql.run(`UPDATE scores SET tickets = ${row.tickets + value*1} WHERE userId = "${message.author.id}"`)
+        sql.run(`UPDATE scores SET tickets = "${row.tickets + value*1}" WHERE userId = "${message.author.id}"`)
       })
     }, 2000)
 
@@ -25,7 +25,7 @@ module.exports = (message, type, value) =>  {
     setTimeout(() => {
       sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
         if (!row) return message.reply(`\`INTERNAL ERROR\` Transaction Failed.`)
-        sql.run(`UPDATE scores SET chatBits = ${row.chatBits + value*1} WHERE userId = "${message.author.id}"`)
+        sql.run(`UPDATE scores SET chatBits = "${row.chatBits + value*1}" WHERE userId = "${message.author.id}"`)
       })
     }, 2000)
 
@@ -34,7 +34,7 @@ module.exports = (message, type, value) =>  {
     setTimeout(() => {
       sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
         if (!hl) return message.reply(`\`INTERNAL ERROR\` Transaction Failed.`)
-        sql.run(`UPDATE hyperlevels SET spaceA = ${hl.spaceA*1 + value*1} WHERE userId = "${message.author.id}"`)
+        sql.run(`UPDATE hyperlevels SET spaceA = "${hl.spaceA*1 + value*1}" WHERE userId = "${message.author.id}"`)
       })
     }, 2000)
   } else if (type === "dtk") {
@@ -42,7 +42,7 @@ module.exports = (message, type, value) =>  {
     setTimeout(() => {
       sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
         if (!hl) return message.reply(`\`INTERNAL ERROR\` Transaction Failed.`)
-        sql.run(`UPDATE hyperlevels SET spaceB = ${hl.spaceB*1 + value*1} WHERE userID = "${message.author.id}"`)
+        sql.run(`UPDATE hyperlevels SET spaceB = "${hl.spaceB*1 + value*1}" WHERE userID = "${message.author.id}"`)
       })
     }, 2000)
     // Transaction(message, HPZero, HP)
