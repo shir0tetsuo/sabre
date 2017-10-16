@@ -45,7 +45,8 @@ const qEnemy = [
   '\u265D',
   '\u265E',
   '\u265F',
-  '\u2660'
+  '\u2660',
+  '\u26EE'
 ]
 
 const qEnemyNameA = [
@@ -112,9 +113,9 @@ module.exports = (mode) =>  {
     return qObject[3];
   }
   if (mode === 'item3') {
-    return qObject[5]
+    return qObject[5];
   }
   if (mode === 'item4') {
-    return qObject[6]
+    return qObject[6];
   }
 }

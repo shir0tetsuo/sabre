@@ -128,7 +128,7 @@ var player = MAP.player,
       mapData += `${PLY(message, 'genTickets', false, h)}`
     }
     if (ev === 'newt') {
-      
+
     }
     return mapData;
   }
@@ -140,42 +140,40 @@ module.exports = (message, boss, bossTiny, h, chance) => {
     var mungedData = '';
 
     if (h.hlvl >= 1) {
-
-      // bossmode
+      ////////////////////
+      // Chance Core
       ////////////////////
       if (chance >= 96) {
         mungedData += `${bossMode(true, boss, 1, 'Dark Chasm', 'a Dark Room')}`
-        // formulas
-        // boss health / accuracy,
-        // player health
         var bossHP = Math.round(Math.random() * (7600 - 1500*h.hlvl) + 1500*h.hlvl),
           npcACC = Math.round(Math.random() * (65 - 33) + 33 + h.hlvl),
           baseHP = Math.round(Math.random() * (6500 - 5500) + 5500 + 1250 * h.hlvl);
           if (npcACC >= 95) var npcACC = 95
         fight(message, uid, boss, bossHP, h, baseHP, isFighting, npcACC)
-      } else {
-        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
-      }
-      ////////////////////
-      // Chance Core
-      ////////////////////
-      if (chance >= 96) {
         mungedData += `${dungeonMode('fight', h, message, bossTiny)}`
       } else if (chance >= 85) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('stranger', h, message, bossTiny)}`
       } else if (chance >= 80) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('hdtk', h, message, bossTiny)}`
       } else if (chance >= 70) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('tk', h, message, bossTiny)}`
       } else if (chance >= 50) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
       } else if (chance >= 30) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
       } else if (chance >= 25) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('qkey', h, message, bossTiny)}`
       } else if (chance >= 15) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('byte', h, message, bossTiny)}`
       } else if (chance >= 0) {
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
         mungedData += `${dungeonMode('mystery', h, message, bossTiny)}`
       }
 

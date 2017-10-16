@@ -20,5 +20,12 @@
   "WHITELEFTTRIANGLE": "\u25C5",
   "BLACKDIAMOND": "\u25C6",
   "WHITEDIAMOND": "\u25C7",
-  "Radioactive": "\u2622"
+  "Radioactive": "\u2622",
+  "Snowman": "\u26C4",
+  "SunBehindCloud": "\u26C5",
+  "Rain": "\u26C6",
+  "BlackSnowman": "\u26C7",
+  "ThunderCloudRain": "\u26C8",
+  "WhiteShield": "\u26C9",
+  "BlackShield": "\u26CA"
 }
