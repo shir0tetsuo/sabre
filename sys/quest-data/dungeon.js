@@ -23,7 +23,8 @@ var player = MAP.player,
   DARK = MAP.DARK,
   DARKPADDING = MAP.DARKPADDING,
   DARKTRIANGLE = MAP.DARKTRIANGLE,
-  LIGHTTRIANGLE = MAP.LIGHTTRIANGLE
+  LIGHTTRIANGLE = MAP.LIGHTTRIANGLE,
+  BLACKDIAMOND = MAP.BLACKDIAMOND
 
 ////////////////////////////////////////////////////////////////////////////////
 // Bossmode or Normal Initializer
@@ -123,7 +124,7 @@ var player = MAP.player,
       mapData += `> ${vert}${LIGHT}${MED}${DARK}${MED}${player}${tile(true)}${vert}\n`
       mapData += `> ${botleft}${horz}${botright}\n\n`
       var CoT = Math.round(Math.random() * 3);
-      mapData += `< Obtained ${CoT} Dark Tickets >\n`
+      mapData += `<Obtained ${CoT} Dark Tickets>\n`
       Transaction(message, 'dtk', CoT)
     }
     if (ev === 'tk') {
@@ -149,13 +150,26 @@ var player = MAP.player,
       mapData += `< The room was empty. >\n`
     }
     if (ev === 'qkey') {
-      mapData += `< Coming Soon >\n`
+      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)}${qkey}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)} ${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)}${player}${tile(true)}${vert}\n\n`
+      mapData += `<Obtained Quest Key>\n`
+      Transaction(message, 'qkey', 1)
     }
     if (ev === 'byte') {
-      mapData += `< Coming Soon >\n`
+      mapData += `* ${vert}${BLACKDIAMOND} ${LIGHT}${MED}${DARK}${DARK}${vert}\n`
+      mapData += `> ${vert} ${LIGHT}${MED}${player}${DARK}${DARK}${DARK}\n`
+      mapData += `> ${vert}${LIGHT}${MED}${DARK}${DARK}${MED}${LIGHT}\n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
+      mapData += `<${PLY(message, 'genBytes', false, h)}>\n`
     }
     if (ev === 'mystery') {
-      mapData += `< Coming Soon >\n`
+      mapData += `> ${vert}${tile(true)}${tile(false)}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `> ${vert}${tile(true)}${player}${tile(false)}${tile(true)}${vert}\n`
+      mapData += `* ${vert}${tile(true)}${tile(false)}${NPC('item1')}${tile(true)}${DARK}${MED}${LIGHT} \n`
+      mapData += `> ${botleft}${horz}${botright}\n\n`
+      mapData += `<${Reward(message, h)}>\n`
     }
     return mapData;
   }

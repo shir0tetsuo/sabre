@@ -104,4 +104,13 @@ module.exports = (message, mode, isFighting, h) =>  {
     Transaction(message, 'tk', amt)
     return `< You found ${amt} tickets. >\n`
   }
+  if (mode === 'genBytes') {
+    if (h.hlvl >= 5) {
+      var amt = Math.round(Math.random() * (200000 - 1000) + 1000)
+    } else if (h.hlvl >= 0) {
+      var amt = Math.round(Math.random() * (12000 - 500) + 500)
+    }
+    Transaction(message, 'b', amt)
+    return `< You found ${amt} bytes. >\n`
+  }
 }
