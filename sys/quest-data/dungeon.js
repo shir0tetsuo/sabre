@@ -211,7 +211,7 @@ module.exports = (message, boss, bossTiny, h, chance) => {
         mungedData += `${dungeonMode('newt', h, message, bossTiny)}`
   // empty
       } else if (chance >= 30) {
-        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'a Dark Room')}`
+        mungedData += `${bossMode(false, boss, 1, 'Dark Forest', 'Empty Room')}`
         mungedData += `${dungeonMode('empty', h, message, bossTiny)}`
   // questkey
       } else if (chance >= 25) {
