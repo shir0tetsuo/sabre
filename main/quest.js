@@ -60,8 +60,9 @@ exports.run = (client, message, params) => {
     ////////////////////////////////////////////////////////////////////////////
     // Condensed row
     var h = hl;
-
-    if (params[0] === "force" && params[1] !== 0 && message.author.id === settings.ownerid) {
+    const permlvl = client.elevation(message)
+    // "Unlock Code"
+    if (params[0] === "force" && params[1] !== 0 && permlvl >= 4) {
       var chance = params[1]
       console.log(chalk.redBright(`${message.member.displayName} in ${message.channel.name}, ${message.guild.name}; Developer Mode (${chance})`))
       // Master Chance
@@ -246,5 +247,5 @@ name is also the command alias
 exports.help = {
   name: 'quest',
   description: 'Let Sabre\'s Forest take you away. (HK1)',
-  usage: 'quest\nPL4O :: quest devmode [num] = give keys\nPL4O :: quest force [0-100] = Force Chance.'
+  usage: 'quest\nPL4 :: quest force [0-100] = Force Chance.\nDocumentation :: https://shir0tetsuo.github.io/sabre/QuestEngine/'
 };
