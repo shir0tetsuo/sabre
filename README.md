@@ -1,8 +1,6 @@
 # Project Sabre
 ### Overview
 
-[![NPM version][npm-image]][npm-url] 
-
 ```bash
 # ALASKA DISCORD COMMUNITY USERS
 # The contents of this library are CLASSIFIED//TOP-SECRET
