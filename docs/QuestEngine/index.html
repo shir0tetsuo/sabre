@@ -50,10 +50,63 @@
         <h3 style="color: #6cac66;">AWAIT-EVENTS</h3>
       </div>
     </div>
-    <br>Quest.js hands off data to Quest-Data.
-    <br>The command is run from a Sabre-Enabled Server.
-    <br>The system executes an appropriate response given the %Chance.
+    <br>Quest.js hands off data to Quest-Data. The command is run from a Sabre-Enabled Server. The system executes an appropriate response given the %Chance.
   </p>
+  <p style="border: 3px solid #606060; color: #606060; padding: 5px;">
+    quest.js
+  </p>
+  <p style="border: 3px solid #606060; padding: 5px; text-align: justify;">
+    <b>This command requires Permission Level 1, Hyper Level 1, and 1 Quest Key.</b><br>
+    The system is loaded. Specific developers (Permission Level 4) are allowed access to the <b style="color: orange;"><i>force</i></b> argument which forces the system's chance calculator to obtain a user-defined integer between 0-100.<br>
+    Usage Example: <b style="color: orange;">quest force 96</b><br><br>
+    In a typical setup, the user is greeted with the header data.<br>
+    <b style="color: orange;">HLVL:</b> Hyperlevel<br>
+    <b style="color: orange;">HQKY:</b> Quest Keys<br>
+    <b style="color: orange;">HDTK:</b> Dark Tickets<br>
+    followed by a randomly generated room based on your %Chance score.<br><br>
+    <div style="color: #ee9800;">
+      <b>Quest =&gt;</b><br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>Rand = require(../sys/quest-data/random.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>Transaction = require(../sys/quest-data/transaction.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>NPC = require(../sys/quest-data/NPCData.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>PLY = require(../sys/quest-data/PlayerData.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>Reward = require(../sys/quest-data/reward.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>fight = require(../sys/quest-data/fight.js)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>MAP = require(../sys/quest-data/set_map.json)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe629;</span>generateForest = require(../sys/quest-data/dungeon.js)
+    </div>
+    <div style="color: #606060;">
+      <b>Run =&gt;</b><br>
+      <span style="font-family: Devicons; font-size: 30px; color: #ee9800;">&#xe606;</span>Set Chance (0-100)<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe606;</span>Obtain Quest Color<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe606;</span>Print Database Statistics (h)<br>
+      <span style="font-family: Devicons; font-size: 30px; color: #6cac66;">&#xe606;</span>Export chance, message, h<br>
+      <span style="font-family: Devicons; font-size: 30px;">&#xe606;</span>Take a key<br>
+    </div>
+    <div style="text-align: center;">
+      <span style="font-family: Devicons; font-size: 128px; color: #ee9800;">&#xe670;</span><br>
+      <b style="color: #ee9800;">Chance System</b>
+    </div>
+  </p>
+  <p style="border: 3px solid #ee9800; color: #ee9800; padding: 5px;">
+    dungeon.js
+  </p>
+  <p style="border: 3px solid #ee9800; padding: 5px; text-align: justify;">
+    <b style="color: #ee9800;"><span style="font-family: Devicons;">&#xe680;</span> Hyperlevel 1+ Chance</b><br>
+      0-14: Mystery Item<br>
+      15-24: Bytes<br>
+      25-49: Quest Key<br>
+      50-64: Empty<br>
+      65-69: Portal (New)<br>
+      70-79: Tickets<br>
+      80-84: Dark Tickets<br>
+      85-94: Random Event<br>
+      95-100: Fight
+  </p>
+  </div>
+  <div class="inletNorm">
+    wip October 2017<br>
+    <span style="font-family: Devicons; text-align: center; font-size: 64px; color: #36393E;">&#xe602;&#xe618;</span>
   </div>
 </body>
 
