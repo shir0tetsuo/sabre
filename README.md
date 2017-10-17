@@ -1,9 +1,9 @@
 ![QEU](https://img.shields.io/badge/Quest%20Engine-Version%208-orange.svg "QEU")
 ![ECONOMY](https://img.shields.io/badge/Economy-Version%208.1-6cac66.svg)
 
-![LSV](https://img.shields.io/badge/Stable Build-Version%200.8.1.11B-66ac66.svg "LSV")
-![ECONOMY](https://img.shields.io/badge/Development Build-Version 0.8.2.11D-ee9800.svg)
-![QEU](https://img.shields.io/badge/Quest%20Engine Documentation-Version%206-orange.svg "QEU")
+![LSV](https://img.shields.io/badge/Stable%20Build-Version%200.8.1.11B-66ac66.svg "LSV")
+![ECONOMY](https://img.shields.io/badge/Development%20Build-Version%200.8.2.11D-ee9800.svg "ECONOMY")
+![QEU](https://img.shields.io/badge/Quest%20Engine%20Documentation-Version%206-orange.svg "QEU")
 
 ![UPD](https://img.shields.io/badge/Updated-October%2017%2C%202017-lightgrey.svg "UPD")
 
