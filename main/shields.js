@@ -13,7 +13,7 @@ exports.run = (client, message, params) => {
     message.delete()
     msg.channel.send(`${link}\n\`${msg.author.username}#${msg.author.discriminator}\``)
   } else {
-    message.reply(`\`ERROR!\` Invalid Format!\nTry \`some%20words something 66AC666`)
+    message.reply(`\`ERROR!\` Invalid Format! Try \`some%20words something 66AC666\``)
   }
 };
 // if Number.isInteger(num) === true
