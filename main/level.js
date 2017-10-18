@@ -57,8 +57,8 @@ function runMessage(row, hl, mess, barCol, PLVL) {
         inline: true
       },
       {
-        name: `\`\`\`md\n< ${mess.author.tag} >\n*/ Permission Level ${PLVL} *\`\`\``,
-        value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
+        name: `${m.createdTimestamp - mess.createdTimestamp}ms.`,
+        value: `\`\`\`md\n< ${mess.author.tag} >\n*/ Permission Level ${PLVL} *\`\`\``
       }
     ]
   }}))
