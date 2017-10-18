@@ -31,6 +31,7 @@ exports.run = (client, message, params) => {
 
   var row = Tran(message, 'readL', null, message.author, params)
   var hl = Tran(message, 'readH', null, message.author, params)
+  console.log(row, hl)
 
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
