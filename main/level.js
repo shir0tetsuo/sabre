@@ -13,6 +13,7 @@ let QKEY = ":key2:"
 let HDTK = ":pound:"
 
 function runMessage(row, hl, mess, barCol, PLVL) {
+  console.log(chalk.gray(`Populated LVL for ${mess.author.tag}\n`), chalk.redBright(`${row}\n${hl}\n${barcol}\n${PLVL}\n`), chalk.blueBright(`${mess.channel.name} ${mess.guild.name}`))
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
     timestamp: new Date(),
@@ -151,5 +152,5 @@ exports.conf = {
 exports.help = {
   name: 'level',
   description: 'Displays a user\'s Sabrelevel Data and Hyperlevel Data.',
-  usage: 'level'
+  usage: 'level\nSabre Levels and Hyper Levels :: Acquire HL through hyperlevel\n# Level Version 4'
 };
