@@ -34,16 +34,16 @@ exports.run = (client, message, params) => {
 
   //var hl = Tran(message, 'readH', null, message.author, params)
 
-  sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
-    if (!row) {
+  sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
+    if (!r) {
       console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
       sql.run(`INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 1]).then(() => {
-        sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
-          return row;
+        sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
+          var row = r;
         })
       })
     } else {
-      return row;
+      var row = r;
     }
   }).catch(() => {
     console.error;
@@ -51,8 +51,31 @@ exports.run = (client, message, params) => {
     sql.run(`CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)`).then(() => {
       sql.run(`INSERT INTO scores (userId, tickets, level, chatBits)`, [uid.id, 0, 0, 1]);
     }).then(() => {
-      sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
-        return row;
+      sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
+        var row = r;
+      })
+    })
+  })
+
+  sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(r => {
+    if (!r) {
+      console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
+      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 0]).then(() => {
+        sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(r => {
+          var hl = r;
+        })
+      })
+    } else {
+      var hl = r;
+    }
+  }).catch(() => {
+    console.error;
+    console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
+    sql.run(`CREATE TABLE IF NOT EXISTS hyperlevels (userId TEXT, hlvl INTEGER, spaceA TEXT, spaceB TEXT)`).then(() => {
+      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB)`, [uid.id, 0, 0, 0]);
+    }).then(() => {
+      sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(r => {
+        var hl = r;
       })
     })
   })
