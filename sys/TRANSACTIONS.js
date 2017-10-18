@@ -41,12 +41,12 @@ let HDTK = ":pound:"
 module.exports = (message, type, value, uid, client, params) => {
   // This makes sure it doesn't break
   //////////////////////////////////////////////////////////////////////////////
-  if (!uid || uid === undefined) const uid = message.author; // therefor goes by message
-  if (!value || value === undefined) const value = 1;
-  if (value == 1 && type === 'lv') const value = 0;
-  if (value == 1 && type === 'hl') const value = 0;
-  if (value !== -1) const value = Math.round(value)
-  if (value >= 1000000000000000000) const value = 1000000000000000000
+  if (!uid || uid === undefined) var uid = message.author; // therefor goes by message
+  if (!value || value === undefined) var value = 1;
+  if (value == 1 && type === 'lv') var value = 0;
+  if (value == 1 && type === 'hl') var value = 0;
+  if (value !== -1) var value = Math.round(value)
+  if (value >= 1000000000000000000) var value = 1000000000000000000
   //////////////////////////////////////////////////////////////////////////////
   console.log(chalk.gray(`${new Date()} transaction (${type} ${value}) ${message.channel.name} ${message.guild.name}`))
   ////////////////////////////////////////////////////////////////////////////////
