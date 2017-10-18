@@ -13,10 +13,10 @@ exports.run = (client, message, params) => {
     message.delete()
     msg.channel.send(`${link}\n\`${msg.author.username}#${msg.author.discriminator}\``)
   } else {
-    message.reply(`\`ERROR!\` Invalid Format!`)
+    message.reply(`\`ERROR!\` Invalid Format!\nTry \`some%20words something 66AC666`)
   }
 };
-
+// if Number.isInteger(num) === true
 /*
 enabled, guildOnly, aliases, permission level
 */
