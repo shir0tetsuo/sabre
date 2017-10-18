@@ -13,6 +13,7 @@ let QKEY = ":key2:"
 let HDTK = ":pound:"
 
 exports.run = (client, message, params) => {
+  if (!uid || uid === undefined) var uid = message.author; // therefor goes by message
   if (message.member === null) return;
   const permlvl = client.elevation(message)
   if (permlvl === 0) {
