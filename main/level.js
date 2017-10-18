@@ -8,7 +8,7 @@ let readH = "readH"
 let TK = ":tickets:"
 let CB = ":eye_in_speech_bubble:"
 let LV = ":small_orange_diamond:"
-let HL = ":radioactive:"
+let HL = ":large_orange_diamond:"
 let QKEY = ":key2:"
 let HDTK = ":pound:"
 
