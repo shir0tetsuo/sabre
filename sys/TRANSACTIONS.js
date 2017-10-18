@@ -8,19 +8,7 @@ const chalk = require('chalk');
 // REQUIRE the transaction file
  const Tran = require('../sys/TRANSACTIONS.js')
 
-// READ Sabre Level
- @message-user
- var sl = Tran(message, 'readL', null, message.author, params)
- @mention
- var person = message.mentions.members.first()
- var sl = Tran(message, 'readL', null, person, params)
-
-// READ Hyper Level
- @message-user
- var hl = Tran(message, 'readH', null, message.author, params)
- @mention
- var person = message.mentions.members.first()
- var hl = Tran(message, 'readH', null, person, params)
+See level file
 
 // WRITE a Transaction
   @message-user
@@ -49,57 +37,6 @@ module.exports = (message, type, value, uid, client, params) => {
   if (value >= 1000000000000000000) var value = 1000000000000000000
   //////////////////////////////////////////////////////////////////////////////
   console.log(chalk.gray(`${new Date()} transaction (${type} ${value}) ${message.channel.name} ${message.guild.name}`))
-  ////////////////////////////////////////////////////////////////////////////////
-  // Read Mode
-  ////////////////////////////////////////////////////////////////////////////////
-  if (type === readL) {
-    sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
-      if (!r) {
-        console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
-        sql.run(`INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 1]).then(() => {
-          sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(b => {
-            return b;
-          })
-        })
-      } else {
-        return r;
-      }
-    }).catch(() => {
-      console.error;
-      console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
-      sql.run(`CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)`).then(() => {
-        sql.run(`INSERT INTO scores (userId, tickets, level, chatBits)`, [uid.id, 0, 0, 1]);
-      }).then(() => {
-        sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
-          return r;
-        })
-      })
-    })
-  }
-  if (type === readH) {
-    sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(r => {
-      if (!r) {
-        console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
-        sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 0]).then(() => {
-          sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(b => {
-            return b;
-          })
-        })
-      } else {
-        return r;
-      }
-    }).catch(() => {
-      console.error;
-      console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
-      sql.run(`CREATE TABLE IF NOT EXISTS hyperlevels (userId TEXT, hlvl INTEGER, spaceA TEXT, spaceB TEXT)`).then(() => {
-        sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB)`, [uid.id, 0, 0, 0]);
-      }).then(() => {
-        sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(r => {
-          return r;
-        })
-      })
-    })
-  }
 
   ////////////////////////////////////////////////////////////////////////////////
   // Write Mode

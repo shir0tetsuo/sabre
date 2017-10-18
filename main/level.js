@@ -115,10 +115,6 @@ exports.run = (client, message, params) => {
   let mess = message
   let keep = message
 
-  //var row = Tran(message, 'readL', null, message.author, params)
-
-  //var hl = Tran(message, 'readH', null, message.author, params)
-
   sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
     if (!r) {
       console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
