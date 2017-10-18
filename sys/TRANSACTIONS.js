@@ -1,9 +1,34 @@
 const sql = require("sqlite");
-sql.open("../score.sqlite");
-const settings = require('../settings.json');
+sql.open("../../score.sqlite");
+const settings = require('../../settings.json');
 const chalk = require('chalk');
 ////////////////////////////////////////////////////////////////////////////////
-// Transaction Master Reference Guide
+/*
+ ////////// Transaction Master Reference Guide /////////////////////////////////
+// REQUIRE the transaction file
+ const Tran = require('../sys/TRANSACTIONS.js')
+
+// READ Sabre Level
+ @message-user
+ const sl = Tran(message, 'readL', null, message.author, params)
+ @mention
+ const person = message.mentions.members.first()
+ const sl = Tran(message, 'readL', null, person, params)
+
+// READ Hyper Level
+ @message-user
+ const hl = Tran(message, 'readH', null, message.author, params)
+ @mention
+ const person = message.mentions.members.first()
+ const hl = Tran(message, 'readH', null, person, params)
+
+// WRITE a Transaction
+  @message-user
+  Tran(message, 'tk/cb/lv/hl/qkey/hdtk', 1, message.author, params)
+  @mention
+  const person = message.mentions.members.first()
+  Tran(message, 'tk/cb/lv/hl/qkey/hdtk', 1, person, params)
+*/
 let readL = "readL"
 let readH = "readH"
 let TK = ":tickets:"
