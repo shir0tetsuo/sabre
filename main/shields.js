@@ -9,6 +9,9 @@ let chatBit = ":eye_in_speech_bubble:"
 exports.run = (client, message, params) => {
   if (params[2] !== undefined && params[3] === undefined) {
     var link = `https://img.shields.io/badge/${params[0]}-${params[1]}-${params[2]}.png`
+    msg = message;
+    message.delete()
+    msg.channel.send(`${link}\n\`${msg.author.username}#${msg.author.discriminator}\``)
   } else {
     message.reply(`\`ERROR!\` Invalid Format!`)
   }
