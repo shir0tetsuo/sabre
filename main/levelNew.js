@@ -1,5 +1,5 @@
-//const sql = require("sqlite");
-//sql.open("../score.sqlite");
+const sql = require("sqlite");
+sql.open("../score.sqlite");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
 const Tran = require('../sys/TRANSACTIONS.js')
