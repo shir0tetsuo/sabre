@@ -29,10 +29,33 @@ exports.run = (client, message, params) => {
   let mess = message
   let keep = message
 
-  var row = Tran(message, 'readL', null, message.author, params)
-  var hl = Tran(message, 'readH', null, message.author, params)
-  console.log(row, hl)
+  //var row = Tran(message, 'readL', null, message.author, params)
 
+  //var hl = Tran(message, 'readH', null, message.author, params)
+
+  sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
+    if (!row) {
+      console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
+      sql.run(`INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 1]).then(() => {
+        sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
+          return row;
+        })
+      })
+    } else {
+      return row;
+    }
+  }).catch(() => {
+    console.error;
+    console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
+    sql.run(`CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)`).then(() => {
+      sql.run(`INSERT INTO scores (userId, tickets, level, chatBits)`, [uid.id, 0, 0, 1]);
+    }).then(() => {
+      sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(row => {
+        return row;
+      })
+    })
+  })
+    console.log(row, hl)
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
     timestamp: new Date(),
