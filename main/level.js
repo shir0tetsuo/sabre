@@ -12,7 +12,7 @@ let HL = ":radioactive:"
 let QKEY = ":key2:"
 let HDTK = ":pound:"
 
-function runMessage(row, hl, mess, barCol) {
+function runMessage(row, hl, mess, barCol, PLVL) {
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
     timestamp: new Date(),
@@ -57,25 +57,25 @@ function runMessage(row, hl, mess, barCol) {
         inline: true
       },
       {
-        name: "Ranking for: " + mess.author.tag + "\u200b",
+        name: `\`\`\`md\n< ${mess.author.tag} >\n*/ Permission Level ${PLVL} *\`\`\``
         value: `System returned message in ${m.createdTimestamp - mess.createdTimestamp}ms.`
       }
     ]
   }}))
 }
 
-function handleHL(r, mess, barCol) {
+function handleHL(r, mess, barCol, PLVL) {
   var uid = mess.author;
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(h => {
     if (!h) {
       console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
       sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 0]).then(() => {
         sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(h => {
-          runMessage(r, h, mess, barCol)
+          runMessage(r, h, mess, barCol, PLVL)
         })
       })
     } else {
-      runMessage(r, h, mess, barCol)
+      runMessage(r, h, mess, barCol, PLVL)
 
     }
   }).catch(() => {
@@ -85,7 +85,7 @@ function handleHL(r, mess, barCol) {
       sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB)`, [uid.id, 0, 0, 0]);
     }).then(() => {
       sql.get(`SELECT * FROM hyperlevels WHERE userId = "${uid.id}"`).then(h => {
-        runMessage(r, h, mess, barCol)
+        runMessage(r, h, mess, barCol, PLVL)
 
       })
     })
@@ -98,14 +98,19 @@ exports.run = (client, message, params) => {
   const permlvl = client.elevation(message)
   if (permlvl === 0) {
     var barCol = 0x36786A
+    var PLVL = 0
   } else if (permlvl === 1) {
     var barCol = 0x366394
+    var PLVL = 1
   } else if (permlvl === 2) {
     var barCol = 0x802D32
+    var PLVL = 2
   } else if (permlvl === 3) {
     var barCol = 0x992D22
+    var PLVL = 3
   } else if (permlvl === 4) {
     var barCol = 0x980098
+    var PLVL = 4
   }
   let mess = message
   let keep = message
@@ -119,11 +124,11 @@ exports.run = (client, message, params) => {
       console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
       sql.run(`INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)`, [uid.id, 0, 0, 1]).then(() => {
         sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
-          handleHL(r, mess, barCol)
+          handleHL(r, mess, barCol, PLVL)
         })
       })
     } else {
-      handleHL(r, mess, barCol)
+      handleHL(r, mess, barCol, PLVL)
     }
   }).catch(() => {
     console.error;
@@ -132,7 +137,7 @@ exports.run = (client, message, params) => {
       sql.run(`INSERT INTO scores (userId, tickets, level, chatBits)`, [uid.id, 0, 0, 1]);
     }).then(() => {
       sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
-        handleHL(r, mess, barCol)
+        handleHL(r, mess, barCol, PLVL)
       })
     })
   })
