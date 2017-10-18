@@ -13,7 +13,7 @@ let QKEY = ":key2:"
 let HDTK = ":pound:"
 
 function runMessage(row, hl, mess, barCol, PLVL) {
-  console.log(chalk.gray(`Populated LVL for ${mess.author.tag}\n`), chalk.redBright(`LV ${row.level}\nTK ${row.tickets}\nCB ${row.chatBits}\n\nHL ${hl.hlvl}\nQK ${hl.spaceA}\nDT ${hl.spaceB}\n\nBARCOL ${barCol}\nPLVL ${PLVL}\n`), chalk.blueBright(`${mess.channel.name} ${mess.guild.name}`))
+  console.log(chalk.gray(`Populated LVL for ${mess.author.tag}\n`), chalk.redBright(`LV ${row.level} TK ${row.tickets} CB ${row.chatBits}\n`), chalk.yellowBright(`HL ${hl.hlvl} QK ${hl.spaceA} DT ${hl.spaceB}\n`), chalk.gray(`BARCOL ${barCol} PLVL ${PLVL}\n`), chalk.blueBright(`${mess.channel.name} ${mess.guild.name}`))
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
     timestamp: new Date(),
