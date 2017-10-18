@@ -10,23 +10,23 @@ const chalk = require('chalk');
 
 // READ Sabre Level
  @message-user
- const sl = Tran(message, 'readL', null, message.author, params)
+ var sl = Tran(message, 'readL', null, message.author, params)
  @mention
- const person = message.mentions.members.first()
- const sl = Tran(message, 'readL', null, person, params)
+ var person = message.mentions.members.first()
+ var sl = Tran(message, 'readL', null, person, params)
 
 // READ Hyper Level
  @message-user
- const hl = Tran(message, 'readH', null, message.author, params)
+ var hl = Tran(message, 'readH', null, message.author, params)
  @mention
- const person = message.mentions.members.first()
- const hl = Tran(message, 'readH', null, person, params)
+ var person = message.mentions.members.first()
+ var hl = Tran(message, 'readH', null, person, params)
 
 // WRITE a Transaction
   @message-user
   Tran(message, 'tk/cb/lv/hl/qkey/hdtk', 1, message.author, params)
   @mention
-  const person = message.mentions.members.first()
+  var person = message.mentions.members.first()
   Tran(message, 'tk/cb/lv/hl/qkey/hdtk', 1, person, params)
 */
 let readL = "readL"

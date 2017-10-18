@@ -29,8 +29,8 @@ exports.run = (client, message, params) => {
   let mess = message
   let keep = message
 
-  const row = Tran(message, 'readL', null, message.author, params)
-  const hl = Tran(message, 'readH', null, message.author, params)
+  var row = Tran(message, 'readL', null, message.author, params)
+  var hl = Tran(message, 'readH', null, message.author, params)
 
   mess.reply("Calculating!").then(m => m.edit({embed: {
     color: barCol,
