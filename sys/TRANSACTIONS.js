@@ -30,6 +30,7 @@ module.exports = (message, type, value, uid, client, params) => {
   // This makes sure it doesn't break
   //////////////////////////////////////////////////////////////////////////////
   if (!uid || uid === undefined) var uid = message.author; // therefor goes by message
+  // uid = person NOT person.id
   if (!value || value === undefined) var value = 1;
   if (value == 1 && type === 'lv') var value = 0;
   if (value == 1 && type === 'hl') var value = 0;
