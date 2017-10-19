@@ -4,6 +4,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
+  var string = '';
   let person = message.mentions.members.first();
   //let output = '';
   const millisJoined = new Date().getTime() - person.joinedAt.getTime();
@@ -11,25 +12,25 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM scores WHERE userId = "${person.id}"`).then(row => {
     //output += `${person}: Lv ${row.level}, Tk ${row.tickets}, B ${row.chatBits}\n`
     //output += `User joined ${daysJoined} Days Ago (${message.guild.name}).\n`
-    message.author.send(`${person}: Lv ${row.level}, Tk ${row.tickets}, B ${row.chatBits}\nUser joined: ${daysJoined} Days Ago (${message.guild.name})`)
+    string += `${person}: Lv ${row.level}, Tk ${row.tickets}, B ${row.chatBits}\nUser joined: ${daysJoined} Days Ago (${message.guild.name})\n`
   })
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(row => {
     if (!row) {
-      message.author.send(`This user does not have a hyperlevel.`)
+      string += `This user does not have a hyperlevel.\n`
     } else {
-      message.author.send(`HLVL: ${row.hlvl}, HQKY: ${row.spaceA}, HDTK: ${row.spaceB}.`)
+      string += `HLVL: ${row.hlvl}, HQKY: ${row.spaceA}, HDTK: ${row.spaceB}.\n`
     }
   })
   sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(row => {
     if (!row) {
-      message.author.send("This user has never received a warning.")
+      string += "This user has never received a warning.\n"
       //output += `This user has never received a warning.\n`
     } else {
-      message.author.send(`Date Warned: ${row.date} - User has ${row.times} warnings.`)
+      string += `Date Warned: ${row.date} - User has ${row.times} warnings.\n`
       //output += `Date Warned: ${row.date} - User has ${row.times} warnings tallied.`
     }
   })
-  //message.author.send(output)
+  message.author.send(string)
 };
 
 exports.conf = {
