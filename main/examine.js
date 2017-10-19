@@ -10,6 +10,7 @@ let QKEY = ":key2:"
 let HDTK = ":pound:"
 
 function returnAuthorMessage(client, message, params, person, sl, hl, w) {
+  console.log("LAST STEP", person.id, sl, hl, w)
   var SabreLevelContent = `< LV ${sl.level} >\n`
   SabreLevelContent += `* TK ${sl.tickets}\n`
   SabreLevelContent += `* CB ${sl.chatBits}`
@@ -104,6 +105,7 @@ exports.run = (client, message, params) => {
 };
 
 function handleHL(client, message, params, person, sl) {
+  console.log("HANDLE START", person.id, sl)
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
     if (!hl) {
       console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
