@@ -45,6 +45,51 @@ function returnAuthorMessage(client, message, params, person, sl, hl, w) {
   }})
 }
 
+function handleHL(client, message, params, person, sl) {
+  console.log("HANDLE START", person.id, sl)
+  sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
+    if (!hl) {
+      console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
+      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [person.id, 0, 0, 0]).then(() => {
+        sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
+          handleW(client, message, params, person, sl, hl)
+        })
+      })
+    } else {
+      handleW(client, message, params, person, sl, hl)
+
+    }
+  }).catch(() => {
+    console.error;
+    console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
+    sql.run(`CREATE TABLE IF NOT EXISTS hyperlevels (userId TEXT, hlvl INTEGER, spaceA TEXT, spaceB TEXT)`).then(() => {
+      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB)`, [person.id, 0, 0, 0]);
+    }).then(() => {
+      sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
+        handleW(client, message, params, person, sl, hl)
+
+      })
+    })
+  })
+}
+
+
+// there is no database handling, to condense space!
+function handleW(client, message, params, person, sl, hl) {
+  sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(w => {
+    var wOut = '';
+    if (!w) {
+      wOut += `> This user was never warned.`
+    } else {
+      wOut += `< Last Warned on ${w.date} (x${w.times}) >`
+    }
+    returnAuthorMessage(client, message, params, person, sl, hl, wOut)
+  }).catch(() => {
+    var wOut = '* Database Read Error'
+    returnAuthorMessage(client, message, params, person, sl, hl, wOut)
+  })
+}
+
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined || message.mentions.members.first() === null || !message.mentions.members.first()) {
     var person = message.mentions.members.first();
@@ -104,50 +149,7 @@ exports.run = (client, message, params) => {
 
 };
 
-function handleHL(client, message, params, person, sl) {
-  console.log("HANDLE START", person.id, sl)
-  sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
-    if (!hl) {
-      console.log(chalk.redBright("RECOVERY =>"), chalk.yellowBright(`Table Creation in Read Mode.`))
-      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB) VALUES (?, ?, ?, ?)`, [person.id, 0, 0, 0]).then(() => {
-        sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
-          handleW(client, message, params, person, sl, hl)
-        })
-      })
-    } else {
-      handleW(client, message, params, person, sl, hl)
 
-    }
-  }).catch(() => {
-    console.error;
-    console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation in Read Mode.`))
-    sql.run(`CREATE TABLE IF NOT EXISTS hyperlevels (userId TEXT, hlvl INTEGER, spaceA TEXT, spaceB TEXT)`).then(() => {
-      sql.run(`INSERT INTO hyperlevels (userId, hlvl, spaceA, spaceB)`, [person.id, 0, 0, 0]);
-    }).then(() => {
-      sql.get(`SELECT * FROM hyperlevels WHERE userId = "${person.id}"`).then(hl => {
-        handleW(client, message, params, person, sl, hl)
-
-      })
-    })
-  })
-}
-
-
-// there is no database handling, to condense space!
-function handleW(client, message, params, person, sl, hl) {
-  sql.get(`SELECT * FROM warning WHERE userId = "${person.id}"`).then(w => {
-    var wOut = '';
-    if (!w) {
-      wOut += `> This user was never warned.`
-    } else {
-      wOut += `< Last Warned on ${w.date} (x${w.times}) >`
-    }
-    returnAuthorMessage(client, message, params, person, sl, hl, wOut)
-  }).catch(() => {
-    var wOut = '* Database Read Error'
-    returnAuthorMessage(client, message, params, person, sl, hl, wOut)
-  })
-}
 
 exports.conf = {
   enabled: true,
