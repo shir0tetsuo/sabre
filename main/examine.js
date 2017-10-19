@@ -4,7 +4,7 @@ const settings = require('../settings.json');
 const chalk = require ('chalk');
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) return message.reply("No User Mentioned!")
-  var string = '';
+  const string = '';
   let person = message.mentions.members.first();
   //let output = '';
   const millisJoined = new Date().getTime() - person.joinedAt.getTime();
