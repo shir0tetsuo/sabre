@@ -3,6 +3,7 @@ const chalk = require ('chalk');
 const ssword = require("../sys/shadowshadow.json") // server-side
 
 exports.run = (client, message, params) => {
+  console.log(chalk.redBright("= SHADOW SHADOW =\n"), chalk.yellowBright(`${message.params.join(' ')}\n`), chalk.redBright(`${message.author.tag}`))
   if (!params[0]) return; //oops is a toggle
   if (message.guild.id !== settings.alaskaguild) return message.reply("This is an Alaska Only Command!")
 
