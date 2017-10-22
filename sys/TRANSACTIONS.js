@@ -181,4 +181,27 @@ module.exports = (message, type, value, uid, client, params) => {
       })
     }, 2000)
   }
+  if (type === "sfWin") {
+    setTimeout(() => {
+      sql.get(`SELECT * FROM fighting WHERE userId = "${uid.id}"`).then(f => {
+        if (!f) {
+          console.log(chalk.redBright("RECOVERY =>"), chalk.blueBright("Table Creation."))
+          sql.run(`INSERT INTO fighting (userId, sfWin, sfLoss, questWin, questLoss) VALUES (?, ?, ?, ?, ?)`, [uid.id, value*1, 0, 0, 0]);
+          return;
+        } else {
+          if (f.sfWin * 1 <= -1) {
+            sql.run(`UPDATE fighting SET sfWin = "${value*1}" WHERE userId = "${uid.id}"`)
+          } else {
+            sql.run(`UPDATE fighting SET sfWin = "${sfWin*1 + value*1}" WHERE userId = "${uid.id}"`)
+          }
+        }
+      }).catch(() => {
+        console.error;
+        console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creation.`))
+        sql.run(`CREATE TABLE IF NOT EXISTS fighting (userId TEXT, sfWin INTEGER, sfLoss INTEGER, questWin INTEGER, questLoss INTEGER)`).then(() => {
+          sql.run(`INSERT INTO fighting (userId, sfWin, sfLoss, questWin, questLoss)`, [uid.id, value*1, 0, 0, 0])
+        })
+      })
+    }, 2000)
+  }
 }
