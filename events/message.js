@@ -224,6 +224,7 @@ module.exports = message => {
   if (message.channel.type === "dm") {
     message.react("🚫")
     message.reply("Please use a Server!")
+    console.log(`${message.author.tag} illegally speaking to Bot (DM)`)
     return;
   }
   // Classified should go here
