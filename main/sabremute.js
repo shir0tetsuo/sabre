@@ -59,7 +59,7 @@ function brain(client, message, params, person, muRole) {
 
 exports.run = (client, message, params) => {
   console.log(`${message.author.tag} ${message.channel.name} ${message.guild.name} OPER: mu ${message.content}`)
-  if (params[0] !== message.mentions.members.first() || message.mentions.members.first() === undefined) {
+  if (message.mentions.members.first() === undefined) {
     return message.reply(`\`ERROR\` See Manual`)
   }
   let muRole_i = message.guild.roles.find("name", "muted")
