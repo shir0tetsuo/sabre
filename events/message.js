@@ -240,7 +240,7 @@ module.exports = message => {
     if (message.channel.id === selfdelchan.id) {
     setTimeout(() => {
       message.delete();
-    }, 45000);
+    }, 1800000);
     return; // 10 seconds
     }
   }
