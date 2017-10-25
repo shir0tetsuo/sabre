@@ -62,7 +62,7 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined) {
     return message.reply(`\`ERROR\` See Manual`)
   }
-  let muRole_i = message.guild.roles.find("name", "muted")
+  let muRole_i = message.guild.roles.find("name", "Muted")
   console.log("Step One", muRole_i)
   if (!muRole_i || muRole_i === undefined) muRole_i = null
   let muRole_ii = message.guild.roles.find("name", "Bad Boy")
@@ -70,7 +70,7 @@ exports.run = (client, message, params) => {
   if (!muRole_ii || muRole_ii === undefined) muRole_ii = null
   if (muRole_i === null && muRole_ii === null) {
     console.log("Step Three", muRole_i, muRole_ii)
-    return message.reply(`\`ERROR\` I couldn't find the roles muted or Bad Boy.`)
+    return message.reply(`\`ERROR\` I couldn't find the roles __Muted__ or __Bad Boy__.`)
   } else {
     const person = message.mentions.members.first();
     if (person === undefined) {
