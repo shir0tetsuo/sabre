@@ -64,10 +64,10 @@ exports.run = (client, message, params) => {
   }
   let muRole_i = message.guild.roles.find("name", "muted")
   console.log("Step One", muRole_i)
-  if (!muRole_i || muRole_i === undefined) let muRole_i = null
+  if (!muRole_i || muRole_i === undefined) muRole_i = null
   let muRole_ii = message.guild.roles.find("name", "Bad Boy")
   console.log("Step Two", muRole_ii)
-  if (!muRole_ii || muRole_ii === undefined) let muRole_ii = null
+  if (!muRole_ii || muRole_ii === undefined) muRole_ii = null
   if (muRole_i === null && muRole_ii === null) {
     console.log("Step Three", muRole_i, muRole_ii)
     return message.reply(`\`ERROR\` I couldn't find the roles muted or Bad Boy.`)
