@@ -107,6 +107,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'sabremute',
-  description: '',
+  description: 'Invokes Sabre\'s mathematics to see if they\'re being bad.',
   usage: 'sabremute [@user] (reason)'
 };
