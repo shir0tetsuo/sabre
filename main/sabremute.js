@@ -43,11 +43,11 @@ function brain(client, message, params, person, muRole) {
           let logroom = message.guild.channels.find('name', 'logs-chat');
           let secroom = message.guild.channels.find('name', 'security-bot');
           let classif = message.guild.channels.find('name', 'classified');
-          if (logroom !== undefined) {
+          if (logroom !== undefined && logroom !== null) {
             logroom.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
-          } else if (secroom !== undefined) {
+          } else if (secroom !== undefined && secroom !== null) {
             secroom.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
-          } else if (classif !== undefined) {
+          } else if (classif !== undefined && classif !== null) {
             classif.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
           } else {
             message.author.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
