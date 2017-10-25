@@ -51,6 +51,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'timeofday',
-  description: '',
-  usage: ''
+  description: 'Public Developer Test Command.',
+  usage: 'timeofday'
 };
