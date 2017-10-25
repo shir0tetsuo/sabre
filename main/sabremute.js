@@ -36,12 +36,22 @@ function brain(client, message, params, person, muRole) {
           let personroles = person.roles.map(role => role.name).join(', ')
           var shadow = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
           var shadowb = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
-          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n${params.slice(1).join(' ')}. His roles (${personroles}) were stripped. (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\`\`\``).then(function (message) {
+          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n**${params.slice(1).join(' ')}**. Their roles (${personroles}) were stripped. (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\`\`\``).then(function (message) {
             message.react("☢")
             message.react("🤐")
           })
-          message.guild.channels.find('name', 'logs-chat').send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date()).catch(console.error)
-          message.guild.channels.find('name', 'security-bot').send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date()).catch(console.error)
+          let logroom = message.guild.channels.find('name', 'logs-chat');
+          let secroom = message.guild.channels.find('name', 'security-bot');
+          let classif = message.guild.channels.find('name', 'classified');
+          if (logroom !== undefined) {
+            logroom.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
+          } else if (secroom !== undefined) {
+            secroom.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
+          } else if (classif !== undefined) {
+            classif.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
+          } else {
+            message.author.send("```\n" + person.displayName + ` (${person.user.username}#${person.user.discriminator})` + "\n\nMuted.\n\nRoles to Give Back: " + personroles + "\n\n" + `${params.slice(1).join(' ')}` + "\n\nSent by " + message.author.tag + `using MU in ${message.channel.name}` + "```" + new Date())
+          }
           person.setRoles([muRole]).catch(console.error)
         } else {
           sql.run(`UPDATE warning SET times = "${w.times*1 + 1}" WHERE userId = "${person.id}"`)
