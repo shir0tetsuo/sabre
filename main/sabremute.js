@@ -12,7 +12,8 @@ const rarray = [
   "Hmm. Let me think about this.",
   "Hold the phone.",
   "Calculating...",
-  "I'll see what I can do."
+  "I'll see what I can do.",
+  "Flipping a coin brb."
 ]
 
 function Rand(data) {
