@@ -36,7 +36,7 @@ function brain(client, message, params, person, muRole) {
           let personroles = person.roles.map(role => role.name).join(', ')
           var shadow = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
           var shadowb = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
-          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n**${params.slice(1).join(' ')}**. Their roles (${personroles}) were stripped. (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\`\`\``).then(function (message) {
+          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n**${params.slice(1).join(' ')}**. Their roles \`(${personroles})\` were stripped. (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\`\`\``).then(function (message) {
             message.react("☢")
             message.react("🤐")
           })
