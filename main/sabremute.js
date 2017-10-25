@@ -36,7 +36,7 @@ function brain(client, message, params, person, muRole) {
           let personroles = person.roles.map(role => role.name).join(', ')
           var shadow = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
           var shadowb = ssword.strings[Math.floor(Math.random() * ssword.strings.length)]
-          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n${params.slice(1).join(' ')} (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\n.\`\`\``).then(function (message) {
+          message.channel.send(`Sabre found the defendant **${person.user.username}#${person.user.discriminator}** (${person.displayName}) guilty of\n${params.slice(1).join(' ')} (${message.member.displayName} ${message.author.tag})\n\`\`\`markdown\n.\n${shadow.text} ${person.displayName} Was silenced by Sabre. ${shadowb.text}\n.\`\`\``).then(function (message) {
             message.react("☢")
             message.react("🤐")
           })
@@ -63,13 +63,13 @@ exports.run = (client, message, params) => {
     return message.reply(`\`ERROR\` See Manual`)
   }
   let muRole_i = message.guild.roles.find("name", "Muted")
-  console.log("Step One", muRole_i)
+  //console.log("Step One", muRole_i)
   if (!muRole_i || muRole_i === undefined) muRole_i = null
   let muRole_ii = message.guild.roles.find("name", "Bad Boy")
-  console.log("Step Two", muRole_ii)
+  //console.log("Step Two", muRole_ii)
   if (!muRole_ii || muRole_ii === undefined) muRole_ii = null
   if (muRole_i === null && muRole_ii === null) {
-    console.log("Step Three", muRole_i, muRole_ii)
+    //console.log("Step Three", muRole_i, muRole_ii)
     return message.reply(`\`ERROR\` I couldn't find the roles __Muted__ or __Bad Boy__.`)
   } else {
     const person = message.mentions.members.first();
