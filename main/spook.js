@@ -16,24 +16,10 @@ exports.run = (client, message, params) => {
     if (hl.hlvl !== 0 && hl.spaceA >= 2) {
       var person = message.mentions.members.first();
       if (!person || person === undefined || person === null) {
-        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! (-2 :pound:) ${message.author}!\n\`next\``)
+        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's 1.5 Million Sabre Tickets! (-2 :pound:) ${message.author}!`)
         Tran(message, "hdtk", -2)
-        message.channel.awaitMessages(response => response.author.id === message.author.id), {
-          max: 1,
-          time: 30000,
-          errors: ['time']
-        }
-        .then(collected => {
-          const msg = collected.first();
-          const input = msg.content.toLowerCase();
-          // init
-          msg.reply(`TRICK OR TREAT! LET'S SEE.. HMM.. AHH! YES!\n\`1500000 Sabre Tickets!\``)
-          Tran(message, "tk", 1500000)
-        })
-        .catch(() => {
-          console.error;
-          message.channel.send(`**${message.author.username}** wasn't able to respond.`);
-        })
+        Tran(message, "tk", 1500000)
+
       } else {
         Tran(message, "hdtk", 2, person)
         Tran(message, "hdtk", -2)
