@@ -16,7 +16,7 @@ exports.run = (client, message, params) => {
     if (hl.hlvl !== 0 && hl.spaceA >= 2) {
       var person = message.mentions.members.first();
       if (!person || person === undefined || person === null) {
-        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! (-2 :pound:) ${message.author}!`)
+        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! (-2 :pound:) ${message.author}!\n\`next\``)
         Tran(message, "hdtk", -2)
         message.channel.awaitMessages(response => response.author.id === message.author.id), {
           max: 1,
