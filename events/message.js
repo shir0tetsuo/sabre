@@ -31,6 +31,7 @@ let chatBit = ":eye_in_speech_bubble:"
 
 
 // Score Init, +Tickets, -Tickets, +Bits, -Bits
+// cookie
 
 function scoreInit(mess) { // Convert message into mess
   sql.get(`SELECT * FROM scores WHERE userId ="${mess.author.id}"`).then(row => {
