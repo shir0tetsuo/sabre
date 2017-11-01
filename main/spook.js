@@ -13,17 +13,18 @@ exports.run = (client, message, params) => {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
-    if (hl.hlvl !== 0 && hl.spaceA >= 2) {
+    if (hl.spaceA*1 >= 2) {
       var person = message.mentions.members.first();
+      var RandomTk = Math.floor(Math.random() * (1500000 - 30000) + 30000)
       if (!person || person === undefined || person === null) {
-        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's 1.5 Million Sabre Tickets! (-2 :pound:) ${message.author}!`)
+        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's ${RandomTk} Sabre Tickets! (-2 :pound:) ${message.author}!`)
         Tran(message, "hdtk", -2)
-        Tran(message, "tk", 1500000)
+        Tran(message, "tk", RandomTk)
 
       } else {
         Tran(message, "hdtk", 2, person)
         Tran(message, "hdtk", -2)
-        message.channel.send(`${person} was given 2 HYPERTICKETS!`)
+        message.channel.send(`${person} was given 2 DARK TICKETS! :pound:`)
       }
     } else {
       return message.reply(`\`ERROR\` You need 2 Dark Tickets.`)
