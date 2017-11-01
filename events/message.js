@@ -239,6 +239,13 @@ module.exports = message => {
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
   if (selfdelchan !== null) {
     if (message.channel.id === selfdelchan.id) {
+      if (message.content.startsWith(`xxxx`)) {
+        let messagecount = 100;
+        message.channel.fetchMessages({
+          limit: messagecount
+        }).then(messages => message.channel.bulkDelete(messages));
+      }
+
     setTimeout(() => {
       message.delete();
     }, 1800000);
