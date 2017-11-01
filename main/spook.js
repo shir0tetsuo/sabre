@@ -22,7 +22,7 @@ exports.run = (client, message, params) => {
           max: 1,
           time: 30000,
           errors: ['time']
-        })
+        }
         .then(collected => {
           const msg = collected.first();
           const input = msg.content.toLowerCase();
