@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
       var person = message.mentions.members.first();
       var RandomTk = Math.floor(Math.random() * (1500000 - 30000) + 30000)
       if (!person || person === undefined || person === null) {
-        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's ${RandomTk} Sabre Tickets! (-2 :pound:) ${message.author}!`)
+        message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's ${RandomTk} Sabre Tickets! (-5 :pound:) ${message.author}!`)
         Tran(message, "hdtk", -5)
         Tran(message, "tk", RandomTk)
 
