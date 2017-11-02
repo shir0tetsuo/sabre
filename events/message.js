@@ -238,7 +238,7 @@ module.exports = message => {
   // begin self deleting channel lines
   let selfdelchan = message.guild.channels.find('name', 'selfdelete')
   if (selfdelchan !== null) {
-    if (message.channel.id === selfdelchan.id) {
+    if (message.channel.id === selfdelchan.id && message.guild.id === settings.davnetguild) {
       if (message.content.startsWith(`xxxx`)) {
         let messagecount = 100;
         message.channel.fetchMessages({
@@ -248,9 +248,21 @@ module.exports = message => {
 
     setTimeout(() => {
       message.delete();
-    }, 1800000);
+    }, 10000);
     return; // 10 seconds
-    }
+  } else if (message.channel.id === selfdelchan.id) {
+        if (message.content.startsWith(`xxxx`)) {
+          let messagecount = 100;
+          message.channel.fetchMessages({
+            limit: messagecount
+          }).then(messages => message.channel.bulkDelete(messages));
+        }
+
+      setTimeout(() => {
+        message.delete();
+      }, 1800000);
+      return; // 10 seconds
+      }
   }
   let danceRoom = message.guild.channels.find('name', 'dancefloor')
   if (danceRoom !== null) {
