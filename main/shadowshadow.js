@@ -66,7 +66,7 @@ exports.run = (client, message, params) => {
 };
 
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['Shadowshadow', 'ss'],
   permLevel: 4

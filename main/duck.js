@@ -156,7 +156,7 @@ DONE
 Randomized responses for releasing and exploding ducks
 */
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: true,
   aliases: ['quack'],
   permLevel: 0

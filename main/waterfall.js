@@ -139,7 +139,7 @@ exports.run = (client, message, params) => {
 
 // need this to go back to permLevel 1
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['wf'],
   permLevel: 4

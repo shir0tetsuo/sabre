@@ -25,7 +25,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: false,
   guildOnly: false,
-  aliases: ['tax'],
+  aliases: ['altk'],
   permLevel: 4
 };
 
@@ -34,7 +34,7 @@ name, desc., usage
 name is also the command alias
 */
 exports.help = {
-  name: 'tax',
+  name: 'alltk',
   description: 'Fix a big mistake. OWNER ONLY!',
-  usage: 'tax [newseed]'
+  usage: 'alltk [newseed]'
 };

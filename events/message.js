@@ -3,6 +3,7 @@ const settings = require('../settings.json');
 const processResponse = require('../sys/processResponse.js')
 const sql = require("sqlite");
 sql.open("../score.sqlite");
+// Clean this, add nights room command and PL3/PL4 Mute Capability
 const availResponse = [
   '= Sadface =',
   '= Bugger =',

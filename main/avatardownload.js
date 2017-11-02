@@ -45,7 +45,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['avt', 'avurl'],
-  permLevel: 4
+  permLevel: 3
 };
 
 /*
