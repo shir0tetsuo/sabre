@@ -13,7 +13,7 @@ exports.run = (client, message, params) => {
       return message.reply(`\`ERROR\` HyperLevel requirement not met`)
     }
     // Set hyperlevel requirement here (hl.hlvl >= int)
-    if (hl.spaceA*1 >= 5) {
+    if (hl.spaceB*1 >= 5) {
       var person = message.mentions.members.first();
       var RandomTk = Math.floor(Math.random() * (1500000 - 30000) + 30000)
       if (!person || person === undefined || person === null) {
