@@ -25,6 +25,7 @@ exports.run = (client, message, params) => {
     if (hl.spaceA*1 === 0) {
       AvailableKeys += `You don't have any keys.`
     }
+    message.channel.send(`${AvailableKeys}`)
   })
 };
 
