@@ -11,19 +11,19 @@ exports.run = (client, message, params) => {
     if (!hl) return message.reply(`\`ERROR\` Cannot find hyperlevel data.`)
     var AvailableKeys = '';
     if (hl.spaceA*1 >= 20) {
-      AvailableKeys += `20 :key2: \`3,000,000 Sabre Tickets\``
+      AvailableKeys += `20 :key2: \`3,000,000 Sabre Tickets\`\n`
     }
     if (hl.spaceA*1 >= 10) {
-      AvailableKeys += `10 :key2: \`1,250,000 Sabre Tickets\``
+      AvailableKeys += `10 :key2: \`1,250,000 Sabre Tickets\`\n`
     }
     if (hl.spaceA*1 >= 5) {
-      AvailableKeys += `5 :key2: \`500,000 Sabre Tickets\``
+      AvailableKeys += `5 :key2: \`500,000 Sabre Tickets\`\n`
     }
     if (hl.spaceA*1 >= 1) {
-      AvailableKeys += `1 :key2: \`240,000 Sabre Tickets\``
+      AvailableKeys += `1 :key2: \`240,000 Sabre Tickets\`\n`
     }
     if (hl.spaceA*1 === 0) {
-      AvailableKeys += `You don't have any keys.`
+      AvailableKeys += `You don't have any keys.\n`
     }
     message.channel.send(`${AvailableKeys}`)
   })
