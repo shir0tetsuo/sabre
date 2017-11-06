@@ -21,15 +21,17 @@ exports.run = (client, message, params) => {
     }
     if (Keys >= 5) {
       AvailableKeys += `5 :key2: \`500,000 Sabre Tickets\`\n`
+      AvailableKeys += `5 :key2: \`6 Dark Tickets\`\n`
     }
     if (Keys >= 1) {
-      AvailableKeys += `1 :key2: \`240,000 Sabre Tickets\`\n`
+      AvailableKeys += `1 :key2: \`90,000 Sabre Tickets\`\n`
     }
     if (Keys === 0) {
       AvailableKeys += `You don't have any keys.\n`
     }
     if (Dark >= 20) {
       AvailableDark += `20 :pound: \`20 Quest Keys\`\n`
+      AvailableDark += `20 :pound: \`Quest Trophy\``
     }
     if (Dark >= 10) {
       AvailableDark += `10 :pound: \`9 Quest Keys\`\n`
@@ -41,6 +43,9 @@ exports.run = (client, message, params) => {
       AvailableDark += `You don't have any dark tickets.\n`
     }
     message.channel.send(`${AvailableKeys}${AvailableDark}`)
+    // trophies will be obtained by killing quest bosses.
+    // Last boss -> LastBoss
+    // Trophy -> if (boss) exists lastboss -> trophy
   })
 };
 
@@ -60,6 +65,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'darkshop',
-  description: 'Coming Soon. (HL1)',
+  description: 'Trade tickets, keys, and obtain trophies. (HL1)',
   usage: 'darkshop'
 };

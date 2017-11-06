@@ -15,6 +15,7 @@ exports.run = (client, message, params) => {
     // Set hyperlevel requirement here (hl.hlvl >= int)
     if (hl.spaceB*1 >= 5) {
       var person = message.mentions.members.first();
+      // NOTE: Add chance floor
       var RandomTk = Math.floor(Math.random() * (1500000 - 30000) + 30000)
       if (!person || person === undefined || person === null) {
         message.channel.send(`OOOOOH! WOOOOAAAAAAAH! HELLOOOO! Here's ${RandomTk} Sabre Tickets! (-5 :pound:) ${message.author}!`)
