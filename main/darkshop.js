@@ -31,7 +31,7 @@ exports.run = (client, message, params) => {
     }
     if (Dark >= 20) {
       AvailableDark += `20 :pound: \`20 Quest Keys\`\n`
-      AvailableDark += `20 :pound: \`Quest Trophy\``
+      AvailableDark += `20 :pound: \`Quest Trophy\`\n`
     }
     if (Dark >= 10) {
       AvailableDark += `10 :pound: \`9 Quest Keys\`\n`
