@@ -10,22 +10,37 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
     if (!hl) return message.reply(`\`ERROR\` Cannot find hyperlevel data.`)
     var AvailableKeys = '';
-    if (hl.spaceA*1 >= 20) {
+    var AvailableDark = '';
+    const Keys = hl.spaceA*1
+    const Dark = hl.spaceB*1
+    if (Keys >= 20) {
       AvailableKeys += `20 :key2: \`3,000,000 Sabre Tickets\`\n`
     }
-    if (hl.spaceA*1 >= 10) {
+    if (Keys >= 10) {
       AvailableKeys += `10 :key2: \`1,250,000 Sabre Tickets\`\n`
     }
-    if (hl.spaceA*1 >= 5) {
+    if (Keys >= 5) {
       AvailableKeys += `5 :key2: \`500,000 Sabre Tickets\`\n`
     }
-    if (hl.spaceA*1 >= 1) {
+    if (Keys >= 1) {
       AvailableKeys += `1 :key2: \`240,000 Sabre Tickets\`\n`
     }
-    if (hl.spaceA*1 === 0) {
+    if (Keys === 0) {
       AvailableKeys += `You don't have any keys.\n`
     }
-    message.channel.send(`${AvailableKeys}`)
+    if (Dark >= 20) {
+      AvailableDark += `20 :pound: \`20 Quest Keys\`\n`
+    }
+    if (Dark >= 10) {
+      AvailableDark += `10 :pound: \`9 Quest Keys\`\n`
+    }
+    if (Dark >= 5) {
+      AvailableDark += `5 :pound: \`3 Quest Keys\`\n`
+    }
+    if (Dark === 0) {
+      AvailableDark += `You don't have any dark tickets.\n`
+    }
+    message.channel.send(`${AvailableKeys}${AvailableDark}`)
   })
 };
 
