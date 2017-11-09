@@ -249,7 +249,7 @@ module.exports = message => {
 
     setTimeout(() => {
       message.delete();
-    }, 10000);
+    }, 25000);
     return; // 10 seconds
   } else if (message.channel.id === selfdelchan.id) {
         if (message.content.startsWith(`xxxx`)) {
