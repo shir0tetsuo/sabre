@@ -30,7 +30,7 @@ name, desc., usage
 name is also the command alias
 */
 exports.help = {
-  name: '..lick',
+  name: 'lick',
   description: 'Lick someone',
-  usage: '..lick <tag someone>'
+  usage: 'lick <tag someone>'
 };
