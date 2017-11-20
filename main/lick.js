@@ -1,7 +1,8 @@
 
 exports.run = (client, message, params) => {
+  console.log(`Run`)
   if (message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`No mention!`);
-    let aids = Math.floor(Math.random() * 100);
+    var aids = Math.floor(Math.random() * 100);
   
   console.log(aids)
   
