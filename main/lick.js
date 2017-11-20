@@ -1,7 +1,7 @@
 
 exports.run = (client, message, params) => {
   if (message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`No mention!`);
-    let aids = Math.Floor(Math.Random() * 100);
+    let aids = Math.floor(Math.random() * 100);
   
   if (message.mentions.members.first() !== undefined && aids >=50) {
     message.channel.send(`Oh no! ${message.mentions.members.first().displayName} has been licked by ${message.author} and was given AIDS. You've been Magic Johnson'd!`);
