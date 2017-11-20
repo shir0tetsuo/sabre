@@ -1,6 +1,6 @@
 
 exports.run = (client, message, params) => {
-  if (message.mentions.members.first() === message.author) return message.reply(`You can't lick yourself! Or can you...`)
+  if (message.mentions.members.first().displayName === message.member.displayName) return message.reply(`You can't lick yourself! Or can you...`)
   if (message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`No mention!`);
     var aids = Math.floor(Math.random() * 100);
   
