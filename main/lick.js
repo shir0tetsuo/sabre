@@ -1,23 +1,15 @@
 function magicJohnson(client, message, params){
-  let aids = Math.Floor(Math.Random() * 10) + 1;
+  let aids = Math.Floor(Math.Random() * 100);
   aids = aids % 2;
   
-  switch(aids){
-    case 0:
-      if(message.mentions.members.first() !== undefined){
-        message.channel.send(`Oh no! ${message.mentions.members.first().displayName} has been licked by ${mess.author} and was given AIDS. You've been Magic Johnson'd!`);
-      }
-      break;
-      
-    case 1:
-      if(message.mentions.members.first() !== undefined){
-        message.channel.send(`Woah! ${mess.author} just tried to lick ${message.mentions.members.first().displayName} but failed to get rid of the AIDS.`);
-        break;
-      }
+  if (message.mentions.members.first() !== undefined && aids >=50) {
+    message.channel.send(`Oh no! ${message.mentions.members.first().displayName} has been licked by ${message.author} and was given AIDS. You've been Magic Johnson'd!`);
+  } else {
+    message.channel.send(`Woah! ${message.author} just tried to lick ${message.mentions.members.first().displayName} but failed to get rid of the AIDS.`);
   }
 }
-
 exports.run = (client, message, params) => {
+  if (message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`No mention!`);
   magicJohnson(client, message, params);
 };
 
