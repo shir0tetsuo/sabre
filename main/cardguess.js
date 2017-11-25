@@ -71,6 +71,7 @@ exports.run = (client, message, params) => {
     })
     .then((collected) => {
       //console.log(collected.first().content)
+      console.log(handActual, "(left = 5+)")
       if (handActual >= 5) {
         var trueHand = 'left'
       } else {
