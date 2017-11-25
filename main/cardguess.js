@@ -83,6 +83,7 @@ exports.run = (client, message, params) => {
       errors: ['time'],
     })
     .then((collected) => {
+      console.log(collected.content)
       if (collected.first().content.toLowerCase() === 'right') {
         doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
       } else if (collected.first().content.toLowerCase() === 'left') {
