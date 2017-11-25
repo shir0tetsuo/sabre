@@ -34,6 +34,7 @@ const enumerator = [
 ]
 
 exports.run = (client, message, params) => {
+  console.log(handActual, "(left = 5+)")
   var AvaCmd = (['left', 'right'])
   var enumeration = Rand(enumerator)
   var card = Rand(cv)
@@ -71,7 +72,6 @@ exports.run = (client, message, params) => {
     })
     .then((collected) => {
       //console.log(collected.first().content)
-      console.log(handActual, "(left = 5+)")
       if (handActual >= 5) {
         var trueHand = 'left'
       } else {
