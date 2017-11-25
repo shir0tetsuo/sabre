@@ -33,7 +33,7 @@ const enumerator = [
   ':clubs:'
 ]
 
-function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, author){
+function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual){
   if (handActual >= 5) {
     if (prizeChance >= 80) {
       message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
@@ -83,13 +83,12 @@ exports.run = (client, message, params) => {
       errors: ['time'],
     })
     .then((collected) => {
-      console.log(collected.first().content)
-      message.reply(collected.first().content)
-    //  if (collected.first().content.toLowerCase() === 'right') {
-    //    doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
-    //  } else if (collected.first().content.toLowerCase() === 'left') {
-    //    doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
-    //  }
+      //console.log(collected.first().content)
+      if (collected.first().content.toLowerCase() === 'right') {
+        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual)
+      } else if (collected.first().content.toLowerCase() === 'left') {
+        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual)
+      }
     })
     .catch(() => {
       message.reply(`Uh oh, I dropped the cards..`)
