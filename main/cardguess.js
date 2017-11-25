@@ -47,6 +47,7 @@ function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, autho
 }
 
 exports.run = (client, message, params) => {
+  var AvaCmd = ['left', 'right']
   var enumeration = Rand(enumerator)
   var card = Rand(cv)
   var prizeChance = Math.floor(Math.random() * 100)
@@ -76,7 +77,7 @@ exports.run = (client, message, params) => {
     ]
   }})
   .then(() => {
-    message.channel.awaitMessages(response => response.content.toLowerCase() === ['right','left'], {
+    message.channel.awaitMessages(response => response.author.id === message.author.id && AvaCmd.some(word => response.content.toLowerCase().startsWith(word)), {
       max: 1,
       time: 20000,
       errors: ['time'],
