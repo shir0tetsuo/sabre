@@ -84,11 +84,12 @@ exports.run = (client, message, params) => {
     })
     .then((collected) => {
       console.log(collected.first().content)
-      if (collected.first().content.toLowerCase() === 'right') {
-        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
-      } else if (collected.first().content.toLowerCase() === 'left') {
-        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
-      }
+      message.reply(collected.first().content)
+    //  if (collected.first().content.toLowerCase() === 'right') {
+    //    doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
+    //  } else if (collected.first().content.toLowerCase() === 'left') {
+    //    doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
+    //  }
     })
     .catch(() => {
       message.reply(`Uh oh, I dropped the cards..`)
