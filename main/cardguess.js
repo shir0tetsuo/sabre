@@ -34,13 +34,13 @@ const enumerator = [
 ]
 
 exports.run = (client, message, params) => {
-  console.log(handActual, "(left = 5+)")
   var AvaCmd = (['left', 'right'])
   var enumeration = Rand(enumerator)
   var card = Rand(cv)
   var prizeChance = Math.floor(Math.random() * 100)
   var prizeActual = Math.floor(Math.random() * (3000 - 1000) + 1000)
   var handActual = Math.floor(Math.random() * 11)
+  console.log(handActual, "(left = 5+)")
   message.channel.send({embed:{
     color: 0x6ede2a,
     timestamp: new Date(),
