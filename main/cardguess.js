@@ -7,6 +7,11 @@ const Tran = require ('../sys/TRANSACTIONS.js')
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
+function Rand(data) {
+  // where data is the array
+  return data[Math.floor(Math.random() * data.length)]
+}
+
 const cv = [
   ':a:',
   ':two:',
@@ -30,8 +35,8 @@ const enumerator = [
 
 
 exports.run = (client, message, params) => {
-  var enumeration = Math.floor(Math.random() * enumerator.length)
-  var card = Math.floor(Math.random() * cv.length)
+  var enumeration = Rand(enumerator)
+  var card = Rand(cv)
   message.channel.send({embed:{
     color: 0x6ede2a,
     timestamp: new Date(),
