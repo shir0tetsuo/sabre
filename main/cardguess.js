@@ -72,7 +72,12 @@ exports.run = (client, message, params) => {
     .then((collected) => {
       //console.log(collected.first().content)
       if (handActual >= 5) {
-        if (prizeChance >= 80) {
+        var trueHand = 'left'
+      } else {
+        var trueHand = 'right'
+      }
+      if (trueHand === collected.first().content.toLowerCase()) {
+        if (prizeChance >= 75) {
           message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
           Tran(message, "tk", prizeActual)
         } else {
