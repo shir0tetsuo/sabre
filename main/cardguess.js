@@ -47,7 +47,7 @@ function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, autho
 }
 
 exports.run = (client, message, params) => {
-  var AvaCmd = ['left', 'right']
+  var AvaCmd = (['left', 'right'])
   var enumeration = Rand(enumerator)
   var card = Rand(cv)
   var prizeChance = Math.floor(Math.random() * 100)
