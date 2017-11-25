@@ -33,19 +33,6 @@ const enumerator = [
   ':clubs:'
 ]
 
-function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual){
-  if (handActual >= 5) {
-    if (prizeChance >= 80) {
-      message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
-      Tran(message, "tk", prizeActual)
-    } else {
-      message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!`)
-    }
-  } else {
-    message.reply(`You got :black_joker: the wrong card!`)
-  }
-}
-
 exports.run = (client, message, params) => {
   var AvaCmd = (['left', 'right'])
   var enumeration = Rand(enumerator)
@@ -84,10 +71,15 @@ exports.run = (client, message, params) => {
     })
     .then((collected) => {
       //console.log(collected.first().content)
-      if (collected.first().content.toLowerCase() === 'right') {
-        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual)
-      } else if (collected.first().content.toLowerCase() === 'left') {
-        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual)
+      if (handActual >= 5) {
+        if (prizeChance >= 80) {
+          message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
+          Tran(message, "tk", prizeActual)
+        } else {
+          message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!`)
+        }
+      } else {
+        message.reply(`You got :black_joker: the wrong card!`)
       }
     })
     .catch(() => {
