@@ -33,10 +33,25 @@ const enumerator = [
   ':clubs:'
 ]
 
+function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author){
+  if (handActual >= 5) {
+    if (prizeChance >= 80) {
+      message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
+      Tran(message, "tk", prizeActual)
+    } else {
+      message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!`)
+    }
+  } else {
+    message.reply(`You got :black_joker: the wrong card!`)
+  }
+}
 
 exports.run = (client, message, params) => {
   var enumeration = Rand(enumerator)
   var card = Rand(cv)
+  var prizeChance = Math.floor(Math.random() * 100)
+  var prizeActual = Math.floor(Math.random() * (3000 - 1000) + 1000)
+  var handActual = Math.floor(Math.random() * 11)
   message.channel.send({embed:{
     color: 0x6ede2a,
     timestamp: new Date(),
@@ -53,9 +68,30 @@ exports.run = (client, message, params) => {
       {
         name: `Your card:`,
         value: `${card}${enumeration}`
+      },
+      {
+        name: `Type`,
+        value: `\`left\` or \`right\` to guess!`
       }
     ]
   }})
+  .then(() => {
+    message.channel.awaitMessages(response => response.content.toLowerCase() === ['right','left'], {
+      max: 1,
+      time: 20000,
+      errors: ['time'],
+    })
+    .then((collected) => {
+      if (collected.first().content.toLowerCase() === 'right') {
+        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
+      } else if (collected.first().content.toLowerCase() === 'left') {
+        doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author)
+      }
+    })
+    .catch(() => {
+      message.reply(`Uh oh, I dropped the cards..`)
+    })
+  })
 };
 
 /*
