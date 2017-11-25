@@ -33,7 +33,7 @@ const enumerator = [
   ':clubs:'
 ]
 
-function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, collected.first().author){
+function doSeeWin(enumeration, card, prizeChance, prizeActual, handActual, author){
   if (handActual >= 5) {
     if (prizeChance >= 80) {
       message.reply(`Snap! You guessed it! That hand had ${card}${enumeration}!\n\`You receive an award of ${prizeActual}\`:tickets:`)
