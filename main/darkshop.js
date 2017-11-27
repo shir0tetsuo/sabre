@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
     var AvailableDark = '';
     const Keys = hl.spaceA*1
     const Dark = hl.spaceB*1
-    if (params !== undefined && params.indexOf(availablePossible) !== -1) {
+    if (params !== undefined && params.toLowerCase.startsWith([availablePossible]) !== -1) {
       message.channel.send(`Success! \`Not Really!\``)
     } else {
       if (Keys >= 20) {
