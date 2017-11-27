@@ -7,7 +7,7 @@ let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
 const availablePossible = [
-  '20k0', '10k0', '5k0', '5k1', '1k0', '20t0', '20t1', '10t0', '5t0'
+
 ]
 
 exports.run = (client, message, params) => {
@@ -17,7 +17,7 @@ exports.run = (client, message, params) => {
     var AvailableDark = '';
     const Keys = hl.spaceA*1
     const Dark = hl.spaceB*1
-    if (params !== undefined && params.toLowerCase.startsWith([availablePossible]) !== -1) {
+    if (params[0] === (['20k0', '10k0', '5k0', '5k1', '1k0', '20t0', '20t1', '10t0', '5t0'])) {
       message.channel.send(`Success! \`Not Really!\``)
     } else {
       if (Keys >= 20) {
