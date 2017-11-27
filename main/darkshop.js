@@ -3,12 +3,9 @@ const sql = require("sqlite");
 sql.open("../score.sqlite");
 const settings = require('../settings.json');
 const chalk = require ('chalk');
+const Tran = require ('../sys/TRANSACTIONS.js')
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
-
-const availablePossible = [
-
-]
 
 exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM hyperlevels WHERE userId = "${message.author.id}"`).then(hl => {
@@ -17,8 +14,13 @@ exports.run = (client, message, params) => {
     var AvailableDark = '';
     const Keys = hl.spaceA*1
     const Dark = hl.spaceB*1
-    if (params[0] === (['20k0', '10k0', '5k0', '5k1', '1k0', '20t0', '20t1', '10t0', '5t0'])) {
-      message.channel.send(`Success! \`Not Really!\``)
+    pch = params[0]
+    if (pch !== null && pch !== undefined) {
+      if (Keys >= 20 && pch.toLowerCase() === '20k0') {
+        Tran(message, "tk", 3000000)
+        Tran(message, "qkey", -20)
+        message.reply(`SUCCESS! 20 Quest Keys :key2: were used. Gained 3 Million Sabre Tickets :tickets:!`)
+      }
     } else {
       if (Keys >= 20) {
         AvailableKeys += `\`20\` :key2: \`3,000,000 Sabre Tickets\` (20k0)\n`
