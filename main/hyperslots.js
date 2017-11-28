@@ -80,15 +80,15 @@ exports.run = (client, message, params) => {
           var cName = 'Obtained 1 :key2:',
             cVal = `You can use the \`${settings.prefix}quest\` command with this key.`
             hSpaceAUpdate(message);
-        } else if (cMath >= 1600) {
+        } else if (cMath >= 1500) {
           var cName = 'Obtained 1 :pound:',
             cVal = `You can use the \`${settings.prefix}darkshop\` command with this ticket.`
             hSpaceBUpdate(message);
-        } else if (cMath >= 1400) {
+        } else if (cMath >= 1200) {
           var cName = `Obtained 3000 ${curren}`,
             cVal = `Lucky you`
             scoreUpTicket(message, 3000)
-        } else if (cMath >= 1300) {
+        } else if (cMath >= 1000) {
           var cName = `Obtained 8000 ${chatBit}`,
             cVal = `Lucky you`
             scoreUpBits(message, 8000)
