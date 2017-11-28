@@ -21,6 +21,44 @@ exports.run = (client, message, params) => {
         Tran(message, "qkey", -20)
         message.reply(`SUCCESS! 20 Quest Keys :key2: were used. Gained 3 Million Sabre Tickets :tickets:!`)
       }
+      if (Keys >= 10 && pch.toLowerCase() === '10k0') {
+        Tran(message, "tk", 1250000)
+        Tran(message, "qkey", -10)
+        message.reply(`SUCCESS! 10 Quest Keys :key2: were used. Gained 1.25 Million Sabre Tickets :tickets:!`)
+      }
+      if (Keys >= 5 && pch.toLowerCase() === '5k0') {
+        Tran(message, "tk", 500000)
+        Tran(message, "qkey", -5)
+        message.reply(`SUCCESS! 5 Quest Keys :key2: were used. Gained 500k Sabre Tickets :tickets:!`)
+      }
+      if (Keys >= 5 && pch.toLowerCase() === '5k1') {
+        Tran(message, "hdtk", 6)
+        Tran(message, "qkey", -5)
+        message.reply(`SUCCESS! 5 Quest Keys :key2: were used. Gained 6 Dark Tickets :pound:!`)
+      }
+      if (Keys >= 1 && pch.toLowerCase() === '1k0') {
+        Tran(message, "tk", 90000)
+        Tran(message, "qkey", -1)
+        message.reply(`SUCCESS! 1 Quest Key :key2: was used. Gained 90k Sabre Tickets :tickets:!`)
+      }
+      if (Dark >= 20 && pch.toLowerCase() === '20t0') {
+        Tran(message, "qkey", 20)
+        Tran(message, "hdtk", -20)
+        message.reply(`SUCCESS! 20 Dark Tickets :pound: were used. Gained 20 Quest Keys :key2:!`)
+      }
+      if (Dark >= 20 && pch.toLowerCase() === '20t1') {
+        message.reply(`\`ERROR\` This feature isn't available (yet).`)
+      }
+      if (Dark >= 10 && pch.toLowerCase() === '10t0') {
+        Tran(message, "qkey", 9)
+        Tran(message, "hdtk", -10)
+        message.reply(`SUCCESS! 10 Dark Tickets :pound: were used. Gained 9 Quest Keys :key2:!`)
+      }
+      if (Dark >= 5 && pch.toLowerCase() === '5t0') {
+        Tran(message, "qkey", 3)
+        Tran(message, "hdtk", 5)
+        message.reply(`SUCCESS! 5 Dark Tickets :pound: were used. Gained 3 Quest Keys :key2:!`)
+      }
     } else {
       if (Keys >= 20) {
         AvailableKeys += `\`20\` :key2: \`3,000,000 Sabre Tickets\` (20k0)\n`
@@ -76,5 +114,5 @@ name is also the command alias
 exports.help = {
   name: 'darkshop',
   description: 'Trade tickets, keys, and obtain trophies. (HL1)',
-  usage: 'darkshop'
+  usage: 'darkshop [code]'
 };
