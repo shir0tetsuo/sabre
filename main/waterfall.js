@@ -18,14 +18,49 @@ const CType = [
   ':hearts:', ':spades:', ':clubs:', ':diamonds:'
 ]
 
+function increaseHi(message, game) {
+  sql.run(`UPDATE waterfall SET hiScore = "${game.hiScore*1} + 1" WHERE userId = "${message.author.id}"`)
+}
+
 function Play(cl, ms, pr, game) {
-  var cardput = `${game.cardA}\n`
+  var cardput = ``;
+  /* var cardput = `\n${game.cardA}\n`
   cardput += `${game.cardB}\n`
   cardput += `${game.cardC}\n`
   cardput += `${game.cardD}\n`
   cardput += `${game.cardE}`
-  ms.reply(`${cardput}`)
+  ms.reply(`${cardput}`) */
+  if (game.turn === '0') {
+    cardput = `${game.cardA} \`<<\`\n`
+  } else {
+    cardput = `${game.cardA}\n`
+  }
+  if (game.turn === '1') {
+    cardput = `${game.cardB} \`<<\`\n`
+  } else {
+    cardput = `${game.cardB}\n`
+  }
+  if (game.turn === '2') {
+    cardput = `${game.cardC} \`<<\`\n`
+  } else {
+    cardput = `${game.cardC}\n`
+  }
+  if (game.turn === '3') {
+    cardput = `${game.cardD} \`<<\`\n`
+  } else {
+    cardput = `${game.cardD}\n`
+  }
+  if (game.turn === '4') {
+    cardput = `${game.cardE} \`<<\`\n`
+  } else {
+    cardput = `${game.cardE}\n`
+  }
+
+  ms.reply(`${cardput}\n**${message.member.displayName}**, turn: \`0${game.drink}\``)
+
+  //increaseHi(ms, game)
 }
+// objective to get least drinks as possible
 
 exports.run = (client, message, params) => {
   var cA = `${Rand(Integer)}${Rand(CType)}`
@@ -36,7 +71,7 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) { // there is one spoon
       console.log(`CREATED New Waterfall Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
-      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
+      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
       .then(() => {
         sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
           Play(client, message, params, row)
@@ -48,8 +83,8 @@ exports.run = (client, message, params) => {
   }).catch(() => { // there is no spoon
     console.error;
     console.log(`NEW DB WATERFALL ADDED SUCCESSFULLY`)
-    sql.run(`CREATE TABLE IF NOT EXISTS waterfall (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER)`).then(() => {
-      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
+    sql.run(`CREATE TABLE IF NOT EXISTS waterfall (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER, drink INTEGER)`).then(() => {
+      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
     }).then(() => {
       Play(client, message, params, row)
     })
