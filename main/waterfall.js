@@ -1,152 +1,77 @@
-const settings = require('../settings.json');
-const chalk = require ('chalk');
+// ctrl-p = find a file
 const sql = require("sqlite");
 sql.open("../score.sqlite");
-////////////////////////////////////////////////////////////////////////////////
-// function floor
+const settings = require('../settings.json');
+const chalk = require ('chalk');
+let curren = ":tickets:"
+let chatBit = ":eye_in_speech_bubble:"
+
 function Rand(data) {
+  // where data is the array
   return data[Math.floor(Math.random() * data.length)]
 }
-function convertToInt(wfRow, wfRVL) {
-  for (var i = 0; i < wfRow.length; i++) {
-    var cardX = wfRow[i]
-    if (cardX == 'a') {
-      wfRVL[i] = a
-    } else if (cardX == 'one') {
-      wfRVL[i] = one
-    } else if (cardX == 'two') {
-      wfRVL[i] = two
-    } else if (cardX == 'three') {
-      wfRVL[i] = three
-    } else if (cardX == 'four') {
-      wfRVL[i] = four
-    } else if (cardX == 'five') {
-      wfRVL[i] = five
-    } else if (cardX == 'six') {
-      wfRVL[i] = six
-    } else if (cardX == 'seven') {
-      wfRVL[i] = seven
-    } else if (cardX == 'eight') {
-      wfRVL[i] = eight
-    } else if (cardX == 'nine') {
-      wfRVL[i] = nine
-    } else if (cardX == 'keycap_ten') {
-      wfRVL[i] = keycap_ten
-    } else if (cardX == 'regional_indicator_j') {
-      wfRVL[i] = regional_indicator_j
-    } else if (cardX == 'regional_indicator_q') {
-      wfRVL[i] = regional_indicator_q
-    } else if (cardX == 'regional_indicator_k') {
-      wfRVL[i] = regional_indicator_k
-    }
-  }
-  console.log(wfRVL)
-}
-////////////////////////////////////////////////////////////////////////////////
-// symbol floor
-const cards = [
-  'a',
-  'one',
-  'two',
-  'three',
-  'four',
-  'five',
-  'six',
-  'seven',
-  'eight',
-  'nine',
-  'keycap_ten',
-  'regional_indicator_j',
-  'regional_indicator_q',
-  'regional_indicator_k'
+
+const Integer = [
+  ':a:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:', ':regional_indicator_j:', ':regional_indicator_q:', ':regional_indicator_k:'
 ]
-////////////////////////////////////////////////////////////////////////////////
-// value floor
-let a = 0
-let one = 1
-let two = 2
-let three = 3
-let four = 4
-let five = 5
-let six = 6
-let seven = 7
-let eight = 8
-let nine = 9
-let keycap_ten = 10
-let regional_indicator_j = 11
-let regional_indicator_q = 12
-let regional_indicator_k = 13
-////////////////////////////////////////////////////////////////////////////////
-// exports
+const CType = [
+  ':hearts:', ':spades:', ':clubs:', ':diamonds:'
+]
+
+function Play(cl, ms, pr, game) {
+  var cardput = `${game.cardA}\n`
+  cardput += `${game.cardB}\n`
+  cardput += `${game.cardC}\n`
+  cardput += `${game.cardD}\n`
+  cardput += `${game.cardE}`
+  ms.reply(`${cardput}`)
+}
+
 exports.run = (client, message, params) => {
-  if (params[0] === undefined) return message.reply("`ERROR` Can't play option-less.")
-  if (params[0] === "usage" || params[0] === "help") {
-    message.channel.send({embed: {
-      color: 0x4D94E6,
-      timestamp: new Date(),
-      footer: {
-        text: "Waterfall Usage"
-      },
-      author: {
-        name: message.member.displayName + " --- Waterfall Card Game Instructions",
-        icon_url: message.author.avatarURL
-      },
-      fields: [
-        {
-          name: "How the Game Works",
-          value: "A set of 5 cards are randomly generated. Your objective is to clear the game's 5 cards."
-        },
-        {
-          name :"Whatnow?",
-          value: "You can clear a card and move onto the next by guessing if the next card that will replace the current card will be higher or lower valued."
-        },
-        {
-          name: "What happens if I get it wrong?",
-          value: "You have to go back to the beginning and start over."
-        },
-        {
-          name: "What happens if the card is the same value?",
-          value: "You continue but are penalized."
-        },
-        {
-          name: "Commands?",
-          value: "See " + settings.prefix + "help waterfall"
-        }
-      ]
-    }})
-  } else if (params[0] === 'new') {
-    ////////////////////////////////////////////////////////////////////////////
-    // initialization
-    var visualization = ''
-    var cardA = Rand(cards)
-    var cardB = Rand(cards)
-    var cardC = Rand(cards)
-    var cardD = Rand(cards)
-    var cardE = Rand(cards)
-    var wfRow = `${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`
-    console.log(wfRow)
-    var wfRow = wfRow.split(' ')
-    for (var i = 0; i < wfRow.length; i++) {
-      visualization += `:${wfRow[i]}: `
+  var cA = `${Rand(Integer)}${Rand(CType)}`
+  var cB = `${Rand(Integer)}${Rand(CType)}`
+  var cC = `${Rand(Integer)}${Rand(CType)}`
+  var cD = `${Rand(Integer)}${Rand(CType)}`
+  var cE = `${Rand(Integer)}${Rand(CType)}`
+  sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
+    if (!row) { // there is one spoon
+      console.log(`CREATED New Waterfall Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
+      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
+      .then(() => {
+        sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
+          Play(client, message, params, row)
+        })
+      })
+    } else { // there are two spoons
+      Play(client, message, params, row)
     }
-    var wfRVL = wfRow
-    convertToInt(wfRow, wfRVL)
-    ////////////////////////////////////////////////////////////////////////////
-    // returns ${visualization} and ${wfRVL}
-    message.reply(`${visualization}`)
-  }
+  }).catch(() => { // there is no spoon
+    console.error;
+    console.log(`NEW DB WATERFALL ADDED SUCCESSFULLY`)
+    sql.run(`CREATE TABLE IF NOT EXISTS waterfall (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER)`).then(() => {
+      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
+    }).then(() => {
+      Play(client, message, params, row)
+    })
+  })
 };
 
-// need this to go back to permLevel 1
+/*
+enabled, guildOnly, aliases, permission level
+*/
 exports.conf = {
-  enabled: false,
+  enabled: true,
   guildOnly: false,
   aliases: ['wf'],
   permLevel: 4
 };
 
+/*
+name, desc., usage
+name is also the command alias
+*/
 exports.help = {
   name: 'waterfall',
-  description: 'Waterfall Game. COMING SOON',
-  usage: 'waterfall [new/end/usage/view/high/low]'
+  description: 'Card Game!',
+  usage: 'waterfall [higher/lower/hi/lo/score]'
 };
