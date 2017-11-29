@@ -19,7 +19,7 @@ const CType = [
 ]
 
 function increaseHi(message, game) {
-  sql.run(`UPDATE waterfall SET hiScore = "${game.hiScore*1} + 1" WHERE userId = "${message.author.id}"`)
+  sql.run(`UPDATE waterfallB SET hiScore = "${game.hiScore*1} + 1" WHERE userId = "${message.author.id}"`)
 }
 
 function Play(cl, ms, pr, game) {
@@ -68,12 +68,12 @@ exports.run = (client, message, params) => {
   var cC = `${Rand(Integer)}${Rand(CType)}`
   var cD = `${Rand(Integer)}${Rand(CType)}`
   var cE = `${Rand(Integer)}${Rand(CType)}`
-  sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
+  sql.get(`SELECT * FROM waterfallB WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) { // there is one spoon
-      console.log(`CREATED New Waterfall Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
-      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
+      console.log(`CREATED New WaterfallB Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
+      sql.run(`INSERT INTO waterfallB (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
       .then(() => {
-        sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
+        sql.get(`SELECT * FROM waterfallB WHERE userId = "${message.author.id}"`).then(row => {
           Play(client, message, params, row)
         })
       })
@@ -83,8 +83,8 @@ exports.run = (client, message, params) => {
   }).catch(() => { // there is no spoon
     console.error;
     console.log(`NEW DB WATERFALL ADDED SUCCESSFULLY`)
-    sql.run(`CREATE TABLE IF NOT EXISTS waterfall (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER, drink INTEGER)`).then(() => {
-      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
+    sql.run(`CREATE TABLE IF NOT EXISTS waterfallB (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER, drink INTEGER)`).then(() => {
+      sql.run(`INSERT INTO waterfallB (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
     }).then(() => {
       Play(client, message, params, row)
     })
