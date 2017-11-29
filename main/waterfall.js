@@ -36,7 +36,7 @@ exports.run = (client, message, params) => {
   sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
     if (!row) { // there is one spoon
       console.log(`CREATED New Waterfall Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
-      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
+      sql.run(`INSERT INTO waterfall (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0])
       .then(() => {
         sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(row => {
           Play(client, message, params, row)
