@@ -84,7 +84,7 @@ function resetGame(message, cAv, cA, cBv, cB, cCv, cC, cDv, cD, cEv, cE) {
       }, 2100)
     }
     setTimeout(() => {
-      sql.run(`UPDATE waterfall SET card = "0" WHERE userId = "${message.author.id}"`)
+      sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
     }, 2300)
     if (ndata.userDsp !== message.author.tag) {
       setTimeout(() => {
@@ -196,9 +196,9 @@ function showCards(message, game) {
 function gameOver(message, game) {
   setTimeout(() => {
     message.reply(`\`Well Played! It only took ${game.userScore*1 + 1} Cards to beat that round!\``)
-    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`).then(() => {
-      sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
-    })
+    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`) //.then(() => {
+    //  sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
+  //  })
   }, 2000)
 }
 
@@ -387,7 +387,13 @@ function chooseCards(message, guess, game) {
 
 exports.run = (client, message, params) => {
   if (params[0] === "score") {
-    message.reply(`This feature isn't available yet.`)
+    sql.all(`SELECT * FROM waterfall ORDER BY userHiscore ASC LIMIT 15`).then(data => {
+      var scoreData = ``;
+      scoreData += `\`\`\`asciidoc`
+      scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore}`)
+      scoreData += `\`\`\``
+      message.reply(`**__Top 15 Waterfall Players__**\n${scoreData}`)
+    })
     return;
   }
   var cAv = DropNumber()
