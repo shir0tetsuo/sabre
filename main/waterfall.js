@@ -50,12 +50,6 @@ exports.run = (client, message, params) => {
       console.log(chalk.redBright(`Continuing match ${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`))
       PlayGame(client, message, params, gm)
     }
-  }).catch(() => {
-    console.error;
-    sql.run(`CREATE TABLE IF NOT EXISTS waterf (userId TEXT, userDsp TEXT, userTurn INTEGER, userHiscore INTEGER, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT)`).then(() => {
-      console.log(chalk.greenBright(`waterf CREATED: Populated ${message.author.id} ${message.author.tag} 0 100 ${cA} ${cB} ${cC} ${cD} ${cE}`))
-      sql.run(`INSERT INTO waterf (userId, userDsp, userTurn, userHiscore, cardA, cardB, cardC, cardD, cardE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, 0, 100, cA, cB, cC, cD, cE])
-    })
   })
 };
 
