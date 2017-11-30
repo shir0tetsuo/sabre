@@ -418,6 +418,9 @@ exports.run = (client, message, params) => {
     })
     return;
   }
+  if (params[0] === "reshuffle") {
+    resetGame(message, cAv, cA, cBv, cB, cCv, cC, cDv, cD, cEv, cE)
+  }
   var cAv = DropNumber()
   var cA = SolveEquiv(cAv)
   var cBv = DropNumber()
@@ -487,5 +490,5 @@ name is also the command alias
 exports.help = {
   name: 'waterfall',
   description: 'Card Game!',
-  usage: 'waterfall [higher/lower/hi/lo/score]'
+  usage: 'waterfall [higher/lower/hi/lo/score/reshuffle]\n\nHow to Play\n===========\n\nThere is a row of cards. Your objective is to successfully guess if the next card is higher or lower valued.\nValues :: A = Lowest, 2, 3, 4 ... 9, J, Q, K = Highest\n\nReset :: You can reset the game using reshuffle.'
 };
