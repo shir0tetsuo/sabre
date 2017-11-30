@@ -65,7 +65,7 @@ function newCards(message, cardAdata, cardA, cardBdata, cardB, cardCdata, cardC,
         icon_url: message.author.avatarURL
       },
       title: `Waterfall`,
-      description: `Here are your cards!`
+      description: `Here are your cards!`,
       fields: [
         {
           name: `You started a **New Round!**`,
