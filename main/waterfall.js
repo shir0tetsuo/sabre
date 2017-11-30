@@ -418,9 +418,6 @@ exports.run = (client, message, params) => {
     })
     return;
   }
-  if (params[0] === "reshuffle") {
-    resetGame(message, cAv, cA, cBv, cB, cCv, cC, cDv, cD, cEv, cE)
-  }
   var cAv = DropNumber()
   var cA = SolveEquiv(cAv)
   var cBv = DropNumber()
@@ -431,6 +428,10 @@ exports.run = (client, message, params) => {
   var cD = SolveEquiv(cDv)
   var cEv = DropNumber()
   var cE = SolveEquiv(cEv)
+  if (params[0] === "reshuffle") {
+    resetGame(message, cAv, cA, cBv, cB, cCv, cC, cDv, cD, cEv, cE)
+    return;
+  }
   sql.get(`SELECT * FROM waterfall WHERE userId = "${message.author.id}"`).then(game => {
 
     // there is one spoon
