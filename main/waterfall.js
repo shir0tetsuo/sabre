@@ -5,6 +5,7 @@ const settings = require('../settings.json');
 const chalk = require('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
+const Tran = require('../sys/TRANSACTIONS.js')
 
 function Rand(data) {
   // where data is the array
@@ -195,7 +196,25 @@ function showCards(message, game) {
 
 function gameOver(message, game) {
   setTimeout(() => {
-    message.reply(`\`Well Played! It only took ${game.userScore*1 + 1} Cards to beat that round!\``)
+    var bonus = `0`;
+    var prizeCalc = Math.floor(Math.random() * (40000 - 10000) + 10000)
+    if (game.userScore < game.userHiscore) {
+      // gain 1000 for each try overcome
+      bonus += (game.userHiscore - game.userScore) * 1000
+    }
+    if (game.userScore <= 10) {
+      bonus += 8000
+    } else if (game.userScore <= 6) {
+      bonus += 12000
+    }
+    var prizeFinal = prizeCalc*1 + bonus*1
+    if (bonus !== 0) {
+      var additional = `, with a bonus of ${bonus} tickets!`
+    } else {
+      var additional = `!`
+    }
+    message.reply(`\`Well Played! It only took ${game.userScore*1 + 1} Cards to beat that round!\nAdditionally, you've earned ${prizeCalc} Sabre Tickets\``)
+    Tran(message, "tk", prizeFinal)
     sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`) //.then(() => {
     //  sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
   //  })
