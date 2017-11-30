@@ -39,6 +39,7 @@ exports.run = (client, message, params) => {
   var cD = `${Rand(Integer)}${Rand(CType)}`
   var cE = `${Rand(Integer)}${Rand(CType)}`
   sql.get(`SELECT * FROM waterf WHERE userId = "${message.author.id}"`).then(gm => {
+    console.log(gm)
     if (!gm) {
       console.log(chalk.redBright(`Populating tables ${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`))
       sql.run(`INSERT INTO waterf (userId, userDsp, userTurn, userHiscore, cardA, cardB, cardC, cardD, cardE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, 0, 100, cA, cB, cC, cD, cE])
@@ -54,8 +55,6 @@ exports.run = (client, message, params) => {
     sql.run(`CREATE TABLE IF NOT EXISTS waterf (userId TEXT, userDsp TEXT, userTurn INTEGER, userHiscore INTEGER, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT)`).then(() => {
       console.log(chalk.greenBright(`waterf CREATED: Populated ${message.author.id} ${message.author.tag} 0 100 ${cA} ${cB} ${cC} ${cD} ${cE}`))
       sql.run(`INSERT INTO waterf (userId, userDsp, userTurn, userHiscore, cardA, cardB, cardC, cardD, cardE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, 0, 100, cA, cB, cC, cD, cE])
-    }).then(() => {
-      PlayGame(client, message, params, gm)
     })
   })
 };
