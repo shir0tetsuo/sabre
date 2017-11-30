@@ -65,37 +65,43 @@ function newCards(message, cardAdata, cardA, cardBdata, cardB, cardCdata, cardC,
 function showCards(message, game) {
 
   var printC = ``;
+  var selectedC = ``;
 
   if (game.userCard*1 == 0) {
     printC += `\n${game.cardA} \`<<\`\n`
+    selectedC += `${game.cardA}`
   } else {
     printC += `\n${game.cardA}\n`
   }
 
   if (game.userCard*1 == 1) {
     printC += `${game.cardB} \`<<\`\n`
+    selectedC += `${game.cardB}`
   } else {
     printC += `${game.cardB}\n`
   }
 
   if (game.userCard*1 == 2) {
     printC += `${game.cardC} \`<<\`\n`
+    selectedC += `${game.cardC}`
   } else {
     printC += `${game.cardC}\n`
   }
 
   if (game.userCard*1 == 3) {
     printC += `${game.cardD} \`<<\`\n`
+    selectedC += `${game.cardD}`
   } else {
     printC += `${game.cardD}\n`
   }
 
   if (game.userCard*1 == 4) {
     printC += `${game.cardE} \`<<\``
+    selectedC += `${game.cardE}`
   } else {
     printC += `${game.cardE}\n`
   }
-  
+
 //  message.reply(`Here are your cards. ${printC}\n\`Turn: ${game.userScore}\`\n\`Card: ${game.userCard*1 + 1}\`\n\nTo continue, use \`${settings.prefix}waterfall [higher/lower/hi/lo]\``)
   message.channel.send({embed: {
     color: 0x236a88,
@@ -113,7 +119,7 @@ function showCards(message, game) {
       },
       {
         name: `\u200b`,
-        value: `\`\`\`ml\nTurn: ${game.userScore}\nCard: ${game.userCard*1 + 1}\`\`\``,
+        value: `\`\`\`ml\nTurn: ${game.userScore}\nCard: ${game.userCard*1 + 1}\`\`\`\n${selectedC} \`<<\``,
         inline: true
       },
       {
