@@ -200,7 +200,10 @@ function gameOver(message, game) {
     var prizeCalc = Math.floor(Math.random() * (40000 - 10000) + 10000)
     if (game.userScore < game.userHiscore) {
       // gain 1000 for each try overcome
+      var beatHighScore = ` You beat your High Score!`
       bonus += (game.userHiscore - game.userScore) * 1000
+    } else {
+      var beatHighScore = ``
     }
     if (game.userScore <= 10) {
       bonus += 8000
@@ -213,7 +216,7 @@ function gameOver(message, game) {
     } else {
       var additional = `!`
     }
-    message.reply(`\`Well Played! It only took ${game.userScore*1 + 1} Cards to beat that round!\nAdditionally, you've earned ${prizeCalc} Sabre Tickets\``)
+    message.reply(`\`Well Played!${beatHighScore} It only took ${game.userScore*1 + 1} Cards to beat that round!\nAdditionally, you've earned ${prizeCalc} Sabre Tickets${additional}\``)
     Tran(message, "tk", prizeFinal)
     sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`) //.then(() => {
     //  sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
