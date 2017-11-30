@@ -408,7 +408,7 @@ exports.run = (client, message, params) => {
   if (params[0] === "score") {
     sql.all(`SELECT * FROM waterfall ORDER BY userHiscore ASC LIMIT 15`).then(data => {
       var scoreData = ``;
-      scoreData += `\`\`\`asciidoc`
+      scoreData += `\`\`\`asciidoc\n`
       scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore}`)
       scoreData += `\`\`\``
       message.reply(`**__Top 15 Waterfall Players__**\n${scoreData}`)
