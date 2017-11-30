@@ -96,7 +96,7 @@ function showCards(message, game) {
     printC += `${game.cardE}\n`
   }
 
-  message.reply(`Here are your cards. ${printC}\n\`Turn: ${game.userScore}\`\n\nTo continue, use \`${settings.prefix}waterfall [higher/lower/hi/lo]\``)
+  message.reply(`Here are your cards. ${printC}\n\`Turn: ${game.userScore}\`\n\`Card: ${game.userCard*1 + 1}\`\n\nTo continue, use \`${settings.prefix}waterfall [higher/lower/hi/lo]\``)
 
 }
 
