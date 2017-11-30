@@ -95,9 +95,33 @@ function showCards(message, game) {
   } else {
     printC += `${game.cardE}\n`
   }
-
-  message.reply(`Here are your cards. ${printC}\n\`Turn: ${game.userScore}\`\n\`Card: ${game.userCard*1 + 1}\`\n\nTo continue, use \`${settings.prefix}waterfall [higher/lower/hi/lo]\``)
-
+  
+//  message.reply(`Here are your cards. ${printC}\n\`Turn: ${game.userScore}\`\n\`Card: ${game.userCard*1 + 1}\`\n\nTo continue, use \`${settings.prefix}waterfall [higher/lower/hi/lo]\``)
+  message.channel.send({embed: {
+    color: 0x236a88,
+    author: {
+      name: message.author.tag,
+      icon_url: message.author.avatarURL
+    },
+    title: `Waterfall`,
+    description: `Here are your cards!`,
+    fields: [
+      {
+        name: `\u200b`,
+        value: `${printC}`,
+        inline: true
+      },
+      {
+        name: `\u200b`,
+        value: `\`\`\`ml\nTurn: ${game.userScore}\nCard: ${game.userCard*1 + 1}\`\`\``,
+        inline: true
+      },
+      {
+        name: `Is the next card to be drawn of higher or lower value than the current card?`,
+        value: `Type \`${settings.prefix}waterfall [higher/lower/hi/lo]\` to continue.`
+      }
+    ]
+  }})
 }
 
 exports.run = (client, message, params) => {
