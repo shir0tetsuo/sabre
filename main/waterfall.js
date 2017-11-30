@@ -18,49 +18,19 @@ const CType = [
   ':hearts:', ':spades:', ':clubs:', ':diamonds:'
 ]
 
-function increaseHi(message, game) {
-  sql.run(`UPDATE waterfallB SET hiScore = "${game.hiScore*1} + 1" WHERE userId = "${message.author.id}"`)
-}
+//function increaseHi(message, game) {
+//  sql.run(`UPDATE waterfallB SET hiScore = "${game.hiScore*1} + 1" WHERE userId = "${message.author.id}"`)
+//}
 
-function Play(cl, ms, pr, game) {
+function PlayGame(client, message, params, game) {
   var cardput = ``;
-  /* var cardput = `\n${game.cardA}\n`
+  var cardput = `\n${game.cardA}\n`
   cardput += `${game.cardB}\n`
   cardput += `${game.cardC}\n`
   cardput += `${game.cardD}\n`
   cardput += `${game.cardE}`
-  ms.reply(`${cardput}`) */
-  if (game.turn === '0') {
-    cardput = `${game.cardA} \`<<\`\n`
-  } else {
-    cardput = `${game.cardA}\n`
-  }
-  if (game.turn === '1') {
-    cardput = `${game.cardB} \`<<\`\n`
-  } else {
-    cardput = `${game.cardB}\n`
-  }
-  if (game.turn === '2') {
-    cardput = `${game.cardC} \`<<\`\n`
-  } else {
-    cardput = `${game.cardC}\n`
-  }
-  if (game.turn === '3') {
-    cardput = `${game.cardD} \`<<\`\n`
-  } else {
-    cardput = `${game.cardD}\n`
-  }
-  if (game.turn === '4') {
-    cardput = `${game.cardE} \`<<\`\n`
-  } else {
-    cardput = `${game.cardE}\n`
-  }
-
-  ms.reply(`${cardput}\n**${message.member.displayName}**, turn: \`0${game.drink}\``)
-
-  //increaseHi(ms, game)
+  message.reply(`${cardput}`)
 }
-// objective to get least drinks as possible
 
 exports.run = (client, message, params) => {
   var cA = `${Rand(Integer)}${Rand(CType)}`
@@ -68,25 +38,22 @@ exports.run = (client, message, params) => {
   var cC = `${Rand(Integer)}${Rand(CType)}`
   var cD = `${Rand(Integer)}${Rand(CType)}`
   var cE = `${Rand(Integer)}${Rand(CType)}`
-  sql.get(`SELECT * FROM waterfallB WHERE userId = "${message.author.id}"`).then(row => {
-    if (!row) { // there is one spoon
-      console.log(`CREATED New WaterfallB Table ${message.guild.name} ${message.channel.name} ${message.author.tag}`)
-      sql.run(`INSERT INTO waterfallB (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
+  sql.get(`SELECT * FROM waterf WHERE userId = "${message.author.id}"`).then(gm => {
+    if (!gm) {
+      console.log(chalk.redBright(`Populating tables ${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`))
+      sql.run(`INSERT INTO waterf (userId, userDsp, userTurn, userHiscore, cardA, cardB, cardC, cardD, cardE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [message.author.id, message.author.tag, 0, 100, cA, cB, cC, cD, cE])
       .then(() => {
-        sql.get(`SELECT * FROM waterfallB WHERE userId = "${message.author.id}"`).then(row => {
-          Play(client, message, params, row)
-        })
+        PlayGame(client, message, params, gm)
       })
-    } else { // there are two spoons
-      Play(client, message, params, row)
+    } else {
+      console.log(chalk.redBright(`Continuing match ${cardA} ${cardB} ${cardC} ${cardD} ${cardE}`))
+      PlayGame(client, message, params, gm)
     }
-  }).catch(() => { // there is no spoon
+  }).catch(() => {
     console.error;
-    console.log(`NEW DB WATERFALL ADDED SUCCESSFULLY`)
-    sql.run(`CREATE TABLE IF NOT EXISTS waterfallB (userId TEXT, tag TEXT, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT, hiScore INTEGER, turn INTEGER, drink INTEGER)`).then(() => {
-      sql.run(`INSERT INTO waterfallB (userId, tag, cardA, cardB, cardC, cardD, cardE, hiScore, turn, drink)`, [message.author.id, message.author.tag, cA, cB, cC, cD, cE, 100, 0, 1])
-    }).then(() => {
-      Play(client, message, params, row)
+    sql.run(`CREATE TABLE IF NOT EXISTS waterf (userId TEXT, userDsp TEXT, userTurn INTEGER, userHiscore INTEGER, cardA TEXT, cardB TEXT, cardC TEXT, cardD TEXT, cardE TEXT)`).then(() => {
+      console.log(chalk.greenBright(`waterf CREATED: Populated ${message.author.id} ${message.author.tag} 0 100 ${cA} ${cB} ${cC} ${cD} ${cE}`))
+      sql.run(`INSERT INTO waterf (userId, userDsp, userTurn, userHiscore, cardA, cardB, cardC, cardD, cardE)`, [message.author.id, message.author.tag, 0, 100, cA, cB, cC, cD, cE])
     })
   })
 };
