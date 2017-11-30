@@ -480,13 +480,9 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['wf'],
-  permLevel: 4
+  permLevel: 1
 };
 
-/*
-name, desc., usage
-name is also the command alias
-*/
 exports.help = {
   name: 'waterfall',
   description: 'Card Game!',
