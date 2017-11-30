@@ -66,31 +66,31 @@ function showCards(message, game) {
 
   var printC = ``;
 
-  if (game.userCard === '0') {
+  if (game.userCard*1 == 0) {
     printC += `\n${game.cardA} \`<<\`\n`
   } else {
     printC += `\n${game.cardA}\n`
   }
 
-  if (game.userCard === '1') {
+  if (game.userCard*1 == 1) {
     printC += `${game.cardB} \`<<\`\n`
   } else {
     printC += `${game.cardB}\n`
   }
 
-  if (game.userCard === '2') {
+  if (game.userCard*1 == 2) {
     printC += `${game.cardC} \`<<\`\n`
   } else {
     printC += `${game.cardC}\n`
   }
 
-  if (game.userCard === '3') {
+  if (game.userCard*1 == 3) {
     printC += `${game.cardD} \`<<\`\n`
   } else {
     printC += `${game.cardD}\n`
   }
 
-  if (game.userCard === '4') {
+  if (game.userCard*1 == 4) {
     printC += `${game.cardE} \`<<\``
   } else {
     printC += `${game.cardE}\n`
