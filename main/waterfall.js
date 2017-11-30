@@ -181,7 +181,7 @@ function showCards(message, game) {
         },
         {
           name: `\u200b`,
-          value: `\`\`\`ml\nTurn: ${game.userScore}\nCard: ${game.userCard*1 + 1}\`\`\`\n${selectedC} \`<<\``,
+          value: `\`\`\`ml\nTurn: ${game.userScore*1 + 1}\nCard: ${game.userCard*1 + 1}\`\`\`\n${selectedC} \`<<\``,
           inline: true
         },
         {
@@ -195,8 +195,10 @@ function showCards(message, game) {
 
 function gameOver(message, game) {
   setTimeout(() => {
-    message.reply(`\`Well Played! It only took ${game.userScore} Cards to beat that round!\``)
-    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`)
+    message.reply(`\`Well Played! It only took ${game.userScore*1 + 1} Cards to beat that round!\``)
+    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`).then(() => {
+      sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
+    })
   }, 2000)
 }
 
