@@ -201,7 +201,10 @@ function gameOver(message, game) {
     if (game.userScore < game.userHiscore) {
       // gain 1000 for each try overcome
       var beatHighScore = ` You beat your High Score!`
-      bonus += (game.userHiscore - game.userScore) * 1000
+      setTimeout(() => {
+        sql.run(`UPDATE waterfall SET userHiscore = "${game.userScore}" WHERE userId = "${message.author.id}"`)
+      }, 1200)
+      bonus += (game.userHiscore - (game.userScore * 2)) * 1000
     } else {
       var beatHighScore = ``
     }
@@ -210,15 +213,18 @@ function gameOver(message, game) {
     } else if (game.userScore <= 6) {
       bonus += 12000
     }
+    if (bonus*1 > 3500000) {
+      bonus = 3500000
+    }
     var prizeFinal = prizeCalc*1 + bonus*1
     if (bonus !== 0) {
-      var additional = `, with a bonus of ${bonus} tickets!`
+      var additional = `, with a bonus of ${bonus*1} tickets!`
     } else {
       var additional = `!`
     }
     message.reply(`\`Well Played!${beatHighScore} It only took ${game.userScore*1 + 1} Cards to beat that round!\nAdditionally, you've earned ${prizeCalc} Sabre Tickets${additional}\``)
     Tran(message, "tk", prizeFinal)
-    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`) //.then(() => {
+    sql.run(`UPDATE waterfall SET userTurnProgress = "1" WHERE userId = "${message.author.id}"`)
     //  sql.run(`UPDATE waterfall SET userCard = "0" WHERE userId = "${message.author.id}"`)
   //  })
   }, 2000)
@@ -412,7 +418,7 @@ exports.run = (client, message, params) => {
     sql.all(`SELECT * FROM waterfall ORDER BY userHiscore ASC LIMIT 15`).then(data => {
       var scoreData = ``;
       scoreData += `\`\`\`asciidoc\n`
-      scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore}`)
+      scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore}`).join('\n')
       scoreData += `\`\`\``
       message.reply(`**__Top 15 Waterfall Players__**\n${scoreData}`)
     })
