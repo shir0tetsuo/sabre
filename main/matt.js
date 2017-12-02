@@ -92,8 +92,8 @@ exports.run = (client, message, params) => {
     color: 0x00fafa,
     description: `\u200b`,
     author: {
-      name: client.username,
-      avatarURL: client.avatarURL
+      name: client.user.username,
+      avatarURL: client.user.avatarURL
     },
     fields: [
       {
