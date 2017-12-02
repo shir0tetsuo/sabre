@@ -33,29 +33,57 @@ function Rand() {
   //return data[Math.floor(Math.random() * data.length)]
 }
 
+function RandArray(data) {
+  // where data is the array
+  return data[Math.floor(Math.random() * data.length)]
+}
+
+responseArray = [
+  'Simple.',
+  'Strange.',
+  'Odd.',
+  'Mesmarizing.',
+  'Silly.',
+  'Uncomfortable.',
+  'Blocky.',
+  'High-Tech.',
+  'Stupid.',
+  'Crazy.',
+  'Fantastic.',
+  'Creepy.',
+  'like David\'s Cryptographs.',
+  'Super.',
+  'Splendid.',
+  'Wunderbar.',
+  'Fancy.',
+  'Spoofy.',
+  'Spicy.',
+  'Beefy.'
+]
+
 exports.run = (client, message, params) => {
-  var RanDart = `\`\`\`ml\n`
-  for (i = 0; i < 10; i++) {
+  var RanDart = `\`\`\`ml\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
-  RanDart += `\n`
-  for (i = 0; i < 10; i++) {
+  RanDart += `\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
-  RanDart += `\n`
-  for (i = 0; i < 10; i++) {
+  RanDart += `\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
-  RanDart += `\n`
-  for (i = 0; i < 10; i++) {
+  RanDart += `\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
-  RanDart += `\n`
-  for (i = 0; i < 10; i++) {
+  RanDart += `\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
-  RanDart += `\n`
-  for (i = 0; i < 10; i++) {
+  RanDart += `\n==`
+  for (i = 0; i < 20; i++) {
     RanDart += Rand()
   }
   RanDart += `\`\`\``
@@ -64,12 +92,12 @@ exports.run = (client, message, params) => {
     color: 0x00fafa,
     description: `\u200b`,
     author: {
-      name: client.user.name,
-      avatarURL: client.user.avatarURL
+      name: client.username,
+      avatarURL: client.avatarURL
     },
     fields: [
       {
-        name: `_-_-_-_-_-_-_-_-_-_`,
+        name: `\`Looks ${RandArray(responseArray)}\``,
         value: `${RanDart}`
       }
     ]
