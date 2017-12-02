@@ -91,10 +91,6 @@ exports.run = (client, message, params) => {
   message.channel.send({embed: {
     color: 0x00fafa,
     description: `\u200b`,
-    author: {
-      name: `Generating...`,
-      avatarURL: message.author.avatarURL
-    },
     fields: [
       {
         name: `\`Looks ${RandArray(responseArray)}\``,
