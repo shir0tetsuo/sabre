@@ -28,7 +28,7 @@ function Rand() {
   if (imposeMath >= 89) return `S`
   if (imposeMath >= 88) return `E`
   if (imposeMath >= 87) return `/`
-  if (imposeMath >= 85) return `${generateRandomness}`
+  if (imposeMath >= 85) return `${generateRandomness()}`
   if (imposeMath !== -1) return ` `
   //return data[Math.floor(Math.random() * data.length)]
 }
@@ -61,7 +61,7 @@ exports.run = (client, message, params) => {
   RanDart += `\`\`\``
 
   message.channel.send({embed: {
-    color: 0x17bd0f,
+    color: 0x00fafa,
     description: `\u200b`,
     author: {
       name: client.user.name,
