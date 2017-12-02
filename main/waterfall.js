@@ -204,7 +204,7 @@ function gameOver(message, game) {
       setTimeout(() => {
         sql.run(`UPDATE waterfall SET userHiscore = "${game.userScore}" WHERE userId = "${message.author.id}"`)
       }, 1200)
-      bonus += (game.userHiscore - (game.userScore * 2)) * 100
+      bonus += (game.userHiscore * 1 - (game.userScore / 2)) * 200
     } else {
       var beatHighScore = ``
     }
