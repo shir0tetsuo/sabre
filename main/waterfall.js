@@ -204,7 +204,7 @@ function gameOver(message, game) {
       setTimeout(() => {
         sql.run(`UPDATE waterfall SET userHiscore = "${game.userScore}" WHERE userId = "${message.author.id}"`)
       }, 1200)
-      bonus += (game.userHiscore - (game.userScore * 2)) * 1000
+      bonus += (game.userHiscore - (game.userScore * 2)) * 100
     } else {
       var beatHighScore = ``
     }
@@ -418,7 +418,7 @@ exports.run = (client, message, params) => {
     sql.all(`SELECT * FROM waterfall ORDER BY userHiscore ASC LIMIT 15`).then(data => {
       var scoreData = ``;
       scoreData += `\`\`\`asciidoc\n`
-      scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore}`).join('\n')
+      scoreData += data.map(m => `${m.userDsp} :: ${m.userHiscore*1 + 1}`).join('\n')
       scoreData += `\`\`\``
       message.reply(`**__Top 15 Waterfall Players__**\n${scoreData}`)
     })
