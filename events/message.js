@@ -148,27 +148,6 @@ function checkSTFU(message) {
   })
 }
 
-function InterventionI(message) {
-  if (message.guild.id !== settings.davnetguild) return;
-  if (message.author.id === settings.ownerid) return;
-  var illegalRole = message.guild.roles.find("name", "Sabre");
-  if (!illegalRole || illegalRole === undefined) return;
-  message.channel.send(`:no_pedestrians: \`Illegal Role Detected.\`\n\`\`\`diff\n- Sabre Role\`\`\`\nAction: :no_pedestrians: \`\`\`diff\n- Commencing elimination of unauthorized user.\`\`\``).then(() => {
-    message.channel.send(`**${message.member.displayName}, \`ERROR: Divine Intervention class I Offence\`, I hereby sentence you to the Mute-Zone!** @everyone`)
-    var personroles = person.roles.map(role => role.name).join(', ')
-    var secroom = message.guild.channels.find('name', 'security-bot');
-    var muRole = message.guild.roles.find("name", "Muted");
-    if (muRole !== undefined && muRole !== null) {
-      message.member.setRoles([muRole]).catch(console.error)
-    }
-    if (secroom !== undefined && secroom !== null) {
-      secroom.send(`${personroles} (${message.member.displayName})`)
-    } else {
-      console.log(`${message.channel.name} ${message.guild.name} Illegal Role (Sabre) ${message.member.displayName} ${personroles}`)
-    }
-  }).catch(console.error)
-}
-
 function findJob(name, client, message) {
   if (name.indexOf("MD") !== -1) {
     return 0x60d917
@@ -278,7 +257,6 @@ module.exports = message => {
   // Classified should go here
   // Disable the ability to use Sabre with SQL (future use)
   checkSTFU(message);
-  InterventionI(message);
   scoreInit(message);
   availInit(message);
   scanKeyword(message);

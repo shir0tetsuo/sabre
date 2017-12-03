@@ -10,8 +10,6 @@ exports.run = (client, message, params) => {
   var post = `\`\`\`diff\n`
   post += `- ${settings.prefix}stfu (undo) [mention]\n`
   post += `-- Obfuscates user input for 30 minutes.\n\n`
-  post += `- Sabre Role\n`
-  post += `-- Illegal Role.\n`
   post += `+ These tools require DIVINE INTERVENTION key.`
   post += `\`\`\``
   message.channel.send(`${post}`)
