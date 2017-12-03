@@ -51,7 +51,7 @@ enabled, guildOnly, aliases, permission level
 exports.conf = {
   enabled: false,
   guildOnly: false,
-  aliases: ['shush'],
+  aliases: ['shush', 'intervene'],
   permLevel: 0
 };
 
