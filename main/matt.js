@@ -63,27 +63,27 @@ responseArray = [
 
 exports.run = (client, message, params) => {
   var RanDart = `\`\`\`ml\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\n==`
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 19; i++) {
     RanDart += Rand()
   }
   RanDart += `\`\`\``
