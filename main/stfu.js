@@ -16,13 +16,22 @@ exports.run = (client, message, params) => {
   if (message.mentions.members.first() !== undefined && message.mentions.members.first() !== null) {
     if (message.author.id !== settings.ownerid && message.author.id !== settings.starid && message.author.id !== settings.mimyid) return message.channel.send(`Ohhh, Sorry! This is one of those... Special commands that require authorization. Nice try.`)
     var person = message.mentions.members.first()
+    if (params[0] === 'undo') {
+      sql.run(`SELECT * FROM stfu WHERE userId = "${person.id}"`).then(shh => {
+        if (!shh) return;
+        setTimeout(() => {
+          sql.run(`UPDATE stfu SET bit = "0" WHERE userId = "${person.id}"`)
+          message.reply(`${person} was unsilenced.`)
+        }, 2000)
+      })
+    }
     sql.get(`SELECT * FROM stfu WHERE userId = "${person.id}"`).then(shh => {
       if (!shh) {
         sql.run(`INSERT INTO stfu (userId, bit) VALUES (?, ?)`, [person.id, 1]).then(() => {
           TimerDelay(person)
         })
       } else {
-        sql.run(`INSERT INTO stfu (userId, bit) VALUES (?, ?)`, [person.id, 1]).then(() => {
+        sql.run(`UPDATE stfu SET bit = "1" WHERE userId = "${person.id}"`).then(() => {
           TimerDelay(person)
         })
       }
@@ -53,5 +62,5 @@ name is also the command alias
 exports.help = {
   name: 'stfu',
   description: 'User has been naughty. Obfuscates all text for half an hour.',
-  usage: 'stfu [key] [user]'
+  usage: 'stfu (undo) [user]'
 };
