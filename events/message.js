@@ -123,6 +123,31 @@ function Rand(data) {
   return data[Math.floor(Math.random() * data.length)]
 }
 
+const ungreatful = [
+  'You got oof\'d.',
+  'The customer you are trying to reach is currently unavailable.',
+  'Sorry, What\'d you say again?',
+  'Oooh, how hurtful.',
+  'It appears you have been shushed.',
+  'That was a nice comment. Too bad this message is here instead.'
+]
+
+function checkSTFU(message) {
+  sql.get(`SELECT * FROM stfu WHERE userId = "${message.author.id}"`).then(shh => {
+    if (!shh) return;
+    if (shh.bit == 1) {
+      var msg = message;
+      message.delete()
+      msg.reply(`${Rand(ungreatful)}`)
+      return;
+    }
+  }).catch(() => {
+    sql.run(`CREATE TABLE IF NOT EXISTS stfu (userId TEXT, bit INTEGER)`).then(() => {
+      sql.run(`INSERT INTO stfu (userId, bit)`, [msg.author.id, 0])
+    })
+  })
+}
+
 function findJob(name, client, message) {
   if (name.indexOf("MD") !== -1) {
     return 0x60d917
@@ -231,6 +256,7 @@ module.exports = message => {
   }
   // Classified should go here
   // Disable the ability to use Sabre with SQL (future use)
+  checkSTFU(message);
   scoreInit(message);
   availInit(message);
   scanKeyword(message);
