@@ -137,8 +137,8 @@ function checkSTFU(message) {
     if (!shh) return;
     if (shh.bit == 1) {
       var msg = message;
-      message.delete()
       msg.reply(`${Rand(ungreatful)}`)
+      message.delete()
       return;
     }
   }).catch(() => {
