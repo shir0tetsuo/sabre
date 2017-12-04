@@ -6,6 +6,7 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
+// "id" / settings.x-id
 const Authorized = [
   settings.ownerid,
   settings.starid,
@@ -14,7 +15,7 @@ const Authorized = [
 
 function Cryptographic(xlen) {
   if (!xlen) var xlen = 1
-    var charset = "0123456789 XY+-Oo.eE=/",
+    var charset = "0123456789 XY+-Oo.eE=/Z",
         retVal = "";
     for (var i = 0, n = charset.length; i < xlen; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));
@@ -32,7 +33,7 @@ function PC(xlen) {
 }
 
 exports.run = (client, message, params) => {
-  if (message.guild.id !== settings.davnetguild) return message.reply(`\`Access Denied\` This is a DAVNET command.`);
+  //if (message.guild.id !== settings.davnetguild) return message.reply(`\`Access Denied\` This is a DAVNET command.`);
   if (!message.mentions.members.first() || message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`\`ERROR\` No Mention.`)
   //console.log(`${message.author.tag} ${message.channel.name} ${message.guild.name} OPER: exfil ${message.content}`)
   person = message.mentions.members.first();
@@ -40,9 +41,41 @@ exports.run = (client, message, params) => {
   passcode = PC(5);
   const inter = 120000;
   var MU = message.guild.roles.find("name", "Muted")
-  if (!MU || MU === undefined) return message.reply(`\`FATAL\` Cannot find \`Muted\` role.`);
+  if (!MU || MU === undefined) {
+    message.guild.createRole().then(role => {
+      role.edit({
+                  name: "Muted",
+                  color: 0x454647,
+                  mentionable: false
+      })
+    }).then(() => {
+      MU = message.guild.roles.find("name", "Muted")
+      message.channel.send(`\`Role Created: Muted\``)
+    })
+  }//return message.reply(`\`FATAL\` Cannot find \`Muted\` role.`);
   var personroles = person.roles.map(role => role.name).join(`, `)
   const secbotChan = message.guild.channels.find('name', 'security-bot');
+  if (!secbotChan || secbotChan === undefined) {
+    message.guild.createChannel('security-bot', 'text').then(ch => {
+      ch.overwritePermissions(message.guild.roles.find("name", "Sabre"), {
+        READ_MESSAGES: true,
+        SEND_MESSAGES: true,
+        READ_MESSAGE_HISTORY: true,
+        MENTION_EVERYONE: true,
+        ADD_REACTIONS: true,
+        MANAGE_ROLES_OR_PERMISSIONS: true,
+        ATTACH_FILES: true
+      })
+      ch.overwritePermissions(message.guild.id, {
+        READ_MESSAGES: false,
+        READ_MESSAGE_HISTORY: false,
+        SEND_MESSAGES: false
+      }).then(() => {
+        message.channel.send(`\`Channel Created: security-bot\``)
+        secbotChan = message.guild.channels.find('name', 'security-bot')
+      })
+    })
+  }
     const permlvl = client.elevation(message)
     var ExfilMessage = `:no_pedestrians:\n**\`\`\`diff\n`
     ExfilMessage += `- Authorization Required -\n`
