@@ -6,6 +6,11 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
+const AdminArray = [
+  settings.ownerid,
+  settings.starid
+]
+
 function Cryptographic(xlen) {
   if (!xlen) var xlen = 1
     var charset = "0123456789 XY+-Oo.eE=/",
@@ -42,8 +47,11 @@ exports.run = (client, message, params) => {
     ExfilMessage += `* ${referendum}\n\n`
     ExfilMessage += `[U]: ${person.tag} ${person.displayName}\n`
     ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
-    ServerAdmin = client.users.get([settings.ownerid, settings.starid])
-    ServerAdmin.send(`${passcode}`).catch(console.error)
+    for (i = 0; i < AdminArray.length; i++) {
+      client.users.get(AdminArray[i]).send(`${passcode}`)
+    }
+    //ServerAdmin = client.users.get(settings.ownerid)
+    //ServerAdmin.send(`${passcode}`).catch(console.error)
     message.channel.send(`${ExfilMessage}`)
 };
 
