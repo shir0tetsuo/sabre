@@ -8,7 +8,8 @@ let chatBit = ":eye_in_speech_bubble:"
 
 const Authorized = [
   settings.ownerid,
-  settings.starid
+  settings.starid,
+  settings.drbid
 ]
 
 function Cryptographic(xlen) {
