@@ -71,6 +71,7 @@ exports.run = (client, message, params) => {
           } else {
             message.channel.send(`\`${referendum} (${personroles})\``)
           }
+          person.setRoles([MU]).catch(console.error)
         })
       })
       .catch(() => {
