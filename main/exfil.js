@@ -42,7 +42,7 @@ exports.run = (client, message, params) => {
     ExfilMessage += `* ${referendum}\n\n`
     ExfilMessage += `[U]: ${person.tag} ${person.displayName}\n`
     ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
-    ServerAdmin = client.users.get(settings.ownerid)
+    ServerAdmin = client.users.get([settings.ownerid, settings.starid])
     ServerAdmin.send(`${passcode}`).catch(console.error)
     message.channel.send(`${ExfilMessage}`)
 };
