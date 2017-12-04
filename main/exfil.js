@@ -40,8 +40,10 @@ exports.run = (client, message, params) => {
     ExfilMessage += `[!]: ACTION REQUIRED!\n`
     ExfilMessage += `[#]: REFERENCE ID:\n\n`
     ExfilMessage += `* ${referendum}\n\n`
-    ExfilMessage += `[U]: ${person.displayName}\n`
+    ExfilMessage += `[U]: ${person.tag} ${person.displayName}\n`
     ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
+    ServerAdmin = message.members.get(settings.ownerid)
+    ServerAdmin.send(`${passcode}`)
     message.channel.send(`${ExfilMessage}`)
 };
 
