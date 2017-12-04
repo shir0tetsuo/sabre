@@ -30,10 +30,10 @@ exports.run = (client, message, params) => {
     })
   }
 
-  message.channel.overwritePermissions(message.guild.id, {
-    READ_MESSAGES: false,
-    SEND_MESSAGES: false
-  })
+  //message.channel.overwritePermissions(message.guild.id, {
+  //  READ_MESSAGES: false,
+  //  SEND_MESSAGES: false
+  //})
   message.reply(`\`Muted tag revoked permissions\``)
 };
 
