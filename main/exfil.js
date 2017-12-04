@@ -54,7 +54,7 @@ exports.run = (client, message, params) => {
     ExfilMessage += `- ////////////////////// -\`\`\`**\`\`\`md\n`
     ExfilMessage += `[#]: ${referendum}\n`
     ExfilMessage += `[U]: ${person.user.tag} (${person.displayName})\n`
-    ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `).substring(300)}\`\`\``
+    ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `).substring(0, 300)}\`\`\``
     message.channel.send(`${ExfilMessage}`).then(() => {
       ExfilMessage += `\`\`\`md\n[A]: ${passcode}\n[C]: ${message.channel.name}, ${message.guild.name}\n[T]: ${new Date()}\n[!]: ${message.author.tag} (${message.member.displayName})\`\`\``
       for (i = 0; i < Authorized.length; i++) {
