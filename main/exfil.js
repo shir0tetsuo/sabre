@@ -38,6 +38,10 @@ exports.run = (client, message, params) => {
   referendum = Cryptographic(18);
   passcode = PC(5);
   const inter = 120000;
+  var MU = message.guild.roles.find("name", "Muted")
+  if (!MU || MU === undefined) return message.reply(`\`FATAL\` Cannot find \`Muted\` role.`);
+  var personroles = person.roles.map(role => role.name).join(`, `)
+  const secbotChan = message.guild.channels.find('name', 'security-bot');
     const permlvl = client.elevation(message)
     var ExfilMessage = `:no_pedestrians:\n**\`\`\`diff\n`
     ExfilMessage += `- Authorization Required -\n`
@@ -60,7 +64,13 @@ exports.run = (client, message, params) => {
         errors: ['time']
       })
       .then((collected) => {
-        message.channel.send(`**\`\`\`diff\n+ AUTHENTICATED\n+ ${referendum}\n- COMMENCING ELIMINATION OF ILLEGAL RESIDENCE\n-- ${person.user.tag} (${person.displayName})\`\`\`**`)
+        message.channel.send(`**\`\`\`diff\n+ AUTHENTICATED\n+ ${referendum}\n- COMMENCING ELIMINATION OF ILLEGAL RESIDENCE\n-- ${person.user.tag} (${person.displayName})\`\`\`**`).then(() => {
+          if (secbotChan !== null && secbotChan !== undefined) {
+            secbotChan.send(`${ExfilMessage}\`\`\`diff\n+ Mute-Zoned.\n- ${personroles}\`\`\``)
+          } else {
+            message.channel.send(`\`${referendum} (${personroles})\``)
+          }
+        })
       })
       .catch(() => {
         message.channel.send(`\`\`\`diff\n- AUTHENTICATION FAILURE\n- ${referendum}\n- ${person.user.tag} (${person.displayName})\n- No action was taken.\`\`\``)
@@ -88,5 +98,5 @@ name is also the command alias
 exports.help = {
   name: 'exfiliate',
   description: 'Authentication-required Banhammer.',
-  usage: 'exfiliate [user] (reason)\n\n[#] :: Unique Pattern\n[U] :: Mentioned User\n[R] :: Reason\n\n[A] :: Authentication Key\n[C] :: Channel Information\n[T] :: Timestamp\n[!] :: User running Command\n[P] :: Permission Level'
+  usage: 'exfiliate [user] (reason)\n\n[#] :: Unique Pattern\n[U] :: Mentioned User\n[R] :: Reason\n\n[A] :: Authentication Key\n[C] :: Channel Information\n[T] :: Timestamp\n[!] :: User running Command\n[P] :: Execution Permission Level\n'
 };
