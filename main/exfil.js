@@ -6,7 +6,7 @@ const chalk = require ('chalk');
 let curren = ":tickets:"
 let chatBit = ":eye_in_speech_bubble:"
 
-const AdminArray = [
+const Authorized = [
   settings.ownerid,
   settings.starid
 ]
@@ -35,34 +35,45 @@ exports.run = (client, message, params) => {
   if (!message.mentions.members.first() || message.mentions.members.first() === undefined || message.mentions.members.first() === null) return message.reply(`\`ERROR\` No Mention.`)
   //console.log(`${message.author.tag} ${message.channel.name} ${message.guild.name} OPER: exfil ${message.content}`)
   person = message.mentions.members.first();
-  referendum = Cryptographic(19);
+  referendum = Cryptographic(18);
   passcode = PC(5);
-    var ExfilToken = ``;
-    var ExfilMessage = `:no_pedestrians: <@!${settings.ownerid}>\n\`\`\`diff\n`;
+  /*  var ExfilMessage = `:no_pedestrians: <@!${settings.ownerid}>\n\`\`\`diff\n`;
     ExfilMessage += `- Warning!\`\`\``
     ExfilMessage += `__\`\`\`diff\n`
-    ExfilMessage += `- AUTHORIZATION REQUIREMENT UNMET -\`\`\`__\`\`\`md\n`
+    ExfilMessage += `- AUTHORIZATION REQUIREMENT -\`\`\`__\`\`\`md\n`
     ExfilMessage += `[!]: ACTION REQUIRED!\n`
     ExfilMessage += `[#]: REFERENCE ID:\n\n`
     ExfilMessage += `* ${referendum}\n\n`
-    ExfilMessage += `[U]: ${person.tag} ${person.displayName}\n`
+    ExfilMessage += `[USER]: ${person.user.tag} ${person.displayName}\n`
+    ExfilMessage += `[REASON]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
+  */
+    var ExfilMessage = `:no_pedestrians:\n**\`\`\`diff\n`
+    ExfilMessage += `- Authorization Required -\n`
+    ExfilMessage += `- ////////////////////// -\n\n`
+    ExfilMessage += `-      SYSTEM READY      -\n`
+    ExfilMessage += `- ////////////////////// -\`\`\`**\`\`\`md\n`
+    ExfilMessage += `[#]: ${referendum}\n`
+    ExfilMessage += `[U]: ${person.user.tag} (${person.displayName})\n`
     ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
-    for (i = 0; i < AdminArray.length; i++) {
-      client.users.get(AdminArray[i]).send(`${passcode}`)
-    }
+    message.channel.send(`${ExfilMessage}`).then(() => {
+      ExfilMessage += `\`\`\`md\n[A]: ${passcode}\`\`\``
+      for (i = 0; i < Authorized.length; i++) {
+        client.users.get(Authorized[i]).send(`${ExfilMessage}`)
+      }
+    })
     //ServerAdmin = client.users.get(settings.ownerid)
     //ServerAdmin.send(`${passcode}`).catch(console.error)
-    message.channel.send(`${ExfilMessage}`)
+
 };
 
 /*
 enabled, guildOnly, aliases, permission level
 */
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: false,
   aliases: ['exfil', 'exf'],
-  permLevel: 3
+  permLevel: 0
 };
 
 /*
