@@ -37,16 +37,8 @@ exports.run = (client, message, params) => {
   person = message.mentions.members.first();
   referendum = Cryptographic(18);
   passcode = PC(5);
-  /*  var ExfilMessage = `:no_pedestrians: <@!${settings.ownerid}>\n\`\`\`diff\n`;
-    ExfilMessage += `- Warning!\`\`\``
-    ExfilMessage += `__\`\`\`diff\n`
-    ExfilMessage += `- AUTHORIZATION REQUIREMENT -\`\`\`__\`\`\`md\n`
-    ExfilMessage += `[!]: ACTION REQUIRED!\n`
-    ExfilMessage += `[#]: REFERENCE ID:\n\n`
-    ExfilMessage += `* ${referendum}\n\n`
-    ExfilMessage += `[USER]: ${person.user.tag} ${person.displayName}\n`
-    ExfilMessage += `[REASON]: ${message.content.split(` `).slice(2).join(` `)}\`\`\``
-  */
+  const inter = 120000;
+    const permlvl = client.elevation(message)
     var ExfilMessage = `:no_pedestrians:\n**\`\`\`diff\n`
     ExfilMessage += `- Authorization Required -\n`
     ExfilMessage += `- ////////////////////// -\n\n`
@@ -55,11 +47,24 @@ exports.run = (client, message, params) => {
     ExfilMessage += `[#]: ${referendum}\n`
     ExfilMessage += `[U]: ${person.user.tag} (${person.displayName})\n`
     ExfilMessage += `[R]: ${message.content.split(` `).slice(2).join(` `).substring(0, 300)}\`\`\``
+
     message.channel.send(`${ExfilMessage}`).then(() => {
-      ExfilMessage += `\`\`\`md\n[A]: ${passcode}\n[C]: ${message.channel.name}, ${message.guild.name}\n[T]: ${new Date()}\n[!]: ${message.author.tag} (${message.member.displayName})\`\`\``
+      ExfilMessage += `\`\`\`md\n[A]: ${passcode}\n[C]: ${message.channel.name}, ${message.guild.name}\n[T]: ${new Date()}\n[!]: ${message.author.tag} (${message.member.displayName})\n[P]: ${permlvl}\`\`\``
+      ExfilMessage += `\`Action Required: Event expires in ${inter/1000}SEC.\``
       for (i = 0; i < Authorized.length; i++) {
         client.users.get(Authorized[i]).send(`${ExfilMessage}`)
       }
+      message.channel.awaitMessages(response => response.content.startsWith(passcode), {
+        max: 1,
+        time: inter,
+        errors: ['time']
+      })
+      .then((collected) => {
+        message.channel.send(`**\`\`\`diff\n+ AUTHENTICATED\n+ ${referendum}\n- COMMENCING ELIMINATION OF ILLEGAL RESIDENCE\n-- ${person.user.tag} (${person.displayName})\`\`\`**`)
+      })
+      .catch(() => {
+        message.channel.send(`\`\`\`diff\n- AUTHENTICATION FAILURE\n- ${referendum}\n- ${person.user.tag} (${person.displayName})\n- No action was taken.\`\`\``)
+      })
     })
     //ServerAdmin = client.users.get(settings.ownerid)
     //ServerAdmin.send(`${passcode}`).catch(console.error)
@@ -83,5 +88,5 @@ name is also the command alias
 exports.help = {
   name: 'exfiliate',
   description: 'Authentication-required Banhammer.',
-  usage: 'exfiliate [user] (reason)'
+  usage: 'exfiliate [user] (reason)\n\n[#] :: Unique Pattern\n[U] :: Mentioned User\n[R] :: Reason\n\n[A] :: Authentication Key\n[C] :: Channel Information\n[T] :: Timestamp\n[!] :: User running Command\n[P] :: Permission Level'
 };
