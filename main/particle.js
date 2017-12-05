@@ -52,20 +52,21 @@ exports.run = (client, message, params) => {
   nukk += `- ////////////////////// -\n\n`
   nukk += `+      ACCESS GRANTED    +\n`
   nukk += `==========================\n`
-  nukk += `+ ${uniq}`
+  nukk += `+ ${uniq}\n`
   nukk += `+ [${key1}]\n`
   nukk += `+ [${key2}]\n`
   nukk += `+ [${key3}]\n`
   nukk += `+ [${key4}]\`\`\`**`
   message.channel.send(`${nukk}`).then(() => {
     setTimeout(() => {
-      message.channel.send(`:radioactive: \n\`\`\`diff\n- Let's smash some particles!\n- Smashing ${users.join(` particle with the `)} particlematron!! Let's see what happened!`)
-    }, 3000).then(() => {
-      setTimeout(() => {
-        var results = doFunny()
-        message.channel.send(`\`EXPERIMENT ${key1}\`\n${results}`)
-      }, 3000)
-    })
+      message.channel.send(`:radioactive: \n\`\`\`diff\n- Let's smash some particles!\n- Smashing ${users.join(` particle with the `)} particlematron!! Let's see what happened!\`\`\``)
+    }, 3000)
+
+    setTimeout(() => {
+      var results = doFunny()
+      message.channel.send(`\`EXPERIMENT ${key1}\`\n${results}`)
+    }, 6000)
+
   })
 };
 
