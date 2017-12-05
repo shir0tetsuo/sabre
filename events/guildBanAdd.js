@@ -1,7 +1,7 @@
 const settings = require('../settings.json');
 const chalk = require('chalk');
 
-function Package(guild, user) => {
+function Package(guild, user) {
   var securitybotChannel = guild.channels.find('name', 'security-bot');
   if (securitybotChannel !== undefined && securitybotChannel !== null) {
     securitybotChannel.send({embed: {
