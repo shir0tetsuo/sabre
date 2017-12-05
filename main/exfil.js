@@ -132,6 +132,6 @@ name is also the command alias
 */
 exports.help = {
   name: 'exfiliate',
-  description: 'Authentication-required Banhammer.',
+  description: 'Authentication-required Mutehammer.',
   usage: 'exfiliate [user] (reason)\n\n[#] :: Unique Pattern\n[U] :: Mentioned User\n[R] :: Reason\n\n[A] :: Authentication Key\n[C] :: Channel Information\n[T] :: Timestamp\n[!] :: User running Command\n[P] :: Execution Permission Level\n'
 };
