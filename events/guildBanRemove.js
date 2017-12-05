@@ -1,22 +1,10 @@
-const Discord = require('discord.js');
-const settings = require('../settings.json')
+const settings = require('../settings.json');
 const chalk = require('chalk');
-module.exports = (guild, user) => {
-  console.log(new Date());
-  console.log(chalk.bgWhite.black(`${user.username} was UNBANNED from ${guild.name}.`))
-  if (guild.id === settings.davnetguild) {
-    guild.channels.find('name', 'security-bot').send({embed: {
-      color: 0xFFFF00,
-      timestamp: new Date(),
-      fields: [
-        { //member.user.username
-          name: user.tag,
-          value: "Was just unbanned!"
-        }
-      ]
-    }})
-  } else if (guild.id === settings.alaskaguild) {
-    guild.channels.find('name', 'classified').send({embed: {
+
+function Package(guild, user) => {
+  var securitybotChannel = guild.channels.find('name', 'security-bot');
+  if (securitybotChannel !== undefined && securitybotChannel !== null) {
+    securitybotChannel.send({embed: {
       color: 0xFFFF00,
       timestamp: new Date(),
       fields: [
@@ -27,6 +15,39 @@ module.exports = (guild, user) => {
       ]
     }})
   } else {
-    guild.defaultChannel.send(`${user.tag} was just unbanned!`);
+    guild.createChannel('security-bot', 'text').then(ch => {
+      ch.overwritePermissions(guild.roles.find("name", "Sabre"), {
+        READ_MESSAGES: true,
+        SEND_MESSAGES: true,
+        READ_MESSAGE_HISTORY: true,
+        MENTION_EVERYONE: true,
+        ADD_REACTIONS: true,
+        MANAGE_ROLES_OR_PERMISSIONS: true,
+        ATTACH_FILES: true
+      })
+      ch.overwritePermissions(guild.id, {
+        READ_MESSAGES: false,
+        READ_MESSAGE_HISTORY: false,
+        SEND_MESSAGES: false
+      }).then(() => {
+        ch.send({embed: {
+          color: 0xFFFF00,
+          timestamp: new Date(),
+          fields: [
+            { //member.user.username
+              name: user.tag,
+              value: "Was just unbanned!"
+            }
+          ]
+        }})
+      })
+    })
   }
+
+}
+
+module.exports = (guild, user) => {
+  console.log(new Date());
+  console.log(chalk.bgWhite.black(`${user.username} was BANNED from ${guild.name}.`))
+  Package(guild, user)
 };

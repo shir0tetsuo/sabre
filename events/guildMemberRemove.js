@@ -1,25 +1,10 @@
-const settings = require('../settings.json')
+const settings = require('../settings.json');
 const chalk = require('chalk');
-module.exports = member => {
-  console.log(new Date());
-  console.log(chalk.bgYellow.black(`${member.user.tag} ${member.displayName} Left ${member.guild.name}.`))
-  let guild = member.guild;
-  if (guild.id === settings.davnetguild) {
-    //let davnet_gmA = guild.channels.find('name', 'security-bot')
-    guild.channels.find('name', 'security-bot').send({embed: {
-      color: 0xA7A7A5,
-      timestamp: new Date(),
-      fields: [
-        { //member.user.username
-          name: member.user.tag + " (" + member.displayName + ")",
-          value: "Parted the server."
-        }
-      ]
-    }})
-  } else if (guild.id === settings.alaskaguild) {
-    //let alaska = guild.channels.get(settings.alaskachanclassified)
-    //let alaska_gmA = guild.channels.find('name', 'classified')
-    guild.channels.find('name', 'classified').send({embed: {
+
+function Package(guild, user) => {
+  var securitybotChannel = guild.channels.find('name', 'security-bot');
+  if (securitybotChannel !== undefined && securitybotChannel !== null) {
+    securitybotChannel.send({embed: {
       color: 0xA7A7A5,
       timestamp: new Date(),
       fields: [
@@ -30,7 +15,39 @@ module.exports = member => {
       ]
     }})
   } else {
-    if (guild.defaultChannel === undefined) return;
-    guild.defaultChannel.send(`Please say goodbye to ${member.user.username} we will miss you!`);
+    guild.createChannel('security-bot', 'text').then(ch => {
+      ch.overwritePermissions(guild.roles.find("name", "Sabre"), {
+        READ_MESSAGES: true,
+        SEND_MESSAGES: true,
+        READ_MESSAGE_HISTORY: true,
+        MENTION_EVERYONE: true,
+        ADD_REACTIONS: true,
+        MANAGE_ROLES_OR_PERMISSIONS: true,
+        ATTACH_FILES: true
+      })
+      ch.overwritePermissions(guild.id, {
+        READ_MESSAGES: false,
+        READ_MESSAGE_HISTORY: false,
+        SEND_MESSAGES: false
+      }).then(() => {
+        ch.send({embed: {
+          color: 0xA3F700,
+          timestamp: new Date(),
+          fields: [
+            { //member.user.username
+              name: member.user.tag + " (" + member.displayName + ")",
+              value: "Parted the server."
+            }
+          ]
+        }})
+      })
+    })
   }
+
+}
+
+module.exports = (guild, user) => {
+  console.log(new Date());
+  console.log(chalk.bgWhite.black(`${user.username} was BANNED from ${guild.name}.`))
+  Package(guild, user)
 };
