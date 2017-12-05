@@ -76,5 +76,3 @@ client.elevation = message => {
 // token error system was removed
 
 client.login(settings.token);
-
-process.on('unhandledRejection', console.log(`Suppressed unhandledRejection`))
