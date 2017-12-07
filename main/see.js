@@ -10,9 +10,9 @@ exports.run = (client, message, params) => {
   let seeRole = message.guild.roles.find("name", "O_O");
   if (!seeRole || seeRole === undefined) return;
   if(message.member.roles.has(seeRole.id)) {
-    message.author.removeRole(seeRole).catch(console.error);
+    message.member.removeRole(seeRole).catch(console.error);
   } else {
-    message.author.addRole(seeRole).catch(console.error);
+    message.member.addRole(seeRole).catch(console.error);
   }
 };
 
