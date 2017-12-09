@@ -46,7 +46,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['del', 'selfdelete'],
-  permLevel: 1
+  permLevel: 0
 };
 
 exports.help = {
