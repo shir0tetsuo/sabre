@@ -21,7 +21,7 @@ client.on("message", message => {
   //  message.reply("Written by shadowsword#0179")
   //  return;
   //}
-  if (message.isMentioned(client.id) === true) {
+  if (message.isMentioned(client.id)) {
     message.reply(`\`Mentioned Flag True\``)
   }
 })
