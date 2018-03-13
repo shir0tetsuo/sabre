@@ -49,7 +49,8 @@ var INTText = `\n`;
 INTText += `:one: The ${mach} **is dumbfounded.** It probably can't dodge anything, and really has no idea what it's doing (but still follows guidelines). It might hit you with shear luck.\n`
 INTText += `:two: The ${mach} **posesses average intelligence.** A smarter and more patient cookie. It can dodge stuff, just don't expect it to do math.\n`
 INTText += `:three: The ${mach} **is a master of its domain.** A slightly dumber Whis.\n`
-INTText += `:four: The ${mach} **is like facing a Jedi Master.** Oh, and it can now use flight and illusions. Seriously, get out your lucky rabbit's foot.`
+INTText += `:four: The ${mach} **is like facing a Jedi Master.** Oh, and it can now use flight and illusions. Seriously, get out your lucky rabbit's foot.\n`
+INTText += `:five: The ${mach} **increases in difficulty and adapts to the user.** This would be suicide, if it were allowed to kill you that is.\n`
 
 function InvokeSpar(message){
   const ActFour = (['1', '2', '3', '4'])
@@ -111,7 +112,7 @@ function InvokeSpar(message){
         })
         .then(() => {
           message.reply(`Please state the level of intelligence. ${INTText}`)
-          message.channel.awaitMessages(IS => IS.author.id === message.author.id && ActFour.some(word => IS.content.startsWith(word)), {
+          message.channel.awaitMessages(IS => IS.author.id === message.author.id && ActFive.some(word => IS.content.startsWith(word)), {
             max: 1,
             time: 60000,
             errors: ['time'],
