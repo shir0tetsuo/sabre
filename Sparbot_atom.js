@@ -19,6 +19,7 @@ HLPText += `:three: If the invoker is unable to continue, the bot will cease to 
 HLPText += `:four: Upon the expiry of the time limit, the entity will completely dematerialize, and a healing Ki ball is sent to the invoker.\n`
 HLPText += `:five: If for some reason service is interrupted, such as a restart, expiry conditions will apply.\n`
 HLPText += `:six: A temporary circular-platform construct is materialized below the contestants during the match.\n`
+HLPText += `:seven: The construct is passively repaired as time goes on.\n`
 HLPText += `**Questions:** Time Limit, Defense, Speed, Attack, Intelligence.`
 
 var DLText = `\n`;
