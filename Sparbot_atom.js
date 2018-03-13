@@ -27,10 +27,7 @@ client.on("message", message => {
   if (message.isMentioned(client.id) === true) {
     message.reply(`\`Method 2\``)
   }
-  if (message.isMentioned(client)) {
+  if (message.isMentioned(client.id) = true) {
     message.reply(`\`Method 3\``)
-  }
-  if (message.isMentioned(client) === true) {
-    message.reply(`\`Method 4\``)
   }
 })
