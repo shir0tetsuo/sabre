@@ -13,14 +13,14 @@ client.on("ready", () => {
 });
 
 client.on("message", message => {
-  if (message.author.bot) return;
-  if (message === null) return;
-  if (message.content.length <= 4) return;
-  if (message.channel.type === "dm") {
-    message.react("👆")
-    message.reply("Written by shadowsword#0179")
-    return;
-  }
+  //if (message.author.bot) return;
+  //if (message === null) return;
+  //if (message.content.length <= 4) return;
+  //if (message.channel.type === "dm") {
+  //  message.react("👆")
+  //  message.reply("Written by shadowsword#0179")
+  //  return;
+  //}
   if (message.isMentioned === true) {
     message.reply(`\`Mentioned Flag True\``)
   }
