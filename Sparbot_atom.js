@@ -20,6 +20,7 @@ HLPText += `:four: Upon the expiry of the time limit, the entity will completely
 HLPText += `:five: If for some reason service is interrupted, such as a restart, expiry conditions will apply.\n`
 HLPText += `:six: A temporary circular-platform construct is materialized below the contestants during the match.\n`
 HLPText += `:seven: The construct is passively repaired as time goes on.\n`
+HLPText += `:eight: **Typing \`stop\` will command it to cease action before the timer expires.**\n`
 HLPText += `**Questions:** Time Limit, Defense, Speed, Attack, Intelligence.`
 
 var DLText = `\n`;
