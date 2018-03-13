@@ -22,6 +22,15 @@ client.on("message", message => {
   //  return;
   //}
   if (message.isMentioned(client.id)) {
-    message.reply(`\`Mentioned Flag True\``)
+    message.reply(`\`Method 1\``)
+  }
+  if (message.isMentioned(client.id) === true) {
+    message.reply(`\`Method 2\``)
+  }
+  if (message.isMentioned(client)) {
+    message.reply(`\`Method 3\``)
+  }
+  if (message.isMentioned(client) === true) {
+    message.reply(`\`Method 4\``)
   }
 })
