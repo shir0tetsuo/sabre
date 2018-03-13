@@ -12,7 +12,7 @@ client.on("ready", () => {
   client.user.setStatus("online")
 });
 
-client.on("message", () => {
+client.on("message", message => {
   if (message.author.bot) return;
   if (message === null) return;
   if (message.content.length <= 4) return;
