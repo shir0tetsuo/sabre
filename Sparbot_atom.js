@@ -21,7 +21,7 @@ client.on("message", message => {
   //  message.reply("Written by shadowsword#0179")
   //  return;
   //}
-  if (message.mentions.members.has(client.id)) {
+  if (message.isMentioned(client.user.id)) {
     message.reply(`\`Method 1\``)
   }
 })
