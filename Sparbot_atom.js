@@ -14,9 +14,10 @@ HLPText += `The usage of this bot is **intended for individuals knowledged in ho
 HLPText += `Upon **tagging this bot,** the system will respond with a series of questions pretaining to the difficulty of the training.\n`
 HLPText += `Once each question is responded, **A magickally automated entity will come forth for such training.** Here are the **absolute conditions.**\n`
 HLPText += `:one: If oblitherated before the time limit expires, another entity will spawn into existence and continue.\n`
-HLPText += `:two: This bot will never land critically that permanently damages the invoker.\n`
+HLPText += `:two: This bot will never hit critically that permanently damages the invoker.\n`
 HLPText += `:three: If the invoker is unable to continue, the bot will cease to be despite the remaining limit.\n`
 HLPText += `:four: Upon the expiry of the time limit, the entity will completely dematerialize, and a healing Ki ball is sent to the invoker.\n`
+HLPText += `:five: If for some reason service is interrupted, such as a restart, expiry conditions will apply.\n`
 HLPText += `**Questions:** Time Limit, Defense, Speed, Attack, Intelligence.`
 
 var DLText = `\n`;
