@@ -3,7 +3,8 @@ const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
-var asmv = "1.0.5" // Version Number
+var asmv = "1.0.6" // Version Number
+var prefix = "?spar"
 
 console.log(chalk.redBright("Spar System Initialization"))
 
@@ -172,14 +173,21 @@ client.on("message", message => {
   if (message.content.length <= 3) return;
   if (message.channel.type === "dm") {
     message.react("👆")
-    message.reply(`Written by shadowsword#0179\n\`?spar\`\n\`?spar v\``)
+    message.reply(`Written by shadowsword#0179\n\`?spar\`\n\`?spar v\`\n\`?spar heal\`\n\`?spar barrier\``)
     return;
   }
-  if (message.content === "?spar") {
+  if (message.content === `${prefix}`) {
     message.reply(`${HLPText}`)
     return;
-  } else if (message.content.startsWith("?spar v")) {
+  } else if (message.content.startsWith(`${prefix} v`)) {
     message.reply(`SparCompanion ASM v${asmv}`)
+    return;
+  } else if (message.content.startsWith(`${prefix} heal`)) {
+    message.reply(`**Four Ki-balls have been dispatched to assist you.** This does not work while a match is in progress.`)
+    return;
+  } else if (message.content.startsWith(`${prefix} barrier`)) {
+    message.reply(`**A Class III Barrier surrounds you.** This does not work while a match is in progress.\nThe barrier will dematerialize if there are no threats detected.`)
+    return;
   }
   if (message.isMentioned(client.user.id)) {
     InvokeSpar(message)
