@@ -3,6 +3,8 @@ const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
+var asmv = "1.0.5" // Version Number
+
 console.log(chalk.redBright("Spar System Initialization"))
 
 var mach = "Autonomous Sparring Mechanism"
@@ -170,12 +172,14 @@ client.on("message", message => {
   if (message.content.length <= 3) return;
   if (message.channel.type === "dm") {
     message.react("👆")
-    message.reply("Written by shadowsword#0179")
+    message.reply(`Written by shadowsword#0179\n\`?spar\`\n\`?spar v\``)
     return;
   }
   if (message.content === "?spar") {
     message.reply(`${HLPText}`)
     return;
+  } else if (message.content.startsWith("?spar v")) {
+    message.reply(`SparCompanion ASM v${asmv}`)
   }
   if (message.isMentioned(client.user.id)) {
     InvokeSpar(message)
