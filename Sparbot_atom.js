@@ -118,8 +118,10 @@ function InvokeSpar(message){
           })
           .then(() => {
             message.reply(`**your sparring specifications have been collected!** Good luck!`)
+            console.log(`${mach} INVOKED FOR ${message.member.displayName} (${limiter}ms)`)
             setTimeout(() => {
               message.reply(`**Expiry!** The construct and ${mach} has been dematerialized.`)
+              console.log(`${mach} DEMATERIALIZED FOR ${message.member.displayName} (${limiter}ms)`)
             }, limiter)
           })
           .catch(() => {
