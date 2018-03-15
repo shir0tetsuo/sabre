@@ -170,7 +170,7 @@ function InvokeBreakPractice(message){
       return;
     }
     message.reply(`Please state the level of defense. ${BKDef}`)
-    message.channel.awaitMessages(BD => BD.author.id === message.author.id && ActSix.some(word => TL.content.startsWith(word)), {
+    message.channel.awaitMessages(BD => BD.author.id === message.author.id && ActSix.some(word => BD.content.startsWith(word)), {
       max: 1,
       time: 60000,
       errors: ['time'],
