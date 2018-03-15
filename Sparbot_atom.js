@@ -18,7 +18,7 @@ console.log(chalk.redBright("Spar System Initialization"))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Recursive help menu
-var opts = ``\`${prefix}\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
+var opts = `\`${prefix}\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
 
 ////////////////////////////////////////////////////////////////////////////////
 // Invoke Texts
