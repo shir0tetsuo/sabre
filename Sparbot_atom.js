@@ -3,13 +3,25 @@ const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
-var asmv = "1.0.6" // Version Number
+// Added tally system
+const sql = require("sqlite");
+sql.open("../score.sqlite");
+
+////////////////////////////////////////////////////////////////////////////////
+// Version number and recursive text
+var asmv = "1.1.0" // Version Number
 var prefix = "?spar"
+var RTe = "Reply time expired."
+var mach = "Autonomous Sparring Mechanism"
 
 console.log(chalk.redBright("Spar System Initialization"))
 
-var mach = "Autonomous Sparring Mechanism"
+////////////////////////////////////////////////////////////////////////////////
+// Recursive help menu
+var opts = ``\`${prefix}\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
 
+////////////////////////////////////////////////////////////////////////////////
+// Invoke Texts
 var HLPText = ``;
 HLPText += `SparCompanion is an ${mach}. *Sparring by definition is to make the motions of boxing without landing heavy blows, as a form of training.*\n`
 HLPText += `__**Warning**__\n`
@@ -55,6 +67,135 @@ INTText += `:three: The ${mach} **is a master of its domain.** A slightly dumber
 INTText += `:four: The ${mach} **is like facing a Jedi Master.** Oh, and it can now use flight and illusions. Seriously, get out your lucky rabbit's foot.\n`
 INTText += `:five: The ${mach} **increases in difficulty and adapts to the user.** This would be suicide, if it were allowed to kill you that is.\n`
 
+var BKDef = `\n`;
+BKDef += `:one: The ${mach} spawns **3 Barriers.**\n`
+BKDef += `:two: The ${mach} spawns **10 Barriers.**\n`
+BKDef += `:three: The ${mach} spawns **20 Barriers.**\n`
+BKDef += `:four: The ${mach} spawns **50 Barriers.**\n`
+BKDef += `:five: The ${mach} spawns **100 Barriers.**\n`
+BKDef += `:six: The ${mach} spawns **200 Barriers.**\n`
+BKDef += `\`\`\`md\n[!]: All these barriers are Class III.\nThe level of difficulty increases with each barrier and attempts to match the user's strength.\`\`\``
+
+////////////////////////////////////////////////////////////////////////////////
+// Statistic Controllers
+
+function Tally(message) {
+  setTimeout(() => {
+    sql.get(`SELECT * FROM SparComp WHERE userId = "masterstat"`).then(r => {
+      if (!r) {
+        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, ["masterstat", 1])
+      } else {
+        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "masterstat"`)
+      }
+    }).catch(() => {
+      console.error;
+      console.log(chalk.redBright("RECOVERY =>"), "New DB for Masterstat in SparComp added.")
+      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
+        sql.run(`INSERT INTO SparComp (userId, record)`, ["masterstat", 1])
+      })
+    })
+  }, 2000)
+  setTimeout(() => {
+    sql.get(`SELECT * FROM SparComp WHERE userId = "${message.author.id}"`).then(r => {
+      if (!r) {
+        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, [message.author.id, 1])
+      } else {
+        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "${message.author.id}"`)
+      }
+    }).catch(() => {
+      console.error;
+      console.log(chalk.redBright("RECOVERY =>"), "New DB for User in SparComp added.")
+      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
+        sql.run(`INSERT INTO SparComp (userId, record)`, [message.author.id, 1])
+      })
+    })
+  }, 4000)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+function ListStatistic(message) {
+  sql.get(`SELECT * FROM SparComp WHERE userid = "masterstat"`).then(m => {
+    if (!m) {
+      message.reply(`\`Error\` The database hasn't been initialized yet.`)
+      return;
+    } else {
+      var MasterStat = m.record;
+      sql.get(`SELECT * FROM SparComp WHERE userId = "${message.author.id}"`).then(scs => {
+        let StateMRecord = `:exclamation: There are __${MasterStat}__ matches recorded.`
+        if (!scs) {
+          message.reply(`${StateMRecord}\n\`The system could not find a statistic for you.\``)
+        } else {
+          message.reply(`${StateMRecord}\n\`You have \`__\`${scs.record}\`__\`, Recorded Matches.\``)
+        }
+      })
+    }
+  })
+}
+
+////////////////////////////////////////////////////////////////////////////////
+function InvokeBreakPractice(message){
+  const ActSix = (['1', '2', '3', '4', '5', '6'])
+  const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+
+  message.reply(`Please state a time limit between 1-10 minutes.`)
+  message.channel.awaitMessages(BK => BK.author.id === message.author.id && ActTen.some(word => BK.content.startsWith(word)), {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(FinishedTime => {
+    LimitQuery = FinishedTime.first().content;
+    if (LimitQuery === "1") {
+      var limiter = 60000
+    } else if (LimitQuery === "2") {
+      var limiter = 120000
+    } else if (LimitQuery === "3") {
+      var limiter = 180000
+    } else if (LimitQuery === "4") {
+      var limiter = 240000
+    } else if (LimitQuery === "5") {
+      var limiter = 300000
+    } else if (LimitQuery === "6") {
+      var limiter = 360000
+    } else if (LimitQuery === "7") {
+      var limiter = 420000
+    } else if (LimitQuery === "8") {
+      var limiter = 480000
+    } else if (LimitQuery === "9") {
+      var limiter = 540000
+    } else if (LimitQuery === "10") {
+      var limiter = 600000
+    } else {
+      message.reply(`\`Internal Error\``)
+      return;
+    }
+    message.reply(`Please state the level of defense. ${BKDef}`)
+    message.channel.awaitMessages(BD => BD.author.id === message.author.id && ActSix.some(word => TL.content.startsWith(word)), {
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
+    .then(() => {
+      message.reply(`**Your barrier-breaking practice has initiated!** They have been placed ahead of you, each a meter apart. Good luck.`)
+      setTimeout(() => {
+        message.reply(`**Expiry!** Barrier practice has ended.`)
+      }, limiter)
+    })
+    .catch(() => {
+      console.error;
+      console.log(`${mach} BREAK BARR`)
+      message.reply(`${RTe}`)
+    })
+  })
+  .catch(() => {
+    console.error;
+    console.log(`${mach} BREAK TIMER (BREAKER)`)
+    message.reply(`${RTe}`)
+  })
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 function InvokeSpar(message){
   const ActFour = (['1', '2', '3', '4'])
   const ActFive = (['1', '2', '3', '4', '5'])
@@ -131,34 +272,36 @@ function InvokeSpar(message){
           .catch(() => {
             console.error;
             console.log(`${mach} BREAK IS`)
-            message.reply(`Reply time expired.`)
+            message.reply(`${RTe}`)
           })
         })
         .catch(() => {
           console.error;
           console.log(`${mach} BREAK AS`)
-          message.reply(`Reply time expired.`)
+          message.reply(`${RTe}`)
         })
       })
       .catch(() => {
         console.error;
         console.log(`${mach} BREAK SS`)
-        message.reply(`Reply time expired.`)
+        message.reply(`${RTe}`)
       })
     })
     .catch(() => {
       console.error;
       console.log(`${mach} BREAK DS`)
-      message.reply(`Reply time expired.`)
+      message.reply(`${RTe}`)
     })
   })
   .catch(() => {
     console.error;
     console.log(`${mach} BREAK null`)
-    message.reply(`Reply time expired.`)
+    message.reply(`${RTe}`)
   })
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Login lines and message listeners
 client.login(settings.token_sparbot);
 
 client.on("ready", () => {
@@ -173,7 +316,7 @@ client.on("message", message => {
   if (message.content.length <= 3) return;
   if (message.channel.type === "dm") {
     message.react("👆")
-    message.reply(`Written by shadowsword#0179\n\`?spar\`\n\`?spar v\`\n\`?spar heal\`\n\`?spar barrier\``)
+    message.reply(`Written by shadowsword#0179\n${opts}`)
     return;
   }
   if (message.content === `${prefix}`) {
@@ -187,6 +330,15 @@ client.on("message", message => {
     return;
   } else if (message.content.startsWith(`${prefix} barrier`)) {
     message.reply(`**A Class III Barrier surrounds you.** This does not work while a match is in progress.\nThe barrier will dematerialize if there are no threats detected.`)
+    return;
+  } else if (message.content.startsWith(`${prefix} breaker`)) {
+    InvokeBreakPractice(message)
+    return;
+  } else if (message.content.startsWith(`${prefix} help`)) {
+    message.reply(`${opts}`)
+    return;
+  } else if (message.content.startsWith(`${prefix} stats`)) {
+    ListStatistic(message)
     return;
   }
   if (message.isMentioned(client.user.id)) {
