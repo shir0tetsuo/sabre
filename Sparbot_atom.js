@@ -125,7 +125,7 @@ function ListStatistic(message) {
         if (!scs) {
           message.reply(`${StateMRecord}\n\`The system could not find a statistic for you.\``)
         } else {
-          message.reply(`${StateMRecord}\n\`You have \`__\`${scs.record}\`__\`, Recorded Matches.\``)
+          message.reply(`${StateMRecord}\n\`You have ..\`__\`${scs.record}\`__\`, Recorded Matches.\``)
         }
       })
     }
