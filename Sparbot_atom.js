@@ -9,7 +9,7 @@ sql.open("../score.sqlite");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Version number and recursive text
-var asmv = "1.1.0" // Version Number
+var asmv = "1.1.1" // Version Number
 var prefix = "?spar"
 var RTe = "Reply time expired."
 var mach = "Autonomous Sparring Mechanism"
@@ -266,6 +266,7 @@ function InvokeSpar(message){
             console.log(`${mach} INVOKED FOR ${message.member.displayName} (${limiter}ms)`)
             setTimeout(() => {
               message.reply(`**Expiry!** The construct and ${mach} has been dematerialized.`)
+              Tally(message);
               console.log(`${mach} DEMATERIALIZED FOR ${message.member.displayName} (${limiter}ms)`)
             }, limiter)
           })
