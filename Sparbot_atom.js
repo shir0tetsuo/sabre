@@ -141,7 +141,7 @@ function InvokeTimer(message){
     return;
   }
   message.reply(`**A challenge has been requested!** ${opponent}, accept? \`yes/no\``)
-  message.channel.awaitMessages(ACC => ACC.author.id === opponent.id && ActAcc.some(word => ACC.content.toLowerCase().startsWith(word)), {
+  message.channel.awaitMessages(ACC => ACC.opponent.id === opponent.id && ActAcc.some(word => ACC.content.toLowerCase().startsWith(word)), {
     max: 1,
     time: 30000,
     errors: ['time'],
