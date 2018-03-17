@@ -9,7 +9,7 @@ sql.open("../score.sqlite");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Version number and recursive text
-var asmv = "1.1.1" // Version Number
+var asmv = "1.2.0" // Version Number
 var prefix = "?spar"
 var RTe = "Reply time expired."
 var mach = "Autonomous Sparring Mechanism"
@@ -18,7 +18,7 @@ console.log(chalk.redBright("Spar System Initialization"))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Recursive help menu
-var opts = `\`${prefix}\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
+var opts = `\`${prefix}\`\n\`${prefix} count\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
 
 ////////////////////////////////////////////////////////////////////////////////
 // Invoke Texts
@@ -129,6 +129,46 @@ function ListStatistic(message) {
         }
       })
     }
+  })
+}
+
+////////////////////////////////////////////////////////////////////////////////
+function InvokeTimer(message){
+  let ActAcc = (['yes', 'no'])
+  let opponent = message.mentions.users.first();
+  if (opponent.id === message.author.id) {
+    message.reply(`You're really going to fight *yourself?*`)
+    return;
+  }
+  message.reply(`**A challenge has been requested!** ${opponent}, accept? \`yes/no\``)
+  message.channel.awaitMessages(ACC => ACC.author.id === opponent.id && ActAcc.some(word => ACC.content.toLowerCase().startsWith(word)), {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(Response => {
+    if (Response.content.toLowerCase() === "yes") {
+      message.channel.send(`${message.author} :vs: ${opponent}, :three:`)
+      setTimeout(() => {
+        message.channel.send(`:two:`)
+        setTimeout(() => {
+          message.channel.send(`:one:`)
+          setTimeout(() => {
+            message.channel.send(`:arrow_forward: :exclamation:`)
+          }, 2000)
+        }, 2000)
+      }, 2000)
+    } else if (Response.content.toLowerCase() === "no") {
+      message.reply(`The user declined.`)
+    } else {
+      message.reply(`Fatal Error.`)
+      return;
+    }
+  })
+  .catch(() => {
+    console.error;
+    message.reply(`The user was unable to respond in time.`)
+    return;
   })
 }
 
@@ -341,6 +381,13 @@ client.on("message", message => {
   } else if (message.content.startsWith(`${prefix} stats`)) {
     ListStatistic(message)
     return;
+  } else if (message.content.startsWith(`${prefix} count`)) {
+    if (message.mentions.users.first() !== null && message.mentions.users.first() !== undefined) {
+      InvokeTimer(message)
+    } else {
+      message.reply(`Action required: \`Please @mention A user\``)
+      return;
+    }
   }
   if (message.isMentioned(client.user.id)) {
     InvokeSpar(message)
