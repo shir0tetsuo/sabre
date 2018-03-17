@@ -134,20 +134,14 @@ function ListStatistic(message) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function InvokeTimer(message){
-  let ActAcc = (['yes', 'no'])
   let opponent = message.mentions.users.first();
   if (opponent.id === message.author.id) {
     message.reply(`You're really going to fight *yourself?*`)
     return;
+  } else if (opponent.bot) {
+    message.reply(`Bot users cannot be mentioned for this type of command.`)
+    return;
   }
-  message.reply(`**A challenge has been requested!** ${opponent}, accept? \`yes/no\``)
-  message.channel.awaitMessages(ACC => ACC.opponent.id === opponent.id && ActAcc.some(word => ACC.content.toLowerCase().startsWith(word)), {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(Response => {
-    if (Response.content.toLowerCase() === "yes") {
       message.channel.send(`${message.author} :vs: ${opponent}, :three:`)
       setTimeout(() => {
         message.channel.send(`:two:`)
@@ -158,19 +152,7 @@ function InvokeTimer(message){
           }, 2000)
         }, 2000)
       }, 2000)
-    } else if (Response.content.toLowerCase() === "no") {
-      message.reply(`The user declined.`)
-    } else {
-      message.reply(`Fatal Error.`)
-      return;
-    }
-  })
-  .catch(() => {
-    console.error;
-    message.reply(`The user was unable to respond in time.`)
-    return;
-  })
-}
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 function InvokeBreakPractice(message){
