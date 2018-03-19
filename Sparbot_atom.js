@@ -142,7 +142,7 @@ function InvokeTimer(message){
     message.reply(`Bot users cannot be mentioned for this type of command.`)
     return;
   }
-      message.channel.send(`${message.author}\n:vs:\n${opponent}, \n:three:`)
+      message.channel.send(`${message.author}\n:crossed_swords::vs::crossed_swords:\n${opponent}, \n:three:`)
       setTimeout(() => {
         message.channel.send(`:two:`)
         setTimeout(() => {
