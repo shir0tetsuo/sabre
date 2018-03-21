@@ -1,4 +1,3 @@
-const settings = require('./settings.json')
 const chalk = require ("chalk"); // console chalk system
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
