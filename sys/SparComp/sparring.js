@@ -1,3 +1,8 @@
+const settings = require('./settings.json')
+const chalk = require ("chalk"); // console chalk system
+const Discord = require ("discord.js"); // discord client
+const client = new Discord.Client(); // discord client
+
 const ActFour = (['1', '2', '3', '4'])
 const ActFive = (['1', '2', '3', '4', '5'])
 const ActSix = (['1', '2', '3', '4', '5', '6'])
