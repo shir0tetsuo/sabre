@@ -3,6 +3,9 @@ const ActFive = (['1', '2', '3', '4', '5'])
 const ActSix = (['1', '2', '3', '4', '5', '6'])
 const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 
+var mach = "Autonomous Sparring Mechanism"
+var RTe = "Reply time expired."
+
 var HLPText = ``;
 HLPText += `SparCompanion is an ${mach}. *Sparring by definition is to make the motions of boxing without landing heavy blows, as a form of training.*\n`
 HLPText += `__**Warning**__\n`
