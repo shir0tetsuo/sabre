@@ -3,7 +3,7 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
 const sql = require("sqlite");
-sql.open("../../../score.sqlite");
+sql.open("../../score.sqlite");
 
 const ActFour = (['1', '2', '3', '4'])
 const ActFive = (['1', '2', '3', '4', '5'])
