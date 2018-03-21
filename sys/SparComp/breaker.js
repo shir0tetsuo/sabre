@@ -1,10 +1,9 @@
 var mach = "Autonomous Sparring Mechanism"
 var RTe = "Reply time expired."
+const ActSix = (['1', '2', '3', '4', '5', '6'])
+const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 
 module.exports = (message) =>  {
-    const ActSix = (['1', '2', '3', '4', '5', '6'])
-    const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
-
     message.reply(`Please state a time limit between 1-10 minutes.`)
     message.channel.awaitMessages(BK => BK.author.id === message.author.id && ActTen.some(word => BK.content.startsWith(word)), {
       max: 1,
