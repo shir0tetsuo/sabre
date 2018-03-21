@@ -52,6 +52,38 @@ INTText += `:three: The ${mach} **is a master of its domain.** A slightly dumber
 INTText += `:four: The ${mach} **is like facing a Jedi Master.** Oh, and it can now use flight and illusions. Seriously, get out your lucky rabbit's foot.\n`
 INTText += `:five: The ${mach} **increases in difficulty and adapts to the user.** This would be suicide, if it were allowed to kill you that is.\n`
 
+function Tally(message) {
+  setTimeout(() => {
+    sql.get(`SELECT * FROM SparComp WHERE userId = "masterstat"`).then(r => {
+      if (!r) {
+        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, ["masterstat", 1])
+      } else {
+        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "masterstat"`)
+      }
+    }).catch(() => {
+      console.error;
+      console.log(chalk.redBright("RECOVERY =>"), "New DB for Masterstat in SparComp added.")
+      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
+        sql.run(`INSERT INTO SparComp (userId, record)`, ["masterstat", 1])
+      })
+    })
+  }, 2000)
+  setTimeout(() => {
+    sql.get(`SELECT * FROM SparComp WHERE userId = "${message.author.id}"`).then(r => {
+      if (!r) {
+        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, [message.author.id, 1])
+      } else {
+        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "${message.author.id}"`)
+      }
+    }).catch(() => {
+      console.error;
+      console.log(chalk.redBright("RECOVERY =>"), "New DB for User in SparComp added.")
+      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
+        sql.run(`INSERT INTO SparComp (userId, record)`, [message.author.id, 1])
+      })
+    })
+  }, 4000)
+}
 
 module.exports = (message) =>  {
     message.reply(`Please state a time limit between 1-10 minutes.`)

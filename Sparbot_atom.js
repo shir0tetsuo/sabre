@@ -4,6 +4,7 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
 const InvokeSpar = require('./sys/SparComp/sparring.js')
+const InvokeBreakPractice = require('./sys/SparComp/breaker.js')
 
 // Added tally system
 const sql = require("sqlite");
@@ -33,42 +34,6 @@ BKDef += `:four: The ${mach} spawns **50 Barriers.**\n`
 BKDef += `:five: The ${mach} spawns **100 Barriers.**\n`
 BKDef += `:six: The ${mach} spawns **200 Barriers.**\n`
 BKDef += `\`\`\`md\n[!]: All these barriers are Class III.\nThe level of difficulty increases with each barrier and attempts to match the user's strength.\`\`\``
-
-////////////////////////////////////////////////////////////////////////////////
-// Statistic Controllers
-
-function Tally(message) {
-  setTimeout(() => {
-    sql.get(`SELECT * FROM SparComp WHERE userId = "masterstat"`).then(r => {
-      if (!r) {
-        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, ["masterstat", 1])
-      } else {
-        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "masterstat"`)
-      }
-    }).catch(() => {
-      console.error;
-      console.log(chalk.redBright("RECOVERY =>"), "New DB for Masterstat in SparComp added.")
-      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
-        sql.run(`INSERT INTO SparComp (userId, record)`, ["masterstat", 1])
-      })
-    })
-  }, 2000)
-  setTimeout(() => {
-    sql.get(`SELECT * FROM SparComp WHERE userId = "${message.author.id}"`).then(r => {
-      if (!r) {
-        sql.run(`INSERT INTO SparComp (userId, record) VALUES (?, ?)`, [message.author.id, 1])
-      } else {
-        sql.run(`UPDATE SparComp SET record = "${r.record*1 + 1}" WHERE userId = "${message.author.id}"`)
-      }
-    }).catch(() => {
-      console.error;
-      console.log(chalk.redBright("RECOVERY =>"), "New DB for User in SparComp added.")
-      sql.run(`CREATE TABLE IF NOT EXISTS SparComp (userId TEXT, record INTEGER)`).then(() => {
-        sql.run(`INSERT INTO SparComp (userId, record)`, [message.author.id, 1])
-      })
-    })
-  }, 4000)
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 function ListStatistic(message) {
@@ -111,68 +76,6 @@ function InvokeTimer(message){
         }, 2000)
       }, 2000)
   }
-
-////////////////////////////////////////////////////////////////////////////////
-function InvokeBreakPractice(message){
-  const ActSix = (['1', '2', '3', '4', '5', '6'])
-  const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
-
-  message.reply(`Please state a time limit between 1-10 minutes.`)
-  message.channel.awaitMessages(BK => BK.author.id === message.author.id && ActTen.some(word => BK.content.startsWith(word)), {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then(FinishedTime => {
-    LimitQuery = FinishedTime.first().content;
-    if (LimitQuery === "1") {
-      var limiter = 60000
-    } else if (LimitQuery === "2") {
-      var limiter = 120000
-    } else if (LimitQuery === "3") {
-      var limiter = 180000
-    } else if (LimitQuery === "4") {
-      var limiter = 240000
-    } else if (LimitQuery === "5") {
-      var limiter = 300000
-    } else if (LimitQuery === "6") {
-      var limiter = 360000
-    } else if (LimitQuery === "7") {
-      var limiter = 420000
-    } else if (LimitQuery === "8") {
-      var limiter = 480000
-    } else if (LimitQuery === "9") {
-      var limiter = 540000
-    } else if (LimitQuery === "10") {
-      var limiter = 600000
-    } else {
-      message.reply(`\`Internal Error\``)
-      return;
-    }
-    message.reply(`Please state the level of defense. ${BKDef}`)
-    message.channel.awaitMessages(BD => BD.author.id === message.author.id && ActSix.some(word => BD.content.startsWith(word)), {
-      max: 1,
-      time: 60000,
-      errors: ['time'],
-    })
-    .then(() => {
-      message.reply(`**Your barrier-breaking practice has initiated!** They have been placed ahead of you, each a meter apart. Good luck.`)
-      setTimeout(() => {
-        message.reply(`**Expiry!** Barrier practice has ended.`)
-      }, limiter)
-    })
-    .catch(() => {
-      console.error;
-      console.log(`${mach} BREAK BARR`)
-      message.reply(`${RTe}`)
-    })
-  })
-  .catch(() => {
-    console.error;
-    console.log(`${mach} BREAK TIMER (BREAKER)`)
-    message.reply(`${RTe}`)
-  })
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Login lines and message listeners
