@@ -9,7 +9,7 @@ sql.open("../score.sqlite");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Version number and recursive text
-var asmv = "1.2.0" // Version Number
+var asmv = "1.3.0" // Version Number
 var prefix = "?spar"
 var RTe = "Reply time expired."
 var mach = "Autonomous Sparring Mechanism"
@@ -44,6 +44,7 @@ DLText += `:two: The ${mach} will have a **Class I Barrier** capable of defendin
 DLText += `:three: The ${mach} will have a **Class II Barrier** capable of defending against light attacks.\n`
 DLText += `:four: The ${mach} will have a **Class III Barrier** capable of defending against strong attacks.\n`
 DLText += `:five: The ${mach} will have a **Class III Barrier** and **Regenerative Capability** for maximum difficulty.\n`
+DLText += `:six: The ${mach} will have a **Class IV Barrier**, A barrier with the capacity of attacking on its own upon attack.\n`
 
 var SPDText = `\n`;
 SPDText += `:one: The ${mach} will stay as **still as a tree.**\n`
@@ -257,7 +258,7 @@ function InvokeSpar(message){
       return;
     }
     message.reply(`Please state the level of defense. ${DLText}`)
-    message.channel.awaitMessages(DS => DS.author.id === message.author.id && ActFive.some(word => DS.content.startsWith(word)), {
+    message.channel.awaitMessages(DS => DS.author.id === message.author.id && ActSix.some(word => DS.content.startsWith(word)), {
       max: 1,
       time: 60000,
       errors: ['time'],
