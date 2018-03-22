@@ -24,6 +24,22 @@ var opts = `\`${prefix}\`\n\`${prefix} count\`\n\`${prefix} v\`\n\`${prefix} hea
 
 ////////////////////////////////////////////////////////////////////////////////
 // Invoke Texts
+var HLPText = ``;
+HLPText += `SparCompanion is an ${mach}. *Sparring by definition is to make the motions of boxing without landing heavy blows, as a form of training.*\n`
+HLPText += `__**Warning**__\n`
+HLPText += `The usage of this bot is **intended for individuals knowledged in how to move their Astral Body / Spirit / Soul.**\n`
+HLPText += `Upon **tagging this bot,** the system will respond with a series of questions pretaining to the difficulty of the training.\n`
+HLPText += `Once each question is responded, **A magickally automated entity will come forth for such training.** Here are the **absolute conditions.**\n`
+HLPText += `:one: If oblitherated before the time limit expires, another entity will spawn into existence and continue.\n`
+HLPText += `:two: This bot will never hit critically that permanently damages the invoker.\n`
+HLPText += `:three: If the invoker is unable to continue, the bot will cease to be despite the remaining limit.\n`
+HLPText += `:four: Upon the expiry of the time limit, the entity will completely dematerialize, and a healing Ki ball is sent to the invoker.\n`
+HLPText += `:five: If for some reason service is interrupted, such as a restart, expiry conditions will apply.\n`
+HLPText += `:six: A temporary circular-platform construct is materialized below the contestants during the match.\n`
+HLPText += `:seven: The construct is passively repaired as time goes on.\n`
+HLPText += `:eight: **Typing \`stop\` will command it to cease action before the timer expires.**\n`
+HLPText += `**Questions:** Time Limit, Defense, Speed, Attack, Intelligence.`
+
 
 var BKDef = `\n`;
 BKDef += `:one: The ${mach} spawns **3 Barriers.**\n`
