@@ -4,6 +4,7 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
 const InvokeSpar = require('./sys/SparComp/sparring.js')
+const InvokeHelpMenu = require('./sys/SparComp/help.js')
 
 // Added tally system
 const sql = require("sqlite");
@@ -11,7 +12,7 @@ sql.open("../score.sqlite");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Version number and recursive text
-var asmv = "1.4.0" // Version Number
+//var asmv = "1.4.0" // Version Number
 var prefix = "?spar"
 var RTe = "Reply time expired."
 var mach = "Autonomous Sparring Mechanism"
@@ -19,28 +20,7 @@ var mach = "Autonomous Sparring Mechanism"
 console.log(chalk.redBright("Spar System Initialization"))
 
 ////////////////////////////////////////////////////////////////////////////////
-// Recursive help menu
-var opts = `\`${prefix}\`\n\`${prefix} count\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
-
-////////////////////////////////////////////////////////////////////////////////
 // Invoke Texts
-var HLPText = ``;
-HLPText += `SparCompanion is an ${mach}. *Sparring by definition is to make the motions of boxing without landing heavy blows, as a form of training.*\n`
-HLPText += `__**Warning**__\n`
-HLPText += `The usage of this bot is **intended for individuals knowledged in how to move their Astral Body / Spirit / Soul.**\n`
-HLPText += `Upon **tagging this bot,** the system will respond with a series of questions pretaining to the difficulty of the training.\n`
-HLPText += `Once each question is responded, **A magickally automated entity will come forth for such training.** Here are the **absolute conditions.**\n`
-HLPText += `:one: If oblitherated before the time limit expires, another entity will spawn into existence and continue.\n`
-HLPText += `:two: This bot will never hit critically that permanently damages the invoker.\n`
-HLPText += `:three: If the invoker is unable to continue, the bot will cease to be despite the remaining limit.\n`
-HLPText += `:four: Upon the expiry of the time limit, the entity will completely dematerialize, and a healing Ki ball is sent to the invoker.\n`
-HLPText += `:five: If for some reason service is interrupted, such as a restart, expiry conditions will apply.\n`
-HLPText += `:six: A temporary circular-platform construct is materialized below the contestants during the match.\n`
-HLPText += `:seven: The construct is passively repaired as time goes on.\n`
-HLPText += `:eight: **Typing \`stop\` will command it to cease action before the timer expires.**\n`
-HLPText += `**Questions:** Time Limit, Defense, Speed, Attack, Intelligence.`
-
-
 var BKDef = `\n`;
 BKDef += `:one: The ${mach} spawns **3 Barriers.**\n`
 BKDef += `:two: The ${mach} spawns **10 Barriers.**\n`
@@ -174,10 +154,7 @@ client.on("message", message => {
     return;
   }
   if (message.content === `${prefix}`) {
-    message.reply(`${HLPText}`)
-    return;
-  } else if (message.content.startsWith(`${prefix} v`)) {
-    message.reply(`SparCompanion ASM v${asmv}`)
+    InvokeHelpMenu(message)
     return;
   } else if (message.content.startsWith(`${prefix} heal`)) {
     message.reply(`**Four Ki-balls have been dispatched to assist you.** This does not work while a match is in progress.`)
@@ -187,9 +164,6 @@ client.on("message", message => {
     return;
   } else if (message.content.startsWith(`${prefix} breaker`)) {
     InvokeBreakPractice(message)
-    return;
-  } else if (message.content.startsWith(`${prefix} help`)) {
-    message.reply(`${opts}`)
     return;
   } else if (message.content.startsWith(`${prefix} stats`)) {
     ListStatistic(message)
