@@ -68,7 +68,6 @@ client.on("message", message => {
   if (message.channel.type === "dm") {
     message.react("👆")
     message.reply(`Written by shadowsword#0179, please use commands within a server.`)
-    InvokeHelpMenu(message)
     return;
   } // Should someone DM the bot
   CleanProcess(message);
