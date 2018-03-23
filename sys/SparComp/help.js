@@ -1,6 +1,6 @@
 const Discord = require ("discord.js"); // discord client
 
-var asmv = "1.5.1" // Version Number
+var asmv = "1.6.0b-rev1" // Version Number
 var prefix = "?spar"
 //var opts = `\`${prefix}\`\n\`${prefix} count\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
 
@@ -10,7 +10,8 @@ opts += `${prefix} count   :: Tag a user with this to begin a sparring countdown
 opts += `${prefix} heal    :: Invokes bot to send forth 4 healing Ki balls.\n`
 opts += `${prefix} barrier :: Invokes bot to send forth Class III Barrier.\n`
 opts += `${prefix} breaker :: Barrier-Breaking Practice.\n`
-opts += `${prefix} stats   :: See how many times you invoked sparring practice.`
+opts += `${prefix} stats   :: See how many times you invoked sparring practice.\n`
+opts += `${prefix} pdt     :: Pocket Dimension tools.`
 
 var HLPText = ``;
 HLPText += `:one: If oblitherated before the time limit expires, another entity will spawn into existence and continue.\n`

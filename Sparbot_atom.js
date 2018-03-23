@@ -14,6 +14,7 @@ const ListStatistic = require('./sys/SparComp/liststat.js')
 const InvokeTimer = require('./sys/SparComp/countdown.js')
 const InvokeBreakPractice = require('./sys/SparComp/barrierbreaker.js')
 const InvokeAssist = require('./sys/SparComp/assistance.js')
+const PDTools = require('./sys/SparComp/pdmain.js')
 ////////////////////////////////////////////////////////////////////////////////
 // system prefix
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +54,9 @@ function CleanProcess(message) {
       return;
     }
     // more else ifs go here
+  } else if (mdata.startsWith(`${prefix} pdt`)) {
+    PDTools(message);
+    return;
   }
   if (message.isMentioned(client.user.id)) {
     InvokeSpar(message) // data detatched
