@@ -1,6 +1,6 @@
 const Discord = require ("discord.js"); // discord client
 
-var asmv = "1.4.5b" // Version Number
+var asmv = "1.5.0" // Version Number
 var prefix = "?spar"
 //var opts = `\`${prefix}\`\n\`${prefix} count\`\n\`${prefix} v\`\n\`${prefix} heal\`\n\`${prefix} barrier\`\n\`${prefix} breaker\`\n\`${prefix} stats\`\n\`${prefix} help\``
 
