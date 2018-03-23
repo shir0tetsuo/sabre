@@ -147,7 +147,7 @@ client.on("message", message => {
     InvokeBreakPractice(message)
     return;
   } else if (message.content.startsWith(`${prefix} stats`)) {
-    ListStatistic(message)
+    ListStatistic(message) // data detatched
     return;
   } else if (message.content.startsWith(`${prefix} count`)) {
     if (message.mentions.users.first() !== null && message.mentions.users.first() !== undefined) {
