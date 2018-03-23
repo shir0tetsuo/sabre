@@ -13,6 +13,7 @@ const InvokeHelpMenu = require('./sys/SparComp/help.js')
 const ListStatistic = require('./sys/SparComp/liststat.js')
 const InvokeTimer = require('./sys/SparComp/countdown.js')
 const InvokeBreakPractice = require('./sys/SparComp/barrierbreaker.js')
+const InvokeAssist = require('./sys/SparComp/assistance.js')
 ////////////////////////////////////////////////////////////////////////////////
 // system prefix
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,22 +32,20 @@ client.on("ready", () => {
 // Message-Command Processing is done here
 ////////////////////////////////////////////////////////////////////////////////
 function CleanProcess(message) {
-  if (message.content === `${prefix}`) {
+  const mdata = message.content.toLowerCase();
+  if (mdata === `${prefix}`) {
     InvokeHelpMenu(message) // data detatched
     return;
-  } else if (message.content.startsWith(`${prefix} heal`)) {
-    message.reply(`**Four Ki-balls have been dispatched to assist you.** This does not work while a match is in progress.`)
+  } else if (mdata.startsWith(`${prefix} heal`) || mdata.startsWith(`${prefix} barrier`)) {
+    InvokeAssist(message)
     return;
-  } else if (message.content.startsWith(`${prefix} barrier`)) {
-    message.reply(`**A Class III Barrier surrounds you.** This does not work while a match is in progress.\nThe barrier will dematerialize if there are no threats detected.`)
-    return;
-  } else if (message.content.startsWith(`${prefix} breaker`)) {
+  } else if (mdata.startsWith(`${prefix} breaker`)) {
     InvokeBreakPractice(message) // data detatched
     return;
-  } else if (message.content.startsWith(`${prefix} stats`)) {
+  } else if (mdata.startsWith(`${prefix} stats`)) {
     ListStatistic(message) // data detatched
     return;
-  } else if (message.content.startsWith(`${prefix} count`)) {
+  } else if (mdata.startsWith(`${prefix} count`)) {
     if (message.mentions.users.first() !== null && message.mentions.users.first() !== undefined) {
       InvokeTimer(message) // data detatched
     } else {
