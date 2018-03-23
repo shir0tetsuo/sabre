@@ -53,6 +53,7 @@ function CleanProcess(message) {
       message.reply(`Action required: \`Please @mention A user\``)
       return;
     }
+    // more else ifs go here
   }
   if (message.isMentioned(client.user.id)) {
     InvokeSpar(message) // data detatched
