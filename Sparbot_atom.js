@@ -32,28 +32,6 @@ BKDef += `:six: The ${mach} spawns **200 Barriers.**\n`
 BKDef += `\`\`\`md\n[!]: All these barriers are Class III.\nThe level of difficulty increases with each barrier and attempts to match the user's strength.\`\`\``
 
 ////////////////////////////////////////////////////////////////////////////////
-function InvokeTimer(message){
-  let opponent = message.mentions.users.first();
-  if (opponent.id === message.author.id) {
-    message.reply(`You're really going to fight *yourself?*`)
-    return;
-  } else if (opponent.bot) {
-    message.reply(`Bot users cannot be mentioned for this type of command.`)
-    return;
-  }
-      message.channel.send(`${message.author}\n:crossed_swords::vs::crossed_swords:\n${opponent}, \n:three:`)
-      setTimeout(() => {
-        message.channel.send(`:two:`)
-        setTimeout(() => {
-          message.channel.send(`:one:`)
-          setTimeout(() => {
-            message.channel.send(`:regional_indicator_g::regional_indicator_o: `)
-          }, 2000)
-        }, 2000)
-      }, 2000)
-  }
-
-////////////////////////////////////////////////////////////////////////////////
 function InvokeBreakPractice(message){
   const ActSix = (['1', '2', '3', '4', '5', '6'])
   const ActTen = (['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
