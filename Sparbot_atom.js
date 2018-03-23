@@ -6,6 +6,7 @@ const client = new Discord.Client(); // discord client
 const InvokeSpar = require('./sys/SparComp/sparring.js')
 const InvokeHelpMenu = require('./sys/SparComp/help.js')
 const ListStatistic = require('./sys/SparComp/liststat.js')
+const InvokeTimer = require('./sys/SparComp/countdown.js')
 
 // Added tally system
 const sql = require("sqlite");
