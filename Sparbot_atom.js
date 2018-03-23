@@ -5,6 +5,7 @@ const client = new Discord.Client(); // discord client
 
 const InvokeSpar = require('./sys/SparComp/sparring.js')
 const InvokeHelpMenu = require('./sys/SparComp/help.js')
+const ListStatistic = require('./sys/SparComp/liststat.js')
 
 // Added tally system
 const sql = require("sqlite");
@@ -29,26 +30,6 @@ BKDef += `:four: The ${mach} spawns **50 Barriers.**\n`
 BKDef += `:five: The ${mach} spawns **100 Barriers.**\n`
 BKDef += `:six: The ${mach} spawns **200 Barriers.**\n`
 BKDef += `\`\`\`md\n[!]: All these barriers are Class III.\nThe level of difficulty increases with each barrier and attempts to match the user's strength.\`\`\``
-
-////////////////////////////////////////////////////////////////////////////////
-function ListStatistic(message) {
-  sql.get(`SELECT * FROM SparComp WHERE userid = "masterstat"`).then(m => {
-    if (!m) {
-      message.reply(`\`Error\` The database hasn't been initialized yet.`)
-      return;
-    } else {
-      var MasterStat = m.record;
-      sql.get(`SELECT * FROM SparComp WHERE userId = "${message.author.id}"`).then(scs => {
-        let StateMRecord = `:exclamation: There are __${MasterStat}__ matches recorded.`
-        if (!scs) {
-          message.reply(`${StateMRecord}\n\`The system could not find a statistic for you.\``)
-        } else {
-          message.reply(`${StateMRecord}\n\`You have ..\`__\`${scs.record}\`__\`, Recorded Matches.\``)
-        }
-      })
-    }
-  })
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 function InvokeTimer(message){
@@ -154,7 +135,7 @@ client.on("message", message => {
     return;
   }
   if (message.content === `${prefix}`) {
-    InvokeHelpMenu(message)
+    InvokeHelpMenu(message) // data detatched
     return;
   } else if (message.content.startsWith(`${prefix} heal`)) {
     message.reply(`**Four Ki-balls have been dispatched to assist you.** This does not work while a match is in progress.`)
@@ -177,6 +158,6 @@ client.on("message", message => {
     }
   }
   if (message.isMentioned(client.user.id)) {
-    InvokeSpar(message)
+    InvokeSpar(message) // data detatched
   }
 })
