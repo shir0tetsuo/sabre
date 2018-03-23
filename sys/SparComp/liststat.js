@@ -1,5 +1,5 @@
 const sql = require("sqlite");
-sql.open("../../score.sqlite");
+sql.open("/root/NC/utils/NorthStar/score.sqlite");
 
 function ListStatistic(message) {
   sql.get(`SELECT * FROM SparComp WHERE userid = "masterstat"`).then(m => {
