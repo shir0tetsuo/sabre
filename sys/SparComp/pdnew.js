@@ -37,11 +37,34 @@ function aw2(message) {
       },
       {
         name: `Naming Stage`,
-        value: `Please enter a name for your new Pocket Dimension.`,
+        value: `Please enter a name for your new Pocket Dimension. The name must exceed 3 characters in length.`,
         inline: false
       }
     ]
   }})
+  message.channel.awaitMessages(at2 => at2.author.id === message.author.id && at2.content !== null && at2.content !== undefined && at2.content.length > 3, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at2a => {
+    var pname = at2a.content;
+    if (pname === undefined || pname === null) {
+      message.reply(`The system encountered an error and was forced to quit.`)
+      console.log(`PDT BREAK, new, at2a pname handler, ${message.member.displayName}`)
+      return;
+    }
+    aw3(message, pname)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at2 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw3(message, pname) {
+  message.reply(`${pname} (this was a test, please review this data, line 67 pdnew.js)`)
 }
 
 module.exports = (message) => {
