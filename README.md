@@ -33,3 +33,6 @@ Project Gamma Emerald is another Discord bot which all security related commands
 be exclusively supported by. It will be heavily dependent on the Bourne Again Shell.
 ### Other
 If you download this and try running it, don't come crying to me if it doesn't work. This bot is a work in progress and requires the discord.js library, and NodeJS 8+, as mentioned on the official discord.js website. It's also a work-in-progress, which means bugs, bugs, bugs.
+
+###SparCompanion
+SparCompanion is a system designed upon request for a specific server. Don't ask questions. Just go with it.
