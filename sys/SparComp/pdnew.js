@@ -64,7 +64,35 @@ function aw2(message) {
 }
 
 function aw3(message, pname) {
-  message.reply(`${pname} (this was a test, please review this data, line 67 pdnew.js)`)
+  var sizeopts = ``;
+  sizeopts += `\`\`\`md\n`
+  sizeopts += `1. 50m Radius\n`
+  sizeopts += `2. 100m Radius\n`
+  sizeopts += `3. 300m Radius\n`
+  sizeopts += `4. 500m Radius\n`
+  sizeopts += `5. 1km Radius`
+  sizeopts += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Size Stage`,
+        value: `Please indicate the maximum size of your dimension to include your constructs and what-have-you. Please note that exiting the radius will eject you from the dimension, and constructs that exceed the maximum radius will slowly dematerialize over time.`,
+        inline: false
+      },
+      {
+        name: `Available Options`,
+        value: `${sizeopts}`,
+        inline: false
+      }
+    ]
+  }})
 }
 
 module.exports = (message) => {
