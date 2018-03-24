@@ -48,7 +48,7 @@ function aw2(message) {
     errors: ['time'],
   })
   .then(at2a => {
-    var pname = at2a.content;
+    var pname = at2a.first().content;
     if (pname === undefined || pname === null) {
       message.reply(`The system encountered an error and was forced to quit.`)
       console.log(`PDT BREAK, new, at2a pname handler, ${message.member.displayName}`)
