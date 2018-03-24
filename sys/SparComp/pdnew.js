@@ -361,13 +361,13 @@ function aw7(message, pObj) {
       }
     ]
   }})
-  message.channel.awaitMessages(at7 => at7.author.id === message.channel.id && at7.content >= -15 && at7.content <= 30, {
+  message.channel.awaitMessages(at7 => at7.author.id === message.channel.id && Number.isInteger(Math.round(at7.content)) && Math.round(at7.content) >= -15 && Math.round(at7.content) <= 30, {
     max: 1,
     time: 30000,
     errors: ['time'],
   })
   .then(at7a => {
-    pObj.temp = Math.round(at7a.first().content)
+    pObj.temp = at7a.first().content
     message.reply(`\`Debugging: Success, check console\``)
     console.log(pObj)
   })
