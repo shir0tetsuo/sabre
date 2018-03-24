@@ -336,7 +336,8 @@ function aw6(message, pObj) {
       console.log(`PDT BREAK, new, at6a ${message.member.displayName}`)
       return;
     }
-    aw7(message, pObj)
+    //aw7(message, pObj)
+    console.log(pObj)
   })
   .catch(() => {
     console.error;
