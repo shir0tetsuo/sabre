@@ -10,20 +10,17 @@ module.exports = (message) => {
   if (mdata === `${prefix}`) {
     PDHelpPage(message);
     return;
-  }
-  if (mdata.startsWith(`${prefix} new`)) {
+  } else if (mdata.startsWith(`${prefix} new`)) {
+    console.log(`SparCompanion pdt new (level 1) success`)
     PDNewPage(message);
     return;
-  }
-  if (mdata.startsWith(`${prefix} open`)) {
+  } else if (mdata.startsWith(`${prefix} open`)) {
     PDOpenPage(message);
     return;
-  }
-  if (mdata.startsWith(`${prefix} rm`)) {
+  } else if (mdata.startsWith(`${prefix} rm`)) {
     PDRemPage(message);
     return;
-  }
-  if (mdata.startsWith(`${prefix} mod`)) {
+  } else if (mdata.startsWith(`${prefix} mod`)) {
     PDModPage(message);
     return;
   }
