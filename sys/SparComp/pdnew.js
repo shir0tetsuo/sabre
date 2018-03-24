@@ -377,14 +377,72 @@ function aw7(message, pObj) {
         return Math.round(number * factor) / factor;
       }
       pObj.temp = precisionRound(at7a.first().content, 1)
-      message.reply(`\`Debugging: Success, check console\``)
-      console.log(pObj)
+      aw8(message, pObj)
     })
     .catch(() => {
       console.error;
       console.log(`PDT BREAK, new, at7 ${message.member.displayName}`)
       message.reply(`${RTe}`)
     })
+}
+
+function aw8(message, pObj) {
+  var gravopts = `\`\`\`md\n`
+  gravopts += `1. No Gravity / Zero Gravity\n`
+  gravopts += `2. 1.62 m/s² Moon Gravity\n`
+  gravopts += `3. 3.711 m/s² Mars Gravity\n`
+  gravopts += `4. 9.807 m/s² Earth Gravity\n`
+  gravopts += `5. 24.79 m/s² Jupiter Gravity\n`
+  gravopts += `[!]: Leave this at 4 unless you really know what you're doing.`
+  gravopts += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Gravity Stage`,
+        value: `Gravity is a critical aspect to any domain.`
+      },
+      {
+        name: `Available Options`,
+        value: `${gravopts}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at8 => at8.author.id === message.author.id && ActFive.some(word => at8.content.startsWith(word)), {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at8a => {
+    const at8aC = at8a.first().content;
+    if (at8aC.startsWith("1")) {
+      pObj.gravity = "Zero"
+    } else if (at8aC.startsWith("2")) {
+      pObj.gravity = "Moon"
+    } else if (at8aC.startsWith("3")) {
+      pObj.gravity = "Mars"
+    } else if (at8aC.startsWith("4")) {
+      pObj.gravity = "Earth"
+    } else if (at8aC.startsWith("5")) {
+      pObj.gravity = "Jupiter"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at8a ${message.member.displayName}`)
+      return;
+    }
+    console.log(pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at8 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
 }
 
 module.exports = (message) => {
