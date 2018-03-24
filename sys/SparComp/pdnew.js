@@ -7,6 +7,11 @@ const ActFour = (['1', '2', '3', '4'])
 const ActFive = (['1', '2', '3', '4', '5'])
 const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+
 function AwaitTrain(message) {
   // This area is just as a confirmation system
   message.channel.awaitMessages(at1 => at1.author.id === message.author.id && at1.content.toLowerCase().startsWith('next'), {
@@ -372,10 +377,7 @@ function aw7(message, pObj) {
       errors: ['time'],
     })
     .then(at7a => {
-      function precisionRound(number, precision) {
-        var factor = Math.pow(10, precision);
-        return Math.round(number * factor) / factor;
-      }
+
       pObj.temp = precisionRound(at7a.first().content, 1)
       aw8(message, pObj)
     })
@@ -436,13 +438,45 @@ function aw8(message, pObj) {
       console.log(`PDT BREAK, new, at8a ${message.member.displayName}`)
       return;
     }
-    console.log(pObj)
+    aw9(message, pObj)
   })
   .catch(() => {
     console.error;
     console.log(`PDT BREAK, new, at8 ${message.member.displayName}`)
     message.reply(`${RTe}`)
   })
+}
+
+function aw9(message, pObj) {
+  var humidrecommend = `\`\`\`diff\n`
+  humidrecommend += `New Plants\n`
+  humidrecommend += `++ 70-80%\n`
+  humidrecommend += `Vegetative\n`
+  humidrecommend += `+ 40-60%\n`
+  humidrecommend += `Flowering\n`
+  humidrecommend += `+ 40-50%\n`
+  humidrecommend += `Final Week\n`
+  humidrecommend += `- < 40%`
+  humidrecommend += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Humidity Stage`,
+        value: `Too much moisture leads to mold, rot & mildew. If you are using this space for vegetation, it is recommended to have a breeze over the subjects, and keep moisture low upon harvests.`
+      },
+      {
+        name: `Vegetation Recommendations`,
+        value: `${humidrecommend} Please enter an integer between 0 and 100 for the percentage of humidity.`
+      }
+    ]
+  }})
 }
 
 module.exports = (message) => {
