@@ -2,7 +2,11 @@ var prefix = "?spar pdt"
 
 var availcom = ``;
 availcom += `\`\`\`asciidoc\n`
-availcom += `= There's nothing here... Yet =`
+availcom += `= Pocket Dimension Tools =\n`
+availcom += `${prefix} new    :: Create a New Pocket Dimension.\n`
+availcom += `${prefix} open   :: Open a Pocket Dimension.\n`
+availcom += `${prefix} rm     :: Delete a Pocket Dimension.\n`
+availcom += `${prefix} mod    :: Modify an Existing Pocket Dimension.`
 availcom += `\`\`\``
 
 module.exports = (message) => {
