@@ -2,7 +2,7 @@ var pdc = 0x4524a6
 var RTe = "Reply time expired."
 const sql = require("sqlite");
 sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
-
+  const ActFour = (['1', '2', '3', '4'])
   const ActFive = (['1', '2', '3', '4', '5'])
 
 function AwaitTrain(message) {
@@ -91,7 +91,7 @@ function aw3(message, pObj) {
     fields: [
       {
         name: `Size Stage`,
-        value: `Please indicate the maximum size of your dimension to include your constructs and what-have-you. Please note that exiting the radius will eject you from the dimension, and constructs that exceed the maximum radius will slowly dematerialize over time.`,
+        value: `Please indicate the maximum size of your dimension to include your constructs and what-have-you. Please note that by default, exiting the radius will eject you from the dimension, and constructs that exceed the maximum radius will slowly dematerialize over time.`,
         inline: false
       },
       {
@@ -133,7 +133,115 @@ function aw3(message, pObj) {
 }
 
 function aw4(message, pObj) {
-  console.log(pObj)
+  var weatheropts = `\`\`\`md\n`;
+  weatheropts += `1. Clear\n`,
+  weatheropts += `2. Rain/Snow\n`,
+  weatheropts += `3. Thunder/Lightning\n`,
+  weatheropts += `4. Thunder/Lightning & Rain/Snow\n`
+  weatheropts += `\`\`\``
+  //console.log(pObj)
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Weather Stage`,
+        value: `You may set the default weather for your area. **Temperatures** and **Gravity** may affect these choices.`
+      },
+      {
+        name: `Available Options`,
+        value: `${weatheropts}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at4 => at4.author.id === message.author.id && ActFour.some(word => at4.content.startsWith(word)), {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at4a => {
+    const at4aC = at4a.first().content;
+    if (at4aC.startsWith("1")) {
+      pObj.weather = "Clear"
+      pObj.weatherico = ":sunny:"
+    } else if (at4aC.startsWith("2")) {
+      pObj.weather = "Rain/Snow"
+      pObj.weatherico = ":cloud_rain:"
+    } else if (at4aC.startsWith("3")) {
+      pObj.weather = "Thunder/Lightning"
+      pObj.weatherico = ":cloud_lightning:"
+    } else if (at4aC.startsWith("4")) {
+      pObj.weather = "Thunder/Lightning & Rain/Snow"
+      pObj.weatherico = ":thunder_cloud_rain:"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at4a ${message.member.displayName}`)
+      return;
+    }
+    aw5(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at4 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw5(message, pObj) {
+
+  var bfscaleopts = `\`\`\`md\n`
+  bfscaleopts += `0. Calm\n`
+  bfscaleopts += `< Less-than 1km/h or less-than 1mph >\n`
+  bfscaleopts += `1. Light air\n`
+  bfscaleopts += `< 1-5 km/h or 1-3 mph >\n`
+  bfscaleopts += `2. Light breeze\n`
+  bfscaleopts += `< 6-11 km/h or 4-7 mph >\n`
+  bfscaleopts += `3. Gentle breeze\n`
+  bfscaleopts += `< 12-19 km/h or 8-12 mph >\n`
+  bfscaleopts += `4. Moderate breeze\n`
+  bfscaleopts += `< 20-28 km/h or 13-18 mph >\n`
+  bfscaleopts += `5. Fresh breeze\n`
+  bfscaleopts += `< 29-38 km/h or 19-24 mph >\n`
+  bfscaleopts += `6. Strong breeze\n`
+  bfscaleopts += `< 39-49 km/h or 25-31 mph >\n`
+  bfscaleopts += `7. High wind / moderate gale\n`
+  bfscaleopts += `< 50-61 km/h or 32-38 mph >\n`
+  bfscaleopts += `[!]: Whole trees in motion; inconvenience felt when walking against the wind.\n`
+  bfscaleopts += `8. Gale\n`
+  bfscaleopts += `< 62-74 km/h or 39-46 mph >\n`
+  bfscaleopts += `[!]: Twigs break off trees; generally impedes progress.\n`
+  bfscaleopts += `9. Strong/severe Gale\n`
+  bfscaleopts += `< 75-88 km/h or 47-54 mph >\n`
+  bfscaleopts += `[!]: Slight structural damage possible.\n`
+  bfscaleopts += `10. Storm, Whole Gale\n`
+  bfscaleopts += `< 89-102 km/h or 55-63 mph >\n`
+  bfscaleopts += `[!]: Trees uprooted, significant structural damage.\n`
+  bfscaleopts += `\`\`\``
+
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Wind Stage`,
+        value: `You can customize the level of wind turbulence that is passively generated in the background. These are based off of the **Beaufort Scale.** The maximum for this scale is 10, as any higher would be unwise.`
+      },
+      {
+        name: `Available Options`,
+        value: `${bfscaleopts}`
+      }
+    ]
+  }})
 }
 
 module.exports = (message) => {
