@@ -93,7 +93,7 @@ function aw3(message, pObj) {
     embed: {
       color: pdc,
       timestamp: new Date(),
-      description: ``,
+      description: `${pObj.name}`,
       author: {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
@@ -154,7 +154,7 @@ function aw4(message, pObj) {
     embed: {
       color: pdc,
       timestamp: new Date(),
-      description: ``,
+      description: `${pObj.name}`,
       author: {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
@@ -238,7 +238,7 @@ function aw5(message, pObj) {
     embed: {
       color: pdc,
       timestamp: new Date(),
-      description: ``,
+      description: `${pObj.name}`,
       author: {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
@@ -309,7 +309,7 @@ function aw6(message, pObj) {
     embed: {
       color: pdc,
       timestamp: new Date(),
-      description: ``,
+      description: `${pObj.name}`,
       author: {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
@@ -360,7 +360,7 @@ function aw7(message, pObj) {
     embed: {
       color: pdc,
       timestamp: new Date(),
-      description: ``,
+      description: `${pObj.name}`,
       author: {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
@@ -400,7 +400,7 @@ function aw8(message, pObj) {
   message.channel.send({embed: {
     color: pdc,
     timestamp: new Date(),
-    description: ``,
+    description: `${pObj.name}`,
     author: {
       name: message.member.displayName,
       icon_url: message.author.avatarURL
@@ -461,7 +461,7 @@ function aw9(message, pObj) {
   message.channel.send({embed: {
     color: pdc,
     timestamp: new Date(),
-    description: ``,
+    description: `${pObj.name}`,
     author: {
       name: message.member.displayName,
       icon_url: message.author.avatarURL
@@ -474,6 +474,53 @@ function aw9(message, pObj) {
       {
         name: `Vegetation Recommendations`,
         value: `${humidrecommend} Please enter an integer between 0 and 100 for the percentage of humidity.`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at9 => at9.author.id === message.author.id && Number.isInteger(Math.round(at9.content)) && at9.content * 1 <= 100 && at9.content * 1 >= 0, {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(at9a => {
+    pObj.humidity = precisionRound(at9a.first().content, 1)
+    aw10(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at9 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw10(message, pObj) {
+  var platopt = `\`\`\`md\n`
+  platopt += `1. None\n`
+  platopt += `2. Water-Filled\n`
+  platopt += `3. Black Granite\n`
+  platopt += `4. White Granite\n`
+  platopt += `5. Checkered White/Black Granite\n`
+  platopt += `6. White Marble\n`
+  platopt += `7. Black Marble\n`
+  platopt += `8. Checkered White/Black Marble\n`
+  platopt += `9. Grass`
+  platopt += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Platform Stage`,
+        value: `A preset for a square-tiled circular platform is available. Advanced users that enable **Write Access** can modify this as they please, and is often recommended.`
+      },
+      {
+        name: `Available Options`,
+        value: `${platopt}`
       }
     ]
   }})
