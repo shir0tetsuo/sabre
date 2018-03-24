@@ -4,6 +4,7 @@ const sql = require("sqlite");
 sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
   const ActFour = (['1', '2', '3', '4'])
   const ActFive = (['1', '2', '3', '4', '5'])
+  const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 
 function AwaitTrain(message) {
   // This area is just as a confirmation system
@@ -242,7 +243,7 @@ function aw5(message, pObj) {
       }
     ]
   }})
-  message.channel.awaitMessages(at5 => at5.author.id === message.author.id && ActTen.some(word => at5.content.startsWith(word)), {
+  message.channel.awaitMessages(at5 => at5.author.id === message.author.id && ActBF.some(word => at5.content.startsWith(word)), {
     max: 1,
     time: 60000,
     errors: ['time'],
