@@ -2,6 +2,7 @@ var pdc = 0x4524a6
 var RTe = "Reply time expired."
 const sql = require("sqlite");
 sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
+  const ActThree = (['1', '2', '3'])
   const ActFour = (['1', '2', '3', '4'])
   const ActFive = (['1', '2', '3', '4', '5'])
   const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
@@ -288,7 +289,81 @@ function aw5(message, pObj) {
 }
 
 function aw6(message, pObj) {
-  console.log(pObj)
+  //console.log(pObj)
+  var todopts = `\`\`\`md\n`
+  todopts += `1. Day\n`
+  todopts += `2. Night\n`
+  todopts += `3. Relative\n`
+  todopts += `4. Dusk/Dawn`
+  todopts += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Time of Day Stage`,
+        value: `This stage only has three options. Selecting relative will have a day/night cycle based on **Eastern Standard Time.**`
+      },
+      {
+        name: `Available Options`,
+        value: `${todopts}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at6 => at6.author.id === message.author.id && ActFour.some(word => at6.content.startsWith(word)), {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at6a => {
+    const at6aC = at6a.first().content;
+    if (at6aC.startsWith("1")) {
+      pObj.tod = "Day"
+    } else if (at6aC.startsWith("2")) {
+      pObj.tod = "Night"
+    } else if (at6aC.startsWith("3")) {
+      pObj.tod = "Relative"
+    } else if (at6aC.startsWith("4")) {
+      pObj.tod = "Dusk/Dawn"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at6a ${message.member.displayName}`)
+      return;
+    }
+    aw7(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at6 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw7(message, pObj) {
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: ``,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Temperature Stage`,
+        value: `The temperature will **affect weather.** You are allowed to specify anywhere between **-15**°c and **30**°c.`
+      },
+      {
+        name: `Available Options`,
+        value: `${tempopts}`
+      }
+    ]
+  }})
 }
 
 module.exports = (message) => {
