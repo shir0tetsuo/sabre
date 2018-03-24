@@ -315,6 +315,7 @@ function aw6(message, pObj) {
       }
     ]
   }})
+  // there's a bug here somewhere.
   message.channel.awaitMessages(at6 => at6.author.id === message.author.id && ActFour.some(word => at6.content.startsWith(word)), {
     max: 1,
     time: 30000,
@@ -335,7 +336,7 @@ function aw6(message, pObj) {
       console.log(`PDT BREAK, new, at6a ${message.member.displayName}`)
       return;
     }
-    aw7(message, pObj)
+    console.log(pObj)
   })
   .catch(() => {
     console.error;
@@ -343,7 +344,7 @@ function aw6(message, pObj) {
     message.reply(`${RTe}`)
   })
 }
-
+/*
 function aw7(message, pObj) {
   message.channel.send({embed: {
     color: pdc,
@@ -365,7 +366,7 @@ function aw7(message, pObj) {
     ]
   }})
 }
-
+*/
 module.exports = (message) => {
   message.channel.send({embed: {
     color: pdc,
