@@ -61,6 +61,7 @@ function aw2(message) {
     var pObj = {};
     pObj.userid = message.author.id;
     pObj.userdn = message.member.displayName;
+    pObj.usertg = message.author.tag;
     pObj.name = pname;
 
     aw3(message, pObj)
