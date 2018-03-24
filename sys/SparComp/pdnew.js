@@ -346,7 +346,6 @@ function aw6(message, pObj) {
 }
 
 function aw7(message, pObj) {
-  /*
   message.channel.send({embed: {
     color: pdc,
     timestamp: new Date(),
@@ -359,10 +358,6 @@ function aw7(message, pObj) {
       {
         name: `Temperature Stage`,
         value: `The temperature will **affect weather.** You are allowed to specify anywhere between **-15**°c and **30**°c.`
-      },
-      {
-        name: `Available Options`,
-        value: `${tempopts}`
       }
     ]
   }})
@@ -380,7 +375,7 @@ function aw7(message, pObj) {
     console.log(`PDT BREAK, new, at7 ${message.member.displayName}`)
     message.reply(`${RTe}`)
   })
-  */
+
   console.log(pObj)
 }
 
