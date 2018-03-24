@@ -336,7 +336,7 @@ function aw6(message, pObj) {
       console.log(`PDT BREAK, new, at6a ${message.member.displayName}`)
       return;
     }
-    console.log(pObj)
+    aw7(message, pObj)
   })
   .catch(() => {
     console.error;
@@ -344,7 +344,7 @@ function aw6(message, pObj) {
     message.reply(`${RTe}`)
   })
 }
-/*
+
 function aw7(message, pObj) {
   message.channel.send({embed: {
     color: pdc,
@@ -365,8 +365,22 @@ function aw7(message, pObj) {
       }
     ]
   }})
+  message.channel.awaitMessages(at7 => at7.author.id === message.channel.id && Number.isInteger(at7.content) && at7.content >= -15 && at7.content <= 30, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at7a => {
+    pObj.temp = Math.round(at7a.first().content)
+    console.log(pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at7 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
 }
-*/
+
 module.exports = (message) => {
   message.channel.send({embed: {
     color: pdc,
