@@ -361,7 +361,7 @@ function aw7(message, pObj) {
       }
     ]
   }})
-  message.channel.awaitMessages(at7 => at7.author.id === message.channel.id && at7.content * 1 >= -15 && at7.content * 1 <= 30, {
+  message.channel.awaitMessages(at7 => at7.author.id === message.channel.id && Number.isInteger(Math.round(at7.content * 1)) == true, {
     max: 1,
     time: 30000,
     errors: ['time'],
