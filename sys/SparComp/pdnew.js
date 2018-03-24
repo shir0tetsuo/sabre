@@ -5,7 +5,6 @@ sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
 
 function AwaitTrain(message) {
   // This area is just as a confirmation system
-  console.log(`SparCompanion pdt new (level 3) success`)
   message.channel.awaitMessages(at1 => at1.author.id === message.author.id && at1.content.toLowerCase().startsWith('next'), {
     max: 1,
     time: 30000,
@@ -46,7 +45,6 @@ function aw2(message) {
 }
 
 module.exports = (message) => {
-  console.log(`SparCompanion pdt new (level 2) success`)
   message.channel.send({embed: {
     color: pdc,
     timestamp: new Date(),
