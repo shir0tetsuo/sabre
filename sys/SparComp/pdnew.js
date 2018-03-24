@@ -3,6 +3,8 @@ var RTe = "Reply time expired."
 const sql = require("sqlite");
 sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
 
+  const ActFive = (['1', '2', '3', '4', '5'])
+
 function AwaitTrain(message) {
   // This area is just as a confirmation system
   message.channel.awaitMessages(at1 => at1.author.id === message.author.id && at1.content.toLowerCase().startsWith('next'), {
@@ -54,7 +56,13 @@ function aw2(message) {
       console.log(`PDT BREAK, new, at2a pname handler, ${message.member.displayName}`)
       return;
     }
-    aw3(message, pname)
+
+    var pObj = {};
+    pObj.userid = message.author.id;
+    pObj.userdn = message.member.displayName;
+    pObj.name = pname;
+
+    aw3(message, pObj)
   })
   .catch(() => {
     console.error;
@@ -63,7 +71,7 @@ function aw2(message) {
   })
 }
 
-function aw3(message, pname) {
+function aw3(message, pObj) {
   var sizeopts = ``;
   sizeopts += `\`\`\`md\n`
   sizeopts += `1. 50m Radius\n`
@@ -93,6 +101,39 @@ function aw3(message, pname) {
       }
     ]
   }})
+  message.channel.awaitMessages(at3 => at3.author.id === message.author.id && ActFive.some(word => at3.content.startsWith(word)), {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at3a => {
+    const at3aC = at3a.first().content;
+    if (at3aC.startsWith("1")) {
+      pObj.size = "50m"
+    } else if (at3aC.startsWith("2")) {
+      pObj.size = "100m"
+    } else if (at3aC.startsWith("3")) {
+      pObj.size = "300m"
+    } else if (at3aC.startsWith("4")) {
+      pObj.size = "500m"
+    } else if (at3aC.startsWith("5")) {
+      pObj.size = "1km"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at3a ${message.member.displayName}`)
+      return;
+    }
+    aw4(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at3 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw4(message, pObj) {
+  console.log(pObj)
 }
 
 module.exports = (message) => {
