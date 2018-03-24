@@ -242,6 +242,51 @@ function aw5(message, pObj) {
       }
     ]
   }})
+  message.channel.awaitMessages(at5 => at5.author.id === message.author.id && ActTen.some(word => at5.content.startsWith(word)), {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(at5a => {
+    const at5aC = at5a.first().content;
+    if (at5aC === "0") {
+      pObj.wind = 0;
+    } else if (at5aC === "1") {
+      pObj.wind = 1;
+    } else if (at5aC === "2") {
+      pObj.wind = 2;
+    } else if (at5aC === "3") {
+      pObj.wind = 3;
+    } else if (at5aC === "4") {
+      pObj.wind = 4;
+    } else if (at5aC === "5") {
+      pObj.wind = 5;
+    } else if (at5aC === "6") {
+      pObj.wind = 6;
+    } else if (at5aC === "7") {
+      pObj.wind = 7;
+    } else if (at5aC === "8") {
+      pObj.wind = 8;
+    } else if (at5aC === "9") {
+      pObj.wind = 9;
+    } else if (at5aC === "10") {
+      pObj.wind = 10;
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at5a ${message.member.displayName}`)
+      return;
+    }
+    aw6(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at5 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw6(message, pObj) {
+  console.log(pObj)
 }
 
 module.exports = (message) => {
