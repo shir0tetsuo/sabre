@@ -628,12 +628,287 @@ function aw11(message, pObj) {
       console.log(`PDT BREAK, new, at11a ${message.member.displayName}`)
       return;
     }
-    message.reply(`\`Debug information sent to terminal.\``)
-    console.log(pObj)
+    //message.reply(`\`Debug information sent to terminal.\``)
+    //console.log(pObj)
+    aw12(message, pObj)
   })
   .catch(() => {
     console.error;
     console.log(`PDT BREAK, new, at11 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw12(message, pObj) {
+  var dynopt = `\`\`\`md\n`
+  dynopt += `1. Static\n`
+  dynopt += `< The weather and wind will never deviate from its settings. >\n`
+  dynopt += `2. Dynamic Level 1\n`
+  dynopt += `< The wind can become calm, or fluctuate. The weather can deviate from its settings on occasion. >\n`
+  dynopt += `3. Dynamic Level 2\n`
+  dynopt += `< The wind levels and weather can deviate frequently. >`
+  dynopt += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Dynamic Weather Stage`,
+        value: `This is a switch for how dynamic the weather will be in your environment.`
+      },
+      {
+        name: `Available Options`,
+        value: `${dynopt}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at12 => at12.author.id === message.author.id && Number.isInteger(at12.content * 1) && at12.content * 1 >= 1 && at12.content * 1 <= 3, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at12a => {
+    const at12aC = Math.round(at12a.first().content)
+    if (at12aC === "1") {
+      pObj.dynamic = 1
+    } else if (at12aC === "2") {
+      pObj.dynamic = 2
+    } else if (at12aC === "3") {
+      pObj.dynamic = 3
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at12a ${message.member.displayName}`)
+      return;
+    }
+    aw13(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at12 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw13(message, pObj) {
+  var boundopt = `\`\`\`md\n`
+  boundopt += `1. None\n`
+  boundopt += `2. Barrier\n`
+  boundopt += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Boundary Stage`,
+        value: `You can set the boundary of this area to automatically return you to your previous location, or prevent accidentally leaving from a barrier.`
+      },
+      {
+        name: `Available Options`,
+        value: `${boundopt}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at13 => at13.author.id === message.author.id && Number.isInteger(at13.content * 1) && at13.content * 1 >=1 && at13.content * 1 <= 2, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at13a => {
+    const at13aC = Math.round(at13a.first().content);
+    if (at13aC === "1") {
+      pObj.boundary = "None"
+    } else if (at13aC === "2") {
+      pObj.boundary = "Barrier"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at13a ${message.member.displayName}`)
+      return;
+    }
+    aw14(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at13 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw14(message, pObj) {
+  var writeaccess = `\`\`\`md\n`
+  writeaccess += `1. No Write Access\n`
+  writeaccess += `2. Owner-Only Write Access\n`
+  writeaccess += `3. Public Write Access`
+  writeaccess += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Write Access Stage`,
+        value: `*Almost* done. Now you need to decide on **Write Access**, which will allow you to make changes to your area and save them. With Write Access disabled, materializations will be temporary and will cease to be over time.`
+      },
+      {
+        name: `Available Options`,
+        value: `${writeaccess}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at14 => at14.author.id === message.author.id && Number.isInteger(at14.content * 1) && at14.content * 1 >= 1 && at14.content <= 3, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at14a => {
+    const at14aC = Math.round(at14a.first().content);
+    if (at14aC === "1") {
+      pObj.write = "None"
+    } else if (at14aC === "2") {
+      pObj.write = "Owner-Only"
+    } else if (at14aC === "3") {
+      pObj.write = "Public"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at14a ${message.member.displayName}`)
+      return;
+    }
+    aw15(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at14 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw15(message, pObj) {
+  var resilopt = `\`\`\`md\n`
+  resilopt += `1. No Autorepair, No Override\n`
+  resilopt += `[!]: Structures will not repair, object density will not be overridden.\n`
+  resilopt += `2. Autorepair, No Override\n`
+  resilopt += `[!]: Structures and constructs automatically repair themselves when damaged, object density will not be overridden\n`
+  resilopt += `3. No Autorepair, Override Soft\n`
+  resilopt += `[!]: Structures will not repair, object density overridden to soft surfaces only\n`
+  resilopt += `4. Autorepair, Override Soft\n`
+  resilopt += `[!]: Structures and constructs automatically repair themselves when damaged, object density overridden to soft surfaces only\n`
+  resilopt += `5. No Autorepair, Override Hard\n`
+  resilopt += `[!]: Structures will not repair, object density overridden to hard surfaces only\n`
+  resilopt += `6. Autorepair, Override Hard\n`
+  resilopt += `[!]: Structures and constructs automatically repair themselves when damaged, object density overridden to hard surfaces only\n`
+  resilopt += `\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Resillience Stage`,
+        value: `This is to set the resillience of your constructs you create.`
+      },
+      {
+        name: `Available Options`,
+        value: `${resilopt}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at15 => at15.author.id === message.author.id && Number.isInteger(at15.content * 1) && at15.content * 1 >= 1 && at15.content * 1 <= 6, {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(at15a => {
+    const resil = Math.round(at15a.first().content);
+    if (resil === "1") {
+      pObj.repair = false
+      pObj.override = "none"
+    } else if (resil === "2") {
+      pObj.repair = true
+      pObj.override = "none"
+    } else if (resil === "3") {
+      pObj.repair = false
+      pObj.override = "soft"
+    } else if (resil === "4") {
+      pObj.repair = true
+      pObj.override = "soft"
+    } else if (resil === "5") {
+      pObj.repair = false
+      pObj.override = "hard"
+    } else if (resil === "6") {
+      pObj.repair = true
+      pObj.override = "hard"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at15a ${message.member.displayName}`)
+      return;
+    }
+    aw16(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at15 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw16(message, pObj) {
+  var continuanceopt = `\`\`\`md\n`
+  continuanceopt += `1. True\n`
+  continuanceopt += `2. False\`\`\``
+  message.channel.send({embed: {
+    color: pdc,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `Continuance Stage`,
+        value: `Having the continuance flag **true** will allow things such as vegetation to continue growing after the Pocket Dimension is closed. This may put more stress on the bot. Having the continuance flag as **false** will set the pocket dimension to be saved as a state to be resumed the next time it is used. (This does not effect auto-repair.)`
+      },
+      {
+        name: `Available Options`,
+        value: `${continuanceopt}`
+      }
+    ]
+  }})
+  message.channel.awaitMessages(at16 => at16.author.id === message.author.id && Number.isInteger(at16.content * 1) && at16.content * 1 >= 1 && at16.content * 1 <= 2, {
+    max: 1,
+    time: 30000,
+    errors: ['time'],
+  })
+  .then(at16a => {
+    const cont = Math.round(at16a.first().content);
+    if (cont === "1") {
+      pObj.continuance = true
+    } else {
+      pObj.continuance = false
+    }
+    message.reply(`Check console for debug.`)
+    console.log(pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at16 ${message.member.displayName}`)
     message.reply(`${RTe}`)
   })
 }
