@@ -7,6 +7,7 @@ const ActFour = (['1', '2', '3', '4'])
 const ActFive = (['1', '2', '3', '4', '5'])
 const ActNine = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+const confirm = (['yes', 'no'])
 
 function precisionRound(number, precision) {
   var factor = Math.pow(10, precision);
