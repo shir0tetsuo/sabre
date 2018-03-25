@@ -674,6 +674,8 @@ function aw12(message, pObj) {
   })
   .then(at12a => {
     const at12aC = Math.round(at12a.first().content)
+    console.log(at12aC)
+    console.log(Number.isInteger(at12aC))
     if (at12aC === "1") {
       pObj.dynamic = 1
     } else if (at12aC === "2") {
