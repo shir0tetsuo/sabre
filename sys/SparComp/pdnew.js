@@ -915,6 +915,7 @@ function aw16(message, pObj) {
 }
 
 function aw17(message, pObj) {
+  console.log(pObj)
   message.channel.send({embed: {
     color: 0x00d515,
     timestamp: new Date(),
