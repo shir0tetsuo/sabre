@@ -8,6 +8,7 @@ const ActFive = (['1', '2', '3', '4', '5'])
 const ActNine = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 const confirm = (['yes', 'no'])
+var DoneMsg = "Write Success!"
 
 function catchObj(message, breaker) {
   console.error;
@@ -940,7 +941,7 @@ function doSave(message, pObj) {
         if (!pBlock) {
           sql.run(`INSERT INTO Dimension (userId, userDn, userTg, name, size, weather, weatherIco, wind, tod, temp, gravity, humidity, platform, parallax, dynamic, boundary, write, repair, override, continuance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [pObj.userid, pObj.userdn, pObj.usertg, pObj.name, pObj.size, pObj.weather, pObj.weatherico, pObj.wind, pObj.tod, pObj.temp, pObj.gravity, pObj.humidity, pObj.platform, pObj.parallax, pObj.dynamic, pObj.boundary, pObj.write, pObj.repair, pObj.override, pObj.continuance])
             .then(() => {
-              m.edit(`Done!`)
+              m.edit(`${DoneMsg}`)
               console.log(`PDT: Existing Database, new Block Added`)
             })
         } else {
@@ -1000,7 +1001,7 @@ function doSave(message, pObj) {
               sql.run(`UPDATE Dimension SET continuance = "${pObj.continuance}" WHERE userId = "${message.author.id}"`)
             })
             .then(() => {
-              m.edit(`Done!`)
+              m.edit(`${DoneMsg}`)
               console.log(`PDT: Existing Database and Block, updated Block`)
             })
         }
@@ -1011,7 +1012,7 @@ function doSave(message, pObj) {
             sql.run(`INSERT INTO Dimension (userId, userDn, userTg, name, size, weather, weatherIco, wind, tod, temp, gravity, humidity, platform, parallax, dynamic, boundary, write, repair, override, continuance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [pObj.userid, pObj.userdn, pObj.usertg, pObj.name, pObj.size, pObj.weather, pObj.weatherico, pObj.wind, pObj.tod, pObj.temp, pObj.gravity, pObj.humidity, pObj.platform, pObj.parallax, pObj.dynamic, pObj.boundary, pObj.write, pObj.repair, pObj.override, pObj.continuance])
           })
       }).then(() => {
-        m.edit(`Done!`)
+        m.edit(`${DoneMsg}`)
         console.log(`PDT: New DB and Block`)
       })
 
