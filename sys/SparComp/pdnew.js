@@ -727,9 +727,9 @@ function aw13(message, pObj) {
   })
   .then(at13a => {
     const at13aC = Math.round(at13a.first().content);
-    if (at13aC === "1") {
+    if (at13aC == 1) {
       pObj.boundary = "None"
-    } else if (at13aC === "2") {
+    } else if (at13aC == 2) {
       pObj.boundary = "Barrier"
     } else {
       message.reply(`The system encountered a critical error.`)
@@ -777,11 +777,11 @@ function aw14(message, pObj) {
   })
   .then(at14a => {
     const at14aC = Math.round(at14a.first().content);
-    if (at14aC === "1") {
+    if (at14aC == 1) {
       pObj.write = "None"
-    } else if (at14aC === "2") {
+    } else if (at14aC == 2) {
       pObj.write = "Owner-Only"
-    } else if (at14aC === "3") {
+    } else if (at14aC == 3) {
       pObj.write = "Public"
     } else {
       message.reply(`The system encountered a critical error.`)
@@ -838,22 +838,22 @@ function aw15(message, pObj) {
   })
   .then(at15a => {
     const resil = Math.round(at15a.first().content);
-    if (resil === "1") {
+    if (resil == 1) {
       pObj.repair = false
       pObj.override = "none"
-    } else if (resil === "2") {
+    } else if (resil == 2) {
       pObj.repair = true
       pObj.override = "none"
-    } else if (resil === "3") {
+    } else if (resil == 3) {
       pObj.repair = false
       pObj.override = "soft"
-    } else if (resil === "4") {
+    } else if (resil == 4) {
       pObj.repair = true
       pObj.override = "soft"
-    } else if (resil === "5") {
+    } else if (resil == 5) {
       pObj.repair = false
       pObj.override = "hard"
-    } else if (resil === "6") {
+    } else if (resil == 6) {
       pObj.repair = true
       pObj.override = "hard"
     } else {
@@ -900,7 +900,7 @@ function aw16(message, pObj) {
   })
   .then(at16a => {
     const cont = Math.round(at16a.first().content);
-    if (cont === "1") {
+    if (cont == 1) {
       pObj.continuance = true
     } else {
       pObj.continuance = false
