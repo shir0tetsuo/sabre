@@ -941,10 +941,36 @@ function aw17(message, pObj) {
       },
       {
         name: `Read/Write`,
-        value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}`
+        value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}\n**Name: ${pObj.name}**`
+      },
+      {
+        name: `\u200b`,
+        value: `**Are these settings correct?** Please verify by typing\n\`yes\` / \`no\``
       }
     ]
   }})
+  message.channel.awaitMessages(final => final.author.id === message.author.id && confirm.some(word => final.content.toLowerCase().startsWith(word)), {
+    max: 1,
+    time: 120000,
+    errors: ['time'],
+  })
+  .then(finalresponse => {
+    const finalresponse_condensed = finalresponse.first().content;
+    if (finalresponse_condensed.startsWith("yes")) {
+      doSave(message, pObj)
+    } else {
+      message.reply(`Saving has been cancelled. You can redo this at anytime.`)
+    }
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, final ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function doSave(message, pObj) {
+  message.reply(`Something is supposed to go here!`)
 }
 
 module.exports = (message) => {
