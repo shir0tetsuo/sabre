@@ -5,6 +5,7 @@ sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
 const ActThree = (['1', '2', '3'])
 const ActFour = (['1', '2', '3', '4'])
 const ActFive = (['1', '2', '3', '4', '5'])
+const ActNine = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 
 function precisionRound(number, precision) {
@@ -516,7 +517,7 @@ function aw10(message, pObj) {
     fields: [
       {
         name: `Platform Stage`,
-        value: `A preset for a square-tiled circular platform is available. Advanced users that enable **Write Access** can modify this as they please, and is often recommended.`
+        value: `A preset for a square-tiled circular platform is available. Setting to none is not recommended. Advanced users that enable **Write Access** can modify this as they please, and is often recommended.`
       },
       {
         name: `Available Options`,
@@ -524,6 +525,117 @@ function aw10(message, pObj) {
       }
     ]
   }})
+  message.channel.awaitMessages(at10 => at10.author.id === message.author.id && ActNine.some(word => at10.content.startsWith(word)), {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(at10a => {
+    const at10aC = at10a.first().content;
+    // listed as default construct platform
+    if (at10aC.startsWith("1")) {
+      pObj.platform = "None"
+    } else if (at10aC.startsWith("2")) {
+      pObj.platform = "Water-Filled"
+    } else if (at10aC.startsWith("3")) {
+      pObj.platform = "Black Granite"
+    } else if (at10aC.startsWith("4")) {
+      pObj.platform = "White Granite"
+    } else if (at10aC.startsWith("5")) {
+      pObj.platform = "Checkered White/Black Granite"
+    } else if (at10aC.startsWith("6")) {
+      pObj.platform = "White Marble"
+    } else if (at10aC.startsWith("7")) {
+      pObj.platform = "Black Marble"
+    } else if (at10aC.startsWith("8")) {
+      pObj.platform = "Checkered White/Black Marble"
+    } else if (at10aC.startsWith("9")) {
+      pObj.platform = "Grass"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at10a ${message.member.displayName}`)
+      return;
+    }
+    aw11(message, pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at10 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
+}
+
+function aw11(message, pObj) {
+  var parallopt = `\`\`\`md\n`
+  parallopt += `1. None (Void)\n`
+  parallopt += `2. Randomized Rainbow Star Cluster\n`
+  parallopt += `3. Randomized Green Star Cluster\n`
+  parallopt += `4. Randomized Blue Star Cluster\n`
+  parallopt += `5. Randomized Red Star Cluster\n`
+  parallopt += `6. Randomized Yellow Star Cluster\n`
+  parallopt += `7. Randomized White Star Cluster\n`
+  parallopt += `8. Randomized Purple Star Cluster\n`
+  parallopt += `9. Canvas Mode\n`
+  parallopt += `\`\`\``
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
+      },
+      fields: [
+        {
+          name: `Parallax Stage`,
+          value: `The Parallax Stage allows you to select the background for your realm. You can choose from one of several locations in Astral space to house your domain. Note that this will still not affect the visibility of your realm in those spaces, including which the star (if set to Relative/Day/Dusk/Dawn cycles). Canvas Mode gives the user a blank slate from which they can paint upon however they please.`
+        },
+        {
+          name: `Available Options`,
+          value: `${parallopt}`
+        }
+      ]
+    }
+  })
+  message.channel.awaitMessages(at11 => at11.author.id === message.author.id && ActNine.some(word => at11.content.startsWith(word)), {
+    max: 1,
+    time: 60000,
+    errors: ['time'],
+  })
+  .then(at11a => {
+    const at11aC = at11a.first().content;
+    if (at11aC.startsWith("1")) {
+      pObj.parallax = "Void"
+    } else if (at11aC.startsWith("2")) {
+      pObj.parallax = "Rainbow Cluster"
+    } else if (at11aC.startsWith("3")) {
+      pObj.parallax = "Green Cluster"
+    } else if (at11aC.startsWith("4")) {
+      pObj.parallax = "Blue Cluster"
+    } else if (at11aC.startsWith("5")) {
+      pObj.parallax = "Red Cluster"
+    } else if (at11aC.startsWith("6")) {
+      pObj.parallax = "Yellow Cluster"
+    } else if (at11aC.startsWith("7")) {
+      pObj.parallax = "White Cluster"
+    } else if (at11aC.startsWith("8")) {
+      pObj.parallax = "Purple Cluster"
+    } else if (at11aC.startsWith("9")) {
+      pObj.parallax = "Canvas"
+    } else {
+      message.reply(`The system encountered a critical error.`)
+      console.log(`PDT BREAK, new, at11a ${message.member.displayName}`)
+      return;
+    }
+    message.reply(`\`Debug information sent to terminal.\``)
+    console.log(pObj)
+  })
+  .catch(() => {
+    console.error;
+    console.log(`PDT BREAK, new, at11 ${message.member.displayName}`)
+    message.reply(`${RTe}`)
+  })
 }
 
 module.exports = (message) => {
