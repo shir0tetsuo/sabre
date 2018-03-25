@@ -905,14 +905,35 @@ function aw16(message, pObj) {
     } else {
       pObj.continuance = false
     }
-    message.reply(`Check console for debug.`)
-    console.log(pObj)
+    aw17(message, pObj)
   })
   .catch(() => {
     console.error;
     console.log(`PDT BREAK, new, at16 ${message.member.displayName}`)
     message.reply(`${RTe}`)
   })
+}
+
+function aw17(message, pObj) {
+  message.channel.send({embed: {
+    color: 0x00d515,
+    timestamp: new Date(),
+    description: `${pObj.name}`,
+    author: {
+      name: message.member.displayName,
+      icon_url: message.author.avatarURL
+    },
+    fields: [
+      {
+        name: `You're almost done!`,
+        value: `Please confirm that the following information is correct:`
+      },
+      {
+        name: `**${pObj.name}**`,
+        value: `Stuff will go here.`
+      }
+    ]
+  }})
 }
 
 module.exports = (message) => {
