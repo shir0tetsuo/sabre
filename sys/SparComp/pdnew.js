@@ -935,9 +935,87 @@ function aw17(message, pObj) {
 }
 
 function doSave(message, pObj) {
-  message.reply(`Something is supposed to go here!`)
-  console.log(pObj)
-//  sql.run(`CREATE TABLE IF NOT EXISTS Dimension ()`)
+  message.reply(`Please wait..`).then(m => {
+    sql.get(`SELECT * FROM Dimension WHERE userId = "${message.author.id}"`).then(pBlock => {
+        if (!pBlock) {
+          sql.run(`INSERT INTO Dimension (userId, userDn, userTg, name, size, weather, weatherIco, wind, tod, temp, gravity, humidity, platform, parallax, dynamic, boundary, write, repair, override, continuance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [pObj.userid, pObj.userdn, pObj.usertg, pObj.name, pObj.size, pObj.weather, pObj.weatherico, pObj.wind, pObj.tod, pObj.temp, pObj.gravity, pObj.humidity, pObj.platform, pObj.parallax, pObj.dynamic, pObj.boundary, pObj.write, pObj.repair, pObj.override, pObj.continuance])
+            .then(() => {
+              m.edit(`Done!`)
+              console.log(`PDT: Existing Database, new Block Added`)
+            })
+        } else {
+          sql.run(`UPDATE Dimension SET userDn = "${pObj.userdn}" WHERE userId = "${message.author.id}"`)
+            .then(() => {
+              sql.run(`UPDATE Dimension SET userTg = "${pObj.usertg}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET name = "${pObj.name}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET size = "${pObj.size}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET weather = "${pObj.weather}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET weatherIco = "${pObj.weatherico}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET wind = "${pObj.wind}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET tod = "${pObj.tod}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET temp = "${pObj.temp}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET gravity = "${pObj.gravity}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET humidity = "${pObj.humidity}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET platform = "${pObj.platform}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET parallax = "${pObj.parallax}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET dynamic = "${pObj.dynamic}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET boundary = "${pObj.boundary}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET write = "${pObj.write}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET repair = "${pObj.repair}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET override = "${pObj.override}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              sql.run(`UPDATE Dimension SET continuance = "${pObj.continuance}" WHERE userId = "${message.author.id}"`)
+            })
+            .then(() => {
+              m.edit(`Done!`)
+              console.log(`PDT: Existing Database and Block, updated Block`)
+            })
+        }
+      })
+      .catch(() => {
+        sql.run(`CREATE TABLE IF NOT EXISTS Dimension (userId TEXT, userDn TEXT, userTg TEXT, name TEXT, size TEXT, weather TEXT, weatherIco TEXT, wind INTEGER, tod TEXT, temp INTEGER, gravity TEXT, humidity INTEGER, platform TEXT, parallax TEXT, dynamic INTEGER, boundary TEXT, write TEXT, repair TEXT, override TEXT, continuance TEXT)`)
+          .then(() => {
+            sql.run(`INSERT INTO Dimension (userId, userDn, userTg, name, size, weather, weatherIco, wind, tod, temp, gravity, humidity, platform, parallax, dynamic, boundary, write, repair, override, continuance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [pObj.userid, pObj.userdn, pObj.usertg, pObj.name, pObj.size, pObj.weather, pObj.weatherico, pObj.wind, pObj.tod, pObj.temp, pObj.gravity, pObj.humidity, pObj.platform, pObj.parallax, pObj.dynamic, pObj.boundary, pObj.write, pObj.repair, pObj.override, pObj.continuance])
+          })
+      }).then(() => {
+        m.edit(`Done!`)
+        console.log(`PDT: New DB and Block`)
+      })
+
+  })
 }
 
 module.exports = (message) => {
