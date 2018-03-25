@@ -9,6 +9,18 @@ const ActNine = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 const ActBF = (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
 const confirm = (['yes', 'no'])
 
+function catchObj(message, breaker) {
+  console.error;
+  console.log(`PDT NEW: BREAK (timeout/catch), ${breaker}, ${message.member.displayName}`)
+  message.reply(`${RTe}`)
+}
+
+function catchCritical(message, breaker) {
+  console.log(`PDT NEW: BREAK (critical-error) ${breaker} ${message.member.displayName}`)
+  message.reply(`The system encountered a critical error.`)
+  return;
+}
+
 function precisionRound(number, precision) {
   var factor = Math.pow(10, precision);
   return Math.round(number * factor) / factor;
@@ -25,9 +37,7 @@ function AwaitTrain(message) {
       aw2(message)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at1 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "New (AT)")
     })
 }
 
@@ -76,9 +86,7 @@ function aw2(message) {
       aw3(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at2 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at2")
     })
 }
 
@@ -131,16 +139,12 @@ function aw3(message, pObj) {
       } else if (at3aC.startsWith("5")) {
         pObj.size = "1km"
       } else {
-        message.reply(`The system encountered a critical error.`)
-        console.log(`PDT BREAK, new, at3a ${message.member.displayName}`)
-        return;
+        catchCritical(message, "at3a")
       }
       aw4(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at3 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at3")
     })
 }
 
@@ -192,16 +196,12 @@ function aw4(message, pObj) {
         pObj.weather = "Thunder/Lightning & Rain/Snow"
         pObj.weatherico = ":thunder_cloud_rain:"
       } else {
-        message.reply(`The system encountered a critical error.`)
-        console.log(`PDT BREAK, new, at4a ${message.member.displayName}`)
-        return;
+        catchCritical(message, "at4a")
       }
       aw5(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at4 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at4")
     })
 }
 
@@ -286,16 +286,12 @@ function aw5(message, pObj) {
       } else if (at5aC === "10") {
         pObj.wind = 10;
       } else {
-        message.reply(`The system encountered a critical error.`)
-        console.log(`PDT BREAK, new, at5a ${message.member.displayName}`)
-        return;
+        catchCritical(message, "at5a")
       }
       aw6(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at5 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at5")
     })
 }
 
@@ -344,16 +340,12 @@ function aw6(message, pObj) {
       } else if (at6aC.startsWith("4")) {
         pObj.tod = "Dusk/Dawn"
       } else {
-        message.reply(`The system encountered a critical error.`)
-        console.log(`PDT BREAK, new, at6a ${message.member.displayName}`)
-        return;
+        catchCritical(message, "at6a")
       }
       aw7(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at6 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at6")
     })
 }
 
@@ -384,9 +376,7 @@ function aw7(message, pObj) {
       aw8(message, pObj)
     })
     .catch(() => {
-      console.error;
-      console.log(`PDT BREAK, new, at7 ${message.member.displayName}`)
-      message.reply(`${RTe}`)
+      catchObj(message, "at7")
     })
 }
 
@@ -399,54 +389,51 @@ function aw8(message, pObj) {
   gravopts += `5. 24.79 m/s² Jupiter Gravity\n`
   gravopts += `[!]: Leave this at 4 unless you really know what you're doing.`
   gravopts += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Gravity Stage`,
-        value: `Gravity is a critical aspect to any domain.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${gravopts}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at8 => at8.author.id === message.author.id && ActFive.some(word => at8.content.startsWith(word)), {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(at8a => {
-    const at8aC = at8a.first().content;
-    if (at8aC.startsWith("1")) {
-      pObj.gravity = "Zero"
-    } else if (at8aC.startsWith("2")) {
-      pObj.gravity = "Moon"
-    } else if (at8aC.startsWith("3")) {
-      pObj.gravity = "Mars"
-    } else if (at8aC.startsWith("4")) {
-      pObj.gravity = "Earth"
-    } else if (at8aC.startsWith("5")) {
-      pObj.gravity = "Jupiter"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at8a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Gravity Stage`,
+          value: `Gravity is a critical aspect to any domain.`
+        },
+        {
+          name: `Available Options`,
+          value: `${gravopts}`
+        }
+      ]
     }
-    aw9(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at8 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at8 => at8.author.id === message.author.id && ActFive.some(word => at8.content.startsWith(word)), {
+      max: 1,
+      time: 30000,
+      errors: ['time'],
+    })
+    .then(at8a => {
+      const at8aC = at8a.first().content;
+      if (at8aC.startsWith("1")) {
+        pObj.gravity = "Zero"
+      } else if (at8aC.startsWith("2")) {
+        pObj.gravity = "Moon"
+      } else if (at8aC.startsWith("3")) {
+        pObj.gravity = "Mars"
+      } else if (at8aC.startsWith("4")) {
+        pObj.gravity = "Earth"
+      } else if (at8aC.startsWith("5")) {
+        pObj.gravity = "Jupiter"
+      } else {
+        catchCritical(message, "at8a")
+      }
+      aw9(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at8")
+    })
 }
 
 function aw9(message, pObj) {
@@ -460,39 +447,38 @@ function aw9(message, pObj) {
   humidrecommend += `Final Week\n`
   humidrecommend += `- < 40%`
   humidrecommend += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Humidity Stage`,
-        value: `Too much moisture leads to mold, rot & mildew. If you are using this space for vegetation, it is recommended to have a breeze over the subjects, and keep moisture low upon harvests.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Vegetation Recommendations`,
-        value: `${humidrecommend} Please enter an integer between 0 and 100 for the percentage of humidity.`
-      }
-    ]
-  }})
+      fields: [{
+          name: `Humidity Stage`,
+          value: `Too much moisture leads to mold, rot & mildew. If you are using this space for vegetation, it is recommended to have a breeze over the subjects, and keep moisture low upon harvests.`
+        },
+        {
+          name: `Vegetation Recommendations`,
+          value: `${humidrecommend} Please enter an integer between 0 and 100 for the percentage of humidity.`
+        }
+      ]
+    }
+  })
   message.channel.awaitMessages(at9 => at9.author.id === message.author.id && Number.isInteger(Math.round(at9.content)) && at9.content * 1 <= 100 && at9.content * 1 >= 0, {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then(at9a => {
-    pObj.humidity = precisionRound(at9a.first().content, 1)
-    aw10(message, pObj)
-  })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at9 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
+    .then(at9a => {
+      pObj.humidity = precisionRound(at9a.first().content, 1)
+      aw10(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at9")
+    })
 }
 
 function aw10(message, pObj) {
@@ -507,63 +493,60 @@ function aw10(message, pObj) {
   platopt += `8. Checkered White/Black Marble\n`
   platopt += `9. Grass`
   platopt += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Platform Stage`,
-        value: `A preset for a square-tiled circular platform is available. Setting to none is not recommended. Advanced users that enable **Write Access** can modify this as they please, and is often recommended.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${platopt}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at10 => at10.author.id === message.author.id && ActNine.some(word => at10.content.startsWith(word)), {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then(at10a => {
-    const at10aC = at10a.first().content;
-    // listed as default construct platform
-    if (at10aC.startsWith("1")) {
-      pObj.platform = "None"
-    } else if (at10aC.startsWith("2")) {
-      pObj.platform = "Water-Filled"
-    } else if (at10aC.startsWith("3")) {
-      pObj.platform = "Black Granite"
-    } else if (at10aC.startsWith("4")) {
-      pObj.platform = "White Granite"
-    } else if (at10aC.startsWith("5")) {
-      pObj.platform = "Checkered White/Black Granite"
-    } else if (at10aC.startsWith("6")) {
-      pObj.platform = "White Marble"
-    } else if (at10aC.startsWith("7")) {
-      pObj.platform = "Black Marble"
-    } else if (at10aC.startsWith("8")) {
-      pObj.platform = "Checkered White/Black Marble"
-    } else if (at10aC.startsWith("9")) {
-      pObj.platform = "Grass"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at10a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Platform Stage`,
+          value: `A preset for a square-tiled circular platform is available. Setting to none is not recommended. Advanced users that enable **Write Access** can modify this as they please, and is often recommended.`
+        },
+        {
+          name: `Available Options`,
+          value: `${platopt}`
+        }
+      ]
     }
-    aw11(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at10 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at10 => at10.author.id === message.author.id && ActNine.some(word => at10.content.startsWith(word)), {
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
+    .then(at10a => {
+      const at10aC = at10a.first().content;
+      // listed as default construct platform
+      if (at10aC.startsWith("1")) {
+        pObj.platform = "None"
+      } else if (at10aC.startsWith("2")) {
+        pObj.platform = "Water-Filled"
+      } else if (at10aC.startsWith("3")) {
+        pObj.platform = "Black Granite"
+      } else if (at10aC.startsWith("4")) {
+        pObj.platform = "White Granite"
+      } else if (at10aC.startsWith("5")) {
+        pObj.platform = "Checkered White/Black Granite"
+      } else if (at10aC.startsWith("6")) {
+        pObj.platform = "White Marble"
+      } else if (at10aC.startsWith("7")) {
+        pObj.platform = "Black Marble"
+      } else if (at10aC.startsWith("8")) {
+        pObj.platform = "Checkered White/Black Marble"
+      } else if (at10aC.startsWith("9")) {
+        pObj.platform = "Grass"
+      } else {
+        catchCritical(message, "at10a")
+      }
+      aw11(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at10")
+    })
 }
 
 function aw11(message, pObj) {
@@ -587,8 +570,7 @@ function aw11(message, pObj) {
         name: message.member.displayName,
         icon_url: message.author.avatarURL
       },
-      fields: [
-        {
+      fields: [{
           name: `Parallax Stage`,
           value: `The Parallax Stage allows you to select the background for your realm. You can choose from one of several locations in Astral space to house your domain. Note that this will still not affect the visibility of your realm in those spaces, including which the star (if set to Relative/Day/Dusk/Dawn cycles). Canvas Mode gives the user a blank slate from which they can paint upon however they please.`
         },
@@ -600,44 +582,40 @@ function aw11(message, pObj) {
     }
   })
   message.channel.awaitMessages(at11 => at11.author.id === message.author.id && ActNine.some(word => at11.content.startsWith(word)), {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then(at11a => {
-    const at11aC = at11a.first().content;
-    if (at11aC.startsWith("1")) {
-      pObj.parallax = "Void"
-    } else if (at11aC.startsWith("2")) {
-      pObj.parallax = "Rainbow Cluster"
-    } else if (at11aC.startsWith("3")) {
-      pObj.parallax = "Green Cluster"
-    } else if (at11aC.startsWith("4")) {
-      pObj.parallax = "Blue Cluster"
-    } else if (at11aC.startsWith("5")) {
-      pObj.parallax = "Red Cluster"
-    } else if (at11aC.startsWith("6")) {
-      pObj.parallax = "Yellow Cluster"
-    } else if (at11aC.startsWith("7")) {
-      pObj.parallax = "White Cluster"
-    } else if (at11aC.startsWith("8")) {
-      pObj.parallax = "Purple Cluster"
-    } else if (at11aC.startsWith("9")) {
-      pObj.parallax = "Canvas"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at11a ${message.member.displayName}`)
-      return;
-    }
-    //message.reply(`\`Debug information sent to terminal.\``)
-    //console.log(pObj)
-    aw12(message, pObj)
-  })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at11 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
+    .then(at11a => {
+      const at11aC = at11a.first().content;
+      if (at11aC.startsWith("1")) {
+        pObj.parallax = "Void"
+      } else if (at11aC.startsWith("2")) {
+        pObj.parallax = "Rainbow Cluster"
+      } else if (at11aC.startsWith("3")) {
+        pObj.parallax = "Green Cluster"
+      } else if (at11aC.startsWith("4")) {
+        pObj.parallax = "Blue Cluster"
+      } else if (at11aC.startsWith("5")) {
+        pObj.parallax = "Red Cluster"
+      } else if (at11aC.startsWith("6")) {
+        pObj.parallax = "Yellow Cluster"
+      } else if (at11aC.startsWith("7")) {
+        pObj.parallax = "White Cluster"
+      } else if (at11aC.startsWith("8")) {
+        pObj.parallax = "Purple Cluster"
+      } else if (at11aC.startsWith("9")) {
+        pObj.parallax = "Canvas"
+      } else {
+        catchCritical(message, "at11a")
+      }
+      //message.reply(`\`Debug information sent to terminal.\``)
+      //console.log(pObj)
+      aw12(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at11")
+    })
 }
 
 function aw12(message, pObj) {
@@ -649,52 +627,49 @@ function aw12(message, pObj) {
   dynopt += `3. Dynamic Level 2\n`
   dynopt += `< The wind levels and weather can deviate frequently. >`
   dynopt += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Dynamic Weather Stage`,
-        value: `This is a switch for how dynamic the weather will be in your environment.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${dynopt}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at12 => at12.author.id === message.author.id && Number.isInteger(at12.content * 1) && at12.content * 1 >= 1 && at12.content * 1 <= 3, {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(at12a => {
-    const at12aC = Math.round(at12a.first().content)
-  //  console.log(at12aC)
-  //  console.log(Number.isInteger(at12aC))
-    if (at12aC == 1) {
-      pObj.dynamic = 1
-    } else if (at12aC == 2) {
-      pObj.dynamic = 2
-    } else if (at12aC == 3) {
-      pObj.dynamic = 3
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at12a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Dynamic Weather Stage`,
+          value: `This is a switch for how dynamic the weather will be in your environment.`
+        },
+        {
+          name: `Available Options`,
+          value: `${dynopt}`
+        }
+      ]
     }
-    aw13(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at12 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at12 => at12.author.id === message.author.id && Number.isInteger(at12.content * 1) && at12.content * 1 >= 1 && at12.content * 1 <= 3, {
+      max: 1,
+      time: 30000,
+      errors: ['time'],
+    })
+    .then(at12a => {
+      const at12aC = Math.round(at12a.first().content)
+      //  console.log(at12aC)
+      //  console.log(Number.isInteger(at12aC))
+      if (at12aC == 1) {
+        pObj.dynamic = 1
+      } else if (at12aC == 2) {
+        pObj.dynamic = 2
+      } else if (at12aC == 3) {
+        pObj.dynamic = 3
+      } else {
+        catchCritical(message, "at12a")
+      }
+      aw13(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at12")
+    })
 }
 
 function aw13(message, pObj) {
@@ -702,48 +677,45 @@ function aw13(message, pObj) {
   boundopt += `1. None\n`
   boundopt += `2. Barrier\n`
   boundopt += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Boundary Stage`,
-        value: `You can set the boundary of this area to automatically return you to your previous location, or prevent accidentally leaving from a barrier.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${boundopt}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at13 => at13.author.id === message.author.id && Number.isInteger(at13.content * 1) && at13.content * 1 >=1 && at13.content * 1 <= 2, {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(at13a => {
-    const at13aC = Math.round(at13a.first().content);
-    if (at13aC == 1) {
-      pObj.boundary = "None"
-    } else if (at13aC == 2) {
-      pObj.boundary = "Barrier"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at13a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Boundary Stage`,
+          value: `You can set the boundary of this area to automatically return you to your previous location, or prevent accidentally leaving from a barrier.`
+        },
+        {
+          name: `Available Options`,
+          value: `${boundopt}`
+        }
+      ]
     }
-    aw14(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at13 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at13 => at13.author.id === message.author.id && Number.isInteger(at13.content * 1) && at13.content * 1 >= 1 && at13.content * 1 <= 2, {
+      max: 1,
+      time: 30000,
+      errors: ['time'],
+    })
+    .then(at13a => {
+      const at13aC = Math.round(at13a.first().content);
+      if (at13aC == 1) {
+        pObj.boundary = "None"
+      } else if (at13aC == 2) {
+        pObj.boundary = "Barrier"
+      } else {
+        catchCritical(message, "at13a")
+      }
+      aw14(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at13")
+    })
 }
 
 function aw14(message, pObj) {
@@ -752,50 +724,47 @@ function aw14(message, pObj) {
   writeaccess += `2. Owner-Only Write Access\n`
   writeaccess += `3. Public Write Access`
   writeaccess += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Write Access Stage`,
-        value: `*Almost* done. Now you need to decide on **Write Access**, which will allow you to make changes to your area and save them. With Write Access disabled, materializations will be temporary and will cease to be over time.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${writeaccess}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at14 => at14.author.id === message.author.id && Number.isInteger(at14.content * 1) && at14.content * 1 >= 1 && at14.content <= 3, {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(at14a => {
-    const at14aC = Math.round(at14a.first().content);
-    if (at14aC == 1) {
-      pObj.write = "None"
-    } else if (at14aC == 2) {
-      pObj.write = "Owner-Only"
-    } else if (at14aC == 3) {
-      pObj.write = "Public"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at14a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Write Access Stage`,
+          value: `*Almost* done. Now you need to decide on **Write Access**, which will allow you to make changes to your area and save them. With Write Access disabled, materializations will be temporary and will cease to be over time.`
+        },
+        {
+          name: `Available Options`,
+          value: `${writeaccess}`
+        }
+      ]
     }
-    aw15(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at14 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at14 => at14.author.id === message.author.id && Number.isInteger(at14.content * 1) && at14.content * 1 >= 1 && at14.content <= 3, {
+      max: 1,
+      time: 30000,
+      errors: ['time'],
+    })
+    .then(at14a => {
+      const at14aC = Math.round(at14a.first().content);
+      if (at14aC == 1) {
+        pObj.write = "None"
+      } else if (at14aC == 2) {
+        pObj.write = "Owner-Only"
+      } else if (at14aC == 3) {
+        pObj.write = "Public"
+      } else {
+        catchCritical(message, "at14a")
+      }
+      aw15(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at14")
+    })
 }
 
 function aw15(message, pObj) {
@@ -813,161 +782,156 @@ function aw15(message, pObj) {
   resilopt += `6. Autorepair, Override Hard\n`
   resilopt += `[!]: Structures and constructs automatically repair themselves when damaged, object density overridden to hard surfaces only\n`
   resilopt += `\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Resillience Stage`,
-        value: `This is to set the resillience of your constructs you create.`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${resilopt}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at15 => at15.author.id === message.author.id && Number.isInteger(at15.content * 1) && at15.content * 1 >= 1 && at15.content * 1 <= 6, {
-    max: 1,
-    time: 60000,
-    errors: ['time'],
-  })
-  .then(at15a => {
-    const resil = Math.round(at15a.first().content);
-    if (resil == 1) {
-      pObj.repair = false
-      pObj.override = "none"
-    } else if (resil == 2) {
-      pObj.repair = true
-      pObj.override = "none"
-    } else if (resil == 3) {
-      pObj.repair = false
-      pObj.override = "soft"
-    } else if (resil == 4) {
-      pObj.repair = true
-      pObj.override = "soft"
-    } else if (resil == 5) {
-      pObj.repair = false
-      pObj.override = "hard"
-    } else if (resil == 6) {
-      pObj.repair = true
-      pObj.override = "hard"
-    } else {
-      message.reply(`The system encountered a critical error.`)
-      console.log(`PDT BREAK, new, at15a ${message.member.displayName}`)
-      return;
+      fields: [{
+          name: `Resillience Stage`,
+          value: `This is to set the resillience of your constructs you create.`
+        },
+        {
+          name: `Available Options`,
+          value: `${resilopt}`
+        }
+      ]
     }
-    aw16(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at15 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at15 => at15.author.id === message.author.id && Number.isInteger(at15.content * 1) && at15.content * 1 >= 1 && at15.content * 1 <= 6, {
+      max: 1,
+      time: 60000,
+      errors: ['time'],
+    })
+    .then(at15a => {
+      const resil = Math.round(at15a.first().content);
+      if (resil == 1) {
+        pObj.repair = false
+        pObj.override = "none"
+      } else if (resil == 2) {
+        pObj.repair = true
+        pObj.override = "none"
+      } else if (resil == 3) {
+        pObj.repair = false
+        pObj.override = "soft"
+      } else if (resil == 4) {
+        pObj.repair = true
+        pObj.override = "soft"
+      } else if (resil == 5) {
+        pObj.repair = false
+        pObj.override = "hard"
+      } else if (resil == 6) {
+        pObj.repair = true
+        pObj.override = "hard"
+      } else {
+        catchCritical("at15a")
+      }
+      aw16(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at15")
+    })
 }
 
 function aw16(message, pObj) {
   var continuanceopt = `\`\`\`md\n`
   continuanceopt += `1. True\n`
   continuanceopt += `2. False\`\`\``
-  message.channel.send({embed: {
-    color: pdc,
-    timestamp: new Date(),
-    description: `${pObj.name}`,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `Continuance Stage`,
-        value: `Having the continuance flag **true** will allow things such as vegetation to continue growing after the Pocket Dimension is closed. This may put more stress on the bot. Having the continuance flag as **false** will set the pocket dimension to be saved as a state to be resumed the next time it is used. (This does not effect auto-repair.)`
+  message.channel.send({
+    embed: {
+      color: pdc,
+      timestamp: new Date(),
+      description: `${pObj.name}`,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Available Options`,
-        value: `${continuanceopt}`
-      }
-    ]
-  }})
-  message.channel.awaitMessages(at16 => at16.author.id === message.author.id && Number.isInteger(at16.content * 1) && at16.content * 1 >= 1 && at16.content * 1 <= 2, {
-    max: 1,
-    time: 30000,
-    errors: ['time'],
-  })
-  .then(at16a => {
-    const cont = Math.round(at16a.first().content);
-    if (cont == 1) {
-      pObj.continuance = true
-    } else {
-      pObj.continuance = false
+      fields: [{
+          name: `Continuance Stage`,
+          value: `Having the continuance flag **true** will allow things such as vegetation to continue growing after the Pocket Dimension is closed. This may put more stress on the bot. Having the continuance flag as **false** will set the pocket dimension to be saved as a state to be resumed the next time it is used. (This does not effect auto-repair.)`
+        },
+        {
+          name: `Available Options`,
+          value: `${continuanceopt}`
+        }
+      ]
     }
-    aw17(message, pObj)
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, at16 ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(at16 => at16.author.id === message.author.id && Number.isInteger(at16.content * 1) && at16.content * 1 >= 1 && at16.content * 1 <= 2, {
+      max: 1,
+      time: 30000,
+      errors: ['time'],
+    })
+    .then(at16a => {
+      const cont = Math.round(at16a.first().content);
+      if (cont == 1) {
+        pObj.continuance = true
+      } else {
+        pObj.continuance = false
+      }
+      aw17(message, pObj)
+    })
+    .catch(() => {
+      catchObj(message, "at16")
+    })
 }
 
 function aw17(message, pObj) {
   //console.log(pObj)
-  message.channel.send({embed: {
-    color: 0x00d515,
-    timestamp: new Date(),
-    description: ``,
-    author: {
-      name: message.member.displayName,
-      icon_url: message.author.avatarURL
-    },
-    fields: [
-      {
-        name: `You're almost done!`,
-        value: `Please confirm that the following information is correct:`
+  message.channel.send({
+    embed: {
+      color: 0x00d515,
+      timestamp: new Date(),
+      description: ``,
+      author: {
+        name: message.member.displayName,
+        icon_url: message.author.avatarURL
       },
-      {
-        name: `Terrain`,
-        value: `**Platform:** ${pObj.platform}\n**Size:** ${pObj.size} Radius\n**Self-Repair:** ${pObj.repair}\n**Density Override:** ${pObj.override}\n**Time of Day:** ${pObj.tod}\n**Parallax:** ${pObj.parallax}`,
-        inline: true
-      },
-      {
-        name: `Weather`,
-        value: `**Dynamic:** ${pObj.dynamic}\n**Wind Level:** ${pObj.wind}\n**Weather:** ${pObj.weatherico} ${pObj.weather}\n**Temperature:** ${pObj.temp}°c\n**Gravity:** ${pObj.gravity}\n**Humidity:** ${pObj.humidity}%`,
-        inline: true
-      },
-      {
-        name: `Read/Write`,
-        value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}\n**Name: ${pObj.name}**`
-      },
-      {
-        name: `\u200b`,
-        value: `**Are these settings correct?** Please verify by typing\n\`yes\` / \`no\``
-      }
-    ]
-  }})
-  message.channel.awaitMessages(final => final.author.id === message.author.id && confirm.some(word => final.content.toLowerCase().startsWith(word)), {
-    max: 1,
-    time: 120000,
-    errors: ['time'],
-  })
-  .then(finalresponse => {
-    const finalresponse_condensed = finalresponse.first().content;
-    if (finalresponse_condensed.startsWith("yes")) {
-      doSave(message, pObj)
-    } else {
-      message.reply(`Saving has been cancelled. You can redo this at anytime.`)
+      fields: [{
+          name: `You're almost done!`,
+          value: `Please confirm that the following information is correct:`
+        },
+        {
+          name: `Terrain`,
+          value: `**Platform:** ${pObj.platform}\n**Size:** ${pObj.size} Radius\n**Self-Repair:** ${pObj.repair}\n**Density Override:** ${pObj.override}\n**Time of Day:** ${pObj.tod}\n**Parallax:** ${pObj.parallax}`,
+          inline: true
+        },
+        {
+          name: `Weather`,
+          value: `**Dynamic:** ${pObj.dynamic}\n**Wind Level:** ${pObj.wind}\n**Weather:** ${pObj.weatherico} ${pObj.weather}\n**Temperature:** ${pObj.temp}°c\n**Gravity:** ${pObj.gravity}\n**Humidity:** ${pObj.humidity}%`,
+          inline: true
+        },
+        {
+          name: `Read/Write`,
+          value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}\n**Name: ${pObj.name}**`
+        },
+        {
+          name: `\u200b`,
+          value: `**Are these settings correct?** Please verify by typing\n\`yes\` / \`no\``
+        }
+      ]
     }
   })
-  .catch(() => {
-    console.error;
-    console.log(`PDT BREAK, new, final ${message.member.displayName}`)
-    message.reply(`${RTe}`)
-  })
+  message.channel.awaitMessages(final => final.author.id === message.author.id && confirm.some(word => final.content.toLowerCase().startsWith(word)), {
+      max: 1,
+      time: 120000,
+      errors: ['time'],
+    })
+    .then(finalresponse => {
+      const finalresponse_condensed = finalresponse.first().content;
+      if (finalresponse_condensed.startsWith("yes")) {
+        doSave(message, pObj)
+      } else {
+        message.reply(`Saving has been cancelled. You can redo this at anytime.`)
+      }
+    })
+    .catch(() => {
+      catchObj(message, "final")
+    })
 }
 
 function doSave(message, pObj) {
