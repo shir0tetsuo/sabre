@@ -936,6 +936,8 @@ function aw17(message, pObj) {
 
 function doSave(message, pObj) {
   message.reply(`Something is supposed to go here!`)
+  console.log(pObj)
+//  sql.run(`CREATE TABLE IF NOT EXISTS Dimension ()`)
 }
 
 module.exports = (message) => {
