@@ -915,11 +915,11 @@ function aw16(message, pObj) {
 }
 
 function aw17(message, pObj) {
-  console.log(pObj)
+  //console.log(pObj)
   message.channel.send({embed: {
     color: 0x00d515,
     timestamp: new Date(),
-    description: `${pObj.name}`,
+    description: ``,
     author: {
       name: message.member.displayName,
       icon_url: message.author.avatarURL
@@ -930,8 +930,18 @@ function aw17(message, pObj) {
         value: `Please confirm that the following information is correct:`
       },
       {
-        name: `**${pObj.name}**`,
-        value: `Stuff will go here.`
+        name: `Terrain`,
+        value: `**Platform:** ${pObj.platform}\n**Size:** ${pObj.size} Radius\n**Self-Repair:** ${pObj.repair}\n**Density Override:** ${pObj.override}\n**Time of Day:** ${pObj.tod}\n**Parallax:** ${pObj.parallax}`,
+        inline: true
+      },
+      {
+        name: `Weather`,
+        value: `**Dynamic:** ${pObj.dynamic}\n**Wind Level:** ${pObj.wind}\n**Weather:** ${pObj.weatherico} ${pObj.weather}\n**Temperature:** ${pObj.temp}°c\n**Gravity:** ${pObj.gravity}\n**Humidity:** ${pObj.humidity}`,
+        inline: true
+      },
+      {
+        name: `Read/Write`,
+        value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}`
       }
     ]
   }})
