@@ -34,12 +34,12 @@ function PostObject(message, pObj) {
         },
         {
           name: `Weather`,
-          value: `**Dynamic:** ${pObj.dynamic}\n**Wind Level:** ${pObj.wind}\n**Weather:** ${pObj.weatherico} ${pObj.weather}\n**Temperature:** ${pObj.temp}°c\n**Gravity:** ${pObj.gravity}\n**Humidity:** ${pObj.humidity}%`,
+          value: `**Dynamic:** ${pObj.dynamic}\n**Wind Level:** ${pObj.wind}\n**Weather:** ${pObj.weatherIco} ${pObj.weather}\n**Temperature:** ${pObj.temp}°c\n**Gravity:** ${pObj.gravity}\n**Humidity:** ${pObj.humidity}%`,
           inline: true
         },
         {
           name: `Read/Write`,
-          value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}\n**Name: ${pObj.name}**`,
+          value: `**Write-Access:** ${pObj.write}\n**Boundary:** ${pObj.boundary}\n**Continuance:** ${pObj.continuance}\n**Name: \`${pObj.name}\`**`,
           inline: true
         },
         {
