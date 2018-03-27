@@ -44,7 +44,7 @@ function PostObject(message, pObj) {
         },
         {
           name: `Ownership`,
-          value: `**${pObj,userTg}**\n(${pObj.userDn}) \`[${userId.substring(0,5)}]\``,
+          value: `**${pObj.userTg}**\n(${pObj.userDn}) \`[${userId.substring(0,5)}]\``,
           inline: true
         },
         {
