@@ -2,8 +2,24 @@ const sql = require("sqlite");
 sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
 const PDNewPage = require('./pdnew.js')
 const confirm = (['yes', 'no'])
+var timer = new Set();
 
 function RequestObject(message) {
+  if (timer.has(message.author.id)) {
+    message.reply(`\n:large_orange_diamond: \`Your dimension is already open!\`\nExit? \`yes\``)
+    message.channel.awaitMessages(exit => exit.author.id === message.author.id && exit.content.toLowerCase().startsWith("yes"), {
+        max: 1,
+        time: 15000,
+        errors: ['time'],
+      })
+      .then(branch => {
+        timer.delete(message.author.id)
+        message.reply(`\`Dimension Closed.\``)
+      })
+      .catch(() => {
+        message.reply(`\`Reply time expired.\``)
+      })
+  }
   sql.get(`SELECT * FROM Dimension WHERE userId = "${message.author.id}"`).then(pBlock => {
       if (!pBlock) {
         message.reply(`\`There was no record found.\``)
@@ -86,8 +102,10 @@ function MaterialTime(message) {
       } else {
         message.reply(`\`Your Pocket Dimension has been opened for ${act.first().content} minutes.\``)
       }
+      timer.add(message.author.id);
       setTimeout(() => {
         message.reply(`\`Your Pocket Dimension has closed and you have been evicted.\``)
+        timer.delete(message.author.id);
       }, time)
     })
 }
