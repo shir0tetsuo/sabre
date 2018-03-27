@@ -19,18 +19,19 @@ function RequestObject(message) {
       .catch(() => {
         message.reply(`\`Reply time expired.\``)
       })
+  } else {
+    sql.get(`SELECT * FROM Dimension WHERE userId = "${message.author.id}"`).then(pBlock => {
+        if (!pBlock) {
+          message.reply(`\`There was no record found.\``)
+          PDNewPage(message);
+        } else {
+          PostObject(message, pBlock)
+        }
+      })
+      .catch(() => {
+        return message.reply(`\`Database Failure.\``)
+      })
   }
-  sql.get(`SELECT * FROM Dimension WHERE userId = "${message.author.id}"`).then(pBlock => {
-      if (!pBlock) {
-        message.reply(`\`There was no record found.\``)
-        PDNewPage(message);
-      } else {
-        PostObject(message, pBlock)
-      }
-    })
-    .catch(() => {
-      return message.reply(`\`Database Failure.\``)
-    })
 }
 
 function PostObject(message, pObj) {
