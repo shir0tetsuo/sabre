@@ -12,9 +12,9 @@ function RequestObject(message) {
         PostObject(message, pBlock)
       }
     })
-    .catch(() => {
-      return message.reply(`\`Database Failure.\``)
-    })
+    //.catch(() => {
+    //  return message.reply(`\`Database Failure.\``)
+    //})
 }
 
 function PostObject(message, pObj) {
