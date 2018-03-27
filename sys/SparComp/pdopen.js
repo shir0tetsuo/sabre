@@ -18,7 +18,7 @@ function RequestObject(message) {
     })
 }
 
-PostObject(message, pObj) {
+function PostObject(message, pObj) {
   message.channel.send({
     embed: {
       color: 0xeb7c09,
