@@ -74,7 +74,7 @@ function PostObject(message, pObj) {
 
 function MaterialTime(message) {
   message.reply(`How many minutes would you like this materialized for? (Max: 120)`)
-  message.channel.awaitMessages(min => min.message.id === message.author.id && Number.isInteger(min.content * 1) && min.content * 1 >= 1 && min.content * 1 <= 120, {
+  message.channel.awaitMessages(min => min.author.id === message.author.id && Number.isInteger(min.content * 1) && min.content * 1 >= 1 && min.content * 1 <= 120, {
       max: 1,
       time: 30000,
       errors: ['time'],
