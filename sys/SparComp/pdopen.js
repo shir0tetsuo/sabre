@@ -80,7 +80,7 @@ function MaterialTime(message) {
       errors: ['time'],
     })
     .then(act => {
-      var time = Math.round(min.content * 1) * 60000
+      var time = Math.round(act.first().content * 1) * 60000
       message.reply(`\`Your Pocket Dimension has been opened for ${act} minutes.\``)
       setTimeout(() => {
         message.reply(`\`Your Pocket Dimension has closed and you have been evicted.\``)
