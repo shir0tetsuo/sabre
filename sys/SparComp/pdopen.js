@@ -1,3 +1,6 @@
+const sql = require("sqlite");
+sql.open("/root/NC/utils/NorthStar/pockets.sqlite");
+
 function RequestObject(message) {
   const uid = message.author.id;
   sql.get(`SELECT * FROM Dimension WHERE userId = "${uid}"`).then(pBlock => {
