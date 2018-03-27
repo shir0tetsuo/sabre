@@ -4,8 +4,7 @@ const PDNewPage = require('./pdnew.js')
 const confirm = (['yes', 'no'])
 
 function RequestObject(message) {
-  const uid = message.author.id;
-  sql.get(`SELECT * FROM Dimension WHERE userId = "${uid}"`).then(pBlock => {
+  sql.get(`SELECT * FROM Dimension WHERE userId = "${message.author.id}"`).then(pBlock => {
       if (!pBlock) {
         message.reply(`\`There was no record found.\``)
         PDNewPage(message);
