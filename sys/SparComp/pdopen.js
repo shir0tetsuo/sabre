@@ -82,7 +82,7 @@ function MaterialTime(message) {
     .then(act => {
       var time = Math.round(act.first().content * 1) * 60000
       if (time * 1 === 60000) {
-        message.reply(`\`Your pocket dimension has been opened for 1 minute.`)
+        message.reply(`\`Your pocket dimension has been opened for 1 minute.\``)
       } else {
         message.reply(`\`Your Pocket Dimension has been opened for ${act.first().content} minutes.\``)
       }
