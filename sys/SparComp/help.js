@@ -1,6 +1,6 @@
 const Discord = require ("discord.js"); // discord client
 
-var asmv = "1.7.2b" // Version Number
+var asmv = "1.8.0b" // Version Number
 var prefix = "?spar"
 
 var opts = ``;
