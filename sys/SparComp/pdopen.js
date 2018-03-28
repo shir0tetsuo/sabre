@@ -105,8 +105,10 @@ function MaterialTime(message) {
       }
       timer.add(message.author.id);
       setTimeout(() => {
-        message.reply(`\`Your Pocket Dimension has closed and you have been evicted.\``)
-        timer.delete(message.author.id);
+        if (timer.has(message.author.id)) {
+          message.reply(`\`Your Pocket Dimension has closed and you have been evicted.\``)
+          timer.delete(message.author.id);
+        }
       }, time)
     })
 }
