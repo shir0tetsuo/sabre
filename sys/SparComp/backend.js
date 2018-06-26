@@ -36,10 +36,8 @@ function Access(message) {
                   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                   const embed = new Discord.RichEmbed()
                     .setTitle(`COMMAND WAS JUST RUN! Self-Destructing in: ${seconds} s`)
-                    .setAuthor(`Sabre ran a Command: ${params.join(' ')}`, client.user.avatarURL)
-                    .setColor(0xCF4F36)
+                    .setColor(0x33ad52)
                     .setDescription(`:radioactive::warning: Reply from firewall.dnet.lab`)
-                    .setFooter(`${seconds} s`, client.user.avatarURL)
                     .addField('OUT:', `\`\`\`${stdout.substring(0, 1000)}\`\`\``)
                     .addField('OUT:', `\`\`\`${stdout.substring(1000, 2000)}\`\`\``)
                     .addField('OUT:', `\`\`\`${stdout.substring(2000, 3000)}\`\`\``)
