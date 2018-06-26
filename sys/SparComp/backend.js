@@ -5,6 +5,8 @@ function Access(message) {
   let params = message.content.split(' ').slice(1);
   if (params[0] === "who") {
     var Post = `${new Date(message.author.joinedAt.toUTCString())}`;
+    message.channel.send(`${Post}`)
+    console.log(message.author)
   }
   if (params[0] === "sshx") {
     if (params[1] === undefined) {
