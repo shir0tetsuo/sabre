@@ -48,7 +48,7 @@ function CleanProcess(message) {
     if (settings.ownerid !== message.author.id) {
       message.reply(`:radioactive: Unauthorized`)
     } else {
-      Evaluate(message)
+      Evaluate(message, client)
     }
     return;
   } else if (mdata.startsWith(`${prefix} stats`)) {

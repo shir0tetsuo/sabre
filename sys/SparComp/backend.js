@@ -1,11 +1,15 @@
 const Discord = require("discord.js")
 var exec = require('child_process').exec;
 
-function Access(message) {
+function Access(message, client) {
   let params = message.content.split(' ').slice(1);
   if (params[0] === "who") {
-
-    console.log(message.author)
+    const tgt = message.mentions.members.first()
+    const JoinedID = new Date().getTime() - message.guild.createdAt.getTime();
+    const AliveID = new Date().getTime() - tgt.id
+    const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
+    const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
+    message.channel.send(`${JIDays} Days since Joined Server, ${AIDays} Days since Joined Discord`)
   }
   if (params[0] === "sshx") {
     if (params[1] === undefined) {
@@ -66,7 +70,7 @@ function Access(message) {
   }
 }
 
-module.exports = (message) => {
-  Access(message)
+module.exports = (message, client) => {
+  Access(message, client)
   return;
 }
