@@ -3,6 +3,9 @@ var exec = require('child_process').exec;
 
 function Access(message) {
   let params = message.content.split(' ').slice(1);
+  if (params[0] === "who") {
+    var Post = `${new Date(message.author.joinedAt.toUTCString())}`;
+  }
   if (params[0] === "sshx") {
     if (params[1] === undefined) {
       return message.reply("Nothing to evaluate!")
