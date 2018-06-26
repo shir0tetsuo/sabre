@@ -78,6 +78,7 @@ client.on("message", message => {
 })
 
 client.on("messageDelete", message => {
+  console.log(message);
   if (message.author.bot) return;
   let guild = message.author.guild;
   let member = message.author;
