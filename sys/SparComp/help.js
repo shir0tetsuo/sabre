@@ -10,7 +10,8 @@ opts += `${prefix} heal    :: Invokes bot to send forth 4 healing Ki balls.\n`
 opts += `${prefix} barrier :: Invokes bot to send forth Class III Barrier.\n`
 opts += `${prefix} breaker :: Barrier-Breaking Practice.\n`
 opts += `${prefix} stats   :: See how many times you invoked sparring practice.\n`
-opts += `${prefix} pdt     :: Pocket Dimension tools.`
+opts += `${prefix} pdt     :: Pocket Dimension tools.\n`
+opts += `?ev sshx          :: (Technician) Evaluate a command.`
 
 var HLPText = ``;
 HLPText += `:one: If oblitherated before the time limit expires, another entity will spawn into existence and continue.\n`

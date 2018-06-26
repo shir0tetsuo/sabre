@@ -15,6 +15,7 @@ const InvokeTimer = require('./sys/SparComp/countdown.js')
 const InvokeBreakPractice = require('./sys/SparComp/barrierbreaker.js')
 const InvokeAssist = require('./sys/SparComp/assistance.js')
 const PDTools = require('./sys/SparComp/pdmain.js')
+const Evaluate = require('./sys/SparComp/backend.js')
 ////////////////////////////////////////////////////////////////////////////////
 // system prefix
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +43,13 @@ function CleanProcess(message) {
     return;
   } else if (mdata.startsWith(`${prefix} breaker`)) {
     InvokeBreakPractice(message) // data detatched
+    return;
+  } else if (mdata.startsWith(`?ev`)) {
+    if (settings.ownerid !== message.author.id) {
+      message.reply(`:radioactive: Unauthorized`)
+    } else {
+      Evaluate(message)
+    }
     return;
   } else if (mdata.startsWith(`${prefix} stats`)) {
     ListStatistic(message) // data detatched
@@ -71,27 +79,8 @@ client.on("message", message => {
   if (message.content.length <= 3) return; // Ignore everything less-than 3 characters
   if (message.channel.type === "dm") {
     message.react("👆")
-    message.reply(`Written by shadowsword#0179, please use commands within a server.`)
+    message.reply(`Written by shadowsword#0179 303309686264954881, please use commands within a server.`)
     return;
   } // Should someone DM the bot
   CleanProcess(message);
-})
-
-client.on("messageDelete", message => {
-  console.log(message);
-  if (message.author.bot) return;
-  let guild = message.author.guild;
-  let member = message.author;
-  if (guild.id === "436571342058553355") {
-    guild.channels.find('name', 'bot-spam').send({embed: {
-      color: 0xff7a00,
-      timestamp: new Date(),
-      fields: [
-        {
-          name: `${member.user.tag} ${message.displayName} (${member.id})`,
-          value: `Deleted message:\n${message.content}`
-        }
-      ]
-    }})
-  }
 })
