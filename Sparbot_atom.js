@@ -76,3 +76,21 @@ client.on("message", message => {
   } // Should someone DM the bot
   CleanProcess(message);
 })
+
+client.on("messageDelete", message => {
+  if (message.author.bot) return;
+  let guild = message.author.guild;
+  let member = message.author;
+  if (guild.id === "436571342058553355") {
+    guild.channels.find('name', 'bot-spam').send({embed: {
+      color: 0xff7a00,
+      timestamp: new Date(),
+      fields: [
+        {
+          name: `${member.user.tag} ${message.displayName} (${member.id})`,
+          value: `Deleted message:\n${message.content}`
+        }
+      ]
+    }})
+  }
+})
