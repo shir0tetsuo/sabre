@@ -6,14 +6,14 @@ function Access(message, client) {
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
-    const AliveID = new Date().getTime() - tgt.createdAt
+    const AIDays = new Date().getTime() - tgt.createdAt
     const SCID = new Date().getTime() - message.guild.createdAt.getTime()
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
-    const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
+    //const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
     const SCDays = Math.floor(SCID / 1000 / 60 / 60 / 24);
     var Re = ``;
     const PR = tgt.roles.map(role => `${role}`).join(', ')
-    Re += `**${JIDays}** Days since Joined Server.`
+    Re += `${JIDays} Days since Joined Server.`
     var RR = `\`${SCDays} Days since the Server was Created.\`\n`
     RR += `**${AIDays}** Days since this user joined Discord.\n`
     //personroles = person.roles.map(role => role.name).join(', ')
