@@ -5,11 +5,31 @@ function Access(message, client) {
   let params = message.content.split(' ').slice(1);
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
-    const JoinedID = new Date().getTime() - message.guild.createdAt.getTime();
-    const AliveID = new Date().getTime() - tgt.id
+    const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
+    const AliveID = new Date().getTime() - tgt.createdAt.getTime()
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
-    message.channel.send(`${JIDays} Days since Joined Server, ${AIDays} Days since Joined Discord`)
+    const Re = ``;
+    const PR = tgt.roles.map(role => `${role}`).join(', ')
+    Re += `**${JIDays}** Days since Joined Server,\n`
+    Re += `\`${SCDays} Days since the Server was Created.\`\n`
+    Re += `**${AIDays}** Days since this user joined Discord.\n`
+    //personroles = person.roles.map(role => role.name).join(', ')
+    message.channel.send({embed: {
+      color: 0x1cf09d,
+      timestamp: new Date(),
+      description: `${tgt.id} ${tgt.tag} ${tgt.member.displayName}`,
+      author: {
+        name: client.user.username,
+        icon_url: client.user.avatarURL
+      },
+      fields: [
+        {
+          name: `${Re}`,
+          value: `${PR}`
+        }
+      ]
+    }})
   }
   if (params[0] === "sshx") {
     if (params[1] === undefined) {
