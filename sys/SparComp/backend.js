@@ -6,9 +6,10 @@ function Access(message, client) {
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
-    const AliveID = new Date().getTime() - tgt.createdAt.getTime()
+    const AliveID = new Date().getTime() - tgt.createdAt
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
+    const SCDays = message.guild.createdAt.getTime()
     const Re = ``;
     const PR = tgt.roles.map(role => `${role}`).join(', ')
     Re += `**${JIDays}** Days since Joined Server,\n`
