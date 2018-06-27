@@ -10,7 +10,7 @@ function Access(message, client) {
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
     const SCDays = message.guild.createdAt.getTime()
-    const Re = ``;
+    var Re = ``;
     const PR = tgt.roles.map(role => `${role}`).join(', ')
     Re += `**${JIDays}** Days since Joined Server,\n`
     Re += `\`${SCDays} Days since the Server was Created.\`\n`
