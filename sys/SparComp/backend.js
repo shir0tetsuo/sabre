@@ -5,6 +5,7 @@ function Access(message, client) {
   let params = message.content.split(' ').slice(1);
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
+    if (tgt === null || tgt === undefined) return;
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
     const AIDays = tgt.user.createdAt
     const SCID = new Date().getTime() - message.guild.createdAt.getTime()
@@ -24,7 +25,6 @@ function Access(message, client) {
     message.channel.send({embed: {
       color: 0x1cf09d,
       timestamp: new Date(),
-      description: `\`${tgt.id}\``,
       author: {
         name: client.user.username,
         icon_url: client.user.avatarURL
@@ -32,7 +32,7 @@ function Access(message, client) {
       fields: [
         {
           name: `${Re}`,
-          value: `${RR}\n__${tgt} has the following roles:__\n${PR}`
+          value: `${RR}\n__${tgt} \`${tgt.id}\` has the following roles:__\n${PR}`
         }
       ]
     }})
