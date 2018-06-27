@@ -16,15 +16,15 @@ function Access(message, client) {
     var RR = `**${JIDays}** Days since joined Server.\n\`(${SCDays} Days since Server Creation.)\`\n`
     RR += `\n__Account Created:__\n**${AIDays}**\n`
     RR += `\n\n`
-    RR += `:wave: Online: **${message.guild.members.filter(m => m.presence.status === 'online').size} / ${message.guild.memberCount}\n`
-    RR += `:spy: Offline: **${message.guild.members.filter(m => m.presence.status === 'offline').size} / ${message.guild.memberCount}\n`
-    RR += `:red_circle: Busy: **${message.guild.members.filter(m => m.presence.status === 'dnd').size} / ${message.guild.memberCount}\n`
-    RR += `:dark_sunglasses: Idle: **${message.guild.members.filter(m => m.presence.status === 'idle').size} / ${message.guild.memberCount}\n`
+    RR += `:wave: **\`${message.guild.members.filter(m => m.presence.status === 'online').size} / ${message.guild.memberCount}\`** Online\n`
+    RR += `:spy: **\`${message.guild.members.filter(m => m.presence.status === 'offline').size} / ${message.guild.memberCount}\`** Offline\n`
+    RR += `:red_circle: **\`${message.guild.members.filter(m => m.presence.status === 'dnd').size} / ${message.guild.memberCount}\`** Busy\n`
+    RR += `:dark_sunglasses: **\`${message.guild.members.filter(m => m.presence.status === 'idle').size} / ${message.guild.memberCount}\`** Idle\n`
     //personroles = person.roles.map(role => role.name).join(', ')
     message.channel.send({embed: {
       color: 0x1cf09d,
       timestamp: new Date(),
-      description: `${tgt.id}`,
+      description: `\`${tgt.id}\``,
       author: {
         name: client.user.username,
         icon_url: client.user.avatarURL
