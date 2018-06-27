@@ -6,7 +6,7 @@ function Access(message, client) {
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
-    const AIDays = new Date().getTime() - tgt.createdAt
+    const AIDays = tgt.createdAt
     const SCID = new Date().getTime() - message.guild.createdAt.getTime()
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     //const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
@@ -15,7 +15,7 @@ function Access(message, client) {
     const PR = tgt.roles.map(role => `${role}`).join(', ')
     Re += `${JIDays} Days since Joined Server.`
     var RR = `\`${SCDays} Days since the Server was Created.\`\n`
-    RR += `**${AIDays}** Days since this user joined Discord.\n`
+    RR += `**${AIDays}**\n`
     //personroles = person.roles.map(role => role.name).join(', ')
     message.channel.send({embed: {
       color: 0x1cf09d,
@@ -28,7 +28,7 @@ function Access(message, client) {
       fields: [
         {
           name: `${Re}`,
-          value: `${RR}\n${tgt} has the following roles:\n${PR}`
+          value: `${RR}\n__${tgt} has the following roles:__\n${PR}`
         }
       ]
     }})
