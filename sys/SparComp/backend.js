@@ -6,7 +6,7 @@ function Access(message, client) {
   if (params[0] === "who") {
     const tgt = message.mentions.members.first()
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
-    const AIDays = tgt.createdAt
+    const AIDays = tgt.user.createdAt
     console.log(tgt)
     const SCID = new Date().getTime() - message.guild.createdAt.getTime()
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
