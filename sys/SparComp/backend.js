@@ -7,6 +7,7 @@ function Access(message, client) {
     const tgt = message.mentions.members.first()
     const JoinedID = new Date().getTime() - tgt.joinedAt.getTime() // message.guild.createdAt.getTime();
     const AIDays = tgt.createdAt
+    console.log(tgt)
     const SCID = new Date().getTime() - message.guild.createdAt.getTime()
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     //const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
