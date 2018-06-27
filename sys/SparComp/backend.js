@@ -12,11 +12,15 @@ function Access(message, client) {
     const JIDays = Math.floor(JoinedID/ 1000 / 60 / 60 / 24);
     //const AIDays = Math.floor(AliveID / 1000 / 60 / 60 / 24);
     const SCDays = Math.floor(SCID / 1000 / 60 / 60 / 24);
-    var Re = ``;
+    var Re = `\u200b`;
     const PR = tgt.roles.map(role => `${role}`).join(', ')
-    Re += `${JIDays} Days since Joined Server.`
-    var RR = `\`${SCDays} Days since the Server was Created.\`\n`
-    RR += `**${AIDays}**\n`
+    var RR = `**${JIDays}** Days since joined Server.\n\`(${SCDays} Days since Server Creation.)\`\n`
+    RR += `\n__Account Created:__\n**${AIDays}**\n`
+    RR += `\n\n`
+    RR += `:wave: Online: **${message.guild.members.filter(m => m.presence.status !== 'offline' && m.presence.status !== 'idle' && m.presence.status !== 'dnd').size} / ${message.guild.memberCount}\n`
+    RR += `:grey_questionmark: Offline: **${message.guild.members.filter(m => m.presence.status !== 'online' && m.presence.status !== 'idle' && m.presence.status !== 'dnd').size} / ${message.guild.memberCount}\n`
+    RR += `:red_circle: Busy: **${message.guild.members.filter(m => m.presence.status !== 'offline' && m.presence.status !== 'idle' && m.presence.status !== 'onlinw').size} / ${message.guild.memberCount}\n`
+    RR += `:dark_sunglasses: Idle: **${message.guild.members.filter(m => m.presence.status !== 'offline' && m.presence.status !== 'idle' && m.presence.status !== 'dnd').size} / ${message.guild.memberCount}`
     //personroles = person.roles.map(role => role.name).join(', ')
     message.channel.send({embed: {
       color: 0x1cf09d,
