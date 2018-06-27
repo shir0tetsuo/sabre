@@ -19,7 +19,7 @@ function Access(message, client) {
     message.channel.send({embed: {
       color: 0x1cf09d,
       timestamp: new Date(),
-      description: `${tgt.id} ${tgt.tag} ${tgt.member.displayName}`,
+      description: `${tgt.id} ${tgt.tag}`,
       author: {
         name: client.user.username,
         icon_url: client.user.avatarURL
@@ -27,7 +27,7 @@ function Access(message, client) {
       fields: [
         {
           name: `${Re}`,
-          value: `${PR}`
+          value: `${tgt} has the following roles:\n${PR}`
         }
       ]
     }})
