@@ -1,6 +1,6 @@
 const Discord = require ("discord.js"); // discord client
 
-var asmv = "1.8.3" // Version Number
+var asmv = "1.9.0" // Version Number
 var prefix = "?spar"
 
 var opts = ``;
@@ -11,6 +11,7 @@ opts += `${prefix} barrier :: Invokes bot to send forth Class III Barrier.\n`
 opts += `${prefix} breaker :: Barrier-Breaking Practice.\n`
 opts += `${prefix} stats   :: See how many times you invoked sparring practice.\n`
 opts += `${prefix} pdt     :: Pocket Dimension tools.\n`
+opts += `${prefix} who     :: Followed by a mention will display some stats.\n`
 opts += `?ev sshx          :: (Technician) Evaluate a command.`
 
 var HLPText = ``;

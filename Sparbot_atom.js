@@ -16,6 +16,7 @@ const InvokeBreakPractice = require('./sys/SparComp/barrierbreaker.js')
 const InvokeAssist = require('./sys/SparComp/assistance.js')
 const PDTools = require('./sys/SparComp/pdmain.js')
 const Evaluate = require('./sys/SparComp/backend.js')
+const Whois = require('./sys/SparComp/whois.js')
 ////////////////////////////////////////////////////////////////////////////////
 // system prefix
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +42,8 @@ function CleanProcess(message) {
   } else if (mdata.startsWith(`${prefix} heal`) || mdata.startsWith(`${prefix} barrier`)) {
     InvokeAssist(message)
     return;
+  } else if (mdata.startsWith(`${prefix} who`)) {
+    Whois(message, client)
   } else if (mdata.startsWith(`${prefix} breaker`)) {
     InvokeBreakPractice(message) // data detatched
     return;
